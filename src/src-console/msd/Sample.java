@@ -1,7 +1,0 @@
-package msd;
-
-class Mample {
-
-}
-
-
