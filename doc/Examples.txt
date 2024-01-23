@@ -5,6 +5,31 @@
 
 	C ve Sistem Programcıları Derneği
 ----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	23 Ocak 2024
+----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Java Platformunun Temel Özellikleri:
+		- Arakodlu Çalışma Sistemi: C ve C++ gibi dillerde yazılan kodlardan elde edilen (nasıl elde edildiği bu aşamada
+		önemli değildir) "çalışabilir dosya (executable file)" sisteme (genel olarak işletim sistemi, donanım vb.) 
+		özgüdür ve koda göre her sistem için ayrıca oluşturulmalıdır. Hatta sisteme özgü kodlar yazılmışsa diğer sistemler
+		için bu dosya oluşturulamaz. Oysa Java programlama dili ile yazılan bir program "derlendiğinde (compilation)" 
+		oluşan dosyanın içerisinde hiç bir sistemin dili olmayan yapay bir arakod bulunur. Bu arakoda "byte code (BC)" denir.
+		BC doğrudan çalıştırılamaz. Çalıştırılması için ayrı bir uygulama (program)  gerekir. Bu program, BC'yi
+		yorumlayarak makine koduna yani sisteme özgü koda dönüştürerek programı çalıştırır. Bu dönüştürme işlemine
+		JIT (Just In Time) compilation denir. Geliştirme ve çalıştırma anlamında 3 tane temel kavram karşımıza çıkar:
+			- JVM (Java Virtual Machine): BC'yi makine koduna dönüştürür. JVM aslında BC'nin nasıl makine koduna
+			dönüştürüleceğini tanımlayan soyut bir kavramdır.
+
+			- JRE (Java Runtime Environment): Genel olarak Java ile yazılmış bir uygulamayı çalıştırmak (run
+ 			için gereken araçları ve uygulamaları içeren bir pakettir. Yani BC elde edildiğinde bu programın 
+			çalıştırılabilmesi için JRE'ye ihtiyaç vardır.
+
+			- JDK (Java Development Kit): Geliştirme (development) araçlarını ve çalıştırma araçlarının bir çoğunu 
+			içeren pakettir. Buradaki çalıştırma araçları geliştirme aşamasında kullanılabilir.
+
+	
+----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
 
