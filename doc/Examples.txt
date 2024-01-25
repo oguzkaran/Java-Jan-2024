@@ -21,14 +21,24 @@
 			- JVM (Java Virtual Machine): BC'yi makine koduna dönüştürür. JVM aslında BC'nin nasıl makine koduna
 			dönüştürüleceğini tanımlayan soyut bir kavramdır.
 
-			- JRE (Java Runtime Environment): Genel olarak Java ile yazılmış bir uygulamayı çalıştırmak (run
+			- JRE (Java Runtime Environment): Genel olarak Java ile yazılmış bir uygulamayı çalıştırmak (run)
  			için gereken araçları ve uygulamaları içeren bir pakettir. Yani BC elde edildiğinde bu programın 
 			çalıştırılabilmesi için JRE'ye ihtiyaç vardır.
 
 			- JDK (Java Development Kit): Geliştirme (development) araçlarını ve çalıştırma araçlarının bir çoğunu 
 			içeren pakettir. Buradaki çalıştırma araçları geliştirme aşamasında kullanılabilir.
 
+	Ticari kullanımlarda özellikle Java 11 ile birlikte bazı değişiklikler yapılmıştır. Genel olarak şöyle söylenebilir:
+	Java'da geliştirme ortamı ücetsiz, çalıştırma araçları kullanılan araca göre ücretlendirilebilir.  Tamamen ücretsiz
+	olarak kullanılabilen "Open JRE" gibi çalıştırma araçları da mevcuttur.  Burada anlatılanlar geneldir. Ayrıca, belirli
+	bir noktadan sonra Java sürümleri için Long Term Support (LTS) kavramı da getirilmiştir. LTS sürümleri uzun süre 
+	desteklenen yani güncellemesi (hızlandırılması, hataların düzeltilmesi vb.) uzun süre yapılan sürümlerdir. Java'da 
+	Java 8, 11, 17 ve 21 sürümleri LTS sürümleridir. Bu kavramlar zamanla anlaşılacaktır.
+
 	
+----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	25 Ocak 2024
 ----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
