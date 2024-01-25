@@ -28,17 +28,50 @@
 			- JDK (Java Development Kit): Geliştirme (development) araçlarını ve çalıştırma araçlarının bir çoğunu 
 			içeren pakettir. Buradaki çalıştırma araçları geliştirme aşamasında kullanılabilir.
 
-	Ticari kullanımlarda özellikle Java 11 ile birlikte bazı değişiklikler yapılmıştır. Genel olarak şöyle söylenebilir:
-	Java'da geliştirme ortamı ücetsiz, çalıştırma araçları kullanılan araca göre ücretlendirilebilir.  Tamamen ücretsiz
-	olarak kullanılabilen "Open JRE" gibi çalıştırma araçları da mevcuttur.  Burada anlatılanlar geneldir. Ayrıca, belirli
-	bir noktadan sonra Java sürümleri için Long Term Support (LTS) kavramı da getirilmiştir. LTS sürümleri uzun süre 
-	desteklenen yani güncellemesi (hızlandırılması, hataların düzeltilmesi vb.) uzun süre yapılan sürümlerdir. Java'da 
-	Java 8, 11, 17 ve 21 sürümleri LTS sürümleridir. Bu kavramlar zamanla anlaşılacaktır.
+		Ticari kullanımlarda özellikle Java 11 ile birlikte bazı değişiklikler yapılmıştır. Genel olarak şöyle söylenebilir:
+		Java'da geliştirme ortamı ücetsiz, çalıştırma araçları kullanılan araca göre ücretlendirilebilir.  Tamamen ücretsiz
+		olarak kullanılabilen "Open JRE" gibi çalıştırma araçları da mevcuttur.  Burada anlatılanlar geneldir. Ayrıca, belirli
+		bir noktadan sonra Java sürümleri için Long Term Support (LTS) kavramı da getirilmiştir. LTS sürümleri uzun süre 
+		desteklenen yani güncellemesi (hızlandırılması, hataların düzeltilmesi vb.) uzun süre yapılan sürümlerdir. Java'da 
+		Java 8, 11, 17 ve 21 sürümleri LTS sürümleridir. Bu kavramlar zamanla anlaşılacaktır.
 
-	
+		Arakodlu çalışma sisteminin en önemli avantajı, gelişirilen uygulamaların genel olarak sistemden bağımsız olarak 
+		çalıştırılabilmesidir. Dolayısıyla kodun çalıştırılacağı sistemden bağımsız olarak ürün geliştirilebilir. Bu kavrama
+		"Write Once Run Anywhere (WORA)" denilmektedir. Şüphesiz bu durumun da istisnaları vardır.
+
+		Ayrıca unutulmamalıdır ki, arakodlu çalışma sistemi ufak da olsa bir performas kaybına yol açar. Ancak Java'nın hedeflediği
+		uygulamalar düşünüldüğünde bu kaybın pek de önemi yoktur. Bu kaybın önemli olduğu uygulamalar için zaten Java ile 
+		geliştirme yapılmaz. 
+
+	Hızlı Uygulama Geliştirme Ortamı: Java hızlı uygulama geliştirme (rapid application development) ortamı sunar. Bu anlamda
+	hem öğrenmesi kolaydır hem de ürün daha çabuk elde edilir. 
+
+	Geniş bir sınıf kütüphanesi: Java'da oldukça geniş bir sınıf kütüphanesi bulunur. Veritabanı işlemler, web programlama,
+	dosya işlemleri gibi işlemler için hazır sınıflar bulunmaktadır.
+
+	Güvenli Çalışma Ortamı: Java'da yazılmış olan bir programın sisteme zarar verme olasılığı çok daha azdır. Yazılan bir 
+	program yüzünden yanlışlıkla makinede bir problem olma olasılığı oldukça düşüktür.
 ----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
 	25 Ocak 2024
+----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Programlama Dillerinin Sınıflandırılması:
+	1. Seviyelerine (level) göre sınıflandırma: Seviye programlama dilinin insan algısına yakınlığınının bir ölçümüdür. 
+	Yüksek seviyeli (high level) diller hem dil özellikleri hem de uygulama geliştirme olarak insan algısına yakındır, 
+	dolayısıyla kolay öğrenilebilirdir. Aşağı seviyeli (low level) diller makinenin doğal çalışmasına daha yakındır. 
+	Olabilecek en aşağı seviyeli dil saf makine dilidir.
+
+	2. Kullanım alanlarına göre sınıflandırma: Dilin hangi alanlarda kullanılabileceğine ilişkin sınıflandırmadır. Bazı
+	diller birden fazla alanda kullanılabilirler. Bazı diller ise tek bir alana yöneliktir. 
+
+	3. Programlama modeline göre sınıflandırma: Bir programı yazarken kullanılan genel model (paradigm) önemlidir. Bazı
+	dillerde sınıf yoktur, program çeşitli alt programların (function) birbirlerini çağırmasıyla yazılır. Buna 
+	"procedurel model" denir. Bazı dillerde sınıf vardır, program sınıflar kullanılarak yazılır. Başka bir çok kavramla
+	birlikte sınıflar da kullanılarak yazılan modele "object oriented model" denir. Bazı dillerde programlar formül 
+	yazıyormuş gibi yazılır. Bu modele "functional" model, yapılan programlamaya ise "functional programming" denir. Bazı
+	diller birden fazla modeli desteklerler. Bu tip dillere "multi pradigm language" denir. Burada birden fazla 
+	modelin desteklenmesi hepsinin aynı derecede desteklenmesi anlamına gelmez.
 ----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
