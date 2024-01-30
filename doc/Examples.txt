@@ -56,26 +56,91 @@
 	25 Ocak 2024
 ----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
-	Programlama Dillerinin Sınıflandırılması:
-	1. Seviyelerine (level) göre sınıflandırma: Seviye programlama dilinin insan algısına yakınlığınının bir ölçümüdür. 
-	Yüksek seviyeli (high level) diller hem dil özellikleri hem de uygulama geliştirme olarak insan algısına yakındır, 
-	dolayısıyla kolay öğrenilebilirdir. Aşağı seviyeli (low level) diller makinenin doğal çalışmasına daha yakındır. 
-	Olabilecek en aşağı seviyeli dil saf makine dilidir.
+	Programlama Dillerinin Sınıflandırılması: Programlama dilleri çeşitli şekillerde sınıflandırılabilse de genel olarak
+	3 şekilde sınıflandırma eğilimi söz konusudur:
+	1. Seviyelerine (level) göre sınıflandırma: Programlama dilinin seviyesi onun insan algısına yakınlığının ölçüsüdür. Yüksek
+	seviyeli diller (high level languages) hem dil özellikleri, hem de uygulama geliştirme anlamında insan algısına yakınlıkları
+	dolayısıyla daha kolay öğrenebilirler. Düşük seviyeli diller (low level languages) makineye daha yakın dillerdir. Olabilecek
+	en düşük seviyeli dil makine dilidir.
 
-	2. Kullanım alanlarına göre sınıflandırma: Dilin hangi alanlarda kullanılabileceğine ilişkin sınıflandırmadır. Bazı
-	diller birden fazla alanda kullanılabilirler. Bazı diller ise tek bir alana yöneliktir. 
+	2. Kullanım alanlarına göre sınıflandırma: Dilin hangi alanlarda kullanılabileceğine göre sınıflandırmadır. Bazı diller
+	birden fazla alanda kullanılabilirler. Bazı diller ise sadece bir alanda kullanılabilirler. Bu anlamda genel amaçlı diller,
+	bilimsel ve mühendislik dilleri, veritabanı dilleri, yapay zeka dilleri, oyun ve animasyon dilleri vb. alanlar için diller
+	söz konusu olabilmektedir.
 
-	3. Programlama modeline göre sınıflandırma: Bir programı yazarken kullanılan genel model (paradigm) önemlidir. Bazı
-	dillerde sınıf yoktur, program çeşitli alt programların (function) birbirlerini çağırmasıyla yazılır. Buna 
-	"procedurel model" denir. Bazı dillerde sınıf vardır, program sınıflar kullanılarak yazılır. Başka bir çok kavramla
-	birlikte sınıflar da kullanılarak yazılan modele "object oriented model" denir. Bazı dillerde programlar formül 
-	yazıyormuş gibi yazılır. Bu modele "functional" model, yapılan programlamaya ise "functional programming" denir. Bazı
-	diller birden fazla modeli desteklerler. Bu tip dillere "multi pradigm language" denir. Burada birden fazla 
-	modelin desteklenmesi hepsinin aynı derecede desteklenmesi anlamına gelmez.
+	3. Programlama modeline göre sınıflandırma: Bir programı yazarken kullanılan genel model (paradigm) önemlidir. Bazı dillerde
+	sınıf yoktur. Program çeşitli alt programların (function) bir araya getirilmesiyle yazılır. Bu modele "procedurel model"
+	denir. Bazı dillerde sınıflar vardır ve programlar sınıflar kullanılarak yazılır. Başka bir çok kavramla birlikte sınıflar
+	kullanılarak yazılan programlama modeline "nesne yönelimli model (object oriented model)" denir. Bazı dillerde programlar
+	matematiksel formül yazıyormuş gibi yazılmaktadır. Bu tarz programlama modeline "fonksiyonel (functional)" model denir.
+	Bazı diller birden fazla modeli desteklerler. Bu tarz dillere "multi paradigm languages" denilmektedir. Birden fazla modeli
+	destekleyen diller, modellerin tüm özelliklerini desteklemeyebilir. 
+
+	Bu durumda Java, bilimsel ve mühendislik uygulamalarında, web uygulamalarında, yapay zeka uygulamalarında, mobil
+	programlamada vb. kullanılabilen genel amaçlı, yüksek seviyeli, nesne yönelimli programlama modeli ile uygulama
+	geliştirilebilen ve özellikle Java 8 ile birlike fonksiyonel programlama modelini de belirli ölçüde destekleyen
+	"multi paradigm" bir dildir.
+
+	Anahtar Notlar: Bir dilin bir çok alanda kullanılabilmesi, o dilin tüm alanlarında pratikte kullanılacağı anlamına gelmez.
+	Bir alanda daha etkin kullanılabilen bir dil varsa o dil daha fazla tercih edilebilir.
+
+	Anahtar Notlar: Yukarıda anlatılan kavramların detayları vardır. Zaman içerisinde anlaşılacaktır.
 ----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
+	30 Ocak 2024
+----------------------------------------------------------------------------------------------------------------------*/
 
+/*----------------------------------------------------------------------------------------------------------------------
+	Temel Kavramlar:
+	Çevirici Programlar, Derleyiciler ve Yorumlayıcılar: Bir dilde yazılmış programı başka bir dile çeviren programlara
+	çevirici programlar (translator) denir. Çevirici programlarda bir kaynak dil (source language) ve bir hedef dil (target/destination language)
+	vardır. Kaynak dil yüksek seviyeli, hedef dil düşük seviyeli bir programlama diliyse bu durumda çevirici programa
+	derleyici (compiler) denir. Örneğin Java programlama dilinden Kotlin programlama diline dönüştürme yapan program
+	bir translator, Java programlama dilinden byte code'a dönüştürme yapan program ise bir compiler'dır. JVM'in byte code'u
+	makine koduna çevirme faaliyeti de bir derleme işlemidir. Bu sebeple buna JIT compilation denir. Bazı dillerde yazılan
+	programlar herhangi bir kod üretilmeden çalıştırılırlar. Bu tarz dillerde yazılmış programları herhangi bir kod üretmeden
+	çalıştıran programlara "interpreter" denir. Bazı diller hem derleyici hem yorumlayıcı ile kullanılabilirler. Java pratikte
+	derleyici ile kullanılan, Java 11 ile birlikte "java" programı yorumlayıcı olarak da java kodunu byte code üretilmeden 
+	çalıştırabilmektedir. Yorumlayıcı ile kullanılan diller derleyici ile kullanılan dillere göre daha yavaş olma eğilimindedir.
+
+	Anahtar Notlar: Bir uygulama tek bir java dosyasından oluşmak zorunda değildir. Hatta bir Java uygulaması yalnızca
+	java kodlarından da oluşmak zorunda değildir. Bu durumda farklı java dosyaları ayrı derlenir. Hatta aynı dosyada
+	bulunan sınıflar da ayrı derlenir. Bir ürün aslında tüm birimlerinin uygun şekilde derlenmesi ve ele alınmasıyla
+	elde edilir. Bu işleme genel olarak "build" terimi kullanılır. Build işlemi yalnızca derleme işlemi değildir. Yani
+	bir uygulamanın ürün olarak elde edilmesi süreci "build" işlemidir. Burada anlatılanların da detayları zamanla
+	ele alınacaktır.
+
+	İşletim Sistemi (Operating System): Makinenin donanımını yöneten, bilgisayar ile kullanıcı arasında bir köprü oluşturan
+	yazılımdır. Bir işletim sisteminin pek çok görevi vardır. Programları çalıştırmak, çeşitli cihazları ve aygıtları yönetmek,
+	dosyaları ve dizinleri (directory) organize etmek vb. görevler sayılabilir. İşletim sistemleri genel olarak iki gruba
+	ayrılabilir: masaüstü işletim sistemleri (desktop operating systems), mobil işletim sistemleri (mobile operating systems).
+	Şüphesiz başka çeşit işletim sistemleri de vardır. Popüler masaüstü işletim sistemleri Windows, Mac OS X, Unix ve Linux
+	dağitımları gibi işletim sistemleridir. Popüler mobil işletim sistemleri Android ve IOS'dur.
+
+	Açık kaynak kodlu yazılım, özgür yazılım ve mülkiyete sahip yazılım: Özgür yazılım (free software) ve açık kaynak kodlu
+	(open source) yazılımlar arasında farklar olsa da genel olarak aşağıdaki ortak özelliklere sahiptirler:
+		- Bedavadır. Kullanılabilmesi için herhangi bir lisans gerekmez.
+		- Kaynak kodlar sahiplenilemez. Kaynak koda ekleme yapıldığında ya da bir kaynak kod kullanıldığında kodlar kapatılamaz.
+		Onların da açılması gerekir.
+		- Çoğaltılabilir, izin almadan kullanılabilir.
+
+	Bunun tam tersi olarak mülkiyete sahip (propriatery) yazlımlardır. Bu yazılımlar para verilerek kullanılır ve izin
+	almadan çoğaltılamaz.
+
+	IDE (Integrated Development Environment): Derleyicler ve yorumlayıcılar komut satırından çalışan ve basit arayüzlere
+	sahip programlardır. Aslında teorik olarak bir uygulamadaki tüm Java dosyaları ve diğer dosyalar basit bir editör programla
+	yazılıp komut satırından derlenebilir. Ancak bu, uygulama büyüdükçe zahmetli olmaya başlar. Bu da programcıya zaman
+	kaybettirir. Bu amaçla pratikte yazılm geliştirmeyi kolaylaştırmak için IDE denilen yazılımlar kullanılır. IDE'lerde
+	örneğin bir takım yardımlar veren editörler, tasarım araçları, test araçları, debug araçları vb. programcının geliştirme
+	sırasında kullandığı araçlar bulunur. Java ile uygulama geliştirmede iki tane IDE yoğun olarak kullanılmaktadır:
+	Eclipse, IntelliJIDEA. Biz kursumuzda belirli bir zaman (yaklaşık kursun yarısına kadar) Eclipse, sonrasında IntelliJIDEA
+	kullanacağız.
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: Yukarıdaki maddelerdeki bazı zorunluluklar ilerideki konularda anlaşılacaktır.	
 ----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
