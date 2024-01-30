@@ -1,4 +1,4 @@
-﻿/*----------------------------------------------------------------------------------------------------------------------
+/*----------------------------------------------------------------------------------------------------------------------
 	Java ile Nesne Yönelimli Programlama
 
 	Eğitmen: Oğuz KARAN
@@ -131,7 +131,7 @@
 	IDE (Integrated Development Environment): Derleyicler ve yorumlayıcılar komut satırından çalışan ve basit arayüzlere
 	sahip programlardır. Aslında teorik olarak bir uygulamadaki tüm Java dosyaları ve diğer dosyalar basit bir editör programla
 	yazılıp komut satırından derlenebilir. Ancak bu, uygulama büyüdükçe zahmetli olmaya başlar. Bu da programcıya zaman
-	kaybettirir. Bu amaçla pratikte yazılm geliştirmeyi kolaylaştırmak için IDE denilen yazılımlar kullanılır. IDE'lerde
+	kaybettirir. Bu amaçla pratikte yazılım geliştirmeyi kolaylaştırmak için IDE denilen yazılımlar kullanılır. IDE'lerde
 	örneğin bir takım yardımlar veren editörler, tasarım araçları, test araçları, debug araçları vb. programcının geliştirme
 	sırasında kullandığı araçlar bulunur. Java ile uygulama geliştirmede iki tane IDE yoğun olarak kullanılmaktadır:
 	Eclipse, IntelliJIDEA. Biz kursumuzda belirli bir zaman (yaklaşık kursun yarısına kadar) Eclipse, sonrasında IntelliJIDEA
@@ -140,10 +140,10 @@
 
 /*----------------------------------------------------------------------------------------------------------------------
 	JDK'nın kurulumu için işletim sistemine göre aşağıdaki şu link'den ilgili "installer" indirilebilir: 
-	https://www.oracle.com/tr/java/technologies/downloads/. Burada LTS olması açısından 17 seçilebilir. Ya da en son
-	versiyon seçilebilir. Dersin tarihinde en son versiyon JDK 20 'dir. Kursumuzda Java 17 özellikleri de konular
-	içerisinde ele alınacağından en az Java 17 kurulumu önerilir. Java 17 öncesinde en az Java 11 olmalıdır. Kurulum
-	aşamasından sonra java ve javac programları -version seçeneği ile çalıştırılarak versiyon kontrolü yapılabilir. 
+	https://www.oracle.com/tr/java/technologies/downloads/. Burada LTS olması açısından 17 veya 21 seçilebilir. 
+	Kursumuzda Java 17 özellikleri de konular içerisinde ele alınacağından en az Java 17 kurulumu önerilir. Java 17 
+	öncesinde en az Java 11 olmalıdır. Kurulum aşamasından sonra java ve javac programları -version seçeneği ile
+	çalıştırılarak versiyon kontrolü yapılabilir. 
 ----------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -158,7 +158,7 @@
 	3. Komut yorumlayıcı program (command promt/terminal/shell) ile csd directory'sinin bulunduğu dizine geçilir. Dizin
 	geçişi için cd komutu kullanılır. Örneğin cd cd D:\Repositories\Java-Jan-2024\src\src-console
 
-	4. Harhangi bir editör program ile App.java dosyasının içerisine aşağıdaki programı yazınız.
+	4. Herhangi bir editör program ile App.java dosyasının içerisine aşağıdaki programı yazınız.
 
 	5. Komut yorumlayıcı programda, csd'nin bulunduğu dizinde aşağıdaki komutları çalıştırarak derleme işlemi yapılır:
 		javac csd/App.java -> Windows dışı sistemler için
@@ -171,6 +171,15 @@
 
 	Anahtar Notlar: Yukarıdaki maddelerdeki bazı zorunluluklar ilerideki konularda anlaşılacaktır.	
 ----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		System.out.println("Hello, World");
+	}
+}
+
 
 /*----------------------------------------------------------------------------------------------------------------------
 
