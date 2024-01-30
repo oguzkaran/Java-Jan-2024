@@ -138,8 +138,37 @@
 	kullanacağız.
 ----------------------------------------------------------------------------------------------------------------------*/
 
+/*----------------------------------------------------------------------------------------------------------------------
+	JDK'nın kurulumu için işletim sistemine göre aşağıdaki şu link'den ilgili "installer" indirilebilir: 
+	https://www.oracle.com/tr/java/technologies/downloads/. Burada LTS olması açısından 17 seçilebilir. Ya da en son
+	versiyon seçilebilir. Dersin tarihinde en son versiyon JDK 20 'dir. Kursumuzda Java 17 özellikleri de konular
+	içerisinde ele alınacağından en az Java 17 kurulumu önerilir. Java 17 öncesinde en az Java 11 olmalıdır. Kurulum
+	aşamasından sonra java ve javac programları -version seçeneği ile çalıştırılarak versiyon kontrolü yapılabilir. 
+----------------------------------------------------------------------------------------------------------------------*/
+
 
 /*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki programı çalıştırmak için JDK kurulu olan bir bilgisayarda aşağıdaki işlemlerin yapılması gerekir:
+	1. Herhangi bir dizinde (directory) csd isimli bir dizin açılır. Buradaki csd isminin tamamı küçük-harf olacak
+	şekilde yazılacaktır.
+
+	2. csd dizini içerisinde App.java isimli bir dosya açılır. Windows sisteminde uzantılar gizlenmişse görünür hale
+	getirip uzantının .java olarak değiştirilmesi gerekir. Buradaki dosya isminin aynen yazılması gerekir.
+
+	3. Komut yorumlayıcı program (command promt/terminal/shell) ile csd directory'sinin bulunduğu dizine geçilir. Dizin
+	geçişi için cd komutu kullanılır. Örneğin cd cd D:\Repositories\Java-Jan-2024\src\src-console
+
+	4. Harhangi bir editör program ile App.java dosyasının içerisine aşağıdaki programı yazınız.
+
+	5. Komut yorumlayıcı programda, csd'nin bulunduğu dizinde aşağıdaki komutları çalıştırarak derleme işlemi yapılır:
+		javac csd/App.java -> Windows dışı sistemler için
+		javac csd\App.java -> Windows sistemi için
+	Derleme işleminde herhangi bir hata (error) mesajı alınmazsa derleme işlemi başarılıdır ve App.class isminde byte code
+	üretilir
+
+	6. Komut yorumlayıcı programda aşağıdaki biçimde byte code çalıştırılır:
+		java csd.App
+
 	Anahtar Notlar: Yukarıdaki maddelerdeki bazı zorunluluklar ilerideki konularda anlaşılacaktır.	
 ----------------------------------------------------------------------------------------------------------------------*/
 
