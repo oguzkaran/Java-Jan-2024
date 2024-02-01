@@ -180,9 +180,68 @@ class App {
 	}
 }
 
+/*----------------------------------------------------------------------------------------------------------------------
+	1 Şubat 2024
+----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
+	Dil Kavramı: İletişimde kullanılan sembollere dil denir. Dilin kurallarına gramer denir. Bir olgu en az şu iki özelliğe
+	sahipse bir dildir:
+	1. Sentaks (syntax): Dilin öğrelerinin doğru dizilimine denir. Örneğin "I am a student" cümlesinde dilin öğeleri doğru 
+	dizilmiştir. Cümle "am a student I"  biçiminde yasılsaydı sentaks olarak hatalı olurdu.
+	2. Semantik (semantic): Doğru dizilmiş öğelerin anlamına denir. Öğeler doğru dizilse bile cümle anlamlı değilse yine
+	hatalıdır. 
 
+	Doğal dillerde sentaks ve semantik dışında da kavramlar bulunur. Bilgisayar bilimlerinde kullanılan dillere 
+	bilgisayar dilleri (computer languages) denir. Bir bilgisayar dili akış (flow) içeriyorsa programlama dili (programming language)
+	denir. Her bilgisayar dili bir programlama dili değildir. Örneğin html, XML gibi bilgisayar dilleri akış içermediği
+	için programlama dili değildir. Java bir programlama dilidir.
+
+	Programlama dilleri zaman içerisinde birbirilerinden esinlenmiştir. Hatta bazı programlama kalıpları da bir takım
+	dillerden alınarak kullanılmaktadır
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Derleyicinin verdiği mesajlar: Derleyiciler koda ilişkin bazı teşhiş mesajları (diagnostics) verebilirler. 
+	Derleyicilerin teşhis mesajları iki gruba ayrılır:
+	1. Gerçek hatalar (errors): Sentaks veya semantik olarak geçersiz bir durumda derleyicinin verdiği mesajlardır. Bu
+	durumda BC üretilmez. Programcının hataya yol açan durumları düzeltmesi ve derleme işlemini yapması gerekir.
+
+	2. Uyarılar (warnings): Programcının olası programlama hatalarına yönelik mesajlardır. Uyarı mesajları ara kodun
+	üretimini engellemez. Ancak programcı tarafından dikkate alınmalıdır. Özel bir durum yoksa uyarı mesajlarına yol
+	açan durumların ortadan kaldırılması gerekir. Bazı durumlarda programcının kullandığı bazı static kod analizi
+	araçları da derleyici dışında bazı uyarılar verebilirler. Şüphesiz bunlar da dikkate alınmalıdır ancak hepsinin
+	ortadan kaldırılması gerekmeyebilir. Pratikte bir ürünün nihayi (release) versiyonunda derleyicinin tüm uyarı
+	mesajlarının kaldıırlmış olması gerekir.
+
+	3. Ölümcül hatalar (fatal errors): Derleme işleminin dahi tamamlanamadığı hatalardır. Örneğin derlenecek dosyanın 
+	bulunamamaı, diskte yer kalmaması, sistemsel problemler oluşması vb. Bu durumda programcının ölümcül hataya yol
+	açan durumu ortadann kaldırıp derleme işlemini yapması gerekir. Yani ölümcül hata durumunda programcının kodu
+	ile bir durum yoktur.
+
+	Derleme işleminin başarıyla yapılması durumunda derleyiciler ya hiç bir mesaj vermezler ya da derleme işleminin
+	başarılı olduğu da anlaşılan mesajlar verirler. 
+
+	Programın çalışma zaamanında oluşan hatalı durumlara genel olarak "excaption" veya "run time error" denir. Exception
+	handling konusuna gelene kadar bir exception oluştuğunda program abnormal bir biçimde sonlanır olarak düşüneceğiz.
+
+	Anahtar Notlar: Bir program için, programcı açısından iki durum söz konusudur: 
+	1. Derleme zamanı (compile time): Derleme işlemine ilişkin süreçtir.
+	2. Çalışma zamanı (run time): Programın çalıştırlması sürecidir. 
+
+	Şüphesiz derleme zamanı ve çalışma birbirleri ile ilişkildir. Sonuçta bir program derlenmeden zaten çalıştırılamaz.
+	Her ne kadar ilişkili de olsalar birbirlerinden farklı kavramlardır.
+----------------------------------------------------------------------------------------------------------------------*/
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Atom (Token): Programlama dilinin bölünemeyen en küçük birimine denir. Java programlama dilinde atomlar şunlardır:
+	1. Anahtar Sözcükler (keywords/reserved words):
+	2. Değişkenler (variables/identifiers:
+	3. Sabitler (literals/constants):
+	4. Operatörler (operators):
+	5. String'ler (strings):
+	6. Ayraçlar (delimiters/punctuators):
 ----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
