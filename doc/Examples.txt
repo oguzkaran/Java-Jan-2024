@@ -236,13 +236,104 @@ class App {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	Atom (Token): Programlama dilinin bölünemeyen en küçük birimine denir. Java programlama dilinde atomlar şunlardır:
-	1. Anahtar Sözcükler (keywords/reserved words):
-	2. Değişkenler (variables/identifiers:
-	3. Sabitler (literals/constants):
-	4. Operatörler (operators):
-	5. String'ler (strings):
-	6. Ayraçlar (delimiters/punctuators):
+	1. Anahtar Sözcükler (keywords/reserved words): Derleyicinin bildiği, tanıdığı sözcüklerdir. Anahtar sözcükler 
+	tek başına değişken ismi olamazlar. Örneğin:
+		package, int, class
+
+	2. Değişken atomlar (variables/identifiers: İsmini programcının belirlediği ve isimlendirmeye ilişkin kuralları
+	olan atomnlardır. Örneğin:
+		csd, App, String 
+
+	3. Sabitler (literals/constants): Program içerisine doğrudan yazılan değerlere denir. Örneğin:
+		10, 20
+
+	4. Operatörler (operators): Belirli işleme yol açan ve işlem sonunda bir değer üreten atomlardır. Örneğin:
+		a + b ifadesinde + bir operatördür
+		++a ifadesinde ++ bir operatördür
+
+	5. String'ler (strings/string literals): İki tane iki tırnak (double quote) içerisinde yazılan yazılara tırnaklarıyla
+	birlikte string ya da string literal denir. Örneğin:
+		"Hello, World"
+
+	6. Ayraçlar (delimiters/punctuators): Yukarıdakiler dışında kalan atomlardır. Örneğin
+		{}, ()
+
+	Derleme işlemi atomlarına ayırmakla (tokenizing) başlar.
+
+	Anahtar Notlar: Klavyeden basıldığında boşluk hissi veren karakterlere boşluk karakterleri (whitespaces) denir. 
+	Klavyden basılaon tipik boşluk karakterleri şunlardır: SPACE, TAB, ENTER
 ----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Java'da kod yazım kuralları genel olarak şu şekilde özetlenebillir:
+	1. Atomlar arasında istenildiği kadar boşluk bırakılabilir
+	2. Değişken atomlar ve anahtar sözcükler kendi aralarında bitişik yazılması dışındaki tüm atomlar bitişik yazılabilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Atomlar arasında istenildiği kadar boşluk bırakılabilir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App 
+
+
+
+
+
+
+
+
+
+
+{
+	public static void main(
+		
+	
+	
+	
+	String [] args)
+	{
+		System.out
+		
+		
+		
+		
+		
+		.														println("Hello World");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Atomlar bitişik yazılabilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+package csd;class App{public static void main(String[]args){System.out.println("Hello, World");}}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Değişen atomlar ve anahtar sözcükler bitişik yazılamazlar
+----------------------------------------------------------------------------------------------------------------------*/
+packagecsd;class App{public static void main(String[]args){System.out.println("Hello, World");}} //error
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Programlamada derleyicinin gözrmezden geldiği kod parçalarına yorum satırları (comment lines) denir. Java'da iki
+	çeşit yorum satırı yazılabilir. Yorum satırlarının okunabilirliği/algılanabilirliği olumsuz etkilememesi gerekir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) //Burası görmezden gelinecek
+	{
+		/*
+		 	Burası da derleyici tarafından
+			görmezden gelinecektir
+		 */
+		System.out.println("Hello, World");
+	}
+}
+
+
+
 
 /*----------------------------------------------------------------------------------------------------------------------
 
