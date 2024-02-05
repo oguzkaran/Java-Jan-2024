@@ -311,7 +311,7 @@ class App
 package csd;class App{public static void main(String[]args){System.out.println("Hello, World");}}
 
 /*----------------------------------------------------------------------------------------------------------------------
-	Değişen atomlar ve anahtar sözcükler bitişik yazılamazlar
+	Değişken atomlar ve anahtar sözcükler bitişik yazılamazlar
 ----------------------------------------------------------------------------------------------------------------------*/
 packagecsd;class App{public static void main(String[]args){System.out.println("Hello, World");}} //error
 
