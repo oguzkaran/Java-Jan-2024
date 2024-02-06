@@ -333,6 +333,19 @@ class App {
 }
 
 
+/*----------------------------------------------------------------------------------------------------------------------
+	6 Şubat 2024
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bildirim (Declaration): Bir ismin derleyiciye tanıtılmasıdır.
+	Bir dilin kurallarının genel biçimlerini açıklamaya yönelik pek çok notasyon kullanılmaktadır. Biz burada "açısal 
+	parantez-köşeli parantez" tekniğini kullanacağız. Bu teknikte zorunlu olması gerekenler açıklamada açısal parantez
+	içerisine alınır. Seçenekli olması gerekenler ise köşeli parantez içerisine alınır. Herhangi bir paranteze alınmayanlar
+	aynı şekilde bulundurulması gerekenlerdir. Ayrıca 
+		//...
+	"burada bir takım kodlar var ancak şu an bizi ilgilendirmiyor" anlamına gelecektir. 
+----------------------------------------------------------------------------------------------------------------------*/
 
 
 /*----------------------------------------------------------------------------------------------------------------------
