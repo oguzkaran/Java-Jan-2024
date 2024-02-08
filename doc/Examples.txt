@@ -478,6 +478,86 @@ class Mample {
 	}
 }
 
+/*----------------------------------------------------------------------------------------------------------------------
+	8 Şubat 2024
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sayı Sistemleri
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Tür (Type): Bir değişkenin içerisindeki değerin ne kadar uzunlukta tutulduğunu yani bellekte ne kadar ayrılacağını
+	ve değerin hangi formatta tutulacağını belirtir. Java'da temel türler (primitive/built-in/predefined) şunlardır:
+	
+	
+	Tür						Uzunluğu (byte/bit)
+	int							   4/32
+	long						   8/64
+	short						   2/16
+	byte						   1/8
+	
+	double						   8/64
+	float						   4/32
+	
+	char						   2/16
+	boolean						   -
+	
+	Açıklamalar:
+	- Java'da temel tür isimlerinin her biri birer anahtar sözcüktür.
+	
+	- int, long, short ve byte türlerine tamsayı türleri (integer/integral types) denir.
+	 
+	- Tamsayı türleri için işaretli sistemde 2'ye formatını kullanılar. Java'da işaretsiz tamsayı türü yoktur.
+	
+	- double ve float türleribne "gerçek sayı türleri (real types)" denir. Gerçek sayı türleri için IEEE 754 
+	formatı kullanılır. Bu sebeple türlere "floating point types" da denilmektedir. Bu türlerle yapılan işlemlerde
+	IEEE 754 satandardının çalışma sistemi gereği yuvarlama hataları (rounding error) oluşabilir. Bu yuvarlama hatalarının
+	problem olabileceği uygulamalarda (örneğin  parasal ve finansal uygulamalarda) bu türler kullanılmazz. Bu tip durumlarda
+	hangi türlerin kullanılacağı ileride ele alınacaktır.
+	
+	- Programlamada kullanılan karakter bir tabloda tutulurlar. Bu tabloya karakter tabşosu denilmektedir. Programlamada 
+	pek çok karakter tablosu kullanılabilmektedir. Daha önceleri ASCII denilen ve 7 bit olarak tutulan ancak daha 8 bit olarak
+	ele alınan bir karakter tablosu vardır. Daha sonraları dünyada kullanılan pek çok karakterin de tutulabilmesi için 
+	UNOCODE isimli bir karakter tablosu kullanılmaya başlanmıştır. UNICODE tablosunun ilk 128 karakteri ASCII ile 
+	aynıdır. UNICODE tablosunun da çeşitleri vardır. char türü içerisinde tutulan sayı ilgili tabloda sıra numarası
+	olarak yorumlanır. Yani char türü içerisinde tutulan sayı aslında ilgili karakter tablosounda bir karakterin
+	sıra numarasına karşılık gelir. Bu anlamda char türü UNICODE tablosunun 2 byte'ı ile uyumludur. Karakter tablolarına
+	ilişkin detaylar ileride ele alıncaktır.
+	
+	- boolean türü mantıksal olarak doğru ve yanlış kavramlarını temsil eden bir türdür. boolean türünden bir değişeken
+	iki tane değer alabilir: true, false. Bu tür örneğin flag değişkenlerde kullanılabilir. boolean türünün uzunluğu
+	Java Language Specifcation dökumanında belirtilmemiştir. Zaten iki tane değer aldığı için de uzunluğunun kaç olduğunun
+	programcı açısından önemi yoktur.
+	
+	- Her ne kadar 8 tane tür olsa da programcı tamsayı kullanacağı zaman önce int türünü düşünür, int türünün senaryoya
+	uygun olmadığı durumda (örneğin daha fazla değer tutulması gerekirse) diğer türler tercih edilmelidir. Benzer 
+	şekilde gerçek sayılar için de öncelikle double türü düşünülmeli, duruma göre float türü tercih edilmelidir. Diğer 
+	türler (char ve boolean) zaten özel amaçlı türlerdir.
+	
+----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği çalıştırıp yuvarlama hatasını gözlemleyiniz. Kodun detayları şu an için önemsizdir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+public class App {
+	public static void main(String [] args)
+	{	
+		double a = 0.1, b = 0.2;
+		double c;
+		
+		c = a + b;
+		
+		System.out.printf("c = %.20f%n", c);
+		
+		if (c == 0.3)
+			System.out.println("Eşit");
+		else
+			System.out.println("Eşit değil");
+	}
+}
+
 
 
 /*----------------------------------------------------------------------------------------------------------------------
