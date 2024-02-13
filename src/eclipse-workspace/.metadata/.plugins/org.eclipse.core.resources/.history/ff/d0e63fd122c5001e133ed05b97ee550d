@@ -1,0 +1,32 @@
+/*----------------------------------------------------------------------------------------------------------------------
+	Çağıran metodun (caller) ait olduğu sınıf ile çağrılan metodun (callee) ait olduğu sınıf aynı ise çağrı sırasında
+	paket ismi kullanılmasına gerek yoktur. 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		System.out.println("Hello, World");
+		csd.Sample.foo();
+		csd.Mample.bar();
+		System.out.println("Goodbye, World");
+	}
+}
+
+
+class Sample {
+	//...
+	public static void foo()
+	{
+		System.out.println("foo");
+	}
+}
+
+class Mample {
+	//...
+	public static void bar()
+	{
+		System.out.println("bar");
+	}
+}

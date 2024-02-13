@@ -1,0 +1,82 @@
+/*----------------------------------------------------------------------------------------------------------------------
+	"Hello World" Programının Genel Açıklaması:
+	Bir Java programı genel olarak paketlerden (package), paketler sınıflardan (class), sınıflar da metotlardan (method)
+	oluşur. Paket bildiriminin genel biçimi:
+	
+		package <isim>;
+		
+	Burada isim daha sonra ele alacağımız değişken isimlendirme kurallarına uygun bir isim olmalıdır. Paketler konusu
+	çok detaylı bir konudur, ileride detaylı olarak ele alınacaktır. Biz ilgili konuya kadar yalnızca csd paketi içerisinde
+	kodlama yapacağız. 
+	
+	Sınıf bildiriminin genel biçimi şu şekildedir:
+	
+	[bildirime ilişkin bazı anahtar sözcükler] class <isim> {
+		//...
+	}
+	
+	Burada isim değişken isimlendirme kurallarına uygun olmalıdır. Sınıf kavramı da oldukça geniş bir kavramdır. Sınıf bildiriminin
+	detayları konular içerisinde ele alınacaktır. Sınıf kavramı Nesne Yönelimli Programlama Tekiniğinin de temel taşlarından
+	biridir.  
+	
+	Java'da alt programlara metot denir. Metot bildirimi (method declaration) alt programın kodlarının yazılmasıdır. Bir 
+	metot bildirildiğinde kodlarının çalıştırılabilmesi için çağrılması (call/invoke) gerekir. Metot bildiriminin genel
+	biçimi şu şekildedir:
+	
+	[erişim belirleyici] [static] <geri dönüş değeri bilgisi> <isim>([parametre listesi])
+	{
+		//...
+	}
+	
+	Erişim belirleyici şunlar olabilir: public, no-modifier (hiç bir şey yazmamak), protected, private. İlgili konuya
+	gelene kadar tüm metotlarımızı public olarak bildireceğiz. Bir metot static veya non-static olabilir. static anahtar
+	sözcüğü yazılmadığında metot non-static olur. İlgili konuya gelene kadar tüm metotlarımızı static olarak bildireceğiz.
+	Bir metodun geri dönüş değeri (return value) olabilir ya da olmayabilir. Bir metodun geri dönüş değeri yoksa void
+	anahtar sözcüğü yazılır. Metot ismi değişken isimlendirme kurallarına uygun bir isim olmalıdır. Bir metodun parametreleri
+	olabilir ya da hiç olmayabilir. Metot bildiriminde { ile } arasında kalan kod bölümüne metodun gövdesi (body) denir.
+	Metodun ne iş yaptığı yani kodları buraya yazılır. Parametre kavramı ileride ele alınacaktır. static bir metodu 
+	çağırmanın genel biçimi şu şekildedir:
+		[paket ismi].[sınıf ismi].<metot ismi>([argümanlar]);
+	Argüman kavramı ileride ele alınacaktır. Bir metot çağrıldığında akış metodun kodlarına dallanır. Çağrılan metodun
+	kodları çalıştırılır. Metot çağrısı bittiğinde akış çağıran metoda (çağrılan noktaya) geri döner. Akış main metodundan
+	başlar. Akışın başladığı main metoduna "entry point" denir. Özel bazı durumlar dışında main metodu bittiğinde program
+	sonlanır. print ve println metotları aldıkları değerleri ekrana basmak için kullanılan standart metotlardır. Bu metotlar
+	non-static metotlardır. Dolayısıyla çağrıdaki System bir paket değildir.
+	
+	Anahtar Notlar: Aslında teknik olarak print ve println gibi metotlar ekrana yazma yapmazlar. Bu metotlar ismine
+	standard output (stdout) denilen kabaca bir dosyaya yazma yaparlar. stdout dosyası ekrana yönlendirildiği için
+	biz çıktıları ekranda görürüz. Kursumuzda basitleştirmek için ekran terimini kullanacağız.  Benzer şekilde 
+	klavyeden okuma yapan metotlar, okumayı aslında standard input (stdin) denilen bir dosyadan yaparlar. Dosya klavyeye
+	yönlendirildiğinde okuma klavyeden yapılmış olur. Kursumuzda basitleştirmek için klavye terimini de kullanacağız.
+	
+	Anahtar Notlar: Java'nın standart (yani hazır olarak) sınıflarının ve metotlarının buluduğu kütüğhaneye genele olarak
+	JavaSE (Java Standard Edition).  
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		System.out.println("Hello, World");
+		csd.Sample.foo();
+		csd.Mample.bar();
+		System.out.println("Goodbye, World");
+	}
+}
+
+
+class Sample {
+	//...
+	public static void foo()
+	{
+		System.out.println("foo");
+	}
+}
+
+class Mample {
+	//...
+	public static void bar()
+	{
+		System.out.println("bar");
+	}
+}
