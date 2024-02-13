@@ -694,33 +694,6 @@ class Mample {
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-/*---------------------------------------------------------------------------------------------------------------------------------------------------
-	Yazılar da aslında bilgisayar belleğinde 2'lik sistemde sayılar biçiminde tutulmaktadır. Bir yazıyı oluşturan elemanlara "karakter" denilmektedir. İşte
-	bir yazıda her bir karakter 2'lik sistemde bir sayı ile ifade edilir. Böylece yazı aslında ikilik sistemde bir sayı dizisi gibi tutulmaktadır. İşte
-	bir karakter için hangi sayının karşı geldiğini belirten tablolara "karakter tabloları" denilmektedir. Karakter tablosundaki karakter şekillerine "glyph"
-	denilmektedir. Her karaktere tabloda bir sıra numarası verilmiştir. Buna da "code point" denilmektedir. Dünyanın ilk standart karakter tablosu "ASCII (American
-	Standard Code Information Interchange)" denilen tablodur. ASCII tablosu aslında 7 bit bir tablodur. Dolayısıyla tabloda 128 tane glyph için code point
-	bulundurulmuştur. ASCII dışında IBM EBCDIC tablosunu geliştirmiştir. Wang firması WISCII tablosunu kullanmıştır. ASCII tablosu Amerikalılar tarafından yalnızca İngilizce
-	karakterleri ifade etmek için oluşturulmuştur. Bilgisayarlar yaygınlaşmaya başladığında farklı karakterlere sahip olan Türkiye gibi, Yunanistan gibi, Almanya gibi
-	ülkeler bu ASCII tablosunu 8 bite çıkartıp elde edilen 128'lik yeni alanı kendi karakterlerini ifade etmek için kullanmışlardır. ASCII tablosunun ilk yarısı 
-	(yani [0, 128] numaraları karakterleri) standarttır. Ancak ikinci yarısı "code page" adı altında farklı ülkeler tarafından farklı yerleşimler yapılarak kullanılmaktadır. 
-	DOS zamanlarında Türkçe karakterler için OEM 857 denilen code page kullanılıyordu. Daha sonra Microsoft Windows sistemlerinde Türkçe karakterler için 1254 code page'i
-	düzenledi. ISO, bu code page'leri standart hale getirmiştir. Bugün Türkçe karakterler ISO tarafından ASCII 8859-9 Code page'i ile düzenlenmiştir.
-
-	ASCII tablosu ve onların code page'leri uzun süre kullanılmış ve hala kullanılmakta olsa da maalesef karışıklıklara yol açmaktadır. İşte son 20 yıldır
-	artık karakterleri 2 byte içerisinde ifade ederek dünyanın bütün dillerinin ve ortak sembollerinin tek bir tabloya yerleştirilmesi ile ismine UNICODE 
-	denilen bir tablo oluşturulmuştur (www-unicode.org). UNICODE tablo ISO tarafından 10646 ismiyle de bazı farklılıklarla standardize edilmiştir. UNICODE tablonun
-	ilk 128 karakteri standart ASCII karakterleri, ikinci 128 karakteri ISO 8859-9 code page'indeki karakterlerdir. 
-
-	Bir karakter tablosundaki code point'lerin ikilik sistemde ifade edilme biçimine "encoding" denilmektedir. ASCII code page'lerinde encoding doğrudan 
-	code point'in 1 byte'lık sayı karşılığıdır. Ancak UNICODE tablonun değişik encoding'leri kullanılmaktadır. UNICODE tablonun klasik encoding'i UTF-16'dır. 
-	Burada code point doğrudan 16 bir bir sayı biçiminde ifade edilir. UTF-32 encoding'inde ise code point 32 bitlik bir sayı biçiminde ifade edilmektedir. 
-	Ancak UNICODE tablonun en yaygın kullanılan encoding'i UTF-8 encoding'idir. UTF-8 kodlamasında standart ASCII karakterler 1 byte ile, diğer karakterler 
-	2 byte, 3 byte, 4 byte ve 5 byte kodlanabilmekedir. Türkçe karakterler UTF-8 encoding'inde 2 byte yer kaplamaktadr. UTF-8 encoding'i UNICODE bir yazının 
-	adeta sıkıştırılmış bir hali gibi düşünülebilir. 
-
-	Bugün pek çok programlama editörleri default durumda dosyayı UNICODE UTF-8 encoding'ine göre saklamaktadır.
-----------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------
 	Bilgisayar dünyasında çok kullanılan diğer bir sayı sistemi de 16'lık sistemdir. 16'lık sisteme İngilizce "hexadecimal system" denilmektedir. 16'lık 
@@ -850,7 +823,7 @@ class Mample {
 	
 	- int, long, short ve byte türlerine tamsayı türleri (integer/integral types) denir.
 	 
-	- Tamsayı türleri için işaretli sistemde 2'ye formatını kullanılar. Java'da işaretsiz tamsayı türü yoktur.
+	- Tamsayı türleri için işaretli sistemde 2'ye tümleme formatını kullanılar. Java'da işaretsiz tamsayı türü yoktur.
 	
 	- double ve float türleribne "gerçek sayı türleri (real types)" denir. Gerçek sayı türleri için IEEE 754 
 	formatı kullanılır. Bu sebeple türlere "floating point types" da denilmektedir. Bu türlerle yapılan işlemlerde
@@ -858,10 +831,10 @@ class Mample {
 	problem olabileceği uygulamalarda (örneğin  parasal ve finansal uygulamalarda) bu türler kullanılmazz. Bu tip durumlarda
 	hangi türlerin kullanılacağı ileride ele alınacaktır.
 	
-	- Programlamada kullanılan karakter bir tabloda tutulurlar. Bu tabloya karakter tabşosu denilmektedir. Programlamada 
-	pek çok karakter tablosu kullanılabilmektedir. Daha önceleri ASCII denilen ve 7 bit olarak tutulan ancak daha 8 bit olarak
-	ele alınan bir karakter tablosu vardır. Daha sonraları dünyada kullanılan pek çok karakterin de tutulabilmesi için 
-	UNOCODE isimli bir karakter tablosu kullanılmaya başlanmıştır. UNICODE tablosunun ilk 128 karakteri ASCII ile 
+	- Programlamada kullanılan karakter bir tabloda tutulurlar. Bu tabloya karakter tablosu denilmektedir. Programlamada 
+	pek çok karakter tablosu kullanılabilmektedir. Daha önceleri ASCII denilen ve 7 bit olarak tutulan ancak daha 8 bit 
+	olarak ele alınan bir karakter tablosu vardır. Daha sonraları dünyada kullanılan pek çok karakterin de tutulabilmesi 
+	için UNOCODE isimli bir karakter tablosu kullanılmaya başlanmıştır. UNICODE tablosunun ilk 128 karakteri ASCII ile 
 	aynıdır. UNICODE tablosunun da çeşitleri vardır. char türü içerisinde tutulan sayı ilgili tabloda sıra numarası
 	olarak yorumlanır. Yani char türü içerisinde tutulan sayı aslında ilgili karakter tablosounda bir karakterin
 	sıra numarasına karşılık gelir. Bu anlamda char türü UNICODE tablosunun 2 byte'ı ile uyumludur. Karakter tablolarına
@@ -875,13 +848,14 @@ class Mample {
 	- Her ne kadar 8 tane tür olsa da programcı tamsayı kullanacağı zaman önce int türünü düşünür, int türünün senaryoya
 	uygun olmadığı durumda (örneğin daha fazla değer tutulması gerekirse) diğer türler tercih edilmelidir. Benzer 
 	şekilde gerçek sayılar için de öncelikle double türü düşünülmeli, duruma göre float türü tercih edilmelidir. Diğer 
-	türler (char ve boolean) zaten özel amaçlı türlerdir. Bu anlamda int ve double türüne "default types" da denilmektedir
+	türler (char ve boolean) zaten özel amaçlı türlerdir. Bu anlamda int ve double türlerine "default types" da denilmektedir
 	
-	- Java'da boolean türü dışında kalan temel türlerin uzunlukları her sistemde aynıdır.
+	- Java'da boolean türü dışında kalan temel türlerin uzunlukları her sistemde aynıdır. boolean türünün aldığı iki
+	tane değer olduğundan yani herhangi bir sınır söz konusu olmadığından programcı açısından uzunluğun da önemi
+	yoktur.
 	
 	- int türüne "integer" demek yanlış bir tanım kullanmak demektir. integer kavramı tam sayılara verilen genel bir 
-	isimdir. int ise 4 byte'lık bir tamsayı türüdür. Ayrıca JavaSE'de Integer isimli önemli bir sınıf da bulunmaktadır
-	
+	isimdir. int ise 4 byte'lık bir tamsayı türüdür. Ayrıca JavaSE'de Integer isimli önemli bir sınıf da bulunmaktadır.
 ----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
 	Aşağıdaki demo örneği çalıştırıp yuvarlama hatasını gözlemleyiniz. Kodun detayları şu an için önemsizdir
@@ -902,6 +876,194 @@ public class App {
 			System.out.println("Eşit");
 		else
 			System.out.println("Eşit değil");
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	13 Şubat 2024
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: Yazılar da aslında bilgisayar belleğinde 2'lik sistemde sayılar biçiminde tutulmaktadır. Bir yazıyı oluşturan 
+	elemanlara "karakter" denilmektedir. İşte bir yazıda her bir karakter 2'lik sistemde bir sayı ile ifade edilir. Böylece yazı 
+	aslında ikilik sistemde bir sayı dizisi gibi tutulmaktadır. İşte bir karakter için hangi sayının karşı geldiğini belirten 
+	tablolara "karakter tabloları" denilmektedir. Karakter tablosundaki karakter şekillerine "glyph" denilmektedir. Her karaktere 
+	tabloda bir sıra numarası verilmiştir. Buna da "code point" denilmektedir. Dünyanın ilk standart karakter tablosu 
+	"ASCII (American Standard Code Information Interchange)" denilen tablodur. ASCII tablosu aslında 7 bit bir tablodur. Dolayısıyla
+	tabloda 128 tane glyph için code point bulundurulmuştur. ASCII dışında IBM EBCDIC tablosunu geliştirmiştir. Wang firması WISCII
+	tablosunu kullanmıştır. ASCII tablosu Amerikalılar tarafından yalnızca İngilizce karakterleri ifade etmek için oluşturulmuştur. 
+	Bilgisayarlar yaygınlaşmaya başladığında farklı karakterlere sahip olan Türkiye gibi, Yunanistan gibi, Almanya gibi ülkeler bu 
+	ASCII tablosunu 8 bite çıkartıp elde edilen 128'lik yeni alanı kendi karakterlerini ifade etmek için kullanmışlardır. ASCII tablosunun
+	ilk yarısı (yani [0, 128] numaraları karakterleri) standarttır. Ancak ikinci yarısı "code page" adı altında farklı ülkeler tarafından 
+	farklı yerleşimler yapılarak kullanılmaktadır. DOS zamanlarında Türkçe karakterler için OEM 857 denilen code page kullanılıyordu. Daha 
+	sonra Microsoft Windows sistemlerinde Türkçe karakterler için 1254 code page'i düzenledi. ISO, bu code page'leri standart hale 
+	getirmiştir. Bugün Türkçe karakterler ISO tarafından ASCII 8859-9 Code page'i ile düzenlenmiştir. ASCII tablosu ve onların 
+	code page'leri uzun süre kullanılmış ve hala kullanılmakta olsa da maalesef karışıklıklara yol açmaktadır. İşte son 20 yıldır artık 
+	karakterleri 2 byte içerisinde ifade ederek dünyanın bütün dillerinin ve ortak sembollerinin tek bir tabloya yerleştirilmesi ile ismine 
+	UNICODE denilen bir tablo oluşturulmuştur (www.unicode.org). UNICODE tablo ISO tarafından 10646 ismiyle de bazı farklılıklarla standardize 
+	edilmiştir. UNICODE tablonun ilk 128 karakteri standart ASCII karakterleri, ikinci 128 karakteri ISO 8859-9 code page'indeki 
+	karakterlerdir. Bir karakter tablosundaki code point'lerin ikilik sistemde ifade edilme biçimine "encoding" denilmektedir. ASCII 
+	code page'lerinde encoding doğrudan code point'in 1 byte'lık sayı karşılığıdır. Ancak UNICODE tablonun değişik encoding'leri 
+	kullanılmaktadır. UNICODE tablonun klasik encoding'i UTF-16'dır. Burada code point doğrudan 16 bit bir sayı biçiminde ifade 
+	edilir. UTF-32 encoding'inde ise code point 32 bitlik bir sayı biçiminde ifade edilmektedir. Ancak UNICODE tablonun en yaygın 
+	kullanılan encoding'i UTF-8 encoding'idir. UTF-8 kodlamasında standart ASCII karakterler 1 byte ile, diğer karakterler 2 byte, 
+	3 byte, 4 byte ve 5 byte ile kodlanabilmekedir. Türkçe karakterler UTF-8 encoding'inde 2 byte yer kaplamaktadr. UTF-8 encoding'i 
+	UNICODE bir yazının adeta sıkıştırılmış bir hali gibi düşünülebilir. Bugün pek çok programlama editörleri default durumda dosyayı 
+	UNICODE UTF-8 encoding'ine göre saklamaktadır.
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Değişken, bellekte ayrılan bir bölge ile işlşem yapılmasını saplar yani o bölgeyi temsil eder. Bir değişken için
+	bellekte yer ayrılma detayları ileride ele alınacaktır. Değişken bildiriminin genel biçimi şu şekildedir:
+	
+		<tür> <isim>;
+		
+	Java'da bir değişken kullanılmadan önce bildirilmelidir. Değişken ismi, değişken isimlendirme kurallarına uygun
+	herhangi bir isim olabilir. Bir değişkene bildirim noktasında değer verilmesine "ilkdeğerleme (initialization)" 
+	denir. Bir değişkenin derleyici tarafından görülebildiği kod aralığına "faaliyet alanı (scope)" denir. Bir 
+	değişkenin bellekte kalma süresine yani yaratılmasıyla yok edilmesi arasında kalan süre "ömür (storage duration)"
+	denir. Ömür kavramı "adresler" konusuyla birlikte ileride ele alınacaktır. 
+	
+	Java'da 3 çeşit değişken vardır:
+	1. Yerel değişkenler (local variables)
+	2. Parametre değişkenleri (paraameter  variables)
+	3. Sınıf veri elemanları (member variables)
+	
+	Bir metot içerisinde { ile } arasonda kalan bölgeye parantezler ile birlikte "blok (block)" denir. Bu anlamda 
+	metodun gövdesi de bir bloktur. Bir metot içeriisnde istenildiği kadar içiçe veya ayrık bloklar olabilir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+
+	public static void main(String[] args) 
+	{
+		
+		int a = 10; //initialization
+		double b;
+		
+		b = 10;
+		
+		//...
+		
+		a = 20;
+		
+		{
+			//...
+			
+			{
+				
+			}
+			{
+				//...
+				{
+					
+				}
+			}
+		}
+		
+		{
+			//...
+		}
+			
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir blok içerisinde bildirilen değişkenlere yerel değişkenler (local variables) denir. Eğer yerel değişkenler
+	aynı türdense bu durumda bildirim virgül ile ayrılarak yapılabilir. Yerel bir değişkenin faaliyet alanı (scope)
+	bildirildiği yerden bildirildiği bloğun sonuna kadardır
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+
+	public static void main(String[] args) 
+	{
+		int a, x = 10, y;
+		
+		//...
+			
+	}
+}
+
+class Sample {
+	public static void foo()
+	{
+		a = 10; //error
+		int b;
+		
+		{
+			int c;
+			//...
+			
+			c = 34;
+			
+			b = 23;
+		}
+		
+		b = 34;
+		c = 10; //error
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aynı faaliyet alanı içeisinde aynı isimde yerel değişken bildirimi yapılamaz. 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class Sample {
+	public static void foo()
+	{
+		int a;
+		double a; //error
+		
+		{
+			float a; //error
+			
+			//...
+		}
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Farklı faaliyet alanları içerisinde aynı isimde yerel değişken bildirimi geçerlidir 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+
+	public static void main(String[] args) 
+	{
+		int a;
+			
+	}
+}
+
+class Sample {
+	public static void foo()
+	{
+		int a;
+	
+
+		{
+			int b;
+			//..
+		}
+		
+		int b;
+		
+		//...
+	}
+	
+	public static void bar()
+	{
+		int a;
+		
+		//...
 	}
 }
 
