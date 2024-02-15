@@ -1,4 +1,0 @@
-INDEX VERSION 1.134+/Users/oguzkaran/Dropbox/CSD/Kurslar/Java-Jan-2024/src/eclipseworkspace/.metadata/.plugins/org.eclipse.jdt.core
-1865797976.index
-30038764.index
-3824960605.index

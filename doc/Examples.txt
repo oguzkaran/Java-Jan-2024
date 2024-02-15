@@ -222,7 +222,7 @@ class App {
 	Derleme işleminin başarıyla yapılması durumunda derleyiciler ya hiç bir mesaj vermezler ya da derleme işleminin
 	başarılı olduğu da anlaşılan mesajlar verirler. 
 
-	Programın çalışma zaamanında oluşan hatalı durumlara genel olarak "excaption" veya "run time error" denir. Exception
+	Programın çalışma zamanında oluşan hatalı durumlara genel olarak "excaption" veya "run time error" denir. Exception
 	handling konusuna gelene kadar bir exception oluştuğunda program abnormal bir biçimde sonlanır olarak düşüneceğiz.
 
 	Anahtar Notlar: Bir program için, programcı açısından iki durum söz konusudur: 
@@ -385,7 +385,9 @@ class App {
 	olabilir ya da hiç olmayabilir. Metot bildiriminde { ile } arasında kalan kod bölümüne metodun gövdesi (body) denir.
 	Metodun ne iş yaptığı yani kodları buraya yazılır. Parametre kavramı ileride ele alınacaktır. static bir metodu 
 	çağırmanın genel biçimi şu şekildedir:
+	
 		[paket ismi].[sınıf ismi].<metot ismi>([argümanlar]);
+		
 	Argüman kavramı ileride ele alınacaktır. Bir metot çağrıldığında akış metodun kodlarına dallanır. Çağrılan metodun
 	kodları çalıştırılır. Metot çağrısı bittiğinde akış çağıran metoda (çağrılan noktaya) geri döner. Akış main metodundan
 	başlar. Akışın başladığı main metoduna "entry point" denir. Özel bazı durumlar dışında main metodu bittiğinde program
@@ -396,10 +398,12 @@ class App {
 	buradan yapılır 
 	
 	Anahtar Notlar: Aslında teknik olarak print ve println gibi metotlar ekrana yazma yapmazlar. Bu metotlar ismine
-	standard output (stdout) denilen kabaca bir dosyaya yazma yaparlar. stdout dosyası ekrana yönlendirildiği için
-	biz çıktıları ekranda görürüz. Kursumuzda basitleştirmek için ekran terimini kullanacağız.  Benzer şekilde 
-	klavyeden okuma yapan metotlar, okumayı aslında standard input (stdin) denilen bir dosyadan yaparlar. Dosya klavyeye
-	yönlendirildiğinde okuma klavyeden yapılmış olur. Kursumuzda basitleştirmek için klavye terimini de kullanacağız.
+	standard output (stdout) denilen kabaca bir dosyaya yazma yaparlar. stdout dosyası ekrana yönlendirildiğinde
+	biz çıktıları ekranda görürüz. Kursumuzda basitleştirmek için ekran terimini kullanacağız. Benzer şekilde 
+	klavyeden okuma yapan metotlar, okumayı aslında standard input (stdin) denilen bir dosyadan yaparlar. Dosya, klavyeye
+	yönlendirildiğinde okuma klavyeden yapılmış olur. Kursumuzda basitleştirmek için klavye terimini de kullanacağız. Masaüstü
+	işletim sistemlerinin hemen hepsinde stdout ekrana, stdin ise klavyaye yönlendirilmiştir. Ayrıca IDE'ler de stout'u 
+	genel olarak kendi console pencerelerine yönlendirirler. 
 	
 	Anahtar Notlar: Java'nın standart (yani hazır olarak) sınıflarının ve metotlarının buluduğu kütüğhaneye genele olarak
 	JavaSE (Java Standard Edition) denilmektedir.	
@@ -1011,7 +1015,7 @@ class Sample {
 
 
 /*----------------------------------------------------------------------------------------------------------------------
-	Aynı faaliyet alanı içeisinde aynı isimde yerel değişken bildirimi yapılamaz. 
+	Aynı faaliyet alanı içerisinde aynı isimde yerel değişken bildirimi yapılamaz. 
 ----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -1153,6 +1157,417 @@ class App {
 	olur. Ancak bu sınır oldukça fazla olma eğiliminde olduğundan isimlendirmede bir sorun oluşturmaz.
 ----------------------------------------------------------------------------------------------------------------------*/
 
+/*----------------------------------------------------------------------------------------------------------------------
+	15 Şubat 2024
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Java'da klavyeden okuma yapmak (aslında stdin'den okuma yapmak) için pek çok sınıf ve metot bulunmaktadır. Biz kursumuzda
+	ağırlıklı olarak Scanner isimli bir sınıfın nextXXX metotlarını kullanacağız. Belirli konulara gelene kadar bu 
+	kullanımlar birer kalıp biçiminde düşünülmelidir. Kullanılan kalıpların detayları ileride anlaşılacaktır. Kullanılan
+	kalıplarda IDE'nin static kod analizi ya da derleyici bir takım uyarılar (warnings) verebilecektir. Aksi belirtilmediği 
+	sürece bu uyarılar dikkate alınmayacaktır.
+	
+	Bu kalıplarda ilgili türden giriş yapılmadığı durumlarda exception oluşur.	
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki klavyeden int türden değer okuma kalıbında değerler aralarında en az bir tane whitespace karakter olacak
+	şekilde girilir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		int total;
+		
+		total = a + b;
+		System.out.println(total);		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki klavyeden int türden değer okuma kalıbında değerler ENTER karakteri ile ayrılacak şekilde girilmelidir. 
+	Diğer whitespace karakterlerin kullanımı exception oluşturur
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Birinci sayıyı giriniz:");
+		int a = Integer.parseInt(kb.nextLine()); 
+		
+		System.out.print("İkinci sayıyı giriniz:");
+		int b = Integer.parseInt(kb.nextLine());
+		int total;
+		
+		total = a + b;
+		System.out.println(total);		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki klavyeden double türden değer okuma kalıbında değerler aralarında en az bir tane whitespace karakter olacak
+	şekilde girilir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		double a = kb.nextDouble();
+		double b = kb.nextDouble();
+		double total;
+		
+		total = a + b;
+		System.out.println(total);		
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki klavyeden double türden değer okuma kalıbında değerler ENTER karakteri ile ayrılacak şekilde girilmelidir. 
+	Diğer whitespace karakterlerin kullanımı exception oluşturur
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Birinci sayıyı giriniz:");
+		double a = Double.parseDouble(kb.nextLine()); 
+		
+		System.out.print("İkinci sayıyı giriniz:");
+		double b = Double.parseDouble(kb.nextLine());
+		double total;
+		
+		total = a + b;
+		System.out.println(total);		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki klavyeden long türden değer okuma kalıbında değerler aralarında en az bir tane whitespace karakter olacak
+	şekilde girilir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		long a = kb.nextLong();
+		long b = kb.nextLong();
+		long total;
+		
+		total = a + b;
+		System.out.println(total);		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki klavyeden double türden değer okuma kalıbında değerler ENTER karakteri ile ayrılacak şekilde girilmelidir. 
+	Diğer whitespace karakterlerin kullanımı exception oluşturur
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Birinci sayıyı giriniz:");
+		long a = Long.parseLong(kb.nextLine()); 
+		
+		System.out.print("İkinci sayıyı giriniz:");
+		long b = Long.parseLong(kb.nextLine());
+		long total;
+		
+		total = a + b;
+		System.out.println(total);		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	İfade (expression): Sabitlerden, operatörlerden ve değişkenlerden oluşan herhangi bir kombinasyona ifade denir. Bir
+	ifade yalnızca sabitlerden ve operatörlerden oluşuyorsa bu ifadeye "constant expression" denir. Bir değişken veya sabit
+	tek başına ifadedir. Ancak bir operatör tek başına bir ifade olamaz. Her ifadenin bir türü vardır. Bunun bir tane 
+	istisnası vardır, ileride ele alınacaktır
+----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir metodun geri dönüş değeri bilgisi yerine bir tür ismi yazılırsa, bu metodun geri dönüş değeri (return value)"
+	vardır denir. Tersinde bir metodun geri dönüş değeri varsa geri dönüş değeri bilgisi yerine bir tür yazılır. Bir 
+	metodun geri dönüş değeri varsa, o metodun çağrısı bittiğinde çağrılan noktaya bir değer ile geri döner. Bir metodun
+	geri dönüş değeri yoksa geri dönüş değeri bilgisi yerine void anahtar sözcüğü yazılır. Metodun geri dönüş değeri yoksa
+	sonlandığında çağrılan noktaya yalnızca geri döner, bir değer aktarılmaz. Bir metodun geri dönüş değeri metot içerisinde 
+	return deyimi ile oluşturulur. return deyiminin genel biçimi şu şekildedir:
+	
+		return [ifade];
+		
+	Görüldüğü gibi return deyimi tek başına veya bir ifade ile kullanılabilir. Bu kullanımların detayları bölüm içerisinde
+	anlaşılacaktır. return deyimi nasıl kullanılırsa kullanılsın, akış return deyimine geldiğinde metot sonlanır. Yani 
+	return deyiminin birinci görevi metodu sonlandırmaktır. return deyimi ifade ile kullanılmışsa ifadenin değeri çağrılan
+	noktaya aktarılır. Buna geri dönüş değeri denmesinin nedeni budur  
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örnekte add metodu çağrıldığında kullanıcıdan iki değer istenmiş ve o değerlerin toplamına geri 
+	dönülmüştür. main metodu içerisinde ise add metodu çağrılmış, geri dönüş değeri 3 ile çarpılıp sonuç result 
+	değişkenine atanmıştır
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		int result;
+		
+		result = Util.add() * 2;
+		
+		System.out.println(result);						
+	}
+}
+
+class Util {
+	public static int add()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		int total;
+		
+		total = a + b;
+		
+		return total;		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Geri dönüş değeri olan bir metot içerisinde return deyiminin tek başına kullanımı geçersizdir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class Util {
+	public static int add()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		int total;
+		
+		total = a + b;
+		
+		return;	//error	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Geri dönüş değeri olan bir metot içerisinde akışın her noktasında metodun return edebilmesi gerekir. Yani derleyici
+	açısından, metodun geri dönüş değeri varsa metot içerisinde metodun bir değer döndüremeyeceği bir durum oluşmamalıdır 
+----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örnekte geri dönüş değeri olan add metodunda bir değer döndürülmediği için error oluşur 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class Util {
+	public static int add() //error
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		int total;
+		
+		total = a + b;	
+			
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örnekte geri dönüş değeri olan add metodunda total > 10 koşulu gerçeklenmediğinde metot bir değere 
+	dönemeyeceğinden dolayı error oluşur 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class Util {
+	public static int add() //error
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		int total;
+		
+		total = a + b;
+		
+		if (total > 10)
+			return total;	
+		
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demoörnekte return deyimine ilişkin ifadenin değeri a ile b'nin değerlerinin toplamından elde edilmiştir. Bu
+	tarz ifadelerde okunabilirliğin/algılanabilirliğin olumsuz etkilenmemesine dikkat edilmelidir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		int result;
+		
+		result = Util.add() * 2;
+		
+		System.out.println(result);						
+	}
+}
+
+class Util {
+	public static int add()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		
+		return a + b;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örnekte add metodunun geri dönüş değeri getInt metodunun geri dönüş değeri yapılmıştır. Yani, getInt
+	metodu add metodu çağrıldıktan sonra elde edilen değere geri dönmektedir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		int result;
+		
+		result = Sample.getInt();
+		
+		System.out.println(result);						
+	}
+}
+
+class Sample {
+	public static int getInt()
+	{
+		System.out.println("İki tane tamsayı değeri girmeniz gerekiyor:");
+		
+		return Util.add();
+	}
+}
+
+class Util {
+	public static int add()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		
+		return a + b;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Metot çağrısı için derleyici geçici değişken (temporary variable) yaratan ve işleme sokulan bir kod üretir. Geçici
+	değişkenin türü çağrılan metodun geri dönüş değeri türü ile aynıdır. Aşağıdaki demo örnekte *** ile belirtilen 
+	deyimi için üretilen yaklaşık kod şu şekildedir:
+		int temp = Util.add();
+		
+		result = temp * 2;
+	
+	Bu durumda geri dönüş değeri olan bir metot çağrısı geçici değişkene yapılan bir atama işlemidir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		int result;
+		
+		result = Util.add() * 2; //***
+		
+		System.out.println(result);						
+	}
+}
+
+class Util {
+	public static int add()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		
+		return a + b;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Geri dönüş değeri olan bir metot geri dönüş değeri yokmuş gibi yani geri dönüş değeri işleme sokulmadan çağrılabilir.
+	Şüphesiz metodun da buna uygun olması gerekir. Aşağıdaki demo örnekte add metodu toplam değerini ekrana bastığı için
+	ve add metodunu çağıran kod da  yalnızca ekrana basmı kısmı ile ilgilendiğinden metodu doğrudan çağırmaktadır. Demo
+	örnekteki add metodu toplam değerini ekrana basmasaydı, yani sadece geri döndürseydi, doğrudan çağrılmasının 
+	algoritmik açıdan etkisi olur muydu?
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		Util.add();
+	}
+}
+
+class Util {
+	public static int add()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();		
+		int total = a + b;
+		
+		System.out.println(total);
+		
+		return total;
+	}
+}
+
 
 
 /*----------------------------------------------------------------------------------------------------------------------
@@ -1161,3 +1576,4 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------------------------------------------*/
+
