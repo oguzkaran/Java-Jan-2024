@@ -1,0 +1,39 @@
+/*----------------------------------------------------------------------------------------------------------------------
+	Değişken isimlendirme kuralları (Buradaki kurallar tüm değişken atomlar için geçerlidir):
+	- Değişken isimleri bir rakam karakteri ile başlatılamaz. Uygun bir karakter ile başlatılıp istenildiği kadar
+	rakam karakteri kullanılabilir.
+	
+	- Değişken isimlerinde alfabetik karakter kullanılabilir.
+	
+	- Değişken isimlerinde "_ (underscore)" karakteri kullanılabilir. Değişken ismi alttire karakteri ile de başlatılabilir.
+	Java 8 ile brilikte _ karakterinin tek başına değişken ismi olması deprecated olmuştur, Java 9 ile birlikte _
+	karakterinin tek başına kullanımı error olarak değğerlendirilir.
+	
+	- Anahtar sözcükler tek başına değişken ismi olamazlar.
+	Anahtar Notlar: Java'ya daha sonraya eklenen bazı sözcükler kullanım yerine anahtar sözcük ya da değişken gibi ele 
+	alınırlar. Aslıunda bu tip sözcükler JLS'de anahar sözcükler listesinde bulunmaz. Bu tip sözcüklere programlamada 
+	"contextual keywords" denilmektedir.
+	
+	- Değişken isimleri bir boşluk (whitespace) karakteri içeremez.
+	
+	- Değişken isimleri byük-küçük harf duyarlıdır (case sensitive). Aslında Java case sensitive bir dildir. Örneğin
+	anahtar sözcüklerin tamamı küçük garf olarak yazılmalıdır.
+	
+	- Değişken isimleri UNICODE alfabetik karakterler içerebilir. Örneğin değişken isimlerinde Türkçe karakterler kullanılabilir.
+	Anahtar Notlar: Her nekadar değişken isimlerinde UNICODE alfabetik karakterler kullanılabilse de programcı İnglizce
+	alfabedeki karakteri tercih etmelidir. Hatta programcı bir değişken ismi herhangi bir dile özgü de yazmamalıdır. Değişken
+	isimlerinde İnglizce kelimer tercih edilmeldir.
+	
+	- Değişken isimlerinde $ karakteri kullanılabilir. Değişken ismi $ karakteri ile başlatılabilir, $ karakteri tek
+	başına değişken ismi olabilir. Ancak 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		
+		
+	}
+}
+
