@@ -1078,7 +1078,6 @@ class Sample {
 package csd;
 
 class App {
-
 	public static void main(String[] args) 
 	{
 		int a = 10;
@@ -1282,7 +1281,7 @@ class App {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
-	Aşağıdaki klavyeden double türden değer okuma kalıbında değerler ENTER karakteri ile ayrılacak şekilde girilmelidir. 
+	Aşağıdaki klavyeden long türden değer okuma kalıbında değerler ENTER karakteri ile ayrılacak şekilde girilmelidir. 
 	Diğer whitespace karakterlerin kullanımı exception oluşturur
 ----------------------------------------------------------------------------------------------------------------------*/
 package csd;
@@ -1539,7 +1538,7 @@ class Util {
 /*----------------------------------------------------------------------------------------------------------------------
 	Geri dönüş değeri olan bir metot geri dönüş değeri yokmuş gibi yani geri dönüş değeri işleme sokulmadan çağrılabilir.
 	Şüphesiz metodun da buna uygun olması gerekir. Aşağıdaki demo örnekte add metodu toplam değerini ekrana bastığı için
-	ve add metodunu çağıran kod da  yalnızca ekrana basmı kısmı ile ilgilendiğinden metodu doğrudan çağırmaktadır. Demo
+	ve add metodunu çağıran kod da yalnızca ekrana basmı kısmı ile ilgilendiği için metodu doğrudan çağırmaktadır. Demo
 	örnekteki add metodu toplam değerini ekrana basmasaydı, yani sadece geri döndürseydi, doğrudan çağrılmasının 
 	algoritmik açıdan etkisi olur muydu?
 ----------------------------------------------------------------------------------------------------------------------*/
@@ -1567,6 +1566,327 @@ class Util {
 		return total;
 	}
 }
+
+/*----------------------------------------------------------------------------------------------------------------------
+	20 Şubat 2024	
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir metodun geri dönüş değeri yoksa geri dönüş değeri bilgisi yerine "void" anahtar sözcüğü yazılır. Geri dönüş
+	değeri olmayan metotlara "void method" da denilmektedir. void bir metot sonlandığında çağrılan noktaya bir değer 
+	ile dönmez. Bu durumda void metot içerisinde return deyimi bir ifade ile kullanılamaz. İstenirse metodu sonlandırmak
+	için tek başına kullanılabilir. Bu anlamda void metotlarda return deyimi zorunlu değildir. void bir metot geri dönüş
+	değeri varmış gibi çağrılamaz. Yani geri dönüş değeri varmış gibi işleme sokulamaz 
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		Util.printTotal();
+	}
+}
+
+class Util {
+	public static void printTotal()
+	{
+		int total = add();
+		
+		System.out.println(total);
+	}	
+	
+	public static int add()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();		
+		int total = a + b;		
+		
+		return total;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+
+class Util {
+	public static void printTotal()
+	{
+		int total = add();
+		
+		System.out.println(total);
+		
+		return total; //error
+	}	
+	
+	public static int add()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();		
+		int total = a + b;		
+		
+		return total;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		Util.printTotal();
+	}
+}
+
+class Util {
+	public static void printTotal()
+	{
+		int total = add();
+		
+		if (total <= 0)
+			return;		
+		
+		System.out.println(total);		
+	}	
+	
+	public static int add()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();		
+		int total = a + b;		
+		
+		return total;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		int result = Util.printTotal() * 2; //error
+		
+				
+	}
+}
+
+class Util {
+	public static void printTotal()
+	{
+		int total = add();
+		
+		if (total <= 0)
+			return;		
+		
+		System.out.println(total);		
+	}	
+	
+	public static int add()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();		
+		int total = a + b;		
+		
+		return total;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		int result = Util.printTotal() * 2; //error
+				
+	}
+}
+
+class Util {
+	public static void printTotal()
+	{
+		int total = add();		
+	
+		System.out.println(total);		
+	}	
+	
+	public static int add()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();		
+		int total = a + b;		
+		
+		return total;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: void bir metot çağrısı da bir ifadedir. Ancak bu ifadenin türü yoktur. void bir metot çağrısına 
+	ilişkin ifadelere "void expressions" denilmektedir 
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: Bir metodun geri dönüş değeri o metodun bir çıktısıdır (output).  	
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: Java'da bir metot bir tane değere geri dönebilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Metodun gövdesinde önce parantez içerisinde bildirilen değişkenlere metot parametre değişkenleri denir. Metot 
+	parametre değişkenleri virgül ile ayrılır. Değişkenler aynı türden olsa bile tür bilgisi her biri için yazılmalıdır.
+	Metot parametre değişkenleri faaliyet alanı olarak metodun başında bildirilen yerel değişkenler gibidir. Yani ilgili
+	metot boyunca görülebilirdir. Metot çağrısında metoda geçilen ifadelere argüman (argument) denir. Bu anlamda metodun
+	parametre değişkenleri aslında metodun girdileridir (input). Bir metodun kaç tane parametresi varsa o kadar sayıda
+	argüman ile çağrılmalıdır. Parametre değişkenleri değerlerini metot çağrısında, ilgili parametreye geçilen ifadenin
+	değeri olarak alırlar. Yani metot çağrısında argümana ilişkin ifade önce hesaplanır ve değeri parametre değişkenine
+	aktarılır. Bu anlamda argümanlardan parametrelere aktarım da bir atama işlemidir.
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int x = kb.nextInt();
+		int y = kb.nextInt();		
+		int result;
+		
+		result = Util.add(x, y);
+		
+		System.out.println(result);
+	}
+}
+
+class Util {
+	public static int add(int a, int b)
+	{
+		return a + b;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte b değişkeni tür bilgisi yazılmadığından error oluşur
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class Util {
+	public static int add(int a, b) //error
+	{
+		return a + b;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte 2 parametreli add metodu 3 tane argüman ile çağrıldığından error oluşur
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int x = kb.nextInt();
+		int y = kb.nextInt();		
+		int result;
+		
+		result = Util.add(x, y, 10); //error
+		
+		System.out.println(result);
+	}
+}
+
+class Util {
+	public static int add(int a, int b)
+	{
+		return a + b;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int x = kb.nextInt();
+		int y = kb.nextInt();		
+		int result;
+		
+		result = Util.add(x + 2, y * 2);
+		
+		System.out.println(result);
+	}
+}
+
+class Util {
+	public static int add(int a, int b)
+	{
+		return a + b;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: Java'da 3 yerde atama işlemi yapılır: 
+	1. Yalın atama işlemi
+	2. Metodun geri dönüş değerinin geçici değişkene atanması
+	3. Argümandan parametre değişkene aktarım
+	
+	Özel bazı durumlar dışında atama işlemine ilişkin kurallar tüm atama işlemleri için geçerlidir
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: Java'da 3 yerde atama işlemi yapılır: 
+	1. Yalın atama işlemi
+	2. Metodun geri dönüş değerinin geçici değişkene atanması
+	3. Argümandan parametre değişkene aktarım
+	
+	Özel bazı durumlar dışında atama işlemine ilişkin kurallar tüm atama işlemleri için geçerlidir
+----------------------------------------------------------------------------------------------------------------------*/
 
 
 
