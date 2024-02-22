@@ -1,32 +1,21 @@
 /*----------------------------------------------------------------------------------------------------------------------
-	Anahtar Notlar: Java'da 3 yerde atama işlemi yapılır: 
-	1. Yalın atama işlemi
-	2. Metodun geri dönüş değerinin geçici değişkene atanması
-	3. Argümandan parametre değişkene aktarım
-	
-	Özel bazı durumlar dışında atama işlemine ilişkin kurallar tüm atama işlemleri için geçerlidir
+	Aşağıdaki demo örneği çalıştırıp yuvarlama hatasını gözlemleyiniz. Kodun detayları şu an için önemsizdir
 ----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
-class App {
-	public static void main(String[] args) 
-	{
-		java.util.Scanner kb = new java.util.Scanner(System.in);
+public class App {
+	public static void main(String [] args)
+	{	
+		double a = 0.1, b = 0.2;
+		double c;
 		
-		System.out.print("İki sayı giriniz:");
-		int x = kb.nextInt();
-		int y = kb.nextInt();		
-		int result;
+		c = a + b;
 		
-		result = Util.add(x + 2, y * 2);
+		System.out.printf("c = %.20f%n", c);
 		
-		System.out.println(result);
-	}
-}
-
-class Util {
-	public static int add(int a, int b)
-	{
-		return a + b;
+		if (c == 0.3)
+			System.out.println("Eşit");
+		else
+			System.out.println("Eşit değil");
 	}
 }

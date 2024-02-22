@@ -1771,7 +1771,7 @@ class Util {
 	parametre değişkenleri aslında metodun girdileridir (input). Bir metodun kaç tane parametresi varsa o kadar sayıda
 	argüman ile çağrılmalıdır. Parametre değişkenleri değerlerini metot çağrısında, ilgili parametreye geçilen ifadenin
 	değeri olarak alırlar. Yani metot çağrısında argümana ilişkin ifade önce hesaplanır ve değeri parametre değişkenine
-	aktarılır. Bu anlamda argümanlardan parametrelere aktarım da bir atama işlemidir.
+	aktarılır. Bu anlamda argümanlardan parametrelere aktarım da bir atama işlemidir
 ----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
@@ -1880,19 +1880,273 @@ class Util {
 ----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
-	Anahtar Notlar: Java'da 3 yerde atama işlemi yapılır: 
-	1. Yalın atama işlemi
-	2. Metodun geri dönüş değerinin geçici değişkene atanması
-	3. Argümandan parametre değişkene aktarım
-	
-	Özel bazı durumlar dışında atama işlemine ilişkin kurallar tüm atama işlemleri için geçerlidir
+	22 Şubat 2024
 ----------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------
+	Metotlar ne işe yarar? Ya da başka bir deyişle bir problemin çözümünde neden metotlar yazalım? 
+	Aşağıda metot yazılmasına ilişkin durumlar genel olarak ele alınmıştır:
+	
+	- Bir işi çok fazla yerde yapmak kod tekrarına yol açar. Yazılım geliştirmede temel prensip "zorunlu olmadıkça kod 
+	tekrarı yapılmamalıdır (do not repeat yourself)" şeklindedir. Bu durumda programcı bir metot yazarak ilgili yerlerde
+	o metodu çağırır
+	
+	- Bir problemin çözümü metot çağırma yerine her yerde kodun yazılması biçiminde "implemente" edilmişse, bu durumda 
+	programcı problemin çözümünde bir değişiklik yapmak isterse veya bir hata olduğunu görüp düzeltmek isterse her yerde
+	bu değişiklikleri yapmak zorundadır. Bu da çoğu zaman zor olacaktır.
+	
+	- Bir problemin çözümü metot çağırma yerine her yerde kodun yazılması biçiminde "implemente" edilmişse, bu durumda
+	kodun okunabilirliği/algılanabilirliği azalabilir. Yani metot çağırarak kodun okunabilirliği/algılanabilirliği artırılmış
+	olur.
+	
+	- Metot yazıldığında başka projelere taşınarak da kullanılabilir (code reusability).
+	
+	- Metodu çağıran programcı metodun nasıl yazıldığına ilişkin detayları bilmek zorunda değildir. Çünkü metodun 
+	çağrıldığı noktada metodun nasıl yazıldığının önemi yoktur. Ne yaptığı önemlidir.
+	
+	- Bir kod parçasının metot olarak yazılması onun bağımsız olarak test edilip doğrulanması veya varsa hataların
+	düzeltilmesi açısından da önemlidir.
+	
+	Anahtar Notlar: Kurs içerisinde ele alacağımız Nesne Yönelimli Programlama Tekniği'ne (Object Oriented Programming Paradigm)
+	ilişkin kavramlar ile kodun parçalara ayrılması metotlar dışında daha yüksek seviyede de yapılabilecektir. 
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	System.out.printf metodu ile formatlı yazdırma yapılabilir. printf metodunun birinci parametresine geçien argüman
+	bir yazı (string literal vb.) olmalıdır. Bu metot birinci parametresi ile birlikte değişken sayıda argüman alabilecek
+	şekilde tasarlanmıştır. Değişken sayıda argüman alan metotların (vararg methods) bildiriminin nasıl yapıldığı bu
+	bölümde ele alınmayacaktır. printf metodunun birinci parametresine ilişkin yazının içerisinde % karakteri ile 
+	birlikte özel bazı karakterler kullanılabilmektedir. Bu özel karakterlere format karakterleri (format specifiers)
+	denir. Bir format karakterinin yazı içerisinde % karakteri ile birlikte kullanılmasına ise yer tutucu (place holder)
+	denir. Bir format karakteri özel bazıları dışında bir türe karşılık gelir ve o yer tutucu yerine printf'e geçilen
+	argümanların değerleri yerleştirilerek yazı formatlanır. Format karakterlerinin bazıları şunlardır:
+	- d: Tamsayı türleri için kullanılır. Sayının değerinin decimal olarak formatlanmasını sağlar.
+	- x veya X: Tamsayı türleri için kullanılır. Sayının değerinin hexadecimal olarak formatlanmasını sağlar.
+	- h veya H: Tamsayı türleri için kullanılır. Sayının değerinin hexadecimal olarak formatlanmasını sağlar.
+	- o: Tamsayı türleri için kullanılır. Sayının değerinin octal olarak formatlanmasını sağlar.
+	- f: Gerçek sayı türleri kullanılır.  
+	- c: char türü için kullanılır.
+	- b: boolean türü için kullanılır.
+	- n: İmleci (cursor) bir sonraki satırın başına çekmek için kullanılır.
+	- %: % karakterinin karşılığıdır. 
+	
+	Bu format karakterleri dışında da format karakterleri vardır. Kurs boyunca konular içerisinde ele alınacaktır.
+	Format karakterlerine ilişkin detaylar yine ileride ele alınacaktır.
+	
+	Anahtar Notlar: printf metodu gibi kullanılan ancak printf'den daha fazla karşımıza bazı metotlar için printf 
+	metodunun formatlama detaylarının öğrenilmesi önemlidir 
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	d, x, X, h, H ve o format karakterleri
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int x = kb.nextInt();
+		int y = kb.nextInt();		
+		
+		System.out.printf("%d + %d = %d%n", x, y, x + y);
+		System.out.printf("%x + %x = %x%n", x, y, x + y);
+		System.out.printf("%X + %X = %X%n", x, y, x + y);
+		System.out.printf("%h + %h = %h%n", x, y, x + y);
+		System.out.printf("%H + %H = %H%n", x, y, x + y);
+		System.out.printf("%o + %o = %o%n", x, y, x + y);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Tamsayıya ilişkin format karakterlerinde % ile format karakteri arasında yazılan sayı hizalamak (alignment) için
+	kullanılabilir. Bu sayının pozitif olması gerekir. % ile format karakteri arasında yalnızca pozitif bir sayı 
+	sayı yazıldığında formatlanan sayının basamak sayısı % ile format karakteri arasındaki sayıdan küçükse soluna verilen
+	sayı kadar space karakteri eklenir. Eğer % ile format karakteri arasında verilen sayıdan önce sıfır sayısı yazılırsa
+	space yerine sıfır değeri ile formatlama yapılır. Tamsayılara ilişkin format karakterlerinin başka detaylı kullanımları da
+	vardır. Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Tarih bilgisini gün ay yıl olarak giriniz:");
+		int day = kb.nextInt();
+		int month = kb.nextInt();		
+		int year = kb.nextInt();
+		
+		System.out.printf("%02d/%02d/%04d%n", day, month, year);
+		System.out.printf("%2d/%2d/%4d%n", day, month, year);		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int a = kb.nextInt();
+		
+		System.out.printf("a = %d%na = %08X%n", a, a);
+				
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	% karakterinin % olarak formatlanabilmesi için yine % karakteri ile kullanılması gerekir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int ratio = kb.nextInt();
+		
+		System.out.printf("Oran:%%%d%n", ratio);		
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	f format karakteri
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		double ratio = kb.nextDouble();
+		
+		System.out.printf("Oran:%%%f%n", ratio);		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	f format karakteri için % ile f arasında . ve pozitif bir sayı yazıldığında formatlanacak gerçek sayının noktadan 
+	sonraki kısmının kaç basamak olarak gösterileceği belirlenir. Gerçek sayının geri kalan basamakları bilimsel 
+	yuvarlanarak formatlanır
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		double ratio = kb.nextDouble();
+		
+		System.out.printf("Oran:%%%.2f%n", ratio);		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	c format karakteri
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+public class App {
+	public static void main(String [] args)
+	{	
+		char c;
+		
+		c = 68;
+		
+		System.out.printf("c = %c%n", c);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	printf metodunda geçilen argümanların türleri ile uyumsuz format karakteri kullanılması durumunda genel olarak
+	exception oluşur
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int day = kb.nextInt();
+		
+		System.out.printf("a = %f%n", day);			
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Tam sayılarla bölme işleminde elde edilen sonucun noktadan sonraki kısmı atılır. Yani tamsayılarla bölme işleminde
+	sonuç yine tamsayı çıkar 
+	
+	Tam sayılarla bölme işleminde paydanın değeri sıfır ise exception oluşur.
+	
+	Aşağıdaki demo örneği çeşitli değerlerle çalıştırıp sonuçları gözlemleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		int c;
+		
+		c = a / b;
+		
+		System.out.printf("c = %d%n", c);		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	IEEE 754 formatında bazı özel değerler bulunur. Bu değerler Matematiksel olarak bazı kavramları temsil ederler. Örneğin
+	Infinity ve -Infinity sırasıyla Matemetikteki "artı sonsuz" ve "eksi sonsuz" değerlerine karşılık gelir. NaN değeri de
+	Matematikteki belirsizliği (indeterminate) temsil eden değerdir. Bu durumda gerçek sayılarda bölme işleminde paydanın
+	sıfır olması durumunda da işlem yapılabilmektedir. Aşağıdaki demo örneği çeşitli değerler ile çalıştırıp sonuçları 
+	gözlemleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("İki sayı giriniz:");
+		double a = kb.nextDouble();
+		double b = kb.nextDouble();
+		double c;
+		
+		c = a / b;
+		
+		System.out.printf("c = %f%n", c);		
+	}
+}
 
 
 
 /*----------------------------------------------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------------------------------------------*/
+
 /*----------------------------------------------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------------------------------------------*/
