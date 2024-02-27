@@ -46,7 +46,7 @@
 	Hızlı Uygulama Geliştirme Ortamı: Java hızlı uygulama geliştirme (rapid application development) ortamı sunar. Bu anlamda
 	hem öğrenmesi kolaydır hem de ürün daha çabuk elde edilir. 
 
-	Geniş bir sınıf kütüphanesi: Java'da oldukça geniş bir sınıf kütüphanesi bulunur. Veritabanı işlemler, web programlama,
+	Geniş bir sınıf kütüphanesi: Java'da oldukça geniş bir sınıf kütüphanesi bulunur. Veritabanı işlemleri, web programlama,
 	dosya işlemleri gibi işlemler için hazır sınıflar bulunmaktadır.
 
 	Güvenli Çalışma Ortamı: Java'da yazılmış olan bir programın sisteme zarar verme olasılığı çok daha azdır. Yazılan bir 
@@ -2091,7 +2091,6 @@ class App {
 }
 
 
-
 /*----------------------------------------------------------------------------------------------------------------------
 	Tam sayılarla bölme işleminde elde edilen sonucun noktadan sonraki kısmı atılır. Yani tamsayılarla bölme işleminde
 	sonuç yine tamsayı çıkar 
@@ -2138,6 +2137,167 @@ class App {
 		c = a / b;
 		
 		System.out.printf("c = %f%n", c);		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	27 Şubat 2024
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Neden standart metotları kullanmalıyız? Standart olarak var olan bir metodu programcı yazmalı mıdır? 
+	Java'da standart olarak (yani JavaSE'de bulunan) metotlatın kullanılmasının bazı önemli avantajları şunlardır:
+	- Okunabilir/algılanabilir kodlar yazılır
+	
+	- Testleri yapılmıştır ve yeterince etkin olarak yazılmıştır. Hatta zamanla duruma göre daha etkin hale getirilecek
+	şekilde yazılabilmektedir.
+	
+	- Taşınabilirdir. Yani standart metotların çağrıldığı kodlar herhangi bir üçüncü parti koda ya da kütüphaneye
+	ihtiyaç duymadan derlenebilir.
+	
+	 - Programcının bir uygulama geliştirirken yalnıca uygulamaya ilişkin domain'e odaklanmasını sağlar. 
+	 
+	 - Bazı metotları yazmak için başka detay konuların da bilinmesi gerekir.
+	 
+	
+	Bu durumda bir Java programcısının çözmesi gereken bir problem için, JavaSE'de problemin çözümüne ilişkin metotlar
+	varsa onları kullanması gerekir, yoksakullandığı bazı iyi kütüphanelerin içerisinde varsa onu kullanması gerekir. 
+	Burada da yoksa bu durumda programcı o metodu yazmalıdır. Ancak bu durum programcının kullandığı bir metodu
+	standart olsun ya da olmasın nasıl yazıldığını gözardı etmesi anlamına gelmemelidir. Programcı programlama yaşamı
+	boyunca hepsini olmasa da hazır olarak kullandığı metotların nasıl yazıldığını (implementation) öğrenmesi gerekir.	
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: Bir metodun ne iş yaptığına ilişkin detaylar nasıl öğrenilecektir? Bunun için tipik olarak metot
+	için bir dökumantasyon oluşuturur. JavaSE içerisinde bulunan standart metotların (ait olduğu sınıfların da) 
+	dökumantasyonu "docs.oracle.com" sitesinde çeşitli sayfalarda yayınlanmaktadır. Ancak yine de ilgili dökumantasyon
+	tüm detayıyla öğretemeyebilir. Genel olarak Java dökumanları (javadoc) konu hakkında fikir vermek için yazılır.
+	Duruma göre programcı başka kaynaklardan öğrenmek zorunda kalabilir.
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	java.lang paketi içerisinde bulunan Math sınıfının Matematiksel işlemlere yönelik çeşitli metotları vardır. Bu 
+	metotların bazıları pek yerde kullanılır. Bazıları ise Matematiksel işlemlerde kullanılır. Burada çok kullanılan
+	bazıları ele alınacaktır. Java programcısı Matematiksel işlemler gerektiğinde önce bu sınıfa bakmalı varsa bu 
+	sınıfın elemanlarını kullanmalıdır. 
+	
+	Anahtar Notlar: java.lang paketi içerisinde bulunan sınıf isimleri doğrudan kullanılabilir. Konunun detayları
+	ileride ele alınacaktır.
+----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Math sınıfının sqrt metodu parametresi ile aldığı double türden değerin kareköküne geri döner. sqrt metoduna negatif
+	bir argüman geçildiğinde NaN değerine geri döner
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir sayı giriniz:");
+		double a = kb.nextDouble();
+		
+		System.out.printf("sqrt(%f) = %f%n", a, Math.sqrt(a));
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Math sınıfının pow metodu kuvvet almak için kullanılır
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Tabanı ve üssü giriniz:");
+		double a = kb.nextDouble();
+		double b = kb.nextDouble();
+		
+		System.out.printf("pow(%f, %f) = %f%n", a, b, Math.pow(a, b));
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı double türden iki noktaya ilişkin koordinat bilgilerine göre iki nokta
+	arasındaki Euclid uzaklığına geri dönen distance isimli meotdu PointUtil isimli sınıf içerisinde yazınız ve aşağıdaki
+	kod ile test ediniz
+	
+	Euclid Uzaklığı fomulü: sqrt((x1 - x2) ^ 2 + (y1 - y2) ^ 2) 
+	Açıklama: ^ üs anlamına gelmektedir 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		PointUtilDistanceTest.run();
+	}
+}
+
+class PointUtilDistanceTest {
+	public static void run() 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki noktanın koordinatlarını giriniz:");
+		double x1 = kb.nextDouble();
+		double y1 = kb.nextDouble();
+		double x2 = kb.nextDouble();
+		double y2 = kb.nextDouble();
+		double d = PointUtil.distance(x1, y1, x2, y2);
+		
+		System.out.printf("distance(%f, %f, %f, %f) = %f%n", x1, y1, x2, y2, d);
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class PointUtil {
+	public static double distance(double x1, double y1, double x2, double y2)
+	{
+		return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı double türden iki noktaya ilişkin koordinat bilgilerine göre iki nokta
+	arasındaki Euclid uzaklığına geri dönen distance isimli meotdu PointUtil isimli sınıf içerisinde yazınız ve aşağıdaki
+	kod ile test ediniz
+	
+	Euclid Uzaklığı fomulü: sqrt((x1 - x2) ^ 2 + (y1 - y2) ^ 2) 
+	Açıklama: ^ üs anlamına gelmektedir 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		PointUtilDistanceTest.run();
+	}
+}
+
+class PointUtilDistanceTest {
+	public static void run() 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki noktanın koordinatlarını giriniz:");
+		double x1 = kb.nextDouble();
+		double y1 = kb.nextDouble();
+		double x2 = kb.nextDouble();
+		double y2 = kb.nextDouble();
+		double d = PointUtil.distance(x1, y1, x2, y2);
+		
+		System.out.printf("distance(%f, %f, %f, %f) = %f%n", x1, y1, x2, y2, d);
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class PointUtil {
+	public static double distance(double x1, double y1, double x2, double y2)
+	{
+		return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
 	}
 }
 
