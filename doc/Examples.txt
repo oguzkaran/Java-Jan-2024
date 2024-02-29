@@ -829,18 +829,18 @@ class Mample {
 	 
 	- Tamsayı türleri için işaretli sistemde 2'ye tümleme formatını kullanılar. Java'da işaretsiz tamsayı türü yoktur.
 	
-	- double ve float türleribne "gerçek sayı türleri (real types)" denir. Gerçek sayı türleri için IEEE 754 
+	- double ve float türlerine "gerçek sayı türleri (real types)" denir. Gerçek sayı türleri için IEEE 754 
 	formatı kullanılır. Bu sebeple türlere "floating point types" da denilmektedir. Bu türlerle yapılan işlemlerde
 	IEEE 754 satandardının çalışma sistemi gereği yuvarlama hataları (rounding error) oluşabilir. Bu yuvarlama hatalarının
 	problem olabileceği uygulamalarda (örneğin  parasal ve finansal uygulamalarda) bu türler kullanılmazz. Bu tip durumlarda
 	hangi türlerin kullanılacağı ileride ele alınacaktır.
 	
-	- Programlamada kullanılan karakter bir tabloda tutulurlar. Bu tabloya karakter tablosu denilmektedir. Programlamada 
-	pek çok karakter tablosu kullanılabilmektedir. Daha önceleri ASCII denilen ve 7 bit olarak tutulan ancak daha 8 bit 
+	- Programlamada kullanılan karakterler bir tabloda tutulurlar. Bu tabloya karakter tablosu denilmektedir. Programlamada 
+	pek çok karakter tablosu kullanılabilmektedir. Daha önceleri ASCII denilen ve 7 bit olarak tutulan ancak daha sonra 8 bit 
 	olarak ele alınan bir karakter tablosu vardır. Daha sonraları dünyada kullanılan pek çok karakterin de tutulabilmesi 
-	için UNOCODE isimli bir karakter tablosu kullanılmaya başlanmıştır. UNICODE tablosunun ilk 128 karakteri ASCII ile 
+	için UNICODE isimli bir karakter tablosu kullanılmaya başlanmıştır. UNICODE tablosunun ilk 128 karakteri ASCII ile 
 	aynıdır. UNICODE tablosunun da çeşitleri vardır. char türü içerisinde tutulan sayı ilgili tabloda sıra numarası
-	olarak yorumlanır. Yani char türü içerisinde tutulan sayı aslında ilgili karakter tablosounda bir karakterin
+	olarak yorumlanır. Yani char türü içerisinde tutulan sayı aslında ilgili karakter tablosunda bir karakterin
 	sıra numarasına karşılık gelir. Bu anlamda char türü UNICODE tablosunun 2 byte'ı ile uyumludur. Karakter tablolarına
 	ilişkin detaylar ileride ele alıncaktır.
 	
@@ -2220,7 +2220,7 @@ class App {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	Sınıf Çalışması: Parametresi ile aldığı double türden iki noktaya ilişkin koordinat bilgilerine göre iki nokta
-	arasındaki Euclid uzaklığına geri dönen distance isimli meotdu PointUtil isimli sınıf içerisinde yazınız ve aşağıdaki
+	arasındaki Euclid uzaklığına geri dönen distance isimli metodu PointUtil isimli sınıf içerisinde yazınız ve aşağıdaki
 	kod ile test ediniz
 	
 	Euclid Uzaklığı fomulü: sqrt((x1 - x2) ^ 2 + (y1 - y2) ^ 2) 
@@ -2262,7 +2262,7 @@ class PointUtil {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	Sınıf Çalışması: Parametresi ile aldığı double türden iki noktaya ilişkin koordinat bilgilerine göre iki nokta
-	arasındaki Euclid uzaklığına geri dönen distance isimli meotdu PointUtil isimli sınıf içerisinde yazınız ve aşağıdaki
+	arasındaki Euclid uzaklığına geri dönen distance isimli metodu PointUtil isimli sınıf içerisinde yazınız ve aşağıdaki
 	kod ile test ediniz
 	
 	Euclid Uzaklığı fomulü: sqrt((x1 - x2) ^ 2 + (y1 - y2) ^ 2) 
@@ -2298,6 +2298,255 @@ class PointUtil {
 	public static double distance(double x1, double y1, double x2, double y2)
 	{
 		return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	29 Şubat 2024
+----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	 Math sınıfının logaritma fonksiyonuna ilişkin metotları şunlardır: log, log10, log1p. 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		double a = kb.nextDouble();
+		
+		System.out.printf("log(%f) = %f%n", a, Math.log(a));
+		System.out.printf("log10(%f) = %f%n", a, Math.log10(a));
+		System.out.printf("log1p(%f + 1) = %f%n", a, Math.log1p(a));
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		double a = kb.nextDouble();
+		double b = kb.nextDouble();
+		
+		System.out.printf("log(%f, %f) = %f%n", a, b, MathUtil.log(a, b));
+	}
+}
+
+class MathUtil {
+	public static double log(double a, double b)
+	{
+		return Math.log(b) / Math.log(a);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	 Math sınıfının PI ve E elemanları
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		System.out.println(Math.PI);
+		System.out.println(Math.E);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Math sınıfının trigonometrik işlem yapan metotları radyan (radians) ölçü birimiyle çalışırlar
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Derece bilgisini giriniz:");
+		double a = kb.nextDouble();
+		
+		System.out.printf("sin(%f) = %f%n", a, Math.sin(Math.toRadians(a)));
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Math sınıfının abs metotları
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int a = kb.nextInt();
+		
+		System.out.printf("|%d| = %d%n", a, Math.abs(a));
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Math sınıfının min ve max metotları
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		
+		System.out.printf("min(%d, %d) = %d%n", a, b, Math.min(a, b));
+		System.out.printf("max(%d, %d) = %d%n", a, b, Math.max(a, b));
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Math sınıfının min ve max metotları ile 3 tane sayının en küçüğünün ve en büyüğünün bulunması 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Üç sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		int c = kb.nextInt();
+		
+		System.out.printf("min(%d, %d, %d) = %d%n", a, b, c, Math.min(Math.min(a, b), c));
+		System.out.printf("max(%d, %d, %d) = %d%n", a, b, c, Math.max(Math.max(a, b), c));
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Math sınıfının tamsayı değerine yuvarlayan önemli bazı metoları 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		double a = kb.nextDouble();
+		
+		System.out.printf("round(%f) = %d%n", a, Math.round(a));
+		System.out.printf("round(%f) = %f%n", a, Math.rint(a));
+		System.out.printf("ceil(%f) = %f%n", a, Math.ceil(a));
+		System.out.printf("floor(%f) = %f%n", a, Math.floor(a));
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sabitler (Literals): Program içerisinde doğrudan yazılan bir değere sabit (literal/constant) denir. 
+	
+	Anahtar Notlar: Anımsanacağı gibi iki tırnak içerisindeki yazılara "string literal" denir.
+	
+	Sabitlerin de türleri vardır. Sabitlerin türleri derleme aşamasında yani derleyici tarafından tespit edilir.
+	
+	Anahtar Notlar: Derleyicinin bir ifadenin türünü tespit etmesine genel "type inference/deduction" denilmektedir.
+	
+	Sabitlerin türleri aşağıdaki kurallara göre belirlenir:
+	- Sayı nokta içermiyorsa, sonuna herhangi bir ek almamışsa ve int türü sınırları içerisinde kalıyorsa int türden 
+	bir  sabittir. Sayı, nokta içermiyorsa fakat int türü sınırları dışındaysa error oluşur. 
+	Örnekler: 100, 2000000000 vb.
+	
+	- Sayı nokta içermiyorsa ve sonuna L (küçük veya büyük harf olarak) son ekini almışsa long türdendir. L sonekini
+	almış bir sabit long türü sınırları dışındaysa error oluşur. 
+	Örneğin, 10L, 4000000000L vb.
+	
+	Anahtar Notlar: Küçük harf L soneki 1(bir) sayısına özellikle bazı yazı türlerinde benzediği okunabililik açısından
+	kullanılması tavsiye edilmez.
+	
+	- Java'da byte ve short türden sabit yoktur
+	
+	- Sayı nokta içeriyorsa ve sonuna herhangi bir ek almamışsa double türdendir. 
+	Örneğin: 3.4, 6.6 vb.
+	
+	- Sayı nokta içersin ya da içermesin sonuna D (küçük veya büyük) ekini alıyorsa double türdendir.
+	Örneğin: 4.5D, 5D, 5.6d vb.
+	
+	- Sayı nokta içersin ya da içermesin sonuna F (küçük veya büyük) ekini alıyorsa float türdendir. 
+	Örneğin: 3.4F, 7f, 6.8F vb.
+	
+	Anahtar Notlar: Nokta içeren ve noktadan sonraki kısmın tamamı sıfır olmayan bir sabitin (yani double türden sabitin)
+	sonuna F (küçük veya büyük) eki getirildiğinde, sayının değeri float türü ile temsil edilemiyorsa en yakın değere
+	yuvarlanır (rounding error). 
+	
+	- boolean türden iki tane sabit vardır: true, false.
+	
+	- Tek tırnak içerisinde yazılan karaterlere ilişkin sembollere tırnaklarıyla beraber karakter sabitleri (character literals).
+	Karakter sabitleri char türdendir. Tek tırnak içerisinde özel bazı durumlar dışında tek bir karakter yazılır. Aksi durumda 
+	error oluşur. Bir karakter sabiti ilgili karakterin karakter tablosundaki sıra numarasına karşılık gelir. Aslında biz
+	char türden sabit yazarak o sabite ilişkin karakterin sıra numarasını elde etmiş oluruz. Bu sıra numarasını char
+	türden bir değişken içerisinde saklayarak mantıksal olarak o karakteri tutmuş oluruz. Bazı karakterler klavyedeki
+	tuş kombinasyonları ile doğrudan yazılamazlar. Bazı karakterler ise doğrudan ekrana basılamazlar (non-printable). 
+	Bu tarz karakterler doğrudan tek tırnak içerisinde karakter sabiti olarak yazılamazlar. Bu karakterler ters bölü 
+	karateri ile birlikte özel bir karakter kullanılarak tek tırnak içerisinde yani karakter sabiti olarak yazılırlar. 
+	Ters bölü ile yazılan karakterlere "escape sequence" karakterler denir. Java'da desteklenen escape sequence
+	karakterler şunlardır:
+	'\n'	-> Line Feed (LF)
+	'\r'	-> Carriage Return (CR)
+	'\t'	-> Tabular (TAB)
+	'\f'	-> Form feed
+	
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Line Feed karakter sabiti
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		char c;
+		
+		c = '\n';
+		
+		System.out.print("Hello, World");
+		System.out.print(c);
+		System.out.println("Goodbye, World");
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Carriage Return karakter sabiti. 
+	Dikkat: Aşağıdaki örneği işletim sisteminizin "komut yorumlayıcı" programı ile çalıştırınız. Kullandığınız IDE'nin
+	console penceresi farklı yorumlayabilir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		char c;
+		
+		c = '\r';
+		
+		System.out.print("Hello, World");
+		System.out.print(c);
+		System.out.println("Hi");
 	}
 }
 
