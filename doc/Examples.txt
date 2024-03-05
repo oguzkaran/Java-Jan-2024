@@ -2761,6 +2761,118 @@ class App {
 	}
 }
 
+/*----------------------------------------------------------------------------------------------------------------------
+	Java 7 ile birlikte sabitlerin basamakları arasında _ (alttire) karakteri kullanılabilir duruma gelmiştir. Alttire
+	karakteri yalnızca basamaklar arasında istenildiği kadar kullanılabilir. Bu kullanım duruma göre okunabilirliği
+	artırır
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{		
+		int a = 1_111_237_809;
+		double b = 345_789.987_789;
+		
+		System.out.printf("a = %d, b = %f%n", a, b);	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Tamsayı sabitleri decimal dışında, hexadecimal, octal ve Java 7 ile birlikte binary olarak gösterilebilmektedir.
+	Sabitin başında bir ek yoksa decimal, 0x (x küçük veya büyük olabilir) varsa hexadecimal, sıfır varsa octal ve 
+	0b (b küçük veya büyük olabilir) binary olarak ele alınır. Şüphesiz sayının basamakları sayı sistemine uygun 
+	olmalıdır. Aksi durumda error oluşur. Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{		
+		int a = 10;
+		int b = 0xA;
+		int c = 012;
+		int d = 0b1010; //Since Java 7
+		
+		System.out.printf("a = %d, b = %d, c = %d, d = %d%n", a, b, c, d);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sayı sistemi ile gösterilişte de alttire karakteri konabilir. Alttire karakteri basamakların arasına gelebileceğinden
+	sabitin önekinden önce veya sonra kullanılması error oluşuturur. Bunun bir tek istisna durumu octal sabitin öneki
+	olan sıfır'dan sonra alttire karakteri konabilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte sabitin octal olarak yazıldığına dikkat ediniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{		
+		int a = 012;
+		
+		
+		System.out.printf("a = %d%n", a);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Operatörler (Operators): Belirli bir işleme yol açan, işlem sonucunda bir değer üreten atomlardır. Bir operatör ile
+	işleme giren ifadelere (expression) operand denir. Bir operatörün öğrenilmesi için aşağıdaki özelliklerin incelenmesi
+	gerekir:
+	- Operatörün sınıfları:
+		1. İşlevine göre sınıflandırma
+			- Aritmetik operatörler (arithmetic operators)
+			- Karşılaştırma operatörleri (comparison operators)
+			- Mantıksal operatörler (logical operatörs)
+			- Bitsel operatörler (bitwise operators)
+			- Özel amaçlı operatörler (special purpose operators)
+		2. Operand sayısına göre sınıflandırma
+			- Tek operandlı (unary)
+			- İki operandlı (binary)
+			- Üç operandlı (ternary)
+		3. Operatörün konumuna göre sınıflandırma
+			- Önek (prefix)
+			- Araek (infix)
+			- Sonek (postfix)
+			
+	- Operatörün ürettiği değer (product value): İşlem sonucunda üretilen değerdir.
+	
+	- Operatörün kısıtı (constraint): Operatörün kullanımına ilişkin bir takım zorunluluklardır.
+	
+	- Operatörün yan etkisi (side effect): Operatörün, operandının değerini değiştirip değiştirmediğidir.
+	
+	- Operatörün önceliği (precedence): Operatörün ifadede diğer operatörlere göre işlem sırasıdır. Örneğin
+		 	x = y + z * t
+		 işleminin yapılış sırası şöyledir:
+		 	i1: z * t
+		 	i2: y + i1
+		 	i3: x = i2
+		 Bir işlemi önceliklendirmek için Matematik'teki gibi önceliklendirme parantezi kullanılır. Örneğin:
+		  	x = (y + z) * t
+		 işleminin yapılış sırası şöyledir:
+		 	i1: y + z
+		 	i2: i1 * t
+		 	i3: x = i2
+		 Bazı operatörler aynı öncelik seviyesinde olabilirler. Bu durumda aynı öncelik seviyesine sahip operatörlerin
+		 aynı ifadede bulunması durumunda işlemin hangi sırada yapılacağını belirleyen "associativity" denilen bir kavram
+		 kullanılır. Bu anlamda "left associative" ve "right associative" kavramları sırasıyla "soldan sağa öncelik" ve 
+		 "sağdan sola öncelik" anlamına gelir. Örneğin:
+		 	x = y + z - t
+		 işleminin yapılış sırası + ve - operatörleri aynı öncelik seviyesinde ve left associative olduklarından şöyledir:
+		 	i1: y + z
+		 	i2: i1 - t
+		 	i3: x = i2
+		 
+		Anahtar Notlar: Java'da öncelik, her zaman işlem sırasını da belirlemez. Bu durumun detayları konu içerisinde
+		ele alınacaktır.
+
+	Biz de bir operatörü öğrenirken bu özellikleri inceleyeceğiz
+----------------------------------------------------------------------------------------------------------------------*/
+
 
 
 /*----------------------------------------------------------------------------------------------------------------------
