@@ -216,7 +216,7 @@ class App {
 
 	3. Ölümcül hatalar (fatal errors): Derleme işleminin dahi tamamlanamadığı hatalardır. Örneğin derlenecek dosyanın 
 	bulunamamaı, diskte yer kalmaması, sistemsel problemler oluşması vb. Bu durumda programcının ölümcül hataya yol
-	açan durumu ortadann kaldırıp derleme işlemini yapması gerekir. Yani ölümcül hata durumunda programcının kodu
+	açan durumu ortadan kaldırıp derleme işlemini yapması gerekir. Yani ölümcül hata durumunda programcının kodu
 	ile bir durum yoktur.
 
 	Derleme işleminin başarıyla yapılması durumunda derleyiciler ya hiç bir mesaj vermezler ya da derleme işleminin
@@ -2457,6 +2457,10 @@ class App {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
+	5 Mart 2024
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
 	Sabitler (Literals): Program içerisinde doğrudan yazılan bir değere sabit (literal/constant) denir. 
 	
 	Anahtar Notlar: Anımsanacağı gibi iki tırnak içerisindeki yazılara "string literal" denir.
@@ -2502,13 +2506,18 @@ class App {
 	tuş kombinasyonları ile doğrudan yazılamazlar. Bazı karakterler ise doğrudan ekrana basılamazlar (non-printable). 
 	Bu tarz karakterler doğrudan tek tırnak içerisinde karakter sabiti olarak yazılamazlar. Bu karakterler ters bölü 
 	karateri ile birlikte özel bir karakter kullanılarak tek tırnak içerisinde yani karakter sabiti olarak yazılırlar. 
-	Ters bölü ile yazılan karakterlere "escape sequence" karakterler denir. Java'da desteklenen escape sequence
-	karakterler şunlardır:
+	Ters bölü ile yazılan karakterlere "escape sequence" karakterler denir. Java'da desteklenen escape sequence karakterler 
+	şunlardır:
 	'\n'	-> Line Feed (LF)
 	'\r'	-> Carriage Return (CR)
-	'\t'	-> Tabular (TAB)
+	'\t'	-> Tabular (horizontal tab)
 	'\f'	-> Form feed
+	'\b'	-> backspace
+	'\''	-> single quote
+	'\"'	-> double quote (optional)
+	'\\'	-> back slash	
 	
+	Escape sequence karakterler string literal içerisinde kendi anlamlarındadır. 
 ----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
@@ -2547,6 +2556,208 @@ class App {
 		System.out.print("Hello, World");
 		System.out.print(c);
 		System.out.println("Hi");
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Tek tırnak karakter sabiti ters bölü ile yazılır yani bu karakter sabiti de bir escape sequence karakterdir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		char c;
+		
+		c = '\'';
+		
+		System.out.println(c);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	İki tırnak karakter sabiti iki şekilde yazılabilir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		char c1, c2;
+		
+		c1 = '\"';
+		c2 = '"';
+		
+		System.out.println(c1);
+		System.out.println(c2);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Ters bölü karakter sabiti de escape sequence karakter olarak yazılır
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{
+		char c;
+		
+		c = '\\';	
+		
+		System.out.println(c);		
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte LF karakteri string literal içerisinde kullanılmıştır
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{		
+		System.out.println("Hello\nWorld");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz. Örnekte tab ve LF karaktersabitlerinin yazı içerisinde kullanıldığına dikkat
+	ediniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{		
+		System.out.println("C:\test\names.txt");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz. Örnekte ters bölü karakteri için escape sequence kullanıldığına dikkat ediniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{		
+		System.out.println("C:\\test\\names.txt");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String literal içerisinde ters bölü ile birlikte escape sequence olarak desteklenmeyen bir karakter kullanımı error
+	oluşturur
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{		
+		System.out.println("C:\virtual\names.txt"); //error
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{		
+		System.out.println("\\\\test\\names.txt");
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Tek tırnak karakteri string literal içerisinde doğrudan ya da escape sequence olarak kullanılabilir. İki kullanım
+	tamamen aynı anlamdadır. İki tırnak karakteri string literal içerisinde ancak escape sequence olarak kullanılabilir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{		
+		System.out.println("'zonguldak'");
+		System.out.println("\'zonguldak\'");
+		System.out.println("\"zonguldak\"");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String literal içerisinde ters bölü ile birlikte escape sequence olarak desteklenmeyen bir karakter kullanımı error
+	oluşturur
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{		
+		System.out.println("C:\virtual\names.txt"); //error
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{		
+		System.out.println("`zonguldak`");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: Java 12 ile birlikte ismine "text block" denilen bir string sabiti yazma yöntemi de eklenmiştir.
+	Text block'lar ileride ele alınacaktır
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sayının noktadan sonraki kısmı yani ondalık kısmının tamamı sıfırsa noktadan sonra sıfır yazılmayabilir. Benzer 
+	şekilde sayının noktadan önceki kısmı yani tam kısmının tamamı sıfırsa noktadan önce sıfır yazılmayabilir. Yani
+	1.0 sabiti ile 1. sabiti birebir aynıdır, benzer şekilde 0.1 sabiti ile .1 sabiti birebir aynıdır
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{		
+		System.out.println(1.);
+		System.out.println(1.0);
+		System.out.println(0.1);
+		System.out.println(.1);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sabitlerin bilimsel/üstel gösterilişi. Bu şekilde yazılan sabitler double türdendir  
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{		
+		System.out.printf("%.0f%n", 6.02E23);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sabitlerin bilimsel/üstel gösterilişi. Bu şekilde yazılan sabitler double türdendir  
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String[] args) 
+	{		
+		System.out.printf("%.0f%n", 6.02e23);
 	}
 }
 
