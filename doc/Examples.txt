@@ -3006,6 +3006,264 @@ class NumberUtil {
 	}
 }
 
+/*----------------------------------------------------------------------------------------------------------------------
+	İşaret - aritmetik operatörü tek operandlı ve önek durumundadır. Bu operatör operandına ilişkin ifadenin ters 
+	işeretlisini üretir. Operatörün yan etkisi yoktur. Operatör ikinci seviyede ve dolayısıyla sağdan sola önceliklidir.
+	Operatör eksi işareti alınabilen her tür için kullanılabilir. İşaret + operatörü yine aynı özelliklere sahip 
+	ancak ifadenin değerini üreten bir operatördür. Bu anlamda + operatörü kullanmakla kullanmamak arasında fark yoktur.
+	Bütünlük açısında dile eklenmiştir. Aşağıdaki demo örneği inceleyiniz 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+public class App {
+	public static void main(String [] args)
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int a = kb.nextInt();
+		int x;
+		
+		x = -a;
+		
+		System.out.printf("x = %d%n", x);
+		
+		x = +a;
+		
+		System.out.printf("x = %d%n", x);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: Okunabilirlik/algılanabilirlik açısından özel bazı operatörler dışında iki operandlı (binary)
+	operatörlerin operandları ile aralarından bir tane space karakteri bulundurulur. Örneğin a + b işleminde operandlar
+	ile operatör arasında birer boşluk yazılır. Ancak nokta operatörü için özellikle bitişik yazılması önerilir. Tek
+	operandlı operatörler için de operatörün operandına bitişik olarak yazılması tavsiye edilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	++/-- operaörü tek operandlı hem önek hem de sonek kullanılabilen bir aritmetik operatördür. Operatörün operandının
+	bir değişken olması zorunludur. Yani sabit ifadesi olamaz. Operatörün ürettiği değer önek ve son ek kullanıma
+	göre değişiklik gösterir. Operatörün yan etkisi vardır, operandı olan değişkenin değerini bir artırır/azaltır.
+	Operatör önek kullanımda artırılmış/azaltılmış değeri, sonek kullanımda ise artırılmamış/azaltılmamış değeri üretir.
+	Yani işleme giren değer önek ve sonek durumunda farklıdır.
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	++ operatörü
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+public class App {
+	public static void main(String [] args) 
+	{	
+		int a = 10;
+		
+		++a; //a = a + 1;
+		
+		System.out.printf("a = %d%n", a);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	++ operatörü
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+public class App {
+	public static void main(String [] args) 
+	{	
+		int a = 10;
+		
+		a++; //a = a + 1;
+		
+		System.out.printf("a = %d%n", a);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	++ operatörünün önek kullanımı
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+public class App {
+	public static void main(String [] args) 
+	{	
+		int a = 10;
+		int b;
+		
+		b = ++a;
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	++ operatörünün sonek kullanımı
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+public class App {
+	public static void main(String [] args) 
+	{	
+		int a = 10;
+		int b;
+		
+		b = a++;
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	++ operatörü
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+public class App {
+	public static void main(String [] args) 
+	{	
+		int a = 10;
+		
+		++a; //a = a + 1;
+		
+		System.out.printf("a = %d%n", a);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	-- operatörü
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+public class App {
+	public static void main(String [] args) 
+	{	
+		int a = 10;
+		
+		a--; //a = a - 1;
+		
+		System.out.printf("a = %d%n", a);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	++ operatörünün önek kullanımı
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+public class App {
+	public static void main(String [] args) 
+	{	
+		int a = 10;
+		int b;
+		
+		b = --a;
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	++ operatörünün sonek kullanımı
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+public class App {
+	public static void main(String [] args) 
+	{	
+		int a = 10;
+		int b;
+		
+		b = a--;
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+public class App {
+	public static void main(String [] args) 
+	{	
+		int a = 10;
+		int b;
+		
+		b = a-- + a;
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+public class App {
+	public static void main(String [] args) 
+	{	
+		int a = 10;
+		int b;
+		
+		b = a + a--;
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+public class App {
+	public static void main(String [] args) 
+	{	
+		int a = 10;
+		int b;
+		
+		b = a++ + a--;
+		
+		System.out.printf("a = %d%n", a);
+		System.out.printf("b = %d%n", b);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Java derleyicisi soldan sağa ve yukarıdan aşağıya anlamlı en uzun ifadeyi alacak şekilde atomalarına ayırma (tokenizing)
+	işlemini yapar. Bu kurala genel olarak "maximal/maximum munch" kuralı denir. Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+public class App {
+	public static void main(String [] args) 
+	{	
+		int a = 3;
+		int b = 4;
+		int c;
+		
+		c = a+++b; //a++ + b
+		
+		System.out.printf("a = %d%n", a); //a = 4
+		System.out.printf("b = %d%n", b); //b = 4
+		System.out.printf("c = %d%n", c); //c = 7
+	}
+}
+
 
 
 /*----------------------------------------------------------------------------------------------------------------------
