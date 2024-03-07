@@ -2820,6 +2820,10 @@ class App {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
+	7 Mart 2024
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
 	Operatörler (Operators): Belirli bir işleme yol açan, işlem sonucunda bir değer üreten atomlardır. Bir operatör ile
 	işleme giren ifadelere (expression) operand denir. Bir operatörün öğrenilmesi için aşağıdaki özelliklerin incelenmesi
 	gerekir:
@@ -2839,7 +2843,7 @@ class App {
 			- Araek (infix)
 			- Sonek (postfix)
 			
-	- Operatörün ürettiği değer (product value): İşlem sonucunda üretilen değerdir.
+	- Operatörün ürettiği değer (product value): İşlem sonucunda elde edilen değerdir.
 	
 	- Operatörün kısıtı (constraint): Operatörün kullanımına ilişkin bir takım zorunluluklardır.
 	
@@ -2867,11 +2871,140 @@ class App {
 		 	i2: i1 - t
 		 	i3: x = i2
 		 
-		Anahtar Notlar: Java'da öncelik, her zaman işlem sırasını da belirlemez. Bu durumun detayları konu içerisinde
+		Anahtar Notlar: Java'da öncelik kavramı, her zaman işlem sırasını da belirlemez. Bu durumun detayları konu içerisinde
 		ele alınacaktır.
 
-	Biz de bir operatörü öğrenirken bu özellikleri inceleyeceğiz
+	Biz de bir operatörü öğrenirken o operatör için bu özellikleri inceleyeceğiz
 ----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aritmetik 4 işlem operatörleri (+, -, *, /) iki operandlı ve araek durumundadır. Operatörler işlemin sonucuna ilişkin
+	değeri üretirler. Bu operatörlerin yan etkisi yoktur. * ve / operatörleri, + ve - operatörlerinden yüksek önceliklidir.
+	Aritmetik 4 işlem operatörleri soldan sağa önceliklidir. İlgili operatöre ilişkin geçerli işlemler kısıt olarak
+	düşünülebilir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+public class App {
+	public static void main(String [] args)
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		
+		System.out.printf("%d + %d = %d%n", a, b, a + b);
+		System.out.printf("%d - %d = %d%n", a, b, a - b);
+		System.out.printf("%d * %d = %d%n", a, b, a * b);
+		System.out.printf("%d / %d = %d%n", a, b, a / b);	
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Mod operatörü (%) aslında bir çeşit bölme işlemi yapar. Bu sebeple öellikler ürettiği değer dışında bölme operatörü
+	ile aynıduır. Bu operatör birinci operandının ikinci operandına bölümünden elde edilen kalan değerini verir. Bu 
+	operatörün ikinci operandının işaretinin önemi yoktur. Yani ikinci operandı negatif bile olsa pozitif değeri ile
+	işlem yapılır. Bu operatörün birinci operandı negatif ise işlem şu şekilde yapılır: Birinci operandın pozitif oldığu
+	değere göre kalan değerinin ters işaretlisi alınır. Yani bu operaörün ürettiği değerin işareti birinci operandının
+	işareti ile aynıdır. Yani sonuç olarak bu operatör negatif operandlar için Matematik'teki mod alma işlemi ile aynı 
+	değildir. Bazı programlama dillerinde gerçek sayılar için mod operatörü kullanılamaz. Ancak Java'da böyle bir 
+	kısıt yoktur. Pratikte bu operatörler daha daha çok tamsayılarla kullanılır. Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+public class App {
+	public static void main(String [] args)
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		
+		System.out.printf("%d %% %d = %d%n", a, b, a % b);	
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden 3 basamaklı bir sayının basamakları toplamına geri dönen 
+	sumOf3Digits metodunu NumberUtil isimli sınıf içerisinde aşağıdaki açıklamalara göre yazınız ve test ediniz.
+	Açıklamalar:
+		- Metot sayının 3 basamaklı olup olmadığı kontrolünü yapmayacaktır
+		- Metot negatif sayılar için de pozitif toplam değerine geri dönecektir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+public class App {
+	public static void main(String [] args)
+	{	
+		NumberUtilSumOf3DigitsTest.run();	
+	}
+}
+
+class NumberUtilSumOf3DigitsTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int a = kb.nextInt();
+		
+		System.out.printf("%d sayısının basamakları toplamı:%d%n", a, NumberUtil.sumOf3Digits(a));
+	}
+}
+
+class NumberUtil {
+	public static int sumOf3Digits(int val)
+	{
+		int a = val / 100;
+		int b = val / 10 % 10;
+		int c = val % 10; 
+		
+		return Math.abs(a + b + c);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden 3 basamaklı bir sayının basamakları toplamına geri dönen 
+	sumOf3Digits metodunu NumberUtil isimli sınıf içerisinde aşağıdaki açıklamalara göre yazınız ve test ediniz.
+	Açıklamalar:
+		- Metot sayının 3 basamaklı olup olmadığı kontrolünü yapmayacaktır
+		- Metot negatif sayılar için de pozitif toplam değerine geri dönecektir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+public class App {
+	public static void main(String [] args)
+	{	
+		NumberUtilSumOf3DigitsTest.run();	
+	}
+}
+
+class NumberUtilSumOf3DigitsTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int a = kb.nextInt();
+		
+		System.out.printf("%d sayısının basamakları toplamı:%d%n", a, NumberUtil.sumOf3Digits(a));
+	}
+}
+
+class NumberUtil {
+	public static int sumOf3Digits(int val)
+	{
+		int a = val / 100;
+		int b = val % 100 / 10;
+		int c = val % 10; 
+		
+		return Math.abs(a + b + c);
+	}
+}
 
 
 
