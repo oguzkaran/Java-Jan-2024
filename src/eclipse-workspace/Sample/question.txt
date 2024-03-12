@@ -1,0 +1,21 @@
+package csd;
+
+public class App {
+	public static void main(String [] args) 
+	{	
+		int a = 3;
+		int b = 4;
+		int c;
+		
+		c = a++ + -b;
+		
+		System.out.printf("a = %d%n", a); 
+		System.out.printf("b = %d%n", b); 
+		System.out.printf("c = %d%n", c); 
+	}
+}
+
+a) Derleme zamanı hatası oluşur. Nedeni ...
+b) Derlenir. Ekran çıktısı ...
+c) Çalışma zamanı hatası oluşur. Nedeni...
+d) Hiçbiri...

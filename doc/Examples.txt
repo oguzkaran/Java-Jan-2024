@@ -3230,7 +3230,7 @@ public class App {
 ----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
-public class App {
+class App {
 	public static void main(String [] args) 
 	{	
 		int a = 10;
@@ -3249,7 +3249,7 @@ public class App {
 ----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
-public class App {
+class App {
 	public static void main(String [] args) 
 	{	
 		int a = 3;
@@ -3261,6 +3261,532 @@ public class App {
 		System.out.printf("a = %d%n", a); //a = 4
 		System.out.printf("b = %d%n", b); //b = 4
 		System.out.printf("c = %d%n", c); //c = 7
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	12 Mart 2024
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte maximal munch kuralı gereği error oluşur
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		int a = 3;
+		int b = 4;
+		int c;
+		
+		c = a++++b; //error
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		int a = 3;
+		int b = 4;
+		int c;
+		
+		c = a+++-b; // c = a++ + -b;
+		
+		System.out.printf("a = %d%n", a); //a = 4
+		System.out.printf("b = %d%n", b); //b = 4
+		System.out.printf("c = %d%n", c); //c = -1
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte maximal munch kuralı gereği error oluşur
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		int a = 3;
+		int b = 4;
+		int c;
+		
+		c = a+++++b; // error
+		
+		System.out.printf("a = %d%n", a); //a = 4
+		System.out.printf("b = %d%n", b); //b = 4
+		System.out.printf("c = %d%n", c); //c = -1
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		int a = 3;
+		int b = 4;
+		int c;
+		
+		c = a+++ + +b;
+		
+		System.out.printf("a = %d%n", a); //a = 4
+		System.out.printf("b = %d%n", b); //b = 4
+		System.out.printf("c = %d%n", c); //c = 7
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		int a;
+		
+		a = - - - - - - - - - - - - - - - - - - - 2;
+		
+		System.out.printf("a = %d%n", a);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Temel karşılaştırma operatörleri 6 tanedir: <, > , <=, >=, ==, !=
+	
+	Bu operatörler iki operandlı, araek durumundadır. Operatörlerin yan etkisi yoktur. Bu operatörlerin ürettiği değer
+	boolean türdendir. Karşılaştırma işlemi doğru ise true, yanlış ise false değerini üretir. <, >, <=, >= operatörleri
+	klasik operatörlerdir. == operatörü operandlarına ilişkin ifadelerin değerleri eşitse true, değilse false değerini
+	üretir. != operatörü operandlarına ilişkin ifadelerin değerleri eşit değilse true, eşitse false değerini üretir. 
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("İki sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		
+		System.out.printf("%d < %d = %b%n", a, b, a < b);
+		System.out.printf("%d >= %d = %b%n", a, b, a >= b);
+		System.out.printf("%d > %d = %b%n", a, b, a > b);
+		System.out.printf("%d <= %d = %b%n", a, b, a <= b);
+		System.out.printf("%d == %d = %b%n", a, b, a == b);
+		System.out.printf("%d != %d = %b%n", a, b, a != b);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Java'da metot çağırma işlemi metot çağırma operatörü (method call operator) ile yapılır. Bu operatör özel amaçlı
+	iki veya tek operandlıve araek durumunda bir operatördür. Operatör, operatör öncelik tablosunun birinci seviyesindedir.
+	Operatör ilgili metodu çağırır ve eğer metodun geri dönüş değeri varsa geri dönüş değerini üretir. Geri dönüş değeri
+	olmayan bir metot çağrısı için bu operatöre ilişkin ifadenin türü void'dur. Bu anlamda void aslında bir tür olmamasına
+	rağmen, dilin Matematiksel bütünlüğü adına bir tür gibi kullanılabilmektedir. Bu anlamda bir değer üretmeyebilen
+	tek operatör metot çağırma operatörüdür. Eğer, void bir metot çağrılırsa bu operatör değer üretmez  
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Mantıksal operatörler şunlardır: AND (&&), OR (||), NOT (!).
+	Bu operatörler Mantık'taki ilgili operatörleri temsil eder. Bu operatörlerin operandları boolean türden olmalıdır.
+	Operatörlerin ürettiği değer de boolean türdendir. Bu operatörlerin yan etkileri yoktur.
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anımsanacağı gibi && ve || operatörlerinin doğruluk tablolaları (truth table) şu şekildedir:
+	
+	a		b		&&		||
+	---------------------------
+	T		T		T		T
+	T		F		F		T
+	F		T		F		T
+	F		F		F		F
+	
+	Bu doğruluk tablosundan kısaca şu sonuçlar çıkartılabilir:
+	- && işlemi için: Her ikisi birden doğru ise doğru sonuç verir. Ya da başka bir deyişle en az biri yanlışsa yanlış
+	sonuç verir.
+	
+	- || işlemi için: Her ikisi yanlış ise yanlış sonuç verir. Ya da başka bir deyişle en az biri doğruysa doğru
+	sonuç verir. 
+	
+	Bu operatörler doğru sonuca yani Matematiksel olarak elde edilen sonuca en kısa yoldan ulaşmaya çalışırlar. Bu 
+	sebeple bu operatörlerin bulunduğu ifadeler hesaplanmaya en soldan başlar. && ve || operatörlerinde birinci 
+	operand hesaplandığında elde edilen sonuç, ikinci operand hesaplansa da değişmeyecekse ikinci operand hesaplanmaz.
+	Buna kısa devra davranışı (short circuit behavior) denir. Bu durumda && operatörü için birinci operanda ilişkin
+	ifadenin değeri false ise ikinci operanda ilişkin ifade yapılmaz, || operatörü için birinci operanda ilişkin
+	ifadenin değeri true ise ikinci operanda ilişkin ifade yapılmaz.    
+	
+	Bu operatörler yine doğru sonuca en kısa yoldan ulaşmak için klasik operatör önceliği kuralına işlemi yaparken 
+	uymazlar. Yani bu operatörlere ilişkin bir ifade, öncelik ne olursa olsun en soldan başlanarak hesaplanır. Ancak 
+	elde edilen sonuç operatör önceliğine uyularak yapılan işlem sırası ile elde edilen sonuç ile aynıdır.  Yani bu 
+	operatörler yine  kısa devre davranışını da kullanarak doğru sonuca en kısa yoldan ulaşırlar
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	&& operatörüne ilişkin demo örneği inceleyiniz:
+	Ekran Çıktısı:
+	foo
+	bar
+	false
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		boolean result;
+		
+		result = Sample.foo() && Sample.bar();
+		
+		System.out.printf("result:%b%n", result);
+	}
+}
+
+class Sample {
+	public static boolean foo()
+	{
+		System.out.println("foo");
+		
+		return true;
+	}
+	
+	public static boolean bar()
+	{
+		System.out.println("bar");
+		
+		return false;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	|| operatörüne ilişkin demo örneği inceleyiniz
+	Ekran Çıktısı:
+	bar
+	foo
+	true
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		boolean result;
+		
+		result = Sample.bar() || Sample.foo();
+		
+		System.out.printf("result:%b%n", result);
+	}
+}
+
+class Sample {
+	public static boolean foo()
+	{
+		System.out.println("foo");
+		
+		return true;
+	}
+	
+	public static boolean bar()
+	{
+		System.out.println("bar");
+		
+		return false;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağdaki demo örnekte kısa devre oluşur
+	Ekran Çıktısı:
+	foo
+	true
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		boolean result;
+		
+		result = Sample.foo() || Sample.bar();
+		
+		System.out.printf("result:%b%n", result);
+	}
+}
+
+class Sample {
+	public static boolean foo()
+	{
+		System.out.println("foo");
+		
+		return true;
+	}
+	
+	public static boolean bar()
+	{
+		System.out.println("bar");
+		
+		return false;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağdaki demo örnekte kısa devre oluşur
+	Ekran Çıktısı:
+	bar
+	false
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		boolean result;
+		
+		result = Sample.bar() && Sample.foo();
+		
+		System.out.printf("result:%b%n", result);
+	}
+}
+
+class Sample {
+	public static boolean foo()
+	{
+		System.out.println("foo");
+		
+		return true;
+	}
+	
+	public static boolean bar()
+	{
+		System.out.println("bar");
+		
+		return false;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağdaki demo örneği inceleyiniz
+	Ekran Çıktısı:
+	foo	
+	true
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		boolean result;
+		
+		result = Sample.foo() || Sample.bar() && Sample.tar();
+		
+		System.out.printf("result:%b%n", result);
+	}
+}
+
+class Sample {
+	public static boolean foo()
+	{
+		System.out.println("foo");
+		
+		return true;
+	}
+	
+	public static boolean bar()
+	{
+		System.out.println("bar");
+		
+		return false;
+	}
+	
+	public static boolean tar()
+	{
+		System.out.println("tar");
+		
+		return false;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağdaki demo örneği inceleyiniz
+	Ekran Çıktısı:
+	bar
+	tar
+	false
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		boolean result;
+		
+		result = Sample.bar() && Sample.foo() || Sample.tar();
+		
+		System.out.printf("result:%b%n", result);
+	}
+}
+
+class Sample {
+	public static boolean foo()
+	{
+		System.out.println("foo");
+		
+		return true;
+	}
+	
+	public static boolean bar()
+	{
+		System.out.println("bar");
+		
+		return false;
+	}
+	
+	public static boolean tar()
+	{
+		System.out.println("tar");
+		
+		return false;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağdaki demo örnekte || operatörüne öncelik verilmiştir
+	Ekran Çıktısı:
+	foo
+	tar
+	false
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		boolean result;
+		
+		result = (Sample.foo() || Sample.bar()) && Sample.tar();
+		
+		System.out.printf("result:%b%n", result);
+	}
+}
+
+class Sample {
+	public static boolean foo()
+	{
+		System.out.println("foo");
+		
+		return true;
+	}
+	
+	public static boolean bar()
+	{
+		System.out.println("bar");
+		
+		return false;
+	}
+	
+	public static boolean tar()
+	{
+		System.out.println("tar");
+		
+		return false;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağdaki demo örnekte önceliklendirme parantezinin olması ile olmamsı arasında bir fark yoktur
+	Ekran Çıktısı:
+	foo
+	true
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		boolean result;
+		
+		result = Sample.foo() || (Sample.bar() && Sample.tar());
+		
+		System.out.printf("result:%b%n", result);
+	}
+}
+
+class Sample {
+	public static boolean foo()
+	{
+		System.out.println("foo");
+		
+		return true;
+	}
+	
+	public static boolean bar()
+	{
+		System.out.println("bar");
+		
+		return false;
+	}
+	
+	public static boolean tar()
+	{
+		System.out.println("tar");
+		
+		return false;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		boolean result;
+		
+		result = Sample.bar() || Sample.foo() && Sample.tar() || Sample.foo() && Sample.bar();
+		
+		System.out.printf("result:%b%n", result);
+	}
+}
+
+class Sample {
+	public static boolean foo()
+	{
+		System.out.println("foo");
+		
+		return true;
+	}
+	
+	public static boolean bar()
+	{
+		System.out.println("bar");
+		
+		return false;
+	}
+	
+	public static boolean tar()
+	{
+		System.out.println("tar");
+		
+		return false;
 	}
 }
 
