@@ -1,38 +1,13 @@
 /*----------------------------------------------------------------------------------------------------------------------
-	Aşağdaki demo örne
+	Noktalı virgül Java'da sonlandırıcı (terminator) karakter olarak kullanılır. Java'da başka terminator karakter yoktur.
+	Noktalı virgül genel olarak ifadeleri sonlandırmak ve bazı deyimleri de sonlandırmak için kullanılır.
 ----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
 class App {
 	public static void main(String [] args) 
 	{	
-		boolean result;
 		
-		result = Sample.bar() || Sample.foo() && Sample.tar() || Sample.foo() && Sample.bar();
-		
-		System.out.printf("result:%b%n", result);
 	}
 }
 
-class Sample {
-	public static boolean foo()
-	{
-		System.out.println("foo");
-		
-		return true;
-	}
-	
-	public static boolean bar()
-	{
-		System.out.println("bar");
-		
-		return false;
-	}
-	
-	public static boolean tar()
-	{
-		System.out.println("tar");
-		
-		return false;
-	}
-}

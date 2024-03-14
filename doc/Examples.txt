@@ -3403,7 +3403,7 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
 	Mantıksal operatörler şunlardır: AND (&&), OR (||), NOT (!).
 	Bu operatörler Mantık'taki ilgili operatörleri temsil eder. Bu operatörlerin operandları boolean türden olmalıdır.
-	Operatörlerin ürettiği değer de boolean türdendir. Bu operatörlerin yan etkileri yoktur.
+	Aksi durumda error oluşur. Operatörlerin ürettiği değer de boolean türdendir. Bu operatörlerin yan etkileri yoktur.
 ----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
@@ -3789,6 +3789,269 @@ class Sample {
 		return false;
 	}
 }
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	14 Mart 2024
+----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Bitwise AND (&) ve bitwise OR (|) operatörleri tamsayılar ile bitsel işlemler yaparlar. Bu operatörler özel olarak
+	boolean türü ile kullanıldıklarında (yani operandları boolen türden olduğunda) kısa devre davranışı olmayan AND
+	ve OR işlemleri olarak düşünülmeldir. Yani bu operatörler boolean türü ile kullanıldıklarında, işlem sırası yine 
+	&& ve || operatörleri ile aynıdır ancak kısa devre davranışı olmaz.
+	
+	Anahtar Notlar: Java'da tamsayılar ile bitsel işlemler yapan bir grup operatör vardır. Bunlara "bitwise operators"
+	denilmektedir. Bitsel operatörlerin detayları ve kullanım alanları "Java ile Uygulama Geliştirme 1" ve "Android Programlama"
+	kurslarında ele alınacaktır
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örnekte tüm metotların çağrıldığına dikkat ediniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		boolean result;
+		
+		result = Sample.foo() | Sample.bar() & Sample.tar();
+		
+		System.out.printf("result:%b%n", result);
+	}
+}
+
+class Sample {
+	public static boolean foo()
+	{
+		System.out.println("foo");
+		
+		return true;
+	}
+	
+	public static boolean bar()
+	{
+		System.out.println("bar");
+		
+		return false;
+	}
+	
+	public static boolean tar()
+	{
+		System.out.println("tar");
+		
+		return false;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		int a = 10; //0b00000000000000000000000000001010 <-> 0x0000000A
+		int b = 11; //0b00000000000000000000000000001011 <-> 0x0000000B
+		int c;
+		
+		c = a & b;
+		
+		System.out.printf("a = %d, a = %08X%n", a, a);
+		System.out.printf("b = %d, b = %08X%n", b, b);		
+		System.out.printf("c = %d, c = %08X%n", c, c);
+		System.out.println("-----------------------------------");
+		
+		c = a | b;
+		
+		System.out.printf("a = %d, a = %08X%n", a, a);
+		System.out.printf("b = %d, b = %08X%n", b, b);		
+		System.out.printf("c = %d, c = %08X%n", c, c);
+		System.out.println("-----------------------------------");
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Logical NOT (!) operatörü tek operandlı ve önek durumundadır. Operatörün yan etkisi yoktur. Logical NOT işleminin
+	doğruluk tablosu şu şekildedir:
+	a 			!a
+	-----------------
+	T			F
+	F			T
+	
+	Bu operatör operandına ilişkin ifadenin mantıksal değilini (yani ifade true ise false, ifade false ise true değerini) 
+	üretir
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		boolean flag = false;
+		
+		flag = !flag;
+		
+		System.out.printf("flag = %b%n", flag);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Atama operatörü (assignment operator) özel amaçlı, iki operandlı ve araek durumundadır. Operatörün birinci operandı
+	bir değişken olmalıdır. Operatörün yan etkisi vardır. Operatör sağdan sola önceliklidir (right associative). Operatörün 
+	ürettiği değer atanan değerdir
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		int a, b, c;
+		
+		a = b = c = 10;
+		
+		System.out.printf("a = %d, b = %d, c = %d%n", a, b, c);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örnekte ikinci atama operatörünün birinci operandı değişken olmadığından error oluşur
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		int a, b = 20, c;
+		
+		(a = b) = c = 10; //error
+		
+		System.out.printf("a = %d, b = %d, c = %d%n", a, b, c);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örnekte üçüncü atama operatörünün birinci operandı değişken olmadığından error oluşur
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		int a, b = 20, c;
+		
+		a = (b = c) = 10;
+		
+		System.out.printf("a = %d, b = %d, c = %d%n", a, b, c);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örnek geçerlidir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		int a, b, c;
+		
+		a = b = (c = 10);
+		
+		System.out.printf("a = %d, b = %d, c = %d%n", a, b, c);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örnek geçerlidir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		int a, b, c;
+		
+		a = (b = c = 10);
+		
+		System.out.printf("a = %d, b = %d, c = %d%n", a, b, c);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Java'da bir grup işlemli atama operatörü (compound/augmented assignment operators) vardır. Bu operatörler iki
+	operandlı ve araek durumundadır.Bu operatörlerin genel biçimi şu şekildedir:
+	
+		<ifade1> <op>= <ifade2>
+		
+	işleminin yaklaşık karşılığı
+	
+		<ifade1> = <ifade1> <op> <ifade2>
+		
+	biçimindedir. Burada ifade1'in değişken olması zorunludur. Bu operatör kullanılabildiği durumlarda kesinlikle
+	açık işlemine göre tercih edilmeldir. Örneğin programcı
+	 
+		x = x + 2;
+		
+	ifadesi yerine
+	
+		x += 2;
+		
+	yazmalıdır. Operatörlerin ürettiği değer yine atanan değerdir. Aslında bu operatörler hem okunabililiği/algılanabilirliği 
+	artırır hem de ifadelerin daha basit (yalın) olarak yazılabilmesi sağlar.
+	
+	Anahtar Notlar: Aslında işlemli atama operatörlerinin genel biçimi tam olarak yukarıda anlatıldığı gibi değildir.
+	İleride tam karşılığı ele alınacaktır. 
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		int a = 10;
+		int b = 20;
+		
+		a += b;
+		
+		System.out.printf("a = %d, b = %d%n", a, b);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		int a = 2;
+		int b = 3;
+		
+		a *= b + 2; //a = a * (b + 2);
+		
+		System.out.printf("a = %d, b = %d%n", a, b);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Noktalı virgül Java'da sonlandırıcı (terminator) karakter olarak kullanılır. Java'da başka terminator karakter yoktur.
+	Noktalı virgül genel olarak ifadeleri sonlandırmak ve bazı deyimleri de sonlandırmak için kullanılır.
+----------------------------------------------------------------------------------------------------------------------*/
 
 
 

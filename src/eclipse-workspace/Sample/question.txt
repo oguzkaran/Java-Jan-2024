@@ -3,15 +3,11 @@ package csd;
 public class App {
 	public static void main(String [] args) 
 	{	
-		int a = 3;
-		int b = 4;
-		int c;
+		int a, b = 20, c;
 		
-		c = a++ + -b;
+		a = (b = c = 10);
 		
-		System.out.printf("a = %d%n", a); 
-		System.out.printf("b = %d%n", b); 
-		System.out.printf("c = %d%n", c); 
+		System.out.printf("a = %d, b = %d, c = %d%n", a, b, c);
 	}
 }
 
