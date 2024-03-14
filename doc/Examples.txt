@@ -934,8 +934,8 @@ public class App {
 	2. Parametre değişkenleri (paraameter  variables)
 	3. Sınıf veri elemanları (member variables)
 	
-	Bir metot içerisinde { ile } arasonda kalan bölgeye parantezler ile birlikte "blok (block)" denir. Bu anlamda 
-	metodun gövdesi de bir bloktur. Bir metot içeriisnde istenildiği kadar içiçe veya ayrık bloklar olabilir
+	Bir metot içerisinde { ile } arasında kalan bölgeye parantezler ile birlikte "blok (block)" denir. Bu anlamda 
+	metodun gövdesi de bir bloktur. Bir metot içerisinde istenildiği kadar içiçe veya ayrık bloklar olabilir
 ----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -3244,6 +3244,23 @@ class App {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
+	Aşağdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		int a = 2;
+		int b;
+		
+		b = a++ + a * --a; // 2 + 3 * 2
+		
+		System.out.printf("a = %d, b = %d%n", a, b);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
 	Java derleyicisi soldan sağa ve yukarıdan aşağıya anlamlı en uzun ifadeyi alacak şekilde atomalarına ayırma (tokenizing)
 	işlemini yapar. Bu kurala genel olarak "maximal/maximum munch" kuralı denir. Aşağıdaki demo örneği inceleyiniz
 ----------------------------------------------------------------------------------------------------------------------*/
@@ -4050,7 +4067,97 @@ class App {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	Noktalı virgül Java'da sonlandırıcı (terminator) karakter olarak kullanılır. Java'da başka terminator karakter yoktur.
-	Noktalı virgül genel olarak ifadeleri sonlandırmak ve bazı deyimleri de sonlandırmak için kullanılır.
+	Noktalı virgül genel olarak ifadeleri sonlandırmak ve bazı deyimleri de sonlandırmak için kullanılır
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Java'da etkisiz ifadeler genel olarak geçersizdir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		int a = 10;
+		int b = 20;
+		
+		a + b; //error
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Derleyici akışın hiç bir zaman o noktaya gelemeyeceği kodlar için genel olarak error oluşturur (unreachable code)
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class Sample {
+	public static int add(int a, int b)
+	{
+		return a + b;
+		
+		System.out.println("Unreachable code"); //error
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağdaki demo örneği inceleyiniz
+	a = a++;
+	i1: a++
+	i2: a = i1
+	Not: Hiç güzel bir örnek değildir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		int a = 2;
+		
+		a = a++;
+		
+		System.out.printf("a = %d%n", a); //a = 2
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağdaki demo örneği inceleyiniz
+	a = ++a;
+	i1: ++a
+	i2: a = i1
+	Not: Hiç güzel bir örnek değildir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		int a = 2;
+		
+		a = ++a;
+		
+		System.out.printf("a = %d%n", a); //a = 2
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Deyimler (Statements): Programın çalıştırılan parçalarına denir. Aslında bir program deyimlerin çalıştırılmasıyla
+	çalışır. Java'da deyimler şunlardır:
+	- Basit deyimler (simple statements): Bir ifadenin sonuna noktalı virgül konmasıyla oluşan deyimdir. örneğin:
+		System.out.println("Merhaba"); ya da x = y + z;
+	  Basit bir deyim çalıştırıldığında deyime ilişkin ifade hesaplanır.
+	  
+	- Bileşik deyimler (compound statements): { ve } arasında kalan yani bir blok içerisinde yazılan deyimlerdir. 
+	Bileşik deyim çalıştırıldığında blok içerisindeki deyimler yukarıdan aşağıya çalıştırılır.  Bu anlamda metodun
+	gövdesi de aslında bileşik olarak düşünülebilir.
+	
+	- Bildirim deyimleri (declaration statements): Bir değişkenin bildirildiği deyimdir. Bildirim deyimi çalıştırıldığında
+	bellekte yer ayrılır.
+	
+	- Kontrol deyimleri (control statements): Akışa yön veren deyimlerdir. Her kontrol deyiminin kendine özgü çalıştırılma
+	biçimi vardır. 
+	
+	- Boş deyim (null/empty statement): Noktalı virgülün tek başına kullanılması durumunda oluşan deyimdir. Boş deyim
+	çalıştırıldığında hiç bir şey yapılmaz.	
 ----------------------------------------------------------------------------------------------------------------------*/
 
 
