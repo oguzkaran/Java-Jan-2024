@@ -4531,7 +4531,7 @@ class NumberUtil {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
- 	Yukarıdaki örnek aşağıdaki gibi daha okunabilir/algılanabilir olarak bildirilebilir
+ 	Yukarıdaki metot aşağıdaki gibi daha okunabilir/algılanabilir olarak yazılabilir
 ----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -4564,7 +4564,7 @@ class NumberUtil {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
- 	Yukarıdaki örnek en okunabilir/algılanabilir olarak aşağıdaki gibi yazılabilir
+ 	Yukarıdaki metot en okunabilir/algılanabilir olarak aşağıdaki gibi yazılabilir
 ----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
