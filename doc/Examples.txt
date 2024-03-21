@@ -1886,9 +1886,9 @@ class Util {
 	Metotlar ne işe yarar? Ya da başka bir deyişle bir problemin çözümünde neden metotlar yazalım? 
 	Aşağıda metot yazılmasına ilişkin durumlar genel olarak ele alınmıştır:
 	
-	- Bir işi çok fazla yerde yapmak kod tekrarına yol açar. Yazılım geliştirmede temel prensip "zorunlu olmadıkça kod 
-	tekrarı yapılmamalıdır (do not repeat yourself)" şeklindedir. Bu durumda programcı bir metot yazarak ilgili yerlerde
-	o metodu çağırır
+	- Bir işi çok fazla yerde yapmak kod tekrarına yol açar. Yazılım geliştirmede temel prensip olarak "zorunlu olmadıkça 
+	kod  tekrarı yapılmamalıdır (do not repeat yourself)". Bu durumda programcı bir metot yazarak ilgili yerlerde o metodu 
+	çağırır
 	
 	- Bir problemin çözümü metot çağırma yerine her yerde kodun yazılması biçiminde "implemente" edilmişse, bu durumda 
 	programcı problemin çözümünde bir değişiklik yapmak isterse veya bir hata olduğunu görüp düzeltmek isterse her yerde
@@ -4590,6 +4590,468 @@ class NumberUtil {
 	public static boolean isEven(int a)
 	{
 		return a % 2 == 0;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	21 Mart 2024
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int a = kb.nextInt();
+		
+		if (!NumberUtil.isEven(a))
+			a *= 2;
+		
+		System.out.printf("a = %d%n", a);
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+
+class NumberUtil {
+	public static boolean isEven(int a)
+	{
+		return a % 2 == 0;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int a = kb.nextInt();
+		
+		if (NumberUtil.isOdd(a))
+			a *= 2;
+		
+		System.out.printf("a = %d%n", a);
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+
+class NumberUtil {
+	public static boolean isEven(int a)
+	{
+		return a % 2 == 0;
+	}
+	
+	public static boolean isOdd(int a)
+	{
+		return !isEven(a);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Aşağıdaki demo örnekte else içteki if deyimine ait olur. Buna "dangling else" denir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int a = kb.nextInt();
+		
+		if (a > 0)
+			if (a % 2 == 0)
+				System.out.println("Çift sayı girdiniz");			
+		else
+			System.out.println("Negatif sayı girdiniz");	
+				
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Yukarıdaki dangling else durumu bileşik deyim kullanılarak da çözülebilir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int a = kb.nextInt();
+		
+		if (a > 0)  {
+			if (a % 2 == 0)
+				System.out.println("Çift sayı girdiniz");
+		}
+		else
+			System.out.println("Negatif sayı girdiniz");
+				
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Aşağıdaki demo örnekte dangling else durumu yoktur
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int a = kb.nextInt();
+		
+		if (a > 0) 
+			if (a % 2 == 0)
+				System.out.println("Çift sayı girdiniz");		
+			else 
+				System.out.println("Tek sayı girdiniz");
+		else
+			System.out.println("Negatif sayı girdiniz");		
+				
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Sınıf Çalışması: Katsayıları klavyeden girilen ikinci dereceden denklemin köklerini bulan ve ekrana basan programı
+ 	yazınız
+ 	Not: Örnek şu ana gördüklerimiz kullanılarak, daha genel yazılmaya çalışılmıtır. İleride daha iyisi yazılacaktır
+ 	Not: Formül için ~/doc/images/ikinci-dereceden-denklem.jpg dosyasından yararlanabilirsiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		QuadraticEquationSolverApp.run();
+	}
+}
+
+class QuadraticEquationSolverApp {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Input coefficients:");
+		double a = kb.nextDouble();
+		double b = kb.nextDouble();
+		double c = kb.nextDouble();
+		
+		EquationSolver.findQuadraticRoots(a, b, c);
+	}
+}
+
+class EquationSolver {
+	public static double calculateDelta(double a, double b, double c)
+	{
+		return b * b - 4 * a * c;
+	}
+	
+	public static void doForDoubleRoots(double delta, double a, double b)
+	{
+		double sqrtDelta = Math.sqrt(delta);
+		double x1, x2;
+		
+		x1 = (-b + sqrtDelta) / (2 * a);
+		x2 = (-b - sqrtDelta) / (2 * a);
+		
+		System.out.printf("x1 = %f, x2 = %f%n", x1, x2);		
+	}
+	
+	public static void doForSameRoot(double a, double b)
+	{
+		double x = -b / (2 * a);
+		
+		System.out.printf("x1 = x2 = %f%n", x);
+	}
+	
+	public static void findQuadraticRoots(double a, double b, double c)
+	{
+		double delta = calculateDelta(a, b, c);
+		
+		if (delta > 0)
+			doForDoubleRoots(delta, a, b);
+		else if (delta == 0)
+			doForSameRoot(a, b);
+		else
+			System.out.println("No real root!...");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Sınıf Çalışması: Katsayıları klavyeden girilen ikinci dereceden denklemin köklerini bulan ve ekrana basan programı
+ 	yazınız
+ 	Not: Örnek şu ana gördüklerimiz kullanılarak, daha genel yazılmaya çalışılmıtır. İleride daha iyisi yazılacaktır
+ 	Not: Formül için ~/doc/images/ikinci-dereceden-denklem.jpg dosyasından yararlanabilirsiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		QuadraticEquationSolverApp.run();
+	}
+}
+
+class QuadraticEquationSolverApp {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Input coefficients:");
+		double a = kb.nextDouble();
+		double b = kb.nextDouble();
+		double c = kb.nextDouble();
+		
+		EquationSolver.findQuadraticRoots(a, b, c);
+	}
+}
+
+class EquationSolver {
+	public static double calculateDelta(double a, double b, double c)
+	{
+		return b * b - 4 * a * c;
+	}
+	
+	public static void doForRoots(double delta, double a, double b)
+	{
+		double sqrtDelta = Math.sqrt(delta);
+		double x1, x2;
+		
+		x1 = (-b + sqrtDelta) / (2 * a);
+		x2 = (-b - sqrtDelta) / (2 * a);
+		
+		System.out.printf("x1 = %f, x2 = %f%n", x1, x2);		
+	}
+
+	
+	public static void findQuadraticRoots(double a, double b, double c)
+	{
+		double delta = calculateDelta(a, b, c);
+		
+		if (delta >= 0)
+			doForRoots(delta, a, b);
+		else
+			System.out.println("No real root!...");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Döngü Deyimleri: Bir işin yinelemeli (iterative) bir biçimde yapılmasını sağlayan kontrol deyimlerinde döngü deyimleri
+ 	(loop statements) denir. Java'da döngü deyimleri genel olarak 3 gruba ayrılır:
+	 	1. while döngü deyimi
+	 		- Kontrolün başta yapıldığı while döngü deyimi (while döngüsü)
+	 		- Kontrolün sonda yapıldığı while döngü deyimi (do-while döngüsü)
+	 	2. for döngü deyimi
+	 	3. for-each (enhanced for loop) döngü deyimi
+	 	
+	 Anahtar Notlar: while döngüsü dendiğinde genel olarak "kontrolün başta yapıldığı while döngü deyimi" anlaşılır. Burada da
+	 while döngüsü dendiğinde bu şekilde anlaşılmalıdır. "Kontrolün sonda yapıldığı while döngü deyimi" için "do-while döngüsü"
+	 terimi kullanılacaktır
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Kontrolün başta yapıldığı while döngü deyiminin (while döngüsü) genel biçimi şu şekildedir:
+ 	
+ 		while (<boolean türden ifade>)
+ 			<deyim>
+ 			
+ 	while döngüsü koşul ifadesi doğru sürece yinelenen döngü deyimidir. Akış while döngü deyimine geldiğinde de koşul
+ 	kontrol edilir, eğer yanlış ise döngüye girilmez. Koşul ifadesinin boolean türden olmamasın durumunda error oluşur
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int n = kb.nextInt();
+		int i;
+		
+		i = 0;
+		
+		while (i < n) {
+			System.out.printf("%d ", i);
+			++i;
+		}
+		
+		System.out.printf("%nDöngü sonrası i = %d%n", i);
+		System.out.println("Tekrar yapıyor musunuz?");		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	while döngü deyiminde yanlışlıkla noktalı virgül kullanılması (yani yanlışlıkla boş deyim kullanılması) durumu
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int n = kb.nextInt();
+		int i;
+		
+		i = 0;
+		
+		while (i < n); {
+			System.out.printf("%d ", i);
+			++i;
+		}
+		
+		System.out.printf("%nDöngü sonrası i = %d%n", i);
+		System.out.println("Tekrar yapıyor musunuz?");		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	while döngü deyimi ile n-kez dönen döngü deyimi de oluşturulabilir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int n = kb.nextInt();
+		int i;
+		
+		i = 0;
+		
+		while (i < n) {
+			System.out.printf("%d ", i);
+			++i;
+		}
+		
+		System.out.printf("%nDöngü sonrası i = %d%n", i);
+		System.out.println("Tekrar yapıyor musunuz?");		
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	while döngü deyimi ile n-kez dönen döngü deyimi de oluşturulabilir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int n = kb.nextInt();
+		int i;
+		
+		i = n - 1;
+		
+		while (i >= 0) {
+			System.out.printf("%d ", i);
+			--i;
+		}
+		
+		System.out.printf("%nDöngü sonrası i = %d%n", i);
+		System.out.println("Tekrar yapıyor musunuz?");		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Aşağıdaki döngü deyimi bazı programcılar tarafından kullanılan "n-kez dönen" döngü kalıbıdır. Bu kalıbı programcı
+ 	kullanmak istemese de gördüğünde tanımalıdır. Bu döngü deyiminde n değerinin, döngüden sonra artık eski değerinde 
+ 	olmadığına dikkat ediniz. Örneği çeşitli değerlerle çalıştırıp sonuçları gözlemleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int n = kb.nextInt();
+	
+		while (n-- > 0)
+			System.out.printf("%d ", n);
+		
+		System.out.println();		
+		System.out.printf("Döngü sonrası n:%d%n", n);
+		System.out.println("Tekrar yapıyor musunuz?");		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Sınıf Çalışması: Parametresi ile aldığı int türden bir sayının basamak sayısını döndüren countDigits metodunu 
+ 	NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		NumberUtilCountDigitsTest.run();
+	}
+}
+
+class NumberUtilCountDigitsTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int val = kb.nextInt();
+		
+		System.out.printf("%d sayısının basamak sayısı:%d%n", val, NumberUtil.countDigits(val));
+	}
+}
+
+class NumberUtil {
+	public static int countDigits(int val)
+	{
+		if (val == 0)
+			return 1;
+		
+		int count = 0;
+		
+		while (val != 0) {
+			++count;
+			val /= 10;			
+		}
+		
+		return count;
 	}
 }
 

@@ -3,15 +3,11 @@ package csd;
 public class App {
 	public static void main(String [] args) 
 	{	
-		int a, b = 20, c;
-		
-		a = (b = c = 10);
-		
-		System.out.printf("a = %d, b = %d, c = %d%n", a, b, c);
+		if (a > 0)
+			if (a % 2 == 0)
+				System.out.println("Çift sayı girdiniz:");
+		else
+			System.out.println("Negatif sayı girdiniz:");
 	}
 }
 
-a) Derleme zamanı hatası oluşur. Nedeni ...
-b) Derlenir. Ekran çıktısı ...
-c) Çalışma zamanı hatası oluşur. Nedeni...
-d) Hiçbiri...

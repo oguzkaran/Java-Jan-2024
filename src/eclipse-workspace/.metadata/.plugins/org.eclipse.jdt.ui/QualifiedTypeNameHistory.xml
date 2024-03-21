@@ -4,4 +4,8 @@
     <fullyQualifiedTypeName name="csd.Mample"/>
     <fullyQualifiedTypeName name="java.util.Scanner"/>
     <fullyQualifiedTypeName name="csd.PointUtilDistanceTest"/>
+    <fullyQualifiedTypeName name="csd.QuadraticEquationSolverApp"/>
+    <fullyQualifiedTypeName name="csd.EquationSolver"/>
+    <fullyQualifiedTypeName name="csd.NumberUtil"/>
+    <fullyQualifiedTypeName name="csd.NumberUtilCountDigitsTest"/>
 </qualifiedTypeNameHistroy>
