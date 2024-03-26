@@ -5099,47 +5099,7 @@ class NumberUtil {
 	}
 }
 
-/*----------------------------------------------------------------------------------------------------------------------
- 	Sınıf Çalışması: Parametresi ile aldığı int türden bir sayının tersine geri dönen reverse isimli metodu NumberUtil
- 	sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz
- 	Örnek: 
- 	123	-> 3 * 10 + 2 = 32 -> 32 * 10 + 1 = 321
- 	-123 -> -3 * 10 - 2 = -32 -> -32 * 10 - 1 = -321
-----------------------------------------------------------------------------------------------------------------------*/
-package csd;
 
-class App {
-	public static void main(String [] args) 
-	{	
-		NumberUtilReversedTest.run();
-	}
-}
-
-class NumberUtilReversedTest {
-	public static void run()
-	{
-		java.util.Scanner kb = new java.util.Scanner(System.in);
-		
-		System.out.print("Bir sayı giriniz:");
-		int val = kb.nextInt();
-		
-		System.out.printf("%d sayısının tersi:%d%n", val, NumberUtil.reverse(val));		
-	}
-}
-
-class NumberUtil {
-	public static int reverse(int val)
-	{
-		int result = 0;
-		
-		while (val != 0) {
-			result = result * 10 + val % 10;
-			val /= 10;
-		}
-		
-		return result;
-	}
-}
 
 /*----------------------------------------------------------------------------------------------------------------------
  	while döngüsünün koşul ifadesinde bir değişkene bir metodun geri dönüş değeri atanıp, atanan değer kontrol edilebilir.
@@ -5230,6 +5190,201 @@ class PosNegCountTotalApp {
 		
 		printPosStatus(posCount, posSum);
 		printNegStatus(negCount, negSum);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Sonsuz Döngü (Infinite Loop): Koşul ifadesinden dolayı sonlanmayan döngü deyimlerine denir. Bu durumda while
+ 	döngü deyimi ile sonsuz döngü şu kalıp ile oluşturulabilir:
+ 		while (true)
+ 			<deyim>
+ 	Bu while döngüsünde, deyim içerisinde döngüden çıkışa yol açacak bir deyim varsa sonsuz döngü sonlanmış olur. Örneğin
+ 	return deyimi sonsuz döngü içerisinde kullanıldığında metodu sonlandırdığından, döngüden de çıkılmış olur. Bu durumda
+ 	hiç sonlanmadan dönen döngü bir sonsuz döngüdür ancak her sonsuz döngü belirli durumlarda sonlanabilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Sınıf Çalışması: Parametresi ile aldığı int türden bir sayının tersine geri dönen reverse isimli metodu NumberUtil
+ 	sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz
+ 	Örnek: 
+ 	123	-> 3 * 10 + 2 = 32 -> 32 * 10 + 1 = 321
+ 	-123 -> -3 * 10 - 2 = -32 -> -32 * 10 - 1 = -321
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		NumberUtilReversedTest.run();
+	}
+}
+
+class NumberUtilReversedTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Bir sayı giriniz:");
+			int val = Integer.parseInt(kb.nextLine());
+			
+			System.out.printf("%d sayısının tersi:%d%n", val, NumberUtil.reverse(val));
+			
+			if (val == 0)
+				return;
+		}
+	}
+}
+
+class NumberUtil {
+	public static int reverse(int val)
+	{
+		int result = 0;
+		
+		while (val != 0) {
+			result = result * 10 + val % 10;
+			val /= 10;
+		}
+		
+		return result;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Kontrolün sonda yapıldığı while döngü deyimi (do-while döngüsü): do-while döngü deyiminin genel biçimi şu şekildedir:
+ 	
+ 		do 
+ 			<deyim>
+ 		while (<koşul ifadesi>);
+ 	
+ 	Akış do-while döngüsüne geldiğinde koşul kontrol edilmez. Bu durumda do-while döngüsüne en az bir kez girileceği
+ 	garanti altındadır. Yani döngünün ilk adımı kesinlikle yapılacaktır. İlk adımdan sonra koşul kontrol edilecek ve 
+ 	duruma göre döngü devam edecek veya sonlanacaktır. do-while döngü deyimi while döngü deyimi kadar sık kullanılmaz.
+ 	Algoritmaya göre okunabilirliği artırmak amaçlı tercih edilir. Bu döngü deyimi dikkatli kullanılmazsa okunabilirliği
+ 	azaltabilir. Çünkü bir Java programcısı do-while döngü deyimi gördüğünde algoritmada ilk adımın kesinlikle yapılması 
+ 	gerektiği biçiminde kodu algılar. 
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Aşağıdaki örnekte do-while döngü deyimi ile sıfır sayısı için 1 değerine geri dönülmüştür
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		NumberUtilcountDigitsTest.run();
+	}
+}
+
+class NumberUtilcountDigitsTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Bir sayı giriniz:");
+			int val = Integer.parseInt(kb.nextLine());
+			
+			System.out.printf("%d sayısının basamak sayısı:%d%n", val, NumberUtil.countDigits(val));
+			
+			if (val == 0)
+				return;
+		}
+	}
+}
+
+class NumberUtil {
+	public static int countDigits(int val)
+	{
+		int count = 0;
+		
+		do {
+			++count;
+			val /= 10;
+		} while (val != 0);		
+		
+		return count;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Aşağıdaki örnekte val değişkenin scope'u do-while döngüsünün deyimi olduğundan koşul ifadesinde kullanılamaz. 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		do {
+			System.out.print("Bir sayı giriniz:");
+			int val = Integer.parseInt(kb.nextLine());
+			
+			System.out.printf("%d * %d = %d%n", val, val, val * val);
+		} while (val != 0); //error
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Yukarıdaki örnek aşağıdaki gibi yapılabilir 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		int val;
+		
+		do {
+			System.out.print("Bir sayı giriniz:");
+			val = Integer.parseInt(kb.nextLine());
+			
+			System.out.printf("%d * %d = %d%n", val, val, val * val);
+		} while (val != 0);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		NumberUtilcountDigitsTest.run();
+	}
+}
+
+class NumberUtilcountDigitsTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		int val;
+		
+		do {
+			System.out.print("Bir sayı giriniz:");
+			val = Integer.parseInt(kb.nextLine());
+			
+			System.out.printf("%d sayısının basamak sayısı:%d%n", val, NumberUtil.countDigits(val));			
+		} while (val != 0);
+	}
+}
+
+class NumberUtil {
+	public static int countDigits(int val)
+	{
+		int count = 0;
+		
+		do {
+			++count;
+			val /= 10;
+		} while (val != 0);		
+		
+		return count;
 	}
 }
 
