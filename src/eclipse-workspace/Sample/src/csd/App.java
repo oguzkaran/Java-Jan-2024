@@ -1,41 +1,66 @@
 /*----------------------------------------------------------------------------------------------------------------------
- 	Sınıf Çalışması: Parametresi ile aldığı int türden bir sayının basamak sayısını döndüren countDigits metodunu 
- 	NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz
+ 	Sınıf Çalışması: Klavyeden sıfır girilene kadar alınan sayılardan pozitif olanlarının ve negatif olanlarının ayrı 
+ 	ayrı sayılarını ve toplamlarını bulan programı yazınız. Programın mesajlarına ilişkin örnekler şunlardır:
+ 	
+ 	Girilen 3 tane pozitif sayının toplamı: 45
+ 	Girilen 4 tane negatif sayının toplamı: -56
+ 	
+ 	Girilen 3 tane pozitif sayının toplamı: 45
+ 	Hiç negatif sayı girmediniz
+ 	
+ 	Hiç pozitif sayı girmediniz
+ 	Girilen 4 tane negatif sayının toplamı: -56
+ 	
+ 	Hiç pozitif sayı girmediniz
+ 	Hiç negatif sayı girmediniz
 ----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
 class App {
 	public static void main(String [] args) 
 	{	
-		NumberUtilCountDigitsTest.run();
+		PosNegCountTotalApp.run();				
 	}
 }
 
-class NumberUtilCountDigitsTest {
+class PosNegCountTotalApp {
+	public static void printPosStatus(int count, int sum)
+	{
+		if (count != 0)
+			System.out.printf("Girilen %d tane pozitif sayının toplamı:%d%n", count, sum);
+		else
+			System.out.println("Hiç pozitif sayı girmediniz");
+	}
+	
+	public static void printNegStatus(int count, int sum)
+	{
+		if (count != 0)
+			System.out.printf("Girilen %d tane negatif sayının toplamı:%d%n", count, sum);
+		else
+			System.out.println("Hiç negatif sayı girmediniz");
+	}
+	
 	public static void run()
 	{
 		java.util.Scanner kb = new java.util.Scanner(System.in);
+		int posSum, negSum, posCount, negCount;
+		int val;
 		
-		System.out.print("Bir sayı giriniz:");
-		int val = kb.nextInt();
+		posSum = negSum = posCount = negCount = 0;
 		
-		System.out.printf("%d sayısının basamak sayısı:%d%n", val, NumberUtil.countDigits(val));		
-	}
-}
-
-class NumberUtil {
-	public static int countDigits(int val)
-	{
-		if (val == 0)
-			return 1;
+		System.out.println("Sayıları girmeye başlayınız:");
 		
-		int count = 0;
+		while ((val = Integer.parseInt(kb.nextLine())) != 0)
+			if (val > 0) {
+				posSum += val;
+				++posCount;
+			}
+			else {
+				negSum += val;
+				++negCount;
+			}		
 		
-		while (val != 0) {
-			++count;
-			val /= 10;			
-		}
-		
-		return count;
+		printPosStatus(posCount, posSum);
+		printNegStatus(negCount, negSum);
 	}
 }

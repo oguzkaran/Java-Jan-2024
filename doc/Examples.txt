@@ -5056,6 +5056,184 @@ class NumberUtil {
 }
 
 
+/*----------------------------------------------------------------------------------------------------------------------
+	26 Mart 2024
+----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Sınıf Çalışması: Parametresi ile aldığı int türden bir sayının basamakları toplamına geri dönen sumDigits isimli
+ 	metodu NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz
+ 	Açıklama: Sayı negatif ise basamakları toplamı pozitif olarak elde edilecektir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		NumberUtilSumDigitsTest.run();
+	}
+}
+
+class NumberUtilSumDigitsTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int val = kb.nextInt();
+		
+		System.out.printf("%d sayısının basamakları toplamı:%d%n", val, NumberUtil.sumDigits(val));		
+	}
+}
+
+class NumberUtil {
+	public static int sumDigits(int val)
+	{
+		int total = 0;
+		
+		while (val != 0) {
+			total += val % 10;
+			val /= 10;
+		}
+		
+		return Math.abs(total);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Sınıf Çalışması: Parametresi ile aldığı int türden bir sayının tersine geri dönen reverse isimli metodu NumberUtil
+ 	sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz
+ 	Örnek: 
+ 	123	-> 3 * 10 + 2 = 32 -> 32 * 10 + 1 = 321
+ 	-123 -> -3 * 10 - 2 = -32 -> -32 * 10 - 1 = -321
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		NumberUtilReversedTest.run();
+	}
+}
+
+class NumberUtilReversedTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int val = kb.nextInt();
+		
+		System.out.printf("%d sayısının tersi:%d%n", val, NumberUtil.reverse(val));		
+	}
+}
+
+class NumberUtil {
+	public static int reverse(int val)
+	{
+		int result = 0;
+		
+		while (val != 0) {
+			result = result * 10 + val % 10;
+			val /= 10;
+		}
+		
+		return result;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	while döngüsünün koşul ifadesinde bir değişkene bir metodun geri dönüş değeri atanıp, atanan değer kontrol edilebilir.
+ 	Bu tarz koşul ifadeleri okunabilirliği/algılanabilirliği olumsuz etkilemedikten sonra yazılabilir. Aşağıdaki örnekte
+ 	klavyeden sıfır girilene kadar alınan sayıların toplamı bulunmuştur. Örnekte atama işleminin önceliklendirildiğine
+ 	dikkat ediniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.println("Sayıları girmeye başlayınız:");
+		int total = 0;		
+		int val;
+		
+		while ((val = Integer.parseInt(kb.nextLine())) != 0)
+			total += val;
+		
+		System.out.printf("Toplam:%d%n", total);
+		System.out.println("Tekrar yapıyor musunuz?");		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Sınıf Çalışması: Klavyeden sıfır girilene kadar alınan sayılardan pozitif olanlarının ve negatif olanlarının ayrı 
+ 	ayrı sayılarını ve toplamlarını bulan programı yazınız. Programın mesajlarına ilişkin örnekler şunlardır:
+ 	
+ 	Girilen 3 tane pozitif sayının toplamı: 45
+ 	Girilen 4 tane negatif sayının toplamı: -56
+ 	
+ 	Girilen 3 tane pozitif sayının toplamı: 45
+ 	Hiç negatif sayı girmediniz
+ 	
+ 	Hiç pozitif sayı girmediniz
+ 	Girilen 4 tane negatif sayının toplamı: -56
+ 	
+ 	Hiç pozitif sayı girmediniz
+ 	Hiç negatif sayı girmediniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		PosNegCountTotalApp.run();				
+	}
+}
+
+class PosNegCountTotalApp {
+	public static void printPosStatus(int count, int sum)
+	{
+		if (count != 0)
+			System.out.printf("Girilen %d tane pozitif sayının toplamı:%d%n", count, sum);
+		else
+			System.out.println("Hiç pozitif sayı girmediniz");
+	}
+	
+	public static void printNegStatus(int count, int sum)
+	{
+		if (count != 0)
+			System.out.printf("Girilen %d tane negatif sayının toplamı:%d%n", count, sum);
+		else
+			System.out.println("Hiç negatif sayı girmediniz");
+	}
+	
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		int posSum, negSum, posCount, negCount;
+		int val;
+		
+		posSum = negSum = posCount = negCount = 0;
+		
+		System.out.println("Sayıları girmeye başlayınız:");
+		
+		while ((val = Integer.parseInt(kb.nextLine())) != 0)
+			if (val > 0) {
+				posSum += val;
+				++posCount;
+			}
+			else {
+				negSum += val;
+				++negCount;
+			}		
+		
+		printPosStatus(posCount, posSum);
+		printNegStatus(negCount, negSum);
+	}
+}
+
+
 
 /*----------------------------------------------------------------------------------------------------------------------
 
