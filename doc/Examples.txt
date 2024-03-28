@@ -5259,14 +5259,15 @@ class NumberUtil {
  	
  	Akış do-while döngüsüne geldiğinde koşul kontrol edilmez. Bu durumda do-while döngüsüne en az bir kez girileceği
  	garanti altındadır. Yani döngünün ilk adımı kesinlikle yapılacaktır. İlk adımdan sonra koşul kontrol edilecek ve 
- 	duruma göre döngü devam edecek veya sonlanacaktır. do-while döngü deyimi while döngü deyimi kadar sık kullanılmaz.
- 	Algoritmaya göre okunabilirliği artırmak amaçlı tercih edilir. Bu döngü deyimi dikkatli kullanılmazsa okunabilirliği
- 	azaltabilir. Çünkü bir Java programcısı do-while döngü deyimi gördüğünde algoritmada ilk adımın kesinlikle yapılması 
- 	gerektiği biçiminde kodu algılar. 
+ 	duruma göre döngü devam edecek veya sonlanacaktır. do-while döngüsü while döngüsü kadar sık kullanılmaz. Algoritmaya 
+ 	göre okunabilirliği artırmak amaçlı tercih edilir. Bu döngü deyimi dikkatli kullanılmazsa okunabilirliği azaltabilir. 
+ 	Çünkü bir Java programcısı do-while döngü deyimi gördüğünde algoritmada ilk adımın kesinlikle yapılması  gerektiği 
+ 	biçiminde kodu algılar. Bu döngü deyiminde noktalı virgülün deyimi sonlandırmak için gerektiğine dikkat ediniz
 ----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
- 	Aşağıdaki örnekte do-while döngü deyimi ile sıfır sayısı için 1 değerine geri dönülmüştür
+ 	Aşağıdaki örnekte do-while döngü deyimi ile sıfır sayısı için 1 değerine geri dönülmüştür. Ayrıca kontrol yapılması
+ 	gerekmemektedir
 ----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
