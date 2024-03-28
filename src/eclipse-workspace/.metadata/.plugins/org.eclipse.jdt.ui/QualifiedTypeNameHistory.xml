@@ -9,4 +9,5 @@
     <fullyQualifiedTypeName name="csd.NumberUtil"/>
     <fullyQualifiedTypeName name="csd.NumberUtilCountDigitsTest"/>
     <fullyQualifiedTypeName name="csd.PosNegCountTotalApp"/>
+    <fullyQualifiedTypeName name="csd.NumberUtilPowTest"/>
 </qualifiedTypeNameHistroy>
