@@ -1,13 +1,32 @@
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte döngü değişkeni döngü içerisinde bildirildiğinden yanlışlıkla noktalı virgül kullanılması 
+	durumunda error oluşur 
+----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
-public class App {
+class App {
 	public static void main(String [] args) 
 	{	
-		if (a > 0)
-			if (a % 2 == 0)
-				System.out.println("Çift sayı girdiniz:");
-		else
-			System.out.println("Negatif sayı girdiniz:");
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int n = kb.nextInt();		
+		
+		for (int i = 0; i < n; ++i)
+			System.out.printf("%d ", i);
+		
+		System.out.println();
+			
+		for (int i = 0; i < n; ++i)
+			System.out.printf("%d ", i);
+		
+		System.out.println();			
+		System.out.println("Tekrar yapıyor musunuz?");
 	}
 }
 
+Yukarıdaki program için hangisi doğrudur?
+1. Derleme zamanı hatası oluşur. Nedenini açıklayınız
+2. Kod derlenir. Ekran çıktısını söyleyiniz
+3. Exception oluşur. Nedenini açıklayınız
+4. Hiç biri. Peki ne olacak?

@@ -5389,6 +5389,520 @@ class NumberUtil {
 	}
 }
 
+/*----------------------------------------------------------------------------------------------------------------------
+	28 Mart 2024
+----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+ 	for döngü deyimi: for döngü deyimi diğer döngü deyimlerini de neredeyse kapsayan bir döngü deyimidir. for döngüsü
+ 	pratikte genel olarak iterative bir biçimde karşımıza çıksa da, aslında bu iteratiflik for döngü deyiminin çalışma
+ 	biçiminden dolayı yapılabilmektedir. Bu sebeple Java programcısının for döngü deyiminin çalışma sistematiğini iyi
+ 	bilmesi tavsiye edilir. for döngüsünün genel biçimi şu şekildedir:
+ 	
+ 		for ([1.kısım]; [2.kısım]; [3.kısım])
+ 			<deyim>
+ 			
+ 	1.kısım: Akış for döngü deyimine geldiğinde yapılır. Bir daha yapılmaz
+ 	2.kısım: Koşul ifadesidir, boolean türden olmak zorundadır, akış for döngü deyimine geldiğinde 1.kısım yapıldıktan
+ 	sonra da koşul kontrol edilir yani duruma döngüye hiç girilmeyebilir.  
+ 	3.kısım: Döngünün bir adımı tamamlandığında, bir sonraki adım için koşulu kontrol etmeden önce yapılır.
+ 	
+ 	Genel biçimden de anlaşıldığı gibi kısımlar boş bırakılabilir. Kısımların boş bırakılması durumları ayrıca ele 
+ 	alınacaktır 	
+ 	
+ 	Anahtar Notlar: for döngüsünde iteratif olarak bir değişkene döngü değişkeni (loop variable) da denir. 
+ 	
+ 	for döngü deyiminin 1.kısmında değişken bildirimi ve initialization yapılabilir. Bu şekilde bildirilen döngü 
+ 	değişkeninin faaliyet alanı döngü boyuncadır. Döngüden sonra erişilemez. Bu değişken bir yerel değişken de olduğundan
+ 	aynı faaliyet alanı içerisinde aynı isimde başka bir yerel yerel değişken bildirimi geçersizdir. Programcı döngü
+ 	değişkeninin döngüden sonraki değerini kullanmayacaksa, birinci kısımda bildirmelidir. Bu durumda 1.kısımda 
+ 	bildirilmeyen bir döngü değişkeninin döngüden sonraki değerinin program içerisinde kullanıldığı algısı oluşur. Bu da
+ 	okunabilirliği artırır. 
+ 	
+ 	Anımsanacağı gibi Java'da virgül operatörü yoktur. Ancak for döngü deyiminin birinci ve üçüncü kısmında belirli
+ 	koşullar altında virgül atomu kullanılabilir. İkinci kısımda kullanılamaz. Birinci ve üçüncü kısımlarda virgül
+ 	atomu genel olarak birden fazla ifadeyi ayırmak için kullanılır. Birinci kısımda kullanılacaksa ve değişken 
+ 	bildirimi yapılacaksa başka bir ifade yazılamaz, bildirilen değişkenlerin türleri aynı olmalıdır. Üçüncü kısımda
+ 	birden fazla ifade yazılabilir.
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int n = kb.nextInt();
+		int i;
+		
+		for (i = 0; i < n; ++i)
+			System.out.printf("%d ", i);
+		
+		System.out.println();			
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int n = kb.nextInt();
+		int i;
+		
+		for (i = 0; i < n; i++)
+			System.out.printf("%d ", i);
+		
+		System.out.println();			
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int n = kb.nextInt();
+		int i;
+		
+		for (i = n - 1; i >= 0; --i)
+			System.out.printf("%d ", i);
+		
+		System.out.println();			
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int n = kb.nextInt();
+		
+		for (int i = 0; i < n; ++i)
+			System.out.printf("%d ", i);
+		
+		System.out.println();			
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int n = kb.nextInt();
+		int i;
+		
+		for (int i = 0; i < n; ++i) //error
+			System.out.printf("%d ", i);
+		
+		//...
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int n = kb.nextInt();
+		int i;
+		
+		for (i = 0; i < n; ++i)
+			System.out.printf("%d ", i);
+		
+		System.out.printf("i = %d%n", i);
+		
+		System.out.println();			
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+ 	for döngüsünde yanlışlıkla noktalı virgül kullanılması durumu
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int n = kb.nextInt();
+		int i;
+		
+		for (i = 0; i < n; ++i);
+			System.out.printf("%d ", i);
+		
+		System.out.printf("i = %d%n", i);
+		
+		System.out.println();			
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*---------------------------------------------------------------------------------------------z<-------------------------
+	Aşağıdaki örnekte döngü değişkeni döngü içerisinde bildirildiğinden yanlışlıkla noktalı virgül kullanılması 
+	durumunda error oluşur 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int n = kb.nextInt();		
+		
+		for (int i = 0; i < n; ++i);
+			System.out.printf("%d ", i); //error
+		
+		System.out.println();			
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örnekte i'nin döngüden sonraki değeri kullanılmadığından döngü içerisinde bildirimi uygundur. Anımsancağı
+	gibi farklı faaliyet alanları içerisinde aynı isimde yerel değişken bildirimleri geçerlidir 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int n = kb.nextInt();		
+		
+		for (int i = 0; i < n; ++i)
+			System.out.printf("%d ", i);
+		
+		System.out.println();
+			
+		for (int i = 0; i < n; ++i)
+			System.out.printf("%d ", i);
+		
+		System.out.println();
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örnekte birinci ve üçüncü kısımda virgül atomu kullanılmıştır 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int n = kb.nextInt();		
+		int m = kb.nextInt();
+		
+		for (int i = 0, k = m - 1; i < n && k >= 0; ++i, --k)
+			System.out.printf("(%d, %d)%n", i, k);
+	
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int n = kb.nextInt();		
+		int m = kb.nextInt();
+		
+		for (int i = 0, long k = m - 1; i < n && k >= 0; ++i, --k) //error
+			System.out.printf("(%d, %d)%n", i, k);
+	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int n = kb.nextInt();		
+		long m = kb.nextLong();
+		int i;
+		long k;		
+		
+		for (i = 0, k = m - 1; i < n && k >= 0; ++i, --k)
+			System.out.printf("(%d, %d)%n", i, k);
+	
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("İki sayı giriniz:");
+		int n = kb.nextInt();
+		int i = 0;		
+		
+		for (System.out.println("Birinci kısım:"); i < n; System.out.println("Üçüncü kısım"), ++i)
+			System.out.println("Deyim");
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örnekte klavyeden sıfır girilene kadar alınan sayıların toplamı  bulunmaktadır. for döngüsünde
+	boş deyim kullanıldığına dikkat ediniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		int total = 0;
+		int val;
+		
+		for (System.out.println("Sayıları girmeye başlayınız:"), System.out.println("Bir sayı giriniz"); 
+				(val = Integer.parseInt(kb.nextLine())) != 0; total += val, System.out.println("Bir sayı giriniz:"))
+			;
+		
+		System.out.printf("Toplam:%d%n", total);
+		
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden a ve b değeri için a'nın b-inci kuvvetini döndüren pow
+	isimli metodu NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz
+	Açıklamalar:
+	   - Math sınıfının pow metodu kullanılmayacaktır
+	   - b'nin negatif değerleri için metot 1 değerine geri dönecektir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		NumberUtilPowTest.run();		
+	}
+}
+
+class NumberUtilPowTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.println("a ve b'yi giriniz:");
+			int a = kb.nextInt();
+			int b = kb.nextInt();
+			System.out.printf("pow(%d, %d) = %d%n", a, b, NumberUtil.pow(a, b));
+			
+			if (a == 0 && b == 0)
+				return;
+		}
+		
+	}
+}
+
+class NumberUtil {
+	public static int pow(int a, int b)
+	{
+		int result = 1;
+		
+		for (int i = 0; i < b; ++i)
+			result *= a;
+		
+		return result;	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden a ve b değeri için a'nın b-inci kuvvetini döndüren pow
+	isimli metodu NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz
+	Açıklamalar:
+	   - Math sınıfının pow metodu kullanılmayacaktır
+	   - b'nin negatif değerleri için metot 1 değerine geri dönecektir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		NumberUtilPowTest.run();		
+	}
+}
+
+class NumberUtilPowTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.println("a ve b'yi giriniz:");
+			int a = kb.nextInt();
+			int b = kb.nextInt();
+			System.out.printf("pow(%d, %d) = %d%n", a, b, NumberUtil.pow(a, b));
+			
+			if (a == 0 && b == 0)
+				return;
+		}	
+	}
+}
+
+class NumberUtil {
+	public static int pow(int a, int b)
+	{
+		int result = 1;
+		
+		while (b-- > 0)
+			result *= a;
+		
+		return result;	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir sayının Armstrong sayısı olup olmadığını test eden isArmstrong
+	metodunu NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz.
+	Açıklamalar:
+		- Metot sayı Armstrong sayısı ise true, değilse false değerine geri dönecektir
+		
+		- Negatif olmayan bir sayının basamak sayısı n ise her bir basamağının n-inci kuvvetleri toplamı kendisine 
+		eşitse o sayı bir Armstrong sayısıdır. Örneğin:
+		1 * 1  * 1 + 5 * 5 * 5 + 3 * 3 * 3 = 153 olduğundan 153 bir Armstrong sayısıdır.
+		
+		 - Kuvvet işlemi için bir önceki örnekte yazılan pow metodu kullanılacaktır	 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		NumberUtilIsArmstrongTest.run();		
+	}
+}
+
+class NumberUtilIsArmstrongTest {
+	public static void run()
+	{
+		for (int n = -1; n <= 9_999_999; ++n)
+			if (NumberUtil.isArmstrong(n))
+				System.out.println(n);
+	}
+}
+
+class NumberUtil {
+	public static boolean isArmstrong(int a)
+	{
+		return a >= 0 && getDigitsPowSum(a) == a;
+	}
+	
+	public static int getDigitsPowSum(int a)
+	{
+		int result = 0;
+		int n = countDigits(a);
+		
+		while (a != 0) {
+			result += pow(a % 10, n);
+			a /= 10;
+		}
+		
+		return result;
+	}
+	
+	public static int countDigits(int a)
+	{
+		int count = 0;
+		
+		do {
+			++count;
+			a /= 10;
+		} while (a != 0);		
+		
+		return count;			
+	}
+	
+	public static int pow(int a, int b)
+	{
+		int result = 1;
+		
+		while (b-- > 0)
+			result *= a;
+		
+		return result;	
+	}
+}
+
 
 
 /*----------------------------------------------------------------------------------------------------------------------
