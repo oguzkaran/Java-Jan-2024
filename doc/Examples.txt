@@ -666,7 +666,7 @@ class Mample {
 /*---------------------------------------------------------------------------------------------------------------------------------------------------
 	Sabit noktalı formatların dinamik olmaması nedeniyle kayan noktalşı formatlar geliştirilmiştir. Bu formatlarda noktanın yeri sabit değildir. 
 	Noktanın yeri format içerisinde ayrıca tutulmaktadır. Noktalı sayının noktası yokmuş gibi ifade edilmesi durumunda sayının bu haline "mantis (mantissa)" 
-	denilmektedir. İşte kayan formatlarda sayı için ayrılan alanın bir bölümünde manris bir bölümünde de "noktanın yeri" tutulmaktadır. Noktanın yerini belirleyen
+	denilmektedir. İşte kayan formatlarda sayı için ayrılan alanın bir bölümünde mantis bir bölümünde de "noktanın yeri" tutulmaktadır. Noktanın yerini belirleyen
 	kısma "üstel kısım (exponential part)" denilmektedir. Tabii bir de sayının başında işaret biti bulunur. Bu durumda kayan noktalı bir sayının format aşağıdakine benzerdir:
 
 	[işaret biti] [mantis] [noktanın yeri (exponential)]
@@ -6118,7 +6118,7 @@ class NumberUtil {
 		if (a <= 1)
 			return false;		
 		
-		for (long i = 2; i < a / 2; ++i)
+		for (long i = 2; i <= a / 2; ++i)
 			if (a % i == 0)
 				return false;
 		
@@ -6130,7 +6130,7 @@ class NumberUtil {
 	Sınıf Çalışması: Parametresi ile aldığı long türden bir sayının asal olup olmadığını test eden isPrime isimli
 	metodu NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz
 	
-	Kural: Bir sayı karekökünden küçük olan hiç bir asal sayıya tam olarak bölünemiyorsa asaldır.
+	Kural: Bir sayı, karekökünden küçük olan hiç bir asal sayıya tam olarak bölünemiyorsa asaldır.
 	
 	(Hızlı versiyon)
 ----------------------------------------------------------------------------------------------------------------------*/
@@ -6185,6 +6185,97 @@ class NumberUtil {
 	}
 }
 
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki manuel ve basit bir test ile metotlar karşılaştırılmıştır. Henüz daha görmediğimizden herhangi bir test 
+	aracı kullanılmamıştır. Kodlar durumu göstermek için yazılmıştır
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		NumberUtilIsPrimeTest.run();	
+	}
+}
+
+class NumberUtilIsPrimeTest {
+	public static void run()
+	{		
+		System.out.println(NumberUtil.isPrime(1_000_003));
+		System.out.println(NumberUtil.isPrimeSlow(1_000_003));
+	}
+}
+
+class NumberUtil {
+	public static boolean isPrime(long a)
+	{
+		if (a <= 1)
+			return false;		
+		
+		if (a % 2 == 0)
+			return a == 2;
+		
+		if (a % 3 == 0)
+			return a == 3;
+		
+		if (a % 5 == 0)
+			return a == 5;
+		
+		if (a % 7 == 0)
+			return a == 7;
+		
+		int count = 0;
+				
+		for (long i = 11; i * i <= a; i += 2) {
+			++count;
+			if (a % i == 0)
+				return false;
+		}
+		
+		System.out.printf("isPrime -> count:%d%n", count);
+		
+		return true;
+	}
+	
+	public static boolean isPrimeSlow(long a)
+	{
+		if (a <= 1)
+			return false;	
+		
+		int count = 0;
+		
+		for (long i = 2; i <= a / 2; ++i) {
+			++count;
+			if (a % i == 0)
+				return false;
+		}
+		
+		System.out.printf("isPrimeSlow -> count:%d%n", count);
+		
+		return true;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki çok büyük asal sayıları test için kullanabilirsiniz:
+	6750161072220585911
+	1603318868174368979
+	6584583408148485263
+	6245098347044246839
+	6285871677077738093
+	5697859706174583067
+	710584055392819667
+	4935060337471977161
+	3728803592870153407
+	4331452335614730577
+	1386437196678024971
+	1677990107453991593
+	4765603950744460867
+	4498306523077899307
+	4434895834573449257
+-----------------------------------------------------------------------------------------------------------------------*/
 
 
 

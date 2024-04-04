@@ -1,10 +1,6 @@
 /*----------------------------------------------------------------------------------------------------------------------
-	Sınıf Çalışması: Parametresi ile aldığı long türden bir sayının asal olup olmadığını test eden isPrime isimli
-	metodu NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz
-	
-	Kural: Bir sayı karekökünden küçük olan hiç bir asal sayıya tam olarak bölünemiyorsa asaldır.
-	
-	(Hızlı versiyon)
+	Aşağıdaki manuel ve basit bir test ile metotlar karşılaştırılmıştır. Henüz daha görmediğimizden herhangi bir test 
+	aracı kullanılmamıştır. Kodlar durumu göstermek için yazılmıştır
 ----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -17,17 +13,8 @@ class App {
 
 class NumberUtilIsPrimeTest {
 	public static void run()
-	{
-		java.util.Scanner kb = new java.util.Scanner(System.in);
-		
-		System.out.print("Bir sayı giriniz:");
-		int n = kb.nextInt();
-		
-		for (int i = 0; i <= n; ++i)
-			if (NumberUtil.isPrime(i))
-				System.out.println(i);		
-		
-		System.out.println(NumberUtil.isPrime(1_000_003));
+	{		
+		System.out.println(NumberUtil.isPrime(6750161072220585911L));	
 	}
 }
 
@@ -56,4 +43,3 @@ class NumberUtil {
 		return true;
 	}
 }
-
