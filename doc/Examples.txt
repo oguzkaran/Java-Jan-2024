@@ -5903,6 +5903,289 @@ class NumberUtil {
 	}
 }
 
+/*----------------------------------------------------------------------------------------------------------------------
+	4 Nisan 2024
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden n değerinin faktoriyel değerine geri dönen factorial isimli
+	metodu NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz.
+	Açıklamalar:
+		- Faktoriyel işlemi aşağıdaki şekilde betimlenebilir:
+			0! = 1
+			1! = 1
+			2! = 1 * 2
+			
+			...
+			n! = 1 * 2 * ... * (n - 1) * n
+		- Metot negatif sayılar için 1 değerine geri dönecektir.
+		
+		- Faktoriyel fonksiyonu Matematik'te bilindik en çabuk büyüyen fonksiyondur. Bu sebeple belli bir n değerinden
+		sonra hemen taşma olacaktır. Metot bunu kontrol etmeyecektir. Yani bu durum metodu çağıran programcının sorumluluğuna
+		bırakılacaktır.
+		
+		- Metot recursion kullanılarak çözülmeyecektir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		NumberUtilFactorialTest.run();					
+	}
+}
+
+class NumberUtilFactorialTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int n = kb.nextInt();
+		
+		for (int i = 0; i <= n; ++i)
+			System.out.printf("%d! = %d%n", i, NumberUtil.factorial(i));
+	}
+}
+
+class NumberUtil {
+	public static int factorial(int n)
+	{
+		int result = 1;
+		
+		for (int i = 2; i <= n; ++i)
+			result *= i; 
+		
+		return result;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	for döngü deyiminin birinci kısmının boş bırakılması durumunda akış for döngü deyimine geldiğinde doğrudan koşul
+	kontrolü yapılacaktır. Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int n = kb.nextInt();
+		int i = 0;
+		
+		for (; i < n; ++i)
+			System.out.printf("%d ", i);
+		
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	for döngü deyiminin üçüncü kısmının boş bırakılması durumunda döngünün bir adımı tamamlandığında bir sonraki adım için
+	doğrudan koşul kontrolü yapılır. Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int n = kb.nextInt();
+		
+		for (int i = 0; i < n; ) {
+			System.out.printf("%d ", i);
+			++i;
+		}
+		
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	for döngü deyiminin  birinci ve üçüncü kısmı boş bırakıldığında while döngüsü ile eşdeğer bir döngü yazılmış
+	olur. Şüphesiz bu durumda while döngüsü daha okunabilirdir. Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int n = kb.nextInt();		
+		int i = 0;
+		
+		for (; i < n; ) { //while (i < n)
+			System.out.printf("%d ", i);
+			++i;
+		}
+		
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	for döngü deyiminin ikinci kısmı boş bırakıldığında koşul hep sağlanır anlamındadır. Yani true yazmakla eşdeğerdir. Bu
+	durumda sonsuz döngü oluşur. Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		for (int i = 0; ; ++i)
+			System.out.println(i);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	for döngü deyimi ile sonsuz döngü oluşturmak için ikinci kısmın boş bırakılması yeterli olsa da programcılar 
+	okunabilirlik açısından her üç bölümü de boş bırakmayı bir kalıp olarak tercih ederler
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		for (;;) { //while (true)
+			//...
+		}
+			
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int n = kb.nextInt();
+		
+		for (int i = 0; i < n; i += 2)
+			System.out.printf("%d ", i);
+		
+		System.out.println();			
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı long türden bir sayının asal olup olmadığını test eden isPrime isimli
+	metodu NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz
+	(Yavaş versiyon)
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		NumberUtilIsPrimeTest.run();	
+	}
+}
+
+class NumberUtilIsPrimeTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int n = kb.nextInt();
+		
+		for (int i = 0; i <= n; ++i)
+			if (NumberUtil.isPrime(i))
+				System.out.println(i);		
+		
+		System.out.println(NumberUtil.isPrime(1_000_003));
+	}
+}
+
+
+class NumberUtil {
+	public static boolean isPrime(long a)
+	{
+		if (a <= 1)
+			return false;		
+		
+		for (long i = 2; i < a / 2; ++i)
+			if (a % i == 0)
+				return false;
+		
+		return true;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı long türden bir sayının asal olup olmadığını test eden isPrime isimli
+	metodu NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz
+	
+	Kural: Bir sayı karekökünden küçük olan hiç bir asal sayıya tam olarak bölünemiyorsa asaldır.
+	
+	(Hızlı versiyon)
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		NumberUtilIsPrimeTest.run();	
+	}
+}
+
+class NumberUtilIsPrimeTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int n = kb.nextInt();
+		
+		for (int i = 0; i <= n; ++i)
+			if (NumberUtil.isPrime(i))
+				System.out.println(i);		
+		
+		System.out.println(NumberUtil.isPrime(1_000_003));
+	}
+}
+
+class NumberUtil {
+	public static boolean isPrime(long a)
+	{
+		if (a <= 1)
+			return false;		
+		
+		if (a % 2 == 0)
+			return a == 2;
+		
+		if (a % 3 == 0)
+			return a == 3;
+		
+		if (a % 5 == 0)
+			return a == 5;
+		
+		if (a % 7 == 0)
+			return a == 7;
+
+		for (long i = 11; i * i <= a; i += 2)
+			if (a % i == 0)
+				return false;
+		
+		return true;
+	}
+}
+
+
 
 
 /*----------------------------------------------------------------------------------------------------------------------
