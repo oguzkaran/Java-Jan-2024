@@ -6277,6 +6277,282 @@ class NumberUtil {
 	4434895834573449257
 -----------------------------------------------------------------------------------------------------------------------*/
 
+/*----------------------------------------------------------------------------------------------------------------------
+	16 Nisan 2024
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden n değeri için n-inci asal sayıyı döndüren nthPrime metodunu
+	NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz.
+	Açıklamalar: 
+		- isPrime metodunun hızlı versiyonu kullanılacaktır.
+		- n değerinin pozitif olup olmadığı metot içerisinde kontrol edilmeyecektir.
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		NumberUtilNthPrimeTest.run();			
+	}
+}
+
+class NumberUtilNthPrimeTest {
+	public static void run()
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Bir sayı giriniz:");
+			int n = Integer.parseInt(kb.nextLine());
+			
+			if (n <= 0)
+				return; 
+			
+			System.out.printf("%d. asal sayı:%d%n", n, NumberUtil.nthPrime(n));
+			
+		}
+	}
+}
+
+class NumberUtil {
+	public static long nthPrime(int n)
+	{
+		long result = 2;
+		int count = 0;
+		
+		for (long i = 2; count < n; ++i)
+			if (isPrime(i)) {
+				++count;
+				result = i;
+			}
+		
+		return result;		
+	}
+	
+	public static boolean isPrime(long a)
+	{
+		if (a <= 1)
+			return false;		
+		
+		if (a % 2 == 0)
+			return a == 2;
+		
+		if (a % 3 == 0)
+			return a == 3;
+		
+		if (a % 5 == 0)
+			return a == 5;
+		
+		if (a % 7 == 0)
+			return a == 7;
+
+		for (long i = 11; i * i <= a; i += 2)
+			if (a % i == 0)
+				return false;
+		
+		return true;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı long türden bir sayıdan büyük ilk asal sayıyı döndüren nextClosestPrime
+	metodunu yazınız ve aşağıdaki kod ile test ediniz
+	Açıklamalar:
+		- isPrime metodunun hızlı versiyonu kullanılacaktır.
+		- Metot taşma durumlarını kontrol etmeyecektir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		NumberUtilNextClosestPrimeTest.run();			
+	}
+}
+
+class NumberUtilNextClosestPrimeTest {
+	public static void run()
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Bir sayı giriniz:");
+			long a = Long.parseLong(kb.nextLine());
+			
+			System.out.printf("%d sayısından büyük ilk asal sayı:%d%n", a, NumberUtil.nextClosestPrime(a));
+			
+			if (a == 0)
+				return;
+			
+		}
+	}
+}
+
+class NumberUtil {
+	public static long nextClosestPrime(long a)
+	{
+		if (a < 2)
+			return 2;
+		
+		while (!isPrime(++a))
+			;
+		
+		return a;		
+	}
+	
+	public static boolean isPrime(long a)
+	{
+		if (a <= 1)
+			return false;		
+		
+		if (a % 2 == 0)
+			return a == 2;
+		
+		if (a % 3 == 0)
+			return a == 3;
+		
+		if (a % 5 == 0)
+			return a == 5;
+		
+		if (a % 7 == 0)
+			return a == 7;
+
+		for (long i = 11; i * i <= a; i += 2)
+			if (a % i == 0)
+				return false;
+		
+		return true;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı long türden bir sayıdan büyük ilk asal sayıyı döndüren nextClosestPrime
+	metodunu yazınız ve aşağıdaki kod ile test ediniz
+	Açıklamalar:
+		- isPrime metodunun hızlı versiyonu kullanılacaktır.
+		- Metot taşma durumlarını kontrol etmeyecektir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		NumberUtilNextClosestPrimeTest.run();			
+	}
+}
+
+class NumberUtilNextClosestPrimeTest {
+	public static void run()
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Bir sayı giriniz:");
+			long a = Long.parseLong(kb.nextLine());
+			
+			System.out.printf("%d sayısından büyük ilk asal sayı:%d%n", a, NumberUtil.nextClosestPrime(a));
+			
+			if (a == 0)
+				return;
+		}
+	}
+}
+
+class NumberUtil {
+	public static long nextClosestPrime(long a)
+	{
+		if (a < 2)
+			return 2;
+		
+		long i = a + 1;
+		
+		for (; !isPrime(i); ++i)
+			;
+		
+		return i;				
+	}
+	
+	public static boolean isPrime(long a)
+	{
+		if (a <= 1)
+			return false;		
+		
+		if (a % 2 == 0)
+			return a == 2;
+		
+		if (a % 3 == 0)
+			return a == 3;
+		
+		if (a % 5 == 0)
+			return a == 5;
+		
+		if (a % 7 == 0)
+			return a == 7;
+
+		for (long i = 11; i * i <= a; i += 2)
+			if (a % i == 0)
+				return false;
+		
+		return true;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir döngünün deyimi başka bir döngü deyimi ise bu durumda içiçe döngü yazılmış olur. İçiçe döngüler tipik olarak
+	içiçe iki döngü, içiçe 3 döngü biçiminde karşımıza çıkar. İçiçe 3'den fazla döngü çok özel durumlar dışında karşımıza
+	çıkmaz. Bazı durumlarda programcı döngü içerisinde çağırdığı bir metot da döngüye girdiğinden dolayı olarak içiçe döngü
+	yazmış olur. 
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);	
+		
+		System.out.print("İki sayı giriniz:");
+		int m = kb.nextInt();
+		int n = kb.nextInt();
+		
+		for (int i = 0; i < m; ++i)
+			for (int k = n - 1; k >= 0; --k)
+				System.out.printf("(%d, %d)%n", i, k);	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örnekte programcı doWork metodunu döngü içerisinde çağırdığından dolaylı olarak içiçe döngü yazmış olur 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);	
+		
+		System.out.print("İki sayı giriniz:");
+		int m = kb.nextInt();
+		int n = kb.nextInt();
+		
+		for (int i = 0; i < m; ++i)
+			Sample.doWork(i, n);	
+	}
+}
+
+class Sample {
+	public static void doWork(int i, int n)
+	{
+		for (int k = n - 1; k >= 0; --k)
+			System.out.printf("(%d, %d)%n", i, k);
+	}
+}
+
 
 
 /*----------------------------------------------------------------------------------------------------------------------
