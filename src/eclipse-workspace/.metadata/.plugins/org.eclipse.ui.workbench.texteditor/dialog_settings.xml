@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="Sayı nokta"/>
+		<item key="selection" value="isArmstrong"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="isArmstrong"/>
+			<item value="Klavyeden int "/>
 			<item value="sayı nokta"/>
 			<item value="isEven"/>
 			<item value="storage"/>
@@ -21,8 +23,6 @@
 			<item value="Sınıf"/>
 			<item value="metot bildi"/>
 			<item value="expre"/>
-			<item value="ifade"/>
-			<item value="expression"/>
 		</list>
 		<list key="replacehistory">
 		</list>

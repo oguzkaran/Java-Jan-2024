@@ -6553,6 +6553,227 @@ class Sample {
 	}
 }
 
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örnekte 3 basamaklı Armstrong sayıları içiçe döngü kullanılarak bulunmuştur  
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		for (int a = 1; a <= 9; ++a)
+			for (int b = 0; b <= 9; ++b)
+				for (int c = 0; c <= 9; ++c)
+					if (100 * a + 10 * b + c == a * a * a + b * b * b + c * c * c)
+						System.out.printf("%d%d%d%n", a, b, c);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	break deyimi: break deyimi döngü deyimlerinde ve switch deyiminde kullanılabilen bir kontrol deyimidir. break deyimi
+	döngüde kullanıldığında döngüyü sonlandırır. break deyiminin genel biçimi şu şekildedir:
+	
+	  break [etiket (label) ismi];
+	
+	break deyiminin etiketsiz kullanımda akış ilgili döngüden sonrasından devam eder. Yani döngü sonlanmış olur. break 
+	deyiminin döngü deyimi ve switch deyimi dışında kullanımı error oluşturur.  break deyimi hangi döngü deyimi içerisinde
+	kullanılmışsa o döngü deyimini sonlandırır. break deyimi algoritmaya göre her durumda kullanılabileceği gibi tipik
+	olarak sonsuz döngü içerisinde de kullanılabilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı long türden bir sayıdan büyük ilk asal sayıyı döndüren nextClosestPrime
+	metodunu yazınız ve aşağıdaki kod ile test ediniz
+	Açıklamalar:
+		- isPrime metodunun hızlı versiyonu kullanılacaktır.
+		- Metot taşma durumlarını kontrol etmeyecektir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		NumberUtilNextClosestPrimeTest.run();			
+	}
+}
+
+class NumberUtilNextClosestPrimeTest {
+	public static void run()
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Bir sayı giriniz:");
+			long a = Long.parseLong(kb.nextLine());
+			
+			if (a == 0)
+				break;
+			
+			System.out.printf("%d sayısından büyük ilk asal sayı:%d%n", a, NumberUtil.nextClosestPrime(a));					
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class NumberUtil {
+	public static long nextClosestPrime(long a)
+	{
+		if (a < 2)
+			return 2;
+		
+		while (!isPrime(++a))
+			;
+		
+		return a;		
+	}
+	
+	public static boolean isPrime(long a)
+	{
+		if (a <= 1)
+			return false;		
+		
+		if (a % 2 == 0)
+			return a == 2;
+		
+		if (a % 3 == 0)
+			return a == 3;
+		
+		if (a % 5 == 0)
+			return a == 5;
+		
+		if (a % 7 == 0)
+			return a == 7;
+
+		for (long i = 11; i * i <= a; i += 2)
+			if (a % i == 0)
+				return false;
+		
+		return true;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örnekte içteki döngüde bir koşul sağlandığında dıştaki döngü de sonlandırılmıştır. Bunun bayrak (flag)
+	değişken kullanılarak yapıldığına dikkat ediniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		boolean exitFlag = false;
+		
+		for (int i = 0; i < 20; ++i) {
+			for (int k = 40; k >= 0; --k) {
+				System.out.printf("(%d, %d)%n", i, k);
+				if ((i + k) % 6 == 0) {
+					exitFlag = true;
+					break;
+				}
+			}
+			
+			if (exitFlag)
+				break;
+		}
+				
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	break deyiminin etiketli (labeled break) yazılan etiket isminin bildirilmiş olduğu döngü deyimi sonlandırılır. Etiket
+	bildiriminin genel biçimi şu şekildedir:
+	
+		<etiket ismi>:
+		
+	Etiket ismi değişken isimlendirme kurallarına uygun herhangi bir isim olabilir ancak bir convention olarak isimlendirmede
+	tamamen büyük harfler kullanılır ve birden fazla kelime için alttire karakteri kullanılır. Etiket isimleri tipik olarak
+	döngü deyimlerinde ve switch deyiminde bildirilebilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örnekte içteki döngüde bir koşul sağlandığında dıştaki döngü de sonlandırılmıştır. Bunun etiketli
+	break deyimi kullanılarak yapıldığına dikkat ediniz 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		EXIT_LOOP:
+		for (int i = 0; i < 20; ++i)
+			for (int k = 40; k >= 0; --k) {
+				System.out.printf("(%d, %d)%n", i, k);
+				if ((i + k) % 6 == 0) 
+					break EXIT_LOOP;
+			}
+				
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden pozitif bir n değeri için n-inci Fibonacci sayısını döndüren 
+	fibonacciNumber isimli metodu yazınız ve aşağıdaki kod ile test ediniz.
+	
+	Açıklamalar:
+	 	- 0 1 1 2 3 5 8 13 21 ... serisinin sayılarına Fibonacci sayıları denir
+	 	- Metot pozitif olmayan n değeri için kontrol yapmayacaktır
+	 	- Metot recursive yazılmayacaktır	 	
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		NumberUtilFibonacciNumberTest.run();
+	}
+}
+
+class NumberUtilFibonacciNumberTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Bir sayı giriniz:");
+			int n = Integer.parseInt(kb.nextLine());
+			
+			if (n <= 0)
+				break;
+			
+			System.out.printf("%d. Fibonacci sayısı:%d%n", n, NumberUtil.fibonacciNumber(n));
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class NumberUtil {
+	public static int fibonacciNumber(int n)
+	{
+		if (n <= 2)
+			return n - 1;
+		
+		int prev1 = 1, prev2 = 0, result = prev1 + prev2;
+		
+		for (int i = 3; i < n; ++i) {
+			prev2 = prev1;
+			prev1 = result;
+			result = prev1 + prev2;
+		}
+		
+		return result;		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden sayıdan büyük ilk Fibonacci sayısını döndüren nextFibonacciNumber
+	isimli metodu NumberUtil sınıfı içerisinde yazınız ve test ediniz	 	
+----------------------------------------------------------------------------------------------------------------------*/
+
 
 
 /*----------------------------------------------------------------------------------------------------------------------

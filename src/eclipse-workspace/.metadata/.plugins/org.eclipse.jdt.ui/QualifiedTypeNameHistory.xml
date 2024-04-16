@@ -2,7 +2,6 @@
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="csd.Sample"/>
     <fullyQualifiedTypeName name="csd.Mample"/>
-    <fullyQualifiedTypeName name="java.util.Scanner"/>
     <fullyQualifiedTypeName name="csd.PointUtilDistanceTest"/>
     <fullyQualifiedTypeName name="csd.QuadraticEquationSolverApp"/>
     <fullyQualifiedTypeName name="csd.EquationSolver"/>
@@ -10,4 +9,5 @@
     <fullyQualifiedTypeName name="csd.NumberUtilCountDigitsTest"/>
     <fullyQualifiedTypeName name="csd.PosNegCountTotalApp"/>
     <fullyQualifiedTypeName name="csd.NumberUtilPowTest"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
 </qualifiedTypeNameHistroy>
