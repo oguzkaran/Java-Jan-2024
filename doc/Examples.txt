@@ -1304,10 +1304,10 @@ class App {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
-	İfade (expression): Sabitlerden, operatörlerden ve değişkenlerden oluşan herhangi bir kombinasyona ifade denir. Bir
-	ifade yalnızca sabitlerden ve operatörlerden oluşuyorsa bu ifadeye "constant expression" denir. Bir değişken veya sabit
-	tek başına ifadedir. Ancak bir operatör tek başına bir ifade olamaz. Her ifadenin bir türü vardır. Bunun bir tane 
-	istisnası vardır, ileride ele alınacaktır
+	İfade (expression): Sabitlerden, operatörlerden ve değişkenlerden oluşan herhangi bir kombinasyona ifade denir.Bir
+	ifade yalnızca sabitlerden ve operatörlerden oluşuyorsa bu ifadeye "sabit ifadesi (constant expression)" denir. Bir 
+	değişken veya sabit tek başına ifadedir. Ancak bir operatör tek başına bir ifade olamaz. Her ifadenin bir türü vardır.
+	Bunun bir tane istisnası vardır, ileride ele alınacaktır
 ----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
 	Bir metodun geri dönüş değeri bilgisi yerine bir tür ismi yazılırsa, bu metodun geri dönüş değeri (return value)"
@@ -7116,6 +7116,317 @@ class DemoMenuApp {
 			printMenu();
 			doOption(Integer.parseInt(kb.nextLine()));			
 		}
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	switch deyimi: switch deyimi sonlu ve sabit sayıda seçenek için okunabilirliği artırmak amaçlı kullanılan bir 
+	kontrol deyimidir. switch deyimi belirli koşullar altında if deyimi yerine kullanılabilir. Yani bu anlamda belirli
+	koşullar altında if deyimi gibi çalışır. switch deyimine Java 12 ile birlikte (ilerleyen bazı sürümlerde de) eklentiler
+	yapılmıştır. Hatta bu anlamda "switch expression" de dile eklenmiştir. switch expression ve switch deyimine ilişkin
+	eklentiler ileride ele alınacaktır.
+	 
+	switch deyiminin genel biçimi şu şekildedir:
+	
+	 switch (<ifade>) {	
+	 	case <sabit ifadesi-1>:
+	 		<deyim>
+	 	case <sabit ifadesi-2>:
+	 		<deyim>
+	 	...
+	 	
+	 	[
+	 	default:
+	 		<deyim>
+	 	]
+	 }
+	
+	switch parantezi içerisindeki ifadenin tam sayı türünden (int, long, short, byte) VEYA char türden VEYA String türünden
+	VEYA enum class türünden olması zorunludur. Bunlar dışında bir türden olması durumunda error oluşur. Bir case bölümüne
+	ilişkin ifadenin ilgili türden sabit ifadesi olması zorunludur. switch deyiminde default anahtar sözcüğü ile default
+	bölümü (default case) olabilir. default bölümü sentaks olarak zorunlu değildir. switch deyimi aslında if deyiminin
+	özel bir hali olarak düşünülebilir. Yukarıdaki genel biçime ilişkin if deyimi şu şekilde yazılabilir:
+	
+		if (<ifade> == <sabit ifadesi-1>
+			<deyim>
+		else if (<ifade> == <sabit ifadesi-2>
+			<deyim>
+		...
+		[
+		else
+			<deyim>
+		]
+	  
+	Dikkat edilirse else kısmı aslında default kısım anlamındadır. switch deyiminin genel biçiminin, if deyimi karşılığı
+	yaklaşık olarak yazılmıştır. 
+	
+	Anahtar Notlar: Dikkat edilirse switch deyiminde eşitlik karşılaştırması yapılmaktadır. String türü için eşitlik
+	karşılaştırması == operatörü ile yapılmaz. Bu durum ileride anlaşılacaktır 
+	
+	Anahtar Notlar: String ve enum class kavramları ileride ele alınacaktır
+	
+	switch deyiminde "aşağı düşme (fall through)" özelliği vardır. Bir case bölümünde (veya default case'de) yazılan
+	deyimlerin sonunda bir sonraki bölüme geçişi engelleyen bir deyim yazılmamışsa bu özellikten dolayı ilgili bölüm de
+	çalıştırılır. Buna aşağı düşme denir. Aşağı düşme çeşitli deyimlerle engellenebilir. Tipik olarak break deyimi
+	switch deyimini sonlandırmak için kullanıldığından aşağı düşme engellenmiş olur. Aşağı düşme algoritmaya göre 
+	return deyimi, continue deyimi ve sonsuz döngü gibi deyimlerle de engellenebilir. Ancak en çok break deyimi kullanılır.  
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örnekte break deyiminin kullanıldığına dikkat ediniz. Neden kullanıldığı ileride ele alınacaktır.
+	Örnekteki switch deyiminin if deyimi karşılığı şu şekildedir:
+		if (plate == 34)
+			System.out.println("İstanbul");
+		else if (plate == 35)
+			System.out.println("İzmir");
+		else if (plate == 6)
+			System.out.println("Ankara");
+		else if (plate == 67)
+			System.out.println("Zonguldak");
+		else
+			System.out.println("Geçersiz plaka değeri!...");
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Plaka numarasını giriniz:");
+		int plate = kb.nextInt();
+		
+		switch (plate) {
+		case 34:
+			System.out.println("İstanbul");
+			break;
+		case 35:
+			System.out.println("İzmir");
+			break;
+		case 6:
+			System.out.println("Ankara");
+			break;
+		case 67:
+			System.out.println("Zonguldak");
+			break;
+		default:
+			System.out.println("Geçersiz plaka değeri!...");
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	switch deyiminde default case yoksa bu durumda hiç bir case bölümü için koşul sağlanmadığında akış switch deyiminden
+	sonraki deyimden devam eder.Örnekteki switch deyiminin if deyimi karşılığı şu şekildedir:
+		if (plate == 34)
+			System.out.println("İstanbul");
+		else if (plate == 35)
+			System.out.println("İzmir");
+		else if (plate == 6)
+			System.out.println("Ankara");
+		else if (plate == 67)
+			System.out.println("Zonguldak");		
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Plaka numarasını giriniz:");
+		int plate = kb.nextInt();
+		
+		switch (plate) {
+		case 34:
+			System.out.println("İstanbul");
+			break;
+		case 35:
+			System.out.println("İzmir");
+			break;
+		case 6:
+			System.out.println("Ankara");
+			break;
+		case 67:
+			System.out.println("Zonguldak");
+			break;		
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	switch deyiminde default case istenilen yere yazılabilir. Nereye yazılırsa yazılsın yine default case'dir. Şüphesiz
+	okunabilirlik/algılanabilirlik açısından tüm case bölümlerinden sonra yazılması tavsiye edilir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Plaka numarasını giriniz:");
+		int plate = kb.nextInt();
+		
+		switch (plate) {
+		default:
+			System.out.println("Geçersiz plaka değeri!...");
+			break;
+		case 34:
+			System.out.println("İstanbul");
+			break;
+		case 35:
+			System.out.println("İzmir");
+			break;
+		case 6:
+			System.out.println("Ankara");
+			break;
+		case 67:
+			System.out.println("Zonguldak");
+			break;		
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte plate double türden olduğundan error oluşur
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Plaka numarasını giriniz:");
+		double plate = kb.nextDouble();
+		
+		switch (plate) {
+		case 34:
+			System.out.println("İstanbul");
+			break;
+		case 35:
+			System.out.println("İzmir");
+			break;
+		case 6:
+			System.out.println("Ankara");
+			break;
+		case 67:
+			System.out.println("Zonguldak");
+			break;		
+		default:
+			System.out.println("Geçersiz plaka değeri!...");
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte case bölümüne ilişkin ifade sabit ifadesi olmadığından error oluşur
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Plaka numarasını giriniz:");
+		int plate = kb.nextInt();
+		
+		int val = 34;
+		
+		switch (plate) {
+		case val: //error
+			System.out.println("İstanbul");
+			break;
+		case 35:
+			System.out.println("İzmir");
+			break;
+		case 6:
+			System.out.println("Ankara");
+			break;
+		case 67:
+			System.out.println("Zonguldak");
+			break;		
+		default:
+			System.out.println("Geçersiz plaka değeri!...");
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örnekte switch deyiminin aşağı düşme özelliğinden yararlanılmıştır
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Telefon kodunu giriniz:");
+		int code = kb.nextInt();	
+	
+		switch (code) {
+		case 212:			
+		case 216:
+			System.out.println("İstanbul");
+			break;
+		case 232:
+			System.out.println("İzmir");
+			break;
+		case 312:
+			System.out.println("Ankara");
+			break;
+		case 372:
+			System.out.println("Zonguldak");
+			break;		
+		default:
+			System.out.println("Geçersiz telefon kodu!...");
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örnekte switch deyiminin aşağı düşme özelliğinden yararlanılmıştır
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Telefon kodunu giriniz:");
+		int code = kb.nextInt();	
+	
+		switch (code) {
+		case 212:
+			System.out.print("Avrupa ");			
+		case 216:
+			System.out.println("İstanbul");
+			break;
+		case 232:
+			System.out.println("İzmir");
+			break;
+		case 312:
+			System.out.println("Ankara");
+			break;
+		case 372:
+			System.out.println("Zonguldak");
+			break;	
+		default:
+			System.out.println("Geçersiz telefon kodu!...");
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
 	}
 }
 
