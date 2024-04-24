@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;csd.Sample&apos; to &apos;App&apos;&#x0D;&#x0A;- Original project: &apos;Sample&apos;&#x0D;&#x0A;- Original element: &apos;csd.Sample&apos;&#x0D;&#x0A;- Renamed element: &apos;csd.App&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Sample&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;csd{Sample.java[Sample" matchStrategy="1" name="App" qualified="false" references="true" similarDeclarations="false" stamp="1708015249586" textual="false" version="1.0"/>
+</session>
