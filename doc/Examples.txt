@@ -7170,7 +7170,7 @@ class DemoMenuApp {
 	deyimlerin sonunda bir sonraki bölüme geçişi engelleyen bir deyim yazılmamışsa bu özellikten dolayı ilgili bölüm de
 	çalıştırılır. Buna aşağı düşme denir. Aşağı düşme çeşitli deyimlerle engellenebilir. Tipik olarak break deyimi
 	switch deyimini sonlandırmak için kullanıldığından aşağı düşme engellenmiş olur. Aşağı düşme algoritmaya göre 
-	return deyimi, continue deyimi ve sonsuz döngü gibi deyimlerle de engellenebilir. Ancak en çok break deyimi kullanılır.  
+	return deyimi, continue deyimi ve sonsuz döngü gibi deyimlerle de engellenebilir. Ancak en çok break deyimi kullanılır. 
 ----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
@@ -7427,6 +7427,230 @@ class App {
 		}
 		
 		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	25 Nisan 2024
+----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: switxh deyiminde case bölümlerinin (dolayısıyla default bölümün) çok uzun deyimlerle doldurulmaması
+	tavsiye edilir. Tipik olarak switch deyimine bakıldığında case bölümleri kolaylıkla okunabilir olmalıdır. Bu anlamda
+	case bölümlerinin uzun kodlar olması durumunda ilgili bölümler için metotlar yazılıp çağrılması tavsiye edilir. Ayrıca
+	çok fazla sabit değeri olması durumunda switch deyimi okunabilirliği/algılanabilirliği olumsuz etkileyebilir. Hatta
+	böyle bir durumda if deyimi bile okunabilirliği/algılanabilirliği olumsuz etkileyebilir. Bu tip durumlarda izlenebilecek
+	yöntemler zamanla anlaşılacktır
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+	Not: İleride daha iyisi yazılacaktır
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		DemoMenuApp.run();
+	}
+}
+
+class DemoMenuApp {
+	public static void printMenu()
+	{
+		System.out.println("1.Ekle");
+		System.out.println("2.Sil");
+		System.out.println("3.Güncelle");
+		System.out.println("4.Listele");
+		System.out.println("5.Çıkış");
+		System.out.print("Seçenek:");
+	}
+	
+	public static void printGoodbyeMessage()
+	{
+		System.out.println("-------------------------------------------");
+		System.out.println("C ve Sistem Programcıları Derneği");
+		System.out.println("Teşekkürler");
+		System.out.println("-------------------------------------------");
+	}
+	
+	public static void printInvalidOptionMessage()
+	{
+		System.out.println("-------------------------------------------");
+		System.out.println("Geçersiz seçenek!...");
+		System.out.println("-------------------------------------------");
+	}
+	
+	public static void insert()
+	{
+		System.out.println("-------------------------------------------");
+		System.out.println("Ekle seçildi");
+		System.out.println("-------------------------------------------");
+	}
+	
+	public static void delete()
+	{
+		System.out.println("-------------------------------------------");
+		System.out.println("Sil seçildi");
+		System.out.println("-------------------------------------------");
+	}
+	
+	public static void update()
+	{
+		System.out.println("-------------------------------------------");
+		System.out.println("Güncelle seçildi");
+		System.out.println("-------------------------------------------");
+	}
+	
+	public static void list()
+	{
+		System.out.println("-------------------------------------------");
+		System.out.println("Listele seçildi");
+		System.out.println("-------------------------------------------");
+	}
+	
+	public static void invalidOption()
+	{
+		printInvalidOptionMessage();
+	}
+	
+	public static void quit()
+	{
+		printGoodbyeMessage();
+		System.exit(0);
+	}
+	
+	public static void doOption(int option)
+	{
+		switch (option) {
+		case 1:
+			insert();
+			break;
+		case 2: 
+			delete();
+			break;
+		case 3:
+			update();
+			break;
+		case 4:
+			list();
+			break;
+		case 5:
+			quit();
+			break;
+		default:
+			invalidOption();			
+		}		
+	}
+	
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			printMenu();
+			doOption(Integer.parseInt(kb.nextLine()));			
+		}
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir yıl bilgisinin artık yıl olup olmadığını test eden isLeapYear
+	isimli metodu yazınız ve aşağıdaki kod ile test ediniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		DateUtilIsLeapYearTest.run();
+	}
+}
+
+class DateUtilIsLeapYearTest {	
+	public static void run()
+	{
+		for (int y = 1994; y <= 2104; ++y)
+			if (DateUtil.isLeapYear(y))
+				System.out.println(y);
+	}
+}
+
+
+class DateUtil {
+	public static boolean isLeapYear(int year)
+	{
+		return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden gün, ay ve yıl bilgilerine ilişkin tarihin geçerli bir tarih 
+	olup olmadığını test eden isValidDate isimli metodu yazınız ve aşağıdaki kod ile test ediniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		DateUtilIsValidDateTest.run();
+	}
+}
+
+class DateUtilIsValidDateTest {	
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Gün, ay ve yıl bilgilerini giriniz:");
+			int day = kb.nextInt();
+			int month = kb.nextInt();
+			int year = kb.nextInt();
+			
+			if (DateUtil.isValidDate(day, month, year))
+				System.out.printf("%02d/%02d/%04d tarihi geçerlidir%n", day, month, year);
+			else 
+				System.out.println("Geçersiz tarih!...");
+			
+			if (day == 0 && month == 0 && year == 0)
+				break;
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+
+class DateUtil {
+	public static boolean isValidDate(int day, int month, int year)
+	{
+		return 1 <= day && day <= 31 &&  1 <= month && month <= 12 && day <= getDays(month, year);
+	}
+	
+	public static int getDays(int month, int year)
+	{
+		int days = 31;
+		
+		switch (month) {
+		case 4:
+		case 6:
+		case 9:
+		case 11:
+			days = 30;
+			break;
+		case 2:
+			days = 28;
+			if (isLeapYear(year))
+				++days;
+		}
+		
+		return days;
+	}
+	
+	public static boolean isLeapYear(int year)
+	{
+		return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
 	}
 }
 
