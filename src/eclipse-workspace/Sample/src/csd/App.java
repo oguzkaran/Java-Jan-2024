@@ -40,7 +40,37 @@ class DateUtilGetDayOfYearTest {
 class DateUtil {
 	public static int getDayOfYear(int day, int month, int year)
 	{
-		//TODO
+		int dayOfYear = day;
+		
+		switch (month - 1) {
+		case 11:
+			dayOfYear += 30;
+		case 10:
+			dayOfYear += 31;
+		case 9:
+			dayOfYear += 30;
+		case 8:
+			dayOfYear += 31;
+		case 7:
+			dayOfYear += 31;
+		case 6:
+			dayOfYear += 30;
+		case 5:
+			dayOfYear += 31;
+		case 4:
+			dayOfYear += 30;
+		case 3:
+			dayOfYear += 31;
+		case 2:
+			dayOfYear += 28;
+			if (isLeapYear(year))
+				++dayOfYear;
+		case 1:
+			dayOfYear += 31;
+		}
+		
+		
+		return dayOfYear;
 	}
 	
 	public static boolean isValidDate(int day, int month, int year)
