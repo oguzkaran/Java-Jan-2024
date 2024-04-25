@@ -7171,6 +7171,8 @@ class DemoMenuApp {
 	çalıştırılır. Buna aşağı düşme denir. Aşağı düşme çeşitli deyimlerle engellenebilir. Tipik olarak break deyimi
 	switch deyimini sonlandırmak için kullanıldığından aşağı düşme engellenmiş olur. Aşağı düşme algoritmaya göre 
 	return deyimi, continue deyimi ve sonsuz döngü gibi deyimlerle de engellenebilir. Ancak en çok break deyimi kullanılır. 
+	
+	switch deyiminde aynı değere sahip case bölümünden birden fazla yazılması geçersizdir.
 ----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
@@ -7433,6 +7435,56 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
 	25 Nisan 2024
 ----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: Derleyiciler, programa ilişkin algoritmayı değiştirmeden, algoritmanın en iyi biçiminde çalışmasını
+	sağlayan kodu üretmesine "compiler optimization" denir. Bu anlamda derleyiciler programcının yazdığı algoritmayı 
+	düzeltmez. Optimizasyon genel olarak ikiye ayrılır: speed optimization, size optimization. Speed optimization, 
+	algoritmaya ilişkin üretilen kodun hızlı çalışması için, size optimization ise üretilen kodun daha az yer kaplaması
+	için yapılır. Derleyicinin pek çok durum için optimizasyon yaklaşımı vardır. 
+	 
+	Derleyiciler sabit ifadelerinin değerlerini arakoda hesaplayaıp yazarlar. Yani sabit ifadelerinin değerleri çalışma
+	zamanında hesaplanmaz. Buna "constant folding optimization" denir. 
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örnekte derleyici constant folding yaptığından aynı değere sahip birden fazla case bölümü tespit
+	ettiğinden error oluşur
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Telefon kodunu giriniz:");
+		int code = kb.nextInt();	
+	
+		switch (code) {
+		case 212: //error
+		case 216:
+			System.out.println("İstanbul");
+			break;
+		case 211 + 1: //error
+			System.out.println("İstanbul");
+			break;
+		case 232:
+			System.out.println("İzmir");
+			break;
+		case 312:
+			System.out.println("Ankara");
+			break;
+		case 372:
+			System.out.println("Zonguldak");
+			break;	
+		default:
+			System.out.println("Geçersiz telefon kodu!...");
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
 /*----------------------------------------------------------------------------------------------------------------------
 	Anahtar Notlar: switxh deyiminde case bölümlerinin (dolayısıyla default bölümün) çok uzun deyimlerle doldurulmaması
 	tavsiye edilir. Tipik olarak switch deyimine bakıldığında case bölümleri kolaylıkla okunabilir olmalıdır. Bu anlamda
@@ -7695,6 +7747,168 @@ class DateUtilGetDayOfYearTest {
 
 
 class DateUtil {
+	public static int getDayOfYear(int day, int month, int year)
+	{
+		int dayOfYear = day;
+		
+		switch (month - 1) {
+		case 11:
+			dayOfYear += 30;
+		case 10:
+			dayOfYear += 31;
+		case 9:
+			dayOfYear += 30;
+		case 8:
+			dayOfYear += 31;
+		case 7:
+			dayOfYear += 31;
+		case 6:
+			dayOfYear += 30;
+		case 5:
+			dayOfYear += 31;
+		case 4:
+			dayOfYear += 30;
+		case 3:
+			dayOfYear += 31;
+		case 2:
+			dayOfYear += 28;
+			if (isLeapYear(year))
+				++dayOfYear;
+		case 1:
+			dayOfYear += 31;
+		}
+		
+		
+		return dayOfYear;
+	}
+	
+	public static boolean isValidDate(int day, int month, int year)
+	{
+		return 1 <= day && day <= 31 &&  1 <= month && month <= 12 && day <= getDays(month, year);
+	}
+	
+	public static int getDays(int month, int year)
+	{
+		int days = 31;
+		
+		switch (month) {
+		case 4:
+		case 6:
+		case 9:
+		case 11:
+			days = 30;
+			break;
+		case 2:
+			days = 28;
+			if (isLeapYear(year))
+				++days;
+		}
+		
+		return days;
+	}
+	
+	public static boolean isLeapYear(int year)
+	{
+		return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden gün, ay ve yıl bilgilerine ilişkin tarihin haftanın hangi günü
+	olduğu bilgisine geri dönen getDayOfWeek isimli metodu ve uygulamayı aşağıdaki açıklamalara göre yazınız
+	Açıklamalar:
+		- getDayOfWeek metodu tarih geçerlilik kontrolü yapmayacaktır.
+		
+		- getDayOfWeek metodu haftanın hangi günü olduğuna ilişkin bilgiyi şu algoritmaya göre bulacaktır:
+		01.01.1900 tarihi ile ilgili tarih (dahil) arasındaki gün sayısı hesaplanıp 7 ile bölümünden elde edilen
+		kalan alındığında 0 Pazar, 1 Pazartesi, ..., 6 Cumartesi anlamına gelir.
+		
+		- Program klavyeden gün ay ve yıl bilgisini isteyecek ve eğer tarih geçerli ise aşağıdaki formatta 
+		tarihi yazdırıcaktır:
+			25/04/2024 Perşembe
+		Tarih geçersiz ise Geçersiz tarih yazdıracaktır. Klavyeden gün ay ve yıl bilgilerinin 3'ü birden sıfır girildiğinde
+		program sonlandırılacaktır. 
+		
+	Not: İleride daha iyisi yazılacaktır
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		DemoDateApp.run();	
+	}
+}
+
+class DemoDateApp {	
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Gün, ay ve yıl bilgilerini giriniz:");
+			int day = kb.nextInt();
+			int month = kb.nextInt();
+			int year = kb.nextInt();
+			
+			DateUtil.printDateTR(day, month, year);
+			
+			if (day == 0 && month == 0 && year == 0)
+				break;
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+} 
+
+class DateUtil {
+	public static void printDateTR(int day, int month, int year)
+	{
+		if (!isValidDate(day, month, year)) {
+			System.out.println("Geçersiz tarih!...");
+			return;
+		}
+		
+		switch (getDayOfWeek(day, month, year)) {
+		case 0:
+			System.out.printf("%02d/%02d/%04d Pazar%n", day, month, year);
+			break;
+		case 1:
+			System.out.printf("%02d/%02d/%04d Pazartesi%n", day, month, year);
+			break;
+		case 2:
+			System.out.printf("%02d/%02d/%04d Salı%n", day, month, year);
+			break;
+		case 3:
+			System.out.printf("%02d/%02d/%04d Çarşamba%n", day, month, year);
+			break;
+		case 4:
+			System.out.printf("%02d/%02d/%04d Perşembe%n", day, month, year);
+			break;
+		case 5:
+			System.out.printf("%02d/%02d/%04d Cuma%n", day, month, year);
+			break;
+		case 6:
+			System.out.printf("%02d/%02d/%04d Cumartesi%n", day, month, year);
+			break;
+		}
+			
+	}
+	
+	public static int getDayOfWeek(int day, int month, int year)
+	{
+		int totalDays = getDayOfYear(day, month, year);
+		
+		for (int y = 1900; y < year; ++y) {
+			totalDays += 365;
+			if (isLeapYear(y))
+				++totalDays;
+		}
+		
+		return totalDays % 7;
+	}
+	
+	
 	public static int getDayOfYear(int day, int month, int year)
 	{
 		int dayOfYear = day;
