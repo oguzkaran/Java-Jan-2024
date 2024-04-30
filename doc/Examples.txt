@@ -5303,7 +5303,7 @@ class NumberUtil {
 		do {
 			++count;
 			val /= 10;
-		} while (val != 0);		
+		} while (val != 0);
 		
 		return count;
 	}
@@ -8256,6 +8256,243 @@ class App {
 		
 		- Aşağı düşme özelliğinin gerektiği bir durumda switch statement tercih edilir.
 ----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+	Not: İleride daha iyisi yazılacaktır
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		DemoMenuApp.run();
+	}
+}
+
+class DemoMenuApp {
+	public static void printMenu()
+	{
+		System.out.println("1.Ekle");
+		System.out.println("2.Sil");
+		System.out.println("3.Güncelle");
+		System.out.println("4.Listele");
+		System.out.println("5.Çıkış");
+		System.out.print("Seçenek:");
+	}
+	
+	public static void printGoodbyeMessage()
+	{
+		System.out.println("-------------------------------------------");
+		System.out.println("C ve Sistem Programcıları Derneği");
+		System.out.println("Teşekkürler");
+		System.out.println("-------------------------------------------");
+	}
+	
+	public static void printInvalidOptionMessage()
+	{
+		System.out.println("-------------------------------------------");
+		System.out.println("Geçersiz seçenek!...");
+		System.out.println("-------------------------------------------");
+	}
+	
+	public static void insert()
+	{
+		System.out.println("-------------------------------------------");
+		System.out.println("Ekle seçildi");
+		System.out.println("-------------------------------------------");
+	}
+	
+	public static void delete()
+	{
+		System.out.println("-------------------------------------------");
+		System.out.println("Sil seçildi");
+		System.out.println("-------------------------------------------");
+	}
+	
+	public static void update()
+	{
+		System.out.println("-------------------------------------------");
+		System.out.println("Güncelle seçildi");
+		System.out.println("-------------------------------------------");
+	}
+	
+	public static void list()
+	{
+		System.out.println("-------------------------------------------");
+		System.out.println("Listele seçildi");
+		System.out.println("-------------------------------------------");
+	}
+	
+	public static void invalidOption()
+	{
+		printInvalidOptionMessage();
+	}
+	
+	public static void quit()
+	{
+		printGoodbyeMessage();
+		System.exit(0);
+	}
+	
+	public static void doOption(int option)
+	{
+		switch (option) {
+			case 1 ->insert();			
+			case 2 -> delete();		
+			case 3 -> update();			
+			case 4 -> list();
+			case 5 -> quit();			
+			default -> invalidOption();			
+		}		
+	}
+	
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			printMenu();
+			doOption(Integer.parseInt(kb.nextLine()));			
+		}
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden gün, ay ve yıl bilgilerine ilişkin tarihin haftanın hangi günü
+	olduğu bilgisine geri dönen getDayOfWeek isimli metodu ve uygulamayı aşağıdaki açıklamalara göre yazınız
+	Açıklamalar:
+		- getDayOfWeek metodu tarih geçerlilik kontrolü yapmayacaktır.
+		
+		- getDayOfWeek metodu haftanın hangi günü olduğuna ilişkin bilgiyi şu algoritmaya göre bulacaktır:
+		01.01.1900 tarihi ile ilgili tarih (dahil) arasındaki gün sayısı hesaplanıp 7 ile bölümünden elde edilen
+		kalan alındığında 0 Pazar, 1 Pazartesi, ..., 6 Cumartesi anlamına gelir.
+		
+		- Program klavyeden gün ay ve yıl bilgisini isteyecek ve eğer tarih geçerli ise aşağıdaki formatta 
+		tarihi yazdırıcaktır:
+			25/04/2024 Perşembe
+		Tarih geçersiz ise Geçersiz tarih yazdıracaktır. Klavyeden gün ay ve yıl bilgilerinin 3'ü birden sıfır girildiğinde
+		program sonlandırılacaktır. 
+		
+	Not: İleride daha iyisi yazılacaktır
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		DemoDateApp.run();	
+	}
+}
+
+class DemoDateApp {	
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Gün, ay ve yıl bilgilerini giriniz:");
+			int day = kb.nextInt();
+			int month = kb.nextInt();
+			int year = kb.nextInt();
+			
+			DateUtil.printDateTR(day, month, year);
+			
+			if (day == 0 && month == 0 && year == 0)
+				break;
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+} 
+
+class DateUtil {
+	public static void printDateTR(int day, int month, int year)
+	{
+		if (!isValidDate(day, month, year)) {
+			System.out.println("Geçersiz tarih!...");
+			return;
+		}
+		
+		switch (getDayOfWeek(day, month, year)) {
+			case 0 -> System.out.printf("%02d/%02d/%04d Pazar%n", day, month, year);			
+			case 1 -> System.out.printf("%02d/%02d/%04d Pazartesi%n", day, month, year);		
+			case 2 -> System.out.printf("%02d/%02d/%04d Salı%n", day, month, year);			
+			case 3 -> System.out.printf("%02d/%02d/%04d Çarşamba%n", day, month, year);		
+			case 4 -> System.out.printf("%02d/%02d/%04d Perşembe%n", day, month, year);		
+			case 5 -> System.out.printf("%02d/%02d/%04d Cuma%n", day, month, year);		
+			case 6 -> System.out.printf("%02d/%02d/%04d Cumartesi%n", day, month, year);		
+		}			
+	}
+	
+	public static int getDayOfWeek(int day, int month, int year)
+	{
+		int totalDays = getDayOfYear(day, month, year);
+		
+		for (int y = 1900; y < year; ++y) {
+			totalDays += 365;
+			if (isLeapYear(y))
+				++totalDays;
+		}
+		
+		return totalDays % 7;
+	}
+	
+	
+	public static int getDayOfYear(int day, int month, int year)
+	{
+		int dayOfYear = day;
+		
+		switch (month - 1) {
+		case 11:
+			dayOfYear += 30;
+		case 10:
+			dayOfYear += 31;
+		case 9:
+			dayOfYear += 30;
+		case 8:
+			dayOfYear += 31;
+		case 7:
+			dayOfYear += 31;
+		case 6:
+			dayOfYear += 30;
+		case 5:
+			dayOfYear += 31;
+		case 4:
+			dayOfYear += 30;
+		case 3:
+			dayOfYear += 31;
+		case 2:
+			dayOfYear += 28;
+			if (isLeapYear(year))
+				++dayOfYear;
+		case 1:
+			dayOfYear += 31;
+		}
+		
+		
+		return dayOfYear;
+	}
+	
+	public static boolean isValidDate(int day, int month, int year)
+	{
+		return 1 <= day && day <= 31 &&  1 <= month && month <= 12 && day <= getDays(month, year);
+	}
+	
+	public static int getDays(int month, int year)
+	{
+		return switch (month) {
+			case 4, 6, 9, 11 -> 30;
+			case 2 -> {if (isLeapYear(year)) yield 29; yield 28;}
+			default -> 31;		
+		};	
+	}
+	
+	public static boolean isLeapYear(int year)
+	{
+		return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
+	}
+}
+
 
 
 /*----------------------------------------------------------------------------------------------------------------------
