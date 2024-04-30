@@ -32,8 +32,8 @@
 		Java'da geliştirme ortamı ücetsiz, çalıştırma araçları kullanılan araca göre ücretlendirilebilir.  Tamamen ücretsiz
 		olarak kullanılabilen "Open JRE" gibi çalıştırma araçları da mevcuttur.  Burada anlatılanlar geneldir. Ayrıca, belirli
 		bir noktadan sonra Java sürümleri için Long Term Support (LTS) kavramı da getirilmiştir. LTS sürümleri uzun süre 
-		desteklenen yani güncellemesi (hızlandırılması, hataların düzeltilmesi vb.) uzun süre yapılan sürümlerdir. Java'da 
-		Java 8, 11, 17 ve 21 sürümleri LTS sürümleridir. Bu kavramlar zamanla anlaşılacaktır.
+		desteklenen yani güncellemesi (hızlandırılması, hataların düzeltilmesi (bug fix) vb.) uzun süre yapılan sürümlerdir. 
+		Java'da Java 8, 11, 17 ve 21 sürümleri LTS sürümleridir. Bu kavramlar zamanla anlaşılacaktır.
 
 		Arakodlu çalışma sisteminin en önemli avantajı, gelişirilen uygulamaların genel olarak sistemden bağımsız olarak 
 		çalıştırılabilmesidir. Dolayısıyla kodun çalıştırılacağı sistemden bağımsız olarak ürün geliştirilebilir. Bu kavrama
@@ -7124,7 +7124,7 @@ class DemoMenuApp {
 	switch deyimi: switch deyimi sonlu ve sabit sayıda seçenek için okunabilirliği artırmak amaçlı kullanılan bir 
 	kontrol deyimidir. switch deyimi belirli koşullar altında if deyimi yerine kullanılabilir. Yani bu anlamda belirli
 	koşullar altında if deyimi gibi çalışır. switch deyimine Java 12 ile birlikte (ilerleyen bazı sürümlerde de) eklentiler
-	yapılmıştır. Hatta bu anlamda "switch expression" de dile eklenmiştir. switch expression ve switch deyimine ilişkin
+	yapılmıştır. Hatta bu anlamda "switch expression" da dile eklenmiştir. switch expression ve switch deyimine ilişkin
 	eklentiler ileride ele alınacaktır.
 	 
 	switch deyiminin genel biçimi şu şekildedir:
@@ -7975,6 +7975,287 @@ class DateUtil {
 	}
 }
 
+/*----------------------------------------------------------------------------------------------------------------------
+	30 Nisan 2024
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	switch expression Java'ya 12 sürümü ile birlikte "preview" olarak eklenmiştir. Java 14 ile birlikte "release" durumuna
+	gelmiştir. Java programcısı açısından switch expression pratikte Java 17 ile kullanılabilir durumdadır. Anımsanacağı 
+	gibi uygulama geliştirmede Java 8, 11, 17 ve 21 sürümleri LTS olduklarından kullanılmaktadır. "switch expression"
+	adından da anlaşılacağı gibi, bir ifade olduğundan bir değer üretebilir. Yani bu anlamda switch expression hem bir 
+	deyim gibi hem de bir ifade gibi kullanılabilmektedir. Hatta switch expression eklenmesi ile birlikte klasik switch
+	deyimi de "yield" anahtar sözcüğü ile birlikte bir ifade olarak kullanılabilir duruma gelmiştir. yield anahtar sözcüğü
+	ileride detaylı olarak ele alınacaktır. 
+	
+	Anahtar Notlar: Programlamada hem deyim hem de ifade olarak kullanılan sentaktik elemanlara "ifadesel deyim (expression statement)"
+	da denilmektedir.
+	
+	switch expression'ın genel biçimi şu şekildedir:
+	
+	switch (<ifade>) {
+		case <si>[, <si>, ...] -> <deyim veya ifade> 
+		case <si>[, <si>, ...] -> <deyim veya ifade>
+		...
+		[default -> <deyim veya ifade>]
+	}
+	
+	switch expression'ın parentezi içerisindeki ifadeye ilişkin kurallar switch deyimi ile aynıdır. case bölümlerine 
+	ilişkin ifadelerin de yine switch deyiminde olduğu gibi sabit ifadesi (si) olması gerekir. 
+	
+	swith expression'da aşağı düşme (fall through) özelliği yoktur. switch expression'da bir case bölümüne istenildiği
+	sayıda sabit ifadesi virgül ile ayrılacak şekilde yazılabilir. Bu durumda aslında "OR" işlemi ya da işlemleri 
+	yapılmaktadır.
+	
+	switch expression, bir expression olarak kullanıldığında yani değeri bir işleme sokulduğunda default case'i
+	kesinlikle bulunmalıdır. Aksi durumda error oluşur.
+	
+	switch expression'da bir case bölümüne (ya da default bölüme) birden fazla deyim yazılacaksa bu durumda bileşik
+	deyim olarak yazılmalıdır. Bu durumda switch expression'ın ürettiği değer kullanılacaksa yield anahtar sözcüğü ile
+	ilgili değer yazılmalıdır. Bileşik deyim kullanılmadığında yield anahtar sözcüğü kullanımı error oluşturur. yield
+	anahtar sözcüğü switch expression'ı da sonlandırır. yield anahtar sözcüğü kullanılarak switch deyimi de bir expression
+	olarak kullanılabilir duruma gelmiştir. 	
+	
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte switch expression kullanılmıştır. Aşağı düşme özelliği olmadığından break gibi bir deyimin 
+	kullanılmadığına dikkat ediniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Plaka numarasını giriniz:");
+		int plate = kb.nextInt();
+		
+		switch (plate) {
+			case 34-> System.out.println("İstanbul");			
+			case 35 -> System.out.println("İzmir");		
+			case 6 -> System.out.println("Ankara");		
+			case 67 -> System.out.println("Zonguldak");			
+			default ->System.out.println("Geçersiz plaka değeri!...");
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Telefon kodunu giriniz:");
+		int code = kb.nextInt();
+		
+		switch (code) {
+			case 212, 216 -> System.out.println("İstanbul");			
+			case 232 -> System.out.println("İzmir");		
+			case 312 -> System.out.println("Ankara");		
+			case 372 -> System.out.println("Zonguldak");			
+			default ->System.out.println("Geçersiz telefon kodu!...");
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Telefon kodunu giriniz:");
+		int code = kb.nextInt();		
+		int plate = switch (code) {
+			case 212, 216 -> 34;			
+			case 232 -> 35;		
+			case 372 -> 67;
+			default -> -1;
+		};
+		
+		if (plate != -1)
+			System.out.printf("Plaka:%d%n", plate);
+		else
+			System.out.println("Geçersiz giriş!...");		
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Telefon kodunu giriniz:");
+		int code = kb.nextInt();		
+		
+		Util.doWorkForPlate(switch (code) {
+			case 212, 216 -> 34;			
+			case 232 -> 35;		
+			case 372 -> 67;
+			default -> -1;
+		});
+		
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class Util {
+	public static void doWorkForPlate(int plate)
+	{
+		if (plate != -1)
+			System.out.printf("Plaka:%d%n", plate);
+		else
+			System.out.println("Geçersiz giriş!...");		
+		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örnekte switch bir expression olarak kullanıldığından default case zorunludur 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Telefon kodunu giriniz:");
+		int code = kb.nextInt();		
+		
+		Util.doWorkForPlate(switch (code) { //error
+			case 212, 216 -> 34;			
+			case 232 -> 35;		
+			case 372 -> 67;
+			//default -> -1;
+		});
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+class Util {
+	public static void doWorkForPlate(int plate)
+	{
+		if (plate != -1)
+			System.out.printf("Plaka:%d%n", plate);
+		else
+			System.out.println("Geçersiz giriş!...");		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Telefon kodunu giriniz:");
+		int code = kb.nextInt();
+		
+		switch (code) {
+			case 212, 216 -> {++code; System.out.println("İstanbul");}		
+			case 232 -> System.out.println("İzmir");		
+			case 312 -> System.out.println("Ankara");		
+			case 372 -> System.out.println("Zonguldak");			
+			default ->System.out.println("Geçersiz telefon kodu!...");
+		}
+		
+		System.out.printf("Kod:%d%n", code);
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Telefon kodunu giriniz:");
+		int code = kb.nextInt();		
+		int plate = switch (code) {
+			case 212, 216 ->  {System.out.println("İstanbul"); yield 34;}			
+			case 232 -> 35;		
+			case 372 -> 67;
+			default -> -1;
+		};
+		
+		if (plate != -1)
+			System.out.printf("Plaka:%d%n", plate);
+		else
+			System.out.println("Geçersiz giriş!...");		
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örnekte switch statement bir expression olarak kullanılmıştır
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Telefon kodunu giriniz:");
+		int code = kb.nextInt();	
+		
+		int plate = switch (code) {
+			case 212:
+			case 216:
+				System.out.println("İstanbul"); 
+				yield 34;			
+			case 232: yield 35;		
+			case 372: yield 67;
+			default: yield -1;
+		};
+		
+		if (plate != -1)
+			System.out.printf("Plaka:%d%n", plate);
+		else
+			System.out.println("Geçersiz giriş!...");		
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Ne zaman switch expression ne zaman switch statement kullanılmalıdır? Programcı buna nasıl karar verecektir? Bu
+	sorunun genel bir cevabı şu şekilde verilebilir: "Gerekmedikçe switch statement kullanılmamalıdır". switch statment
+	tipik olarak iki durumda gerekir:
+		- Java 11 ve öncesi ile geliştirilen bir projede zaten switch expression kullanılamaz. Bu durumda switch statement 
+		kullanılır.
+		
+		- Aşağı düşme özelliğinin gerektiği bir durumda switch statement tercih edilir.
+----------------------------------------------------------------------------------------------------------------------*/
 
 
 /*----------------------------------------------------------------------------------------------------------------------
