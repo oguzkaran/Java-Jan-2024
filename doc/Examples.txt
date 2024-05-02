@@ -8581,6 +8581,178 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
 	Temel türler arasındaki doğrudan dönüşüme (implicit conversion) ilişkin ayrıntılar 
 ----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Küçük tamsayı türünden büyük tamsayı türüne doğrudan atama geçerlidir. Bu dönüşümde kaynak türe ilişkin değer pozitif
+	ise sayının yüksek anlamlı byte'larına ilişkin bit'leri sıfır ile beslenir, değer negatif ise işaretin kaybedilmemesi
+	için yüksek anlamlı byte'lara ilişkin bit'ler 1 ile beslenir.
+	
+	Aşağıdaki demo örneği çeşitli değerler girerek çalıştırıp sonuçları gözlemleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) { 
+			System.out.print("Bir sayı giriniz:");
+			int a = Integer.parseInt(kb.nextLine());
+			long b;
+			
+			b = a;
+			
+			System.out.printf("a = %d%n", a);
+			System.out.printf("a = %08X%n", a);
+			System.out.printf("b = %d%n", b);
+			System.out.printf("b = %016X%n", b);
+			
+			if (a == 0)
+				break;
+		}
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Büyük tamsayı türünden küçük tamsayı türüne doğrudan dönüşüm geçersizdir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir sayı giriniz:");
+		int a = Integer.parseInt(kb.nextLine());
+		short b;
+		
+		b = a; //error	
+		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anımsanacağı gibi Java'da byte ve short türden sabit yoktur. Ancak istisna bir kural olarak "int türden bir sabit
+	eğer hedef türün sınırları içerisindeyse short veya byte türüne doğrudan atanabilir. Aksi durumda error oluşur"
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		int x = 10;
+		short a;
+		byte b;
+		
+		a = 10;
+		b = -124;
+		a = 70000; //error
+		b = -129; //error
+		a = x; //error
+		
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yukarıdaki istisna kural char türü için de geçerlidir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		int x = 10;
+		char c;
+		
+		c = 10;
+		c = -10; //error
+		c = x; //error	
+		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yukarıdaki istisna kurallar metot çağrısında argümanlardan parametrelere aktarımda geçersiz, metotların geri dönüş
+	değerinin geçici değişkene yapılan atama işlemlerinde geçerlidir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		Sample.foo(10); //error
+		Sample.bar(10); //error
+		Sample.tar(10); //error	
+	}
+}
+
+class Sample {
+	public static void foo(short a)
+	{
+		//...
+	}
+	
+	public static void bar(byte a)
+	{
+		//...
+	}
+	
+	public static void tar(char a)
+	{
+		//...
+	}
+}
+
+class Mample {
+	public static short foo()
+	{
+		return 10;
+	}
+	
+	public static byte bar()
+	{
+		return 10;
+	}
+	
+	public static char tar()
+	{
+		return 10;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Herhangi bir gerçek sayı türünden, bir tamsayı türüne doğrudan dönüşüm geçersizdir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		float a = 12;
+		long b;
+		
+		b = a; //error
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Herhangi bir tamsayı türünden herhangi bir gerçek sayı türüne doğrudan atama geçerlidir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		long a = 12;
+		float b;
+		
+		b = a;
+	}
+}
 
 
 
