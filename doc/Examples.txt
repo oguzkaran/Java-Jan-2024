@@ -9325,9 +9325,334 @@ class App {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
-	byte türünden char türüne explicit dönüşüm iki adımda gerçekleşir. Birinci adımda byte türüne ilişkin değer int
-	türüne yükseltilir. İkinci adımda elde edilen değerin yüksek anlamlı iki bte'ı atılır
+	9 Mayıs 2024
 ----------------------------------------------------------------------------------------------------------------------*/
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	byte türünden char türüne explicit dönüşüm iki adımda gerçekleşir. Birinci adımda byte türüne ilişkin değer int
+	türüne yükseltilir. İkinci adımda elde edilen değerin yüksek anlamlı iki byte'ı atılır. Aşağıdaki demo örneği
+	çeşitli değerler ile çalıştırıp sonuçları gözlemleyiniz 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Bir sayı giriniz:");
+			byte a = Byte.parseByte(kb.nextLine());
+			char b;
+			
+			b = (char)a;
+			
+			System.out.printf("a = %02X%n", a);
+			System.out.printf("a = %08X%n", (int)a);
+			System.out.printf("b = %04X%n", (int)b);
+			
+			if (a == 0)
+				break;
+		}
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	char türünden byte türüne yapılan explicit dönüşümde değerin yüksek anlamlı byte'ı atılır 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		char a = '\uFFE9';
+		byte b;
+		
+		b = (byte)a;
+		
+		System.out.printf("b = %02X%n", b);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	double türünden float türüne yapılan explicit dönüşümde sayı float türünden temsil edilebilen en yakın sayıya 
+	yuvarlanır. Bu durumda gerçek sayıların tutuluş formatına ilişkin yuvarlama hatası (rounding error) oluşabileceğini
+	anımsayınız  
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Bir sayı giriniz:");
+			double a = Double.parseDouble(kb.nextLine());
+			float b;
+			
+			b = (float)a;
+			
+			System.out.printf("a = %.20f%n", a);
+			System.out.printf("b = %.20f%n", b);
+			
+			if (a == 0)
+				break;
+			
+		}
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	boolean türünden herhangi bir türe explicit dönüşüm geçersizdir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		boolean a = true;
+		int b;
+		
+		b = (int)a; //error
+		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Herhangi bir türden boolean türüne explicit dönüşüm geçersizdir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		int a = 0;
+		boolean b;
+		
+		b = (boolean)a; //error
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: int türünün en büyük değerine programlamada Integer.MAX_VALUE, en küçük değerine ise Integer.MIN_VALUE
+	ifadeleri ile erişiebilir. Detaylar ileride ele alınacaktır
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Gerçek sayı türünden tamsayı ve char türüne yapılan explicit dönüşüm şu şekilde gerçekleşir:
+	- Sayının noktadan sonraki kısmı atılır
+		- Elde edilen değer hedef türün sınırları içerisinde kalıyorsa doğrudan dönüştürülür
+		- Elde edilen değer hedef türün sınırları içerisinde kalmıyorsa
+			- Hedef tür int, short, byte, char türlerinde biriyse
+				- Değer int türü sınırları içerisindeyse tamsayılar arasındaki dönüşüm kuralları uygulanır
+				- Değer int türü sınırları dışındaysa sayının pozitif ya da negatif olması durumuna göre int türünün
+				en büyük ya da en küçük değeri alınır ve bu değer ile tamsayılar arasındaki dönüşüm kuralları uygulanır
+			- Hedef tür long türüyse 
+				- Değer long türü sınırları içerisindeyse doğrudan alınır
+				- Değer long türü sınırları içerisinde değilse sayınının pozitif ya da negatif olması duruma göre long
+				türünün en büyük ya da en küçük değeri alınır
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		double a = 10.45;
+		byte b;
+		
+		b = (byte)a;
+		
+		System.out.printf("b = %d%n", b);
+	}
+}
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		double a = 128.45;
+		byte b;
+		
+		b = (byte)a;
+		
+		System.out.printf("b = %02X%n", b);
+		System.out.printf("128 = %08X%n", 128);
+	}
+}
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		double a = -129.45;
+		byte b;
+		
+		b = (byte)a;
+		
+		System.out.printf("b = %02X%n", b);
+		System.out.printf("-129 = %08X%n", -129);
+	}
+}
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		double a = 5_000_000_000.45;
+		byte b;
+		
+		b = (byte)a;
+		
+		System.out.printf("b = %02X%n", b);
+		System.out.printf("5_000_000_000 = %016X%n", 5_000_000_000L);
+		System.out.printf("Integer.MAX_VALUE = %08X%n", Integer.MAX_VALUE);
+	}
+}
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		double a = -4_000_000_001.45;
+		byte b;
+		
+		b = (byte)a;
+		
+		System.out.printf("b = %02X%n", b);
+		System.out.printf("-4_000_000_001 = %016X%n", -4_000_000_001L);
+		System.out.printf("Integer.MIN_VALUE = %08X%n", Integer.MIN_VALUE);
+	}
+}
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		double a = -4_000_000_001.45;
+		int b;
+		
+		b = (int)a;
+		
+		System.out.printf("b = %02X%n", b);
+		System.out.printf("-4_000_000_001 = %016X%n", -4_000_000_001L);
+		System.out.printf("Integer.MIN_VALUE = %08X%n", Integer.MIN_VALUE);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bazı durumlarda tür dönüştürme operatörü kullanılmazsa bilgi kaybı oluşabilir. Aşağıdaki örnekte tür dönüştürme
+	operatörü kullanılmasaydı ne olurdu?
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		int count = 0;
+		int total = 0;
+		
+		while (true) {
+			System.out.print("Bir sayı giriniz:");
+			int val = Integer.parseInt(kb.nextLine());
+			
+			if (val == 0)
+				break;
+			
+			total += val;
+			++count;
+		}
+		
+		double avg = (double)total / count;
+		
+		System.out.printf("Ortalama:%f%n", avg);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bazı durumlarda tür dönüştürme operatörü kullanılmazsa bilgi kaybı oluşabilir. Aşağıdaki örnekte tür dönüştürme
+	operatörü kullanılmasaydı ne olurdu?
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Birinci sayıyı giriniz:");
+			int a = Integer.parseInt(kb.nextLine());
+			
+			System.out.print("İkinci sayıyı giriniz:");
+			int b = Integer.parseInt(kb.nextLine());
+			
+			if (a == 0 && b == 0)
+				break;
+			
+			long total = (long)a + b;
+			
+			System.out.printf("%d + %d = %d%n", a, b, total);
+			
+		}
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örnekte double türden sabit kullanılarak işlem double olarak yapılmıştır
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		int total = 0;
+		
+		for (int i = 0; i < 5; ++i) {
+			System.out.print("Bir sayı giriniz:");
+			int val = Integer.parseInt(kb.nextLine());
+			
+			total += val;
+		}	
+		
+		double avg = total / 5.;
+		
+		System.out.printf("Ortalama:%f%n", avg);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örnekte double türden sabit kullanılarak işlem double olarak yapılmıştır
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		int total = 0;
+		
+		for (int i = 0; i < 5; ++i) {
+			System.out.print("Bir sayı giriniz:");
+			int val = Integer.parseInt(kb.nextLine());
+			
+			total += val;
+		}	
+		
+		double avg = total / 5D;
+		
+		System.out.printf("Ortalama:%f%n", avg);
+	}
+}
+
 
 
 /*----------------------------------------------------------------------------------------------------------------------
