@@ -3448,9 +3448,9 @@ class App {
 	ifadenin değeri true ise ikinci operanda ilişkin ifade yapılmaz.    
 	
 	Bu operatörler yine doğru sonuca en kısa yoldan ulaşmak için klasik operatör önceliği kuralına işlemi yaparken 
-	uymazlar. Yani bu operatörlere ilişkin bir ifade, öncelik ne olursa olsun en soldan başlanarak hesaplanır. Ancak 
-	elde edilen sonuç operatör önceliğine uyularak yapılan işlem sırası ile elde edilen sonuç ile aynıdır.  Yani bu 
-	operatörler yine  kısa devre davranışını da kullanarak doğru sonuca en kısa yoldan ulaşırlar
+	uymazlar. Yani bu operatörlere ilişkin bir ifade, operatör önceliği ne olursa olsun en soldan başlanarak hesaplanır. 
+	Ancak  elde edilen sonuç operatör önceliğine uyularak yapılan işlem sırası ile elde edilen sonuç ile aynıdır.  Yani 
+	bu operatörler yine  kısa devre davranışını da kullanarak doğru sonuca en kısa yoldan ulaşırlar
 ----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
@@ -10233,6 +10233,226 @@ class Sample {
 		System.out.println("bar");
 	}
 }
+
+/*----------------------------------------------------------------------------------------------------------------------
+	21 Mayıs 2024	
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Method Overloading: Bir sınıf içerisinde aynı isimde birden fazla metot bildirilmesi durumuna denir. Farklı sınıflar
+	içerisinde aynı isimde metot olması durumu method overloading değildir. Çünkü zaten bu metotlar farklı sınıflarda 
+	olduğundan farklı metotlardır. Method overloading konusu sentaks ve semantik olarak iki biçimde ele alınacaktır:
+	- Method overloading yapılabilmesi için kurallar nelerdir?
+	- Bir metot çağrıldığında derleyici hangi metodun çağrılacağına nasıl karar verecektir? Bu kavrama İngilizce
+	"method overload resolution" denilmektedir. 
+	
+	Method overloading konusunun gerekliliği yani kabaca "ne işe yaradığı" ileride ele alınacaktır
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekteki foo metotları overload edilmemiştir. Çünkü bu metotlar farklı sınıflardadır. Method overloading
+	aynı sınıfta olan, aynı isimdeki metotlar için geçerlidir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		Sample.foo();
+		Mample.foo();
+	}
+}
+
+class Sample {
+	public static void foo()
+	{
+		System.out.println("Sample.foo");
+	}
+}
+
+class Mample {
+	public static void foo()
+	{
+		System.out.println("Mample.foo");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: Aslında genel bir kural olarak "bir sınıf içerisinde AYNI metottan birden fazla olamaz" ya da 
+	başka bir şekilde söylersek "bir sınıf içerisindeki tüm metotların FARKLI olması gerekir". Bu durumda bir metot 
+	için AYNI olmayı (veya olmamayı), FARKLI olmayı (veya olmamayı) sağlayan kurallar bulunur.  
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir metodun erişim belirleyicisini değiştirme o metodu FARKLI yapmaz. Yani erişim belirleyicinin overloading işlemine
+	etkisi yoktur  
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class Sample {
+	public static void foo() //error
+	{
+		
+	}
+	
+	private static void foo() //error
+	{
+		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir metodun static veya non-static olmasının da overload işlemine etkisi yoktur  
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class Sample {
+	public static void foo() //error
+	{
+		
+	}
+	
+	public void foo() //error
+	{
+		
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir metodun geri dönüş değeri bilgisinin overloading işlemine etkisi yoktur  
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class Sample {
+	public static void foo() //error
+	{
+		
+	}
+	
+	public static int foo() //errror
+	{
+		//...
+		
+		return 0;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir metodun parametre değişken isimlerinin overloading işlemine etkisi yoktur  
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+
+class Sample {
+	public static void foo(int a, double b) //error
+	{
+		
+	}
+	
+	public static void foo(int x, double y) //error
+	{
+		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aynı sınıf içerisinde, aynı isimli iki metodun FARKLI olabilmesi için "parametre türlerinin VE dizilimlerinin" farklı
+	olması gerekir. Bir metot için "parametre türü VE dizilimine" genel olarak "parametrik yapı" denir. Öyleyse bir 
+	metodun overload edilebilmesi için aynı isimde olanlardan parametrik yapı olarak farklı olması gerekir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+
+class Sample {
+	public static void foo()
+	{
+		
+	}
+	
+	public static void foo(int a, int b)
+	{
+		
+	}
+	
+	public static void foo(int a, double b, float c)
+	{
+		
+	}
+	
+	public static void foo(int a)
+	{
+		
+	}
+	
+	public static void foo(int a, double b)
+	{
+		
+	}
+	
+	public static void foo(double b, int a)
+	{
+		
+	}
+	
+	public static void foo(double a)
+	{
+		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aslında bir sınıf içerisindeki her metodun kendine özğü (unique) bir bir bilgisi olmalıdır. Bu unique bilgiye
+	genel olarak "imza (signature)" diyebilir. İmza, metodun ismi ve parametrik yapı kombinasyonudur. Genel kural şudur:
+	Bir sınıf içerisinde aynı imzaya sahip birden fazla metot bildirimi geçersizdir. Yani bir sınıf içerisindeki her metodun
+	imzası farklı olmalıdır. Aksi durumda error oluşur. 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class Sample {
+	public static void foo() //imza: foo
+	{
+		
+	}
+	
+	public static void foo(int a, int b) //imza: foo, int, int
+	{
+		
+	}
+	
+	public static void foo(int a, double b, float c) //imza: foo, int, double, float
+	{
+		
+	}
+	
+	public static void foo(int a) //imza: foo, int
+	{
+		
+	}
+	
+	public static void foo(int a, double b) //imza: foo, int, double
+	{
+		
+	}
+	
+	public static void foo(double b, int a) //imza: foo, double, int
+	{
+		
+	}
+	
+	public static void foo(double a) //imza: foo, double
+	{
+		
+	}
+	
+	public static void bar(int a, double b) //imza: bar, int, double
+	{
+		
+	}
+}
+
+
 
 /*----------------------------------------------------------------------------------------------------------------------
 	
