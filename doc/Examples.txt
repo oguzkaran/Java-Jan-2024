@@ -10413,45 +10413,507 @@ package csd;
 class Sample {
 	public static void foo() //imza: foo
 	{
-		
+		//...	
 	}
 	
 	public static void foo(int a, int b) //imza: foo, int, int
 	{
-		
+		//...
 	}
 	
 	public static void foo(int a, double b, float c) //imza: foo, int, double, float
 	{
-		
+		//...
 	}
 	
 	public static void foo(int a) //imza: foo, int
 	{
-		
+		//...
 	}
 	
 	public static void foo(int a, double b) //imza: foo, int, double
 	{
-		
+		//...
 	}
 	
 	public static void foo(double b, int a) //imza: foo, double, int
 	{
-		
+		//...
 	}
 	
 	public static void foo(double a) //imza: foo, double
 	{
-		
+		//...
 	}
 	
 	public static void bar(int a, double b) //imza: bar, int, double
 	{
-		
+		//...
 	}
 }
 
+/*----------------------------------------------------------------------------------------------------------------------
+	28 Mayıs 2024
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	İmza kavramından da anlaşılacağı gibi, bir metodun overload edilebilmesi için farklı olması gerekir, bu da ancak 
+	parametrik yapısının aynı isimde olan diğerlerinden farklı olması ile mümkündür.
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir metot çağrısı için derleyici hangi metodun çağrılacağını belirlemelidir. Bu belirleme sürecine "method overload
+	resolution" ya da kısaca "overload resolution" denilmektedir. Derleyici method overload resolution işlemini aşağıdaki
+	adımlardan geçerek yapar:
+	
+	1. Aday metotlar (candidate methods) belirlenir: Sınıf içerisindeki, çağrılan metot ile aynı isimdeki tüm metotlardır
+	 
+	2. Uygun metotlar (applicable methods) belirlenir: Aday metotlar içerisinde, çağrılan metodun argüman sayısı ile 
+	parametre sayısı aynı olan VE argümanların türünden, karşılık geldikleri parametrelerin türüne implicit conversion'ın 
+	geçerli olduğu metotlardır. 
+	
+	3. En uygun metot (the most applicable method) belirlenir: En uygun metot öyle bir metottur ki, uygun metotların her bir 
+	argümanı karşılık geldiği parametrelerin türleri ile yarışa sokulduğunda toplamda diğerlerine göre daha iyi olan, ya da
+	daha kötü olmayan (diğer bir deyişle kaliteli) dönüşüm sunar. Dönüşümün kalitesi şu kurallar ile belirlenir:
+	T1 argümanın türü, T2 ve T3 yarışa sokulan parametrelerin türü olsun
+	1.  T1 -> T2 ve T1 -> T3 için, T2 veya T3'den biri T1 ile aynı ise aynı olan daha kalitelidir. Örneğin:
+	int -> int *
+	int -> float
+	
+	2.  T1 -> T2 ve T1 -> T3 için, T2'den T3'e implicit dönüşüm geçerli, T3'den T2'ye geçersizse T2 daha kalitelidir. Örneğin:
+	int -> long *
+	int -> float  
+	
+	Herhangi bir adımda bir problem olursa error oluşur. Yani örneğin, aday metot yoksa VEYA aday metot var, uygun metot yoksa
+	VEYA uygun metot var, en uygun metot yoksa error oluşur.
+	
+	Yukarıdaki kurallara göre, metot çağrısında argümanların türü ile karşılık geldikleri parametrelerin türlerinin 
+	birebir aynı olduğu bir metot varsa o en kalitelidir. Buna "best match" de denilmektedir. 
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki çağrı aslında "best match" durumudur. Ancak, adımlar şunlardır:
+	1. Aday metotlar: 1, 2, 3, 4, 5, 6, 7
+	2. Uygun metotlar: 5, 6
+	3. En uygun metot: 5
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		int a = 10;
+		double b = 4.5;
+		
+		Sample.foo(a, b);
+	}
+}
+
+class Sample {
+	public static void foo() //1
+	{
+		System.out.println("foo");
+	}
+	
+	public static void foo(int a, int b) //2
+	{
+		System.out.println("foo, int, int");
+	}
+	
+	public static void foo(int a, double b, float c) //3
+	{
+		System.out.println("foo, int, double, float");
+	}
+	
+	public static void foo(int a) //4
+	{
+		System.out.println("foo, int");
+	}
+	
+	public static void foo(int a, double b) //5
+	{
+		System.out.println("foo, int, double");
+	}
+	
+	public static void foo(double b, double a) //6
+	{
+		System.out.println("foo, double, double");
+	}
+	
+	public static void foo(double a) //7
+	{
+		System.out.println("foo, double");
+	}
+	
+	public static void bar(int a, double b) //8	
+	{
+		System.out.println("bar, int, double");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	
+	1. Aday metotlar: 1, 2, 3, 4, 5, 6, 7
+	2. Uygun metotlar: 2, 5, 6
+	3. En uygun metot: 2
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		short a = 10;
+		int b = 4;
+		
+		Sample.foo(a, b);
+	}
+}
+
+class Sample {
+	public static void foo() //1
+	{
+		System.out.println("foo");
+	}
+	
+	public static void foo(int a, int b) //2
+	{
+		System.out.println("foo, int, int");
+	}
+	
+	public static void foo(int a, double b, float c) //3
+	{
+		System.out.println("foo, int, double, float");
+	}
+	
+	public static void foo(int a) //4
+	{
+		System.out.println("foo, int");
+	}
+	
+	public static void foo(int a, double b) //5
+	{
+		System.out.println("foo, int, double");
+	}
+	
+	public static void foo(double b, double a) //6
+	{
+		System.out.println("foo, double, double");
+	}
+	
+	public static void foo(double a) //7
+	{
+		System.out.println("foo, double");
+	}
+	
+	public static void bar(int a, double b) //8	
+	{
+		System.out.println("bar, int, double");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	
+	1. Aday metotlar: 1, 2, 3, 4, 5, 6, 7
+	2. Uygun metotlar: 2, 5, 6
+	3. En uygun metot: 2
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		short a = 10;
+		int b = 4;
+		
+		Sample.foo(a, b);
+	}
+}
+
+class Sample {
+	public static void foo() //1
+	{
+		System.out.println("foo");
+	}
+	
+	public static void foo(int a, int b) //2
+	{
+		System.out.println("foo, int, int");
+	}
+	
+	public static void foo(int a, double b, float c) //3
+	{
+		System.out.println("foo, int, double, float");
+	}
+	
+	public static void foo(int a) //4
+	{
+		System.out.println("foo, int");
+	}
+	
+	public static void foo(int a, double b) //5
+	{
+		System.out.println("foo, int, double");
+	}
+	
+	public static void foo(double b, double a) //6
+	{
+		System.out.println("foo, double, double");
+	}
+	
+	public static void foo(double a) //7
+	{
+		System.out.println("foo, double");
+	}
+	
+	public static void bar(int a, double b) //8	
+	{
+		System.out.println("bar, int, double");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	
+	1. Aday metotlar: 1, 2, 3, 4, 5, 6, 7
+	2. Uygun metotlar: 5, 6
+	3. En uygun metot: 5 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		int a = 10;
+		double b = 4.5;
+		
+		Sample.foo(a, b);
+	}
+}
+
+class Sample {
+	public static void foo() //1
+	{
+		System.out.println("foo");
+	}
+	
+	public static void foo(int a, int b) //2
+	{
+		System.out.println("foo, int, int");
+	}
+	
+	public static void foo(int a, double b, float c) //3
+	{
+		System.out.println("foo, int, double, float");
+	}
+	
+	public static void foo(int a) //4
+	{
+		System.out.println("foo, int");
+	}
+	
+	public static void foo(float a, double b) //5
+	{
+		System.out.println("foo, float, double");
+	}
+	
+	public static void foo(double b, double a) //6
+	{
+		System.out.println("foo, double, double");
+	}
+	
+	public static void foo(double a) //7
+	{
+		System.out.println("foo, double");
+	}
+	
+	public static void bar(int a, double b) //8	
+	{
+		System.out.println("bar, int, double");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	
+	1. Aday metotlar: Yok
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		int a = 10;
+		double b = 4.5;
+		
+		Sample.fo(a, b); //error
+	}
+}
+
+class Sample {
+	public static void foo() //1
+	{
+		System.out.println("foo");
+	}
+	
+	public static void foo(int a, int b) //2
+	{
+		System.out.println("foo, int, int");
+	}
+	
+	public static void foo(int a, double b, float c) //3
+	{
+		System.out.println("foo, int, double, float");
+	}
+	
+	public static void foo(int a) //4
+	{
+		System.out.println("foo, int");
+	}
+	
+	public static void foo(float a, double b) //5
+	{
+		System.out.println("foo, float, double");
+	}
+	
+	public static void foo(double b, double a) //6
+	{
+		System.out.println("foo, double, double");
+	}
+	
+	public static void foo(double a) //7
+	{
+		System.out.println("foo, double");
+	}
+	
+	public static void bar(int a, double b) //8	
+	{
+		System.out.println("bar, int, double");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	
+	1. Aday metotlar: 1, 2, 3, 4, 5, 6, 7
+	2. Uygun metotlar: Yok
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		boolean a = true;
+		double b = 4.5;
+		
+		Sample.foo(a, b); //error
+	}
+}
+
+class Sample {
+	public static void foo() //1
+	{
+		System.out.println("foo");
+	}
+	
+	public static void foo(int a, int b) //2
+	{
+		System.out.println("foo, int, int");
+	}
+	
+	public static void foo(int a, double b, float c) //3
+	{
+		System.out.println("foo, int, double, float");
+	}
+	
+	public static void foo(int a) //4
+	{
+		System.out.println("foo, int");
+	}
+	
+	public static void foo(float a, double b) //5
+	{
+		System.out.println("foo, float, double");
+	}
+	
+	public static void foo(double b, double a) //6
+	{
+		System.out.println("foo, double, double");
+	}
+	
+	public static void foo(double a) //7
+	{
+		System.out.println("foo, double");
+	}
+	
+	public static void bar(int a, double b) //8	
+	{
+		System.out.println("bar, int, double");
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	
+	1. Aday metotlar: 1, 2, 3, 4, 5, 6, 7
+	2. Uygun metotlar: 2, 5, 6
+	3. En uygun metot: Yok
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		short a = 10;
+		short b = 4;
+		
+		Sample.foo(a, b); //error: ambiguity (ambiguous)
+	}
+}
+
+class Sample {
+	public static void foo() //1
+	{
+		System.out.println("foo");
+	}
+	
+	public static void foo(int a, long b) //2
+	{
+		System.out.println("foo, int, long");
+	}
+	
+	public static void foo(int a, double b, float c) //3
+	{
+		System.out.println("foo, int, double, float");
+	}
+	
+	public static void foo(int a) //4
+	{
+		System.out.println("foo, int");
+	}
+	
+	public static void foo(long a, int b) //5
+	{
+		System.out.println("foo, long, int");
+	}
+	
+	public static void foo(double b, double a) //6
+	{
+		System.out.println("foo, double, double");
+	}
+	
+	public static void foo(double a) //7
+	{
+		System.out.println("foo, double");
+	}
+	
+	public static void bar(int a, double b) //8	
+	{
+		System.out.println("bar, int, double");
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: Method overload resolution kavramının temel türler dışındaki bazı ayrıntıları konular içerisinde
+	ele alınacaktır
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	
+	Nesne Yönelimli Programlama(Object Oriented Programming): Nesne yönelimli programlama tekniğini (NYPT) tek bir cümle
+	ile açıklamak pek mümkün değildir. Ancak, bu tekniği bilen veya belirli ölçüde fikri olan birisine "sınıflar kullanarak
+	program yazma tekniğidir" denir.  
+----------------------------------------------------------------------------------------------------------------------*/
 
 
 /*----------------------------------------------------------------------------------------------------------------------
