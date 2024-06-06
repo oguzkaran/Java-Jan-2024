@@ -918,7 +918,7 @@ class App {
 ----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
-	Değişken, bellekte ayrılan bir bölge ile işlşem yapılmasını saplar yani o bölgeyi temsil eder. Bir değişken için
+	Değişken, bellekte ayrılan bir bölge ile işlem yapılmasını sağlar yani o bölgeyi temsil eder. Bir değişken için
 	bellekte yer ayrılma detayları ileride ele alınacaktır. Değişken bildiriminin genel biçimi şu şekildedir:
 	
 		<tür> <isim>;
@@ -10936,26 +10936,327 @@ class Sample {
 ----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
-	Anımsanacağı gibi bir değişkenin bellekte yaratılmasıyla (yani bellekte yer ayrılması), yok edilmesi (yani bellekten
-	atılması) arasındaki süreye "ömür (storage duration)" denilmektedir. Peki, bir değişken için ayrılan bellek bölgesi
-	neresidir? Bir Java uygulaması çalıştırıldığında, o uygulama için iki tane bellek alanı ayrılır: stack, heap. Aslında
-	aşağı seviyede başka bellek alanları da ayrılır. Stack ve heap, Java seviyesinde ayrılan alanlar olarak düşünülebilir.
-	Stack ve heap alanları RAM'de organize edilir. Program çalıştırılırken bu alanların uzunlukları belirlenebilir. Herhangi
-	bir belirleme yapılmazsa default uzunluklar alınır. Default uzunluklar sistemden sisteme değişebilmektedir. 
+	6 Haziran 2024
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anımsanacağı gibi bir değişkenin (ya da nesnenin) bellekte yaratılmasıyla (yani bellekte yer ayrılması), yok edilmesi 
+	(yani bellekten atılması) arasındaki süreye "ömür (storage duration)" denilmektedir. Peki, bir değişken için ayrılan 
+	bellek bölgesi neresidir? Bir Java uygulaması çalıştırıldığında, o uygulama için iki tane bellek alanı ayrılır: 
+	stack, heap. Aslında aşağı seviyede başka bellek alanları da ayrılır. Stack ve heap, Java seviyesinde ayrılan alanlar 
+	olarak düşünülebilir. Stack ve heap alanları RAM'de organize edilir. Program çalıştırılırken bu alanların uzunlukları 
+	belirlenebilir. Herhangi bir belirleme yapılmazsa default uzunluklar alınır. Default uzunluklar sistemden sisteme 
+	değişebilmektedir. 
 	
+	Anahtar Notlar: Yukarıdaki cümlelerde geçen nesne (object) kavramı ileride ele alınacaktır.
 	
 	Anahtar Notlar: Veri Yapısı (Data Structure), genel olarak birbiri ile ilişkili olan verilerin bir arada ve belirli
 	bir takım algoritmalara göre tutulmasını sağlayan ve istenildiğinde bu verilere erişilebilen yapılardır. Örneğin
-	dizi elemanları aynı türden olan ve bellekte peşpeşe olarak yaratılan bir veri yapısıdır. Stack, LIFO (Last In First Out)
+	dizi, elemanları aynı türden olan ve bellekte peşpeşe olarak yaratılan bir veri yapısıdır. Stack, LIFO (Last In First Out)
 	kuyruk sistemi biçiminde çalışan bir veri yapısıdır. Tipik olarak editör programlarının "undo-redo" mekanizmaları
 	bu şekilde gerçekleştirilir (implementation). Stack veri yapısına eleman ekleme işlemine "push", eleman silme (bazı
 	yaklaşımlara göre hem silme hem elemanı elde etme) işlemine "pop" denir. Uygulama için ayrılan stack alanında yer
 	ayrılması işlemi stack veri yapısı biçiminde (donanımsal da destek ile) yapıldığından, bu alana "stack alanı" 
-	denilmektedir. Stack alanında, yaratma ve yok etme işlemi çok hızlı bir biçimde gerçekleşmektedir 
+	denilmektedir. Stack alanında, yaratma ve yok etme işlemi çok hızlı bir biçimde gerçekleşmektedir.
+	
+	Yerel değişkenler ve parametre değişkenleri stack alanında yaratılırlar. Stack alanı doldur boşalt biçiminde çalışan
+	bellek alanıdır. Böylece program çalışma zamanında, toplamda, bu alanın uzunluğundan daha fazla değişken için yer
+	ayrılabilir
 ----------------------------------------------------------------------------------------------------------------------*/
 
+/*----------------------------------------------------------------------------------------------------------------------	
+	Yerel bir değişken, akış kod bakımından bildirim noktasına geldiğinde yaratılır, bildirildiği blok sonunda yok edilir.
+	Bu durumda bir yerel değişkenin yaratılması "push" komutu ile, yok edilmesi ise "pop" komutu ile yapılır. Peşpeşe
+	bildirilen (yani çalışma zamanında peşpeşe yaratılan) yerel değişkenlerin yok edilmesi ters sırada yapılır. Buna göre
+	faaliyet alanı (scope) ve ömür arasında dolaylı bir ilişki söz konusudur. Ancak yine de faaliyet alanı derleme zamanına 
+	ilişkin, ömür ise çalışma zamanına ilişkindir. Yerel bir değişkenin bildirildiği blok sonlandığında yok edilmesi dolayısıyla
+	faaliyet alanı da bildirildiği yerden bildirildiği bloğun sonuna kadardır
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		int a; //a yaratıldı (push a)
+		double b; //b yaratıldı (push b)
+		
+		{
+			int c; //c yaratıldı (push c)
+			float d; // d yaratıldı (push d)
+			
+			//...
+		} //d yok edildi (pop d) -> c yok edildi (pop c)
+		
+		int x;
+		
+	} //b yok edildi (pop b) -> a yok edildi (pop a)
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	
+	Bir parametre değişkeni ait olduğu metot çağrıldığında yaratılır (push), metot çağrısı bittiğinde yok edilir (pop)
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		Sample.foo(10, 20); //a yaratıldı (push a) -> b yaratıldı (push b)
+		//b yok edildi (pop b), a yok edildi (pop a)
+		
+		//...
+		
+		Sample.foo(10, 20); //a yaratıldı (push a) -> b yaratıldı (push b)
+		//b yok edildi (pop b), a yok edildi (pop a)
+		
+		//...
+	} 
+}
+
+
+class Sample {
+	public static void foo(int a, int b)
+	{
+		//...
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	
+	Bir parametre değişkeni ait olduğu metot çağrıldığında yaratılır (push), metot çağrısı bittiğinde yok edilir (pop)
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		Sample.foo(10, 20); //a yaratıldı (push a) -> b yaratıldı (push b)
+		//b yok edildi (pop b), a yok edildi (pop a)
+		
+		//...
+		
+		Sample.foo(10, 20); //a yaratıldı (push a) -> b yaratıldı (push b)
+		//b yok edildi (pop b), a yok edildi (pop a)
+		
+		//...
+	} 
+}
+
+
+class Sample {
+	public static void foo(int a, int b)
+	{
+		//...
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	
+	Sınıf içerisinde, tüm metotların dışında bildirilen değişkenlere sınıf veri elemanı (class data member/member variable)
+	denir. Sınıf veri elemanları metotlarda olduğu gibi erişim belirleyiciye (public, protected, no-modifier, private)
+	sahip olabilirler. Yine metotlarda olduğu gibi ilgili konuya gelene kadar tüm veri elemanlarımızı public olarak 
+	bildireceğiz. Sınıf veri elemanları da metotlarda olduğu gibi static veya non-static olabilirler. static anahtar 
+	sözcüğü ile bildirilmemişse non-static olur.
+	
+	 Anahtar Notlar: Sınıf içerisindeki bildirimlere sınıfın elemanları (members) denir. Bu, anlamda veri elemanı ve metot
+	 sınıfın elemanlarıdır. Sınıfın başka elemanları da vardır. Sınıf veri elemanlarına "data member/member variable/field"
+	 denilmektedir. Sınıfın elemanı bir alt prograsm ise metot denir. Sınıfın diğer elemanları konular içerisinde ele
+	 alınacaktır.
+	 
+	 Bir sınıf veri elemanının faaliyet alanı ve ömrü ileride ele alınacaktır
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class Sample {
+	int a;
+	private int x;	 
+	
+	public static void foo()
+	{
+		//...
+	}
+	
+	protected double b;
+	
+	public static float c;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	
+	Java'da sınıf dışında değişken bildirimi geçersizdir ya da başka bir deyişle Java'da bir değişkenin bir sınıf içerisinde
+	bildirilmiş olması (veri elemanı veya parametre değişkeni veya yerel değişken olarak) gerekir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+int a; //error
+
+/*----------------------------------------------------------------------------------------------------------------------	
+	Sınıf bildirimi aslında bir tür bildirimidir. Sınıf bildirimi dışında da tür bildirimleri söz konusudur. Bu şekilde
+	yapılan bildirimlere "user defined type (UDT)" denilmektedir. Bu durumda sınıf da bir UDT'dir. Sınıf dışındaki UDT'ler
+	konular içerisinde ele alınacaktır
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class Person {
+	//..
+}
+
+class Server {
+	//...
+}
+
+class USBPort {
+	//...
+}
+
+class TCP {
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	
+	Madem ki sınıf bildirimi bir tür bildirimidir, bu durumda sınıf türünden değişkenler bildirilebilir
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		Person p;
+		Server s;
+		USBPort u;
+		TCP t;
+		
+		
+	} 
+}
+
+class Person {
+	//..
+}
+
+class Server {
+	//...
+}
+
+class USBPort {
+	//...
+}
+
+class TCP {
+	//...
+}
+
+
 /*----------------------------------------------------------------------------------------------------------------------
-	Yerel değişkenler ve parametre değişkenleri stack alanında yaratılırlar. 
+	Java'da türler kategori olarak iki gruba ayrılır: değer türleri (value types), referans türleri (reference types).
+	T bir tür ismi olmak üzere, T türden bir değişken içerisinde bir adres tutuluyorsa T bir referans türüdür, tutulmuyorsa
+	bir değer türüdür. Ya da başka bir deyişle, T türden bir değişkenin içerisindeki değer bir adres ise T referans türü,
+	adres değilse değer türüdür. Java'da temel türler (primitive/built-in/predefined types) değer türleridir. Yani temel
+	bir türden değişken içerisinde adres tutulmaz. Java'da bir sınıf referans türüdür.  Öyleyse sınıf türünden bir 
+	değişken içerisinde adres tutulur. Aslında genel olarak temel türler dışında kalan türler (yani UDT'ler) referans
+	türleridir
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	
+	Sınıf türünden değişkenlere referans değişken (reference variable) ya da kısaca referans (reference) denir. Java
+	seviyesinde adres (address) terimi yerine referans (reference) terimi de kullanılmaktadır. Referans dendiğinde
+	ya bir adres ya da bir referans değişken kastedilmiş olur. Buna göre örneğin bir cümlede "reference of an object"
+	gibi bir içerik söz konusuysa, buradaki referans adres anlamındadır. Ya da örneğin bir cümlede "address of an object
+	is assign to a reference" gibi bir içerik söz konusuysa, buradaki referans, değişken anlamındadır.
+	
+	Peki bir referansa atanbacak adres nasıl elde edilecektir?
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		Person p; //p referans (değişken)
+		Server s; //s referans (değişken)
+		USBPort u; //u referans (değişken)
+		TCP t; //t referans (değişken)
+		
+		
+	} 
+}
+
+class Person {
+	//..
+}
+
+class Server {
+	//...
+}
+
+class USBPort {
+	//...
+}
+
+class TCP {
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	
+	- Sınıf türünden bellekte ayrılan bir alana nesne (object) denir.
+	
+	- Nesneler heap alanında yaratılırlar. Java'da stack'de nesne yaratılamaz.
+	
+	- Java'da bir nesnenin kendisi tutulamaz, adresi tutulabilir. Bu adres de aynı türden bir referans (değişken) içerisinde
+	tutulabilir.
+	
+	- Java'da nesne yaratılması new operatörü ile yapılır. new operatörünün kullanımına ilişkin genel biçimi şu şekildedir:
+	
+		new <sınıf ismi>([argümanlar]);
+	
+	Bu operatör özel amaçlı tek operandlı ve önek durumundadır. Operatör, yaratılmış olan nesnenin adresini üretir. Bir
+	nesne ile referans için hangi uzunlukta yerler ayrılacağı ileride ele alınacaktır. Bu operatörün yan etkisi yokrur. 
+	Aşağıdaki örnekte p, s, u ve t birer nesne DEĞİLDİR, ilgili türden nesnelerin adreslerini tutan referans değişkenlerdir.
+	Örnekte *, **, *** ve **** ile belirtilen deyimlerde ilgili türden nesneler yaratılmış ve ilgili türden referans
+	değişkenlere adresleri atanmıştır. Bu durumda bir referans değişkene bir adres atandığında o referans o nesneyi
+	gösteriyor (reference to) duruma gelmiş olur. 
+	
+	- Bir nesne ilgili sınıf türünden bir örnektir. Buna İngilizce olarak "instance" terimi de kullanılır. Bu anlamda 
+	nesne yaratma işlemi için de "create" fiili ile birlikte "instantiate" fiili de kullanılır.
+	
+	- Referans ve nesne kavramları birbirinden farklıdır. Referans bir nesneyi gösterir ya da adresi anlamında kullanılır.
+	
+	- Her new işlemi yeni bir nesne yaratmak demektir
+	
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		Person p; //p referans (değişken)
+		Server s; //s referans (değişken)
+		USBPort u; //u referans (değişken)
+		TCP t; //t referans (değişken)
+		
+		p = new Person(); //*
+		s = new Server(); //**
+		u = new USBPort(); //***
+		t = new TCP(); //****
+		
+	} 
+}
+
+class Person {
+	//..
+}
+
+class Server {
+	//...
+}
+
+class USBPort {
+	//...
+}
+
+class TCP {
+	//...
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	
 ----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
