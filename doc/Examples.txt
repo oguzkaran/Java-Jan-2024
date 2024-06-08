@@ -7442,7 +7442,7 @@ class App {
 	algoritmaya ilişkin üretilen kodun hızlı çalışması için, size optimization ise üretilen kodun daha az yer kaplaması
 	için yapılır. Derleyicinin pek çok durum için optimizasyon yaklaşımı vardır. 
 	 
-	Derleyiciler sabit ifadelerinin değerlerini arakoda hesaplayaıp yazarlar. Yani sabit ifadelerinin değerleri çalışma
+	Derleyiciler sabit ifadelerinin değerlerini arakoda, hesaplayıp yazarlar. Yani sabit ifadelerinin değerleri çalışma
 	zamanında hesaplanmaz. Buna "constant folding optimization" denir. 
 ----------------------------------------------------------------------------------------------------------------------*/
 
