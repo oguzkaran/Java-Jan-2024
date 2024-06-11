@@ -11055,12 +11055,12 @@ class Sample {
 	bildireceğiz. Sınıf veri elemanları da metotlarda olduğu gibi static veya non-static olabilirler. static anahtar 
 	sözcüğü ile bildirilmemişse non-static olur.
 	
-	 Anahtar Notlar: Sınıf içerisindeki bildirimlere sınıfın elemanları (members) denir. Bu, anlamda veri elemanı ve metot
-	 sınıfın elemanlarıdır. Sınıfın başka elemanları da vardır. Sınıf veri elemanlarına "data member/member variable/field"
-	 denilmektedir. Sınıfın elemanı bir alt prograsm ise metot denir. Sınıfın diğer elemanları konular içerisinde ele
-	 alınacaktır.
+	Anahtar Notlar: Sınıf içerisindeki bildirimlere sınıfın elemanları (members) denir. Bu, anlamda veri elemanı ve metot
+	sınıfın elemanlarıdır. Sınıfın başka elemanları da vardır. Sınıf veri elemanlarına "data member/member variable/field"
+	denilmektedir. Sınıfın elemanı bir alt program ise metot denir. Sınıfın diğer elemanları konular içerisinde ele
+	alınacaktır.
 	 
-	 Bir sınıf veri elemanının faaliyet alanı ve ömrü ileride ele alınacaktır
+	Bir sınıf veri elemanının faaliyet alanı ve ömrü ileride ele alınacaktır
 ----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -11192,6 +11192,10 @@ class TCP {
 	//...
 }
 
+/*----------------------------------------------------------------------------------------------------------------------
+	11 Haziran 2024
+----------------------------------------------------------------------------------------------------------------------*/
+
 /*----------------------------------------------------------------------------------------------------------------------	
 	- Sınıf türünden bellekte ayrılan bir alana nesne (object) denir.
 	
@@ -11205,7 +11209,7 @@ class TCP {
 		new <sınıf ismi>([argümanlar]);
 	
 	Bu operatör özel amaçlı tek operandlı ve önek durumundadır. Operatör, yaratılmış olan nesnenin adresini üretir. Bir
-	nesne ile referans için hangi uzunlukta yerler ayrılacağı ileride ele alınacaktır. Bu operatörün yan etkisi yokrur. 
+	nesne ile referans için hangi uzunlukta yerler ayrılacağı ileride ele alınacaktır. Bu operatörün yan etkisi yoktur. 
 	Aşağıdaki örnekte p, s, u ve t birer nesne DEĞİLDİR, ilgili türden nesnelerin adreslerini tutan referans değişkenlerdir.
 	Örnekte *, **, *** ve **** ile belirtilen deyimlerde ilgili türden nesneler yaratılmış ve ilgili türden referans
 	değişkenlere adresleri atanmıştır. Bu durumda bir referans değişkene bir adres atandığında o referans o nesneyi
@@ -11216,8 +11220,7 @@ class TCP {
 	
 	- Referans ve nesne kavramları birbirinden farklıdır. Referans bir nesneyi gösterir ya da adresi anlamında kullanılır.
 	
-	- Her new işlemi yeni bir nesne yaratmak demektir
-	
+	- Her new işlemi yeni bir nesne yaratmak demektir.
 ----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -11233,12 +11236,11 @@ class App {
 		s = new Server(); //**
 		u = new USBPort(); //***
 		t = new TCP(); //****
-		
 	} 
 }
 
 class Person {
-	//..
+	//...
 }
 
 class Server {
@@ -11250,6 +11252,89 @@ class USBPort {
 }
 
 class TCP {
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	
+	Sınıfın non-static bir veri elemanına referans ve nokta operatörü ile erişilir. Nokta operatörü iki operandlı ve araek 
+	durumundadır. Bu operatörün birinci operandı bir referans, ikinci operandı non-static bir veri elemanı ise bu durumda 
+	o veri  elemanına ilişkin değişkeni üretir. 
+	
+	Sınıfın non-static veri elemanları her nesne yaratıldığında nesnenin içerisinde yaratılırlar. Yani sınıfın non-static
+	veri elemanları nesneye özgüdür ya da başka bir deyişle her nesne için ayrıdır. Bu durumda referans ile non-static 
+	bir veri elemanına erişmek aslında referansın gösterdiği nesnenin içerisinde elemana erişmek anlamına  gelir 
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		Sample s1, s2;
+		
+		s1 = new Sample();
+		s2 = new Sample();		
+		
+		s1.x = 10;
+		s1.y = true;
+		
+		s2.x = 20;
+		s2.y = false;
+		
+		System.out.printf("s1.x = %d, s1.y = %b%n", s1.x, s1.y);
+		System.out.printf("s2.x = %d, s2.y = %b%n", s2.x, s2.y);
+	} 
+}
+
+class Sample {
+	public int x;
+	public boolean y;
+	
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	
+	Bir nesne yaratıldığında nesneye ait non-static veri elemanlarına default değerler (default/zero value) atanır. Default
+	değer mantıksal sıfır (türe özgü sıfır) değeridir. Örneğin int türü için default değer sıfırdır, double türü için
+	default değer yine sıfırdır, boolean türü için ise false değeridir  
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		Sample s;
+		
+		s = new Sample();		
+	
+		System.out.printf("s.x = %d, s.y = %b%n", s.x, s.y);		
+	} 
+}
+
+class Sample {
+	public int x;
+	public boolean y;
+	
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	
+	Aşağıdaki örnekte değer verilmemiş bir yerel değişkenin kullanılmasından dolayı error oluşur  
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		Sample s;			
+		
+		System.out.printf("s.x = %d, s.y = %b%n", s.x, s.y); //error
+	} 
+}
+
+class Sample {
+	public int x;
+	public boolean y;
+	
 	//...
 }
 
