@@ -11060,13 +11060,16 @@ class Sample {
 	denilmektedir. Sınıfın elemanı bir alt program ise metot denir. Sınıfın diğer elemanları konular içerisinde ele
 	alınacaktır.
 	 
-	Bir sınıf veri elemanının faaliyet alanı ve ömrü ileride ele alınacaktır
+	Bir sınıf veri elemanının faaliyet alanı ve ömrü ileride ele alınacaktır. Sınıf içerisindeki veri elemanları 
+	aynı türdense, aynı erişim belirleyiciye sahipse ve static veya non-static olma bakımından aynı ise virgül ile 
+	ayrılarak da bildirilebilir.
 ----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
 class Sample {
 	int a;
-	private int x;	 
+	private int x, y;
+	private int z;	 
 	
 	public static void foo()
 	{
@@ -11256,9 +11259,9 @@ class TCP {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------	
-	Sınıfın non-static bir veri elemanına referans ve nokta operatörü ile erişilir. Nokta operatörü iki operandlı ve araek 
-	durumundadır. Bu operatörün birinci operandı bir referans, ikinci operandı non-static bir veri elemanı ise bu durumda 
-	o veri  elemanına ilişkin değişkeni üretir. 
+	Sınıfın non-static bir veri elemanına sınıf dışından referans ve nokta operatörü ile erişilir. Nokta operatörü iki 
+	operandlı ve araek durumundadır. Bu operatörün birinci operandı bir referans, ikinci operandı non-static bir veri 
+	elemanı ise bu durumda o veri  elemanına ilişkin değişkeni üretir. 
 	
 	Sınıfın non-static veri elemanları her nesne yaratıldığında nesnenin içerisinde yaratılırlar. Yani sınıfın non-static
 	veri elemanları nesneye özgüdür ya da başka bir deyişle her nesne için ayrıdır. Bu durumda referans ile non-static 
@@ -11338,11 +11341,237 @@ class Sample {
 	//...
 }
 
+/*----------------------------------------------------------------------------------------------------------------------
+	13 Haziran 2024
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıfın non-static veri elemanı nesneye özel olduğundan sınıf ile temsil edilen kavrama ilişkin bir karakteristiği (characteristics)
+	ya da başka bir deyişle bir özniteliği (attribute) belirtir. Bu durumda bir sınıf non-static veri elemanları ile
+	bir bileşik türdür (compound type). Örneğin, analitik düzlemde bir noktanın iki tane bileşenmi vardır: axis, ordinate.
+	Bu durumda analitik düzlemde bir "nokta" kavramı ne tek başına axis ne de tek başına ordinate'dir. İkisi birlikte
+	bir noktadır. Bu durumda programcı bu noktayı temsil eden bir sınıf bildiriminde non-static veri elemanı olarak
+	(en azından) axis ve ordinate bilgilerini tutar. Dikkat edilirse sınıfın isminin belirlenmesinden, içerisindeki 
+	elemanların belirlenmesine kadarki kısım sınıfın ait olduğu "domain"'e göre ele alınır.
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Peki bir referansın uzunluğu ne kadardır? Bir referansın uzunluğu sistemin adresleyebileceği kadardır. Yani örneğin
+	32 bit bir sistemde 4 byte, 64 bit bir sistemde 8 byte'dır. Bu anlamda adresler tamsayı formatında olduğundan tutuluş
+	biçimleri yine işaretsiz ikiye tümleme formatıdır. Referansların uzunluğu türe göre değişmez. Bu anlamda bir uygulama
+	için ilgili sistemde tüm referansların uzunluğu aynıdır.
+	
+	Peki bir nesnenin uzunluğu ne kadardır?	Bir nesnenin uzunluğu "en az, ilişkin olduğu sınıfın non-static veri elemanlarının
+	toplam uzunluğu kadardır". Burada en az kavramıyla sisteme ilişkin başka bilgilerin de eklenebileceği anlatılmaktadır.
+	Detaylar önemsizdir. Java programcısı açısından "uzunluk non-static veri elemanları ile belirlenir" olarak algılanmalıdır.
+	
+	Peki non-static bir veri elemanının ömrü (storage duration) ne kadardır? Non-static bir veri elemanı nesne yaratıldığında 
+	yaratılır. Nesne yok edildiğinde yok edilir. Java'da nesne "garbage collector" tarafından yok edilir. Bir nesnenin 
+	yok edilmesine ilişkin detaylar ileride ele alınacaktır.
+	
+	Peki non-static bir veri elemanının faaliyet alanı nedir? Bu konu ileride ele alınacaktır. 
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	
+	Sınıfın static bir veri elemanı nesne içerisinde yaratılmaz. Sınıfın static bir veri elemanına sınıf dışından sınıf 
+	ismi ve nokta operatörü ile erişilir. Nokta operatörü sınıf ismi ve static veri elemanı ile kullanıldığında veri
+	elemanına ilişkin değişkeni üretir. Sınıfın static veri elemanları sınıfın bir elemanı (member) ilk kez kullanıldığında
+	yaratılır ve program sonuna kadar yaşarlar. Bu durumda sınıfın static bir veri elemanı stack'de yaratılamaz. Static
+	veri elemanlarının yaratıldığı alana ilişkin detaylar söz konusu olsa da genelde dolaylı olarak heap'de olduğu
+	söylenebilir.  
+	
+	Bu durumda static bir veri elemanına erişmek için bir nesne yaratılması gerekmez. Static veri elemanlarına da 
+	yaratıldıklarında default değerler atanır
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		System.out.printf("Sample.x = %d, Sample.y = %b%n", Sample.x, Sample.y);
+		
+		Sample.x = 10;
+		Sample.y = true;
+		
+		System.out.printf("Sample.x = %d, Sample.y = %b%n", Sample.x, Sample.y);
+		
+		++Sample.x;
+		
+		System.out.printf("Sample.x = %d, Sample.y = %b%n", Sample.x, Sample.y);
+	} 
+}
+
+class Sample {	
+	public static boolean y;
+	public static int x;	
+	
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	
+	Aşağıdaki örnekte sayaçlar sınıfları kullanan programcı tarafından tutulmuş ve gerektiğinde artırılmıştır. Bu durumda
+	sayacı tutan programcı artırma işlemini unutabilir. Ayrıca başka türler için de sayaçlar tutulması gerektiğinde
+	sayaç değişken bildirimi hem isim açısından hem de kod yükü açısından bir maliyet getirecektir. Buradaki maliyet
+	geliştirme zamanı maaliyetidir. Üstelik örnek bir demodur ve daha pek çok da algoritmik detay durumlar söz konusudur
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		DemoGameApp.run();
+	}
+}
+
+class DemoGameApp {
+	public static void run()
+	{		
+		int alienCount = 0;
+		int soldierCount = 0;
+		//...
+		
+		for (int i = 0; i < 10; ++i) {
+			Alien a = new Alien();
+			
+			++alienCount;			
+			//...
+		}
+		
+		for (int i = 0; i < 20; ++i) {
+			Soldier soldier = new Soldier();
+			
+			++soldierCount;
+			
+			//...
+		}
+		
+		//...
+		
+		System.out.printf("Number of aliens:%d%n", alienCount);
+		System.out.printf("Number of soldiers:%d%n", soldierCount);			
+	}
+}
+
+class Alien {
+	public int color;
+	public int armCount;
+	//...
+}
+
+class Soldier {
+	 public int title;
+	 public int gunCount;
+	 //...
+}
+
+class Civilian {
+	//...
+}
+
+class Building {
+	//...
+}
+
+class Animal {
+	//...
+}
+
+//...
+
+/*----------------------------------------------------------------------------------------------------------------------	
+	Yukarıdaki demo örnekte sınıflara count static veri elemanı eklenerek anlatılan problemler çözülebilir. 
+	
+	Anahtar Notlar: ** ve *** ile belirtilen kodların detayları şu an önemsizdir. Burada sayacın nesne yaratıldıkça
+	artırıldığına odaklanınız. Buradaki detaylar ileride ele alınacaktır
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		DemoGameApp.run();
+	}
+}
+
+class DemoGameApp {
+	public static void run()
+	{		
+		//...
+		
+		for (int i = 0; i < 10; ++i) {
+			Alien a = new Alien();		
+				
+			//...
+		}
+		
+		for (int i = 0; i < 20; ++i) {
+			Soldier soldier = new Soldier();		
+			
+			//...
+		}
+		
+		//...
+		
+		System.out.printf("Number of aliens:%d%n", Alien.count);
+		System.out.printf("Number of soldiers:%d%n", Soldier.count);			
+	}
+}
+
+class Alien {
+	public static int count;
+	public int color;
+	public int armCount;
+	
+	// ...
+	public Alien() //**
+	{
+		//...
+		++count;		
+	}
+	//...
+}
+
+class Soldier {
+	
+	public static int count;
+	public int title;
+	public int gunCount; 
+	 
+	 //...
+
+	
+	public Soldier() //***
+	{
+		++count;
+		//...
+	}
+	 
+	 //...
+}
+
+class Civilian {
+	public static int count;
+	//...
+}
+
+class Building {
+	public static int count;
+	//...
+}
+
+class Animal {
+	public static int count;
+	//...
+}
+
+//...
+
 
 
 /*----------------------------------------------------------------------------------------------------------------------
-	
+
 ----------------------------------------------------------------------------------------------------------------------*/
+
 
 /*----------------------------------------------------------------------------------------------------------------------
 	
