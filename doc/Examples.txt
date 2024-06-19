@@ -11377,8 +11377,7 @@ class Sample {
 	ismi ve nokta operatörü ile erişilir. Nokta operatörü sınıf ismi ve static veri elemanı ile kullanıldığında veri
 	elemanına ilişkin değişkeni üretir. Sınıfın static veri elemanları sınıfın bir elemanı (member) ilk kez kullanıldığında
 	yaratılır ve program sonuna kadar yaşarlar. Bu durumda sınıfın static bir veri elemanı stack'de yaratılamaz. Static
-	veri elemanlarının yaratıldığı alana ilişkin detaylar söz konusu olsa da genelde dolaylı olarak heap'de olduğu
-	söylenebilir.  
+	veri elemanlarının yaratıldığı alana ilişkin detaylar söz konusu olsa da dolaylı olarak heap'de olduğu söylenebilir.  
 	
 	Bu durumda static bir veri elemanına erişmek için bir nesne yaratılması gerekmez. Static veri elemanlarına da 
 	yaratıldıklarında default değerler atanır
@@ -11409,10 +11408,10 @@ class Sample {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------	
-	Aşağıdaki örnekte sayaçlar sınıfları kullanan programcı tarafından tutulmuş ve gerektiğinde artırılmıştır. Bu durumda
-	sayacı tutan programcı artırma işlemini unutabilir. Ayrıca başka türler için de sayaçlar tutulması gerektiğinde
-	sayaç değişken bildirimi hem isim açısından hem de kod yükü açısından bir maliyet getirecektir. Buradaki maliyet
-	geliştirme zamanı maaliyetidir. Üstelik örnek bir demodur ve daha pek çok da algoritmik detay durumlar söz konusudur
+	Aşağıdaki demo örnekte sayaçlar, sınıfları kullanan programcı tarafından tutulmuş ve gerektiğinde artırılmıştır. Bu 
+	durumda programcı artırma işlemini unutabilir. Ayrıca başka türler için de sayaçlar tutulması gerektiğinde sayaç için
+	değişken bildirimi hem isim açısından hem de kod yükü açısından bir maliyet getirecektir. Buradaki maliyet geliştirme
+	zamanı maaliyetidir. Üstelik örnek bir demodur ve algoritmik bakımdan pek çok detaylı durum söz konusudur
 ----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
@@ -11479,7 +11478,7 @@ class Animal {
 //...
 
 /*----------------------------------------------------------------------------------------------------------------------	
-	Yukarıdaki demo örnekte sınıflara count static veri elemanı eklenerek anlatılan problemler çözülebilir. 
+	Yukarıdaki demo örnekte sınıflara "count static veri elemanı eklenerek" anlatılan problemler çözülebilir. 
 	
 	Anahtar Notlar: ** ve *** ile belirtilen kodların detayları şu an önemsizdir. Burada sayacın nesne yaratıldıkça
 	artırıldığına odaklanınız. Buradaki detaylar ileride ele alınacaktır
@@ -11565,7 +11564,6 @@ class Animal {
 }
 
 //...
-
 
 
 /*----------------------------------------------------------------------------------------------------------------------
