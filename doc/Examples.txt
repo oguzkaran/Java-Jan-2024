@@ -11536,7 +11536,7 @@ class Soldier {
 	public int title;
 	public int gunCount; 
 	 
-	 //...
+	//...
 
 	
 	public Soldier() //***
@@ -11566,10 +11566,168 @@ class Animal {
 //...
 
 
+/*----------------------------------------------------------------------------------------------------------------------
+	20 Haziran 2024
+----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıfın non-static bir veri elemanına sınıf dışından sınıf ismi ile erişilemez. Erişilebilseydi sınıfın ilgili elemanı
+	hangi nesneye ait olurdu? Bu sebeple erişilemez  
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		Sample.x = 10; /error
+	}
+}
+
+class Sample {
+	public int x;
+	public boolean y;
+	
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aslında sınıfın static bir veri elemanına sınıf dışından referans ile de erişilebilir. Aslında bu erişimin sınıf ismi
+	ile erişmekten farkı yoktur. Dilin Matematiksel anlatımı gereği bu sentaks geçerlidir. Ancak Java programcısının bu
+	şekilde erişmesi kesinlikle tavsiye edilmez. Bu durum Java programcısı açısında adeta bir error değerlendirilmeli
+	dolayısıyla kullanılmamalıdır. Kullanımı durumundan kodun okunabilirliğini/algılanabilirliğini olumsuz etkilediğine
+	dikkat ediniz
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		Sample s = new Sample();
+		
+		s.x = 10; //Gönlümüzün error'u
+		s.y = true; //Gönlümüzün error'u
+		
+		System.out.printf("Sample.x = %d, Sample.y = %b%n", Sample.x, Sample.y);
+	}
+}
+
+class Sample {
+	public static int x;
+	public static boolean y;
+	
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıfnın non-static bir metoduna sınıf dışından referans ve nokta operatörü ile erişelebilir. Sınıf ismi ile erişilemez.
+	Sınıfın non-static metotlarının nesne ile ilişkisi ileride ele alınacaktır
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		Sample s = new Sample();
+		
+		s.foo();
+		
+		Sample.foo(); //error
+	}
+}
+
+class Sample {
+	//...
+	
+	public void foo()
+	{
+		//...
+	}
+	//...
+}
+
 
 /*----------------------------------------------------------------------------------------------------------------------
-
+	Anahtar Notlar: non-static metotlar nesne içeriisnde tıutulmaz. Aslında metotlar aşağı seviyede genel olarak
+	ismine "code section" denilen bir bölümde tutulurlar. Bu bölümün detayları ve Java düzeyindeki karşılığı burada
+	ele alınamayacaktır. Bu durumda metotlar stack veya heap alanında tutulmazlar değil mi?
 ----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıfnın static bir metoduna sınıf dışından sınıf ismi ve nokta operatörü ile erişilebilir. static veri elemanlarında
+	olduğuı gibi referans ve nokta operatörü ile de erişlebilir. Yine Java programcısı olarak static mettolara da 
+	referans ile erişmeyeceğiz. Sınıfın static metotlarının tür ile ilişkisi ileride ele alınacaktır
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		Sample.foo();
+		
+		Sample s = new Sample();
+		
+		s.foo(); //gönlümüzün error'u		
+	}
+}
+
+class Sample {
+	//...
+	public static void foo()
+	{
+		//...
+	}
+	//...
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: Dikkat edilirse yukarıdaki anlatılanlar, sınıf dışından yani başka bir sınıfın içinden olan erişimler 
+	içindir 
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıfın non-static bir veri elemanına ait olduğu sınıfın non-static bir metodu içerisinde doğrudan yani nokta operatörü
+	kullanmadan erişilebilir. Doğrudan erişilen non-static veri elemanı, non-static metodun çağrılmasında kullanılan referansın
+	gösterdiği nesnenin veri elemanıdır
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		Sample s1 = new Sample();
+		Sample s2 = new Sample();
+		
+		s1.foo(10);
+		s2.foo(20);
+		
+		System.out.printf("s1.x = %d%n", s1.x);
+		System.out.printf("s2.x = %d%n", s2.x);
+		s1.bar();
+		s2.bar();
+	}
+}
+
+class Sample {
+	public int x;
+	//...
+	public void foo(int a)
+	{
+		x = a;
+	}
+	
+	public void bar()
+	{
+		System.out.printf("x = %d%n", x);
+	}
+	//...
+}
+
 
 
 /*----------------------------------------------------------------------------------------------------------------------
