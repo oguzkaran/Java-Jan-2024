@@ -1,0 +1,70 @@
+/*----------------------------------------------------------------------------------------------------------------------	
+	Aşağıdaki örnekte sayaçlar sınıfları kullanan programcı tarafından tutulmuş ve gerektiğinde artırılmıştır. Bu durumda
+	sayacı tutan programcı artırma işlemini unutabilir. Ayrıca başka türler için de sayaçlar tutulması gerektiğinde
+	sayaç değişken bildirimi hem isim açısından hem de kod yükü açısından bir maliyet getirecektir. Buradaki maliyet
+	geliştirme zamanı maaliyetidir. Üstelik örnek bir demodur ve daha pek çok da algoritmik detay durumlar söz konusudur
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		DemoGameApp.run();
+	}
+}
+
+class DemoGameApp {
+	public static void run()
+	{		
+		int alienCount = 0;
+		int soldierCount = 0;
+		//...
+		
+		for (int i = 0; i < 10; ++i) {
+			Alien a = new Alien();
+			
+			++alienCount;			
+			//...
+		}
+		
+		for (int i = 0; i < 20; ++i) {
+			Soldier soldier = new Soldier();
+			
+			++soldierCount;
+			
+			//...
+		}
+		
+		//...
+		
+		System.out.printf("Number of aliens:%d%n", alienCount);
+		System.out.printf("Number of soldiers:%d%n", soldierCount);			
+	}
+}
+
+class Alien {
+	public static int count;
+	public int color;
+	public int armCount;
+	//...
+}
+
+class Soldier {
+	 public int title;
+	 public int gunCount;
+	 //...
+}
+
+class Civilian {
+	//...
+}
+
+class Building {
+	//...
+}
+
+class Animal {
+	//...
+}
+
+//...
