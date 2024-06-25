@@ -12110,7 +12110,7 @@ class Sample {
 	içeriğini de değiştirebilir. Örnekte DateUtil sınıfının change metodunun nesnenin içeriğini değiştirdiğine dikkat 
 	ediniz. 
 	
-	Bir metodun geri dönüş değeri bir sınıf türünden olabilir. Bu durumda bir metot referansa (adrese) geri dçnmüş olur.
+	Bir metodun geri dönüş değeri bir sınıf türünden olabilir. Bu durumda bir metot referansa (adrese) geri dönmüş olur.
 	Böyle bir metodun return deyimine ilişkin ifadesi de aynı türden bir referans olmalıdır. Örnekteki create metodunun
 	bir nesne yaratıp o nesnenin adresine geri döndüğüne dikkat ediniz
 -----------------------------------------------------------------------------------------------------------------------*/

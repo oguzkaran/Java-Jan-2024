@@ -16,45 +16,25 @@ package csd;
 class App {
 	public static void main(String [] args) 
 	{	
-		Date d = DateUtil.create(11, 7, 1983);
+		Point p1 = new Point();
+		Point p2 = new Point();
 		
-		DateUtil.display(d);
-		DateUtil.change(d, 6, 9, 2021);
-		DateUtil.display(d);
+		p1.x = 23.4;
+		p1.y = 56.7;
+		p2.x = 90;		
+		
+		p1.display();
+		p2.display();
 	}
 }
 
-class DateUtil {
-	public static void change(Date date, int day, int month, int year)
-	{
-		//...
-		date.day = day;
-		date.month = month;
-		date.year = year;
-	}
-	
-	public static Date create(int day, int month, int year)
-	{
-		//...
-		Date date = new Date();
-		
-		date.day = day;
-		date.month = month;
-		date.year = year;
-		
-		return date;
-	}
-	
-	public static void display(Date date)
-	{
-		System.out.printf("%02d/%02d/%04d%n", date.day, date.month, date.year);
-	}
-}
 
-class Date {
-	public int day;
-	public int month;
-	public int year;
+class Point {
+	public double x;
+	public double y;
 	
-	//...
+	public void display()
+	{
+		System.out.printf("(%f, %f)%n", x, y);
+	}	
 }
