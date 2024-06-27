@@ -1,14 +1,5 @@
 /*----------------------------------------------------------------------------------------------------------------------	 
-	Bir metodun parametre değişkeni bir referans olabilir. Bu durumda metodun çağrılabilmesi için metoda aynı türden
-	bir referansın argüman olarak geçilmesi gerekir. Bu durumda metodun perametresi olan referans ile argüman olarak
-	geçilen referans aynı nesneyi gösterir duruma gelir. Anımsanacağı gibi argümanlardan parametre değişkenlerine 
-	aktarım da bir atama işlemidir. Bu durumda metot çağrısı boyunca ilgili nesneye erişilebilir. Hatta metot nesnenin
-	içeriğini de değiştirebilir. Örnekte DateUtil sınıfının change metodunun nesnenin içeriğini değiştirdiğine dikkat 
-	ediniz. 
 	
-	Bir metodun geri dönüş değeri bir sınıf türünden olabilir. Bu durumda bir metot referansa (adrese) geri dçnmüş olur.
-	Böyle bir metodun return deyimine ilişkin ifadesi de aynı türden bir referans olmalıdır. Örnekteki create metodunun
-	bir nesne yaratıp o nesnenin adresine geri döndüğüne dikkat ediniz
 -----------------------------------------------------------------------------------------------------------------------*/
 
 package csd;
@@ -16,25 +7,113 @@ package csd;
 class App {
 	public static void main(String [] args) 
 	{	
-		Point p1 = new Point();
-		Point p2 = new Point();
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+				
+		Complex z = new Complex();	
 		
-		p1.x = 23.4;
-		p1.y = 56.7;
-		p2.x = 90;		
-		
-		p1.display();
-		p2.display();
+		System.out.print("Input a complex number:");
+		z.real = kb.nextDouble();				
+		z.imag= kb.nextDouble();		
+		z.display();		
+		z.inc(2); //Mantıksal ++z işlemi
+		z.display();
+		z.dec(2); //Mantıksal --z
+		z.display();
 	}
 }
 
-
-class Point {
-	public double x;
-	public double y;
+class Complex {
+	public double real;
+	public double imag;
+	
+	public static Complex add(double re1, double im1, double re2, double im2) //İleride sınıfı kullanan kodlardan gizleyeceğiz
+	{
+		Complex result = new Complex();
+		
+		result.real = re1 + re2;
+		result.imag = im1 + im2;
+		
+		return result;
+	}
+	
+	public static Complex subtract(double re1, double im1, double re2, double im2) //İleride sınıfı kullanan kodlardan gizleyeceğiz
+	{
+		return add(re1, im1, -re2, -im2);		
+	}
+	
+	public static Complex add(double val, Complex z)
+	{
+		return add(val, 0, z.real, z.imag);
+	}
+	
+	public Complex add(Complex other)
+	{
+		return add(real, imag, other.real, other.imag);
+	}
+	
+	public Complex add(double val)
+	{
+		return add(real, imag, val, 0);
+	}	
+	
+	public static Complex subtract(double val, Complex z)
+	{
+		return subtract(val, 0, z.real, z.imag);
+	}
+	
+	public Complex subtract(Complex other)
+	{
+		return subtract(real, imag, other.real, other.imag);
+	}
+	
+	public Complex subtract(double val)
+	{
+		return subtract(real, imag, val, 0);
+	}
+	
+	public void inc(double val)
+	{
+		real += val;
+	}
+	
+	public void inc()
+	{
+		inc(1);
+	}
+	
+	public void dec(double val)
+	{
+		inc(-val);
+	}
+	
+	public void dec()
+	{
+		dec(1);
+	}
+	
+	public Complex getConjugate()
+	{
+		Complex result = new Complex();
+		
+		result.real = real;
+		result.imag = -imag;
+		
+		return result;
+	}
+	
+	public double getNorm()
+	{
+		return Math.sqrt(real * real + imag * imag);
+	}
+	
+	public double getLength()
+	{
+		return getNorm();
+	}	
 	
 	public void display()
 	{
-		System.out.printf("(%f, %f)%n", x, y);
-	}	
+		System.out.printf("(%.2f, %.2f)%n", real, imag);
+	}
 }
+

@@ -12163,6 +12163,338 @@ class Date {
 	//...
 }
 
+/*----------------------------------------------------------------------------------------------------------------------	 
+	27 Haziran 2024
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Point sınıfı ve test kodları
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		Point p1 = new Point();
+		Point p2 = new Point();
+		
+		p1.x = 23.4;
+		p1.y = 56.7;
+		p2.x = 90;
+		
+		p1.display();
+		p2.display();
+	}
+}
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		Point p1 = new Point();
+		Point p2 = new Point();
+		
+		p1.x = 23.4;
+		p1.y = 56.7;
+		p2.x = 90;
+		
+		p1.display();
+		p2.display();		
+		p1.offset(3.4, -6.7);
+		p2.offset(-45, 9.78);
+		p1.display();
+		p2.display();	
+	}
+}
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		Point p1 = new Point();
+		Point p2 = new Point();
+		
+		p1.x = 23.4;
+		p1.y = 56.7;
+		p2.x = 90;
+		
+		p1.display();
+		p2.display();		
+		p1.offset(3.4);
+		p2.offset(-45, 9.78);
+		p1.display();
+		p2.display();	
+	}
+}
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		Point p1 = new Point();
+		Point p2 = new Point();
+		
+		p1.x = 23;
+		p1.y = 56;
+		p2.x = 26;
+		p2.y = 52;
+		
+		double x = 26, y = 52;
+		
+		p1.display();
+		p2.display();		
+		
+		double d = p1.distance(p2);
+
+		System.out.printf("Distance:%f%n", d);
+		
+		d = p1.distance(x, y);
+		
+		System.out.printf("Distance:%f%n", d);
+		
+		d = p1.distance();
+		
+		System.out.printf("Distance:%f%n", d);
+	}
+}
+
+class Point {
+	public double x;
+	public double y;
+	
+	public double distance()
+	{
+		return distance(0, 0);
+	}
+	
+	public double distance(Point other)
+	{
+		return distance(other.x, other.y);
+	}
+	
+	public double distance(double a, double b)
+	{
+		return Math.sqrt(Math.pow(x - a, 2) + Math.pow(y - b, 2));
+	}	
+	
+	public void offset(double dxy)
+	{
+		offset(dxy, dxy);
+	}
+	
+	public void offset(double dx, double dy)
+	{
+		x += dx;
+		y += dy;
+	}
+	
+	public void display()
+	{
+		System.out.printf("(%f, %f)%n", x, y);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Complex sınıfı ve test kodları	
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+				
+		Complex z1 = new Complex();
+		Complex z2 = new Complex();
+		Complex z;
+		
+		System.out.print("Input two complex numbers:");
+		z1.real = kb.nextDouble();
+		z1.imag = kb.nextDouble();
+		z2.real = kb.nextDouble();
+		z2.imag = kb.nextDouble();		
+		
+		z1.display();
+		z2.display();
+		
+		z = z1.add(z2);	//Mantıksal z1 + z2 işlemi
+		z.display();		
+		z = z1.add(3.6); //Mantıksal z1 + 3.6 işlemi
+		z.display();
+		z = Complex.add(3.6, z1); //Mantıksal 3.6 + z1 işlemi
+		z.display();		
+	}
+}
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+				
+		Complex z1 = new Complex();
+		Complex z2 = new Complex();
+		Complex z;
+		
+		System.out.print("Input two complex numbers:");
+		z1.real = kb.nextDouble();
+		z1.imag = kb.nextDouble();
+		z2.real = kb.nextDouble();
+		z2.imag = kb.nextDouble();		
+		
+		z1.display();
+		z2.display();
+		
+		z = z1.subtract(z2); //Mantıksal z1 - z2 işlemi
+		z.display();		
+		z = z1.subtract(3.6); //Mantıksal z1 - 3.6 işlemi
+		z.display();
+		z = Complex.subtract(3.6, z1); //Mantıksal 3.6 - z1 işlemi
+		z.display();		
+	}
+}
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+				
+		Complex z = new Complex();	
+		
+		System.out.print("Input a complex number:");
+		z.real = kb.nextDouble();				
+		z.imag= kb.nextDouble();		
+		z.display();		
+		z.inc(); //Mantıksal ++z işlemi
+		z.display();
+		z.dec(); //Mantıksal --z
+		z.display();
+	}
+}
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+				
+		Complex z = new Complex();	
+		
+		System.out.print("Input a complex number:");
+		z.real = kb.nextDouble();				
+		z.imag= kb.nextDouble();		
+		z.display();		
+		z.inc(2); //Mantıksal ++z işlemi
+		z.display();
+		z.dec(2); //Mantıksal --z
+		z.display();
+	}
+}
+
+class Complex {
+	public double real;
+	public double imag;
+	
+	public static Complex add(double re1, double im1, double re2, double im2) //İleride sınıfı kullanan kodlardan gizleyeceğiz
+	{
+		Complex result = new Complex();
+		
+		result.real = re1 + re2;
+		result.imag = im1 + im2;
+		
+		return result;
+	}
+	
+	public static Complex subtract(double re1, double im1, double re2, double im2) //İleride sınıfı kullanan kodlardan gizleyeceğiz
+	{
+		return add(re1, im1, -re2, -im2);		
+	}
+	
+	public static Complex add(double val, Complex z)
+	{
+		return add(val, 0, z.real, z.imag);
+	}
+	
+	public Complex add(Complex other)
+	{
+		return add(real, imag, other.real, other.imag);
+	}
+	
+	public Complex add(double val)
+	{
+		return add(real, imag, val, 0);
+	}	
+	
+	public static Complex subtract(double val, Complex z)
+	{
+		return subtract(val, 0, z.real, z.imag);
+	}
+	
+	public Complex subtract(Complex other)
+	{
+		return subtract(real, imag, other.real, other.imag);
+	}
+	
+	public Complex subtract(double val)
+	{
+		return subtract(real, imag, val, 0);
+	}
+	
+	public void inc(double val)
+	{
+		real += val;
+	}
+	
+	public void inc()
+	{
+		inc(1);
+	}
+	
+	public void dec(double val)
+	{
+		inc(-val);
+	}
+	
+	public void dec()
+	{
+		dec(1);
+	}
+	
+	public Complex getConjugate()
+	{
+		Complex result = new Complex();
+		
+		result.real = real;
+		result.imag = -imag;
+		
+		return result;
+	}
+	
+	public double getNorm()
+	{
+		return Math.sqrt(real * real + imag * imag);
+	}
+	
+	public double getLength()
+	{
+		return getNorm();
+	}	
+	
+	public void display()
+	{
+		System.out.printf("(%.2f, %.2f)%n", real, imag);
+	}
+}
+
 
 
 /*----------------------------------------------------------------------------------------------------------------------
