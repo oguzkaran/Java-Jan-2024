@@ -12495,6 +12495,416 @@ class Complex {
 	}
 }
 
+/*----------------------------------------------------------------------------------------------------------------------
+	2 Temmuz 2024
+----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Nesnenin Yaratılması Aşamaları:
+	1. Bellekte yer ayrılır.
+	2. Non-static olan (ancak final olmayan) veri elemanlarına default değerler verilir. 
+	3. Constructor (ctor) çağrılır.
+	
+	Bu üç adım tamamlandığında nesne yaratılmış olur. Herhangi bir adımda bir problem oluştuğunda nesnenin yaratılması
+	tamamlanmamış olur.
+	
+	Anahtar Notlar: final veri elemanları ileride ele alınacaktır.
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------	 
+	ctor aşağıdaki özelliklere sahip bir metottur
+	- ctor nesne yaratılması aşamasında çağrılır.
+	 
+	- ctor overload edilebilir (constructor overloading).
+	
+	- Sınıf içerisinde programcı tarafından hiç bir ctor bildirilmemişse parametresiz ctor (default ctor) derleyici
+	tarafından public ve içi boş olarak yazılır. Programcı en az bir tane ctor bildirirse artık derleyici default 
+	ctor'u yazmaz.
+	
+	- ctor ismi sınıf ismi ile aynı olan ve geri dönüş değeri kavramı olmayan metottur. Burada geri dönüş değeri 
+	kavramı olmaması void bir metot olması anlamına GELMEZ. Ctor için geri dönüş değeri bilgisi yerine herhangi
+	bir şey yazılmaz. Hatta sınıf ismi ile aynı isimde olan ve geri dönüş değeri bilgisi yazılmış olan bir metot
+	bildirimi geçerlidir. Ancak hiç bir programcı böylesi bir metot yazmaz. Çünkü sınıf ismi ile aynı olan bir metodun
+	geri dönüş değeri bilgisi yazılırsa bu metot artık ctor anlamına gelmez.
+	
+	- ctor non-static bir metottur.
+	
+	- Hangi ctor'un çağrılacağı new operatöründe geçilen argümanlara göre klasik "method overload resolution" kuralları
+	ile belirlenir.
+	
+	- ctor programcı tarafından çağrılamaz. Programcı, nesne yaratılması sırasında hangi ctor'un çağrılacağının belirlendiği
+	kodu yazar.
+	
+	- Nesne yaratılması adımları gereği ctor'dan önce non-static veri elemanlarına default değerleri verilmiş olur.
+	
+	- ctor geri dönüş değeri kavramı olmayan bir metot olsa da void bir metot gibi istenirse return deyimi sonlandırmak
+	için kullanılabilir. Buradaki sonlandırma normal bir sonlandırmadır yani nesne yaratılmış olur.
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki demo örneği inceleyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		Sample s;
+		Mample m;
+		
+		s = new Sample();
+		s = new Sample(10, true);
+		s = new Sample(20);
+		m = new Mample(); 
+		//...		
+	}
+}
+
+class Mample {
+	//...
+}
+
+class Sample {
+	//...
+	
+	public Sample()
+	{
+		System.out.println("I am a default ctor");
+	}
+	
+	public Sample(int a, boolean b)
+	{
+		System.out.println("I am a ctor with parameter types int and boolean");
+	}
+	
+	public Sample(int a)
+	{
+		System.out.println("I am a ctor with parameter type int");
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki demo örnekte Sample sınıfının parametresiz ctor'u olmadığından error oluşur. Çünkü bu sınıf için derleyici
+	default ctor'u otomatik olarak yazmaz
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		Sample s;	
+		
+		s = new Sample(); //error	
+	 
+		//...		
+	}
+}
+
+
+class Sample {
+	//...
+	
+	public Sample(int a, boolean b)
+	{
+		System.out.println("I am a ctor with parameter types int and boolean");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki demo örneği inceleyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		Sample s;
+		
+		s = new Sample(); 
+		System.out.println("-----------------------------------------");
+		s = new Sample(10, true);
+		System.out.println("-----------------------------------------");
+		s = new Sample(20);
+	}
+}
+
+
+class Sample {
+	public int x;
+	public boolean y;
+	//...
+	
+	public Sample()
+	{
+		System.out.println("I am a default ctor");
+		System.out.printf("x = %d, y = %b%n", x, y);
+	}
+	
+	public Sample(int a, boolean b)
+	{
+		System.out.println("I am a ctor with parameter types int and boolean");
+		System.out.printf("x = %d, y = %b%n", x, y);
+	}
+	
+	public Sample(int a)
+	{
+		System.out.println("I am a ctor with parameter type int");
+		System.out.printf("x = %d, y = %b%n", x, y);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki demo örneği inceleyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		Sample s;
+		
+		s = new Sample(10, false); 
+		System.out.println("-----------------------------------------");
+		s = new Sample(-10, true);
+		System.out.println("-----------------------------------------");	
+	}
+}
+
+
+class Sample {
+	public int x;
+	public boolean y;
+	//...
+	
+	public Sample(int a, boolean b)
+	{
+		System.out.println("I am a ctor with parameter types int and boolean");
+		
+		if (a < 0)
+			return;
+		
+		System.out.printf("x = %d, y = %b%n", x, y);
+	}	
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Peki, ctor ne işe yarar? Ctor, nesne yaratılmadan önce bir takım ilk işlemlerin yapılması amacıyla kullanılır. Bu 
+	işlemlerden en tipik olanı veri elemanlarına değer verilmesidir. Sınıfın ilgili ctor'ları aldıkları parametre
+	değişkenlerini kullanarak veri elemanlarına değer verebilirler. Şüphesiz bu durum sınıfın senaryosu yani ne olduğu
+	ile ilgilidir. Yine örneğin, bir sınıf aldığı bağlantı bilgilerine göre nesne yaratılmadan önce o bağlantıda bulunan
+	bir cihaza bağlanabilir. Şüphesiz en çok karşılaşılan durum sınıfın veri elemanlarına değer verilmesi durumudur
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Point sınıfı ve test kodları
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		Point p1, p2, p3;
+		
+		p1 = new Point(100, 200);
+		p2 = new Point(200);
+		p3 = new Point();
+		
+		p1.display();
+		p2.display();
+		p3.display();
+	}
+}
+
+class Point {
+	public double x;
+	public double y;
+
+	public Point()
+	{		
+	}
+
+	public Point(double a)
+	{
+		x = a;		
+	}
+	
+	public Point(double a, double b)
+	{
+		x = a;
+		y = b;
+	}
+	
+	public double distance()
+	{
+		return distance(0, 0);
+	}
+	
+	public double distance(Point other)
+	{
+		return distance(other.x, other.y);
+	}
+	
+	public double distance(double a, double b)
+	{
+		return Math.sqrt(Math.pow(x - a, 2) + Math.pow(y - b, 2));
+	}	
+	
+	public void offset(double dxy)
+	{
+		offset(dxy, dxy);
+	}
+	
+	public void offset(double dx, double dy)
+	{
+		x += dx;
+		y += dy;
+	}
+	
+	public void display()
+	{
+		System.out.printf("(%f, %f)%n", x, y);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Complex sınıfı ve test kodları
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		Complex z1, z2, z3;
+		
+		z1 = new Complex();
+		z2 = new Complex(-5.6);
+		z3 = new Complex(-5, 8);
+		
+		z1.display();
+		z2.display();
+		z3.display();
+	}
+}
+
+class Complex {
+	public double real;
+	public double imag;
+	
+	public static Complex add(double re1, double im1, double re2, double im2) //İleride sınıfı kullanan kodlardan gizleyeceğiz
+	{
+		Complex result = new Complex();
+		
+		result.real = re1 + re2;
+		result.imag = im1 + im2;
+		
+		return result;
+	}
+	
+	public static Complex subtract(double re1, double im1, double re2, double im2) //İleride sınıfı kullanan kodlardan gizleyeceğiz
+	{
+		return add(re1, im1, -re2, -im2);		
+	}
+	
+	public Complex()
+	{
+		
+	}
+	
+	public Complex(double a)
+	{
+		real = a;		
+	}
+	
+	public Complex(double a, double b)
+	{
+		real = a;
+		imag = b;
+	}
+	
+	public static Complex add(double val, Complex z)
+	{
+		return add(val, 0, z.real, z.imag);
+	}
+	
+	public Complex add(Complex other)
+	{
+		return add(real, imag, other.real, other.imag);
+	}
+	
+	public Complex add(double val)
+	{
+		return add(real, imag, val, 0);
+	}	
+	
+	public static Complex subtract(double val, Complex z)
+	{
+		return subtract(val, 0, z.real, z.imag);
+	}
+	
+	public Complex subtract(Complex other)
+	{
+		return subtract(real, imag, other.real, other.imag);
+	}
+	
+	public Complex subtract(double val)
+	{
+		return subtract(real, imag, val, 0);
+	}
+	
+	public void inc(double val)
+	{
+		real += val;
+	}
+	
+	public void inc()
+	{
+		inc(1);
+	}
+	
+	public void dec(double val)
+	{
+		inc(-val);
+	}
+	
+	public void dec()
+	{
+		dec(1);
+	}
+	
+	public Complex getConjugate()
+	{
+		Complex result = new Complex();
+		
+		result.real = real;
+		result.imag = -imag;
+		
+		return result;
+	}
+	
+	public double getNorm()
+	{
+		return Math.sqrt(real * real + imag * imag);
+	}
+	
+	public double getLength()
+	{
+		return getNorm();
+	}	
+	
+	public void display()
+	{
+		System.out.printf("(%.2f, %.2f)%n", real, imag);
+	}
+}
+
+
 
 
 /*----------------------------------------------------------------------------------------------------------------------

@@ -1,24 +1,20 @@
 /*----------------------------------------------------------------------------------------------------------------------	 
-	
+	Rassal (Random) Sayı Üretimi:
 -----------------------------------------------------------------------------------------------------------------------*/
-
 package csd;
 
 class App {
 	public static void main(String [] args) 
 	{	
-		java.util.Scanner kb = new java.util.Scanner(System.in);
-				
-		Complex z = new Complex();	
+		Complex z1, z2, z3;
 		
-		System.out.print("Input a complex number:");
-		z.real = kb.nextDouble();				
-		z.imag= kb.nextDouble();		
-		z.display();		
-		z.inc(2); //Mantıksal ++z işlemi
-		z.display();
-		z.dec(2); //Mantıksal --z
-		z.display();
+		z1 = new Complex();
+		z2 = new Complex(-5.6);
+		z3 = new Complex(-5, 8);
+		
+		z1.display();
+		z2.display();
+		z3.display();
 	}
 }
 
@@ -39,6 +35,22 @@ class Complex {
 	public static Complex subtract(double re1, double im1, double re2, double im2) //İleride sınıfı kullanan kodlardan gizleyeceğiz
 	{
 		return add(re1, im1, -re2, -im2);		
+	}
+	
+	public Complex()
+	{
+		
+	}
+	
+	public Complex(double a)
+	{
+		real = a;		
+	}
+	
+	public Complex(double a, double b)
+	{
+		real = a;
+		imag = b;
 	}
 	
 	public static Complex add(double val, Complex z)
@@ -116,4 +128,3 @@ class Complex {
 		System.out.printf("(%.2f, %.2f)%n", real, imag);
 	}
 }
-
