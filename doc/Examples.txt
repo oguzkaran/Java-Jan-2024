@@ -13440,6 +13440,273 @@ class App {
 }
 
 
+/*----------------------------------------------------------------------------------------------------------------------
+	11 Temmuz 2024
+----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Bir String nesnesine ilişkin yazının karakterlerinin her birine sıfırdan başlayarak bir indeks numarası verilmiş
+	gibi yani bir dizi gibi düşünebiliriz. Bu durumda bir yazının herhangi bir indeksteki karakterine charAt isimli
+	metot ile erişilebilir. Bu metot aldığı indeks numarasına ilişkin karaktere geri döner. Metoda pozitif ya da 
+	negatif bakımdan sınırlar dışında bir indeks numarası verildiğinde exception oluşur. Yazının uzunluğu yani kaç tane
+	karakterden oluştuğu bilgisi length metodu ile elde edilebilir
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki demo örneği inceleyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir yazı giriniz:");
+		String s = kb.nextLine();
+		int len = s.length();
+		
+		System.out.printf("Yazının uzunluğu:%d%n", len);
+		
+		for (int i = 0; i < len; ++i)
+			System.out.printf("%c ", s.charAt(i));
+		
+		System.out.println();
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki demo örneği inceleyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir yazı giriniz:");
+		String s = kb.nextLine();
+		int len = s.length();
+		
+		System.out.printf("Yazının uzunluğu:%d%n", len);
+		
+		char c = s.charAt(5);
+		
+		System.out.printf("c = %c%n", c);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	String sınıfı immutable bir sınıftır. Yani, bir String nesnesine ilişkin yazı değiştirilemez. Bu durumda yazı üzerinde
+	değişiklik yapan metotlar değiştirilmiş yazıyı tutan yeni bir String referansına geri dönerler. Örneğin, toLowerCase
+	metotları yazının tüm karakterlerini küçük harfe çeviren metottur. Metot ilgili yazıyı değiştiremeyeceğinden tamamı
+	küçük harflerden oluşan bir yazıya ilişkin yeni bir String referansına geri döner. Benzer şekilde toUpperCase metotları
+	yazının tüm karakterlerini büyük harfe çevirir. Şüphesiz küçük/büyük harf karşılığı olmayan karakterlerin aynıları
+	alınır. Bu metotların bu bölümde yalnızca parametresiz overload'ları ele alınacaktır
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki demo örneği inceleyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir yazı giriniz:");
+		String s = kb.nextLine();	
+		String lower = s.toLowerCase();
+		
+		System.out.printf("s = %s%nlower = %s%n", s, lower);		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki demo örneği inceleyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir yazı giriniz:");
+		String s = kb.nextLine();	
+		String upper = s.toUpperCase();
+		
+		System.out.printf("s = %s%nupper= %s%n", s, upper);		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Bazen aynı referans ile kod içerisinde devam edilmesi gerektiğinde değiştirilmiş yazıya ilişkin nesnenin adresi
+	referansa atanır. Aşağıdaki demo örneği inceleyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir yazı giriniz:");
+		String s = kb.nextLine();	
+		s = s.toUpperCase();
+		
+		System.out.printf("s = %s%n", s);		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Bazen aynı referans ile kod içerisinde devam edilmesi gerektiğinde değiştirilmiş yazıya ilişkin nesnenin adresi
+	referansa atanır. Aşağıdaki demo örneği inceleyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir yazı giriniz:");
+		String s = kb.nextLine();	
+		s = s.toUpperCase();
+		
+		System.out.printf("s = %s%n", s);		
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: Aynı türden iki referans == veya != operatörü ile işleme sokulabilir. Bu durumda aslında iki referansın da
+	aynı nesneyi gösterip göstermediğine ilişkin değer üretilir. Yani == operatörü iki referans da aynı nesneyi gösteriyorsa
+	true, göstermiyorsa false değerini, != operatörü iki referans aynı nesneyi gösteriyosa false, göstermiyorsa true değerini
+	üretir. Farklı türden referanslar hiç bir şekilde işleme sokulamaz. Dikkat edilirse aynı türden referansların eşitlik
+	karşılaştırması adreslerin karşılaştırılmasıdır. Nesnelerin içeriğinin yani non-static veri elemanlarının aynı olup
+	olmadığı kontrolü bu şekilde yapılamaz 
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki demo örnekte farklı nesneler yaratılmıştır değil mi?
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		Sample s1 = new Sample(10);
+		Sample s2 = new Sample(10);
+		
+		System.out.println(s1 == s2 ? "Aynı nesne" : "Farklı nesneler");
+		System.out.println(s1 != s2 ? "Farklı nesneler" : "Aynı nesne");
+	}
+}
+
+class Sample {
+	public int x;
+	
+	public Sample(int a)
+	{
+		x = a;
+	}
+	
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki demo örnekte referanslar aynı nesneyi gösteriyor değil mi?
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		Sample s1 = new Sample(10);
+		Sample s2 = s1;
+		
+		System.out.println(s1 == s2 ? "Aynı nesne" : "Farklı nesneler");
+		System.out.println(s1 != s2 ? "Farklı nesneler" : "Aynı nesne");
+	}
+}
+
+class Sample {
+	public int x;
+	
+	public Sample(int a)
+	{
+		x = a;
+	}
+	
+	//...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki örnekte iki yazının özdeşlik yani tüm karakterlerinin karşılıklı olarak aynı olması karşılaştırması 
+	yapılmamıştır değil mi?
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Birinci yazıyı giriniz:");
+		String s1 = kb.nextLine();
+		
+		System.out.print("İkinci yazıyı giriniz:");
+		String s2 = kb.nextLine();
+		
+		System.out.println(s1 == s2 ? "Aynı yazı" : "Farklı yazılar");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Yazıların özdeşlik karşılaştırması equals isimli metot ile yapılabilir. Bu metot case-sensitive olarak çalışır. 
+	Case-insensitive karşılaştırma için equalsIgnoreCase metodu kullanılabilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Birinci yazıyı giriniz:");
+		String s1 = kb.nextLine();
+		
+		System.out.print("İkinci yazıyı giriniz:");
+		String s2 = kb.nextLine();
+		
+		System.out.println(s1.equals(s2) ? "Aynı yazı" : "Farklı yazılar");		
+		System.out.println(s1.equalsIgnoreCase(s2) ? "Aynı yazı" : "Farklı yazılar");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Derleyici özdeş string literal'lar için aynı adresin verileceği kodu üretir. Yani özdeş string'lere ilişkin bir tane
+	nesne yaratılmış olur. Zaten sınıf immutable olduğundan iki referansın aynı nesneyi göstermesi durumunda nesnenin
+	içeriği değiştirelemezdir, bu da herhangi bir probleme yol açmaz. Bu durumda bellek efektif olarak kullanılmış olur.
+	Aşağıdaki örnekte yine referans karşılaştırması yapılmıştır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		String s1 = "ankara";
+		String s2 = "ankara";
+		
+		System.out.println(s1 == s2 ? "Aynı nesne" : "Farklı nesneler");		
+	}
+}
+
+
 
 /*----------------------------------------------------------------------------------------------------------------------
 
