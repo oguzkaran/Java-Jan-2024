@@ -1,18 +1,39 @@
 /*----------------------------------------------------------------------------------------------------------------------	 
-	Derleyici özdeş string literal'lar için aynı adresin verileceği kodu üretir. Yani özdeş string'lere ilişkin bir tane
-	nesne yaratılmış olur. Zaten sınıf immutable olduğundan iki referansın aynı nesneyi göstermesi durumunda nesnenin
-	içeriği değiştirelemezdir, bu da herhangi bir probleme yol açmaz. Bu durumda bellek efektif olarak kullanılmış olur.
-	Aşağıdaki örnekte yine referans karşılaştırması yapılmıştır
+	Sınıf Çalışması: Parametresi ile aldığı iki yazıdan birinci içerisinde ikincisinden kaç olduğuna geri dönen countString 
+	isimli metodu StringUtil isimli bir sınıf içerisinde yazınız ve aşağıdaki kod ile test ediniz
 -----------------------------------------------------------------------------------------------------------------------*/
 package csd;
 
 class App {
 	public static void main(String [] args) 
-	{			
-		String s1 = "ankara";
-		String s2 = "Ankara";
-		
-		System.out.println(s1 == s2 ? "Aynı nesne" : "Farklı nesneler");		
+	{		
+		StringUtilCountStringTest.run();
 	}
 }
 
+class StringUtilCountStringTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Birinci yazıyı giriniz:");
+			String s1 = kb.nextLine();
+			
+			if ("elma".equals(s1))
+				break;
+			
+			System.out.print("İkinci yazıyı giriniz:");
+			String s2 = kb.nextLine();
+			
+			System.out.printf("Count:%d%n", StringUtil.countString(s1, s2));
+		}
+	}
+}
+
+class StringUtil {
+	public static int countString(String s1, String s2)
+	{
+		//TODO
+	}
+}

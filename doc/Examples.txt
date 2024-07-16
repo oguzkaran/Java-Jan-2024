@@ -13706,7 +13706,402 @@ class App {
 	}
 }
 
+/*----------------------------------------------------------------------------------------------------------------------
+	16 Temmuz 2024
+----------------------------------------------------------------------------------------------------------------------*/
 
+/*----------------------------------------------------------------------------------------------------------------------	 
+	String sınıfının concat metodu çağrıldığı yazının sonuna parametresi ile aldığı yazıyı ekler
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Birinci yazıyı giriniz:");
+			String s1 = kb.nextLine();
+			
+			if ("elma".equals(s1))
+				break;
+			
+			System.out.print("İkinci yazıyı giriniz:");
+			String s2 = kb.nextLine();
+			
+			String str = s1.concat(s2);
+			
+			System.out.println(str);
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki demo örneği inceleyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Birinci yazıyı giriniz:");
+			String s1 = kb.nextLine();
+			
+			if ("elma".equals(s1))
+				break;
+			
+			System.out.print("İkinci yazıyı giriniz:");
+			String s2 = kb.nextLine();
+			
+			String str = s1.concat(" ").concat(s2);
+			
+			System.out.println(str);
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki demo örneği inceleyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Birinci yazıyı giriniz:");
+			String s1 = kb.nextLine();
+			
+			if ("elma".equals(s1))
+				break;
+			
+			System.out.print("İkinci yazıyı giriniz:");
+			String s2 = kb.nextLine();
+			
+			String str = s1.concat(" ".concat(s2));
+			
+			System.out.println(str);
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	+ operatörünün operandları String türündense bu işlem yazı birleştirmesi anlamına gelir ve birleştirilmiş yazıya
+	ilişkin String referansı elde edilir
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Birinci yazıyı giriniz:");
+			String s1 = kb.nextLine();
+			
+			if ("elma".equals(s1))
+				break;
+			
+			System.out.print("İkinci yazıyı giriniz:");
+			String s2 = kb.nextLine();
+			
+			String str = s1 + " " + s2;
+			
+			
+			System.out.println(str);
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	+ operatörünün bir operandı String türündense, diğer operandın yazı karşılığı elde edilerek birleştirme işlemi 
+	yapılır. String türden olmayan bir ifadenin yazı karşılığının (yani String karşılığının) nasıl elde edildiği 
+	"Java Language Specification"'da açıklanmıştır ve detayları ileride ele alınacaktır. Aşağıdaki dönüşüm tür dönüştürme
+	operatörü ile yapılamaz değil mi?
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Hava sıcaklığını giriniz:");
+			int degree = Integer.parseInt(kb.nextLine());
+			
+			String message = "Bugün hava " + degree + " derece";
+			
+			System.out.println(message);
+			
+			if (degree == 0)
+				break;			
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki örnekte önce yazılar birleştirilip println metodu çağrılır. Anımsanacağı gibi bir metot çağrısı için önce 
+	argümana ilişkin ifade hesaplanır elde edilen değer ile metot çağrılır 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Hava sıcaklığını giriniz:");
+			int degree = Integer.parseInt(kb.nextLine());	
+			
+			System.out.println("Bugün hava " + degree + " derece");
+			
+			if (degree == 0)
+				break;			
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Bir String'in boş olup olmadığı çeşitli şekillerde anlaşılıabilir. Örneğin length'inin sıfır olup olmadığına bakılabilir.
+	Ya da "" ile equals metodu kullanılarak karşılaştırma yapılabilir. Ancak bu işlem pratikte çok gerekli olduğundan 
+	String sınıfında isEmpty isimli bir metot bulundurulmaktadır. Bu durumda hem okunabilir hem de kolay olması açısından
+	bir yazının boş string olup olmadığının anlaşılması için isEmpty metodu kullanılmalıdır. Aşağıdaki demo örneği 
+	inceleyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Bir yazı giriniz:");
+			String s = kb.nextLine();
+			
+			if (s.isEmpty()) {
+				System.out.println("Boş string girdiniz");
+				continue;
+			}
+			if ("elma".equals(s))
+				break;
+			
+			System.out.printf("Girilen yazı:(%s)%n", s);
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	String sınıfnın substring metotları bir yazının belli bir kısmını elde etmek için kullanılır. substring metodunun 
+	tek paramtreli overload'u parametresi ile aldığı indeks değerinden itibaren yazının sonuna kadarki kısmına ilişkin 
+	String referansına geri döner. İki parametreli overload'u ise birinci parametresi ile aldığı indeks değerinden
+	ikinci parametresi ile aldığı indeks değerine kadar (hariç) olan yazıya ilişkin String referansına geri döner 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		String s = "ankara";
+		
+		System.out.printf("(%s)%n", s.substring(2)); //(kara)
+		System.out.printf("(%s)%n", s.substring(2, 5)); //(kar)
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	substring metodunun tek parametreli overload'una yazının uzunluğu indeks olarak verildiğinde özel bir durum olarak
+	boş string'e geri döner. Uzunluktan daha büyük bir indeks numarası için exception oluşur 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Bir yazı giriniz:");
+			String s = kb.nextLine();
+			
+			if ("elma".equals(s))
+				break;
+			
+			System.out.print("İndeks numarasını giriniz:");
+			int idx = Integer.parseInt(kb.nextLine());
+			
+			String str = s.substring(idx);
+			
+			System.out.println(str.isEmpty() ? "Boş string" : "Yazı:" + str);
+		}
+		
+		System.out.println("Tekrar yapıyor musunuz?");	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıf Çalışması: Klavyeden elma girilene kadar alınan yazıları aralarına - koyacak şekilde birleştirilmiş yeni bir
+	yazı (yani String referansı) elde eden programı yazınız.
+	Açıklamalar:
+		- Programda dizi kullanılmayacaktır. Zaten gerek de yoktur
+	Not: İleride daha iyisi yazılacaktır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		ConcatWithHyphenApp.run();	
+	}
+}
+
+class ConcatWithHyphenApp {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		String str = "";
+		
+		while (true) {
+			System.out.print("Bir yazı giriniz:");
+			String s = kb.nextLine();
+			
+			if ("elma".equals(s))
+				break;
+			
+			str += s + "-";			
+		}
+		
+		str = str.isEmpty() ? str : str.substring(0, str.length() - 1);
+		
+		System.out.println(str);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıf Çalışması: Klavyeden elma girilene kadar alınan yazıları aralarına - koyacak şekilde birleştirilmiş yeni bir
+	yazı (yani String referansı) elde eden programı yazınız.
+	Açıklamalar:
+		- Programda dizi kullanılmayacaktır. Zaten gerek de yoktur
+		- Girilen boş string'ler yazıya dahil edilmeyecektir
+		
+	Not: İleride daha iyisi yazılacaktır
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		ConcatWithHyphenApp.run();	
+	}
+}
+
+class ConcatWithHyphenApp {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		String str = "";
+		
+		while (true) {
+			System.out.print("Bir yazı giriniz:");
+			String s = kb.nextLine();
+			
+			if (s.isEmpty())
+				continue;
+				
+			if ("elma".equals(s))
+				break;
+			
+			str += s + "-";			
+		}
+		
+		str = str.isEmpty() ? str : str.substring(0, str.length() - 1);
+		
+		System.out.println(str);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	substring metodunun ikiparametreli overload'u için her iki parametreye de aynı değer yani ayno indeks numarası
+	geçirlise boş string'e geri döner. 
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Bir yazı giriniz:");
+		String s = kb.nextLine();
+		
+		s = s.substring(0, 0);
+		
+		System.out.println(s.isEmpty() ? "Boş string" : "Yazı:" + s);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	String sınıfının indexOf metotları yazı içerisinde bir karakteri ya da yazı içerisinde bir yazıyı aramak için 
+	kullanılırlar. indexOf metotlarının prototipleri şu şekildedir:
+	
+	1. int indexOf(int ch)
+	2. int indexOf(int ch, int fromIndex)	
+	3. int indexOf(String str)
+	4. int indexOf(String str, int fromIndex)
+	
+	1. ve 2. metotlar yazı içerisinde karakter aramak için kullanılır. Eğer ilgili karakter bulunursa karakterin ilk bulunduğu 
+	indeks numarasına geri dönerler, bulunamazsa -1 değerine geri dönerler. 3. ve 4. metotlar yazı içerisinde bir yazıyı
+	aramak için kullanılır. Bulursa aranan yazının ilk bulunduğu yerdeki ilk karakterinin indeks numarasına geri dönerler.
+	Bulunamazsa -1 değerine geri dönerler. 2. ve 4. metotlar arama işlemine ikinci parametreleri ile aldıkları indeks 
+	numarasından başlarlar. 1. ve 3. metotlar arama işlemine yazının başından başlarlar
+-----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Aşağıdaki demo örneği inceleyiniz
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		String text = "Bugün hava çok güzel, çok çok güzel";
+		String s = "çok";
+		
+		System.out.println(text.indexOf(s));
+		System.out.println(text.indexOf(s, 12));		
+		System.out.println(text.indexOf(s, 27));
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
 
