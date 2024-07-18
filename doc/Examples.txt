@@ -14285,6 +14285,34 @@ class StringUtil {
 }
 
 
+/*----------------------------------------------------------------------------------------------------------------------
+	Java'da aşağıdaki koşullardan birini sağlayan bir karakter whitespace karakterdir. Tersine whitespace bir karakter
+	aşağıdaki koşullardan birini sağlar (if and only if):
+  	
+  	- Karakter "Unicode space" karakter ve "Non-breaking space" olmayan karakterlerdendir. 
+  	Unicode space karakterler şunlardır:  Space Seperator, Line Seperator, Paragraph Seperator. Bu karakterler
+  	UNICODE'da çeşitli kategorilerdir. Detaylar burada ele alınmayacaktır. Bu karakter Character sınıfının
+  	SPACE_SEPERATOR, LINE_SEPERATOR, PARAGRAPH_SEPERATOR isimli static veri elemanları ile elde edilebilir. 
+  	non-breaking space karakterler şunlardır: '\u00A0', '\u2007', '\u202F'
+  	
+  	- '\t' horizontal tabulation
+  	
+  	- '\n' line feed (LF)
+  	
+  	- '\u000B' vertical tabulation
+  	
+  	- '\f' form tabulation
+  	
+  	- '\r' carriage return (CR)
+  	
+  	- '\u001C' file separator
+  	
+  	- '\u001D' group separator
+  	
+  	- '\u001E' record separator
+  	
+  	- '\u001F' unit separator
+----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
 
