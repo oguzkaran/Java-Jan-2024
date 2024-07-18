@@ -14511,26 +14511,9 @@ class App {
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*----------------------------------------------------------------------------------------------------------------------
-	Java'da aşağıdaki koşullardan birini sağlayan bir karakter whitespace karakterdir. Tersine whitespace bir karakter
-	aşağıdaki koşullardan birini sağlar (if and only if):
+	Anahtar Notlar: Java'da aşağıdaki koşullardan birini sağlayan bir karakter whitespace karakterdir. Tersine whitespace
+	bir karakter aşağıdaki koşullardan birini sağlar (if and only if):
   	
   	- Karakter "Unicode space" karakter ve "Non-breaking space" olmayan karakterlerdendir. 
   	Unicode space karakterler şunlardır:  Space Seperator, Line Seperator, Paragraph Seperator. Bu karakterler
@@ -14556,6 +14539,181 @@ class App {
   	
   	- '\u001F' unit separator
 ----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir karakter ile çeşitli işlemler yapan çeşitli metotların bulunduğu Character sınıfı aynı zamanda String sınıfına
+	da yardımcı olarak kullanılabilmektedir. Sınıfın isXXX metotları parametresi aldığı karaktere ilişkin kontrol 
+	yaparlar. Bu metotlardan bazıları şunlardır:
+	
+	- isWhitespace: Karakterin whitespace karakter olup olmadığını test eder.
+	- isLetter: Karakterin alfabetik olup olmadığını test eder.
+	- isDigit: Karakterin bir sayısal karakter olup olmadığını test eder
+	
+	Sınıfın toXXX metotları parametresi ile aldığı karakteri dönüştürmekte kullanılır. Bu metotlardan bazıları 
+	şunlardır:
+	- toUpperCase: Karakterin büyük harf karşılığını döndürür. Yoksa aynı karaktere geri döner
+	- toLowerCase: Karakterin küçük harf karşılığını döndürür. Yoksa aynı karaktere geri döner
+	
+	Bu sınıfa ait bir metodun hem char hem de int paremetreli overload'ları bulunur. Bu durumda tüm karakterler yani
+	sıra numarası 65535'den büyük olan karakterler için de işlem yapan metotlar bulunmaktadır. 
+---------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+---------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		StringCharactersReportApp.run();		
+	}
+}
+
+class StringCharactersReportApp {
+	public static void printReport(String s)
+	{
+		int len = s.length();
+		int whitespaceCount = 0;
+		int letterCount = 0;
+		int digitCount = 0;		
+		
+		for (int i = 0; i < len; ++i) {
+			char ch = s.charAt(i);
+			
+			if (Character.isWhitespace(ch))
+				++whitespaceCount;			
+			else if (Character.isLetter(ch))
+				++letterCount;
+			else if (Character.isDigit(ch))
+				++digitCount;		
+					
+		}
+		
+		System.out.printf("Whitespace count:%d%n", whitespaceCount);
+		System.out.printf("Letter count:%d%n", letterCount);
+		System.out.printf("Digit count:%d%n", digitCount);
+		System.out.printf("Others:%d%n", len - whitespaceCount - letterCount - digitCount);	
+	}
+	
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Input string:");
+			String s = kb.nextLine();
+			
+			printReport(s);
+			
+			if ("quit".equals(s))
+				break;
+		}
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: parametresi ile aldığı bir yazının ilk karakteri büyük diğer karakterleri küçük harf olan 
+	biçimine geri dönen capitalize isimli metodu StringUtil sınıfı içerisinde yazınız ve test ediniz. Örneğin yazı 
+		bugün hava ÇOK güzel
+	ise elde edilecek yazı	
+		Bugün hava çok güzel
+	olacaktır.
+---------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		StringUtilCapitalizeTest.run();		
+	}
+}
+
+class StringUtilCapitalizeTest {	
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Input string:");
+			String s = kb.nextLine();
+			
+			System.out.printf("(%s)%n", StringUtil.capitalize(s));
+			
+			if ("quit".equals(s))
+				break;
+		}
+	}
+}
+
+
+class StringUtil {
+	public static String capitalize(String s)
+	{
+		return s.isEmpty() ? s : Character.toUpperCase(s.charAt(0)) + s.substring(1).toLowerCase();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String sınıfının trim metodu yazının başındaki (leading) ve sonundaki (trailing) boşluk karakterlerini atar. Bu metot
+ 	[\u0000, \u0020] aralığındaki boşluk karakterleri için çalışır. Diğer whitespace karakterleri atmaz. Java 11 ile birlikte 
+ 	tüm whitespace karakterler için çalışan yani yazının başındaki ve sonundaki whitespace karakterleri atan strip isimli
+ 	bir metot eklenmiştir. Ayrıca Java 11 ile birlikte yazının sadece başındaki whitespace karakterleri atan stripLeading
+ 	ve sadece sonundaki boşluk karakterlerini atan stripLeading isimli metotlar da eklenmiştir. Java 11 öncesince yazının
+ 	yalnızca başındaki veya yalnızca sonundaki boşluk karakterlerini atan metotlar bulunmamaktadır. Java 11 öncesinde
+ 	çalışıldığı durumda  bu tarz metotlar programcı tarafından yazılmalıdır.
+ 	 
+ 	Anahtar Notlar: Pratikte trim metodu çoğu zaman işimizi görse de bazı özel whitespace karakterler için çalışamamaktadır.
+ 	Bu sebeple Java 11+ ile çalışıldığında trim metodu yerine her zaman strip metodu tercih edilmelidir. Java 11 öncesinde
+ 	çalışılıyorsa strip gibi bir metot gerekirse programcı tarafından eklenebilir
+---------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+---------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		
+		while (true) {
+			System.out.print("Input string:");
+			String s = kb.nextLine();
+			
+			System.out.printf("(%s)%n", s);
+			System.out.printf("(%s)%n", s.trim());
+			System.out.printf("(%s)%n", s.strip());
+			System.out.printf("(%s)%n", s.stripLeading());
+			System.out.printf("(%s)%n", s.stripTrailing());
+			
+			if ("exit".equals(s))
+				break;
+		}
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıfı Çalışması: Aşağıda belirtilen metotları StrigUtil sınıfı içerisinde açıklamalara yazınız ve test ediniz.
+	Açıklamalar:
+	- Metotların prototipleri şunlardır:
+		public static String trim(String s);
+		public static String trimLeading(String s);
+		public static String trimTrailing(String s);
+		
+	- Metotlar sırasıyla yazının başındaki ve sonundaki, yalnızca başındaki ve yalnızca sonundaki whitespace karakterleri
+	atacaklardır.
+	
+	- Metotlar Java 11 öncesi için yazılacaktır. Yani stripXXX metotları kullanılmayacaktır
+---------------------------------------------------------------------------------------------------------------------*/
+
+
+
 
 /*----------------------------------------------------------------------------------------------------------------------
 
