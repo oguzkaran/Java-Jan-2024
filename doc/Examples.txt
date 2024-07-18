@@ -13882,6 +13882,21 @@ class App {
 	}
 }
 
+/*----------------------------------------------------------------------------------------------------------------------
+	Length bilgisi sıfır olan yani hiçbir karakter içermeyen bir yazıya "boş string (empty string)" denir. Boş string
+	string en kolay iki tane çift tırnak işaretinin yan yana getirilmesi ile ("") elde edilebilir.
+----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{			
+		String s = "";
+
+		System.out.printf("Length: %d%n", s.length());
+	}
+}
+
 /*----------------------------------------------------------------------------------------------------------------------	 
 	Bir String'in boş olup olmadığı çeşitli şekillerde anlaşılıabilir. Örneğin length'inin sıfır olup olmadığına bakılabilir.
 	Ya da "" ile equals metodu kullanılarak karşılaştırma yapılabilir. Ancak bu işlem pratikte çok gerekli olduğundan 
@@ -14283,6 +14298,234 @@ class StringUtil {
 		return count;
 	}
 }
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	18 Temmuz 2024
+-----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıf Çalışması: Parametresi ile aldığı iki yazıdan birinci içerisinde ikincisinden kaç olduğuna geri dönen ve
+	case insensitive olarak çalışan countStringIgnoreCase isimli metodu yazınız ve aşağıdaki kod ile test ediniz	
+-----------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		StringUtilCountStringIgnoreCaseTest.run();
+	}
+}
+
+class StringUtilCountStringIgnoreCaseTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Birinci yazıyı giriniz:");
+			String s1 = kb.nextLine();
+			
+			if ("elma".equals(s1))
+				break;
+			
+			System.out.print("İkinci yazıyı giriniz:");
+			String s2 = kb.nextLine();
+			
+			System.out.printf("Count:%d%n", StringUtil.countStringIgnoreCase(s1, s2));
+		}
+	}
+}
+
+class StringUtil {
+	public static int countStringIgnoreCase(String s1, String s2)
+	{
+		return countString(s1.toLowerCase(), s2.toLowerCase());
+	}
+	
+	public static int countString(String s1, String s2)
+	{		
+		int count = 0;
+		
+		for (int i = 0; (i = s1.indexOf(s2, i)) != -1; ++i, ++count)
+			;		
+
+		return count;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	String sınıfının lastIndexOf metotları sondan itibaren ilk bulunan yazı veya karaktere ilişkin indeks numarasına
+	geri dönerler. Bu metotlar da bulamadıkları durumda -1 değerine geri dönerler	
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		String text = "Bugün hava çok güzel, çok çok güzel";
+		String s = "çok";
+		
+		System.out.println(text.lastIndexOf(s));
+		System.out.println(text.lastIndexOf(s, 12));		
+		System.out.println(text.lastIndexOf(s, 27));
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------	 
+	Sınıf Çalışması: Aşağıdaki açıklamalara göre parametresi ile aldığı bir yol ifadesine (path) ilişkin dosyanın yalnızca 
+	ismine geri dönen getFileName isimli metodu yazınız.
+	Açıklamalar: 
+	- Metot yol ifadesi geçerliliği yapmayacaktır.
+	- Metot yol ifadesine / veya \ karakterlerini kabul edecektir.
+	- Yol ifadesi / ya da \ içermiyorsa doğrudan yol ifadesini döndürecektir.
+	- Örneğin yol ifadesi C:/test/mest.dat için elde edilen dosya ismi mest.dat olarak elde edilecektir. Ya da örneğin
+	test gibi bir ifadesi için dosya ismi test olarak elde edilecektir.
+	- Metodu FileUtil isimli bir sınıf içerisinde yazınız.
+	- Bu işlemi JavaSE'de yapan türler ve metotlar kullanılmayacaktır.
+	- Metodu klavyeden alınan yol ifadeleri ile test edebilirsiniz.
+	
+	Not: İleride daha iyisi yazılacaktır
+-----------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		FileUtilgetFileNameTest.run();
+	}
+}
+
+class FileUtilgetFileNameTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Input path:");
+			String path = kb.nextLine();
+			
+			System.out.printf("File name:%s%n",FileUtil.getFileName(path));
+			
+			if ("quit".equals(path))
+				break;
+		}
+	}
+}
+
+
+class FileUtil {
+	public static String getFileName(String path)
+	{
+		int idx;
+		
+		idx = path.lastIndexOf('\\');		
+	
+		return idx != -1 ? path.substring(idx + 1) : path.substring(path.lastIndexOf('/') + 1);		
+	}
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+    IntegerDecimalOccurence 
+	String pattern matching in decimal representations of ints.
+	
+	Task description
+	Two integers A and B are given. We are interested in positions at which decimal representation of A occurs as a substring 
+	in the decimal representation of B (counting from 0) For example:
+	
+		- 53 occurs in 1953786 at position 2.
+		- 78 occurs in 1953786786 at positions 4 and 7
+		- 57 does not occur in 153786.
+	
+	Decimal representations are assumed to be big-endian and without leading zeros (the only exception being the number 0, whose 
+	decimal representation is "0")
+	
+	Write function
+		
+		class Solution { public int solution(int A, int B); }
+	
+	that, given two integers A and B, returns the leftmost position at which A occurs in B the function should return -1 
+	if A does not occur in B. 
+	For example, given A = 53 and B = 195378653, the function should return 2, as explained above.
+	Assume that:
+		
+		- A and B are integers within the range [0..999,999,999].
+		
+	In your solution, focus on correctness. The performance of your solution will not be the focus of the assessment.
+---------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		SolutionTest.run();
+	}
+}
+
+class SolutionTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Input first number:");
+			int a = Integer.parseInt(kb.nextLine());
+			
+			System.out.print("Input second number:");
+			int b = Integer.parseInt(kb.nextLine());
+			
+			Solution s = new Solution();
+			
+			System.out.printf("Position:%d%n", s.solution(a, b));
+			
+			if (a == 0 && b == 0)
+				break;
+		}
+	}
+}
+
+
+class Solution { 
+	public int solution(int A, int B)
+	{
+		return (B + "").indexOf(A + "");
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örneği inceleyiniz
+---------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		System.out.println("Java" + 10 + 11); //Java1011
+		System.out.println(10 + 11 + "Java"); //21Java
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*----------------------------------------------------------------------------------------------------------------------
