@@ -14698,6 +14698,11 @@ class App {
 	}
 }
 
+
+/*----------------------------------------------------------------------------------------------------------------------
+	23 Temmuz 2024
+----------------------------------------------------------------------------------------------------------------------*/
+
 /*----------------------------------------------------------------------------------------------------------------------
 	Sınıfı Çalışması: Aşağıda belirtilen metotları StrigUtil sınıfı içerisinde açıklamalara yazınız ve test ediniz.
 	Açıklamalar:
@@ -14712,7 +14717,454 @@ class App {
 	- Metotlar Java 11 öncesi için yazılacaktır. Yani stripXXX metotları kullanılmayacaktır
 ---------------------------------------------------------------------------------------------------------------------*/
 
+package csd;
 
+class App {
+	public static void main(String [] args) 
+	{		
+		StringUtilTrimMethodsTest.run();
+	}
+}
+
+class StringUtilTrimMethodsTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		
+		while (true) {
+			System.out.print("Input string:");
+			String s = kb.nextLine();
+			
+			System.out.printf("(%s)%n", s);
+			System.out.printf("(%s)%n", StringUtil.trim(s));			
+			System.out.printf("(%s)%n", StringUtil.trimLeading(s));
+			System.out.printf("(%s)%n", StringUtil.trimTrailing(s));
+			
+			if ("exit".equals(s))
+				break;
+		}
+	}
+}
+
+class StringUtil {
+	public static String trim(String s)
+	{
+		return trimTrailing(trimLeading(s));
+	}
+	
+	public static String trimLeading(String s)
+	{
+		int i = 0;
+		
+		for (; i < s.length() && Character.isWhitespace(s.charAt(i)); ++i)
+			;
+		
+		return s.substring(i);
+	}
+	
+	public static String trimTrailing(String s)
+	{
+		int i = s.length() - 1;
+		
+		for (; i >= 0 && Character.isWhitespace(s.charAt(i)); --i)
+			;
+		
+		return s.substring(0, i + 1);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıfı Çalışması: Parametresi ile aldığı yazının tersini döndüren reverse isimli metodu yazınız ve aşağıdaki kod
+	ile test ediniz.
+	Açıklamalar: Metodun yazımında performansı (ya da daha genel bir deyişle hızı) düşünmenize gerek yoktur.
+	
+	Anahtar Notlar: Aşağıdaki reverse metodunda String birleştirme işlemi sırasında sürekli String nesnesi yaratılıp
+	referans da eski nesneden kopartılmaktadır. Burada bellek açısından bir sorun oluşmasa da nesne yaratılması bir 
+	maliyet oluşturur:
+	
+		str += s.charAt(i)
+	ifadesinin
+		str = (String)(str + s.charAt(i))
+	ifadesine karşılık geldiğini anımsayınız
+	
+	Not: Bu metodun daha hızlı olacak şekilde çözümleri ileride ele alınacaktır
+---------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		StringUtilReverseTest.run();
+	}
+}
+
+class StringUtilReverseTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		
+		while (true) {
+			System.out.print("Input string:");
+			String s = kb.nextLine();
+			
+			System.out.printf("Reverse:%s%n", StringUtil.reverse(s));
+			
+			if ("exit".equals(s))
+				break;
+		}
+	}
+}
+
+class StringUtil {
+	public static String reverse(String s)
+	{
+		String str = "";
+		
+		for (int i = s.length() - 1; i >= 0; --i)
+			str += s.charAt(i);
+		
+		return str;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String sınıfının immutable olmasının maliyetli olması durumunda string işlemleri için String sınıfına yardımcı
+	StringBuilder isimli bir sınıf kullanılabilir. Bu sınıf immutable değildir. Bu sınıf yazı üzerinde değişiklik
+	yapabilen pek çok yararlı metoda sahiptir. Ancak bu sınıf String sınıfına alternatif olarak düşünülmemelidir. Bu
+	sınıf String sınıfına yardımcı bir sınıftır. StringBuilder sınıfının append metotları ile yazının sonuna ekleme
+	yapılabilir. toString metodu ile StringBuilder içerisindeki yazı String olarak elde edilebilir. Bu sınıfın diğer
+	metotları bu kurs ve Uygulama kursları içerisinde kullanıldıkça ele alınacaktır. Bu sınıfın içsel detayları şu an
+	için önemsizdir. Bu durumda Java programcısı yazı üzerinde değişiklik yapılacak durumların performansı etkilemesi
+	halinde bu sınıfı kullanmalı, işlemlerin sonunda yine String olarak ilgili yazıyı elde etmelidir.
+	
+	Anahtar Notlar: StringBuilder sınıfının pek çok metodu StringBuilder referansına geri döner. Yazı üzerinde
+	değişiklik yapan metotlar aynı StringBuilder referansına geri döner. Bu şekildeki sınıflar ileride ele alacağımız 
+	"fluent pattern"'e uygun olarak yazılmışlardır 
+	
+	Aşağıdaki changeCase metodu parametresi ile aldığı yazının büyük harflerini küçük harfe, küçük harflerini de büyük
+	harfe dönüştürmektedir. Alfabetik olmayan karakterler için herhangi bir işlem yapmamaktadır. Örnek String birleştirme
+	kullanılarak şu şekilde yazılabilir:
+		
+		public static String changeCase(String s)
+		{
+			String str = "";
+			
+			for (int i = 0; i < s.length(); ++i) {
+				char c = s.charAt(i);
+				
+				str += Character.isLowerCase(c) ? Character.toUpperCase(c) : Character.toLowerCase(c);
+			}
+			
+			return str;
+		}
+	  	
+	StringBuilder kullanıldığındaki kod ile arasındaki farkı gözlemleyiniz.
+	
+	
+---------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		StringUtilChangeCaseTest.run();
+	}
+}
+
+class StringUtilChangeCaseTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Input string:");
+			String s = kb.nextLine();
+			
+			System.out.printf("%s%n", StringUtil.changeCase(s));
+			
+			if ("exit".equals(s))
+				break;
+		}
+	}
+}
+
+class StringUtil {
+	public static String changeCase(String s)
+	{
+		StringBuilder sb = new StringBuilder();
+		
+		for (int i = 0; i < s.length(); ++i) {
+			char c = s.charAt(i);
+			
+			sb.append(Character.isLowerCase(c) ? Character.toUpperCase(c) : Character.toLowerCase(c));
+		}
+		
+		return sb.toString();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	StringBuilder sınıfının String parametreli ctor'u ile verilen yazıyı içeren bir StringBuilder nesnesi yaratılabilir.
+	setCharAt metodu ile verilen bir indeksteki karakteri değiştirmek için kullanılır. Metoda indek olarak pozitif ya da
+	negatif bakımdan sınırlar dışında bir değer geçilirse exception oluşur.
+	
+	Yukarıdaki changeCase metodu aşağıdaki gibi de yazılabilir
+---------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		StringUtilChangeCaseTest.run();
+	}
+}
+
+class StringUtilChangeCaseTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Input string:");
+			String s = kb.nextLine();
+			
+			System.out.printf("%s%n", StringUtil.changeCase(s));
+			
+			if ("exit".equals(s))
+				break;
+		}
+	}
+}
+
+class StringUtil {
+	public static String changeCase(String s)
+	{
+		StringBuilder sb = new StringBuilder(s);
+		
+		for (int i = 0; i < s.length(); ++i) {
+			char c = s.charAt(i);
+			
+			sb.setCharAt(i, Character.isLowerCase(c) ? Character.toUpperCase(c) : Character.toLowerCase(c));
+		}
+		
+		return sb.toString();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki reverse metodunu inceleyiniz
+---------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		StringUtilReverseTest.run();
+	}
+}
+
+class StringUtilReverseTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		
+		while (true) {
+			System.out.print("Input string:");
+			String s = kb.nextLine();
+			
+			System.out.printf("Reverse:%s%n", StringUtil.reverse(s));
+			
+			if ("exit".equals(s))
+				break;
+		}
+	}
+}
+
+class StringUtil {
+	public static String reverse(String s)
+	{
+		StringBuilder sb = new StringBuilder();
+		
+		for (int i = s.length() - 1; i >= 0; --i)
+			sb.append(s.charAt(i));
+		
+		return sb.toString();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	StringBuilder sınıfının reverse metodu ile yazının tersi elde edilebilir. Aşağıdaki reverse metodunun en etkin 
+	ve compact yazımı Java'da aşağıdaki gibidir
+---------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		StringUtilReverseTest.run();
+	}
+}
+
+class StringUtilReverseTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		
+		while (true) {
+			System.out.print("Input string:");
+			String s = kb.nextLine();
+			
+			System.out.printf("Reverse:%s%n", StringUtil.reverse(s));
+			
+			if ("exit".equals(s))
+				break;
+		}
+	}
+}
+
+class StringUtil {
+	public static String reverse(String s)
+	{
+		return new StringBuilder(s).reverse().toString();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String sınıfına Java 11 ile birlikte repeat isimli bir metot eklenmiştir. Bu metot parametresi ile adığı değer 
+	kadar ilgili yazıyı çoklar
+---------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);		
+		
+		while (true) {
+			System.out.print("Input string:");
+			String s = kb.nextLine();
+			
+			if ("exit".equals(s))
+				break;
+			
+			System.out.print("Input count:");
+			int count = Integer.parseInt(kb.nextLine());
+			
+			System.out.printf("%s%n", s.repeat(count));			
+		}
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String sınıfına Java 11 ile birlikte isBlank isimli bir metot eklenmiştir. Bu metot yazının tamamının whitespace 
+	karakterlerden oluşup oluşmadığını veya boş string olup olmadığını test eder.
+---------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);		
+		
+		while (true) {
+			System.out.print("Input string:");
+			String s = kb.nextLine();
+			
+			if ("exit".equals(s))
+				break;
+			
+			System.out.println(s.isBlank() ? "Blank string" : "Not a blank string");			
+		}
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı bir yazının pangram olup olmadığını test eden isPangramTR ve isPangramEN 
+	isimli metotları yazınız ve aşağıdaki kod ile test ediniz.
+	Açıklamalar:
+		- İlgili dilin alfadbesindeki tüm karakterler kullanılarak oluşturulan ve içerisinde özel isim olmayan anlamlı 
+		cümlelere "pangram" denir. 
+		Örneğin tipik bir İnglizce pangram şudur:		
+			The quick brown fox jumps over the lazy dog.
+			
+		Örneğin tipik bir Türkçe pangram şudur:
+			Pijamalı hasta yağız şoföre çabucak güvendi.
+		
+		- Metotlar cümlenin anlamına ve özel isim içerip içermediğine bakmayacaktır
+---------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		StringUtilIsPangramTest.run();
+	}
+}
+
+class StringUtilIsPangramTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		StringUtilIsPangramTRTest.run(kb);
+		StringUtilIsPangramENTest.run(kb);
+	}
+}
+
+class StringUtilIsPangramTRTest {
+	public static void run(java.util.Scanner kb)
+	{
+		while (true) {
+			System.out.print("Bir yazı giriniz:");
+			String s = kb.nextLine();
+			
+			if ("elma".equals(s))
+				break;
+			
+			System.out.println(StringUtil.isPangramTR(s) ? "Pangram" : "Pangram değil");			
+		}
+	}
+}
+
+
+class StringUtilIsPangramENTest {
+	public static void run(java.util.Scanner kb)
+	{		
+		while (true) {
+			System.out.print("Input string:");
+			String s = kb.nextLine();
+			
+			if ("exit".equals(s))
+				break;
+			
+			System.out.println(StringUtil.isPangramEN(s) ? "Pangram" : "Not pangram");			
+		}
+	}
+}
+
+class StringUtil {
+	public static boolean isPangramTR(String s)
+	{
+		//TODO
+	}
+	
+	public static boolean isPangramEN(String s)
+	{
+		//TODO
+	}
+}
 
 
 /*----------------------------------------------------------------------------------------------------------------------
