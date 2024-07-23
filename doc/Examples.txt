@@ -15101,7 +15101,7 @@ class App {
 		Örneğin tipik bir Türkçe pangram şudur:
 			Pijamalı hasta yağız şoföre çabucak güvendi.
 		
-		- Metotlar cümlenin anlamına ve özel isim içerip içermediğine bakmayacaktır
+		- Metotlar, cümlenin anlamına ve özel isim içerip içermediğine bakmayacaktır
 ---------------------------------------------------------------------------------------------------------------------*/
 
 package csd;
@@ -15149,22 +15149,164 @@ class StringUtilIsPangramENTest {
 			if ("exit".equals(s))
 				break;
 			
-			System.out.println(StringUtil.isPangramEN(s) ? "Pangram" : "Not pangram");			
+			System.out.println(StringUtil.isPangramEN(s) ? "Pangram" : "Not a pangram");			
 		}
 	}
 }
 
 class StringUtil {
+	public static boolean isPangram(String s, String alphabet)
+	{
+		for (int i = 0; i < alphabet.length(); ++i)
+			if (s.indexOf(alphabet.charAt(i)) == -1)
+				return false;
+		
+		return true;
+	}
+	
 	public static boolean isPangramTR(String s)
 	{
-		//TODO
+		return isPangram(s.toLowerCase(), "abcçdefgğhıijklmnoöprsştuüvyz");
 	}
 	
 	public static boolean isPangramEN(String s)
 	{
-		//TODO
+		return isPangram(s.toLowerCase(), "abcdefghijklmnopqrstuvwxyz");
 	}
 }
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yukarıdaki örnekte yalnızca isPangramEN yazılacak olsaydı ASCII karakter tablosundan faydalanılarak aşağıdaki gibi 
+	yazılabilirdi. Şüphesiz yukarıdaki isPangram metodu daha genel yazılmıştır
+---------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		StringUtilIsPangramENTest.run();
+	}
+}
+
+class StringUtilIsPangramENTest {
+	public static void run()
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Input string:");
+			String s = kb.nextLine();
+			
+			if ("exit".equals(s))
+				break;
+			
+			System.out.println(StringUtil.isPangramEN(s) ? "Pangram" : "Not a pangram");			
+		}
+	}
+}
+
+class StringUtil {
+	
+	public static boolean isPangramEN(String s)
+	{
+		s = s.toLowerCase();
+		 
+		for (char c = 'a'; c <= 'z'; ++c)
+			if (s.indexOf(c) == -1)
+				return false;
+		
+		return true;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yukarıdaki örnek aşağıdaki gibi de yazılabilir
+---------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		StringUtilIsPangramENTest.run();
+	}
+}
+
+class StringUtilIsPangramENTest {
+	public static void run()
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Input string:");
+			String s = kb.nextLine();
+			
+			if ("exit".equals(s))
+				break;
+			
+			System.out.println(StringUtil.isPangramEN(s) ? "Pangram" : "Not a pangram");			
+		}
+	}
+}
+
+class StringUtil {
+	public static boolean isPangramEN(String s)
+	{
+		s = s.toLowerCase();
+		
+		for (int i = 0; i < 26; ++i) 
+			if (s.indexOf((char)('a' + i)) == -1)
+				return false;
+		
+		return true;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yukarıdaki örnek aşağıdaki gibi de yazılabilir
+---------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+		StringUtilIsPangramENTest.run();
+	}
+}
+
+class StringUtilIsPangramENTest {
+	public static void run()
+	{		
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Input string:");
+			String s = kb.nextLine();
+			
+			if ("exit".equals(s))
+				break;
+			
+			System.out.println(StringUtil.isPangramEN(s) ? "Pangram" : "Not a pangram");
+		}
+	}
+}
+
+class StringUtil {
+	
+	public static boolean isPangramEN(String s)
+	{
+		s = s.toLowerCase();
+		
+		for (int i = 0; i < 26; ++i) 
+			if (s.indexOf('a' + i) == -1)
+				return false;
+		
+		return true;
+	}
+}
+
 
 
 /*----------------------------------------------------------------------------------------------------------------------
