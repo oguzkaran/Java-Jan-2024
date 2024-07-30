@@ -14516,9 +14516,9 @@ class App {
 	bir karakter aşağıdaki koşullardan birini sağlar (if and only if):
   	
   	- Karakter "Unicode space" karakter ve "Non-breaking space" olmayan karakterlerdendir. 
-  	Unicode space karakterler şunlardır:  Space Seperator, Line Seperator, Paragraph Seperator. Bu karakterler
+  	Unicode space karakterler şunlardır:  Space Separator, Line Separator, Paragraph Separator. Bu karakterler
   	UNICODE'da çeşitli kategorilerdir. Detaylar burada ele alınmayacaktır. Bu karakter Character sınıfının
-  	SPACE_SEPERATOR, LINE_SEPERATOR, PARAGRAPH_SEPERATOR isimli static veri elemanları ile elde edilebilir. 
+  	SPACE_SEPERATOR, LINE_SEPARATOR, PARAGRAPH_SEPARATOR isimli static veri elemanları ile elde edilebilir. 
   	non-breaking space karakterler şunlardır: '\u00A0', '\u2007', '\u202F'
   	
   	- '\t' horizontal tabulation
@@ -15766,6 +15766,721 @@ class App {
 	}
 }
 
+/*----------------------------------------------------------------------------------------------------------------------
+	30 Temmuz 2024
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: JavaSE'de her temel türe ilişkin sınıflar bulunur. Bu sınıflara "sarmalayan sınıflar (wrapper classes)"
+	denir. Sarmalayan sınıfların ilişkin oldukları temel türe yönelik pek çok yardımcı metotları vardır. Temel tür ve 
+	ilgili sarmalayan sınıflar şunlardır:
+		
+		Temel Tür				Sarmalayan sınıf
+		short						Short
+		int							Integer
+		long						Long
+		byte						Byte
+		
+		float						Float
+		double						Double
+		
+		char						Character
+		boolean						Boolean				
+	
+	Sarmalayan sınıflara ilişkin kullanım detayları ileride ele alınacaktır.
+	
+	Character sınıfı dışında kalan sınıfların (yani nümerik türlere ilişkin sarmalayan sınıfların) parseXXX metotları 
+	aldıkları yazıyı ilgili temel türe dönüştürme işleminde kullanılır. Booleasn sınıfının parseBoolean metodu dışındaki
+	diğer parseXXX metotları aldıkları yazı ilgili türe dönüştürülemiyorsa exception oluştururlar (fırlatırlar). parseBoolean
+	metodu aldığı yazı case-insensitive olarak true değilse false değerine geri döner.
+	
+	Aşağıdaki demo örneği inceleyiniz
+---------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Bir tamsayı giriniz:");
+			int a = Integer.parseInt(kb.nextLine());
+			
+			System.out.print("Bir gerçek sayı giriniz:");
+			double b = Double.parseDouble(kb.nextLine());
+			
+			System.out.printf("a = %d, b = %f%n", a, b);
+		
+			System.out.printf("Çıkmak etmek için büyük küçük harf duyarsız true giriniz:");
+			boolean exitFlag = Boolean.parseBoolean(kb.nextLine());
+			
+			if (exitFlag)
+				break;
+		}		
+		
+		System.out.println("Tekrar yapıyor musunuz?");		
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String sınıfının startsWith metodu ilgili yazının parametresi ile aldığı yazı ile başlayıp başlamadığını test etmek
+	için kullanılır
+	
+	Aşağıdaki demo örneği inceleyiniz
+---------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Web Adresi giriniz:");
+			String address = kb.nextLine();
+			
+			if (address.equals("elma"))
+				break;
+			
+			if (!address.startsWith("http://"))
+				address = "http://" + address;
+			
+			System.out.println(address);
+		}							
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String sınıfının endsWith metodu ilgili yazının parametresi ile aldığı yazı ile bitip bitmediğini test etmek
+	için kullanılır
+	
+	Aşağıdaki demo örneği inceleyiniz
+---------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{		
+	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Email bilgisini giriniz:");
+			String email = kb.nextLine();
+			
+			if (email.equals("elma"))
+				break;
+			
+			if (!email.endsWith(".com"))
+				email += ".com";
+			
+			System.out.println(email);
+		}							
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String sınıfının format isimli static metodu printf metodu gibi çalışır. ekrana basmak yerine formatlanmış yazıya
+	geri döner. 
+	
+	Aşağısdaki demo önreği inceleyiniz
+---------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Email bilgisini giriniz:");
+			String email = kb.nextLine();
+			
+			if (email.equals("elma"))
+				break;
+			
+			if (!email.endsWith(".com"))
+				email += ".com";
+			
+			String message = String.format("Email:%s", email);
+			
+			System.out.println(message);
+		}							
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Complex sınıfının toString metodu
+---------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		Complex z1 = new Complex(3, 4);
+		Complex z2 = new Complex(-5.6, 9.67);
+		Complex z = z1.add(z2);
+		
+		String str = z.toString();
+		
+		System.out.println(str);
+	}
+}
+
+class Complex {
+	public double real;
+	public double imag;
+	
+	public static Complex add(double re1, double im1, double re2, double im2) //İleride sınıfı kullanan kodlardan gizleyeceğiz
+	{
+		return new Complex(re1 + re2, im1 + im2);
+	}
+	
+	public static Complex subtract(double re1, double im1, double re2, double im2) //İleride sınıfı kullanan kodlardan gizleyeceğiz
+	{
+		return add(re1, im1, -re2, -im2);		
+	}
+	
+	public Complex()
+	{		
+	}
+	
+	public Complex(double a)
+	{
+		real = a;		
+	}
+	
+	public Complex(double a, double b)
+	{
+		real = a;
+		imag = b;
+	}
+	
+	public static Complex add(double val, Complex z)
+	{
+		return add(val, 0, z.real, z.imag);
+	}
+	
+	public Complex add(Complex other)
+	{
+		return add(real, imag, other.real, other.imag);
+	}
+	
+	public Complex add(double val)
+	{
+		return add(real, imag, val, 0);
+	}	
+	
+	public static Complex subtract(double val, Complex z)
+	{
+		return subtract(val, 0, z.real, z.imag);
+	}
+	
+	public Complex subtract(Complex other)
+	{
+		return subtract(real, imag, other.real, other.imag);
+	}
+	
+	public Complex subtract(double val)
+	{
+		return subtract(real, imag, val, 0);
+	}
+	
+	public void inc(double val)
+	{
+		real += val;
+	}
+	
+	public void inc()
+	{
+		inc(1);
+	}
+	
+	public void dec(double val)
+	{
+		inc(-val);
+	}
+	
+	public void dec()
+	{
+		dec(1);
+	}
+	
+	public Complex getConjugate()
+	{				
+		return new Complex(real, -imag);
+	}
+	
+	public double getNorm()
+	{
+		return Math.sqrt(real * real + imag * imag);
+	}
+	
+	public double getLength()
+	{
+		return getNorm();
+	}	
+	
+	public String toString()
+	{
+		return String.format("(%.2f, %.2f)", real, imag);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Point sınıfının toString metodu
+---------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		Point p1 = new Point();
+		Point p2 = new Point(100, -456);
+		
+		String str1 = p1.toString();
+		String str2 = p2.toString();
+		
+		System.out.println(str1);
+		System.out.println(str2);
+	}
+}
+
+class Point {
+	public double x;
+	public double y;
+
+	public Point()
+	{		
+	}
+
+	public Point(double a)
+	{
+		x = a;		
+	}
+	
+	public Point(double a, double b)
+	{
+		x = a;
+		y = b;
+	}
+	
+	public double distance()
+	{
+		return distance(0, 0);
+	}
+	
+	public double distance(Point other)
+	{
+		return distance(other.x, other.y);
+	}
+	
+	public double distance(double a, double b)
+	{
+		return Math.sqrt(Math.pow(x - a, 2) + Math.pow(y - b, 2));
+	}	
+	
+	public void offset(double dxy)
+	{
+		offset(dxy, dxy);
+	}
+	
+	public void offset(double dx, double dy)
+	{
+		x += dx;
+		y += dy;
+	}
+	
+	public String toString()
+	{
+		return String.format("(%f, %f)", x, y);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String sınıfına Java 15 ile birlikte formatted isimli bir metot eklenmiştir. Bu metot format metodunun non-static
+	versiyonu olarak düşünülebilir. Bu durumda programcının Java 15 ve üzerinde yani pratikte Java 17+ ile çalışıyorsa 
+	format metodu yerine bu metodu çağırması uygundur
+	
+	Aşağısdaki demo önreği inceleyiniz
+---------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		while (true) {
+			System.out.print("Email bilgisini giriniz:");
+			String email = kb.nextLine();
+			
+			if (email.equals("elma"))
+				break;
+			
+			if (!email.endsWith(".com"))
+				email += ".com";
+			
+			String message = "Email:%s".formatted(email);
+			
+			System.out.println(message);
+		}							
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Complex sınıfının toString metodu
+---------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		Complex z1 = new Complex(3, 4);
+		Complex z2 = new Complex(-5.6, 9.67);
+		Complex z = z1.add(z2);
+		
+		String str = z.toString();
+		
+		System.out.println(str);
+	}
+}
+
+class Complex {
+	public double real;
+	public double imag;
+	
+	public static Complex add(double re1, double im1, double re2, double im2) //İleride sınıfı kullanan kodlardan gizleyeceğiz
+	{
+		return new Complex(re1 + re2, im1 + im2);
+	}
+	
+	public static Complex subtract(double re1, double im1, double re2, double im2) //İleride sınıfı kullanan kodlardan gizleyeceğiz
+	{
+		return add(re1, im1, -re2, -im2);		
+	}
+	
+	public Complex()
+	{		
+	}
+	
+	public Complex(double a)
+	{
+		real = a;		
+	}
+	
+	public Complex(double a, double b)
+	{
+		real = a;
+		imag = b;
+	}
+	
+	public static Complex add(double val, Complex z)
+	{
+		return add(val, 0, z.real, z.imag);
+	}
+	
+	public Complex add(Complex other)
+	{
+		return add(real, imag, other.real, other.imag);
+	}
+	
+	public Complex add(double val)
+	{
+		return add(real, imag, val, 0);
+	}	
+	
+	public static Complex subtract(double val, Complex z)
+	{
+		return subtract(val, 0, z.real, z.imag);
+	}
+	
+	public Complex subtract(Complex other)
+	{
+		return subtract(real, imag, other.real, other.imag);
+	}
+	
+	public Complex subtract(double val)
+	{
+		return subtract(real, imag, val, 0);
+	}
+	
+	public void inc(double val)
+	{
+		real += val;
+	}
+	
+	public void inc()
+	{
+		inc(1);
+	}
+	
+	public void dec(double val)
+	{
+		inc(-val);
+	}
+	
+	public void dec()
+	{
+		dec(1);
+	}
+	
+	public Complex getConjugate()
+	{				
+		return new Complex(real, -imag);
+	}
+	
+	public double getNorm()
+	{
+		return Math.sqrt(real * real + imag * imag);
+	}
+	
+	public double getLength()
+	{
+		return getNorm();
+	}	
+	
+	public String toString()
+	{
+		return "(%.2f, %.2f)".formatted(real, imag);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Point sınıfının toString metodu
+---------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		Point p1 = new Point();
+		Point p2 = new Point(100, -456);
+		
+		String str1 = p1.toString();
+		String str2 = p2.toString();
+		
+		System.out.println(str1);
+		System.out.println(str2);
+	}
+}
+
+class Point {
+	public double x;
+	public double y;
+
+	public Point()
+	{		
+	}
+
+	public Point(double a)
+	{
+		x = a;		
+	}
+	
+	public Point(double a, double b)
+	{
+		x = a;
+		y = b;
+	}
+	
+	public double distance()
+	{
+		return distance(0, 0);
+	}
+	
+	public double distance(Point other)
+	{
+		return distance(other.x, other.y);
+	}
+	
+	public double distance(double a, double b)
+	{
+		return Math.sqrt(Math.pow(x - a, 2) + Math.pow(y - b, 2));
+	}	
+	
+	public void offset(double dxy)
+	{
+		offset(dxy, dxy);
+	}
+	
+	public void offset(double dx, double dy)
+	{
+		x += dx;
+		y += dy;
+	}
+	
+	public String toString()
+	{
+		return "(%f, %f)".formatted(x, y);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String sınıfının iki tane char parametreli replace metodu, birinci parametresi verilen karakterleri, ikinci parametresi
+	ile verilen karakter ile değiştirir. Benzer şekilde iki Charsequence parametreli replace metodu, birinci parametresi 
+	verilen yazıları, ikinci parametresi ile verilen yazı ile değiştirir
+---------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		String s1 = "ankara";
+		String s2 = "Bugün hava çok sıcak. Bu sıcak havada ders mi yapılır!...";
+		
+		System.out.println(s1.replace('a', 'b'));
+		System.out.println(s2.replace("sıcak", "çok soğuk"));
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String sınıfının compareTo metodu 
+		result = a.compareTo(b)
+	işlemi için şu şekilde çalışır:
+		1. result > 0 <=> a yazısı b yazısından sonra gelir
+		2. result == 0 <=> a yazısı b yazısı ile özdeştir (equals)
+		3. result < 0 <=> a yazısı b yazısından önce gelir
+	Buradaki karşılaştırma "lexicographically" olarak yapılır. Detaylar gözardı edilirse, bu karşılaştırmaya genel olarak
+	karakter tablosunda göre karşılaştırma denebilir
+---------------------------------------------------------------------------------------------------------------------*/
+
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		System.out.println("ankara".compareTo("Ankara"));
+		System.out.println("Ankara".compareTo("ankara"));
+		System.out.println("ankara".compareTo("ankara"));
+		System.out.println("bursa".compareTo("izmir"));
+		System.out.println("ozan".compareTo("oğuz"));
+		System.out.println("ozan".compareTo("oguz"));
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	String sınıfının compareToIgnoreCase metodu karşılaştırma işlemini case-insensitive olarak yapar
+---------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		System.out.println("ankara".compareToIgnoreCase("Ankara"));
+		System.out.println("Ankara".compareToIgnoreCase("ankara"));	
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Aşağıdaki metodu açıklamalara göre yazınız.
+	 	public static String repeat(int count, char ch);
+	Açıklamalar:
+		- Metot StringUtil sınıfı içerisinde yazılacaktır.
+		- Metot yazılırken döngü kullanılmayacaktır.
+		- String sınıfının repeat metodu kullanılmayacaktır.
+---------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		System.out.println(StringUtil.repeat(4, 'c'));	
+	}
+}
+
+class StringUtil {
+	public static String repeat(int count, char ch)
+	{
+		return String.format("%0" + count + "d", 0).replace('0', ch);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Aşağıdaki metodu açıklamalara göre yazınız.
+	 	public static String repeat(int count, char ch);
+	Açıklamalar:
+		- Metot StringUtil sınıfı içerisinde yazılacaktır.
+		- Metot yazılırken döngü kullanılmayacaktır.
+		- String sınıfının repeat metodu kullanılmayacaktır.
+---------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		System.out.println(StringUtil.repeat(4, 'c'));	
+	}
+}
+
+class StringUtil {
+	public static String repeat(int count, char ch)
+	{
+		return String.format("%" + count + "c", ' ').replace(' ', ch);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Aşağıdaki metodu açıklamalara göre yazınız.
+	 	public static String repeat(int count, char ch);
+	Açıklamalar:
+		- Metot StringUtil sınıfı içerisinde yazılacaktır.
+		- Metot yazılırken döngü kullanılmayacaktır.
+		- String sınıfının repeat metodu kullanılmayacaktır.
+---------------------------------------------------------------------------------------------------------------------*/
+package csd;
+
+class App {
+	public static void main(String [] args) 
+	{	
+		System.out.println(StringUtil.repeat(4, 'c'));	
+	}
+}
+
+class StringUtil {
+	public static String repeat(int count, char ch)
+	{
+		return ("%0" + count + "d").formatted(0).replace('0', ch);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: String sınıfına ilişkin diğer metotlar konular içerisinde ele alınacaktır	
+---------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: Java 13 ile birlikte "Text block" denilen bir String literal dile eklenmiştir. Buna göre bir
+	String sabiti """ ve """ arasında yazılabilmektedir. Text block detaylı bir konudur ve ileride ayrı bir bölüm olarak
+	ele alınacaktır
+---------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Paketler ve İsim Arama (Packages and Name Lookup):		
+---------------------------------------------------------------------------------------------------------------------*/
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	
+---------------------------------------------------------------------------------------------------------------------*/
 
 
 /*----------------------------------------------------------------------------------------------------------------------
