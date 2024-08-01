@@ -16473,8 +16473,58 @@ class StringUtil {
 ---------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
-	Paketler ve İsim Arama (Packages and Name Lookup):		
+	1 Ağustos 2024	
 ---------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Paketler ve İsim Arama (Packages and Name Lookup):
+	Anımsanacağı gibi bir Java programı genel olarak paketlerden oluşur. Java kodlarını içeren ve genel olarak .java
+	uzantılı olarak derlenen dosyalara "derleme birimi (translation/compilation unit) denir". Java'da her User Defined Type (UDT)
+	ayrı bir derleme birimi olarak düşünülebilir.
+	
+	Paketlere ilişkin detaylar:
+	- javac her UDT için bir ".class" uzantılı dosya üretir. İşte bu dosyalara "byte code (BC)" denir. 
+	
+	- UDT'ler aynı derleme biriminde olsalar bile her biri için ayrı BC üretilir. 
+	
+	- Bir UDT herhangi bir pakette olabilir. Bir proje içerisindeki UDT'lerin aynı pakette olması gerekmez.
+	
+	- Bir ".class" uzantılı dosyaya ilişkin UDT'nin başka derleme biriminden kullanılabilmesi için UDT'nin ait olduğu 
+	paketle aynı isimde bir dizinde (directory) olması gerekir. Java IDE'leri bu işlemi otomatik olarak yaparlar. Yani 
+	BC'yi uygun yerinde üretirler. Derleme birimleri için böyle bir zorunluluk yoktur ancak Java'da kullanılan IDE'lerin
+	hemen hepsi derleme birimleri için de pakete ilişkin directory'de olma zorunluluğu tutar.
+	
+	- Bir UDT'nin ismine bulunduğu paket dışından paket ismi ve nokta operatörü ile erişilebilir. Bir UDT'ye bulunduğu
+	paket dışından erişilebilmesi için public olarak bildirilmesi gerekir. public olarak bildirilmeyen yani yalnızca
+	kendi paketi içerisinden erişilebilen UDT'ler için "friendly" terimi kullanılır. Bazı kaynaklar friendly terimi yerine
+	"internal" terimini de kullanırlar.
+	
+	- Farklı paketlerde bulunan UDT'lerin BC'lerinin, bulunduğu pakete ilişkin dizinlerin, yani kodda paketi belirtilen 
+	dizinin, uygulamanın çalışmaya başladığı yerde olması gerekir. Bu durumda tüm paketler burada bulundurulmalıdır
+	
+	- Uygulamada kullanılan sınıflar içerisinde bir tane main metodu olmak zorunda değildir. java programına verilen 
+	sınıfın uygun main metodu çalıştırılır. main metodunun prototipi aşağıdaki gibi olmalıdır:
+	
+		public static void main(String [] args);
+		
+	Bu protoipte uygunluğu bozmayacak tek değişiklik parametre ismi olan args'ta yapılabilir. java programına verilen
+	sınıfın main metodunun bu prototipe sahip olması zorunludur. Aksi durumda exception oluşur. Akışın başladığı main
+	metoduna "entry point" dendiğini anımsayınız. Entry point olarak belirlenen main metodunun ait olduğu UDT kesinlikle
+	bir sınıf olmalıdır. 
+	
+	Anahtar Notlar: Java 21 ile birlikte entry point olarak belirlenen main metodunun yapısına ilişkin bazı esnek
+	kullanımlar söz konusu olmaktadır. Bu durum "uygulama kurslarında" ele alınacaktır
+	
+	- public olarak bildirilen bir UDT, ismi ile aynı isimde bir .java dosyasında olmalıdır. Aksi durumda error oluşur. 
+	Bu durumda bir java dosyası içerisinde ancak dosya ismi ile aynı isimde bir UDT public olabilir
+	
+	- Bir java dosyasında dosya ile aynı isimde olan bir UDT olmak zorunda değildir. Ancak bu durum pratikte çok 
+	kullanılmaz
+	
+	-  Paket bildirimi tüm bildirimlerden önce olmalıdır. Dolayısıyla bir java dosyasında bir tane paket bildirimi 
+	yapılabilir
+---------------------------------------------------------------------------------------------------------------------*/
+
 
 
 
