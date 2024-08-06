@@ -16473,7 +16473,7 @@ class StringUtil {
 ---------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
-	1 Ağustos 2024	
+	1 Ağustos 2024- 6 Ağustos 2024
 ---------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
@@ -16523,6 +16523,50 @@ class StringUtil {
 	
 	-  Paket bildirimi tüm bildirimlerden önce olmalıdır. Dolayısıyla bir java dosyasında bir tane paket bildirimi 
 	yapılabilir
+	
+	- Birden fazla .java dosyasında aynı isimde paket bildirimi yapılabilir. Bu durumda bu dosyalardaki tüm UDT'ler
+	aynı pakette bildirilmiş olur
+	
+	- Bir paket içerisinde aynı isimde birden fazla UDT bildirimi geçersizdir
+	
+	- Farklı paketler içerisinde aynı isimde UDT bildirimleri geçerlidir. Bu UDT'ler isimleri aynı olsa da aslında 
+	farklı türlerdir
+	
+	- Bir paketin alt paketleri olabilir. Alt paket bildiriminin genel biçimi şu şekildedir:
+		package <paket ismi>[.<alt paket ismi>.<alt paket ismi>...];
+	Alt paket içerisindeki UDT'lerin byte code'ları paket hiyerarşisinde uygun alt dizinde bulunmalıdır. Yine IDE
+	programlar bunu otomatik olarak yaparlar
+	
+	- Paketler içiçe bile olsa farklı paketlerdir. Yani örneğin arman paketi içerisinde SerialPort isimli bir sınıf 
+	varsa, arman.util paketi içerisinde de SerialPort isimli bir sınıf olabilir. Çünkü paketler farklıdır ve isim 
+	çakışması oluşmaz
+	
+	-  Paketler isim çakışmasını engellemek için düşünülmüştür. Paketler ile farklı firmalar kendi paket isimleriyle
+	UDT yazdıklarında UDT'lerin isimleri aynı olsa bile diğerleriyle birlikte aynı projede kullanılabilirler
+	
+	- Paket isimleri genelde bir firmaya özgü tekil (unique) bir olan domain isminden türetilir. Örneğin CSD'nin 
+	paketleri domain ismi "csystem.org" olduğundan "org.csystem" paketi altında yazılır. Bu bir convention'dır ve 
+	firmalar özellikle bu kurala genel UDT'ler için mutlaka uyarlar. Pratikte domain ismi altında doğrudan bir UDT
+	bildirilmez. En az bir tane paket altında bildirilir. Yani aslında bu convention'da domain ismi taban paket (base package)
+	olarak kullanılır. Programcının bir UDT'yi koyacağı paketi okunabilir/algılanabilir ve isim çakışma olasığını en aza
+	olacak şekilde belirler. Bu anlamda alt paketlerin fazla olması bir sorun oluşturmaz. Paket isimlendirmede programcı 
+	anlamlı olacak şekilde cömert olmalıdır.
+	
+	- Paket isimleri bir convention olarak tamamı küçük harf olacak şekilde bildirilir. Birden fazla kelimeden oluşuyorsa
+	bitişik olarak yazılır. Örnğin:
+		org.csystem.util.net
+		org.csystem.util.mapoperations
+		
+	- JavaSE içerisindeki tüm paketler ve UDT'ler java isimli bir paket altında bildirilmiştir. Bu anlamda programcının
+	java paketi altında bir bildirim yapması tavsiye edilmez. Zaten yıkarıdaki domain ismi convention'ına uyulduğunda 
+	böyle bir durum da oluşmaz
+	
+	- java.lang paketi içerisindeki tüm UDT'ler her yerden görülebilirdir. Yabi bu paket içerisindeki UDT isimleri
+	doğrudan kullanılabilir. Ayrıca belirtilmesi gerekmez. Bu UDT'ler ileride göreceğimiz "import bildirimi (import declaration)"
+	yapılmasına gerek yoktur. Örneğin System, String, Integer, Double sınıfları java.lang paketi altında bildirilmiştir
+	
+	- Hiç bir paket altında bildirilmeyen UDT'ler isimsiz paket (unnamed package) içerisinde bildirilmiş olur. Pratikte
+	bir uygulama içerisinde isimsiz paket altında bir UDT bildirimi yapılmaz. Bunun nedeni ileride ele alınacaktır
 ---------------------------------------------------------------------------------------------------------------------*/
 
 
