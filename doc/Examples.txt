@@ -16568,7 +16568,738 @@ class StringUtil {
 	- Hiç bir paket altında bildirilmeyen UDT'ler isimsiz paket (unnamed package) içerisinde bildirilmiş olur. Pratikte
 	bir uygulama içerisinde isimsiz paket altında bir UDT bildirimi yapılmaz. Bunun nedeni ileride ele alınacaktır
 ---------------------------------------------------------------------------------------------------------------------*/
+/**
+ * Point class that represents a complex number in math
+ * Last Update: 6th August 2024
+ * @author Java-Jan-2024 Group
+ */
+package org.csystem.math.geometry;
 
+public class Point {
+	public double x;
+	public double y;
+
+	public Point()
+	{
+	}
+
+	public Point(double a)
+	{
+		x = a;
+	}
+
+	public Point(double a, double b)
+	{
+		x = a;
+		y = b;
+	}
+
+	public double distance()
+	{
+		return distance(0, 0);
+	}
+
+	public double distance(Point other)
+	{
+		return distance(other.x, other.y);
+	}
+
+	public double distance(double a, double b)
+	{
+		return Math.sqrt(Math.pow(x - a, 2) + Math.pow(y - b, 2));
+	}
+
+	public void offset(double dxy)
+	{
+		offset(dxy, dxy);
+	}
+
+	public void offset(double dx, double dy)
+	{
+		x += dx;
+		y += dy;
+	}
+
+	public String toString()
+	{
+		return "(%f, %f)".formatted(x, y);
+	}
+}
+
+/**
+ * Point class that represents a complex number in math
+ * Last Update: 6th August 2024
+ * @author Java-Jan-2024 Group
+ */
+package org.csystem.math.geometry;
+
+public class Point {
+	public double x;
+	public double y;
+
+	public Point()
+	{
+	}
+
+	public Point(double a)
+	{
+		x = a;
+	}
+
+	public Point(double a, double b)
+	{
+		x = a;
+		y = b;
+	}
+
+	public double distance()
+	{
+		return distance(0, 0);
+	}
+
+	public double distance(Point other)
+	{
+		return distance(other.x, other.y);
+	}
+
+	public double distance(double a, double b)
+	{
+		return Math.sqrt(Math.pow(x - a, 2) + Math.pow(y - b, 2));
+	}
+
+	public void offset(double dxy)
+	{
+		offset(dxy, dxy);
+	}
+
+	public void offset(double dx, double dy)
+	{
+		x += dx;
+		y += dy;
+	}
+
+	public String toString()
+	{
+		return "(%f, %f)".formatted(x, y);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+    8 Ağustos 2024
+---------------------------------------------------------------------------------------------------------------------*/
+
+/**
+ * Utility class for numeric operations
+ * Last Update: 8th August 2024
+ * @author Java-Jan-2024 Group
+ */
+package org.csystem.util.numeric;
+
+public class NumberUtil {
+	public static int countDigits(int a)
+	{
+		return a != 0 ? (int) Math.log10(Math.abs(a)) + 1 : 1;
+	}
+
+	public static long factorial(int n)
+	{
+		long result = 1;
+
+		for (long i = 2; i <= n; ++i)
+			result *= i;
+
+		return result;
+	}
+
+	public static int fibonacciNumber(int n)
+	{
+		if (n <= 2)
+			return n - 1;
+
+		int prev1 = 1, prev2 = 0, result = prev1 + prev2;
+
+		for (int i = 3; i < n; ++i) {
+			prev2 = prev1;
+			prev1 = result;
+			result = prev1 + prev2;
+		}
+
+		return result;
+	}
+
+	public static int getDigitsPowSum(int a)
+	{
+		int result = 0;
+		int n = countDigits(a);
+
+		while (a != 0) {
+			result += (int)Math.pow(a % 10, n);
+			a /= 10;
+		}
+
+		return result;
+	}
+
+	public static boolean isArmstrong(int a)
+	{
+		return a >= 0 && getDigitsPowSum(a) == a;
+	}
+
+	public static boolean isEven(int a)
+	{
+		return a % 2 == 0;
+	}
+
+	public static boolean isOdd(int a)
+	{
+		return !isEven(a);
+	}
+
+	public static boolean isPrime(long a)
+	{
+		if (a <= 1)
+			return false;
+
+		if (a % 2 == 0)
+			return a == 2;
+
+		if (a % 3 == 0)
+			return a == 3;
+
+		if (a % 5 == 0)
+			return a == 5;
+
+		if (a % 7 == 0)
+			return a == 7;
+
+		for (long i = 11; i * i <= a; i += 2)
+			if (a % i == 0)
+				return false;
+
+		return true;
+	}
+
+	public static long nextClosestPrime(long a)
+	{
+		if (a < 2)
+			return 2;
+
+		while (!isPrime(++a))
+			;
+
+		return a;
+	}
+
+	public static int nextFibonacciNumber(int val)
+	{
+		if (val < 0)
+			return 0;
+
+		int prev1 = 1, prev2 = 0, next = prev1 + prev2;
+
+		while (next <= val) {
+			prev2 = prev1;
+			prev1 = next;
+			next = prev1 + prev2;
+		}
+
+		return next;
+	}
+
+	public static long nthPrime(int n)
+	{
+		long result = 2;
+		int count = 0;
+
+		for (long i = 2; count < n; ++i)
+			if (isPrime(i)) {
+				++count;
+				result = i;
+			}
+		return result;
+	}
+
+	public static int reverse(int val)
+	{
+		int result = 0;
+
+		while (val != 0) {
+			result = result * 10 + val % 10;
+			val /= 10;
+		}
+
+		return result;
+	}
+
+	public static int sumDigits(int val)
+	{
+		int total = 0;
+
+		while (val != 0) {
+			total += val % 10;
+			val /= 10;
+		}
+
+		return Math.abs(total);
+	}
+}
+
+/**
+ * Utility class for string operations
+ * Last Update: 8th August 2024
+ * @author Java-Jan-2024 Group
+ */
+package org.csystem.util.string;
+
+public class StringUtil {
+	public static String capitalize(String s)
+	{
+		return s.isEmpty() ? s : Character.toUpperCase(s.charAt(0)) + s.substring(1).toLowerCase();
+	}
+
+	public static String changeCase(String s)
+	{
+		StringBuilder sb = new StringBuilder(s);
+
+		for (int i = 0; i < s.length(); ++i) {
+			char c = s.charAt(i);
+
+			sb.setCharAt(i, Character.isLowerCase(c) ? Character.toUpperCase(c) : Character.toLowerCase(c));
+		}
+
+		return sb.toString();
+	}
+
+
+	public static int countString(String s1, String s2)
+	{
+		int count = 0;
+
+		for (int i = 0; (i = s1.indexOf(s2, i)) != -1; ++i, ++count)
+			;
+
+		return count;
+	}
+
+
+	public static boolean isPalindrome(String s)
+	{
+		int left = 0;
+		int right = s.length() - 1;
+
+		while (left < right) {
+			char cLeft = s.charAt(left);
+
+			if (!Character.isLetter(cLeft)) {
+				++left;
+				continue;
+			}
+
+			char cRight = s.charAt(right);
+
+			if (!Character.isLetter(cRight)) {
+				--right;
+				continue;
+			}
+
+			if (Character.toLowerCase(cLeft) != Character.toLowerCase(cRight))
+				return false;
+
+			++left;
+			--right;
+		}
+
+		return true;
+	}
+
+	public static boolean isPangram(String s, String alphabet)
+	{
+		for (int i = 0; i < alphabet.length(); ++i)
+			if (s.indexOf(alphabet.charAt(i)) == -1)
+				return false;
+
+		return true;
+	}
+
+	public static boolean isPangramEN(String s)
+	{
+		s = s.toLowerCase();
+
+		for (char c = 'a'; c <= 'z'; ++c)
+			if (s.indexOf(c) == -1)
+				return false;
+
+		return true;
+	}
+
+	public static boolean isPangramTR(String s)
+	{
+		return isPangram(s.toLowerCase(), "abcçdefgğhıijklmnoöprsştuüvyz");
+	}
+
+	public static String padLeading(String s, int n, char ch)
+	{
+		int len = s.length();
+
+		return len < n ? String.valueOf(ch).repeat(n - len) + s : s;
+	}
+
+	public static String padLeading(String s, int n)
+	{
+		return padLeading(s, n, ' ');
+	}
+
+	public static String padTrailing(String s, int n, char ch)
+	{
+		int len = s.length();
+
+		return len < n ? s + String.valueOf(ch).repeat(n - len) : s;
+	}
+
+	public static String padTrailing(String s, int n)
+	{
+		return padTrailing(s, n, ' ');
+	}
+
+	public static String reverse(String s)
+	{
+		return new StringBuilder(s).reverse().toString();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Derleyici kod içerisinde kullanılan bir ismi gördüğünde bu ismin bildirimini arar. Bu kavrama "isim arama (name lookup)"
+	denir. Derleyici bir ismi bildirim noktasında aramaz. Derleyici ismi bulduğunda (yani bildirimini bulduğunda) o ismin
+	geçerli olarak kullanılıp kullanılmadığına bakar. Eğer geçersiz olarak kullanılmışsa error oluşur. Yani aslında
+	derleyici önce isim araması yapar, bulduktan sonra geçerlilik kontrolü yapar. Zaten ismi bulamazsa yine error oluşur.
+	Bu durumda bir ismin bulunamaması ile bulunup geçersiz kullanılması durumunda oluşan error'lar aynı değildir.
+
+	Aşağıdaki örnekte ** ile belirtilen error a isminin bulunması ancak geçersiz kullanılması durumunda oluşmuştur. ***
+	ile belirtilen error ise x isminin bulunamaması dolayısıyla oluşmuştur
+---------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		boolean a = true;
+
+		++a; //error **
+		++x; //error ***
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Kod içerisinde bir isim iki şekilde kullanılabilir: nitelikli (qualified), niteliksiz (unqualified).
+
+	Kullanılan bir isim nokta operatörünün sağında kalıyorsa nitelikli, kalmıyorsa niteliksiz kullanılmış olur.
+
+	Nitelikli kullanılan bir isim nitelikli isim arama kurallarına göre, niteliksiz kullanılan bir isim ise niteliksiz
+	isim arama kurallarına göre aranır.
+
+	Anahtar Notlar: Buradaki "qualified" ve "unqualified" terimleri algısal olarak olumlu ya da olumsuz bir durum
+	belirtmemektedir. Tamamen kullanım biçimlerine ilişkin kavramlardır.
+
+	Anahtar Notlar: Nitelikli ve niteliksiz isim arama kuralları genel ve özel olmak üzere iki gruba ayrılabilir. Biz
+	öncelikle genel kuralları, sonrasında özel kuralları ele alacağız
+---------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		Sample s; //Sample niteliksiz kullanılmıştır
+
+		s = new Sample(); //s ve Sample niteliksiz kullanılmıştır
+		s.foo(10); // s niteliksiz, foo nitelikli kullanılmıştır
+	}
+}
+
+class Sample {
+	public int x;
+
+	public void foo(int a)
+	{
+		x = a; //x ve a niteliksiz kullaılmıştır
+		//...
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Kod içerisinde bir isim iki şekilde kullanılabilir: nitelikli (qualified), niteliksiz (unqualified).
+
+	Kullanılan bir isim nokta operatörünün sağında kalıyorsa nitelikli, kalmıyorsa niteliksiz kullanılmış olur.
+
+	Nitelikli kullanılan bir isim nitelikli isim arama kurallarına göre, niteliksiz kullanılan bir isim ise niteliksiz
+	isim arama kurallarına göre aranır.
+
+	Anahtar Notlar: Buradaki "qualified" ve "unqualified" terimleri algısal olarak olumlu ya da olumsuz bir durum
+	belirtmemektedir. Tamamen kullanım biçimlerine ilişkin kavramlardır.
+
+	Anahtar Notlar: Nitelikli ve niteliksiz isim arama kuralları genel ve özel olmak üzere iki gruba ayrılabilir. Biz
+	öncelikle genel olanları, sonrasında özel durumlarını ele alacağız
+---------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App { //App aranmaz
+	public static void main(String [] args) //main aranmaz
+	{
+		Sample s; //Sample niteliksiz kullanılmıştır, s aranmaz
+
+		s = new Sample(); //s ve Sample niteliksiz kullanılmıştır
+		s.foo(10); // s niteliksiz, foo nitelikli kullanılmıştır
+	}
+}
+
+class Sample { //Sample aranmaz
+	public int x; //x aranmaz
+
+	public void foo(int a) // foo aranmaz
+	{
+		x = a; //x ve a niteliksiz kullanılmıştır
+		//...
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Niteliksiz isim arama genel kuralları (else if biçiminde değerlendiriniz):
+	1. İsim metot içerisinde kullanılmışsa kullanılan noktadan yukarıya doğru metot içerisinde aranır. Bu aramaya metot
+	parametre değişkenleri de dahildir
+---------------------------------------------------------------------------------------------------------------------*/
+class Sample {
+	public void foo(int a)
+	{
+		int x;
+
+		x = a;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Niteliksiz isim arama genel kuralları (else if biçiminde değerlendiriniz):
+	2. Kullanılan isim sınıf içerisinde, tüm metotların dışında kalan her yerde aranır. Bulunamazsa taban sınıflara da
+	bulununcaya veya bulunamayıncaya kadar bakılır. Taban sınıf (super class) kavramı türetme (inheritance) konusunda
+	ele alaınacaktır
+---------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		Sample s = new Sample();
+
+		s.foo(19);
+
+		System.out.printf("s.x = %d%n", s.x);
+	}
+}
+
+class Sample {
+	public void foo(int a)
+	{
+		x = a;
+	}
+
+	public int x;
+
+	public void bar(int x)
+	{
+		//...
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yukarıdaki iki maddenin sonucu olarak, bir metodun parametre değişkeni veya bir yerel değişkeni ait olduğu sınıfın
+	veri elemanı ile aynı isimde olabilir. Aşağıdaki örnekte ** belirtilen atama işleminde x yerel değişken olan x'dir
+	değil mi?
+---------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		Sample s = new Sample();
+
+		s.foo(19);
+
+		System.out.printf("s.x = %d%n", s.x);
+	}
+}
+
+class Sample {
+	public int x;
+
+	public void foo(int a)
+	{
+		int x;
+
+		x = a; //**
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Niteliksiz isim arama genel kuralları (else if biçiminde değerlendiriniz):
+	3. İsim, kullanılan metodun ait olduğu sınıfın ait olduğu paket içerisinde aranır. Burada alt ve üst paketlere bakılmaz
+---------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		Sample s;
+	}
+}
+
+class Sample {
+	//
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Niteliksiz isim arama genel kuralları (else if biçiminde değerlendiriniz):
+	3. İsim, kullanılan metodun ait olduğu sınıfın ait olduğu paket içerisinde aranır. Burada alt ve üst paketlere bakılmaz
+---------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		Sample s;
+	}
+}
+
+package org.csystem;
+
+public class Sample {
+    //...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Niteliksiz isim arama genel kuralları (else if biçiminde değerlendiriniz):
+	3. İsim, kullanılan metodun ait olduğu sınıfın ait olduğu paket içerisinde aranır. Burada alt ve üst paketlere bakılmaz
+---------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		Sample s;
+	}
+}
+
+package org.csystem.app.sample;
+
+public class Sample {
+    //...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+    Niteliksiz isim arama genel kuralları (else if biçiminde değerlendiriniz):
+    4. "import on demand declaration" olarak belirtilen paketlerin hepsinde arama yapar. "import on demand declaration"
+    ileride ele alınacaktır
+---------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Nitelikli isim arama genel kuralları (else if biçiminde değerlendiriniz):
+	1. Aranan ismin solunda bir UDT ismi varsa, isim o UDT içerisinde aranır. Burada bulunamazsa taban sınıflara
+	bulununcaya veya bulunamayıncaya kadar bakılır
+---------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		Sample.foo(20);
+		System.out.printf("Sample.x = %d%n", Sample.x);
+	}
+}
+
+class Sample {
+	public static int x;
+
+	public static void foo(int a)
+	{
+		x = a;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Nitelikli isim arama genel kuralları (else if biçiminde değerlendiriniz):
+	2. Aranan ismin solunda bir referans (değişken) ismi varsa, isim referans değişkenin türüne ilişkin UDT içerisinde
+	aranır. Burada bulunamazsa taban sınıflara bulununcaya veya bulunamayıncaya kadar bakılır
+---------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		Sample s = new Sample();
+
+		s.foo(20);
+		System.out.printf("Sample.x = %d%n", s.x);
+	}
+}
+
+class Sample {
+	public int x;
+
+	public void foo(int a)
+	{
+		x = a;
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Nitelikli isim arama genel kuralları (else if biçiminde değerlendiriniz):
+	3. Aranan ismin solunda bir paket ismi varsa, isim o paket içerisinde aranır. Burada da alt paketlere ya da üst
+	paketlere bakılmaz
+---------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		org.csystem.math.geometry.Point p;
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Paket isimleri niteliksiz isim aramaya dahil değildir. Aslında bu kural daha teknik olarak şu şekilde açıklanabilir:
+	Paket içerisinde arama yapılırken paket isimleri niteliksiz aramaya dahil edilmez
+---------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		sample.Sample s;
+	}
+}
+
+package org.csystem.app.sample;
+
+public class Sample {
+    //...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yukarıda anlatılan isim arama kurallarına göre isimsiz (unnamed) bir paket içerisinde bildirilen bir UDT'ye başka
+	bir paketten erişilemez. Bu durumda isimsiz paket altında bildirilen bir UDT ancak isimsiz paket altında bildirilen
+	başka bir UDT içerisinden erişilebilirdir. Bu durumda isimsiz bir paket altında UDT bildirimi pratikte tavsiye
+	edilmez
+---------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		Sample s;
+	}
+}
+
+public class Sample {
+    //...
+}
 
 
 
