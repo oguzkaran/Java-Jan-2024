@@ -16569,7 +16569,7 @@ class StringUtil {
 	bir uygulama içerisinde isimsiz paket altında bir UDT bildirimi yapılmaz. Bunun nedeni ileride ele alınacaktır
 ---------------------------------------------------------------------------------------------------------------------*/
 /**
- * Point class that represents a complex number in math
+ * Point class that represents a point in geometry
  * Last Update: 6th August 2024
  * @author Java-Jan-2024 Group
  */
@@ -16627,7 +16627,7 @@ public class Point {
 }
 
 /**
- * Point class that represents a complex number in math
+ * Point class that represents a point in geometry
  * Last Update: 6th August 2024
  * @author Java-Jan-2024 Group
  */
@@ -17253,7 +17253,7 @@ class Sample {
 	Nitelikli isim arama genel kuralları (else if biçiminde değerlendiriniz):
 	3. Aranan ismin solunda bir paket ismi varsa, isim o paket içerisinde aranır. Burada da alt paketlere ya da üst
 	paketlere bakılmaz
----------------------------------------------------------------------------------------------------------------------*/
+----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app;
 
 class App {
@@ -17266,7 +17266,7 @@ class App {
 /*----------------------------------------------------------------------------------------------------------------------
 	Paket isimleri niteliksiz isim aramaya dahil değildir. Aslında bu kural daha teknik olarak şu şekilde açıklanabilir:
 	Paket içerisinde arama yapılırken paket isimleri niteliksiz aramaya dahil edilmez
----------------------------------------------------------------------------------------------------------------------*/
+----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app;
 
 class App {
@@ -17287,7 +17287,7 @@ public class Sample {
 	bir paketten erişilemez. Bu durumda isimsiz paket altında bildirilen bir UDT ancak isimsiz paket altında bildirilen
 	başka bir UDT içerisinden erişilebilirdir. Bu durumda isimsiz bir paket altında UDT bildirimi pratikte tavsiye
 	edilmez
----------------------------------------------------------------------------------------------------------------------*/
+----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app;
 
 class App {
@@ -17301,11 +17301,681 @@ public class Sample {
     //...
 }
 
+/*----------------------------------------------------------------------------------------------------------------------
+    15 Ağustos 2024
+----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	import bildirimleri (import declarations): import bildirimleri niteliklendirmeyi azaltmak ve kodu daha yalın olarak
+	yazabilmek için düşünülmüştür. import bildirimlerinin UDT ismi bakımından iki kullanım biçimi vardır:
+	1. Yıldızlı import bildirimi (import on demand declaration)
+	2. Yıldızsız import bildirimi (import single type declaration)
 
+	import bildirimlerine ilişkin ortak özellikler:
+	- import bildirimleri bir derleme biriminde paket bildiriminden sonra ve tüm diğer bildirimlerden önce bulunmalıdır.
+	- Birden fazla import bildirimi geçerlidir ve bildirim sırasının önemi yoktur.
+	- import bildirimleri niteliksiz isimler için (yani niteliksiz isim arama için) geçerlidir. Nitelikli isimler için
+	import bildiriminin önemi yoktur.
+	- Bir import bildirimi yalnızca bildirildiği derleme biriminde geçerlidir.
+
+	Anahtar Notlar: import bildirimi bir kütüphaneyi projeye dahil etmek demek DEĞİLDİR. Bir kütüphaneyi projeye dahil
+	etmek için başka yöntemler kullanılmaktadır. Bir kütüphaneyi projeye dahil etme işlemi Java ile Uygulama Geliştirme 1
+	ve Android Programlama kurslarında ele alınacaktır.
+
+	Anahtar Notlar: Yukarıdaki "yıldızlı" ve "yıldızsız" terimleri tamamen Oğuz Karan tarafından uydurulmuştur. Bunlar
+	gerçek terimlerin Türkçe karşılıkları değildir. Kolay anlaşılması açısından bu şekilde kullanılmaktadır
+----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Yıldızlı import bildirimi (import on demand declaration): Yıldızlı import bildiriminin genel biçimi şu şekildedir:
+		import <paket ismi>[.<alt paket listesi>].*;
+	Niteliksiz isim arama genel kurallarına göre isim, paket içerisinde bulunamazsa yıldızlı import bildirimlerine ilişkin
+	tüm paketlerde aranır. Burada yine alt ve üst paketlere bakılmaz. Bu bildirim adeta bir paketi isim arama anlamında
+	derleme birimine ilişkin pakete dahil etmektir.
+----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.*;
+import org.csystem.math.*;
+import org.csystem.math.geometry.*;
+
+class App {
+	public static void main(String [] args)
+	{
+		Random r = new Random();
+		Scanner kb = new Scanner(System.in);
+
+		System.out.print("Bir sayı giriniz:");
+		int count = kb.nextInt();
+
+		for (int i = 0; i < count; ++i) {
+			Point p = new Point(r.nextInt(-100, 100), r.nextInt(-100, 100));
+			Complex z = new Complex(r.nextDouble(-3.456, 3.456), r.nextDouble(-3.456, 3.456));
+
+			System.out.println("--------------------------------------");
+			System.out.printf("Point:%s%n", p.toString());
+			System.out.printf("Complex Number:%s%n", z.toString());
+			System.out.println("--------------------------------------");
+		}
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Arama tüm yıldızlı import bildirimlerinde yapılır. Eğer isim import bildirimlerine ilişkin birden fazla pakette
+	bulunursa error oluşur (ambiguity)
+----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import gorkem.*;
+import arman.*;
+
+class App {
+	public static void main(String [] args)
+	{
+		Mample m;
+		Test t;
+		Sample s; //error: ambiguity
+	}
+}
+
+package arman;
+
+public class Sample {
+    //...
+}
+
+package gorkem;
+
+public class Sample {
+    //...
+}
+
+package gorkem;
+
+public class Mample {
+    //...
+}
+package arman;
+
+public class Test {
+    //...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yıldızsız import bildirimleri (import single type declaration): Bu bildirimin genel biçimi şu şekildedir:
+		import <paket ismi>[.alt paket listesi>.<UDT ismi>;
+	Bubildirimde belirtilen UDT ismi derleme birimöi boyunca her yerde niteliksiz olarak kullanılabilir (visible). Ya da
+	başka bir deyişle buradaki bildirim, bu ismin derleme birimi boyunca niteliksiz kullanılabileceğini belirtir. Yani
+	bu bildirime ilişkin isim niteliksiz isim arama genel kurallarına göre aranmaz. Yani ilgili isim için niteliksiz
+	isim arama genel kuralları uygulanmaz
+----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.Random;
+import java.util.Scanner;
+import org.csystem.math.Complex;
+import org.csystem.math.geometry.Point;
+
+class App {
+	public static void main(String [] args)
+	{
+		Random r = new Random();
+		Scanner kb = new Scanner(System.in);
+
+		System.out.print("Bir sayı giriniz:");
+		int count = kb.nextInt();
+
+		for (int i = 0; i < count; ++i) {
+			Point p = new Point(r.nextInt(-100, 100), r.nextInt(-100, 100));
+			Complex z = new Complex(r.nextDouble(-3.456, 3.456), r.nextDouble(-3.456, 3.456));
+
+			System.out.println("--------------------------------------");
+			System.out.printf("Point:%s%n", p.toString());
+			System.out.printf("Complex Number:%s%n", z.toString());
+			System.out.println("--------------------------------------");
+		}
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yıldızsız import bildiriminde aynı ismin farklı paketlerden verilmesi error oluşuturur. Çünkü bu bildirim ile bir
+	isim artık niteliksiz kullanılabilirdir. Bu durumda farklı paketlerde olan aynı isim için bildirim yapılamaz
+----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import arman.Sample;
+import gorkem.Sample; //error
+
+class App {
+	public static void main(String [] args)
+	{
+
+	}
+}
+
+package arman;
+
+public class Sample {
+    //...
+}
+
+package gorkem;
+
+public class Sample {
+    //...
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Anahtar Notlar: Programcı mümkün olduğunda yıldızsız import bildirimlerini tercih etmelidir. Aslında bu bildirim
+	ile artık ismin kullanımında ambiguity durumu oluşamayacağından tercih edilmeldir. IDE'ler genel olarak yıldızsız
+	import bildirimine yönlendirirler. Ancak bu çeşitli konfigürasyon ayarlarından değiştirilebilmektedir. Yine çok fazla
+	aynı paketteki UDT'ler için yıldızsız bildirim yapıldığında bunlar yıldızlı ile de birleştirilebilir. Bu aslında
+	bir yaklaşımdır ve programcıdan programcıya değişiklik gösterebilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örnekte Sample, org.csystem.app paketi içerisinde olandır
+----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import gorkem.*;
+
+class App {
+	public static void main(String [] args)
+	{
+		Sample.foo();
+	}
+}
+
+package gorkem;
+
+public class Sample {
+    //...
+    public static void foo()
+    {
+        System.out.println("gorkem.Sample.foo()");
+    }
+}
+
+package org.csystem.app;
+
+class Sample {
+    //...
+    public static void foo()
+    {
+        System.out.println("org.csystem.app.Sample.foo()");
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örnekte Sample, gorkem paketi içerisinde olandır
+----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import gorkem.Sample;
+
+class App {
+	public static void main(String [] args)
+	{
+		Sample.foo();
+	}
+}
+
+package gorkem;
+
+public class Sample {
+    //...
+    public static void foo()
+    {
+        System.out.println("gorkem.Sample.foo()");
+    }
+}
+
+package org.csystem.app;
+
+class Sample {
+    //...
+    public static void foo()
+    {
+        System.out.println("org.csystem.app.Sample.foo()");
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örnekte Sample sınıfı UDT içerisinde bildirildiğinden yıldızsız import bildirimi
+	error oluşturur
+----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import gorkem.Sample;
+
+class App {
+	public static void main(String [] args)
+	{
+		Sample.foo();
+	}
+}
+
+class Sample {
+	//...
+	public static void foo()
+	{
+		System.out.println("org.csystem.app.Sample.foo()");
+	}
+}
+
+package gorkem;
+
+public class Sample {
+    //...
+    public static void foo()
+    {
+        System.out.println("gorkem.Sample.foo()");
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	import static bildirimleri (import static declarations): import static bildirimleri Java 5 ile dile eklenmiştir.
+	Bu bildirimler de iki gruba ayrılabilir:
+	1. Yıldızlı import static bildirimi (import static on demand declaration)
+	2. Yıldızsız import static bildirimi (import static single member declaration)
+
+	import bildirimleri için yazılan ortak özellikler import static bildirimleri için de geçerlidir
+
+	Anahtar Notlar: import static bildirimlerinin okunabilirliği olumsuz etkilemedikten sonra kullanılması tavsiye
+	edilir
+----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Yıldızlı import static bildirimi (import static on demand declaration): Bu bildirimin genel biçimi şu şekildedir:
+		import static <paket ismi>[.<alt paket listesi>].<UDT ismi>.*;
+	Bu bildirim ile niteliksiz kullanılan bir isim ilgili pakette de bulunamazsa yıldızlı import static bildirimine ilişkin
+	UDT'de aranır
+----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.Scanner;
+import static java.lang.Math.*;
+
+class App {
+	public static void main(String [] args)
+	{
+		Scanner kb = new Scanner(System.in);
+
+		System.out.print("Bir sayı giriniz:");
+		double a = kb.nextDouble();
+
+		System.out.printf("sqrt(%f) = %f%n", a, sqrt(a));
+	}
+}
+
+/**
+ * Point class that represents a point in geometry
+ * Last Update: 15th August 2024
+ * @author Java-Jan-2024 Group
+ */
+package org.csystem.math.geometry;
+
+import static java.lang.Math.*;
+
+public class Point {
+	public double x;
+	public double y;
+
+	public Point()
+	{
+	}
+
+	public Point(double a)
+	{
+		x = a;
+	}
+
+	public Point(double a, double b)
+	{
+		x = a;
+		y = b;
+	}
+
+	public double distance()
+	{
+		return distance(0, 0);
+	}
+
+	public double distance(Point other)
+	{
+		return distance(other.x, other.y);
+	}
+
+	public double distance(double a, double b)
+	{
+		return sqrt(pow(x - a, 2) + pow(y - b, 2));
+	}
+
+	public void offset(double dxy)
+	{
+		offset(dxy, dxy);
+	}
+
+	public void offset(double dx, double dy)
+	{
+		x += dx;
+		y += dy;
+	}
+
+	public String toString()
+	{
+		return "(%f, %f)".formatted(x, y);
+	}
+}
+
+/**
+ * Complex class that represents a complex number in math
+ * Last Update: 15th August 2024
+ * @author Java-Jan-2024 Group
+ */
+package org.csystem.math;
+
+import static java.lang.Math.*;
+
+public class Complex {
+	public double real;
+	public double imag;
+
+	public static Complex add(double re1, double im1, double re2, double im2) //İleride sınıfı kullanan kodlardan gizleyeceğiz
+	{
+		return new Complex(re1 + re2, im1 + im2);
+	}
+
+	public static Complex subtract(double re1, double im1, double re2, double im2) //İleride sınıfı kullanan kodlardan gizleyeceğiz
+	{
+		return add(re1, im1, -re2, -im2);
+	}
+
+	public Complex()
+	{
+	}
+
+	public Complex(double a)
+	{
+		real = a;
+	}
+
+	public Complex(double a, double b)
+	{
+		real = a;
+		imag = b;
+	}
+
+	public static Complex add(double val, Complex z)
+	{
+		return add(val, 0, z.real, z.imag);
+	}
+
+	public Complex add(Complex other)
+	{
+		return add(real, imag, other.real, other.imag);
+	}
+
+	public Complex add(double val)
+	{
+		return add(real, imag, val, 0);
+	}
+
+	public static Complex subtract(double val, Complex z)
+	{
+		return subtract(val, 0, z.real, z.imag);
+	}
+
+	public Complex subtract(Complex other)
+	{
+		return subtract(real, imag, other.real, other.imag);
+	}
+
+	public Complex subtract(double val)
+	{
+		return subtract(real, imag, val, 0);
+	}
+
+	public void inc(double val)
+	{
+		real += val;
+	}
+
+	public void inc()
+	{
+		inc(1);
+	}
+
+	public void dec(double val)
+	{
+		inc(-val);
+	}
+
+	public void dec()
+	{
+		dec(1);
+	}
+
+	public Complex getConjugate()
+	{
+		return new Complex(real, -imag);
+	}
+
+	public double getNorm()
+	{
+		return sqrt(real * real + imag * imag);
+	}
+
+	public double getLength()
+	{
+		return getNorm();
+	}
+
+	public String toString()
+	{
+		return "(%.2f, %.2f)".formatted(real, imag);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Yıldızsız import static bildirimi (import static on demand declaration): Bu bildirimin genel biçimi şu şekildedir:
+		import static <paket ismi>[.<alt paket listesi>].<UDT ismi>.<static eleman>;
+	Bu bildirim ile ilgili static eleman tüm derleme birimi boyunca kullanılabilir
+----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.Scanner;
+
+import static java.lang.Math.sqrt;
+
+class App {
+	public static void main(String [] args)
+	{
+		Scanner kb = new Scanner(System.in);
+
+		System.out.print("Bir sayı giriniz:");
+		double a = kb.nextDouble();
+
+		System.out.printf("sqrt(%f) = %f%n", a, sqrt(a));
+	}
+}
+
+/**
+ * Point class that represents a point in geometry
+ * Last Update: 15th August 2024
+ * @author Java-Jan-2024 Group
+ */
+package org.csystem.math.geometry;
+
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
+public class Point {
+	public double x;
+	public double y;
+
+	public Point()
+	{
+	}
+
+	public Point(double a)
+	{
+		x = a;
+	}
+
+	public Point(double a, double b)
+	{
+		x = a;
+		y = b;
+	}
+
+	public double distance()
+	{
+		return distance(0, 0);
+	}
+
+	public double distance(Point other)
+	{
+		return distance(other.x, other.y);
+	}
+
+	public double distance(double a, double b)
+	{
+		return sqrt(pow(x - a, 2) + pow(y - b, 2));
+	}
+
+	public void offset(double dxy)
+	{
+		offset(dxy, dxy);
+	}
+
+	public void offset(double dx, double dy)
+	{
+		x += dx;
+		y += dy;
+	}
+
+	public String toString()
+	{
+		return "(%f, %f)".formatted(x, y);
+	}
+}
+
+/**
+ * Complex class that represents a complex number in math
+ * Last Update: 15th August 2024
+ * @author Java-Jan-2024 Group
+ */
+package org.csystem.math;
+
+import static java.lang.Math.sqrt;
+
+public class Complex {
+	public double real;
+	public double imag;
+
+	public static Complex add(double re1, double im1, double re2, double im2) //İleride sınıfı kullanan kodlardan gizleyeceğiz
+	{
+		return new Complex(re1 + re2, im1 + im2);
+	}
+
+	public static Complex subtract(double re1, double im1, double re2, double im2) //İleride sınıfı kullanan kodlardan gizleyeceğiz
+	{
+		return add(re1, im1, -re2, -im2);
+	}
+
+	public Complex()
+	{
+	}
+
+	public Complex(double a)
+	{
+		real = a;
+	}
+
+	public Complex(double a, double b)
+	{
+		real = a;
+		imag = b;
+	}
+
+	public static Complex add(double val, Complex z)
+	{
+		return add(val, 0, z.real, z.imag);
+	}
+
+	public Complex add(Complex other)
+	{
+		return add(real, imag, other.real, other.imag);
+	}
+
+	public Complex add(double val)
+	{
+		return add(real, imag, val, 0);
+	}
+
+	public static Complex subtract(double val, Complex z)
+	{
+		return subtract(val, 0, z.real, z.imag);
+	}
+
+	public Complex subtract(Complex other)
+	{
+		return subtract(real, imag, other.real, other.imag);
+	}
+
+	public Complex subtract(double val)
+	{
+		return subtract(real, imag, val, 0);
+	}
+
+	public void inc(double val)
+	{
+		real += val;
+	}
+
+	public void inc()
+	{
+		inc(1);
+	}
+
+	public void dec(double val)
+	{
+		inc(-val);
+	}
+
+	public void dec()
+	{
+		dec(1);
+	}
+
+	public Complex getConjugate()
+	{
+		return new Complex(real, -imag);
+	}
+
+	public double getNorm()
+	{
+		return sqrt(real * real + imag * imag);
+	}
+
+	public double getLength()
+	{
+		return getNorm();
+	}
+
+	public String toString()
+	{
+		return "(%.2f, %.2f)".formatted(real, imag);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+    Anahtar Notlar: Paket ve isim arama konusunda burada anlatılmayan diğer detaylar ya ileride ele alınacaktır ya da
+    pratikte çok kullanılmadağından hiç ele alınmayacaktır
+----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
 	
----------------------------------------------------------------------------------------------------------------------*/
+----------------------------------------------------------------------------------------------------------------------*/
 
 
 /*----------------------------------------------------------------------------------------------------------------------

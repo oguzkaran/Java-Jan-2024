@@ -1,0 +1,16 @@
+package org.csystem.app;
+
+import org.csystem.app.Sample;
+import gorkem.Sample;
+
+class App {
+	public static void main(String [] args)
+	{
+		Sample s;
+	}
+}
+
+1. Error oluşur ....
+2. Derlenir arman paketi içerisindeki Sample olur
+3. Derlenir gorkem paketi içerisindeki Sample olur
+4. Hiçbiri. ...
