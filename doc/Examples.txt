@@ -17974,6 +17974,258 @@ public class Complex {
 ----------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------
+    20 Ağustos 2024
+----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Diziler (Arrays)
+	Elemanları aynı türden olan ve elemanları bellekte peşpeşe tutulacak şekilde yaratılan veri yapısıdır. Diziler
+	programlamada en temel veri yapılarıdır. Hatta bazı veri yapıları dizi kullanılarak implemente edilebilir.
+
+	Java'da diziler heap'de yaratılırlar. Yani sınıfsal temsil edilmişlerdir. Java'da stack'de dizi yaratılamaz. T bir
+	tür ismi olmak üzere her bir elemanı T türünden olan (bu durumda T türden dizi de denebilir) bir dizi referansı
+	bildiriminin iki biçimi vardır:
+		1. T [] a;
+		2. T a[];
+	Burada a bir referans değişkendir. Henüz daha dizi yaratılmamıştır. İkinci biçime "C stili (C style)" bildirim de
+	denilmektedir. Java programcına önerilmemektedir. Pek çok static kod analizi aracı da ikinci biçimde default olarak
+	uyarı verebilmektedir. Biz de kodlarımıza birinci biçimi tercih edeceğiz
+	Örneğin
+		int [] a;
+		int a[];
+----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		int [] a; //int türden dizi referansı bildirimi
+		int b[]; //int türden dizi referansı bildirimi
+
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Dizi referansı bildirimlerinin farkı
+----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		int [] a, b, c; //a, b ve c int [] türünden
+		int x[], y, z; // x int[], y ve z int türden
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Dizi yaratmak için yine new operatörü kullanılır. Dizi yaratmak için new operatörü kullanımının genel biçimi şu
+	şekildedir:
+		new <tür>[<int türüne doğrudan dönüşebilen türden bir değer>];
+	Burada [] içerisinde verilen değere dizinin uzunluğu (length) denir. Uzunluk dizinin eleman sayısıdır. Java'da
+	dizi uzunluğunun sabit ifadesi olması gerekmez. Dizi yaratıldıktan sonra uzunluğu değiştirilemez. Dizi uzunluğunun
+	negatif olması durumunda exception oluşur. Dizi uzunluğuna length isimli veri elemanı ile erişilebilir. length
+	veri elemanının değeri değiştirilemez
+
+	Dizinin elemanlarına erişmek için [] operatörü (subscription operator) kullanılır. Bu operatör özel amaçlı iki
+	operandlı ve araek durumundadır. Operatörün birinci operandı bir referansı ikinci operandı ise int türüne doğrudan
+	dönüşebilen bir değer olmalıdır. İkinci operandına indeks değeri de denilmektedir. Dizinin ilk elemanına sıfır numaralı
+	indeks değeri kullanılarak erişilir. Yani bu anlamda dizinin alemanlarına erişmek için kullanılan indeks değerleri
+	[0, length) aralığıdır. Bu operatör operatör öncelik tablosunda birinci seviyededir. Operatörün ürettiği değer
+	indeksteki elemana ilişkin değişkendir. Indeks numarası pozitif ya da negatif bakımdan sınırlar dışında bir değer
+	olarak verilirse exception oluşur.
+
+	Dizi yaratıldığında elemanlarının her birine default değerler atanır.
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.Scanner;
+
+
+class App {
+	public static void main(String [] args)
+	{
+		Scanner kb = new Scanner(System.in);
+
+		System.out.print("Bir sayı giriniz:");
+		int count = kb.nextInt();
+
+		int [] a;
+
+		a = new int[count];
+		int len = a.length;
+
+		for (int i = 0; i < len; ++i)
+			a[i] = i;
+
+		for (int i = 0; i < len; ++i)
+			System.out.printf("%d ", a[i]);
+
+		System.out.println();
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.Scanner;
+
+class App {
+	public static void main(String [] args)
+	{
+		Scanner kb = new Scanner(System.in);
+
+		System.out.print("Bir sayı giriniz:");
+		int count = kb.nextInt();
+
+		int [] a;
+
+		a = new int[count];
+		int len = a.length;
+
+		for (int i = 0; i < len; ++i)
+			a[i] = i;
+
+		System.out.println(a[5]);
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.Random;
+import java.util.Scanner;
+
+
+class App {
+	public static void main(String [] args)
+	{
+		Scanner kb = new Scanner(System.in);
+		Random r = new Random();
+
+		System.out.print("Bir sayı giriniz:");
+		int count = kb.nextInt();
+
+		int [] a;
+
+		a = new int[count];
+		int len = a.length;
+
+		for (int i = 0; i < len; ++i)
+			a[i] = r.nextInt(100);
+
+		for (int i = 0; i < len; ++i)
+			System.out.printf("%02d ", a[i]);
+
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki demo örneği inceleyiniz
+----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.Random;
+import java.util.Scanner;
+
+class App {
+	public static void main(String [] args)
+	{
+		Scanner kb = new Scanner(System.in);
+		Random r = new Random();
+
+		System.out.print("Bir sayı giriniz:");
+		int count = kb.nextInt();
+
+		int [] a;
+		boolean [] b;
+
+		a = new int[count];
+		b = new boolean[count];
+
+		for (int i = 0; i < count; ++i)
+			System.out.printf("%d ", a[i]);
+
+		System.out.println();
+
+		for (int i = 0; i < count; ++i)
+			System.out.printf("%b ", b[i]);
+
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir diziye ilk değer verilebilir (initialization). Bu işlem için {} kullanılır. {} içerisindeki değerler  virgül
+	ile ayrılırlar. Dizinin eleman sayısı verilen değer kadar olur. Yani ilk değer verildiğinde ilgili dizi nesnesi
+	yaratılır ve elemanlar ilk değer olarak verilir. İlk değer verme sentaksında yine new operatörü kullanılır. [] içerisi
+	boş bırakılır. [] içerisine değer verilmesi durumunda error oluşur. Diziye ilk değer verirken aynı zamanda dizinin
+	adresine ilişkin referans değişkene de ilk değer veriliyorsa new operatörü kullanılmasına gerek yoktur. İstenirse
+	kullanılabilir.
+----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte diziye ilk değer verilmiştir ancak referansa ilk değer verilmemiştir
+----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		int [] a;
+
+		a = new int[] {1, 2, 3, 4, 5, 6};
+
+		for (int i = 0; i < a.length; ++i)
+			System.out.printf("%d ", a[i]);
+
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte diziye ve ilgili referansa da ilk değer verilmiştir
+----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+class App {
+	public static void main(String [] args)
+	{
+		int [] a = {1, 2, 3, 4, 5, 6};
+
+		for (int i = 0; i < a.length; ++i)
+			System.out.printf("%d ", a[i]);
+
+		System.out.println();
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir metodun parametre değişkeni bir dizi referansı olabilir
+----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import static org.csystem.util.array.ArrayUtil.print;
+
+class App {
+	public static void main(String [] args)
+	{
+		int [] a = {1, 2, 3, 4, 5, 6};
+
+		print(a);
+	}
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------
 	
 ----------------------------------------------------------------------------------------------------------------------*/
 

@@ -1,13 +1,11 @@
 /*----------------------------------------------------------------------------------------------------------------------
-	Diziler (Arrays)
+	Bir metodun parametre değişkeni bir dizi referansı olabilir
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app;
 
 class App {
-	public static void main(String [] args)
+	public static void main(String[] args)
 	{
-
+		
 	}
 }
-
-

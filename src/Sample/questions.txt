@@ -14,3 +14,6 @@ class App {
 2. Derlenir arman paketi içerisindeki Sample olur
 3. Derlenir gorkem paketi içerisindeki Sample olur
 4. Hiçbiri. ...
+
+
+Ey Edip Adana'da pide ye
