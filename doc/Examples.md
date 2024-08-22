@@ -17575,42 +17575,38 @@ public class ArrayUtilMinMaxTest {
 ```java
 package org.csystem.app.lottery.numeric;
 
-import java.util.Arrays;
+import org.csystem.util.array.ArrayUtil;
+
 import java.util.Random;
+import java.util.Scanner;
 
-public class NumericLottery {
-    public Random random;
-
-    public NumericLottery(Random r)
+public class NumericLotteryApp {
+    public static void run()
     {
-        random = r;
+        Scanner kb = new Scanner(System.in);
+        NumericLottery numericLottery = new NumericLottery(new Random());
+
+        while (true) {
+            System.out.print("Kaç tane kupon oynamak istersiniz?");
+            int n = Integer.parseInt(kb.nextLine());
+
+            if (n <= 0) {
+                System.out.println("Lütfen pozitif bir sayı giriniz");
+                continue;
+            }
+
+            while (n-- > 0)
+                ArrayUtil.print(numericLottery.getNumbers(), 2);
+        }
     }
 
-    public int [] getNumbers()
+    public static void main(String[] args)
     {
-        int [] a = new int[6];
-
-        for (int i = 0; i < 6; ++i) {
-            boolean repeat;
-
-            do {
-                repeat = false;
-                a[i] = random.nextInt(1, 50);
-
-                for (int k = 0; k < i; ++k)
-                    if (a[k] == a[i]) {
-                        repeat = true;
-                        break;
-                    }
-            } while (repeat);
-        }
-
-        Arrays.sort(a);
-
-        return a;
+        run();
     }
 }
 ```
+
 
 ```java
 package org.csystem.app.lottery.numeric;
