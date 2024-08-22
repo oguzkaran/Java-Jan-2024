@@ -18388,7 +18388,170 @@ class Util {
 	}
 }
 
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir dizinin en büyük elemanına geri dönen max ve en küçük elemanına
+	geri dönen min isimli metotları ArrayUtil sınıfı içerisinde yazınız ve aşağıdaki kodlarla test ediniz
+----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.util.array.test;
 
+import java.util.Random;
+import java.util.Scanner;
+
+import static org.csystem.util.array.ArrayUtil.*;
+
+public class ArrayUtilMinMaxTest {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        Random r = new Random();
+
+        while (true) {
+            System.out.print("Bir sayı giriniz:");
+            int count = Integer.parseInt(kb.nextLine());
+
+            if (count <= 0)
+                break;
+
+            int [] a = generateRandomArray(r, count, 0, 100);
+
+            print(a, 2);
+            System.out.printf("En büyük eleman:%d%nEn küçük eleman:%d%n", max(a), min(a));
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Sayısal loto kupon üreten programı yazınız.
+	Açıklama: Bir sayısal loto kuponu birbirinden farklı 6 tane küçükten büyüğe sıralanmış [1, 49] aralığındaki sayılardan
+	oluşur
+	Not: Aşağıdaki yaklaşım çok iyi değildir
+
+	Anahtar Notlar: Arrays sınıfının sort metodu parametresi ile aldığı diziyi (ascending) artan şekilde sıralar
+----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app.lottery.numeric;
+
+import java.util.Arrays;
+import java.util.Random;
+
+public class NumericLottery {
+    public Random random;
+
+    public NumericLottery(Random r)
+    {
+        random = r;
+    }
+
+    public int [] getNumbers()
+    {
+        int [] a = new int[6];
+
+        for (int i = 0; i < 6; ++i) {
+            boolean repeat;
+
+            do {
+                repeat = false;
+                a[i] = random.nextInt(1, 50);
+
+                for (int k = 0; k < i; ++k)
+                    if (a[k] == a[i]) {
+                        repeat = true;
+                        break;
+                    }
+            } while (repeat);
+        }
+
+        Arrays.sort(a);
+
+        return a;
+    }
+}
+
+package org.csystem.app.lottery.numeric;
+
+import java.util.Arrays;
+import java.util.Random;
+
+public class NumericLottery {
+    public Random random;
+
+    public NumericLottery(Random r)
+    {
+        random = r;
+    }
+
+    public int [] getNumbers()
+    {
+        int [] a = new int[6];
+
+        for (int i = 0; i < 6; ++i) {
+            boolean repeat;
+
+            do {
+                repeat = false;
+                a[i] = random.nextInt(1, 50);
+
+                for (int k = 0; k < i; ++k)
+                    if (a[k] == a[i]) {
+                        repeat = true;
+                        break;
+                    }
+            } while (repeat);
+        }
+
+        Arrays.sort(a);
+
+        return a;
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	27 Ağustos 2024
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Sayısal loto kupon üreten programı yazınız.
+	Açıklama: Bir sayısal loto kuponu birbirinden farklı 6 tane küçükten büyüğe sıralanmış [1, 49] aralığındaki sayılardan
+	oluşur
+	Not: Aşağıdaki yaklaşım bir öncekine göre oldukça iyidir. Ancak daha iyileri de vardır. İleride yazılacaktır
+----------------------------------------------------------------------------------------------------------------------*/
+
+package org.csystem.app.lottery.numeric;
+
+import org.csystem.util.array.ArrayUtil;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class NumericLotteryApp {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        NumericLottery numericLottery = new NumericLottery(new Random());
+
+        while (true) {
+            System.out.print("Kaç tane kupon oynamak istersiniz?");
+            int n = Integer.parseInt(kb.nextLine());
+
+            if (n <= 0) {
+                System.out.println("Lütfen pozitif bir sayı giriniz");
+                continue;
+            }
+
+            while (n-- > 0)
+                ArrayUtil.print(numericLottery.getNumbers(), 2);
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
 
 /*----------------------------------------------------------------------------------------------------------------------
 

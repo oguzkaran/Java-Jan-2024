@@ -40,12 +40,22 @@ public class ArrayUtil {
 
     public static int max(int [] a)
     {
+        int result = a[0];
 
+        for (int i = 1; i < a.length; ++i)
+            result = Math.max(result, a[i]);
+
+        return result;
     }
 
     public static int min(int [] a)
     {
+        int result = a[0];
 
+        for (int i = 1; i < a.length; ++i)
+            result = Math.min(result, a[i]);
+
+        return result;
     }
 
     public static void print(int [] a)

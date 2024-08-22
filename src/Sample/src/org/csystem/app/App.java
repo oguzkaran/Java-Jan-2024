@@ -1,6 +1,8 @@
 /*----------------------------------------------------------------------------------------------------------------------
-	Sınıf Çalışması: Parametresi ile aldığı int türden bir dizinin en büyük elemanına geri dönen max ve en küçük elemanına
-	geri dönen min isimli metotları ArrayUtil sınıfı içerisinde yazınız ve aşağıdaki kodlarla test ediniz
+	Sınıf Çalışması: Sayısal loto kupon üreten programı yazınız.
+	Açıklama: Bir sayısal loto kuponu birbirinden farklı 6 tane küçükten büyüğe sıralanmış [1, 49] aralığındaki sayılardan
+	oluşur
+	(Not: Aşağıdaki yaklaşım çok iyi değildir)
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app;
 
