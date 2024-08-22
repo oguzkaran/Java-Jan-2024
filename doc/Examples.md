@@ -4307,15 +4307,23 @@ class App {
 >**_Not:_** Formül için `~/doc/images/ikinci-dereceden-denklem.jpg` dosyasından yararlanabilirsiniz.
 ><br></br>
 >*İkinci dereceden (quadratic) denklem:*
+>
 >$$ax^2 + bx + c = 0$$
 >*delta ($\Delta$) (discriminant) hesabı:*
+>
 >$$\Delta = b^2 - 4ac$$
 >*Köklerın hesaplanması:*
+>
 >1. if $\Delta > 0$
+>
 >$$x_1 = \frac{-b + \sqrt{\Delta}}{2a}$$
+>
 >$$x_2 = \frac{-b - \sqrt{\Delta}}{2a}$$
+>
 >2.	if $\Delta = 0$
+>
 >$$x_1 = x_2 = \frac{-b}{2a}$$
+>
 >3.	if $\Delta < 0$
 >
 >		Gerçek kök yok!
@@ -4390,15 +4398,23 @@ class EquationSolver {
 >**_Not:_** Formül için `~/doc/images/ikinci-dereceden-denklem.jpg` dosyasından yararlanabilirsiniz.
 ><br></br>
 >*İkinci dereceden (quadratic) denklem:*
+>
 >$$ax^2 + bx + c = 0$$
->*Delta (discriminant) hesabı:*
+>*delta ($\Delta$) (discriminant) hesabı:*
+>
 >$$\Delta = b^2 - 4ac$$
 >*Köklerın hesaplanması:*
+>
 >1. if $\Delta > 0$
+>
 >$$x_1 = \frac{-b + \sqrt{\Delta}}{2a}$$
+>
 >$$x_2 = \frac{-b - \sqrt{\Delta}}{2a}$$
+>
 >2.	if $\Delta = 0$
+>
 >$$x_1 = x_2 = \frac{-b}{2a}$$
+>
 >3.	if $\Delta < 0$
 >
 >		Gerçek kök yok!
