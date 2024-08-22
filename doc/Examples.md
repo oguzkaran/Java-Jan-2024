@@ -4309,9 +4309,11 @@ class App {
 >*İkinci dereceden (quadratic) denklem:*
 >
 >$$ax^2 + bx + c = 0$$
+>
 >*delta ($\Delta$) (discriminant) hesabı:*
 >
 >$$\Delta = b^2 - 4ac$$
+>
 >*Köklerın hesaplanması:*
 >
 >1. if $\Delta > 0$
@@ -4400,9 +4402,11 @@ class EquationSolver {
 >*İkinci dereceden (quadratic) denklem:*
 >
 >$$ax^2 + bx + c = 0$$
+>
 >*delta ($\Delta$) (discriminant) hesabı:*
 >
 >$$\Delta = b^2 - 4ac$$
+>
 >*Köklerın hesaplanması:*
 >
 >1. if $\Delta > 0$
