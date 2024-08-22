@@ -28,6 +28,26 @@ public class ArrayUtil {
         return a;
     }
 
+    public static boolean [] generateRandomArray(Random random, int count)
+    {
+        boolean [] a = new boolean[count];
+
+        for (int i = 0; i < count; ++i)
+            a[i] = random.nextBoolean();
+
+        return a;
+    }
+
+    public static int max(int [] a)
+    {
+
+    }
+
+    public static int min(int [] a)
+    {
+
+    }
+
     public static void print(int [] a)
     {
         print(a, ' ', '\n');
@@ -64,6 +84,16 @@ public class ArrayUtil {
             System.out.printf("%f%c", a[i], sep);
 
         System.out.print(end);
+    }
+
+    public static long sum(int [] a)
+    {
+        long total = 0;
+
+        for (int i = 0; i < a.length; ++i)
+            total += a[i];
+
+        return total;
     }
 
     //...

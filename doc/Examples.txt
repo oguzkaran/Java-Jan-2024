@@ -18209,6 +18209,14 @@ class App {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
+	Diziye ilk değer verme sentaksında son elemandan sonra virgül yazılabilir. Buna "trailing comma" denir. Bunu yazmakla
+	yazmamak arasında bir fark yoktur. Bunun programcının yaklaşımına göre iki tane kullanımı söz konusu olabilir:
+		1. Programcı henüz ilk değerleri kod içerisinde tamamlamamıştır ve bunu belirtmek için sondaki virgülü kullanabilir
+		2. Verilen ilk değerlerin geliştirme aşamasında yerlerinin çok sık değişebileceği durumda, değiştirme işlemi
+		daha kolay yapılabilir
+----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
 	Bir metodun parametre değişkeni bir dizi referansı olabilir
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app;
@@ -18223,7 +18231,6 @@ class App {
 		print(a);
 	}
 }
-
 
 /*----------------------------------------------------------------------------------------------------------------------
     22 Ağustos 2024
@@ -18286,6 +18293,98 @@ class App {
 
 			print(a);
 		}
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sınıf Çalışması: Parametresi ile aldığı int türden bir dizinin elemanları toplamına geri dönen sum metodunu ArrayUtil
+	sınıfı içerisinde yazınız. Metodunuzu rassal olarak üretilmiş diziler ile test ediniz
+----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.util.array.test;
+
+import java.util.Random;
+import java.util.Scanner;
+
+import static org.csystem.util.array.ArrayUtil.*;
+
+public class ArrayUtilSumTest {
+    public static void run()
+    {
+        Scanner kb = new Scanner(System.in);
+        Random r = new Random();
+
+        while (true) {
+            System.out.print("Bir sayı giriniz:");
+            int count = Integer.parseInt(kb.nextLine());
+
+            if (count <= 0)
+                break;
+
+            int [] a = generateRandomArray(r, count, 0, 100);
+
+            print(a, 2);
+            System.out.printf("Total:%d%n", sum(a));
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        run();
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Sıfır elemanlı bir dizi yaratılabilir. Bu durumda şüphesiz dizide bir eleman tutulamaz ancak dizi yaratılmış olur.
+	Sıfır elemanlı diziler bazı durumlarda kontrol amaçlı kullanılabimlir. Örneğin bir metot bir takım değerlere göre
+	bir dizi yuratacak olsun. Metoda geçilen değerlerin geçersiz olması durumunda metot sıfır elemanlı bir diziye geri
+	dönebilir. Bu durumda metodu çağıran programcı geri dönen dizinin eleman sayısına bakarak geçerlilik kontrolü yapabilir.
+	Şüphesiz bunu yapmanın başka yöntemleri de vardır. Sıfır elemanlı bir dizi aşağıdakilerden biri ile yaratılabilir:
+		1. new int[0]
+		2. new int[]{};
+	Aşağıdaki demo örnekte bu gösterilmeye çalışılmıştır.
+----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.Random;
+import java.util.Scanner;
+
+class App {
+	public static void main(String[] args)
+	{
+		Scanner kb = new Scanner(System.in);
+		Random random = new Random();
+
+		while (true) {
+			System.out.print("Bir sayı giriniz:");
+			int count = kb.nextInt();
+
+			boolean [] a = Util.generateRandomBooleanArray(random, count);
+
+			if (a.length > 0) {
+				for (int i = 0; i < a.length; ++i)
+					System.out.printf("%b ", a[i]);
+
+				System.out.println();
+			}
+			else
+				System.out.printf("Dizi uzunluğu sıfırdan büyük olmalıdır:%d%n", count);
+
+		}
+	}
+}
+
+class Util {
+	public static boolean [] generateRandomBooleanArray(Random r, int count)
+	{
+		if (count <= 0)
+			return new boolean[0];
+
+		boolean [] a = new boolean[count];
+
+		for (int i = 0; i < count; ++i)
+			a[i] = r.nextBoolean();
+
+		return a;
 	}
 }
 
