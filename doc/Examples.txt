@@ -15707,9 +15707,9 @@ class StringUtil {
 
 /*----------------------------------------------------------------------------------------------------------------------
 	Anahtar Notlar: java.util.Scanner sınıfının çalışma sistemi gereği bazı sistemlerde aynı nesne ile nextLine ve
-	temel türlere ilişkin nextXXX metotları peşpeşe kullanılmamalıdır. Bu Scanner açısından bir problem değildir, 
+	temel türlere ilişkin nextXXX metotları peşpeşe kullanılmamalıdır. Bu Scanner açısından bir problem değildir.
 	Scanner'ın içsel çalışması ile ilgili sistemin içsel yapısı gereği oluşan bir sonuçtur. Detayının önemi yoktur.
-	Programcı bu tip durumlarda hep nextLine metoduyla değerleri alması ve temel türler için ilgili parseXXX metotlarını
+	Programcı bu tip durumlarda hep nextLine metoduyla değerleri almalı ve temel türler için ilgili parseXXX metotlarını
 	çağırmalıdır
 ---------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------
@@ -18226,8 +18226,69 @@ class App {
 
 
 /*----------------------------------------------------------------------------------------------------------------------
-	
+    22 Ağustos 2024
 ----------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir metodun geri dönüş değeri de bir dizi referansı olabilir
+----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import static org.csystem.util.array.ArrayUtil.generateRandomArray;
+import static org.csystem.util.array.ArrayUtil.print;
+
+import java.util.Random;
+import java.util.Scanner;
+
+class App {
+	public static void main(String[] args)
+	{
+		Scanner kb = new Scanner(System.in);
+		Random random = new Random();
+
+		while (true) {
+			System.out.print("Bir sayı giriniz:");
+			int count = kb.nextInt();
+			if (count <= 0)
+				break;
+
+			int[] a = generateRandomArray(random, count, 0, 100);
+
+			print(a, 2);
+		}
+	}
+}
+
+/*----------------------------------------------------------------------------------------------------------------------
+	Bir metodun geri dönüş değeri de bir dizi referansı olabilir
+----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import static org.csystem.util.array.ArrayUtil.generateRandomArray;
+import static org.csystem.util.array.ArrayUtil.print;
+
+import java.util.Random;
+import java.util.Scanner;
+
+class App {
+	public static void main(String[] args)
+	{
+		Scanner kb = new Scanner(System.in);
+		Random random = new Random();
+
+		while (true) {
+			System.out.print("Bir sayı giriniz:");
+			int count = kb.nextInt();
+			if (count <= 0)
+				break;
+
+			double [] a = generateRandomArray(random, count, 0., 100);
+
+			print(a);
+		}
+	}
+}
+
 
 
 /*----------------------------------------------------------------------------------------------------------------------
