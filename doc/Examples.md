@@ -10394,7 +10394,7 @@ class Sample {
 
 >*Sınıf içerisinde, tüm metotların dışında bildirilen değişkenlere sınıf veri elemanı (class data member/member variable) denir. Sınıf veri elemanları metotlarda olduğu gibi erişim belirleyiciye (public, protected, no-modifier, private) sahip olabilirler. Yine metotlarda olduğu gibi ilgili konuya gelene kadar tüm veri elemanlarımızı public olarak bildireceğiz. Sınıf veri elemanları da metotlarda olduğu gibi static veya non-static olabilirler. static anahtar sözcüğü ile bildirilmemişse non-static olur.*
 
-**_Anahtar Notlar:_** Sınıf içerisindeki bildirimlere sınıfın elemanları (members) denir. Bu, anlamda veri elemanı ve metot sınıfın elemanlarıdır. Sınıfın başka elemanları da vardır. Sınıf veri elemanlarına "data member/member variable/field" denilmektedir. Sınıfın elemanı bir alt program ise metot denir. Sınıfın diğer elemanları konular içerisinde ele alınacaktır.
+**_Anahtar Notlar:_** Sınıf içerisindeki bildirimlere sınıfın elemanları `members` denir. Bu, anlamda veri elemanı ve metot sınıfın elemanlarıdır. Sınıfın başka elemanları da vardır. Sınıf veri elemanlarına "data member/member variable/field" denilmektedir. Sınıfın elemanı bir alt program ise metot denir. Sınıfın diğer elemanları konular içerisinde ele alınacaktır.
 	
 >*Bir sınıf veri elemanının faaliyet alanı ve ömrü ileride ele alınacaktır. Sınıf içerisindeki veri elemanları aynı türdense, aynı erişim belirleyiciye sahipse ve static veya non-static olma bakımından aynı ise virgül ile ayrılarak da bildirilebilir.*
 
@@ -10427,7 +10427,6 @@ int a; //error
 ```
 
 >*Sınıf bildirimi aslında bir tür bildirimidir. Sınıf bildirimi dışında da tür bildirimleri söz konusudur. Bu şekilde yapılan bildirimlere "user defined type (UDT)" denilmektedir. Bu durumda sınıf da bir UDT'dir. Sınıf dışındaki UDT'ler konular içerisinde ele alınacaktır*
-
 
 ```java
 package csd;
@@ -10483,9 +10482,13 @@ class TCP {
 }
 ```
 
->*Java'da türler kategori olarak iki gruba ayrılır: değer türleri (value types), referans türleri (reference types). T bir tür ismi olmak üzere, T türden bir değişken içerisinde bir adres tutuluyorsa T bir referans türüdür, tutulmuyorsa bir değer türüdür. Ya da başka bir deyişle, T türden bir değişkenin içerisindeki değer bir adres ise T referans türü, adres değilse değer türüdür. Java'da temel türler (primitive/built-in/predefined types) değer türleridir. Yani temel bir türden değişken içerisinde adres tutulmaz. Java'da bir sınıf referans türüdür.  Öyleyse sınıf türünden bir değişken içerisinde adres tutulur. Aslında genel olarak temel türler dışında kalan türler (yani UDT'ler) referans türleridir*
+>*Java'da türler kategori olarak iki gruba ayrılır:*
 >
->*Sınıf türünden değişkenlere referans değişken (reference variable) ya da kısaca referans (reference) denir. Java seviyesinde adres (address) terimi yerine referans (reference) terimi de kullanılmaktadır. Referans dendiğinde ya bir adres ya da bir referans değişken kastedilmiş olur. Buna göre örneğin bir cümlede "reference of an object" gibi bir içerik söz konusuysa, buradaki referans adres anlamındadır. Ya da örneğin bir cümlede "address of an object is assign to a reference" gibi bir içerik söz konusuysa, buradaki referans, değişken anlamındadır.*
+>		değer türleri (value types)
+>		referans türleri (reference types) 
+>*T bir tür ismi olmak üzere, T türden bir değişken içerisinde bir adres tutuluyorsa T bir referans türüdür, tutulmuyorsa bir değer türüdür. Ya da başka bir deyişle, T türden bir değişkenin içerisindeki değer bir adres ise T referans türü, adres değilse değer türüdür. Java'da temel türler (primitive/built-in/predefined types) değer türleridir. Yani temel bir türden değişken içerisinde adres tutulmaz. Java'da bir sınıf referans türüdür. Öyleyse sınıf türünden bir değişken içerisinde adres tutulur. Aslında genel olarak temel türler dışında kalan türler (yani UDT'ler) referans türleridir*
+>
+>*Sınıf türünden değişkenlere referans değişken `reference variable` ya da kısaca referans (reference) denir. Java seviyesinde adres (address) terimi yerine referans (reference) terimi de kullanılmaktadır. Referans dendiğinde ya bir adres ya da bir referans değişken kastedilmiş olur. Buna göre örneğin bir cümlede **"reference of an object"** gibi bir içerik söz konusuysa, buradaki referans adres anlamındadır. Ya da örneğin bir cümlede **"address of an object is assigned to a reference"** gibi bir içerik söz konusuysa, buradaki referans, değişken anlamındadır.*
 >
 >*Peki bir referansa atanacak adres nasıl elde edilecektir?*
 
@@ -10523,21 +10526,20 @@ class TCP {
 
 #### 11 Haziran 2024
 
->- Sınıf türünden bellekte ayrılan bir alana nesne (object) denir.
->- Nesneler heap alanında yaratılırlar. Java'da stack'de nesne yaratılamaz.
+>- Sınıf türünden bellekte ayrılan bir alana nesne `object` denir.
+>- Nesneler `heap` alanında yaratılırlar. Java'da stack'de nesne **yaratılamaz**.
 >- Java'da bir nesnenin kendisi tutulamaz, adresi tutulabilir. Bu adres de aynı türden bir referans (değişken) içerisinde tutulabilir.
->- Java'da nesne yaratılması new operatörü ile yapılır. new operatörünün kullanımına ilişkin genel biçimi şu şekildedir:
+>- Java'da nesne yaratılması `new` operatörü ile yapılır. `new` operatörünün kullanımına ilişkin genel biçimi şu şekildedir:
 >
 >		new <sınıf ismi>([argümanlar]);
->Bu operatör özel amaçlı tek operandlı ve önek durumundadır. Operatör, yaratılmış olan nesnenin adresini üretir. Bir
-nesne ile referans için hangi uzunlukta yerler ayrılacağı ileride ele alınacaktır. Bu operatörün yan etkisi yoktur. 
+>Bu operatör özel amaçlı **tek operandlı** ve **önek** durumundadır. Operatör, yaratılmış olan nesnenin adresini üretir. Bir nesne ile referans için hangi uzunlukta yer ayrılacağı ileride ele alınacaktır. Bu operatörün yan etkisi yoktur. 
 >
->Aşağıdaki örnekte p, s, u ve t birer nesne DEĞİLDİR, ilgili türden nesnelerin adreslerini tutan referans değişkenlerdir.
+>Aşağıdaki örnekte `p`, `s`, `u` ve `t` birer nesne **DEĞİLDİR**, ilgili türden nesnelerin adreslerini tutan `referans` değişkenlerdir.
 >
 >Örnekte `*, **, *** ve ****` ile belirtilen deyimlerde ilgili türden nesneler yaratılmış ve ilgili türden referans değişkenlere adresleri atanmıştır. Bu durumda bir referans değişkene bir adres atandığında o referans o nesneyi gösteriyor (reference to) duruma gelmiş olur. 
->- Bir nesne ilgili sınıf türünden bir örnektir. Buna İngilizce olarak "instance" terimi de kullanılır. Bu anlamda nesne yaratma işlemi için de "create" fiili ile birlikte "instantiate" fiili de kullanılır.
+>- Bir nesne ilgili sınıf türünden bir örnektir. Buna İngilizce olarak `instance` terimi de kullanılır. Bu anlamda nesne yaratma işlemi için de "create" fiili ile birlikte "instantiate" fiili de kullanılır.
 >- Referans ve nesne kavramları birbirinden farklıdır. Referans bir nesneyi gösterir ya da adresi anlamında kullanılır.
->- Her new işlemi yeni bir nesne yaratmak demektir.
+>- Her `new` işlemi yeni bir nesne yaratmak demektir.
 
 ```java
 package csd;
@@ -10573,9 +10575,9 @@ class TCP {
 	//...
 }
 ```
->*Sınıfın non-static bir veri elemanına sınıf dışından referans ve nokta operatörü ile erişilir. Nokta operatörü iki operandlı ve araek durumundadır. Bu operatörün birinci operandı bir referans, ikinci operandı non-static bir veri elemanı ise bu durumda o veri  elemanına ilişkin değişkeni üretir.*
+>*Sınıfın `non-static` bir veri elemanına sınıf dışından referans ve nokta operatörü ile erişilir. Nokta operatörü iki operandlı ve araek durumundadır. Bu operatörün birinci operandı bir `referans`, ikinci operandı `non-static` bir veri elemanı ise bu durumda o veri elemanına ilişkin değişkeni üretir.*
 
->*Sınıfın non-static veri elemanları her nesne yaratıldığında nesnenin içerisinde yaratılırlar. Yani sınıfın non-static veri elemanları nesneye özgüdür ya da başka bir deyişle her nesne için ayrıdır. Bu durumda referans ile non-static bir veri elemanına erişmek aslında referansın gösterdiği nesnenin içerisinde elemana erişmek anlamına  gelir*
+>*Sınıfın `non-static` veri elemanları her nesne yaratıldığında nesnenin içerisinde yaratılırlar. Yani sınıfın `non-static` veri elemanları nesneye özgüdür ya da başka bir deyişle her nesne için ayrıdır. Bu durumda referans ile non-static bir veri elemanına erişmek aslında referansın gösterdiği nesnenin içerisinde elemana erişmek anlamına gelir*
 
 ```java
 package csd;
@@ -10607,7 +10609,7 @@ class Sample {
 }
 ```
 
->*Bir nesne yaratıldığında nesneye ait non-static veri elemanlarına default değerler (default/zero value) atanır. Default değer mantıksal sıfır (türe özgü sıfır) değeridir. Örneğin int türü için default değer sıfırdır, double türü için	default değer yine sıfırdır, boolean türü için ise false değeridir*
+>*Bir nesne yaratıldığında nesneye ait `non-static` veri elemanlarına **default** değerler (default/zero value) atanır. Default değer mantıksal sıfır (türe özgü sıfır) değeridir. Örneğin int türü için default değer sıfırdır, double türü için default değer yine sıfırdır, boolean türü için ise false değeridir*
 
 ```java
 package csd;
@@ -10631,7 +10633,7 @@ class Sample {
 }
 ```
 
->*Aşağıdaki örnekte değer verilmemiş bir yerel değişkenin kullanılmasından dolayı error oluşur*
+>*Aşağıdaki örnekte **değer verilmemiş** bir yerel değişkenin kullanılmasından dolayı **error** oluşur*
 
 ```java
 package csd;
@@ -10655,17 +10657,28 @@ class Sample {
 
 #### 13 Haziran 2024
  
->*Sınıfın non-static veri elemanı nesneye özel olduğundan sınıf ile temsil edilen kavrama ilişkin bir karakteristiği (characteristics) ya da başka bir deyişle bir özniteliği (attribute) belirtir. Bu durumda bir sınıf non-static veri elemanları ile bir bileşik türdür (compound type). Örneğin, analitik düzlemde bir noktanın iki tane bileşenmi vardır: axis, ordinate. Bu durumda analitik düzlemde bir "nokta" kavramı ne tek başına axis ne de tek başına ordinate'dir. İkisi birlikte bir noktadır. Bu durumda programcı bu noktayı temsil eden bir sınıf bildiriminde non-static veri elemanı olarak (en azından) axis ve ordinate bilgilerini tutar. Dikkat edilirse sınıfın isminin belirlenmesinden, içerisindeki elemanların belirlenmesine kadarki kısım sınıfın ait olduğu "domain"'e göre ele alınır.*
+>*Sınıfın `non-static` veri elemanı nesneye özel olduğundan sınıf ile temsil edilen kavrama ilişkin bir karakteristiği (characteristics) ya da başka bir deyişle bir özniteliği (attribute) belirtir. Bu durumda bir sınıf `non-static` veri elemanları ile bir bileşik türdür (compound type). Örneğin, analitik düzlemde bir noktanın iki tane bileşeni vardır: axis, ordinate. Bu durumda analitik düzlemde bir "nokta" kavramı ne tek başına axis ne de tek başına ordinate'dir. İkisi birlikte bir noktadır. Bu durumda programcı bu noktayı temsil eden bir sınıf bildiriminde `non-static` veri elemanı olarak (en azından) axis ve ordinate bilgilerini tutar. Dikkat edilirse sınıfın isminin belirlenmesinden, içerisindeki elemanların belirlenmesine kadarki kısım sınıfın ait olduğu `domain`'e göre ele alınır.*
 >
->*Peki bir referansın uzunluğu ne kadardır? Bir referansın uzunluğu sistemin adresleyebileceği kadardır. Yani örneğin 32 bit bir sistemde 4 byte, 64 bit bir sistemde 8 byte'dır. Bu anlamda adresler tamsayı formatında olduğundan tutuluş biçimleri yine işaretsiz ikiye tümleme formatıdır. Referansların uzunluğu türe göre değişmez. Bu anlamda bir uygulama için ilgili sistemde tüm referansların uzunluğu aynıdır.*
+>*Peki bir **referansın** uzunluğu ne kadardır?*
 >
->*Peki bir nesnenin uzunluğu ne kadardır? Bir nesnenin uzunluğu "en az, ilişkin olduğu sınıfın non-static veri elemanlarının toplam uzunluğu kadardır". Burada en az kavramıyla sisteme ilişkin başka bilgilerin de eklenebileceği anlatılmaktadır. Detaylar önemsizdir. Java programcısı açısından "uzunluk non-static veri elemanları ile belirlenir" olarak algılanmalıdır.*
+>*Bir referansın uzunluğu sistemin adresleyebileceği kadardır. Yani örneğin `32 bit` bir sistemde `4 byte`, `64 bit` bir sistemde `8 byte`'dır. Bu anlamda adresler tamsayı formatında olduğundan tutuluş biçimleri yine işaretsiz ikiye tümleme formatıdır. **Referansların** uzunluğu türe göre **değişmez**. Bu anlamda bir uygulama için ilgili sistemde tüm referansların uzunluğu **aynıdır.***
 >
->*Peki non-static bir veri elemanının ömrü (storage duration) ne kadardır? Non-static bir veri elemanı nesne yaratıldığında yaratılır. Nesne yok edildiğinde yok edilir. Java'da nesne "garbage collector" tarafından yok edilir. Bir nesnenin yok edilmesine ilişkin detaylar ileride ele alınacaktır.*
+>*Peki bir **nesnenin** uzunluğu ne kadardır?*
 >
->*Peki non-static bir veri elemanının faaliyet alanı nedir? Bu konu ileride ele alınacaktır.*
+>*Bir nesnenin uzunluğu "en az, ilişkin olduğu sınıfın `non-static` veri elemanlarının toplam uzunluğu kadardır". Burada en az kavramıyla sisteme ilişkin başka bilgilerin de eklenebileceği anlatılmaktadır. Detaylar önemsizdir. Java programcısı açısından **"uzunluk non-static veri elemanları ile belirlenir"** olarak algılanmalıdır.*
 >
->*Sınıfın static bir veri elemanı nesne içerisinde yaratılmaz. Sınıfın static bir veri elemanına sınıf dışından sınıf ismi ve nokta operatörü ile erişilir. Nokta operatörü sınıf ismi ve static veri elemanı ile kullanıldığında veri elemanına ilişkin değişkeni üretir. Sınıfın static veri elemanları sınıfın bir elemanı (member) ilk kez kullanıldığında yaratılır ve program sonuna kadar yaşarlar. Bu durumda sınıfın static bir veri elemanı stack'de yaratılamaz. Static veri elemanlarının yaratıldığı alana ilişkin detaylar söz konusu olsa da dolaylı olarak heap'de olduğu söylenebilir.*
+>*Peki `non-static` bir veri elemanının `ömrü` (storage duration) ne kadardır?*
+> 
+>*`Non-static` bir veri elemanı nesne yaratıldığında yaratılır. Nesne yok edildiğinde yok edilir. Java'da nesne **"garbage collector"** tarafından yok edilir. Bir nesnenin yok edilmesine ilişkin detaylar ileride ele alınacaktır.*
+>
+>*Peki `non-static` bir veri elemanının faaliyet alanı nedir?*
+>
+>*Bu konu ileride ele alınacaktır.*
+
+<br>
+</br>
+
+>*Sınıfın `static` bir veri elemanı nesne içerisinde yaratılmaz. Sınıfın `static` bir veri elemanına sınıf dışından sınıf ismi ve nokta operatörü ile erişilir. Nokta operatörü sınıf ismi ve static veri elemanı ile kullanıldığında veri elemanına ilişkin değişkeni üretir. Sınıfın static veri elemanları sınıfın bir elemanı (member) ilk kez kullanıldığında yaratılır ve program sonuna kadar yaşarlar. Bu durumda sınıfın `static` bir veri elemanı stack'de **yaratılamaz**. Static veri elemanlarının yaratıldığı alana ilişkin detaylar söz konusu olsa da dolaylı olarak `heap`'de olduğu söylenebilir.*
 >
 >*Bu durumda static bir veri elemanına erişmek için bir nesne yaratılması gerekmez. Static veri elemanlarına da yaratıldıklarında default değerler atanır*
 
@@ -10854,7 +10867,7 @@ class Animal {
 
 #### 20 Haziran 2024
 
->*Sınıfın non-static bir veri elemanına sınıf dışından sınıf ismi ile erişilemez. Erişilebilseydi sınıfın ilgili elemanı hangi nesneye ait olurdu? Bu sebeple erişilemez.*
+>*Sınıfın `non-static` bir veri elemanına sınıf dışından sınıf ismi ile erişilemez. Erişilebilseydi sınıfın ilgili elemanı hangi nesneye ait olurdu? Bu sebeple erişilemez.*
 
 ```java
 package csd;
@@ -10874,7 +10887,7 @@ class Sample {
 }
 ```
 
->*Aslında sınıfın static bir veri elemanına sınıf dışından referans ile de erişilebilir. Aslında bu erişimin sınıf ismi ile erişmekten farkı yoktur. Dilin Matematiksel anlatımı gereği bu sentaks geçerlidir. Ancak Java programcısının bu şekilde erişmesi kesinlikle tavsiye edilmez. Bu durum Java programcısı açısından adeta bir error gibi değerlendirilmeli dolayısıyla kullanılmamalıdır. Kullanımı durumundan kodun okunabilirliğini/algılanabilirliğini olumsuz etkilediğine dikkat ediniz*
+>*Aslında sınıfın `static` bir veri elemanına sınıf dışından referans ile de erişilebilir. Aslında bu erişimin sınıf ismi ile erişmekten farkı yoktur. Dilin Matematiksel anlatımı gereği bu sentaks geçerlidir. Ancak Java programcısının bu şekilde erişmesi kesinlikle **tavsiye edilmez**. Bu durum Java programcısı açısından adeta bir `error` gibi değerlendirilmeli dolayısıyla kullanılmamalıdır. Kullanımı durumundan kodun okunabilirliğini/algılanabilirliğini olumsuz etkilediğine dikkat ediniz*
 
 ```java
 package csd;
@@ -10899,7 +10912,7 @@ class Sample {
 }
 ```
 
->*Sınıfnın non-static bir metoduna sınıf dışından referans ve nokta operatörü ile erişelebilir. Sınıf ismi ile erişilemez. Sınıfın non-static metotlarının nesne ile ilişkisi ileride ele alınacaktır*
+>*Sınıfnın `non-static` bir metoduna sınıf dışından referans ve nokta operatörü ile erişelebilir. Sınıf ismi ile **erişilemez**. Sınıfın `non-static` metotlarının nesne ile ilişkisi ileride ele alınacaktır*
 
 ```java
 package csd;
@@ -10926,9 +10939,9 @@ class Sample {
 }
 ```
 
-**_Anahtar Notlar:_** non-static metotlar nesne içerisinde tıutulmaz. Aslında metotlar aşağı seviyede genel olarak ismine "code section" denilen bir bölümde tutulurlar. Bu bölümün detayları ve Java düzeyindeki karşılığı burada ele alınamayacaktır. Bu durumda metotlar stack veya heap alanında tutulmazlar değil mi?
+**_Anahtar Notlar:_** `non-static metotlar` nesne içerisinde tutulmaz. Aslında metotlar aşağı seviyede genel olarak ismine "code section" denilen bir bölümde tutulurlar. Bu bölümün detayları ve Java düzeyindeki karşılığı burada ele alınamayacaktır. Bu durumda metotlar stack veya heap alanında tutulmazlar değil mi?
 
->*Sınıfın static bir metoduna sınıf dışından sınıf ismi ve nokta operatörü ile erişilebilir. static veri elemanlarında olduğu gibi referans ve nokta operatörü ile de erişlebilir. Yine Java programcısı olarak static metotlara da referans ile erişmeyeceğiz. Sınıfın static metotlarının tür ile ilişkisi ileride ele alınacaktır*
+>*Sınıfın `static` bir metoduna sınıf dışından sınıf ismi ve nokta operatörü ile erişilebilir. static veri elemanlarında olduğu gibi referans ve nokta operatörü ile de erişlebilir. Yine Java programcısı olarak static metotlara da referans ile erişmeyeceğiz. Sınıfın static metotlarının tür ile ilişkisi ileride ele alınacaktır*
 
 ```java
 package csd;
@@ -10956,7 +10969,12 @@ class Sample {
 
 **_Anahtar Notlar:_** Dikkat edilirse yukarıdaki anlatılanlar, sınıf dışından yani başka bir sınıfın içinden olan erişimler içindir.
 
->*Sınıfın non-static bir veri elemanına ait olduğu sınıfın non-static bir metodu içerisinde doğrudan yani nokta operatörü kullanmadan erişilebilir. Doğrudan erişilen non-static veri elemanı, non-static metodun çağrılmasında kullanılan referansın gösterdiği nesnenin veri elemanıdır*
+<br>
+</br>
+
+>*Sınıfın `non-static` bir veri elemanına ait olduğu sınıfın `non-static` bir `metodu` içerisinde doğrudan yani nokta operatörü kullanmadan **erişilebilir**.*
+>
+>*Doğrudan erişilen non-static veri elemanı, non-static metodun çağrılmasında kullanılan referansın gösterdiği nesnenin veri elemanıdır*
 
 ```java
 package csd;
@@ -10993,7 +11011,9 @@ class Sample {
 }
 ```
 
->*Sınıfın non-static bir metodu ait olduğu sınıfın non-static bir metodu içerisinde doğrudan çağrılabilir. Doğrudan çağrılan non-static metot, çağıran non-static metodun çağrılmasında kullanılan referans ile çağrılmış olur*
+>*Sınıfın `non-static` bir metodu ait olduğu sınıfın `non-static` bir metodu içerisinde doğrudan çağrılabilir.*
+>
+>*Doğrudan çağrılan `non-static metot`, çağıran `non-static metodun` çağrılmasında kullanılan referans ile çağrılmış olur*
 
 ```java
 package csd;
@@ -11026,9 +11046,13 @@ class Sample {
 }
 ```
 
->*Yukarıdaki iki maddenin özeti olarak şu söylenebilir: Sınıfın non-static bir metodu içerisinde tüm non-static elemanlarına (member) doğrudan erişilebilir*
+>*Yukarıdaki iki maddenin özeti olarak şu söylenebilir:*
+>- Sınıfın `non-static` bir metodu içerisinde, **tüm** `non-static` elemanlarına (member) doğrudan **erişilebilir**
 
->*Sınıfın non-static bir metodu içerisinde, aynı sınıfın static veri elemanlarına doğrudan erişilebilir*
+<br>
+</br>
+
+>*Sınıfın `non-static` bir metodu içerisinde, aynı sınıfın `static` veri elemanlarına doğrudan **erişilebilir***
 
 ```java
 package csd;
@@ -11070,7 +11094,7 @@ class Sample {
 }
 ```
 
->*Sınıfın non-static bir metodu içerisinde, aynı sınıfın static metotları doğrudan çağrılabilir*
+>*Sınıfın `non-static` bir metodu içerisinde, aynı sınıfın `static` metotları **doğrudan çağrılabilir***
 
 ```java
 package csd;
@@ -11103,11 +11127,16 @@ class Sample {
 }
 ```
 
->*Yukarıdaki iki maddenin özeti olarak şu söylenebilir: Sınıfın non-static bir metodu içerisinde tüm static elemanlarına doğrudan erişilebilir*
- 
->*Yukarıdaki dört maddenin özeti olarak şu söylenebilir: Sınıfın non-static bir metodu içerisinde sınfın tüm elemanlarına doğrudan erişilebilir*
+>*Yukarıdaki **iki** maddenin özeti olarak şu söylenebilir:*
+>- Sınıfın `non-static` bir metodu içerisinde, tüm `static` elemanlarına **doğrudan erişilebilir**
+>
+>*Yukarıdaki **dört** maddenin özeti olarak şu söylenebilir:*
+>- Sınıfın `non-static` bir metodu içerisinde, sınfın **tüm** elemanlarına **doğrudan erişilebilir**
 
->*Sınıfın static bir metodu içerisinde, aynı sınıfın non-static bir veri elemanına doğrudan erişilemez*
+<br>
+</br>
+
+>*Sınıfın `static` bir metodu içerisinde, aynı sınıfın `non-static` bir veri elemanına **doğrudan erişilemez***
 
 ```java
 package csd;
@@ -11124,7 +11153,7 @@ class Sample {
 }
 ```
 
->*Sınıfın static bir metodu içerisinde, aynı sınıfın non-static bir metodu doğrudan çağrılamaz*
+>*Sınıfın `static` bir metodu içerisinde, aynı sınıfın `non-static` bir metodu **doğrudan çağrılamaz***
 
 ```java
 package csd;
@@ -11146,9 +11175,13 @@ class Sample {
 }
 ```
 
->*Yukarıdaki iki maddenin özeti olarak şu söylenebilir: Sınıfın static bir metodu içerisinde aynı sınıfın non-static elemanlarına doğrudan erişilemez*
+>*Yukarıdaki iki maddenin özeti olarak şu söylenebilir:*
+>- Sınıfın `static` bir metodu içerisinde, aynı sınıfın `non-static` elemanlarına doğrudan **erişilemez**
 
->*Sınıfın static bir metodu içerisinde, aynı sınıfın static bir veri elemanına doğrudan erişilebilir*
+<br>
+</br>
+
+>*Sınıfın `static` bir metodu içerisinde, aynı sınıfın `static` bir veri elemanına doğrudan **erişilebilir***
 
 ```java
 package csd;
@@ -11173,7 +11206,7 @@ class Sample {
 }
 ```
 
->*Sınıfın static bir metodu içerisinde, aynı sınıfın static bir metodu doğrudan çağrılabilir*
+>*Sınıfın `static` bir metodu içerisinde, aynı sınıfın `static` bir metodu doğrudan **çağrılabilir***
 
 ```java
 package csd;
@@ -11203,12 +11236,21 @@ class Sample {
 }
 ```
 
->*Yukarıdaki iki maddenin özeti olarak şu söylenebilir: Sınıfın static bir metodu içerisinde aynı sınıfın static elemanlarına doğrudan erişilebilir*
+>*Yukarıdaki **iki** maddenin özeti olarak şu söylenebilir:* 
+>- Sınıfın `static` bir metodu içerisinde aynı sınıfın `static` elemanlarına **doğrudan erişilebilir**
 > 
->*Yukarıdaki dört maddenin özeti olarak şu söylenebilir: Sınıfın static bir metodu içerisinde aynı sınıfın static elemanlarına doğrudan erişilebilirken, non-static elemanlarına doğrudan erişilemez*
+>*Yukarıdaki **dört** maddenin özeti olarak şu söylenebilir:* 
+>- Sınıfın `static` bir metodu içerisinde **aynı** sınıfın 
+>	- `static` elemanlarına doğrudan **erişilebilirken**
+>	- `non-static` elemanlarına doğrudan **erişilemez**
 >
->*Yukarıdaki sekiz maddenin özeti olarak şu söylenebilir: Sınıfın non-static bir metodu içerisinde aynı sınıfın tüm elemanlarına doğrudan erişilebilir, static bir metodu içerisince yalnızca static elemanlarına doğrudan erişilebilir*
->
+>*Yukarıdaki **sekiz** maddenin özeti olarak şu söylenebilir:* 
+>- Sınıfın `non-static` bir metodu içerisinde aynı sınıfın **tüm** elemanlarına doğrudan **erişilebilir** 
+>- `static` bir metodu içerisinde **yalnızca** `static` elemanlarına doğrudan **erişilebilir**
+
+<br>
+</br>
+
 >*Aşağıdaki demo örnekte foo metodu içerisinde bar metoduna doğrudan erişilmediğine dikkat ediniz*
 
 ```java
@@ -11240,9 +11282,16 @@ class Sample {
 }
 ```
  
->*Peki tüm bu anlatılanlara göre sınıfı yazan programcı bir metodu static veya non-static yapacağına nasıl karar verecektir? Bir metot non static bir elemana erişmeyecekse static yapılmalıdır. Bu durumda yani non-static bir elemana erişmeyen bir metodun static yapılması durumu, non-static metotların okunabilirliğini/algılanabilirliğini artırır. Yani bir snıfı kullanan programcı non-static bir metot gördüğünde o metodun non-static bir veri elemanına erişitiğini bilir. Çünkü erişmeseydi programcı bu metodu static yapardı olarak algılar*
+>*Peki tüm bu anlatılanlara göre sınıfı yazan programcı bir metodu `static` veya` non-static` yapacağına nasıl karar verecektir?*
+>
+>*Bir metot `non-static` bir elemana erişmeyecekse `static` yapılmalıdır. Bu durumda yani `non-static` bir elemana erişmeyen bir metodun `static` yapılması durumu, `non-static` metotların okunabilirliğini/algılanabilirliğini artırır.*
+>
+>*Yani bir sinıfı kullanan programcı `non-static` bir metot gördüğünde o metodun `non-static` bir veri elemanına eriştiğini bilir. Çünkü erişmeseydi programcı bu metodu `static` yapardı olarak algılar*
 
->*Aşağıdaki örnekte s1 referansının gösterdiği nesne ile s2 referansının gösterdiği nesne farklıdır*
+<br>
+</br>
+
+>*Aşağıdaki örnekte `s1` referansının gösterdiği nesne ile `s2` referansının gösterdiği nesne farklıdır*
 
 ```java
 package csd;
@@ -11309,7 +11358,7 @@ class Sample {
 
 #### 25 Haziran 2024
 
->Aşağıdaki örnekte argüman olarak geçilen x yerel değişkeninin değeri metot içerisinde değiştirilemez değil mi?
+>*Aşağıdaki örnekte argüman olarak geçilen* `x` *yerel değişkeninin değeri metot içerisinde değiştirilemez değil mi?*
 
 ```java
 package csd;
@@ -11335,9 +11384,9 @@ class Sample {
 }
 ```
 
->*Bir metodun parametre değişkeni bir referans olabilir. Bu durumda metodun çağrılabilmesi için metoda aynı türden bir referansın argüman olarak geçilmesi gerekir. Bu durumda metodun perametresi olan referans ile argüman olarak geçilen referans aynı nesneyi gösterir duruma gelir. Anımsanacağı gibi argümanlardan parametre değişkenlerine aktarım da bir atama işlemidir. Bu durumda metot çağrısı boyunca ilgili nesneye erişilebilir. Hatta metot nesnenin içeriğini de değiştirebilir. Örnekte DateUtil sınıfının change metodunun nesnenin içeriğini değiştirdiğine dikkat ediniz.*
+>*Bir metodun parametre değişkeni bir referans olabilir. Bu durumda metodun çağrılabilmesi için metoda aynı türden bir referansın argüman olarak geçilmesi gerekir. Bu durumda metodun perametresi olan referans ile argüman olarak geçilen referans aynı nesneyi gösterir duruma gelir. Anımsanacağı gibi argümanlardan parametre değişkenlerine aktarım da bir atama işlemidir. Bu durumda metot çağrısı boyunca ilgili nesneye erişilebilir. Hatta metot nesnenin içeriğini de değiştirebilir. Örnekte* `DateUtil` *sınıfının* `change` *metodunun nesnenin içeriğini değiştirdiğine dikkat ediniz.*
 
->*Bir metodun geri dönüş değeri bir sınıf türünden olabilir. Bu durumda bir metot referansa (adrese) geri dönmüş olur. Böyle bir metodun return deyimine ilişkin ifadesi de aynı türden bir referans olmalıdır. Örnekteki create metodunun bir nesne yaratıp o nesnenin adresine geri döndüğüne dikkat ediniz*
+>*Bir metodun geri dönüş değeri bir sınıf türünden olabilir. Bu durumda bir metot `referansa` (adrese) geri dönmüş olur. Böyle bir metodun `return` deyimine ilişkin ifadesi de aynı türden bir referans olmalıdır. Örnekteki* `create` *metodunun bir nesne yaratıp o nesnenin adresine geri döndüğüne dikkat ediniz*
 
 ```java
 package csd;
@@ -11391,7 +11440,7 @@ class Date {
 
 #### 27 Haziran 2024
 
->*Point sınıfı ve test kodları*
+##### Point sınıfı ve test kodları
 
 ```java
 package csd;
@@ -11528,7 +11577,7 @@ class Point {
 }
 ```
 
->*Complex sınıfı ve test kodları*
+##### Complex sınıfı ve test kodları
 	
 ```java
 package csd;
@@ -11735,23 +11784,27 @@ class Complex {
 
 ##### Nesnenin Yaratılması Aşamaları:
 >1. Bellekte yer ayrılır.
->2. Non-static olan (ancak final olmayan) veri elemanlarına default değerler verilir. 
->3. Constructor (ctor) çağrılır.
+>2. `Non-static` olan (ancak `final olmayan`) veri elemanlarına `default` değerler verilir. 
+>3. Constructor (`ctor`) çağrılır.
 >
->Bu üç adım tamamlandığında nesne yaratılmış olur. Herhangi bir adımda bir problem oluştuğunda nesnenin yaratılması	tamamlanmamış olur.
+>Bu `üç` adım tamamlandığında nesne yaratılmış olur. Herhangi bir adımda bir problem oluştuğunda nesnenin yaratılması **tamamlanmamış** olur.
 	
 **_Anahtar Notlar:_** final veri elemanları ileride ele alınacaktır.
 
->*ctor aşağıdaki özelliklere sahip bir metottur*
->- ctor nesne yaratılması aşamasında çağrılır.
->- ctor overload edilebilir (constructor overloading).
->- Sınıf içerisinde programcı tarafından hiç bir ctor bildirilmemişse parametresiz ctor (default ctor) derleyici tarafından public ve içi boş olarak yazılır. Programcı en az bir tane ctor bildirirse artık derleyici default ctor'u yazmaz.
->- ctor ismi sınıf ismi ile aynı olan ve geri dönüş değeri kavramı olmayan metottur. Burada geri dönüş değeri kavramı olmaması void bir metot olması anlamına GELMEZ. Ctor için geri dönüş değeri bilgisi yerine herhangi bir şey yazılmaz. Hatta sınıf ismi ile aynı isimde olan ve geri dönüş değeri bilgisi yazılmış olan bir metot bildirimi geçerlidir. Ancak hiç bir programcı böylesi bir metot yazmaz. Çünkü sınıf ismi ile aynı olan bir metodun geri dönüş değeri bilgisi yazılırsa bu metot artık ctor anlamına gelmez.
->- ctor non-static bir metottur.
->- Hangi ctor'un çağrılacağı new operatöründe geçilen argümanlara göre klasik "method overload resolution" kuralları ile belirlenir.
->- ctor programcı tarafından çağrılamaz. Programcı, nesne yaratılması sırasında hangi ctor'un çağrılacağının belirlendiği kodu yazar.
->- Nesne yaratılması adımları gereği ctor'dan önce non-static veri elemanlarına default değerleri verilmiş olur.
+>`ctor` *aşağıdaki özelliklere sahip bir* `metottur`
+>- ctor nesne yaratılması aşamasında **çağrılır**.
+>- ctor overload edilebilir `constructor overloading`.
+>- Sınıf içerisinde programcı tarafından hiç bir ctor bildirilmemişse parametresiz ctor `default ctor` derleyici tarafından public ve içi boş olarak yazılır. Programcı en az bir tane ctor bildirirse artık derleyici default ctor'u **yazmaz**.
+>- ctor ismi, sınıf ismi ile **aynı** olan ve **geri dönüş değeri kavramı olmayan** metottur. Burada geri dönüş değeri kavramı olmaması void bir metot olması anlamına **GELMEZ**. Ctor için geri dönüş değeri bilgisi yerine herhangi bir şey yazılmaz. Hatta sınıf ismi ile aynı isimde olan ve geri dönüş değeri bilgisi yazılmış olan bir metot bildirimi geçerlidir. Ancak hiç bir programcı böylesi bir metot yazmaz. Çünkü sınıf ismi ile aynı olan bir metodun geri dönüş değeri bilgisi yazılırsa bu metot artık ctor anlamına gelmez.
+>- ctor `non-static` bir metottur.
+>- Hangi ctor'un çağrılacağı `new` operatöründe geçilen argümanlara göre klasik **"method overload resolution"** kuralları ile belirlenir.
+>- ctor programcı tarafından **çağrılamaz**. Programcı, nesne yaratılması sırasında hangi ctor'un çağrılacağının belirlendiği kodu yazar.
+>- Nesne yaratılması adımları gereği ctor'dan önce `non-static` veri elemanlarına `default` değerleri verilmiş olur.
 >- ctor geri dönüş değeri kavramı olmayan bir metot olsa da void bir metot gibi istenirse return deyimi sonlandırmak için kullanılabilir. Buradaki sonlandırma normal bir sonlandırmadır yani nesne yaratılmış olur.
+
+
+<br>
+</br>
 
 >*Aşağıdaki demo örneği inceleyiniz*
 
@@ -11899,9 +11952,11 @@ class Sample {
 }
 ```
 
->*Peki, ctor ne işe yarar? Ctor, nesne yaratılmadan önce bir takım ilk işlemlerin yapılması amacıyla kullanılır. Bu işlemlerden en tipik olanı veri elemanlarına değer verilmesidir. Sınıfın ilgili ctor'ları aldıkları parametre değişkenlerini kullanarak veri elemanlarına değer verebilirler. Şüphesiz bu durum sınıfın senaryosu yani ne olduğu ile ilgilidir. Yine örneğin, bir sınıf aldığı bağlantı bilgilerine göre nesne yaratılmadan önce o bağlantıda bulunan bir cihaza bağlanabilir. Şüphesiz en çok karşılaşılan durum sınıfın veri elemanlarına değer verilmesi durumudur*
+>*Peki, ctor ne işe yarar?*
+>
+>*Ctor, nesne yaratılmadan önce bir takım ilk işlemlerin yapılması amacıyla kullanılır. Bu işlemlerden en tipik olanı veri elemanlarına değer verilmesidir. Sınıfın ilgili ctor'ları aldıkları parametre değişkenlerini kullanarak veri elemanlarına değer verebilirler. Şüphesiz bu durum sınıfın senaryosu yani ne olduğu ile ilgilidir. Yine örneğin, bir sınıf aldığı bağlantı bilgilerine göre nesne yaratılmadan önce o bağlantıda bulunan bir cihaza bağlanabilir. Şüphesiz en çok karşılaşılan durum sınıfın veri elemanlarına değer verilmesi durumudur*
 
->*Point sınıfı ve test kodları*
+##### Point sınıfı ve test kodları
 
 ```java
 package csd;
@@ -11975,7 +12030,7 @@ class Point {
 
 #### 4 Temmuz 2024
 
->*Complex sınıfı ve test kodları*
+##### Complex sınıfı ve test kodları
 
 ```java
 package csd;
@@ -12118,17 +12173,22 @@ class Complex {
 }
 ```
 
->*Rassal (Random) Sayı Üretimi: Rassal sayı üretimi Bilgisayar dünyasında çok fazla kullanılmaktadır. Örneğin bir oyunda rassal sayılar üretilerek bir takım karakterler (game object) rassal olarak oluşturulup hareket ettirilebilirler. Ya da örneğin simülasyon programlarında da rassal sayılar üretilmektedir. Gerçek hayattaki rassallık bilgisayar dünyasında gerçeklleştirilemez. Bu anlamda Bilgisayar dünyasında deterministik olarak rassal sayılar üretilebilmektedir. Bu sebeple Bilgisayar dünyasında üretilen rassal sayılara "pseudo random numbers" da denilmektedir.*
+##### Rassal (Random) Sayı Üretimi
+
+>*Rassal sayı üretimi Bilgisayar dünyasında çok fazla kullanılmaktadır. Örneğin bir oyunda rassal sayılar üretilerek bir takım karakterler (game object) rassal olarak oluşturulup hareket ettirilebilirler. Ya da örneğin simülasyon programlarında da rassal sayılar üretilmektedir. Gerçek hayattaki rassallık bilgisayar dünyasında gerçeklleştirilemez. Bu anlamda Bilgisayar dünyasında deterministik olarak rassal sayılar üretilebilmektedir. Bu sebeple Bilgisayar dünyasında üretilen rassal sayılara **"pseudo random numbers"** da denilmektedir.*
 >	
 >*Bilgisayar dünyasında rassal sayı üretiminin kalitesi söz konusudur. Rassal sayı üretimine ilişkin işlemler bir mantık çerçevesinde karmaşıklaştıkça genel olarak kalite artar. Ancak bu durumda da yapılan işlemlere ilişkin bir maliyet söz	konusu  olabilmektedir. Bu anlamda Bilgisayar dünyasında rassal sayı üretimine ilişkin bilimsel çalışmalar hali	hazırda devam etmektedir.*
 >
->*Java'da rassal sayı üretimine ilişkin pek çok sınıf bulunmaktadır. Özellikle Java 17 ile birlikte çeşitli algoritmalara göre rassal sayı üretebilmesine yönelik JavaSE'ye eklentiler yapılmıştır. Java'da rassal sayı üretimine ilişkin en temel sınıf java.util paketi içerisinde bulunan* `Random` *sınıfıdır. Bu sınıfın rassal sayı üretimi orta kalitelidir. Çoğu	zaman yeterli olmaktadır. Zaten yeterli olmadığı durumda programcı diğerlerine yönelir. Özellikle Java 17'den itibaren* `Random` *sınıfına ilişkin rassal sayı üretimine "legacy random" da denilmektedir. Burada* `Random` *sınıfı dışındaki rassal sayı üretimi ele alınmayacaktır.*
+>*Java'da rassal sayı üretimine ilişkin pek çok sınıf bulunmaktadır. Özellikle `Java 17` ile birlikte çeşitli algoritmalara göre rassal sayı üretebilmesine yönelik JavaSE'ye eklentiler yapılmıştır. Java'da rassal sayı üretimine ilişkin en temel sınıf* `java.util` *paketi içerisinde bulunan* `Random` *sınıfıdır. Bu sınıfın rassal sayı üretimi orta kalitelidir. Çoğu	zaman yeterli olmaktadır. Zaten yeterli olmadığı durumda programcı diğerlerine yönelir. Özellikle `Java 17`'den itibaren* `Random` *sınıfına ilişkin rassal sayı üretimine **"legacy random"** da denilmektedir. Burada* `Random` *sınıfı dışındaki rassal sayı üretimi ele alınmayacaktır.*
 >
 >**_Anahtar Notlar:_** `java.util.Random` sınıfı Donald Knuth'un "The Art of Computer Programming" kitaplar serisinin ikinci cildinde "Seminumerical Algorithms" bölümündeki (Section 3.2.1) algoritmayı kullanmaktadır.
 >	
->*Bilgisayar dünyasında genel olarak rassal sayı üretiminde ismine "tohum değeri (seed value)" bir değer kullanılır. Aslında	rassal sayı üretimi bu değer ile başlar ve her üretimde bu değer güncellenerek devam eder. Yani tohum değeri, rassal sayı üretimine ilişkin Matematiksel işlemlerde kullanılır.* `java.util.Random` *sınıfının default ctor'u ile nesne yaratıldığında, tohum değeri o uygulama içerisinde daha önce yine default ctor kullanılarak yaratılmış olan nesnelere ilişkin tohum değerlerinden mümkün olduğunca farklı olma eğilimindedir.* 
+>*Bilgisayar dünyasında genel olarak rassal sayı üretiminde ismine **"tohum değeri (seed value)"** bir değer kullanılır. Aslında rassal sayı üretimi bu değer ile başlar ve her üretimde bu değer güncellenerek devam eder. Yani tohum değeri, rassal sayı üretimine ilişkin Matematiksel işlemlerde kullanılır.* `java.util.Random` *sınıfının default ctor'u ile nesne yaratıldığında, tohum değeri o uygulama içerisinde daha önce yine default ctor kullanılarak yaratılmış olan nesnelere ilişkin tohum değerlerinden mümkün olduğunca farklı olma eğilimindedir.* 
 >
->`java.util.Random` *sınıfının `nextXXX` metotları ile rassal sayılar elde edilebilir. Şüphesiz bu metotlar dışında da metotları bulunmaktadır. Bazı metotlar ileride ele alınacaktır*
+>`java.util.Random` *sınıfının* `nextXXX` *metotları ile rassal sayılar elde edilebilir. Şüphesiz bu metotlar dışında da metotları bulunmaktadır. Bazı metotlar ileride ele alınacaktır*
+
+<br>
+</br>
 
 >`Random` *sınıfının parametresiz nextInt metodu int türü sınırları içerisinde rassal olarak üretilmiş bir sayıya geri döner*
 
@@ -12172,7 +12232,7 @@ class App {
 }
 ```
 
->`Random` *sınıfına Java 17 ile birlikte iki parmatreli nextInt metodu da dolaylı olarak eklenmiştir. Bu metot aldığı parametre değerlerine göre* `[origin, bound)` *aralığında üretilmiş rassal bir sayıya geri döner.*
+>`Random` *sınıfına Java 17 ile birlikte iki parmatreli* `nextInt` *metodu da dolaylı olarak eklenmiştir. Bu metot aldığı parametre değerlerine göre* `[origin, bound)` *aralığında üretilmiş rassal bir sayıya geri döner.*
 	
 **_Anahtar Notlar:_** Burada "dolaylı eklenmiştir" denmesinin ayrıntıları ileride ele alınacaktır
 
@@ -12198,7 +12258,7 @@ class App {
 }
 ```
 
->`Random` *sınıfının `nextLong` metotları long türden rassal bir sayı üretilmesini sağlar. Tek parametreli ve iki parametreli `nextLong` metotları Java 17 ile birlikte dolaylı olarak eklenmiştir*
+>`Random` *sınıfının* `nextLong` *metotları long türden rassal bir sayı üretilmesini sağlar. Tek parametreli ve iki parametreli* `nextLong` *metotları Java 17 ile birlikte dolaylı olarak eklenmiştir*
 
 ```java
 package csd;
@@ -12233,7 +12293,7 @@ class App {
 }
 ```
 
->`Random` *sınıfının nextDouble metotları double türden rassal bir sayı üretilmesini sağlar. Parmetresiz nextDouble metodu* `[0, 1)` *aralığında rassal olarak üretilmiş bir sayıya geri döner. Tek parametreli ve iki parametreli `nextDouble` metotları yine Java 17 ile birlikte dolaylı olarak eklenmiştir*
+>`Random` *sınıfının* `nextDouble` *metotları `double` türden rassal bir sayı üretilmesini sağlar. Parmetresiz nextDouble metodu* `[0, 1)` *aralığında rassal olarak üretilmiş bir sayıya geri döner. Tek parametreli ve iki parametreli* `nextDouble` *metotları yine Java 17 ile birlikte dolaylı olarak eklenmiştir*
 
 ```java
 package csd;
@@ -12268,7 +12328,7 @@ class App {
 }
 ```
 
->`Random` *sınıfının nextBoolean boolean türden rassal olarak üretilmiş değere geri döner*
+>`Random` *sınıfının* `nextBoolean` *boolean türden rassal olarak üretilmiş değere geri döner*
 
 ```java
 package csd;
@@ -12486,7 +12546,7 @@ class EvenDiceProbabilitySimulation {
 
 #### 9 Temmuz 2024
 
->*Anımsanacağı gibi rassal sayı üretimi bir takım Matematiksel işlemlerle bilgisayar dünyasında gerçekleştirilir. Şüphesiz bu işlemler kullanılan algoritmalara göre değişiklik gösterebilir. Ancak neredeyse tüm algoritmalarda "tohum değeri (seed value)" denilen bir değer kullanılır. Bu değer her sayı üretiminde ilgili algoritmaya göre güncellenir. Bu durumda bir işlem aynı tohum değeriyle tekrar yapıldığında aynı sonuçlar elde edilir. Yani örneğin bir programda 10 tane [0, 99] aralığında sayı üretiliyorsa bu program hep aynı tohum değeri ile çalıştırılırsa hep aynı sayılar aynı dizilimde üretilir. Random sınıfının default ctor'u her yaratılan nesne için tohum değerini farklı verecek şekilde yazılmıştır. Bu işlem genel olarak zaman kavramı kullanılarak yapılabilir. Örneğin tohum değeri belirli bir tarihten itibaren geçen milisaniye olarak alınırsa veya donanıma ilişkin üretilen tick sayısına bağlı olarak alınırsa her değer farklı olma eğiliminde olur. Random sınıfının tohum değerini bağlangıçta programcıdan alabildiği bir ctor'u ve setSeed isimli bir metodu da vardır. Örneğin bir resim içerisinde resimde gözle değişiklikle anlaşılamayacak şekilde bir yazı gizlemek için yazının bitleri rassal olarak belirlenen pixel'lere yazılabilir. Bu durumda resimden yazı elde edilirken aynı pixel'lerin elde edilebilmesi için aynı tohum değeriyle üretim yapılması gerekir. Şüphesiz bu işlemin nasıl yapılacağına ilişkin pek çok detay söz konusudur. Burada önemli olan yani odaklanmanız örnekte tohum değerinin aynı olacak şekilde kullanılmasıdır.*
+>*Anımsanacağı gibi rassal sayı üretimi bir takım Matematiksel işlemlerle bilgisayar dünyasında gerçekleştirilir. Şüphesiz bu işlemler kullanılan algoritmalara göre değişiklik gösterebilir. Ancak neredeyse tüm algoritmalarda **"tohum değeri (seed value)"** denilen bir değer kullanılır. Bu değer her sayı üretiminde ilgili algoritmaya göre güncellenir. Bu durumda bir işlem aynı tohum değeriyle tekrar yapıldığında aynı sonuçlar elde edilir. Yani örneğin bir programda `10` tane `[0, 99]` aralığında sayı üretiliyorsa bu program hep **aynı** tohum değeri ile çalıştırılırsa hep aynı sayılar aynı dizilimde üretilir. Random sınıfının default ctor'u her yaratılan nesne için tohum değerini farklı verecek şekilde yazılmıştır. Bu işlem genel olarak zaman kavramı kullanılarak yapılabilir. Örneğin tohum değeri belirli bir tarihten itibaren geçen milisaniye olarak alınırsa veya donanıma ilişkin üretilen tick sayısına bağlı olarak alınırsa her değer farklı olma eğiliminde olur. Random sınıfının tohum değerini başlangıçta programcıdan alabildiği bir ctor'u ve* `setSeed` *isimli bir metodu da vardır. Örneğin bir resim içerisinde resimde gözle değişiklikle anlaşılamayacak şekilde bir yazı gizlemek için yazının bitleri rassal olarak belirlenen pixel'lere yazılabilir. Bu durumda resimden yazı elde edilirken aynı pixel'lerin elde edilebilmesi için aynı tohum değeriyle üretim yapılması gerekir. Şüphesiz bu işlemin nasıl yapılacağına ilişkin pek çok detay söz konusudur. Burada önemli olan yani odaklanmanız örnekte tohum değerinin aynı olacak şekilde kullanılmasıdır.*
 
 >*Aşağıdaki demo örneğin her çalıştırılmasında üretilen ilk 10 sayının dizilimi diğer çalıştırmalardan farklıdır. İkinci 10 sayının dizilimi ise tohum değerine bağlı olduğundan daha önceki bir çalıştırılmada girilen tohum değeri ile aynı değer tekrar girildiğinde dizilim aynı olur*
 
@@ -12517,19 +12577,22 @@ class App {
 }
 ```
 
-**_Anahtar Notlar:_** Burada java.util.Random sınıfının bazı metotları ele alınmıştır. Diğer metotlar başka konuları da gerektirdiğinden daha sonra belirli ölçüde ele alınacaktır
+**_Anahtar Notlar:_** Burada `java.util.Random` sınıfının bazı metotları ele alınmıştır. Diğer metotlar başka konuları da gerektirdiğinden daha sonra belirli ölçüde ele alınacaktır
 
 ##### Yazılarla işlemler ve String sınıfı:
 
->*Yazılarla işlemler programlamada çok fazla yapılmaktadır. İrili ufaklı tüm programlar bir şekilde yazıları kullanırlar. Programlamada karakterlerden oluşan bir topluluğa ya da genel olarak yazılara "string" terimi karşılık getirilmektedir. Java'da yazı işlemlerine ilişkin en temel sınıf* `java.lang` *paketinde bulunan String sınıfıdır. JavaSE'de yazılarla işlem yapan başka sınıflar da vardır. Ancak bunlar genel olarak String sınıfına yardımcı sınıflardır.*
+>*Yazılarla işlemler programlamada çok fazla yapılmaktadır. İrili ufaklı tüm programlar bir şekilde yazıları kullanırlar. Programlamada karakterlerden oluşan bir topluluğa ya da genel olarak yazılara "string" terimi karşılık getirilmektedir. Java'da yazı işlemlerine ilişkin en temel sınıf* `java.lang` *paketinde bulunan* `String` *sınıfıdır. JavaSE'de yazılarla işlem yapan başka sınıflar da vardır. Ancak bunlar genel olarak String sınıfına yardımcı sınıflardır.*
 
-**_Anahtar Notlar:_** `java.lang` paketi içerisinde bulunan UDT'ler herhangi bir bildirim yapmadan doğrudan kullanılabilir. Örneğin, String, System gibi sınıflar `java.lang` paketi içerisinde olduğundan isimleri doğrudan kullanılabilir. Ancak örneğin Random sınıfı java.util paketi içerisinde olduğundan doğrudan kullanılması için ileride detaylı olarak ele alacağımız bir takım işlemlerinde yapılması gerekir ya da paket ismiyle kombine edilerek kullanılabilir.
+**_Anahtar Notlar:_** `java.lang` paketi içerisinde bulunan UDT'ler herhangi bir bildirim yapmadan doğrudan kullanılabilir. Örneğin, `String`, `System` gibi sınıflar `java.lang` paketi içerisinde olduğundan isimleri doğrudan kullanılabilir. Ancak örneğin `Random` sınıfı `java.util` paketi içerisinde olduğundan doğrudan kullanılması için ileride detaylı olarak ele alacağımız bir takım işlemlerin de yapılması gerekir ya da paket ismiyle kombine edilerek kullanılabilir.
 
-**_Anahtar Notlar:_** Bir nesnenin içeriği (yani kabaca non-static veri elemanları) nesne yaratıldıktan sonra sınıfı kullanan programcı tarafından değiştirilemiyorsa bu tarz nesnelerin yaratılabildiği sınıflara "immutable class" denir. Pek çok immutable sınıfın non-static veri elemanları içsel olarak da değiştirilemez. Immutable bir sınıfın nasıl yazılacağı ileride ele alınacaktır.
+**_Anahtar Notlar:_** Bir nesnenin içeriği (yani kabaca `non-static` veri elemanları) nesne yaratıldıktan sonra sınıfı kullanan programcı tarafından değiştirilemiyorsa bu tarz nesnelerin yaratılabildiği sınıflara **"immutable class"** denir. Pek çok immutable sınıfın `non-static` veri elemanları içsel olarak da değiştirilemez. `Immutable` bir sınıfın nasıl yazılacağı ileride ele alınacaktır.
 
->*Derleyici bir string literal gördüğünde ve bu string literal'ı ilk kez görüyorsa kabaca şu şekilde bir kod üretir:
+>*Derleyici bir string literal gördüğünde ve bu string literal'ı ilk kez görüyorsa kabaca şu şekilde bir kod üretir:*
 >
 >*"String türden bir nesne yarat ve string literal içerisindeki karakterleri bu string nesnesi ile tutulabilecek şekle getir ve ilgili string nesnesinin referansını (adresini) ver". Bu durumda bir string literal ile bir string nesnesinin referansı elde edilebilir. print ve println metotlarının String parametreli overload'ları vardır. Bu metotlar aldıkları String referansına ilişkin nesne ile tutulan yazıyı yazdırır. printf metodu ile bir yazı s format karakteri ile yazdırılabilir. Klavyeden bir yazı elde etmek için Scanner sınıfının String geri dönüş değerine sahip metotları kullanılabilir. Örneğin nextLine metodu klavyeden enter girilene alınan yazılara ilişkin bir String nesnesi yaratır ve onun referansına geri döner. Bu yazı içerisinde enter karakteri yoktur*
+
+<br>
+</br>
 
 >*Aşağıdaki demo örneği inceleyiniz*
 
@@ -12584,7 +12647,7 @@ class App {
 
 #### 11 Temmuz 2024
 
->*Bir String nesnesine ilişkin yazının karakterlerinin her birine sıfırdan başlayarak bir indeks numarası verilmiş gibi yani bir dizi gibi düşünebiliriz. Bu durumda bir yazının herhangi bir indeksteki karakterine charAt isimli metot ile erişilebilir. Bu metot aldığı indeks numarasına ilişkin karaktere geri döner. Metoda pozitif ya da negatif bakımdan sınırlar dışında bir indeks numarası verildiğinde exception oluşur. Yazının uzunluğu yani kaç tane karakterden oluştuğu bilgisi length metodu ile elde edilebilir*
+>*Bir String nesnesine ilişkin yazının karakterlerinin her birine sıfırdan başlayarak bir indeks numarası verilmiş gibi yani bir dizi gibi düşünebiliriz. Bu durumda bir yazının herhangi bir indeksteki karakterine* `charAt` *isimli metot ile erişilebilir. Bu metot aldığı indeks numarasına ilişkin karaktere geri döner. Metoda pozitif ya da negatif bakımdan sınırlar dışında bir indeks numarası verildiğinde exception oluşur. Yazının uzunluğu yani kaç tane karakterden oluştuğu bilgisi length metodu ile elde edilebilir*
 
 >*Aşağıdaki demo örneği inceleyiniz*
 
@@ -12633,7 +12696,7 @@ class App {
 }
 ```
 
->*String sınıfı immutable bir sınıftır. Yani, bir String nesnesine ilişkin yazı değiştirilemez. Bu durumda yazı üzerinde değişiklik yapan metotlar değiştirilmiş yazıyı tutan yeni bir String referansına geri dönerler. Örneğin,* `toLowerCase` *metotları yazının tüm karakterlerini küçük harfe çeviren metottur. Metot ilgili yazıyı değiştiremeyeceğinden tamamı	küçük harflerden oluşan bir yazıya ilişkin yeni bir String referansına geri döner. Benzer şekilde toUpperCase metotları	yazının tüm karakterlerini büyük harfe çevirir. Şüphesiz küçük/büyük harf karşılığı olmayan karakterlerin aynıları alınır. Bu metotların bu bölümde yalnızca parametresiz overload'ları ele alınacaktır*
+>*String sınıfı* `immutable` *bir sınıftır. Yani, bir String nesnesine ilişkin yazı değiştirilemez. Bu durumda yazı üzerinde değişiklik yapan metotlar değiştirilmiş yazıyı tutan yeni bir String referansına geri dönerler. Örneğin,* `toLowerCase` *metotları yazının tüm karakterlerini küçük harfe çeviren metottur. Metot ilgili yazıyı değiştiremeyeceğinden tamamı küçük harflerden oluşan bir yazıya ilişkin yeni bir String referansına geri döner. Benzer şekilde* `toUpperCase` *metotları yazının tüm karakterlerini büyük harfe çevirir. Şüphesiz küçük/büyük harf karşılığı olmayan karakterlerin aynıları alınır. Bu metotların bu bölümde yalnızca parametresiz overload'ları ele alınacaktır*
 
 >*Aşağıdaki demo örneği inceleyiniz*
 
@@ -12715,7 +12778,12 @@ class App {
 }
 ```
 
-**_Anahtar Notlar:_** Aynı türden iki referans `==` veya `!=` operatörü ile işleme sokulabilir. Bu durumda aslında iki referansın da aynı nesneyi gösterip göstermediğine ilişkin değer üretilir. Yani `==` operatörü iki referans da aynı nesneyi gösteriyorsa	true, göstermiyorsa false değerini, `!=` operatörü iki referans aynı nesneyi gösteriyosa false, göstermiyorsa true değerini üretir. Farklı türden referanslar hiç bir şekilde işleme sokulamaz. Dikkat edilirse aynı türden referansların eşitlik	karşılaştırması adreslerin karşılaştırılmasıdır. Nesnelerin içeriğinin yani non-static veri elemanlarının aynı olup	olmadığı kontrolü bu şekilde yapılamaz
+**_Anahtar Notlar:_** Aynı türden iki referans `==` veya `!=` operatörü ile işleme sokulabilir. Bu durumda aslında iki referansın da aynı nesneyi gösterip göstermediğine ilişkin değer üretilir. Yani `==` operatörü iki referans da **aynı** nesneyi gösteriyorsa	**true**, göstermiyorsa **false** değerini, `!=` operatörü iki referans **aynı** nesneyi gösteriyosa **false**, göstermiyorsa **true** değerini üretir. **Farklı** türden referanslar hiç bir şekilde işleme **sokulamaz**.
+
+Dikkat edilirse aynı türden referansların eşitlik karşılaştırması adreslerin karşılaştırılmasıdır. Nesnelerin içeriğinin yani `non-static` veri elemanlarının **aynı olup olmadığı** kontrolü bu şekilde **yapılamaz**
+
+<br>
+</br>
 
 >*Aşağıdaki demo örnekte `farklı` nesneler yaratılmıştır değil mi?*
 
@@ -13055,7 +13123,7 @@ class App {
 }
 ```
 
->*String sınıfnın substring metotları bir yazının belli bir kısmını elde etmek için kullanılır. substring metodunun tek paramtreli overload'u parametresi ile aldığı indeks değerinden itibaren yazının sonuna kadarki kısmına ilişkin String referansına geri döner. İki parametreli overload'u ise birinci parametresi ile aldığı indeks değerinden ikinci parametresi ile aldığı indeks değerine kadar (hariç) olan yazıya ilişkin String referansına geri döner*
+>`String` *sınıfnın* `substring` *metotları bir yazının belli bir kısmını elde etmek için kullanılır. substring metodunun tek paramtreli overload'u parametresi ile aldığı indeks değerinden itibaren yazının sonuna kadarki kısmına ilişkin String referansına geri döner. İki parametreli overload'u ise birinci parametresi ile aldığı indeks değerinden ikinci parametresi ile aldığı indeks değerine kadar (hariç) olan yazıya ilişkin String referansına geri döner*
 
 ```java
 package csd;
@@ -13071,7 +13139,7 @@ class App {
 }
 ```
 
->*substring metodunun tek parametreli overload'una yazının uzunluğu indeks olarak verildiğinde özel bir durum olarak boş string'e geri döner. Uzunluktan daha büyük bir indeks numarası için exception oluşur*
+>`substring` *metodunun tek parametreli overload'una yazının uzunluğu indeks olarak verildiğinde özel bir durum olarak boş string'e geri döner. Uzunluktan daha büyük bir indeks numarası için exception oluşur*
 
 ```java
 package csd;
@@ -13204,7 +13272,7 @@ class App {
 }
 ```
 
->*String sınıfının* `indexOf` *metotları yazı içerisinde bir karakteri ya da yazı içerisinde bir yazıyı aramak için kullanılırlar*. `indexOf` *metotlarının prototipleri şu şekildedir:	
+>`String` *sınıfının* `indexOf` *metotları yazı içerisinde bir karakteri ya da yazı içerisinde bir yazıyı aramak için kullanılırlar*. `indexOf` *metotlarının prototipleri şu şekildedir:*	
 >1. int indexOf(int ch)
 >2. int indexOf(int ch, int fromIndex)	
 >3. int indexOf(String str)
@@ -13214,6 +13282,9 @@ class App {
 >`3. ve 4.` metotlar yazı içerisinde bir yazıyı aramak için kullanılır. Bulursa aranan yazının ilk bulunduğu yerdeki ilk karakterinin indeks numarasına geri dönerler. Bulunamazsa -1 değerine geri dönerler.\
 >`2. ve 4.` metotlar arama işlemine ikinci parametreleri ile aldıkları indeks numarasından başlarlar.\
 >`1. ve 3.` metotlar arama işlemine yazının başından başlarlar
+
+<br>
+</br>
 
 >*Aşağıdaki demo örneği inceleyiniz*
 
@@ -13471,7 +13542,7 @@ class StringUtil {
 }
 ```
 
->*String sınıfının* `lastIndexOf` *metotları sondan itibaren ilk bulunan yazı veya karaktere ilişkin indeks numarasına geri dönerler. Bu metotlar da bulamadıkları durumda -1 değerine geri dönerler*
+>`String` *sınıfının* `lastIndexOf` *metotları sondan itibaren ilk bulunan yazı veya karaktere ilişkin indeks numarasına geri dönerler. Bu metotlar da bulamadıkları durumda -1 değerine geri dönerler*
 
 ```java
 package csd;
@@ -13528,7 +13599,6 @@ class FileUtilgetFileNameTest {
 		}
 	}
 }
-
 
 class FileUtil {
 	public static String getFileName(String path)
@@ -13625,27 +13695,30 @@ class App {
 >  	
 >- Karakter "Unicode space" karakter ve "Non-breaking space" olmayan karakterlerdendir. Unicode space karakterler şunlardır:  Space Separator, Line Separator, Paragraph Separator. Bu karakterler UNICODE'da çeşitli kategorilerdir. Detaylar burada ele alınmayacaktır. Bu karakter Character sınıfının SPACE_SEPERATOR, LINE_SEPARATOR, PARAGRAPH_SEPARATOR isimli static veri elemanları ile elde edilebilir. non-breaking space karakterler şunlardır: '\u00A0', '\u2007', '\u202F'
 >
->		'\t' horizontal tabulation
->		'\n' line feed (LF)
->		'\u000B' vertical tabulation
->		'\f' form tabulation
->		'\r' carriage return (CR)
->		'\u001C' file separator
->		'\u001D' group separator
->		'\u001E' record separator
->		'\u001F' unit separator
+>		'\t' 		horizontal tabulation
+>		'\n' 		line feed (LF)
+>		'\u000B' 	vertical tabulation
+>		'\f' 		form tabulation
+>		'\r' 		carriage return (CR)
+>		'\u001C' 	file separator
+>		'\u001D' 	group separator
+>		'\u001E' 	record separator
+>		'\u001F' 	unit separator
 
 >*Bir karakter ile çeşitli işlemler yapan çeşitli metotların bulunduğu* `Character` *sınıfı aynı zamanda* `String` *sınıfına da yardımcı olarak kullanılabilmektedir. Sınıfın* `isXXX` *metotları parametresi aldığı karaktere ilişkin kontrol yaparlar. Bu metotlardan bazıları şunlardır:*
 >
->- isWhitespace: Karakterin whitespace karakter olup olmadığını test eder.
->- isLetter: Karakterin alfabetik olup olmadığını test eder.
->- isDigit: Karakterin bir sayısal karakter olup olmadığını test eder
+>- `isWhitespace`: Karakterin whitespace karakter olup olmadığını test eder.
+>- `isLetter`: Karakterin alfabetik olup olmadığını test eder.
+>- `isDigit`: Karakterin bir sayısal karakter olup olmadığını test eder
 >
 >*Sınıfın* `toXXX` *metotları parametresi ile aldığı karakteri dönüştürmekte kullanılır. Bu metotlardan bazıları şunlardır:*
->- toUpperCase: Karakterin büyük harf karşılığını döndürür. Yoksa aynı karaktere geri döner
->- toLowerCase: Karakterin küçük harf karşılığını döndürür. Yoksa aynı karaktere geri döner
+>- `toUpperCase`: Karakterin büyük harf karşılığını döndürür. Yoksa aynı karaktere geri döner
+>- `toLowerCase`: Karakterin küçük harf karşılığını döndürür. Yoksa aynı karaktere geri döner
 >
 >*Bu sınıfa ait bir metodun hem char hem de int paremetreli overload'ları bulunur. Bu durumda tüm karakterler yani sıra numarası 65535'den büyük olan karakterler için de işlem yapan metotlar bulunmaktadır.*
+
+<br>
+</br>
 
 >*Aşağıdaki demo örneği inceleyiniz*
 
@@ -13745,10 +13818,10 @@ class StringUtil {
 }
 ```
 
->*String sınıfının trim metodu yazının başındaki (leading) ve sonundaki (trailing) boşluk karakterlerini atar. Bu metot	[\u0000, \u0020] aralığındaki boşluk karakterleri için çalışır. Diğer whitespace karakterleri atmaz. Java 11 ile birlikte tüm whitespace karakterler için çalışan yani yazının başındaki ve sonundaki whitespace karakterleri atan strip isimli	bir metot eklenmiştir. Ayrıca Java 11 ile birlikte yazının sadece başındaki whitespace karakterleri atan stripLeading ve sadece sonundaki boşluk karakterlerini atan stripLeading isimli metotlar da eklenmiştir. Java 11 öncesince yazının yalnızca başındaki veya yalnızca sonundaki boşluk karakterlerini atan metotlar bulunmamaktadır. Java 11 öncesinde çalışıldığı durumda  bu tarz metotlar programcı tarafından yazılmalıdır.*
+>`String` *sınıfının* `trim` *metodu yazının başındaki (leading) ve sonundaki (trailing) boşluk karakterlerini atar. Bu metot* `[\u0000, \u0020]` *aralığındaki boşluk karakterleri için çalışır. Diğer whitespace karakterleri atmaz.* `Java 11` *ile birlikte tüm whitespace karakterler için çalışan yani yazının başındaki ve sonundaki whitespace karakterleri atan strip isimli bir metot eklenmiştir. Ayrıca* `Java 11` *ile birlikte yazının sadece başındaki whitespace karakterleri atan stripLeading ve sadece sonundaki boşluk karakterlerini atan stripLeading isimli metotlar da eklenmiştir. Java 11 öncesince yazının yalnızca başındaki veya yalnızca sonundaki boşluk karakterlerini atan metotlar bulunmamaktadır.* `Java 11` *öncesinde çalışıldığı durumda  bu tarz metotlar programcı tarafından yazılmalıdır.*
 
 **_Anahtar Notlar:_** Pratikte trim metodu çoğu zaman işimizi görse de bazı özel whitespace karakterler için çalışamamaktadır.
-Bu sebeple Java 11+ ile çalışıldığında trim metodu yerine her zaman strip metodu tercih edilmelidir. Java 11 öncesinde
+Bu sebeple `Java 11+` ile çalışıldığında trim metodu yerine her zaman strip metodu tercih edilmelidir. `Java 11` öncesinde
 çalışılıyorsa strip gibi bir metot gerekirse programcı tarafından eklenebilir
 
 >*Aşağıdaki demo örneği inceleyiniz*
@@ -13856,7 +13929,7 @@ class StringUtil {
 >
 >**_Açıklamalar:_** Metodun yazımında performansı (ya da daha genel bir deyişle hızı) düşünmenize gerek yoktur.
 >	
->**_Anahtar Notlar:_** Aşağıdaki reverse metodunda String birleştirme işlemi sırasında sürekli String nesnesi yaratılıp referans da eski nesneden kopartılmaktadır. Burada bellek açısından bir sorun oluşmasa da nesne yaratılması bir maliyet oluşturur:
+>**_Anahtar Notlar:_** Aşağıdaki `reverse` metodunda String birleştirme işlemi sırasında sürekli String nesnesi yaratılıp referans da eski nesneden kopartılmaktadır. Burada bellek açısından bir sorun oluşmasa da nesne yaratılması bir maliyet oluşturur:
 >
 >		str += s.charAt(i)
 >ifadesinin
@@ -13864,7 +13937,7 @@ class StringUtil {
 >		str = (String)(str + s.charAt(i))
 >ifadesine karşılık geldiğini anımsayınız
 >	
->**_Not:_** Bu metodun daha hızlı olacak şekilde çözümleri ileride ele alınacaktır*
+>**_Not:_** Bu metodun daha hızlı olacak şekilde çözümleri ileride ele alınacaktır
 
 ```java
 package csd;
@@ -14062,7 +14135,7 @@ class StringUtil {
 }
 ```
 
->`StringBuilder` *sınıfının reverse metodu ile yazının tersi elde edilebilir. Aşağıdaki reverse metodunun en etkin ve compact yazımı Java'da aşağıdaki gibidir*
+>`StringBuilder` *sınıfının* `reverse` *metodu ile yazının tersi elde edilebilir. Aşağıdaki reverse metodunun en etkin ve compact yazımı Java'da aşağıdaki gibidir*
 
 ```java
 package csd;
@@ -14100,7 +14173,7 @@ class StringUtil {
 }
 ```
 
->`String` *sınıfına Java 11 ile birlikte* `repeat` *isimli bir metot eklenmiştir. Bu metot parametresi ile adığı değer kadar ilgili yazıyı çoklar*
+>`String` *sınıfına* `Java 11` *ile birlikte* `repeat` *isimli bir metot eklenmiştir. Bu metot parametresi ile adığı değer kadar ilgili yazıyı çoklar*
 
 ```java
 package csd;
@@ -14126,7 +14199,7 @@ class App {
 }
 ```
 
->`String` *sınıfına Java 11 ile birlikte* `isBlank` *isimli bir metot eklenmiştir. Bu metot yazının tamamının whitespace karakterlerden oluşup oluşmadığını veya boş string olup olmadığını test eder.*
+>`String` *sınıfına* `Java 11` *ile birlikte* `isBlank` *isimli bir metot eklenmiştir. Bu metot yazının tamamının whitespace karakterlerden oluşup oluşmadığını veya boş string olup olmadığını test eder.*
 
 ```java
 package csd;
@@ -14393,7 +14466,7 @@ yazının uzunluğundan küçük veya eşit aynı yazıya geri dönecektir.
 >
 >- padLeading metodunun iki parametreli overload'u yazıyı space karakteri ile besleyecektir.
 >- padTrailing metotları padLeading'in yaptıklarını sondan besleyecek şekilde yapacaktır.
->- Metotlar Java 11 öncesi için yazılacaktır*
+>- Metotlar Java 11 öncesi için yazılacaktır
 
 ```java
 package csd;
@@ -14465,7 +14538,7 @@ class StringUtil {
 }
 ```
 
->**_Sınıf Çalışması:_** Aşağıdaki metotları açıklamalara göre StringUtil sınıfı içerisinde yazınız ve test ediniz.*
+>**_Sınıf Çalışması:_** Aşağıdaki metotları açıklamalara göre StringUtil sınıfı içerisinde yazınız ve test ediniz.
 >
 >		public static String padLeading(String s, int n, char ch);
 >		public static String padLeading(String s, int n);
@@ -14550,15 +14623,11 @@ class StringUtil {
 }
 ```
 
->*String sınıfının static valueOf metotları temel bir türe ilişkin değerin yazı karşılığını elde etmekte kullanılır.*
+>`String` *sınıfının static* `valueOf` *metotları temel bir türe ilişkin değerin yazı karşılığını elde etmekte kullanılır.*
 	
-**_Anahtar Notlar:_** Aldığı parametreleri kullanarak bir nesnenin referansına geri dönen bir "factory method" denir.
-Factory bir metot ilgili sınıfa aitse static olarak bildirilir. Bu anlamda valueOf metodu bir factory metottur. 
+**_Anahtar Notlar:_** Aldığı parametreleri kullanarak bir nesnenin referansına geri dönen bir "factory method" denir. Factory bir metot ilgili sınıfa aitse static olarak bildirilir. Bu anlamda valueOf metodu bir factory metottur. 
 
-**_Anahtar Notlar:_** JavaSE'de bazı sınıfların çeşitli factory metotları bulunur. Java 8'e kadar bu tarz metotların
-isimlendirilmesinde genel olarak "valueOf" kullanılırken, Java 8 ve sonrasında "of" ismi kullanılmaktadır. Bu anlamda
-bazı sınıfların valueOf veya of gibi factory metotları bulunur. Şüphesiz farklı isimlerde factory metotları olan
-sınıflar da vardır. 
+**_Anahtar Notlar:_** JavaSE'de bazı sınıfların çeşitli `factory metotları` bulunur. Java 8'e kadar bu tarz metotların isimlendirilmesinde genel olarak "valueOf" kullanılırken, `Java 8` ve sonrasında "of" ismi kullanılmaktadır. Bu anlamda bazı sınıfların `valueOf` veya `of` gibi factory metotları bulunur. Şüphesiz farklı isimlerde factory metotları olan sınıflar da vardır. 
 	
 >*Aşağıdaki örneği inceleyiniz*
 
@@ -14622,9 +14691,9 @@ class StringUtil {
 }
 ```
 
->*String sınıfının contains metodu bir yazı içerisinde parmetesi ile aldığı yazının var olup olmadığını test eder. Metodun geri dönüş değeri boolean türündendir*
+>`String` *sınıfının* `contains` *metodu bir yazı içerisinde parmetesi ile aldığı yazının var olup olmadığını test eder. Metodun geri dönüş değeri boolean türündendir*
 	
-**_Anahtar Notlar:_** contains metodunun parmetresi Charsequence türündendir. Charsequence gereken yerlerde String referansı verilebilir. Detaylar ileride ele alınacaktır
+**_Anahtar Notlar:_** `contains` metodunun parametresi `CharSequence` türündendir. `CharSequence` gereken yerlerde String referansı verilebilir. Detaylar ileride ele alınacaktır
 
 ```java
 package csd;
@@ -14698,7 +14767,7 @@ class StringUtil {
 }
 ```
 
->**_Sınıf Çalışması:_** Parametresi ile aldığı bir yazının palindrome olup olmadığını test eden isPalindrome isimli metodu StringUtil sınıfı içerisinde yazınız ve test ediniz.
+>**_Sınıf Çalışması:_** Parametresi ile aldığı bir yazının palindrome olup olmadığını test eden `isPalindrome` isimli metodu `StringUtil` sınıfı içerisinde yazınız ve test ediniz.
 >
 >**_Açıklamalar:_**
 >- Alfabetik olmayan karakterleri çıkartıldığında tersi kendisine eşit olan yazılara pandrom denir.
@@ -14844,7 +14913,8 @@ class App {
 >
 >*Sarmalayan sınıflara ilişkin kullanım detayları ileride ele alınacaktır.*
 
-<br></br>
+<br>
+</br>
 
 >`Character` *sınıfı dışında kalan sınıfların (yani nümerik türlere ilişkin sarmalayan sınıfların)* `parseXXX` *metotları aldıkları yazıyı ilgili temel türe dönüştürme işleminde kullanılır.* `Boolean` *sınıfının* `parseBoolean` *metodu dışındaki diğer* `parseXXX` *metotları aldıkları yazı ilgili türe dönüştürülemiyorsa exception oluştururlar (fırlatırlar).* `parseBoolean` *metodu aldığı yazı case-insensitive olarak true değilse false değerine geri döner.*
 	
@@ -15158,7 +15228,7 @@ class Point {
 }
 ```
 
->`String` *sınıfına Java 15 ile birlikte* `formatted` *isimli bir metot eklenmiştir. Bu metot format metodunun non-static versiyonu olarak düşünülebilir. Bu durumda programcının Java 15 ve üzerinde yani pratikte Java 17+ ile çalışıyorsa* `format` *metodu yerine bu metodu çağırması uygundur*
+>`String` *sınıfına* `Java 15` *ile birlikte* `formatted` *isimli bir metot eklenmiştir. Bu metot format metodunun non-static versiyonu olarak düşünülebilir. Bu durumda programcının* `Java 15` *ve üzerinde yani pratikte* `Java 17+` *ile çalışıyorsa* `format` *metodu yerine bu metodu çağırması uygundur*
 >
 >*Aşağısdaki demo önreği inceleyiniz*
 
@@ -15378,7 +15448,7 @@ class Point {
 }
 ```
 
->`String` *sınıfının iki tane char parametreli* `replace` *metodu, birinci parametresi verilen karakterleri, ikinci parametresi ile verilen karakter ile değiştirir. Benzer şekilde iki Charsequence parametreli replace metodu, birinci parametresi verilen yazıları, ikinci parametresi ile verilen yazı ile değiştirir*
+>`String` *sınıfının iki tane* `char` *parametreli* `replace` *metodu, birinci parametresi verilen karakterleri, ikinci parametresi ile verilen karakter ile değiştirir. Benzer şekilde iki* `CharSequence` *parametreli replace metodu, birinci parametresi verilen yazıları, ikinci parametresi ile verilen yazı ile değiştirir*
 
 ```java
 package csd;
@@ -15397,14 +15467,12 @@ class App {
 
 >`String` sınıfının `compareTo` *metodu*
 >
->`result = a.compareTo(b)`
->
+>		result = a.compareTo(b)
 >*işlemi için şu şekilde çalışır:*
 >
 >		result > 0 <=> a yazısı b yazısından sonra gelir
 >		result == 0 <=> a yazısı b yazısı ile özdeştir (equals)
 >		result < 0 <=> a yazısı b yazısından önce gelir
->
 >*Buradaki karşılaştırma "lexicographically" olarak yapılır. Detaylar gözardı edilirse, bu karşılaştırmaya genel olarak karakter tablosunda göre karşılaştırma denebilir*
 
 ```java
@@ -15517,52 +15585,47 @@ class StringUtil {
 
 **_Anahtar Notlar:_** String sınıfına ilişkin diğer metotlar konular içerisinde ele alınacaktır.
 
-**_Anahtar Notlar:_** Java 13 ile birlikte "Text block" denilen bir String literal dile eklenmiştir. Buna göre bir String sabiti """ ve """ arasında yazılabilmektedir. Text block detaylı bir konudur ve ileride ayrı bir bölüm olarak	ele alınacaktır.
+**_Anahtar Notlar:_** `Java 13` ile birlikte "Text block" denilen bir String literal dile eklenmiştir. Buna göre bir String sabiti """ ve """ arasında yazılabilmektedir. Text block detaylı bir konudur ve ileride ayrı bir bölüm olarak ele alınacaktır.
 
 #### 1 Ağustos 2024- 6 Ağustos 2024
 
 ##### Paketler ve İsim Arama (Packages and Name Lookup)
->*Anımsanacağı gibi bir Java programı genel olarak paketlerden oluşur. Java kodlarını içeren ve genel olarak .java uzantılı olarak derlenen dosyalara "derleme birimi (translation/compilation unit) denir". Java'da her User Defined Type (UDT)	ayrı bir derleme birimi olarak düşünülebilir.*
+
+>*Anımsanacağı gibi bir Java programı genel olarak paketlerden oluşur. Java kodlarını içeren ve genel olarak* `.java` *uzantılı olarak derlenen dosyalara "derleme birimi (translation/compilation unit) denir". Java'da her User Defined Type (UDT) ayrı bir derleme birimi olarak düşünülebilir.*
 >
 >*Paketlere ilişkin detaylar:*
->- javac her UDT için bir ".class" uzantılı dosya üretir. İşte bu dosyalara "byte code (BC)" denir. 
+>- `javac` her UDT için bir ".class" uzantılı dosya üretir. İşte bu dosyalara "byte code (BC)" denir. 
 >- UDT'ler aynı derleme biriminde olsalar bile her biri için ayrı BC üretilir. 
 >- Bir UDT herhangi bir pakette olabilir. Bir proje içerisindeki UDT'lerin aynı pakette olması gerekmez.
 >- Bir ".class" uzantılı dosyaya ilişkin UDT'nin başka derleme biriminden kullanılabilmesi için UDT'nin ait olduğu paketle aynı isimde bir dizinde (directory) olması gerekir. Java IDE'leri bu işlemi otomatik olarak yaparlar. Yani BC'yi uygun yerinde üretirler. Derleme birimleri için böyle bir zorunluluk yoktur ancak Java'da kullanılan IDE'lerin hemen hepsi derleme birimleri için de pakete ilişkin directory'de olma zorunluluğu tutar.
->- Bir UDT'nin ismine bulunduğu paket dışından paket ismi ve nokta operatörü ile erişilebilir. Bir UDT'ye bulunduğu paket dışından erişilebilmesi için public olarak bildirilmesi gerekir. public olarak bildirilmeyen yani yalnızca kendi paketi içerisinden erişilebilen UDT'ler için "friendly" terimi kullanılır. Bazı kaynaklar friendly terimi yerine "internal" terimini de kullanırlar.
->- Farklı paketlerde bulunan UDT'lerin BC'lerinin, bulunduğu pakete ilişkin dizinlerin, yani kodda paketi belirtilen 
-dizinin, uygulamanın çalışmaya başladığı yerde olması gerekir. Bu durumda tüm paketler burada bulundurulmalıdır
+>- Bir UDT'nin ismine bulunduğu paket dışından paket ismi ve nokta operatörü ile erişilebilir. Bir UDT'ye bulunduğu paket dışından erişilebilmesi için public olarak bildirilmesi gerekir. public olarak bildirilmeyen yani yalnızca kendi paketi içerisinden erişilebilen UDT'ler için "friendly" terimi kullanılır. Bazı kaynaklar `friendly` terimi yerine "internal" terimini de kullanırlar.
+>- Farklı paketlerde bulunan UDT'lerin BC'lerinin, bulunduğu pakete ilişkin dizinlerin, yani kodda paketi belirtilen dizinin, uygulamanın çalışmaya başladığı yerde olması gerekir. Bu durumda tüm paketler burada bulundurulmalıdır
 >- Uygulamada kullanılan sınıflar içerisinde bir tane main metodu olmak zorunda değildir. java programına verilen sınıfın uygun main metodu çalıştırılır. main metodunun prototipi aşağıdaki gibi olmalıdır:
 >
 >		public static void main(String [] args);
->Bu prototipte uygunluğu bozmayacak tek değişiklik parametre ismi olan args'ta yapılabilir. java programına verilen sınıfın main metodunun bu prototipe sahip olması zorunludur. Aksi durumda exception oluşur. Akışın başladığı main metoduna "entry point" dendiğini anımsayınız. Entry point olarak belirlenen main metodunun ait olduğu UDT kesinlikle bir sınıf olmalıdır.
+>Bu prototipte uygunluğu bozmayacak tek değişiklik parametre ismi olan args'ta yapılabilir. Java programına verilen sınıfın `main` metodunun bu prototipe sahip olması zorunludur. Aksi durumda exception oluşur. Akışın başladığı main metoduna "entry point" dendiğini anımsayınız. Entry point olarak belirlenen main metodunun ait olduğu UDT kesinlikle bir sınıf olmalıdır.
 >
->**_Anahtar Notlar:_** Java 21 ile birlikte entry point olarak belirlenen main metodunun yapısına ilişkin bazı esnek kullanımlar söz konusu olmaktadır. Bu durum "uygulama kurslarında" ele alınacaktır.
->- public olarak bildirilen bir UDT, ismi ile aynı isimde bir .java dosyasında olmalıdır. Aksi durumda error oluşur.  Bu durumda bir java dosyası içerisinde ancak dosya ismi ile aynı isimde bir UDT public olabilir
+>**_Anahtar Notlar:_** `Java 21` ile birlikte entry point olarak belirlenen main metodunun yapısına ilişkin bazı esnek kullanımlar söz konusu olmaktadır. Bu durum "uygulama kurslarında" ele alınacaktır.
+>- `public` olarak bildirilen bir UDT, ismi ile aynı isimde bir `.java` dosyasında olmalıdır. Aksi durumda error oluşur. Bu durumda bir java dosyası içerisinde ancak dosya ismi ile aynı isimde bir UDT `public` olabilir
 >- Bir java dosyasında dosya ile aynı isimde olan bir UDT olmak zorunda değildir. Ancak bu durum pratikte çok kullanılmaz
 >- Paket bildirimi tüm bildirimlerden önce olmalıdır. Dolayısıyla bir java dosyasında bir tane paket bildirimi yapılabilir
->- Birden fazla .java dosyasında aynı isimde paket bildirimi yapılabilir. Bu durumda bu dosyalardaki tüm UDT'ler aynı pakette bildirilmiş olur
->- Bir paket içerisinde aynı isimde birden fazla UDT bildirimi geçersizdir
+>- Birden fazla `.java` dosyasında aynı isimde paket bildirimi yapılabilir. Bu durumda bu dosyalardaki tüm UDT'ler **aynı pakette** bildirilmiş olur
+>- Bir paket içerisinde **aynı** isimde birden fazla UDT bildirimi **geçersizdir**
 >- Farklı paketler içerisinde aynı isimde UDT bildirimleri geçerlidir. Bu UDT'ler isimleri aynı olsa da aslında farklı türlerdir
->- Bir paketin alt paketleri olabilir. Alt paket bildiriminin genel biçimi şu şekildedir:
+>- Bir paketin `alt paketleri` olabilir. Alt paket bildiriminin genel biçimi şu şekildedir:
 >
 >		package <paket ismi>[.<alt paket ismi>.<alt paket ismi>...];
 >Alt paket içerisindeki UDT'lerin byte code'ları paket hiyerarşisinde uygun alt dizinde bulunmalıdır. Yine IDE programlar bunu otomatik olarak yaparlar.
->- Paketler içiçe bile olsa farklı paketlerdir. Yani örneğin arman paketi içerisinde SerialPort isimli bir sınıf varsa, arman.util paketi içerisinde de SerialPort isimli bir sınıf olabilir. Çünkü paketler farklıdır ve isim çakışması oluşmaz
+>- Paketler içiçe bile olsa farklı paketlerdir. Yani örneğin `arman` paketi içerisinde `SerialPort` isimli bir sınıf varsa, `arman.util` paketi içerisinde de `SerialPort` isimli bir sınıf olabilir. Çünkü paketler **farklıdır** ve isim çakışması oluşmaz
 >- Paketler isim çakışmasını engellemek için düşünülmüştür. Paketler ile farklı firmalar kendi paket isimleriyle UDT yazdıklarında UDT'lerin isimleri aynı olsa bile diğerleriyle birlikte aynı projede kullanılabilirler
->- Paket isimleri genelde bir firmaya özgü tekil (unique) bir olan domain isminden türetilir. Örneğin CSD'nin paketleri domain ismi "csystem.org" olduğundan "org.csystem" paketi altında yazılır. Bu bir convention'dır ve firmalar özellikle bu kurala genel UDT'ler için mutlaka uyarlar. Pratikte domain ismi altında doğrudan bir UDT bildirilmez. En az bir tane paket altında bildirilir. Yani aslında bu convention'da domain ismi taban paket (base package) olarak kullanılır. Programcının bir UDT'yi koyacağı paketi okunabilir/algılanabilir ve isim çakışma olasığını en aza olacak şekilde belirler. Bu anlamda alt paketlerin fazla olması bir sorun oluşturmaz. Paket isimlendirmede programcı anlamlı olacak şekilde cömert olmalıdır.
->- Paket isimleri bir convention olarak tamamı küçük harf olacak şekilde bildirilir. Birden fazla kelimeden oluşuyorsa bitişik olarak yazılır. Örnğin:
+>- Paket isimleri genelde bir firmaya özgü tekil (unique) bir olan domain isminden türetilir. Örneğin CSD'nin paketleri domain ismi "csystem.org" olduğundan "org.csystem" paketi altında yazılır. Bu bir **convention**'dır ve firmalar özellikle bu kurala genel UDT'ler için mutlaka uyarlar. Pratikte domain ismi altında doğrudan bir UDT bildirilmez. En az bir tane paket altında bildirilir. Yani aslında bu convention'da domain ismi taban paket (base package) olarak kullanılır. Programcının bir UDT'yi koyacağı paketi okunabilir/algılanabilir ve isim çakışma olasığını en aza olacak şekilde belirler. Bu anlamda alt paketlerin fazla olması bir sorun oluşturmaz. Paket isimlendirmede programcı anlamlı olacak şekilde cömert olmalıdır.
+>- Paket isimleri bir convention olarak **tamamı küçük harf** olacak şekilde bildirilir. Birden fazla kelimeden oluşuyorsa **bitişik** olarak yazılır. Örnğin:
 >
 >		org.csystem.util.net
 >		org.csystem.util.mapoperations
->- JavaSE içerisindeki tüm paketler ve UDT'ler java isimli bir paket altında bildirilmiştir. Bu anlamda programcının
-java paketi altında bir bildirim yapması tavsiye edilmez. Zaten yıkarıdaki domain ismi convention'ına uyulduğunda 
-böyle bir durum da oluşmaz
->- java.lang paketi içerisindeki tüm UDT'ler her yerden görülebilirdir. Yabi bu paket içerisindeki UDT isimleri
-doğrudan kullanılabilir. Ayrıca belirtilmesi gerekmez. Bu UDT'ler ileride göreceğimiz "import bildirimi (import declaration)"
-yapılmasına gerek yoktur. Örneğin System, String, Integer, Double sınıfları java.lang paketi altında bildirilmiştir
->- Hiç bir paket altında bildirilmeyen UDT'ler isimsiz paket (unnamed package) içerisinde bildirilmiş olur. Pratikte
-bir uygulama içerisinde isimsiz paket altında bir UDT bildirimi yapılmaz. Bunun nedeni ileride ele alınacaktır
+>- `JavaSE` içerisindeki tüm paketler ve UDT'ler `java` isimli bir paket altında bildirilmiştir. Bu anlamda programcının `java` paketi altında bir bildirim yapması tavsiye edilmez. Zaten yıkarıdaki domain ismi convention'ına uyulduğunda böyle bir durum da oluşmaz
+>- `java.lang` paketi içerisindeki tüm UDT'ler her yerden görülebilirdir. Yani bu paket içerisindeki UDT isimleri doğrudan kullanılabilir. Ayrıca belirtilmesi gerekmez. Bu UDT'ler ileride göreceğimiz "import bildirimi (import declaration)" yapılmasına gerek yoktur. Örneğin `System`, `String`, `Integer`, `Double` sınıfları `java.lang` paketi altında bildirilmiştir
+>- Hiç bir paket altında bildirilmeyen UDT'ler **isimsiz paket** (unnamed package) içerisinde bildirilmiş olur. Pratikte bir uygulama içerisinde isimsiz paket altında bir UDT bildirimi yapılmaz. Bunun nedeni ileride ele alınacaktır
 
 ```java
 /**
@@ -15967,7 +16030,7 @@ public class StringUtil {
 }
 ```
 
->*Derleyici kod içerisinde kullanılan bir ismi gördüğünde bu ismin bildirimini arar. Bu kavrama "isim arama (name lookup)" denir. Derleyici bir ismi bildirim noktasında aramaz. Derleyici ismi bulduğunda (yani bildirimini bulduğunda) o ismin geçerli olarak kullanılıp kullanılmadığına bakar. Eğer geçersiz olarak kullanılmışsa error oluşur. Yani aslında derleyici önce isim araması yapar, bulduktan sonra geçerlilik kontrolü yapar. Zaten ismi bulamazsa yine error oluşur. Bu durumda bir ismin bulunamaması ile bulunup geçersiz kullanılması durumunda oluşan error'lar aynı değildir.*
+>*Derleyici kod içerisinde kullanılan bir ismi gördüğünde bu ismin bildirimini arar. Bu kavrama **"isim arama (name lookup)"** denir. Derleyici bir ismi bildirim noktasında aramaz. Derleyici ismi bulduğunda (yani bildirimini bulduğunda) o ismin geçerli olarak kullanılıp kullanılmadığına bakar. Eğer geçersiz olarak kullanılmışsa error oluşur. Yani aslında derleyici önce isim araması yapar, bulduktan sonra geçerlilik kontrolü yapar. Zaten ismi bulamazsa yine error oluşur. Bu durumda bir ismin bulunamaması ile bulunup geçersiz kullanılması durumunda oluşan error'lar aynı değildir.*
 >
 >*Aşağıdaki örnekte `**` ile belirtilen error a isminin bulunması ancak geçersiz kullanılması durumunda oluşmuştur. `***` ile belirtilen error ise x isminin bulunamaması dolayısıyla oluşmuştur*
 
@@ -15986,7 +16049,7 @@ class App {
 }
 ```
 
->*Kod içerisinde bir isim iki şekilde kullanılabilir: nitelikli (qualified), niteliksiz (unqualified).*
+>*Kod içerisinde bir isim iki şekilde kullanılabilir: **nitelikli** (qualified), **niteliksiz** (unqualified).*
 >
 >*Kullanılan bir isim nokta operatörünün sağında kalıyorsa nitelikli, kalmıyorsa niteliksiz kullanılmış olur.*
 >
@@ -16107,7 +16170,9 @@ class Sample {
 }
 ```
 
->*Yukarıdaki iki maddenin sonucu olarak, bir metodun parametre değişkeni veya bir yerel değişkeni ait olduğu sınıfın veri elemanı ile aynı isimde olabilir. Aşağıdaki örnekte `**` belirtilen atama işleminde x yerel değişken olan x'dir değil mi?*
+>*Yukarıdaki iki maddenin sonucu olarak, bir metodun parametre değişkeni veya bir yerel değişkeni ait olduğu sınıfın veri elemanı ile aynı isimde olabilir.*
+>
+>*Aşağıdaki örnekte `**` belirtilen atama işleminde x yerel değişken olan x'dir değil mi?*
 
 ```java
 package org.csystem.app;
@@ -16312,23 +16377,27 @@ public class Sample {
 
 #### 15 Ağustos 2024
 
->*import bildirimleri (import declarations): import bildirimleri niteliklendirmeyi azaltmak ve kodu daha yalın olarak yazabilmek için düşünülmüştür. import bildirimlerinin UDT ismi bakımından iki kullanım biçimi vardır:*
+##### import bildirimleri (import declarations)
+
+>*import bildirimleri niteliklendirmeyi azaltmak ve kodu daha yalın olarak yazabilmek için düşünülmüştür. import bildirimlerinin UDT ismi bakımından iki kullanım biçimi vardır:*
 >
->1. Yıldızlı import bildirimi (import on demand declaration)
->2. Yıldızsız import bildirimi (import single type declaration)
+>1. `Yıldızlı` import bildirimi (import on demand declaration)
+>2. `Yıldızsız` import bildirimi (import single type declaration)
 >
->import bildirimlerine ilişkin ortak özellikler:
+>*import bildirimlerine ilişkin ortak özellikler:*
 >
->- import bildirimleri bir derleme biriminde paket bildiriminden sonra ve tüm diğer bildirimlerden önce bulunmalıdır.
+>- import bildirimleri bir derleme biriminde paket bildiriminden `sonra` ve tüm diğer bildirimlerden `önce` bulunmalıdır.
 >- Birden fazla import bildirimi geçerlidir ve bildirim sırasının önemi yoktur.
 >- import bildirimleri niteliksiz isimler için (yani niteliksiz isim arama için) geçerlidir. Nitelikli isimler için import bildiriminin önemi yoktur.
 >- Bir import bildirimi yalnızca bildirildiği derleme biriminde geçerlidir.
 >
->**_Anahtar Notlar:_** import bildirimi bir kütüphaneyi projeye dahil etmek demek DEĞİLDİR. Bir kütüphaneyi projeye dahil etmek için başka yöntemler kullanılmaktadır. Bir kütüphaneyi projeye dahil etme işlemi Java ile Uygulama Geliştirme 1 ve Android Programlama kurslarında ele alınacaktır.
+>**_Anahtar Notlar:_** `import` bildirimi bir kütüphaneyi projeye dahil etmek demek **DEĞİLDİR**. Bir kütüphaneyi projeye dahil etmek için başka yöntemler kullanılmaktadır. Bir kütüphaneyi projeye dahil etme işlemi `Java ile Uygulama Geliştirme 1` ve `Android Programlama` kurslarında ele alınacaktır.
 >
->**_Anahtar Notlar:_** Yukarıdaki "yıldızlı" ve "yıldızsız" terimleri tamamen Oğuz Karan tarafından uydurulmuştur. Bunlar gerçek terimlerin Türkçe karşılıkları değildir. Kolay anlaşılması açısından bu şekilde kullanılmaktadır
+>**_Anahtar Notlar:_** Yukarıdaki "yıldızlı" ve "yıldızsız" terimleri tamamen _Oğuz Karan_ tarafından uydurulmuştur. Bunlar gerçek terimlerin Türkçe karşılıkları değildir. Kolay anlaşılması açısından bu şekilde kullanılmaktadır
 
->*Yıldızlı import bildirimi (import on demand declaration): Yıldızlı import bildiriminin genel biçimi şu şekildedir:*
+###### Yıldızlı import bildirimi (import on demand declaration) 
+
+>*Yıldızlı import bildiriminin genel biçimi şu şekildedir:*
 >
 >		import <paket ismi>[.<alt paket listesi>].*;
 >*Niteliksiz isim arama genel kurallarına göre isim, paket içerisinde bulunamazsa yıldızlı import bildirimlerine ilişkin tüm paketlerde aranır. Burada yine alt ve üst paketlere bakılmaz. Bu bildirim adeta bir paketi isim arama anlamında derleme birimine ilişkin pakete dahil etmektir.*
@@ -16411,8 +16480,9 @@ public class Test {
     //...
 }
 ```
+###### Yıldızsız import bildirimleri (import single type declaration)
 
->*Yıldızsız import bildirimleri (import single type declaration): Bu bildirimin genel biçimi şu şekildedir:*
+>*Bu bildirimin genel biçimi şu şekildedir:*
 >
 >		import <paket ismi>[.alt paket listesi>].<UDT ismi>;
 >*Bu bildirimde belirtilen UDT ismi derleme birimöi boyunca her yerde niteliksiz olarak kullanılabilir (visible). Ya da başka bir deyişle buradaki bildirim, bu ismin derleme birimi boyunca niteliksiz kullanılabileceğini belirtir. Yani bu bildirime ilişkin isim niteliksiz isim arama genel kurallarına göre aranmaz. Yani ilgili isim için niteliksiz isim arama genel kuralları uygulanmaz*
@@ -16589,18 +16659,21 @@ public class Sample {
     }
 }
 ```
+##### import static bildirimleri (import static declarations)
 
->*import static bildirimleri (import static declarations): import static bildirimleri Java 5 ile dile eklenmiştir.*
+>*import static bildirimleri* `Java 5` *ile dile eklenmiştir.*
 >
 >Bu bildirimler de iki gruba ayrılabilir:
->1. Yıldızlı import static bildirimi (import static on demand declaration)
->2. Yıldızsız import static bildirimi (import static single member declaration)
+>1. `Yıldızlı` import static bildirimi (import static on demand declaration)
+>2. `Yıldızsız` import static bildirimi (import static single member declaration)
 >
 >*import bildirimleri için yazılan ortak özellikler import static bildirimleri için de geçerlidir*
 >
 >**_Anahtar Notlar:_** import static bildirimlerinin okunabilirliği olumsuz etkilemedikten sonra kullanılması tavsiye edilir
->
->*Yıldızlı import static bildirimi (import static on demand declaration): Bu bildirimin genel biçimi şu şekildedir:*
+
+###### Yıldızlı import static bildirimi (import static on demand declaration)
+
+>*Bu bildirimin genel biçimi şu şekildedir:*
 >
 >		import static <paket ismi>[.<alt paket listesi>].<UDT ismi>.*;
 >*Bu bildirim ile niteliksiz kullanılan bir isim ilgili pakette de bulunamazsa yıldızlı import static bildirimine ilişkin UDT'de aranır*
@@ -16796,8 +16869,9 @@ public class Complex {
 	}
 }
 ```
+###### Yıldızsız import static bildirimi (import static on demand declaration)
 
->*Yıldızsız import static bildirimi (import static on demand declaration): Bu bildirimin genel biçimi şu şekildedir:*
+>*Bu bildirimin genel biçimi şu şekildedir:*
 >
 >		import static <paket ismi>[.<alt paket listesi>].<UDT ismi>.<static eleman>;
 >*Bu bildirim ile ilgili static eleman tüm derleme birimi boyunca kullanılabilir*
@@ -17002,13 +17076,13 @@ public class Complex {
 
 ##### Diziler (Arrays)
 
->*Elemanları aynı türden olan ve elemanları bellekte peşpeşe tutulacak şekilde yaratılan veri yapısıdır. Diziler programlamada en temel veri yapılarıdır. Hatta bazı veri yapıları dizi kullanılarak implemente edilebilir.*
+>*Elemanları **aynı türden** olan ve elemanları bellekte **peşpeşe** tutulacak şekilde yaratılan veri yapısıdır. Diziler programlamada en temel veri yapılarıdır. Hatta bazı veri yapıları dizi kullanılarak implemente edilebilir.*
 >
->*Java'da diziler heap'de yaratılırlar. Yani sınıfsal temsil edilmişlerdir. Java'da stack'de dizi yaratılamaz. T bir tür ismi olmak üzere her bir elemanı T türünden olan (bu durumda T türden dizi de denebilir) bir dizi referansı bildiriminin iki biçimi vardır:*
+>*Java'da diziler* `heap`*'de yaratılırlar. Yani sınıfsal temsil edilmişlerdir. Java'da* `stack`*'de dizi **yaratılamaz**.* `T` *bir tür ismi olmak üzere her bir elemanı* `T` *türünden olan (bu durumda* `T` *türden dizi de denebilir) bir dizi referansı bildiriminin iki biçimi vardır:*
 >
 >		T [] a;
 >		T a[];
->*Burada a bir referans değişkendir. Henüz daha dizi yaratılmamıştır. İkinci biçime "C stili (C style)" bildirim de denilmektedir. Java programcına önerilmemektedir. Pek çok static kod analizi aracı da ikinci biçimde default olarak uyarı verebilmektedir. Biz de kodlarımıza birinci biçimi tercih edeceğiz*
+>*Burada* `a` *bir referans değişkendir. Henüz daha dizi yaratılmamıştır. İkinci biçime **"C stili (C style)"** bildirim de denilmektedir. Java programcısına önerilmemektedir. Pek çok static kod analizi aracı da ikinci biçimde default olarak uyarı verebilmektedir. Biz de kodlarımıza birinci biçimi tercih edeceğiz*
 >
 >*Örneğin:*
 >
@@ -17042,14 +17116,14 @@ class App {
 }
 ```
 
->*Dizi yaratmak için yine new operatörü kullanılır. Dizi yaratmak için new operatörü kullanımının genel biçimi şu şekildedir:*
+>*Dizi yaratmak için yine* `new` *operatörü kullanılır. Dizi yaratmak için* `new` *operatörü kullanımının genel biçimi şu şekildedir:*
 >
 >		new <tür>[<int türüne doğrudan dönüşebilen türden bir değer>];
->*Burada* `[]` *içerisinde verilen değere dizinin uzunluğu (length) denir. Uzunluk dizinin eleman sayısıdır. Java'da dizi uzunluğunun sabit ifadesi olması gerekmez. Dizi yaratıldıktan sonra uzunluğu değiştirilemez. Dizi uzunluğunun negatif olması durumunda exception oluşur. Dizi uzunluğuna length isimli veri elemanı ile erişilebilir. length veri elemanının değeri değiştirilemez*
+>*Burada* `[]` *içerisinde verilen değere dizinin uzunluğu (length) denir. Uzunluk dizinin eleman sayısıdır. Java'da dizi uzunluğunun sabit ifadesi olması gerekmez. Dizi yaratıldıktan sonra uzunluğu **değiştirilemez**. Dizi uzunluğunun negatif olması durumunda **exception** oluşur. Dizi uzunluğuna* `length` *isimli veri elemanı ile erişilebilir.* `length` *veri elemanının değeri **değiştirilemez***
 >
->*Dizinin elemanlarına erişmek için* `[]` *operatörü (subscription operator) kullanılır. Bu operatör özel amaçlı iki operandlı ve araek durumundadır. Operatörün birinci operandı bir referansı ikinci operandı ise int türüne doğrudan dönüşebilen bir değer olmalıdır. İkinci operandına indeks değeri de denilmektedir. Dizinin ilk elemanına sıfır numaralı indeks değeri kullanılarak erişilir. Yani bu anlamda dizinin alemanlarına erişmek için kullanılan indeks değerleri* `[0, length)` *aralığıdır. Bu operatör operatör öncelik tablosunda birinci seviyededir. Operatörün ürettiği değer indeksteki elemana ilişkin değişkendir. Indeks numarası pozitif ya da negatif bakımdan sınırlar dışında bir değer olarak verilirse exception oluşur.*
+>*Dizinin elemanlarına erişmek için* `[]` *operatörü (subscription operator) kullanılır. Bu operatör özel amaçlı iki operandlı ve araek durumundadır. Operatörün birinci operandı bir referansı ikinci operandı ise* `int` *türüne **doğrudan** dönüşebilen bir değer olmalıdır. İkinci operandına indeks değeri de denilmektedir. Dizinin ilk elemanına sıfır numaralı indeks değeri kullanılarak erişilir. Yani bu anlamda dizinin elemanlarına erişmek için kullanılan indeks değerleri* `[0, length)` *aralığıdır. Bu operatör operatör öncelik tablosunda birinci seviyededir. Operatörün ürettiği değer indeksteki elemana ilişkin değişkendir. Indeks numarası pozitif ya da negatif bakımdan sınırlar dışında bir değer olarak verilirse exception oluşur.*
 >
->*Dizi yaratıldığında elemanlarının her birine default değerler atanır.*
+>*Dizi yaratıldığında elemanlarının her birine* `default` *değerler atanır.*
 
 >*Aşağıdaki demo örneği inceleyiniz*
 
