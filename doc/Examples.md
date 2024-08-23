@@ -2995,7 +2995,7 @@ class App {
 >		!=
 >*Bu operatörler iki operandlı, araek durumundadır. Operatörlerin yan etkisi yoktur. Bu operatörlerin ürettiği değer* `boolean` *türdendir. Karşılaştırma işlemi doğru ise* `true`, *yanlış ise* `false` *değerini üretir.*
 >
->`<`, `>`, `<=`, `>=` operatörleri klasik operatörlerdir. `==` operatörü operandlarına ilişkin ifadelerin değerleri eşitse true, değilse false değerini üretir. `!=` operatörü operandlarına ilişkin ifadelerin değerleri eşit değilse true, eşitse false değerini üretir.*
+>`<`, `>`, `<=`, `>=` *operatörleri klasik operatörlerdir.* `==` *operatörü operandlarına ilişkin ifadelerin değerleri eşitse true, değilse false değerini üretir.* `!=` *operatörü operandlarına ilişkin ifadelerin değerleri eşit değilse true, eşitse false değerini üretir.*
  
 >*Aşağıdaki demo örneği inceleyiniz*
 
@@ -5953,7 +5953,7 @@ class NumberUtil {
 >
 >**_Açıklamalar:_**
 >- `isPrime` metodunun `hızlı` versiyonu kullanılacaktır.
->- Metot taşma durumlarını kontrol etmeyecektir*
+>- Metot taşma durumlarını kontrol etmeyecektir
 
 ```java
 package csd;
@@ -6698,7 +6698,7 @@ class DemoMenuApp {
 }
 ```
 
->**_switch deyimi:_** `switch` deyimi sonlu ve sabit sayıda seçenek için okunabilirliği artırmak amaçlı kullanılan bir kontrol deyimidir. `switch` deyimi belirli koşullar altında if deyimi yerine kullanılabilir. Yani bu anlamda belirli koşullar altında if deyimi gibi çalışır. `switch` deyimine `Java 12` ile birlikte (ilerleyen bazı sürümlerde de) eklentiler yapılmıştır. Hatta bu anlamda `switch expression` da dile eklenmiştir. switch expression ve `switch` deyimine ilişkin eklentiler ileride ele alınacaktır.*
+>**_switch deyimi:_** `switch` *deyimi sonlu ve sabit sayıda seçenek için okunabilirliği artırmak amaçlı kullanılan bir kontrol deyimidir.* `switch` *deyimi belirli koşullar altında if deyimi yerine kullanılabilir. Yani bu anlamda belirli koşullar altında if deyimi gibi çalışır.* `switch` *deyimine* `Java 12` *ile birlikte (ilerleyen bazı sürümlerde de) eklentiler yapılmıştır. Hatta bu anlamda* `switch expression` *da dile eklenmiştir. switch expression ve* `switch` *deyimine ilişkin eklentiler ileride ele alınacaktır.*
 >	
 >`switch` *deyiminin genel biçimi şu şekildedir:*
 >
@@ -8028,7 +8028,7 @@ class DateUtil {
 
 ##### Farklı Türlerin Birbirine Atanması/Tür Dönüşümleri (Type Conversions)
 
->Java'da farklı türlerin birbirine atanabilmesine (dönüşebilmesine) yönelik kurallar belirlenmiştir. `T1` ve `T2` birer tür ismi olmak üzere*
+>*Java'da farklı türlerin birbirine atanabilmesine (dönüşebilmesine) yönelik kurallar belirlenmiştir.* `T1` ve `T2` *birer tür ismi olmak üzere*
 >
 >		T1 a;
 >		T2 b;
