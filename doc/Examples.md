@@ -2,7 +2,7 @@
 ### Java ile Nesne Yönelimli Programlama
 ### Eğitmen: Oğuz KARAN
 #### Düzenleyenler: Bartu Çankaya, Eray Taşay
- 
+
 #### 23 Ocak 2024
 
 ##### Java Platformunun Temel Özellikleri:
@@ -1832,10 +1832,12 @@ class App {
 
 >**_Sınıf Çalışması:_** Parametresi ile aldığı `double` türden iki noktaya ilişkin koordinat bilgilerine göre iki nokta arasındaki Euclid uzaklığına geri dönen `distance` isimli metodu `PointUtil` isimli sınıf içerisinde yazınız ve aşağıdaki kod ile test ediniz.
 >	
->Euclid Uzaklığı fomulü: 
+>Euclid Uzaklığı fomulü:
 >
->		sqrt((x1 - x2) ^ 2 + (y1 - y2) ^ 2)
->**_Açıklama:_** `^` üs anlamına gelmektedir
+>$$\sqrt{(x1 - x2) ^ 2 + (y1 - y2) ^ 2}$$
+><br>
+
+<br>
 
 ```java
 package csd;
@@ -1874,10 +1876,12 @@ class PointUtil {
 
 >**_Sınıf Çalışması:_** Parametresi ile aldığı `double` türden iki noktaya ilişkin koordinat bilgilerine göre iki nokta arasındaki Euclid uzaklığına geri dönen `distance` isimli metodu `PointUtil` isimli sınıf içerisinde yazınız ve aşağıdaki kod ile test ediniz.
 >	
->Euclid Uzaklığı fomulü: 
+>Euclid Uzaklığı fomulü:
 >
->		sqrt((x1 - x2) ^ 2 + (y1 - y2) ^ 2)
->**_Açıklama:_** `^` üs anlamına gelmektedir
+>$$\sqrt{(x1 - x2) ^ 2 + (y1 - y2) ^ 2}$$
+><br>
+
+<br>
 
 ```java
 package csd;
@@ -16287,7 +16291,9 @@ class App {
 		Sample s;
 	}
 }
+```
 
+```java
 package org.csystem;
 
 public class Sample {
@@ -16405,7 +16411,9 @@ class App {
 		sample.Sample s;
 	}
 }
+```
 
+```java
 package org.csystem.app.sample;
 
 public class Sample {
@@ -16586,13 +16594,17 @@ class App {
 
 	}
 }
+```
 
+```java
 package arman;
 
 public class Sample {
     //...
 }
+```
 
+```java
 package gorkem;
 
 public class Sample {
