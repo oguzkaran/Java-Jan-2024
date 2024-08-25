@@ -608,18 +608,19 @@ class Mample {
 
 <br></br>
 
->*Tür (Type): Bir değişkenin içerisindeki değerin ne kadar uzunlukta tutulduğunu yani bellekte ne kadar ayrılacağını ve değerin hangi formatta tutulacağını belirtir. Java'da temel türler (primitive/built-in/predefined) şunlardır:*
+>**Tür (Type):** Bir değişkenin içerisindeki değerin ne kadar uzunlukta tutulduğunu yani bellekte ne kadar ayrılacağını ve değerin hangi formatta tutulacağını belirtir. Java'da temel türler (primitive/built-in/predefined) şunlardır:*
+#### Java'da Temel Türler ####
 
-| Tür     | Byte | Bit |
-|---------|------|-----|
-| int     | 4    | 32  |
-| long    | 8    | 64  |
-| short   | 2    | 16  |
-| byte    | 1    | 8   |
-| double  | 8    | 64  |
-| float   | 4    | 32  |
-| char    | 2    | 16  |
-| boolean | -    | -   |
+>| Tür ismi | Uzunluk (byte) | Sınır Değerler |
+>|----------|----------------|-|
+>| short    | 2              |[-32768, +32767]|
+>| int      | 4              |[-2147483648, +2147483647]|
+>| long     | 8              |[-9223372036854775808, +9223372036854775807]|
+>| byte     | 1              |[-128, +127]|
+>| float    | 4              |[±3.6 * 10-38, ±3.6 * 10+38]|
+>| double   | 8              |[±1.6 * 10-308, ±1.6 * 10+308]|
+>| char     | 2              |[0, 65535]|
+>| boolean  | 1              |true, false|
 
 >**_Açıklamalar:_**
 >- Java'da temel tür isimlerinin her biri birer anahtar sözcüktür.
