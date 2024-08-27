@@ -1,6 +1,6 @@
 /**
  * Utility class for array operations
- * Last Update: 22nd August 2024
+ * Last Update: 27th August 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.array;
@@ -8,6 +8,46 @@ package org.csystem.util.array;
 import java.util.Random;
 
 public class ArrayUtil {
+
+    public static void bubbleSortAscending(int [] a)
+    {
+        for (int i = 0; i < a.length - 1; ++i)
+            for (int k = 0; k < a.length -1 - i; ++k)
+                if (a[k + 1] < a[k])
+                    swap(a, k, k + 1);
+    }
+
+    public static void bubbleSortDescending(int [] a)
+    {
+        for (int i = 0; i < a.length - 1; ++i)
+            for (int k = 0; k < a.length -1 - i; ++k)
+                if (a[k] < a[k + 1])
+                    swap(a, k, k + 1);
+    }
+
+    public static void selectionSortAscending(int [] a)
+    {
+
+    }
+
+    public static void selectionSortDescending(int [] a)
+    {
+        
+    }
+
+    public static void bubbleSort(int [] a)
+    {
+        bubbleSort(a, false);
+    }
+
+    public static void bubbleSort(int [] a, boolean descending)
+    {
+        if (descending)
+            bubbleSortDescending(a);
+        else
+            bubbleSortAscending(a);
+    }
+
     public static int [] generateRandomArray(Random random, int count, int origin, int bound)
     {
         int [] a = new int[count];
@@ -96,6 +136,18 @@ public class ArrayUtil {
         System.out.print(end);
     }
 
+    public static void selectionSort(int [] a)
+    {
+        selectionSort(a, false);
+    }
+
+    public static void selectionSort(int [] a, boolean descending)
+    {
+        if (descending)
+            selectionSortDescending(a);
+        else
+            selectionSortAscending(a);
+    }
     public static long sum(int [] a)
     {
         long total = 0;
@@ -104,6 +156,14 @@ public class ArrayUtil {
             total += a[i];
 
         return total;
+    }
+
+    public static void swap(int [] a, int i, int k)
+    {
+        int temp = a[i];
+
+        a[i] = a[k];
+        a[k] = temp;
     }
 
     //...
