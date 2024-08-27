@@ -125,8 +125,6 @@ hatalıdır.
 >
 >*Derleyicinin verdiği mesajlar: Derleyiciler koda ilişkin bazı teşhiş mesajları (diagnostics) verebilirler.*
 
-<br></br>
-
 >Derleyicilerin teşhis mesajları iki gruba ayrılır:
 >1. Gerçek hatalar (errors): Sentaks veya semantik olarak geçersiz bir durumda derleyicinin verdiği mesajlardır. Bu
 durumda BC üretilmez. Programcının hataya yol açan durumları düzeltmesi ve derleme işlemini yapması gerekir.
@@ -182,8 +180,6 @@ birlikte string ya da string literal denir. Örneğin:
 Klavyden basılaon tipik boşluk karakterleri şunlardır: 
 >
 >		SPACE, TAB, ENTER
-
-<br></br>
 
 >*Java'da kod yazım kuralları genel olarak şu şekilde özetlenebillir:*
 >1. Atomlar arasında istenildiği kadar boşluk bırakılabilir
@@ -269,14 +265,15 @@ aynı şekilde bulundurulması gerekenlerdir. Ayrıca*
 >Bir Java programı genel olarak paketlerden (package), paketler sınıflardan (class), sınıflar da metotlardan (method)
 oluşur. Paket bildiriminin genel biçimi:
 >	
->		package <isim>;		
+>	`package <isim>;`
+>
 >*Burada isim daha sonra ele alacağımız değişken isimlendirme kurallarına uygun bir isim olmalıdır. Paketler konusu çok detaylı bir konudur, ileride detaylı olarak ele alınacaktır. Biz ilgili konuya kadar yalnızca csd paketi içerisinde kodlama yapacağız.*
 >	
 >Sınıf bildiriminin genel biçimi şu şekildedir:
->
->		[bildirime ilişkin bazı anahtar sözcükler] class <isim> {
->			//...
->		}
+
+	[bildirime ilişkin bazı anahtar sözcükler] class <isim> {
+		//...
+	}
 >*Burada isim değişken isimlendirme kurallarına uygun olmalıdır. Sınıf kavramı da oldukça geniş bir kavramdır. Sınıf bildiriminin
 detayları konular içerisinde ele alınacaktır. Sınıf kavramı Nesne Yönelimli Programlama Tekiniğinin de temel taşlarından
 biridir.*
@@ -284,13 +281,11 @@ biridir.*
 >*Java'da alt programlara metot denir. Metot bildirimi (method declaration) alt programın kodlarının yazılmasıdır. Bir 
 metot bildirildiğinde kodlarının çalıştırılabilmesi için çağrılması (call/invoke) gerekir. Metot bildiriminin genel
 biçimi şu şekildedir:*
->
->		[erişim belirleyici] [static] <geri dönüş değeri bilgisi> <isim>([parametre listesi])
->		{
->			//...
->		}
 
-<br></br>
+	[erişim belirleyici] [static] <geri dönüş değeri bilgisi> <isim>([parametre listesi])
+	{
+		//...
+	}
 
 >*Erişim belirleyici şunlar olabilir:*
 >
@@ -299,8 +294,8 @@ biçimi şu şekildedir:*
 >		protected 
 >		private
 >*İlgili konuya gelene kadar tüm metotlarımızı* `public` *olarak bildireceğiz. Bir metot static veya non-static olabilir. static anahtar sözcüğü yazılmadığında metot non-static olur. İlgili konuya gelene kadar tüm metotlarımızı static olarak bildireceğiz. Bir metodun geri dönüş değeri (return value) olabilir ya da olmayabilir. Bir metodun geri dönüş değeri yoksa void anahtar sözcüğü yazılır. Metot ismi değişken isimlendirme kurallarına uygun bir isim olmalıdır. Bir metodun parametreleri olabilir ya da hiç olmayabilir. Metot bildiriminde* `{ ile }` *arasında kalan kod bölümüne metodun gövdesi (body) denir. Metodun ne iş yaptığı yani kodları buraya yazılır. Parametre kavramı ileride ele alınacaktır. static bir metodu  çağırmanın genel biçimi şu şekildedir:*
->
->		[paket ismi].[sınıf ismi].<metot ismi>([argümanlar]);
+
+	[paket ismi].[sınıf ismi].<metot ismi>([argümanlar]);
 >*Argüman kavramı ileride ele alınacaktır. Bir metot çağrıldığında akış metodun kodlarına dallanır. Çağrılan metodun kodları çalıştırılır. Metot çağrısı bittiğinde akış çağıran metoda (çağrılan noktaya) geri döner. Akış main metodundan başlar. Akışın başladığı main metoduna "entry point" denir. Özel bazı durumlar dışında main metodu bittiğinde program sonlanır. print ve println metotları aldıkları değerleri ekrana basmak için kullanılan standart metotlardır. Bu metotlar non-static metotlardır. Dolayısıyla çağrıdaki System bir paket değildir. println ekrana ilgili yazıyı bastıktan sonra imleci (cursor) bir sonraki satırın başına çeker. Yani bir sonraki yazma işlemi, bir sonraki satırın başından itibaren yapılır. print metodu ise imleci en son yazdığı karakterden sonrasına çeker. Bu durumda bir sonraki yazma işlemi buradan yapılır* 
 	
 **_Anahtar Notlar:_** Aslında teknik olarak print ve println gibi metotlar ekrana yazma yapmazlar. Bu metotlar ismine standard output (stdout) denilen kabaca bir dosyaya yazma yaparlar. stdout dosyası ekrana yönlendirildiğinde biz çıktıları ekranda görürüz. Kursumuzda basitleştirmek için ekran terimini kullanacağız. Benzer şekilde klavyeden okuma yapan metotlar, okumayı aslında standard input (stdin) denilen bir dosyadan yaparlar. Dosya, klavyeye yönlendirildiğinde okuma klavyeden yapılmış olur. Kursumuzda basitleştirmek için klavye terimini de kullanacağız. Masaüstü işletim sistemlerinin hemen hepsinde stdout ekrana, stdin ise klavyaye yönlendirilmiştir. Ayrıca IDE'ler de stout'u genel olarak kendi console pencerelerine yönlendirirler. 
@@ -512,18 +507,16 @@ class Mample {
 >		IEEE 754 - Short Real Format 	(4 byte)
 >		IEEE 754 - Long Real Format 	(8 byte)
 >		IEEE 754 - Extended Real Format (10 byte)
->*Bugün Intel, ARM, MIPS, Alpha, Power PC gibi yaygın işlemciler donanımsal olarak bu formatı desteklemektedir. Aynı zamanda bu format yaygın olarak Reel Sayı Ünitesi olmayan mikrodenetleyicilerdeki derleyiciler tarafından da kullanılmaktadır.*
+>*Bugün Intel, ARM, MIPS, Alpha, Power PC gibi yaygın işlemciler donanımsal olarak bu formatı desteklemektedir. Aynı zamanda bu format yaygın olarak Reel Sayı Ünitesi olmayan mikro denetleyicilerdeki derleyiciler tarafından da kullanılmaktadır.*
 >
 >*Kayan noktalı formatların (örneğin IEEE 754 formatının) en ilginç ve problemli tarafı "yuvarlama hatası (rounding error)" denilen durumdur. Yuvarlama hatası	noktalı sayının tam olarak ifade edilemeyip onun yerine ona yakın bir sayının ifade edilmesiyle oluşan hatadır. Yuvarlama hatası sayıyı ilk kez depolarken de oluşabilir, aritmetik işlemlerin sonucunda da oluşabilir. Tabii noktalı sayıların bir bölümü bu formatta hiçbir yuvarlama hatasına maruz kalmadan ifade edilebilmektedir. Ancak bazı sayılarda bu hata oluşabilmektedir. Bu hatayı ortadan kaldırmanın yolu yoktur. Tabii sayı için daha fazla bir ayrılırsa yuvarlama hatasının etkisi de azalacaktır.*
 >	
 >*Yuvarlama hatalarından dolayı programlama dillerinde iki noktalı sayının tam eşitliğinin karşılaştırılması anlamlı değildir. Örneğin aşağıdaki işlemde	yuvarlama hatasından dolayı sayılar sanki eşit değişmiş gibi ele alınacaktır.*
 >
 >		0.2 + 0.1 == 0.3 (false)
->*Pekiyi yuvarlama hatasının önemli olduüu ve bunun istenmediği tarzda uygulamalarda (örneğin finansal uygulamalarda, bilimsel birtakım uygulamalarda) ne yapak gerekir? İşte bunun tek yolu noktalı sayıları kayan noktalı formatta tutmamak olabilir. Bazı programlama dillerinde noktalı sayıyı kayan noktalı formatta tutmayan böylece yuvarlama hatalarına maruz bırkmayan özel türler (örneğin C#'taki decimal) vardır. Ancak bu türler işlemciler tarafından desteklenmediği için yapay türlerdir.* 
+>*Pekiyi yuvarlama hatasının önemli olduğu ve bunun istenmediği tarzda uygulamalarda (örneğin finansal uygulamalarda, bilimsel birtakım uygulamalarda) ne yapak gerekir? İşte bunun tek yolu noktalı sayıları kayan noktalı formatta tutmamak olabilir. Bazı programlama dillerinde noktalı sayıyı kayan noktalı formatta tutmayan böylece yuvarlama hatalarına maruz bırakmayan özel türler (örneğin C#'taki decimal) vardır. Ancak bu türler işlemciler tarafından desteklenmediği için yapay türlerdir.* 
 
-<br></br>
-
->*Bilgisayar dünyasında çok kullanılan diğer bir sayı sistemi de 16'lık sistemdir. 16'lık sisteme İngilizce "hexadecimal system" denilmektedir. 16'lık sistemde syaıları ifade etmek için 16 sembol bulunmaktadır. İlk 10 sembol 10'luk sistemdeki sembollerden alınmıştır. Sonraki 6 sembol alfabetik karakterlerden alınmıştır:*
+>*Bilgisayar dünyasında çok kullanılan diğer bir sayı sistemi de 16'lık sistemdir. 16'lık sisteme İngilizce "hexadecimal system" denilmektedir. 16'lık sistemde sayıları ifade etmek için 16 sembol bulunmaktadır. İlk 10 sembol 10'luk sistemdeki sembollerden alınmıştır. Sonraki 6 sembol alfabetik karakterlerden alınmıştır:*
 >
 >		0
 >		1
@@ -606,8 +599,6 @@ class Mample {
 >		0111 1110	=  176
 >*8'lik sistem de 2'lik sistemin yoğun bir gösterimi olarak kullanılmaktadır. Ancak 8'i tam ortalayamadığı için kullanımı seyrektir.*
 
-<br></br>
-
 >**Tür (Type):** Bir değişkenin içerisindeki değerin ne kadar uzunlukta tutulduğunu yani bellekte ne kadar ayrılacağını ve değerin hangi formatta tutulacağını belirtir. Java'da temel türler (primitive/built-in/predefined) şunlardır:*
 #### Java'da Temel Türler ####
 
@@ -626,14 +617,12 @@ class Mample {
 >- Java'da temel tür isimlerinin her biri birer anahtar sözcüktür.
 >- int, long, short ve byte türlerine tamsayı türleri (integer/integral types) denir.
 >- Tamsayı türleri için işaretli sistemde 2'ye tümleme formatını kullanılar. ?Java'da işaretsiz tamsayı türü yoktur.
->- double ve float türlerine "gerçek sayı türleri (real types)" denir. Gerçek sayı türleri için `IEEE 754` formatı kullanılır. Bu sebeple türlere "floating point types" da denilmektedir. Bu türlerle yapılan işlemlerde `IEEE 754` satandardının çalışma sistemi gereği yuvarlama hataları (rounding error) oluşabilir. Bu yuvarlama hatalarının problem olabileceği uygulamalarda (örneğin  parasal ve finansal uygulamalarda) bu türler kullanılmazz. Bu tip durumlarda hangi türlerin kullanılacağı ileride ele alınacaktır.
+>- double ve float türlerine "gerçek sayı türleri (real types)" denir. Gerçek sayı türleri için `IEEE 754` formatı kullanılır. Bu sebeple türlere "floating point types" da denilmektedir. Bu türlerle yapılan işlemlerde `IEEE 754` standardının çalışma sistemi gereği yuvarlama hataları (rounding error) oluşabilir. Bu yuvarlama hatalarının problem olabileceği uygulamalarda (örneğin  parasal ve finansal uygulamalarda) bu türler kullanılmaz. Bu tip durumlarda hangi türlerin kullanılacağı ileride ele alınacaktır.
 >- Programlamada kullanılan karakterler bir tabloda tutulurlar. Bu tabloya karakter tablosu denilmektedir. Programlamada pek çok karakter tablosu kullanılabilmektedir. Daha önceleri `ASCII` denilen ve 7 bit olarak tutulan ancak daha sonra 8 bit olarak ele alınan bir karakter tablosu vardır. Daha sonraları dünyada kullanılan pek çok karakterin de tutulabilmesi için `UNICODE` isimli bir karakter tablosu kullanılmaya başlanmıştır. `UNICODE` tablosunun ilk 128 karakteri `ASCII` ile aynıdır. `UNICODE` tablosunun da çeşitleri vardır. char türü içerisinde tutulan sayı ilgili tabloda sıra numarası olarak yorumlanır. Yani char türü içerisinde tutulan sayı aslında ilgili karakter tablosunda bir karakterin sıra numarasına karşılık gelir. Bu anlamda char türü `UNICODE` tablosunun 2 byte'ı ile uyumludur. Karakter tablolarına ilişkin detaylar ileride ele alıncaktır.
->- boolean türü mantıksal olarak doğru ve yanlış kavramlarını temsil eden bir türdür. boolean türünden bir değişeken iki tane değer alabilir: true, false. Bu tür örneğin flag değişkenlerde kullanılabilir. boolean türünün uzunluğu `Java Language Specifcation` dökumanında belirtilmemiştir. Zaten iki tane değer aldığı için de uzunluğunun kaç olduğunun programcı açısından önemi yoktur.
+>- boolean türü mantıksal olarak doğru ve yanlış kavramlarını temsil eden bir türdür. boolean türünden bir değişken iki tane değer alabilir: true, false. Bu tür örneğin flag değişkenlerde kullanılabilir. boolean türünün uzunluğu `Java Language Specifcation` dokümanında belirtilmemiştir. Zaten iki tane değer aldığı için de uzunluğunun kaç olduğunun programcı açısından önemi yoktur.
 >- Her ne kadar 8 tane tür olsa da programcı tamsayı kullanacağı zaman önce int türünü düşünür, int türünün senaryoya uygun olmadığı durumda (örneğin daha fazla değer tutulması gerekirse) diğer türler tercih edilmelidir. Benzer şekilde gerçek sayılar için de öncelikle double türü düşünülmeli, duruma göre float türü tercih edilmelidir. Diğer türler (char ve boolean) zaten özel amaçlı türlerdir. Bu anlamda int ve double türlerine "default types" da denilmektedir
 >- Java'da boolean türü dışında kalan temel türlerin uzunlukları her sistemde aynıdır. boolean türünün aldığı iki tane değer olduğundan yani herhangi bir sınır söz konusu olmadığından programcı açısından uzunluğun da önemi yoktur.
 >- `int` türüne "integer" demek yanlış bir tanım kullanmak demektir. integer kavramı tam sayılara verilen genel bir isimdir. int ise 4 byte'lık bir tamsayı türüdür. Ayrıca JavaSE'de Integer isimli önemli bir sınıf da bulunmaktadır.
-
-<br></br>
 
 >*Aşağıdaki demo örneği çalıştırıp yuvarlama hatasını gözlemleyiniz. Kodun detayları şu an için önemsizdir*
 
@@ -667,8 +656,8 @@ class App {
 `UNICODE` tablo ISO tarafından 10646 ismiyle de bazı farklılıklarla standardize edilmiştir. `UNICODE` tablonun ilk 128 karakteri standart ASCII karakterleri, ikinci 128 karakteri `ISO 8859-9` code page'indeki karakterlerdir. Bir karakter tablosundaki code point'lerin ikilik sistemde ifade edilme biçimine "encoding" denilmektedir. ASCII code page'lerinde encoding doğrudan code point'in 1 byte'lık sayı karşılığıdır. Ancak `UNICODE` tablonun değişik encoding'leri kullanılmaktadır. `UNICODE` tablonun klasik encoding'i `UTF-16`'dır. Burada code point doğrudan 16 bit bir sayı biçiminde ifade edilir. `UTF-32` encoding'inde ise code point 32 bitlik bir sayı biçiminde ifade edilmektedir. Ancak `UNICODE` tablonun en yaygın kullanılan encoding'i `UTF-8` encoding'idir. `UTF-8` kodlamasında standart ASCII karakterler 1 byte ile, diğer karakterler 2 byte, 3 byte, 4 byte ve 5 byte ile kodlanabilmekedir. Türkçe karakterler `UTF-8` encoding'inde 2 byte yer kaplamaktadr. `UTF-8` encoding'i `UNICODE` bir yazının adeta sıkıştırılmış bir hali gibi düşünülebilir. Bugün pek çok programlama editörleri default durumda dosyayı `UNICODE UTF-8` encoding'ine göre saklamaktadır.
  
 >*Değişken, bellekte ayrılan bir bölge ile işlem yapılmasını sağlar yani o bölgeyi temsil eder. Bir değişken için bellekte yer ayrılma detayları ileride ele alınacaktır. Değişken bildiriminin genel biçimi şu şekildedir:*
->
->		<tür> <isim>;
+
+	<tür> <isim>;
 >*Java'da bir değişken kullanılmadan önce bildirilmelidir. Değişken ismi, değişken isimlendirme kurallarına uygun herhangi bir isim olabilir. Bir değişkene bildirim noktasında değer verilmesine "ilkdeğerleme (initialization)" denir. Bir değişkenin derleyici tarafından görülebildiği kod aralığına "faaliyet alanı (scope)" denir. Bir değişkenin bellekte kalma süresine yani yaratılmasıyla yok edilmesi arasında kalan süreye "ömür (storage duration)" denir. Ömür kavramı "adresler" konusuyla birlikte ileride ele alınacaktır.*
 >
 >Java'da 3 çeşit değişken vardır:
@@ -850,7 +839,7 @@ class App {
 }
 ```
 
-**_Anahtar Notlar:_** Programlamada artık kullanılması önerilmeyen bir kavrama deprecated denir. `Deprecated` olmanın çeşitli gerekçeleri olabilir. Programcı deprecated olan bir şeyi özel bir durum yoksa kullanmamalıdır. `Deprecated` olmanın gerekçeleri ve yerine kullanılacak şeyler dökumante edilir
+**_Anahtar Notlar:_** Programlamada artık kullanılması önerilmeyen bir kavrama deprecated denir. `Deprecated` olmanın çeşitli gerekçeleri olabilir. Programcı deprecated olan bir şeyi özel bir durum yoksa kullanmamalıdır. `Deprecated` olmanın gerekçeleri ve yerine kullanılacak şeyler dokümante edilir
  
 >*Değişken isimlendirme kuralları (Buradaki kurallar tüm değişken atomlar için geçerlidir):*
 >- Değişken isimleri bir rakam karakteri ile başlatılamaz. Uygun bir karakter ile başlatılıp istenildiği kadar rakam karakteri kullanılabilir.
@@ -1009,8 +998,8 @@ class App {
 >*İfade (expression): Sabitlerden, operatörlerden ve değişkenlerden oluşan herhangi bir kombinasyona ifade denir.Bir ifade yalnızca sabitlerden ve operatörlerden oluşuyorsa bu ifadeye "sabit ifadesi (constant expression)" denir. Bir değişken veya sabit tek başına ifadedir. Ancak bir operatör tek başına bir ifade olamaz. Her ifadenin bir türü vardır. Bunun bir tane istisnası vardır, ileride ele alınacaktır*
  
 >*Bir metodun geri dönüş değeri bilgisi yerine bir tür ismi yazılırsa, bu metodun geri dönüş değeri (return value)" vardır denir. Tersinde bir metodun geri dönüş değeri varsa geri dönüş değeri bilgisi yerine bir tür yazılır. Bir metodun geri dönüş değeri varsa, o metodun çağrısı bittiğinde çağrılan noktaya bir değer ile geri döner. Bir metodun geri dönüş değeri yoksa geri dönüş değeri bilgisi yerine void anahtar sözcüğü yazılır. Metodun geri dönüş değeri yoksa sonlandığında çağrılan noktaya yalnızca geri döner, bir değer aktarılmaz. Bir metodun geri dönüş değeri metot içerisinde `return` deyimi ile oluşturulur. `return` deyiminin genel biçimi şu şekildedir:*
->
->		return [ifade];
+
+	return [ifade];
 >*Görüldüğü gibi `return` deyimi tek başına veya bir ifade ile kullanılabilir. Bu kullanımların detayları bölüm içerisinde anlaşılacaktır. `return` deyimi nasıl kullanılırsa kullanılsın, akış `return` deyimine geldiğinde metot sonlanır. Yani `return` deyiminin birinci görevi metodu sonlandırmaktır. `return` deyimi ifade ile kullanılmışsa ifadenin değeri çağrılan noktaya aktarılır. Buna geri dönüş değeri denmesinin nedeni budur*
 
 >*Aşağıdaki demo örnekte add metodu çağrıldığında kullanıcıdan iki değer istenmiş ve o değerlerin toplamına geri dönülmüştür. main metodu içerisinde ise add metodu çağrılmış, geri dönüş değeri 3 ile çarpılıp sonuç result değişkenine atanmıştır*
@@ -1559,8 +1548,6 @@ düzeltilmesi açısından da önemlidir.
 >
 >**_Anahtar Notlar:_** Kurs içerisinde ele alacağımız Nesne Yönelimli Programlama Tekniği'ne (Object Oriented Programming Paradigm) ilişkin kavramlar ile kodun parçalara ayrılması metotlar dışında daha yüksek seviyede de yapılabilecektir.
 
-<br></br>
-
 >`System.out.printf` *metodu ile formatlı yazdırma yapılabilir. printf metodunun birinci parametresine geçien argüman bir yazı (string literal vb.) olmalıdır. Bu metot birinci parametresi ile birlikte değişken sayıda argüman alabilecek şekilde tasarlanmıştır. Değişken sayıda argüman alan metotların (vararg methods) bildiriminin nasıl yapıldığı bu bölümde ele alınmayacaktır. printf metodunun birinci parametresine ilişkin yazının içerisinde `%` karakteri ile birlikte özel bazı karakterler kullanılabilmektedir. Bu özel karakterlere format karakterleri (format specifiers) denir. Bir format karakterinin yazı içerisinde `%` karakteri ile birlikte kullanılmasına ise yer tutucu (place holder) denir. Bir format karakteri özel bazıları dışında bir türe karşılık gelir ve o yer tutucu yerine printf'e geçilen argümanların değerleri yerleştirilerek yazı formatlanır. Format karakterlerinin bazıları şunlardır:*
 >- d: Tamsayı türleri için kullanılır. Sayının değerinin decimal olarak formatlanmasını sağlar.
 >- x veya X: Tamsayı türleri için kullanılır. Sayının değerinin hexadecimal olarak formatlanmasını sağlar.
@@ -1790,7 +1777,7 @@ class App {
 >
 >*Bu durumda bir Java programcısının çözmesi gereken bir problem için, JavaSE'de problemin çözümüne ilişkin metotlar varsa onları kullanması gerekir, yoksakullandığı bazı iyi kütüphanelerin içerisinde varsa onu kullanması gerekir. Burada da yoksa bu durumda programcı o metodu yazmalıdır. Ancak bu durum programcının kullandığı bir metodu standart olsun ya da olmasın nasıl yazıldığını gözardı etmesi anlamına gelmemelidir. Programcı programlama yaşamı boyunca hepsini olmasa da hazır olarak kullandığı metotların nasıl yazıldığını (implementation) öğrenmesi gerekir.*
  
-**_Anahtar Notlar:_** Bir metodun ne iş yaptığına ilişkin detaylar nasıl öğrenilecektir? Bunun için tipik olarak metot için bir dökumantasyon oluşuturur. JavaSE içerisinde bulunan standart metotların (ait olduğu sınıfların da) dökumantasyonu [Oracle Docs &#x1F517;](https://docs.oracle.com) sitesinde çeşitli sayfalarda yayınlanmaktadır. Ancak yine de ilgili dökumantasyon tüm detayıyla öğretemeyebilir. Genel olarak Java dökumanları `javadoc` konu hakkında fikir vermek için yazılır. Duruma göre programcı başka kaynaklardan öğrenmek zorunda kalabilir.
+**_Anahtar Notlar:_** Bir metodun ne iş yaptığına ilişkin detaylar nasıl öğrenilecektir? Bunun için tipik olarak metot için bir dokümantasyon oluşuturur. JavaSE içerisinde bulunan standart metotların (ait olduğu sınıfların da) dokümantasyonu [Oracle Docs &#x1F517;](https://docs.oracle.com) sitesinde çeşitli sayfalarda yayınlanmaktadır. Ancak yine de ilgili dokümantasyon tüm detayıyla öğretemeyebilir. Genel olarak Java dokümanları `javadoc` konu hakkında fikir vermek için yazılır. Duruma göre programcı başka kaynaklardan öğrenmek zorunda kalabilir.
  
 >`java.lang` *paketi içerisinde bulunan Math sınıfının Matematiksel işlemlere yönelik çeşitli metotları vardır. Bu metotların bazıları pek yerde kullanılır. Bazıları ise Matematiksel işlemlerde kullanılır. Burada çok kullanılan bazıları ele alınacaktır. Java programcısı Matematiksel işlemler gerektiğinde önce bu sınıfa bakmalı varsa bu sınıfın elemanlarını kullanmalıdır.*
 	
@@ -2136,8 +2123,6 @@ yuvarlanır (rounding error).
 >	`"`		-> double quote (optional)\
 >	`\`		-> back slash\
 >Escape sequence karakterler string literal içerisinde kendi anlamlarındadır.
- 
-<br></br>
 
 >`Line Feed` *karakter sabiti*
 
@@ -2492,8 +2477,6 @@ class App {
 ele alınacaktır.
 >
 >*Biz de bir operatörü öğrenirken o operatör için bu özellikleri inceleyeceğiz*
- 
-<br></br>
 
 >*Aritmetik 4 işlem operatörleri* `+`, `-`, `*`, `/` *iki operandlı ve araek durumundadır. Operatörler işlemin sonucuna ilişkin değeri üretirler. Bu operatörlerin yan etkisi yoktur.* `*` ve `/` *operatörleri,* `+` ve `-` *operatörlerinden yüksek önceliklidir. Aritmetik 4 işlem operatörleri soldan sağa önceliklidir. İlgili operatöre ilişkin geçerli işlemler kısıt olarak	düşünülebilir*
 
@@ -2850,7 +2833,7 @@ class App {
 }
 ```
 
->*Aşağdaki demo örneği inceleyiniz*
+>*Aşağıdaki demo örneği inceleyiniz*
 
 ```java
 package csd;
@@ -3046,8 +3029,6 @@ class App {
 >
 >*Bu operatörler yine doğru sonuca en kısa yoldan ulaşmak için klasik operatör önceliği kuralına işlemi yaparken uymazlar. Yani bu operatörlere ilişkin bir ifade, operatör önceliği ne olursa olsun en soldan başlanarak hesaplanır. Ancak elde edilen sonuç operatör önceliğine uyularak yapılan işlem sırası ile elde edilen sonuç ile aynıdır. Yani bu operatörler yine kısa devre davranışını da kullanarak doğru sonuca en kısa yoldan ulaşırlar*
 
-<br></br>
-
 >`&&` *operatörüne ilişkin demo örneği inceleyiniz:*\
 Ekran Çıktısı:\
 foo\
@@ -3122,7 +3103,7 @@ class Sample {
 }
 ```
 
->*Aşağdaki demo örnekte* `kısa devre` *oluşur*\
+>*Aşağıdaki demo örnekte* `kısa devre` *oluşur*\
 Ekran Çıktısı:\
 foo\
 true
@@ -3158,7 +3139,7 @@ class Sample {
 }
 ```
 
->*Aşağdaki demo örnekte* `kısa devre` *oluşur*\
+>*Aşağıdaki demo örnekte* `kısa devre` *oluşur*\
 Ekran Çıktısı:\
 bar\
 false
@@ -3194,9 +3175,9 @@ class Sample {
 }
 ```
 
->*Aşağdaki demo örneği inceleyiniz*\
+>*Aşağıdaki demo örneği inceleyiniz*\
 Ekran Çıktısı:\
-foo	\
+foo\
 true
 
 ```java
@@ -3237,7 +3218,7 @@ class Sample {
 }
 ```
 
->*Aşağdaki demo örneği inceleyiniz*\
+>*Aşağıdaki demo örneği inceleyiniz*\
 Ekran Çıktısı:\
 bar\
 tar\
@@ -3281,7 +3262,7 @@ class Sample {
 }
 ```
 
->*Aşağdaki demo örnekte `||` operatörüne öncelik verilmiştir*\
+>*Aşağıdaki demo örnekte `||` operatörüne öncelik verilmiştir*\
 Ekran Çıktısı:\
 foo\
 tar\
@@ -3325,7 +3306,7 @@ class Sample {
 }
 ```
 
->*Aşağdaki demo örnekte önceliklendirme parantezinin olması ile olması arasında bir fark yoktur.*\
+>*Aşağıdaki demo örnekte önceliklendirme parantezinin olması ile olması arasında bir fark yoktur.*\
 Ekran Çıktısı:\
 foo\
 true
@@ -3368,7 +3349,7 @@ class Sample {
 }
 ```
 
->*Aşağdaki demo örneği inceleyiniz*
+>*Aşağıdaki demo örneği inceleyiniz*
 
 ```java
 package csd;
@@ -3597,12 +3578,12 @@ class App {
 ```
 
 >*Java'da bir grup işlemli atama operatörü (compound/augmented assignment operators) vardır. Bu operatörler iki operandlı ve araek durumundadır.Bu operatörlerin genel biçimi şu şekildedir:*
->
->		<ifade1> <op>= <ifade2>
+
+		<ifade1> <op>= <ifade2>
 >*işleminin yaklaşık karşılığı*
->
->		<ifade1> = <ifade1> <op> <ifade2>
->*biçimindedir. Burada ifade1'in değişken olması zorunludur. Bu operatör kullanılabildiği durumlarda kesinlikle açık işlemine göre tercih edilmeldir. Örneğin programcı*
+
+		<ifade1> = <ifade1> <op> <ifade2>
+>*biçimindedir. Burada ifade1'in değişken olması zorunludur. Bu operatör kullanılabildiği durumlarda kesinlikle açık işlemine göre tercih edilmelidir. Örneğin programcı*
 >
 >		x = x + 2;	
 >*ifadesi yerine*
@@ -3612,8 +3593,6 @@ class App {
 >
 >**_Anahtar Notlar:_** Aslında işlemli atama operatörlerinin genel biçimi tam olarak yukarıda anlatıldığı gibi değildir.
 İleride tam karşılığı ele alınacaktır.
-
-<br></br>
 
 >*Aşağıdaki demo örneği inceleyiniz*
 
@@ -3684,7 +3663,7 @@ class Sample {
 }
 ```
 
->*Aşağdaki demo örneği inceleyiniz\
+>*Aşağıdaki demo örneği inceleyiniz\
 	a = a++;\
 	i1: a++\
 	i2: a = i1\
@@ -3705,7 +3684,7 @@ class App {
 }
 ```
 
->*Aşağdaki demo örneği inceleyiniz\
+>*Aşağıdaki demo örneği inceleyiniz\
 	a = ++a;\
 	i1: ++a\
 	i2: a = i1\
@@ -3758,16 +3737,14 @@ class App {
 >	- `switch` deyimi/ifadesi
 >- Boş deyim (null/empty statement): Noktalı virgülün tek başına kullanılması durumunda oluşan deyimdir. Boş deyim çalıştırıldığında hiç bir şey yapılmaz.
 
-<br></br>
-
 >*if deyimi: Neredeyse tüm programlama dillerinde bulunan ve koşula bağlı olarak akışın yönlemesini sağlayan bir kontrol deyimidir. if deyiminin genel biçimi şu şekildedir:*
->
->		if (<koşul ifadesi>)
->			<deyim>
->		[
->		else 
->			<deyim>
->		]
+
+		if (<koşul ifadesi>)
+			<deyim>
+		[
+		else 
+			<deyim>
+		]
 >if deyiminde koşul ifadesinin (condition expression) `boolean` türden olması zorunludur. Aksi durumda error oluşur.
 >
 >if deyiminde koşul ifadesinin değeri `true` ise if deyiminin doğru kısmına ilişkin deyim çalıştırılır, `false` ise if deyiminde else kısmı varsa `else` kısmına ilişkin (yani yanlış kısmına ilişkin deyim) çalıştırılır.
@@ -4809,9 +4786,9 @@ class PosNegCountTotalApp {
 ```
 
 >**_Sonsuz Döngü (Infinite Loop):_** Koşul ifadesinden dolayı sonlanmayan döngü deyimlerine denir. Bu durumda while döngü deyimi ile sonsuz döngü şu kalıp ile oluşturulabilir:
->
->		while (true)
->			<deyim>>
+
+		while (true)
+			<deyim>
 >*Bu while döngüsünde, deyim içerisinde döngüden çıkışa yol açacak bir deyim varsa sonsuz döngü sonlanmış olur. Örneğin return deyimi sonsuz döngü içerisinde kullanıldığında metodu sonlandırdığından, döngüden de çıkılmış olur. Bu durumda hiç sonlanmadan dönen döngü bir sonsuz döngüdür ancak her sonsuz döngü belirli durumlarda sonlanabilir*
 
 >**_Sınıf Çalışması:_** Parametresi ile aldığı int türden bir sayının tersine geri dönen reverse isimli metodu NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz.
@@ -4864,10 +4841,10 @@ class NumberUtil {
 ```
 
 >*Kontrolün sonda yapıldığı while döngü deyimi (do-while döngüsü): `do-while` döngü deyiminin genel biçimi şu şekildedir:*
->
->		do
->			<deyim>
->		while (<koşul ifadesi>);
+
+		do
+			<deyim>
+		while (<koşul ifadesi>);
 >*Akış `do-while` döngüsüne geldiğinde koşul kontrol edilmez. Bu durumda `do-while` döngüsüne en az bir kez girileceği garanti altındadır. Yani döngünün ilk adımı kesinlikle yapılacaktır. İlk adımdan sonra koşul kontrol edilecek ve duruma göre döngü devam edecek veya sonlanacaktır. `do-while` döngüsü while döngüsü kadar sık kullanılmaz. Algoritmaya göre okunabilirliği artırmak amaçlı tercih edilir. Bu döngü deyimi dikkatli kullanılmazsa okunabilirliği azaltabilir. Çünkü bir Java programcısı `do-while` döngü deyimi gördüğünde algoritmada ilk adımın kesinlikle yapılması gerektiği biçiminde kodu algılar. Bu döngü deyiminde noktalı virgülün deyimi sonlandırmak için gerektiğine dikkat ediniz*
  
 >*Aşağıdaki örnekte `do-while` döngü deyimi ile sıfır sayısı için 1 değerine geri dönülmüştür. Ayrıca kontrol yapılması gerekmemektedir*
@@ -5000,9 +4977,9 @@ class NumberUtil {
 #### 28 Mart 2024
  
 >**_for döngü deyimi:_** for döngü deyimi diğer döngü deyimlerini de neredeyse kapsayan bir döngü deyimidir. for döngüsü pratikte genel olarak iterative bir biçimde karşımıza çıksa da, aslında bu iteratiflik for döngü deyiminin çalışma biçiminden dolayı yapılabilmektedir. Bu sebeple Java programcısının for döngü deyiminin çalışma sistematiğini iyi bilmesi tavsiye edilir. for döngüsünün genel biçimi şu şekildedir:
->
->		for ([1.kısım]; [2.kısım]; [3.kısım])
->			<deyim>
+
+		for ([1.kısım]; [2.kısım]; [3.kısım])
+			<deyim>
 >1. kısım:	Akış for döngü deyimine geldiğinde yapılır. Bir daha yapılmaz
 >2. kısım:	Koşul ifadesidir, boolean türden olmak zorundadır, akış for döngü deyimine geldiğinde 1.kısım yapıldıktan sonra da koşul kontrol edilir yani duruma döngüye hiç girilmeyebilir.  
 >3. kısım:	Döngünün bir adımı tamamlandığında, bir sonraki adım için koşulu kontrol etmeden önce yapılır.
@@ -5014,9 +4991,7 @@ class NumberUtil {
 >*for döngü deyiminin `1.kısmında` değişken bildirimi ve initialization yapılabilir. Bu şekilde bildirilen döngü değişkeninin faaliyet alanı döngü boyuncadır. Döngüden sonra erişilemez. Bu değişken bir yerel değişken de olduğundan aynı faaliyet alanı içerisinde aynı isimde başka bir yerel yerel değişken bildirimi geçersizdir. Programcı döngü değişkeninin döngüden sonraki değerini kullanmayacaksa, birinci kısımda bildirmelidir. Bu durumda 1.kısımda bildirilmeyen bir döngü değişkeninin döngüden sonraki değerinin program içerisinde kullanıldığı algısı oluşur. Bu da okunabilirliği artırır.*
 >
 >*Anımsanacağı gibi Java'da virgül operatörü yoktur. Ancak for döngü deyiminin birinci ve üçüncü kısmında belirli koşullar altında virgül atomu kullanılabilir. İkinci kısımda kullanılamaz. Birinci ve üçüncü kısımlarda virgül atomu genel olarak birden fazla ifadeyi ayırmak için kullanılır. Birinci kısımda kullanılacaksa ve değişken bildirimi yapılacaksa başka bir ifade yazılamaz, bildirilen değişkenlerin türleri aynı olmalıdır. Üçüncü kısımda birden fazla ifade yazılabilir.*
- 
-<br></br>
- 
+
 >*Aşağıdaki demo örneği inceleyiniz*
 
 ```java
@@ -6168,8 +6143,8 @@ class App {
 ```
 
 >**_break deyimi:_** `break` deyimi döngü deyimlerinde ve switch deyiminde kullanılabilen bir kontrol deyimidir. break deyimi döngüde kullanıldığında döngüyü sonlandırır. break deyiminin genel biçimi şu şekildedir:
->
->		break [etiket (label) ismi];
+
+		break [etiket (label) ismi];
 >*break deyiminin etiketsiz kullanımda akış ilgili döngüden sonrasından devam eder. Yani döngü sonlanmış olur. break deyiminin döngü deyimi ve switch deyimi dışında kullanımı error oluşturur.  break deyimi hangi döngü deyimi içerisinde kullanılmışsa o döngü deyimini sonlandırır. break deyimi algoritmaya göre her durumda kullanılabileceği gibi tipik olarak sonsuz döngü içerisinde de kullanılabilir*
  
 >**_Sınıf Çalışması:_** Parametresi ile aldığı `long` türden bir sayıdan büyük ilk asal sayıyı döndüren `nextClosestPrime`
@@ -6275,8 +6250,8 @@ class App {
 ```
 
 >*break deyiminin `etiketli` (labeled break) yazılan etiket isminin bildirilmiş olduğu döngü deyimi sonlandırılır. Etiket bildiriminin genel biçimi şu şekildedir:*
->
->		<etiket ismi>:
+
+		<etiket ismi>:
 >*Etiket ismi değişken isimlendirme kurallarına uygun herhangi bir isim olabilir ancak bir convention olarak isimlendirmede tamamen büyük harfler kullanılır ve birden fazla kelime için alttire karakteri kullanılır. Etiket isimleri tipik olarak döngü deyimlerinde ve switch deyiminde bildirilebilir*
  
 >*Aşağıdaki demo örnekte içteki döngüde bir koşul sağlandığında dıştaki döngü de sonlandırılmıştır. Bunun `etiketli break deyimi` kullanılarak yapıldığına dikkat ediniz*
@@ -6593,8 +6568,6 @@ class DemoMenuApp {
 ```
 
 >**_Anahtar Notlar:_** Bir programı herhangi bir metot içerisinde sonlandırmak için `System.exit` isimli bir metot çağrılabilir. Bu metot parametre olarak int türden bir çıkış kodu (exit code) bilgisini alır. Çıkış kodunun şu aşamada önemi yoktur.
- 
-<br></br>
 
 >*Aşağıdaki demo örneği inceleyiniz*
 >
@@ -6706,30 +6679,30 @@ class DemoMenuApp {
 >**_switch deyimi:_** `switch` *deyimi sonlu ve sabit sayıda seçenek için okunabilirliği artırmak amaçlı kullanılan bir kontrol deyimidir.* `switch` *deyimi belirli koşullar altında if deyimi yerine kullanılabilir. Yani bu anlamda belirli koşullar altında if deyimi gibi çalışır.* `switch` *deyimine* `Java 12` *ile birlikte (ilerleyen bazı sürümlerde de) eklentiler yapılmıştır. Hatta bu anlamda* `switch expression` *da dile eklenmiştir. switch expression ve* `switch` *deyimine ilişkin eklentiler ileride ele alınacaktır.*
 >	
 >`switch` *deyiminin genel biçimi şu şekildedir:*
->
->		switch (<ifade>) {	
->		case <sabit ifadesi-1>:
->			<deyim>
->		case <sabit ifadesi-2>:
->			<deyim>
->		...
->		
->		[
->		default:
->			<deyim>
->		]
->		}
+
+		switch (<ifade>) {	
+			case <sabit ifadesi-1>:
+				<deyim>
+			case <sabit ifadesi-2>:
+				<deyim>
+			...
+			
+			[
+			default:
+				<deyim>
+			]
+		}
 >`switch` *parantezi içerisindeki ifadenin tam sayı türünden (int, long, short, byte) VEYA char türden VEYA String türünden VEYA enum class türünden olması zorunludur. Bunlar dışında bir türden olması durumunda error oluşur. Bir case bölümüne ilişkin ifadenin ilgili türden sabit ifadesi olması zorunludur. switch deyiminde default anahtar sözcüğü ile default bölümü (default case) olabilir. default bölümü sentaks olarak zorunlu değildir. switch deyimi aslında if deyiminin özel bir hali olarak düşünülebilir. Yukarıdaki genel biçime ilişkin if deyimi şu şekilde yazılabilir:*
->
->		if (<ifade> == <sabit ifadesi-1>)
->			<deyim>
->		else if (<ifade> == <sabit ifadesi-2>
->			<deyim>
->		...
->		[
->		else
->			<deyim>
->		]	
+
+		if (<ifade> == <sabit ifadesi-1>)
+			<deyim>
+		else if (<ifade> == <sabit ifadesi-2>
+			<deyim>
+		...
+		[
+		else
+			<deyim>
+		]	
 >*Dikkat edilirse else kısmı aslında default kısım anlamındadır. switch deyiminin genel biçiminin, if deyimi karşılığı yaklaşık olarak yazılmıştır.*
 >
 >**_Anahtar Notlar:_** Dikkat edilirse `switch` deyiminde eşitlik karşılaştırması yapılmaktadır. String türü için eşitlik karşılaştırması `==` operatörü ile yapılmaz. Bu durum ileride anlaşılacaktır 
@@ -6739,8 +6712,6 @@ class DemoMenuApp {
 >`switch` *deyiminde "aşağı düşme (fall through)" özelliği vardır. Bir case bölümünde (veya default case'de) yazılan deyimlerin sonunda bir sonraki bölüme geçişi engelleyen bir deyim yazılmamışsa bu özellikten dolayı ilgili bölüm de çalıştırılır. Buna aşağı düşme denir. Aşağı düşme çeşitli deyimlerle engellenebilir. Tipik olarak break deyimi switch deyimini sonlandırmak için kullanıldığından aşağı düşme engellenmiş olur. Aşağı düşme algoritmaya göre return deyimi, continue deyimi ve sonsuz döngü gibi deyimlerle de engellenebilir. Ancak en çok break deyimi kullanılır.*
 >
 >*switch deyiminde aynı değere sahip case bölümünden birden fazla yazılması geçersizdir.*
-
-<br></br>
  
 >*Aşağıdaki demo örnekte `break` deyiminin kullanıldığına dikkat ediniz. Neden kullanıldığı ileride ele alınacaktır.*
 >
@@ -7013,8 +6984,6 @@ class App {
 >**_Anahtar Notlar:_** Derleyiciler, programa ilişkin algoritmayı değiştirmeden, algoritmanın en iyi biçiminde çalışmasını sağlayan kodu üretmesine `compiler optimization` denir. Bu anlamda derleyiciler programcının yazdığı algoritmayı düzeltmez. Optimizasyon genel olarak ikiye ayrılır: speed optimization, size optimization. Speed optimization, algoritmaya ilişkin üretilen kodun hızlı çalışması için, size optimization ise üretilen kodun daha az yer kaplaması için yapılır. Derleyicinin pek çok durum için optimizasyon yaklaşımı vardır. 
 >	 
 >*Derleyiciler sabit ifadelerinin değerlerini arakoda, hesaplayıp yazarlar. Yani sabit ifadelerinin değerleri çalışma zamanında hesaplanmaz. Buna* `constant folding optimization` *denir.*
-
-<br></br>
 
 >*Aşağıdaki demo örnekte derleyici `constant folding` yaptığından aynı değere sahip birden fazla case bölümü tespit ettiğinden error oluşur*
 
@@ -7539,13 +7508,13 @@ class DateUtil {
 >**_Anahtar Notlar:_** Programlamada hem deyim hem de ifade olarak kullanılan sentaktik elemanlara "ifadesel deyim" `expression statement` da denilmektedir.
 >	
 >`switch expression`*'ın genel biçimi şu şekildedir:*
->
->		switch (<ifade>) {
->			case <si>[, <si>, ...] -> <deyim veya ifade> 
->			case <si>[, <si>, ...] -> <deyim veya ifade>
->			...
->			[default -> <deyim veya ifade>]
->		}
+
+		switch (<ifade>) {
+			case <si>[, <si>, ...] -> <deyim veya ifade> 
+			case <si>[, <si>, ...] -> <deyim veya ifade>
+			...
+			[default -> <deyim veya ifade>]
+		}
 >`switch expression`*'ın parentezi içerisindeki ifadeye ilişkin kurallar switch deyimi ile aynıdır. case bölümlerine ilişkin ifadelerin de yine switch deyiminde olduğu gibi sabit ifadesi (si) olması gerekir.*
 >
 >`switch expression`*'da aşağı düşme (fall through) özelliği yoktur. switch expression'da bir case bölümüne istenildiği sayıda sabit ifadesi virgül ile ayrılacak şekilde yazılabilir. Bu durumda aslında "OR" işlemi ya da işlemleri yapılmaktadır.*
@@ -7792,8 +7761,6 @@ class App {
 >*Ne zaman switch expression ne zaman switch statement kullanılmalıdır? Programcı buna nasıl karar verecektir? Bu sorunun genel bir cevabı şu şekilde verilebilir: "Gerekmedikçe switch statement kullanılmamalıdır". switch statment tipik olarak iki durumda gerekir:*
 >- Java 11 ve öncesi ile geliştirilen bir projede zaten switch expression kullanılamaz. Bu durumda switch statement kullanılır.
 >- Aşağı düşme özelliğinin gerektiği bir durumda switch statement tercih edilir.
-
-<br></br>
 
 >*Aşağıdaki demo örneği inceleyiniz*
 >
@@ -8057,8 +8024,6 @@ class DateUtil {
 >3. Metodun geri dönüş değerinin geçici değişkene atanması.
 >
 >*Tür dönüştürme kuralları istisna bir kaç kural dışında tüm atama durumlarında geçerlidir. İstisna kurallar ayrıca ele alınacaktır.*
-
-<br></br>
 
 >*Aşağıdaki demo örnekte derleyici a değişkenin içerisindeki değeri derleme zamanında bilemeyeceğinden ve dönüşümün	geçerli olması durumunda bilgi kaybı olabileceğinden error oluşur*
 
@@ -8675,8 +8640,8 @@ class App {
 >**_Tür Dönüştürme Operatörü (Type Casting Operator):_** Bu operatör özel amaçlı, tek operandlı ve önek durumundadır.*
 >
 >*Operatörün kullanımına ilişkin genel biçim şu şekildedir:*
->
->		(<tür ismi>)<ifade>
+
+		(<tür ismi>)<ifade>
 >*Operatör operandına ilişkin değeri belirtilen türe dönüştürür. Operatörün yan etkisi yoktur. Operatörün ürettiği değer operandına ilişkin değerin, belirtilen türe dönüştürüldüğündeki elde edilen değerdir. Operatör tür dönüştürme işlemini yine geçici değişken yaratarak yapar. Bu operatör ile yapılan dönüşümlere "explicit conversion" ya da "type casting" denilmektedir. Genel olarak `implicit` olarak yapılamayan dönüşümler, explicit olarak yapılabilmektedir. Dilin bütünlüğü olarak `implicit` olarak yapılabilen dönüşümler, bu operatör kullanılarak da yapılabilmektedir. Java'da `implicit` olarak yapılamayan ancak explicit olarak yapılabilen dönüşümlerde değerlerin nasıl elde edileceği yani genel olarak söylemek gerekirse bilgi kaybının nasıl olacağı da belirlidir. Burada bunlar ele alınacaktır.*
 
 **_Anahtar Notlar:_** Bir dönüşüm `implicit` olarak yapılamıyor ancak `explicit` olarak yapılabiliyorsa "ortada bir problem oluşabilir ve derleyici bunu yanlışlıkla programcının yapmasını istemediği için `explicit` yapılması gerekir" anlamı çıkmalıdır. Yani aslında zorunlu olarak `explicit` yapılan dönüşüm için derleyiciye programcı "ben durumun farkındayım bana izin ver, sonuçlarına katlanacağım :)" mesajı vermektedir. `Explicit` olarak bile yapılamayan dönüşümler zaten anlamsız olduklarından geçersizdir.
@@ -9147,16 +9112,16 @@ class App {
 #### 14 Mayıs 2024
 
 >*Aslında işlemli atama operatörlerinin genelm biçimi şu şekildedir:*
->
->		T1 ve T2 birer tür olmak üzere
->		T1 a;
->		T2 b;		
->için
->		
->		a <op>= b;
->ifadesi açık olarak şu şekildedir:
->
->		a = (T1)(a <op> b)
+
+		T1 ve T2 birer tür olmak üzere
+		T1 a;
+		T2 b;		
+için
+		
+		a <op>= b;
+ifadesi açık olarak şu şekildedir:
+
+		a = (T1)(a <op> b)
 >*Aşağıdaki demo örneği inceleyiniz*
 
 ```java
@@ -9202,8 +9167,8 @@ class App {
 ```
 
 >*Koşul Operatörü (Conditional/Ternary operator): Koşul operatörü özel amaçlı, 3 operandlı (ternary) ve araek (infix) durumundadır. Bu operatörü Java'nın tek 3 operandlı operatörüdür. Bu sebeple bu operatöre "ternary operator" de denilmektedir. Operatörün yan etkisi yoktur. Operatörün genel biçimi şu şekildedir:*
->
->		<ifade1> ? <ifade2> : <ifade3>
+
+		<ifade1> ? <ifade2> : <ifade3>
 >Bu operatörde `<ifade1>` `boolean` türünden olmalıdır. Aksi durumda error oluşur. Bu operatör için `ifade1` hesaplandığında elde edilen değer `true` ise `ifade2` hesaplanır, `false` ise `ifade3` hesaplanır ve duruma göre `ifade2`'nin veya `ifade3`'ün değeri üretilir. Yani bu operatör için çalışma zamanında `ifade1` yapılır ve duruma göre `ifade2` veya `ifade3`'den yalnızca biri hesaplanır.
 
 >*Aşağıdaki demo örneği inceleyiniz*
@@ -10590,8 +10555,8 @@ class TCP {
 >- Nesneler `heap` alanında yaratılırlar. Java'da stack'de nesne **yaratılamaz**.
 >- Java'da bir nesnenin kendisi tutulamaz, adresi tutulabilir. Bu adres de aynı türden bir referans (değişken) içerisinde tutulabilir.
 >- Java'da nesne yaratılması `new` operatörü ile yapılır. `new` operatörünün kullanımına ilişkin genel biçimi şu şekildedir:
->
->		new <sınıf ismi>([argümanlar]);
+
+		new <sınıf ismi>([argümanlar]);
 >Bu operatör özel amaçlı **tek operandlı** ve **önek** durumundadır. Operatör, yaratılmış olan nesnenin adresini üretir. Bir nesne ile referans için hangi uzunlukta yer ayrılacağı ileride ele alınacaktır. Bu operatörün yan etkisi yoktur. 
 >
 >Aşağıdaki örnekte `p`, `s`, `u` ve `t` birer nesne **DEĞİLDİR**, ilgili türden nesnelerin adreslerini tutan `referans` değişkenlerdir.
@@ -10734,9 +10699,6 @@ class Sample {
 >*Peki `non-static` bir veri elemanının faaliyet alanı nedir?*
 >
 >*Bu konu ileride ele alınacaktır.*
-
-<br>
-</br>
 
 >*Sınıfın `static` bir veri elemanı nesne içerisinde yaratılmaz. Sınıfın `static` bir veri elemanına sınıf dışından sınıf ismi ve nokta operatörü ile erişilir. Nokta operatörü sınıf ismi ve static veri elemanı ile kullanıldığında veri elemanına ilişkin değişkeni üretir. Sınıfın static veri elemanları sınıfın bir elemanı (member) ilk kez kullanıldığında yaratılır ve program sonuna kadar yaşarlar. Bu durumda sınıfın `static` bir veri elemanı stack'de **yaratılamaz**. Static veri elemanlarının yaratıldığı alana ilişkin detaylar söz konusu olsa da dolaylı olarak `heap`'de olduğu söylenebilir.*
 >
@@ -11029,9 +10991,6 @@ class Sample {
 
 **_Anahtar Notlar:_** Dikkat edilirse yukarıdaki anlatılanlar, sınıf dışından yani başka bir sınıfın içinden olan erişimler içindir.
 
-<br>
-</br>
-
 >*Sınıfın `non-static` bir veri elemanına ait olduğu sınıfın `non-static` bir `metodu` içerisinde doğrudan yani nokta operatörü kullanmadan **erişilebilir**.*
 >
 >*Doğrudan erişilen non-static veri elemanı, non-static metodun çağrılmasında kullanılan referansın gösterdiği nesnenin veri elemanıdır*
@@ -11108,9 +11067,6 @@ class Sample {
 
 >*Yukarıdaki iki maddenin özeti olarak şu söylenebilir:*
 >- Sınıfın `non-static` bir metodu içerisinde, **tüm** `non-static` elemanlarına (member) doğrudan **erişilebilir**
-
-<br>
-</br>
 
 >*Sınıfın `non-static` bir metodu içerisinde, aynı sınıfın `static` veri elemanlarına doğrudan **erişilebilir***
 
@@ -11193,9 +11149,6 @@ class Sample {
 >*Yukarıdaki **dört** maddenin özeti olarak şu söylenebilir:*
 >- Sınıfın `non-static` bir metodu içerisinde, sınfın **tüm** elemanlarına **doğrudan erişilebilir**
 
-<br>
-</br>
-
 >*Sınıfın `static` bir metodu içerisinde, aynı sınıfın `non-static` bir veri elemanına **doğrudan erişilemez***
 
 ```java
@@ -11237,9 +11190,6 @@ class Sample {
 
 >*Yukarıdaki iki maddenin özeti olarak şu söylenebilir:*
 >- Sınıfın `static` bir metodu içerisinde, aynı sınıfın `non-static` elemanlarına doğrudan **erişilemez**
-
-<br>
-</br>
 
 >*Sınıfın `static` bir metodu içerisinde, aynı sınıfın `static` bir veri elemanına doğrudan **erişilebilir***
 
@@ -11308,9 +11258,6 @@ class Sample {
 >- Sınıfın `non-static` bir metodu içerisinde aynı sınıfın **tüm** elemanlarına doğrudan **erişilebilir** 
 >- `static` bir metodu içerisinde **yalnızca** `static` elemanlarına doğrudan **erişilebilir**
 
-<br>
-</br>
-
 >*Aşağıdaki demo örnekte foo metodu içerisinde bar metoduna doğrudan erişilmediğine dikkat ediniz*
 
 ```java
@@ -11347,9 +11294,6 @@ class Sample {
 >*Bir metot `non-static` bir elemana erişmeyecekse `static` yapılmalıdır. Bu durumda yani `non-static` bir elemana erişmeyen bir metodun `static` yapılması durumu, `non-static` metotların okunabilirliğini/algılanabilirliğini artırır.*
 >
 >*Yani bir sinıfı kullanan programcı `non-static` bir metot gördüğünde o metodun `non-static` bir veri elemanına eriştiğini bilir. Çünkü erişmeseydi programcı bu metodu `static` yapardı olarak algılar*
-
-<br>
-</br>
 
 >*Aşağıdaki örnekte `s1` referansının gösterdiği nesne ile `s2` referansının gösterdiği nesne farklıdır*
 
@@ -11862,10 +11806,6 @@ class Complex {
 >- Nesne yaratılması adımları gereği ctor'dan önce `non-static` veri elemanlarına `default` değerleri verilmiş olur.
 >- ctor geri dönüş değeri kavramı olmayan bir metot olsa da void bir metot gibi istenirse return deyimi sonlandırmak için kullanılabilir. Buradaki sonlandırma normal bir sonlandırmadır yani nesne yaratılmış olur.
 
-
-<br>
-</br>
-
 >*Aşağıdaki demo örneği inceleyiniz*
 
 ```java
@@ -12246,9 +12186,6 @@ class Complex {
 >*Bilgisayar dünyasında genel olarak rassal sayı üretiminde ismine **"tohum değeri (seed value)"** bir değer kullanılır. Aslında rassal sayı üretimi bu değer ile başlar ve her üretimde bu değer güncellenerek devam eder. Yani tohum değeri, rassal sayı üretimine ilişkin Matematiksel işlemlerde kullanılır.* `java.util.Random` *sınıfının default ctor'u ile nesne yaratıldığında, tohum değeri o uygulama içerisinde daha önce yine default ctor kullanılarak yaratılmış olan nesnelere ilişkin tohum değerlerinden mümkün olduğunca farklı olma eğilimindedir.* 
 >
 >`java.util.Random` *sınıfının* `nextXXX` *metotları ile rassal sayılar elde edilebilir. Şüphesiz bu metotlar dışında da metotları bulunmaktadır. Bazı metotlar ileride ele alınacaktır*
-
-<br>
-</br>
 
 >`Random` *sınıfının parametresiz nextInt metodu int türü sınırları içerisinde rassal olarak üretilmiş bir sayıya geri döner*
 
@@ -12651,9 +12588,6 @@ class App {
 >
 >*"String türden bir nesne yarat ve string literal içerisindeki karakterleri bu string nesnesi ile tutulabilecek şekle getir ve ilgili string nesnesinin referansını (adresini) ver". Bu durumda bir string literal ile bir string nesnesinin referansı elde edilebilir. print ve println metotlarının String parametreli overload'ları vardır. Bu metotlar aldıkları String referansına ilişkin nesne ile tutulan yazıyı yazdırır. printf metodu ile bir yazı s format karakteri ile yazdırılabilir. Klavyeden bir yazı elde etmek için Scanner sınıfının String geri dönüş değerine sahip metotları kullanılabilir. Örneğin nextLine metodu klavyeden enter girilene alınan yazılara ilişkin bir String nesnesi yaratır ve onun referansına geri döner. Bu yazı içerisinde enter karakteri yoktur*
 
-<br>
-</br>
-
 >*Aşağıdaki demo örneği inceleyiniz*
 
 ```java
@@ -12841,9 +12775,6 @@ class App {
 **_Anahtar Notlar:_** Aynı türden iki referans `==` veya `!=` operatörü ile işleme sokulabilir. Bu durumda aslında iki referansın da aynı nesneyi gösterip göstermediğine ilişkin değer üretilir. Yani `==` operatörü iki referans da **aynı** nesneyi gösteriyorsa	**true**, göstermiyorsa **false** değerini, `!=` operatörü iki referans **aynı** nesneyi gösteriyosa **false**, göstermiyorsa **true** değerini üretir. **Farklı** türden referanslar hiç bir şekilde işleme **sokulamaz**.
 
 Dikkat edilirse aynı türden referansların eşitlik karşılaştırması adreslerin karşılaştırılmasıdır. Nesnelerin içeriğinin yani `non-static` veri elemanlarının **aynı olup olmadığı** kontrolü bu şekilde **yapılamaz**
-
-<br>
-</br>
 
 >*Aşağıdaki demo örnekte `farklı` nesneler yaratılmıştır değil mi?*
 
@@ -13343,9 +13274,6 @@ class App {
 >`2. ve 4.` metotlar arama işlemine ikinci parametreleri ile aldıkları indeks numarasından başlarlar.\
 >`1. ve 3.` metotlar arama işlemine yazının başından başlarlar
 
-<br>
-</br>
-
 >*Aşağıdaki demo örneği inceleyiniz*
 
 ```java
@@ -13624,8 +13552,8 @@ class App {
 >
 >**_Açıklamalar:_**
 >- Metot yol ifadesi geçerliliği yapmayacaktır.
->- Metot yol ifadesine / veya \ karakterlerini kabul edecektir.
->- Yol ifadesi / ya da \ içermiyorsa doğrudan yol ifadesini döndürecektir.
+>- Metot yol ifadesine `/` veya `\` karakterlerini kabul edecektir.
+>- Yol ifadesi `/` ya da `\` içermiyorsa doğrudan yol ifadesini döndürecektir.
 >- Örneğin yol ifadesi `C:/test/mest.dat` için elde edilen dosya ismi mest.dat olarak elde edilecektir. Ya da örneğin test gibi bir ifadesi için dosya ismi test olarak elde edilecektir.
 >- Metodu `FileUtil` isimli bir sınıf içerisinde yazınız.
 >- Bu işlemi JavaSE'de yapan türler ve metotlar kullanılmayacaktır.
@@ -13776,9 +13704,6 @@ class App {
 >- `toLowerCase`: Karakterin küçük harf karşılığını döndürür. Yoksa aynı karaktere geri döner
 >
 >*Bu sınıfa ait bir metodun hem char hem de int paremetreli overload'ları bulunur. Bu durumda tüm karakterler yani sıra numarası 65535'den büyük olan karakterler için de işlem yapan metotlar bulunmaktadır.*
-
-<br>
-</br>
 
 >*Aşağıdaki demo örneği inceleyiniz*
 
@@ -14957,24 +14882,21 @@ class App {
 #### 30 Temmuz 2024
 
 >*Anahtar Notlar: JavaSE'de her temel türe ilişkin sınıflar bulunur. Bu sınıflara "sarmalayan sınıflar (wrapper classes)" denir. Sarmalayan sınıfların ilişkin oldukları temel türe yönelik pek çok yardımcı metotları vardır. Temel tür ve ilgili sarmalayan sınıflar şunlardır:*
->		
->	|Temel Tür	|	Sarmalayan sınıf|
->	|-----------|-------------------|
->	|short		|	Short			|
->	|int		|	Integer			|
->	|long		|	Long			|
->	|byte		|	Byte			|
->	|			|					|
->	|float		|	Float			|
->	|double		|	Double			|
->	|			|					|
->	|char		|	Character		|
->	|boolean	|	Boolean			|	
->
->*Sarmalayan sınıflara ilişkin kullanım detayları ileride ele alınacaktır.*
+		
+|Temel Tür	|	Sarmalayan sınıf|
+|-----------|-------------------|
+|short		|	Short			|
+|int		|	Integer			|
+|long		|	Long			|
+|byte		|	Byte			|
+|			|					|
+|float		|	Float			|
+|double		|	Double			|
+|			|					|
+|char		|	Character		|
+|boolean	|	Boolean			|
 
-<br>
-</br>
+>*Sarmalayan sınıflara ilişkin kullanım detayları ileride ele alınacaktır.*
 
 >`Character` *sınıfı dışında kalan sınıfların (yani nümerik türlere ilişkin sarmalayan sınıfların)* `parseXXX` *metotları aldıkları yazıyı ilgili temel türe dönüştürme işleminde kullanılır.* `Boolean` *sınıfının* `parseBoolean` *metodu dışındaki diğer* `parseXXX` *metotları aldıkları yazı ilgili türe dönüştürülemiyorsa exception oluştururlar (fırlatırlar).* `parseBoolean` *metodu aldığı yazı case-insensitive olarak true değilse false değerine geri döner.*
 	
@@ -15673,8 +15595,8 @@ class StringUtil {
 >- Bir paket içerisinde **aynı** isimde birden fazla UDT bildirimi **geçersizdir**
 >- Farklı paketler içerisinde aynı isimde UDT bildirimleri geçerlidir. Bu UDT'ler isimleri aynı olsa da aslında farklı türlerdir
 >- Bir paketin `alt paketleri` olabilir. Alt paket bildiriminin genel biçimi şu şekildedir:
->
->		package <paket ismi>[.<alt paket ismi>.<alt paket ismi>...];
+
+		package <paket ismi>[.<alt paket ismi>.<alt paket ismi>...];
 >Alt paket içerisindeki UDT'lerin byte code'ları paket hiyerarşisinde uygun alt dizinde bulunmalıdır. Yine IDE programlar bunu otomatik olarak yaparlar.
 >- Paketler içiçe bile olsa farklı paketlerdir. Yani örneğin `arman` paketi içerisinde `SerialPort` isimli bir sınıf varsa, `arman.util` paketi içerisinde de `SerialPort` isimli bir sınıf olabilir. Çünkü paketler **farklıdır** ve isim çakışması oluşmaz
 >- Paketler isim çakışmasını engellemek için düşünülmüştür. Paketler ile farklı firmalar kendi paket isimleriyle UDT yazdıklarında UDT'lerin isimleri aynı olsa bile diğerleriyle birlikte aynı projede kullanılabilirler
@@ -16462,8 +16384,8 @@ public class Sample {
 ###### Yıldızlı import bildirimi (import on demand declaration) 
 
 >*Yıldızlı import bildiriminin genel biçimi şu şekildedir:*
->
->		import <paket ismi>[.<alt paket listesi>].*;
+
+		import <paket ismi>[.<alt paket listesi>].*;
 >*Niteliksiz isim arama genel kurallarına göre isim, paket içerisinde bulunamazsa yıldızlı import bildirimlerine ilişkin tüm paketlerde aranır. Burada yine alt ve üst paketlere bakılmaz. Bu bildirim adeta bir paketi isim arama anlamında derleme birimine ilişkin pakete dahil etmektir.*
 
 ```java
@@ -16547,8 +16469,8 @@ public class Test {
 ###### Yıldızsız import bildirimleri (import single type declaration)
 
 >*Bu bildirimin genel biçimi şu şekildedir:*
->
->		import <paket ismi>[.alt paket listesi>].<UDT ismi>;
+
+		import <paket ismi>[.alt paket listesi>].<UDT ismi>;
 >*Bu bildirimde belirtilen UDT ismi derleme birimöi boyunca her yerde niteliksiz olarak kullanılabilir (visible). Ya da başka bir deyişle buradaki bildirim, bu ismin derleme birimi boyunca niteliksiz kullanılabileceğini belirtir. Yani bu bildirime ilişkin isim niteliksiz isim arama genel kurallarına göre aranmaz. Yani ilgili isim için niteliksiz isim arama genel kuralları uygulanmaz*
 
 ```java
@@ -16742,8 +16664,8 @@ public class Sample {
 ###### Yıldızlı import static bildirimi (import static on demand declaration)
 
 >*Bu bildirimin genel biçimi şu şekildedir:*
->
->		import static <paket ismi>[.<alt paket listesi>].<UDT ismi>.*;
+
+		import static <paket ismi>[.<alt paket listesi>].<UDT ismi>.*;
 >*Bu bildirim ile niteliksiz kullanılan bir isim ilgili pakette de bulunamazsa yıldızlı import static bildirimine ilişkin UDT'de aranır*
 
 ```java
@@ -16940,8 +16862,8 @@ public class Complex {
 ###### Yıldızsız import static bildirimi (import static on demand declaration)
 
 >*Bu bildirimin genel biçimi şu şekildedir:*
->
->		import static <paket ismi>[.<alt paket listesi>].<UDT ismi>.<static eleman>;
+
+		import static <paket ismi>[.<alt paket listesi>].<UDT ismi>.<static eleman>;
 >*Bu bildirim ile ilgili static eleman tüm derleme birimi boyunca kullanılabilir*
 
 ```java
@@ -17185,8 +17107,8 @@ class App {
 ```
 
 >*Dizi yaratmak için yine* `new` *operatörü kullanılır. Dizi yaratmak için* `new` *operatörü kullanımının genel biçimi şu şekildedir:*
->
->		new <tür>[<int türüne doğrudan dönüşebilen türden bir değer>];
+
+		new <tür>[<int türüne doğrudan dönüşebilen türden bir değer>];
 >*Burada* `[]` *içerisinde verilen değere dizinin uzunluğu (length) denir. Uzunluk dizinin eleman sayısıdır. Java'da dizi uzunluğunun sabit ifadesi olması gerekmez. Dizi yaratıldıktan sonra uzunluğu **değiştirilemez**. Dizi uzunluğunun negatif olması durumunda **exception** oluşur. Dizi uzunluğuna* `length` *isimli veri elemanı ile erişilebilir.* `length` *veri elemanının değeri **değiştirilemez***
 >
 >*Dizinin elemanlarına erişmek için* `[]` *operatörü (subscription operator) kullanılır. Bu operatör özel amaçlı iki operandlı ve araek durumundadır. Operatörün birinci operandı bir referansı ikinci operandı ise* `int` *türüne **doğrudan** dönüşebilen bir değer olmalıdır. İkinci operandına indeks değeri de denilmektedir. Dizinin ilk elemanına sıfır numaralı indeks değeri kullanılarak erişilir. Yani bu anlamda dizinin elemanlarına erişmek için kullanılan indeks değerleri* `[0, length)` *aralığıdır. Bu operatör operatör öncelik tablosunda birinci seviyededir. Operatörün ürettiği değer indeksteki elemana ilişkin değişkendir. Indeks numarası pozitif ya da negatif bakımdan sınırlar dışında bir değer olarak verilirse exception oluşur.*
@@ -17365,8 +17287,6 @@ class App {
 >1. Programcı henüz ilk değerleri kod içerisinde tamamlamamıştır ve bunu belirtmek için sondaki virgülü kullanabilir
 >2. Verilen ilk değerlerin geliştirme aşamasında yerlerinin çok sık değişebileceği durumda, değiştirme işlemi daha kolay yapılabilir
 
-<br>
-
 >*Bir metodun parametre değişkeni bir dizi referansı olabilir*
 
 ```java
@@ -17484,8 +17404,6 @@ public class ArrayUtilSumTest {
     }
 }
 ```
-
-<br>
 
 >*Sıfır elemanlı bir dizi yaratılabilir. Bu durumda şüphesiz dizide bir eleman tutulamaz ancak dizi yaratılmış olur. Sıfır elemanlı diziler bazı durumlarda kontrol amaçlı kullanılabimlir. Örneğin bir metot bir takım değerlere göre bir dizi yuratacak olsun. Metoda geçilen değerlerin geçersiz olması durumunda metot sıfır elemanlı bir diziye geri dönebilir. Bu durumda metodu çağıran programcı geri dönen dizinin eleman sayısına bakarak geçerlilik kontrolü yapabilir. Şüphesiz bunu yapmanın başka yöntemleri de vardır. Sıfır elemanlı bir dizi aşağıdakilerden biri ile yaratılabilir:*
 >
@@ -17704,53 +17622,199 @@ public class NumericLotteryApp {
 }
 ```
 
->**
+```java
+package org.csystem.app.lottery.numeric;  
+  
+import java.util.Random;  
+  
+public class NumericLottery {  
+    public Random random;  
+  
+    public boolean [] getFlags()  
+    {  
+        boolean [] flags = new boolean[50];  
+  
+        for (int i = 0; i < 6; ++i) {  
+            int val;  
+  
+            while (true) {  
+                val = random.nextInt(1, 50);  
+                if (!flags[val])  
+                    break;  
+            }  
+  
+            flags[val] = true;  
+        }  
+  
+        return flags;  
+    }  
+  
+    public int [] getNumbers(boolean [] flags)  
+    {  
+        int [] a = new int[6];  
+        int idx = 0;  
+  
+        for (int i = 1; i < flags.length; ++i)  
+            if (flags[i])  
+                a[idx++] = i;  
+  
+        return a;  
+    }  
+  
+    public NumericLottery(Random r)  
+    {  
+        random = r;  
+    }  
+  
+    public int [] getNumbers()  
+    {  
+        return getNumbers(getFlags());  
+    }  
+}
+```
+
+>**_Sınıf Çalışması:_** Sayısal loto kupon üreten programı yazınız.
+>
+>**_Açıklama:_** Bir sayısal loto kuponu birbirinden farklı 6 tane küçükten büyüğe sıralanmış `[1, 49]` aralığındaki sayılardan oluşur
+>
+>**_Not:_** Aşağıdaki yaklaşım bir öncekine göre oldukça iyidir. Ancak daha iyileri de vardır. İleride yazılacaktır
+
+```java
+package org.csystem.app.lottery.numeric;  
+  
+import org.csystem.util.array.ArrayUtil;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+public class NumericLotteryApp {  
+    public static void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+        NumericLottery numericLottery = new NumericLottery(new Random());  
+  
+        while (true) {  
+            System.out.print("Kaç tane kupon oynamak istersiniz?");  
+            int n = Integer.parseInt(kb.nextLine());  
+  
+            if (n <= 0) {  
+                System.out.println("Lütfen pozitif bir sayı giriniz");  
+                continue;  
+            }  
+  
+            while (n-- > 0)  
+                ArrayUtil.print(numericLottery.getNumbers(), 2);  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+```java
+package org.csystem.app.lottery.numeric;  
+  
+import java.util.Random;  
+  
+public class NumericLottery {  
+    public Random random;  
+  
+    public boolean [] getFlags()  
+    {  
+        boolean [] flags = new boolean[50];  
+  
+        for (int i = 0; i < 6; ++i) {  
+            int val;  
+  
+            do  
+                val = random.nextInt(1, 50);  
+            while (flags[val]);  
+  
+            flags[val] = true;  
+        }  
+  
+        return flags;  
+    }  
+  
+    public int [] getNumbers(boolean [] flags)  
+    {  
+        int [] a = new int[6];  
+        int idx = 0;  
+  
+        for (int i = 1; i < flags.length; ++i)  
+            if (flags[i])  
+                a[idx++] = i;  
+  
+        return a;  
+    }  
+  
+    public NumericLottery(Random r)  
+    {  
+        random = r;  
+    }  
+  
+    public int [] getNumbers()  
+    {  
+        return getNumbers(getFlags());  
+    }  
+}
+```
+
+##### Dizilerin Sıraya Dizilmesi (Sorting)
+
+>*Dizilerin sıraya dizilmesine yönelik pek çok algoritma bulunmaktadır. Sıralama işleminin küçükten büyüğe ya da başka bir deyişle artan sırada (ascending) yapılmasına doğal sıralama (natural sort order) denir. Dizilerin azalan sırada sıralanmasına "descending order" denilmektedir. Biz burada kabarcık sıralama (bubble sort) ve seçerek sıralama (selection sort) algoritmalarını ele alacağız. Bu algoritmaların doğal sıralayan biçimi anlatımda kullanılacaktır ancak hem ascending hem de descending biçimleri ayrıca implemente edilecektir*
+
+**_Anahtar Notlar:_**  Algoritmaların karşılaştırılmasına yönelik iki ölçüt kullanılır: hız (speed), kaynak kullanımı (resource usage). Burada ele alacağımız bubble sort ve selection sort algoritmaları karşılaştırılmayacaktır. Algoritma analizi isimli konuda bu iki algoritmanın karşılaştırılması da ayrıca ele alınacaktır.
+
+>*Kabarcık sıralama algoritmasında dizinin yanyana iki elemanı karşılaştırılır. Duruma göre yer değiştirilir. Her yinelemede en büyük eleman daraltılmış dizinin sonuna gider. Böylece her yinelemede bir geriye kadar gidilmiş olur*
+>
+>Örneğin :
+>
+>		22 8 66 -7 34 -6 17 21 68 45 -10 3 16
+>		8 22 -7 34 -6 17 21 66 45 -10 3 16 68
+>		8 22 -7 -6 ..
+
+```java
+package org.csystem.util.array.test;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+import static org.csystem.util.array.ArrayUtil.*;  
+  
+public class ArrayUtilBubbleSortTest {  
+    public static void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+        Random r = new Random();  
+  
+        while (true) {  
+            System.out.print("Bir sayı giriniz:");  
+            int count = Integer.parseInt(kb.nextLine());  
+  
+            if (count <= 0)  
+                break;  
+  
+            int [] a = generateRandomArray(r, count, 0, 100);  
+  
+            print(a, 2);  
+            boolean descending = r.nextBoolean();  
+            System.out.printf("Dizi %s olarak sıralanıyor%n", descending ? "azalan sırada" : "artan sırada");  
+            bubbleSort(a, descending);  
+            print(a, 2);  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
 
 ```java
 
 ```
-
->**
-
-```java
-
-```
-
->**
-
-```java
-
-```
-
->**
-
-```java
-
-```
-
->**
-
-```java
-
-```
-
->**
-
-```java
-
-```
-
->**
-
-```java
-
-```
-
->**
-
-```java
-
-```
-
-
-
