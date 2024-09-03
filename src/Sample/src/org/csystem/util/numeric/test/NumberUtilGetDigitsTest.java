@@ -18,6 +18,7 @@ public class NumberUtilGetDigitsTest {
 
         for (int i = 0; i < n; ++i) {
             long val = r.nextLong();
+
             System.out.printf("%d -> ", val);
             print(getDigits(val));
         }

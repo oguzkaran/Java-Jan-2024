@@ -17772,10 +17772,9 @@ public class NumericLottery {
 >*Kabarcık sıralama algoritmasında dizinin yanyana iki elemanı karşılaştırılır. Duruma göre yer değiştirilir. Her yinelemede en büyük eleman daraltılmış dizinin sonuna gider. Böylece her yinelemede bir geriye kadar gidilmiş olur*
 >
 >Örneğin :
->
->		22 8 66 -7 34 -6 17 21 68 45 -10 3 16
->		8 22 -7 34 -6 17 21 66 45 -10 3 16 68
->		8 22 -7 -6 ..
+>22 8 66 -7 34 -6 17 21 68 45 -10 3 16
+>8 22 -7 34 -6 17 21 66 45 -10 3 16 68
+>8 22 -7 -6 ..
 
 ```java
 package org.csystem.util.array.test;  
@@ -17814,6 +17813,197 @@ public class ArrayUtilBubbleSortTest {
     }  
 }
 ```
+
+#### 3 Eylül 2024
+
+>*Seçerek sıralama algoritmasında en küçük eleman bulunur, ilk eleman ile değiştirilir. Dizi bir daraltılır, aynı işlem daraltılmış dizi için yapılır. Böylece ilerleniz
+>Örneğin :
+>
+>22 8 66 -7 34 -6 17 21 68 45 -10 3 16
+>-10 8 66 -7 34 -6 17 21 68 45 22 3 16
+>-10 -7 66 8 34 -6 17 21 68 45 22 3 16
+>. . .*
+
+
+```java
+package org.csystem.util.array.test;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+import static org.csystem.util.array.ArrayUtil.*;  
+  
+public class ArrayUtilSelectionSortTest {  
+    public static void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+        Random r = new Random();  
+  
+        while (true) {  
+            System.out.print("Bir sayı giriniz:");  
+            int count = Integer.parseInt(kb.nextLine());  
+  
+            if (count <= 0)  
+                break;  
+  
+            int [] a = generateRandomArray(r, count, 0, 100);  
+  
+            print(a, 2);  
+            boolean descending = r.nextBoolean();  
+            System.out.printf("Dizi %s olarak sıralanıyor%n", descending ? "azalan sırada" : "artan sırada");  
+            selectionSort(a, descending);  
+            print(a, 2);  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+
+>***Bölümleme (Partition) Algoritması:*** Bu algoritmada amaç, bir dizinin belirli bir koşula uyan elemanlarının dizinin başında, koşula uymayanların ise dizinin sonuna getirilmesidir. Bu algoritma başka bir dizi yaratılmadan da gerçekleştirilebilir (implementation). Zaten başka bir dizi kullanımı efektif değildir. Dizi bölümlendikten sonra ilk koşula uymayan elemanın bulunduğu indeks değerine ***"bölümleme noktası (partition point)"*** denir. Bu durumda dizinin tüm elemanları ilgili koşula uyuyor ise partition point'in değeri dizinin uzunluğudur, dizinin hiç bir elemanı koşula uymuyorsa partitionpoint'in değeri sıfırdır. Bu işlem tipik olarak şu şekilde yapılabilir: Önce dizinin koşula uymayan ilk elemanı bulunur. Sonra ikinci bir indeks, koşula uymayan ilk elemandan bir sonraki elemana konumlandırılır. Eğer eleman (ikinci indeksdeki eleman) koşula uyuyorsa, koşula uymayan eleman ile (birinci indeksteki eleman ile) yer değiştirilir ve birinci indeks artırılır. İkinci indeks her duruda artırılır. Böylece ilerlenir. Bu durumda birinci indeks partition point olarak elde edilmiş olur.
+>Örneğin:
+>2 8 66 7 34 6 17 21 68 45 10 3 16
+>dizisinde 11 değerinden küçük olan elemanların bölümlenmesi şu şekilde elde edilebilir
+>1.indeks:2
+>2.indeks:3
+>
+> 2 8 7 66 34 6 17 21 68 45 10 3 16
+> 1.indeks:3
+> 2.indeks:4
+
+2 8 7 66 34 6 17 21 68 45 10 3 16
+> 1.indeks:3
+> 2.indeks:5
+> 2 8 7 6 34 66 17 21 68 45 10 3 16
+>*1.indeks:4
+> 2.indeks:6
+> . . .
+
+```java
+package org.csystem.util.array.test;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+import static org.csystem.util.array.ArrayUtil.*;  
+  
+public class ArrayUtilPartitionTest {  
+    public static void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+        Random r = new Random();  
+  
+        while (true) {  
+            System.out.print("Input count:");  
+            int count = Integer.parseInt(kb.nextLine());  
+  
+            if (count <= 0)  
+                break;  
+  
+            int [] a = generateRandomArray(r, count, 0, 100);  
+  
+            print(a, 2);  
+  
+            System.out.print("Input threshold:");  
+            int threshold = Integer.parseInt(kb.nextLine());  
+              
+            System.out.printf("Threshold:%d%n", threshold);  
+            int partitionPoint = partition(a, threshold);  
+  
+            print(a);  
+            System.out.printf("Partition Point:%d%n", partitionPoint);  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+
+> ***Sınıf Çalışması:*** Parametresi ile aldığı long türden bir sayının basamaklarından oluşan diziye geri dönen getDigits isimli metodu NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz. 
+> ***Açıklama:*** Metot negatif bir argüman için basamak değerlerini pozitif olarak verecektir
+
+```java
+package org.csystem.util.numeric.test;  
+  
+import static org.csystem.util.numeric.NumberUtil.*;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+import static org.csystem.util.array.ArrayUtil.*;  
+  
+public class NumberUtilGetDigitsTest {  
+    public static void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+        Random r = new Random();  
+  
+        System.out.print("Bir sayı giriniz:");  
+        int n = kb.nextInt();  
+  
+        for (int i = 0; i < n; ++i) {  
+            long val = r.nextLong();  
+  
+            System.out.printf("%d -> ", val);  
+            print(getDigits(val));  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+#### 5 Eylül 2024
+
+>**Sınıf Çalışması:*** Aşağıda prototipi verilen metodu açıklamalara göre yazınız ve test ediniz:
+>public static int [] getHistogramData(int [] a, int n);
+>***Açıklamalar:***  
+>- Metot ArrayUtil sınıfı içerisinde yazılacaktır.
+>- Metodu birinci parametresi içerisinde [0, n] aralığında değerlerden oluşan bir dizi olacaktır.
+>- Parametre ile alınan dizinin değerleri için geçerlilik kontrolü yapılmayacaktır.
+>- Metot parametresi ile aldığı dizinin içerisinde [0, n] aralığındaki sayıların sıklık sayıdan yani hangi sayıdan kaç tane olduğu bilgisine ilişkin diziye geri dönecektir.
+>- Geri dönüş değeri olan dizinin indeks numarası [0, n] aralığındaki ilgili sayıya karşılık gelecektir. Yani örneğin 25 numaralı indeksteki eleman, 25 sayısının kaç tane olduğu bilgisini tutacaktır.
+
+
+```java
+
+```
+
+
+
+
+>**
+
+
+```java
+
+```
+
+
+
+
+>**
+
+
+```java
+
+```
+
+
+
+>**
+
 
 ```java
 
