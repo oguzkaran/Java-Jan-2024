@@ -1,6 +1,6 @@
 /**
  * Utility class for numeric operations
- * Last Update: 8th August 2024
+ * Last Update: 3rd September 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.numeric;
@@ -35,6 +35,11 @@ public class NumberUtil {
 		}
 
 		return result;
+	}
+
+	public static int [] getDigits(long a)
+	{
+		//TODO:
 	}
 
 	public static int getDigitsPowSum(int a)

@@ -1,6 +1,6 @@
 /**
  * Utility class for array operations
- * Last Update: 27th August 2024
+ * Last Update: 3rd September 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.array;
@@ -8,7 +8,6 @@ package org.csystem.util.array;
 import java.util.Random;
 
 public class ArrayUtil {
-
     public static void bubbleSortAscending(int [] a)
     {
         for (int i = 0; i < a.length - 1; ++i)
@@ -27,12 +26,38 @@ public class ArrayUtil {
 
     public static void selectionSortAscending(int [] a)
     {
+        int min, minIndex;
 
+        for (int i = 0; i < a.length - 1; ++i) {
+            min = a[i];
+            minIndex = i;
+
+            for (int k = i + 1; k < a.length; ++k)
+                if (a[k] < min) {
+                    min = a[k];
+                    minIndex = k;
+                }
+            a[minIndex] = a[i];
+            a[i] = min;
+        }
     }
 
     public static void selectionSortDescending(int [] a)
     {
-        
+        int max, maxIndex;
+
+        for (int i = 0; i < a.length - 1; ++i) {
+            max = a[i];
+            maxIndex = i;
+
+            for (int k = i + 1; k < a.length; ++k)
+                if (max < a[k]) {
+                    max = a[k];
+                    maxIndex = k;
+                }
+            a[maxIndex] = a[i];
+            a[i] = max;
+        }
     }
 
     public static void bubbleSort(int [] a)
@@ -88,6 +113,16 @@ public class ArrayUtil {
         return result;
     }
 
+    public static int max(int [] a, int startIndex)
+    {
+        int result = a[startIndex];
+
+        for (int i = startIndex + 1; i < a.length; ++i)
+            result = Math.max(result, a[i]);
+
+        return result;
+    }
+
     public static int min(int [] a)
     {
         int result = a[0];
@@ -96,6 +131,50 @@ public class ArrayUtil {
             result = Math.min(result, a[i]);
 
         return result;
+    }
+
+    public static int min(int [] a, int startIndex)
+    {
+        int result = a[startIndex];
+
+        for (int i = startIndex + 1; i < a.length; ++i)
+            result = Math.min(result, a[i]);
+
+        return result;
+    }
+
+    public static int partition(int [] a, int threshold)
+    {
+        int partitionPoint = 0;
+
+        while (partitionPoint != a.length && a[partitionPoint] < threshold)
+            ++partitionPoint;
+
+        if (partitionPoint == a.length)
+            return partitionPoint;
+
+        for (int i = partitionPoint + 1; i < a.length; ++i)
+            if (a[i] < threshold)
+                swap(a, i, partitionPoint++);
+
+        return partitionPoint;
+    }
+
+    public static int partitionByEven(int [] a)
+    {
+        int partitionPoint = 0;
+
+        while (partitionPoint != a.length && a[partitionPoint] % 2 == 0)
+            ++partitionPoint;
+
+        if (partitionPoint == a.length)
+            return partitionPoint;
+
+        for (int i = partitionPoint + 1; i < a.length; ++i)
+            if (a[i] % 2 == 0)
+                swap(a, i, partitionPoint++);
+
+        return partitionPoint;
     }
 
     public static void print(int [] a)
