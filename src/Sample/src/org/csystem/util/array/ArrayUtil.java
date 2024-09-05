@@ -1,6 +1,6 @@
 /**
  * Utility class for array operations
- * Last Update: 3rd September 2024
+ * Last Update: 5th September 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.array;
@@ -101,6 +101,16 @@ public class ArrayUtil {
             a[i] = random.nextBoolean();
 
         return a;
+    }
+
+    public static int [] histogramData(int [] a, int n)
+    {
+        int [] data = new int[n + 1];
+
+        for (int i = 0; i < a.length; ++i)
+            ++data[a[i]];
+
+        return data;
     }
 
     public static int max(int [] a)

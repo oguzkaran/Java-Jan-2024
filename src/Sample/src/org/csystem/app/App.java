@@ -1,36 +1,30 @@
 package org.csystem.app;
 
-import org.csystem.util.string.StringUtil;
-
-import java.util.Scanner;
-
 class App {
 	public static void main(String [] args)
 	{
-		ChangeCaseTest.run();;
+		Sample [] samples;
+
+		samples = new Sample[10];
+
+		for (int i = 0; i < 10; ++i)
+			samples[i] = new Sample(i);
+
+		System.out.println("Dizi elemanları yazdırılıyor:");
+		for (int i = 0; i < 10; ++i)
+			System.out.printf("%d ", samples[i].x);
+
+		System.out.println();
 	}
 }
 
-class ChangeCaseTest {
-	public static void run()
+class Sample {
+	public int x;
+
+	public Sample(int a)
 	{
-		Scanner kb = new Scanner(System.in);
-
-		while (true) {
-			System.out.print("Input string:");
-			String s = kb.nextLine();
-
-			System.out.printf("%s%n", StringUtil.changeCase(s));
-
-			if ("exit".equals(s))
-				break;
-		}
+		x = a;
 	}
-}
 
-class Util {
-	public static String changeCase(String s)
-	{
-		//TODO
-	}
+	//...
 }

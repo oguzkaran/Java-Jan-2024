@@ -2121,7 +2121,8 @@ yuvarlanır (rounding error).
 >	`\b`	-> backspace\
 >	`'`		-> single quote\
 >	`"`		-> double quote (optional)\
->	`\`		-> back slash\
+>	`\`		-> back slash
+>	\0  -> null karakter
 >Escape sequence karakterler string literal içerisinde kendi anlamlarındadır.
 
 >`Line Feed` *karakter sabiti*
@@ -14610,7 +14611,7 @@ class StringUtil {
 
 >`String` *sınıfının static* `valueOf` *metotları temel bir türe ilişkin değerin yazı karşılığını elde etmekte kullanılır.*
 	
-**_Anahtar Notlar:_** Aldığı parametreleri kullanarak bir nesnenin referansına geri dönen bir "factory method" denir. Factory bir metot ilgili sınıfa aitse static olarak bildirilir. Bu anlamda valueOf metodu bir factory metottur. 
+**_Anahtar Notlar:_** Aldığı parametreleri kullanarak bir nesnenin referansına geri dönen bir metoda "factory method" denir. Factory bir metot ilgili sınıfa aitse static olarak bildirilir. Bu anlamda valueOf metodu bir factory metottur. 
 
 **_Anahtar Notlar:_** JavaSE'de bazı sınıfların çeşitli `factory metotları` bulunur. Java 8'e kadar bu tarz metotların isimlendirilmesinde genel olarak "valueOf" kullanılırken, `Java 8` ve sonrasında "of" ismi kullanılmaktadır. Bu anlamda bazı sınıfların `valueOf` veya `of` gibi factory metotları bulunur. Şüphesiz farklı isimlerde factory metotları olan sınıflar da vardır. 
 	
@@ -17927,7 +17928,7 @@ public class ArrayUtilPartitionTest {
 ```
 
 
-> ***Sınıf Çalışması:*** Parametresi ile aldığı long türden bir sayının basamaklarından oluşan diziye geri dönen getDigits isimli metodu NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz. 
+> **_Sınıf Çalışması:_** Parametresi ile aldığı long türden bir sayının basamaklarından oluşan diziye geri dönen getDigits isimli metodu NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz. 
 > ***Açıklama:*** Metot negatif bir argüman için basamak değerlerini pozitif olarak verecektir
 
 ```java
@@ -17966,14 +17967,224 @@ public class NumberUtilGetDigitsTest {
 
 #### 5 Eylül 2024
 
->**Sınıf Çalışması:*** Aşağıda prototipi verilen metodu açıklamalara göre yazınız ve test ediniz:
->public static int [] getHistogramData(int [] a, int n);
+>**_Sınıf Çalışması:_** Aşağıda prototipi verilen metodu açıklamalara göre yazınız ve test ediniz:
+>`public static int [] histogramData(int [] a, int n);`
 >***Açıklamalar:***  
 >- Metot ArrayUtil sınıfı içerisinde yazılacaktır.
->- Metodu birinci parametresi içerisinde [0, n] aralığında değerlerden oluşan bir dizi olacaktır.
+>- Metodun birinci parametresi, içerisinde [0, n] aralığında değerlerden oluşan bir dizi olacaktır.
 >- Parametre ile alınan dizinin değerleri için geçerlilik kontrolü yapılmayacaktır.
->- Metot parametresi ile aldığı dizinin içerisinde [0, n] aralığındaki sayıların sıklık sayıdan yani hangi sayıdan kaç tane olduğu bilgisine ilişkin diziye geri dönecektir.
+>- Metot, parametresi ile aldığı dizinin içerisinde [0, n] aralığındaki sayıların sıklık sayılarından yani hangi sayıdan kaç tane olduğu bilgisine ilişkin diziye geri dönecektir.
 >- Geri dönüş değeri olan dizinin indeks numarası [0, n] aralığındaki ilgili sayıya karşılık gelecektir. Yani örneğin 25 numaralı indeksteki eleman, 25 sayısının kaç tane olduğu bilgisini tutacaktır.
+
+
+```java
+package org.csystem.util.array.test;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+import static org.csystem.util.array.ArrayUtil.*;  
+  
+public class ArrayUtilHistogramDataTest {  
+    public static void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+        Random r = new Random();  
+  
+        while (true) {  
+            System.out.print("Bir sayı giriniz:");  
+            int count = Integer.parseInt(kb.nextLine());  
+  
+            if (count <= 0)  
+                break;  
+  
+            int [] a = generateRandomArray(r, count, 0, 11);  
+  
+            System.out.print("Dizi:");  
+            print(a, 2);  
+            int [] hist = histogramData(a, 10);  
+            System.out.print("Sayı dizisi:");  
+            print(hist, 2);  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+>*char türden diziler String sınıfına benzetilebilir. char türden diziler immutable değildir. Bu anlamda char türden diziler String sınıfına yardımcı olarak da kullanılabilir. Örneğin String sınıfının immutable olmasından dolayı oluşabilecek maliyetli bir durumda char türden dizi kullanılabilir. Şüphesiz böyle bir durumda StringBuilder sınıfı da String sınıfına yardımcı olarak tercih edilebilir. Zaten StringBuilder sınıfı da genellikle içsel olarak char türden dizi kullanmaktadır. String sınıfının toCharArray metodu ile yazıya ilişkin karakterlerden oluşan char türden dizi elde edilebilir. Şüphesiz toCharArray metodu ile her çağrıda yeni bir dizi yaratılır. String sınıfnın char [] parametreli ctor'ları ile char türden dizi içerisindeki karakteri tutan String nesnesi elde edilebilir. String sınıfnın char [] parametresi alan 3 parametreli ctor'u dizinin herhangi bir indeksinden başlayarak 3. parametresi ile aldığı sayı kadar karakterden oluşan bir String nesnesi yaratılmasını sağlar. String sınıfının char [] parametreli valueOf factory metotları da yine char türden bir diziden String nesnesi elde etmek için kullanılabilir. Aşağıdaki demo örneği inceleyiniz*
+
+
+```java
+package org.csystem.app;  
+  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       Scanner kb = new Scanner(System.in);  
+  
+       while (true) {  
+          System.out.print("Input a text:");  
+          String s = kb.nextLine();  
+  
+          if ("quit".equals(s))  
+             break;  
+  
+          char [] chars = s.toCharArray();  
+  
+          for (int i = 0; i < chars.length / 2; ++i) {  
+             char temp = chars[i];  
+  
+             chars[i] = chars[chars.length - 1 - i];  
+             chars[chars.length - 1 - i] = temp;  
+          }  
+  
+          System.out.printf("Reverse of text:%s%n", new String(chars));  
+          System.out.printf("Reverse of text:%s%n", String.valueOf(chars));  
+       }  
+    }  
+}
+```
+
+
+
+>***_Sınıf Çalışması:_** StringUtil sınıfı içerisinde daha önceden yazılmış olaran changeCase metodunu char türden dizi kullanarak Util isimli bir sınıf içerisinde yazınız. Util sınıfını, test kodlarını ve entry point'i içeren sınıfı tek bir derleme biriminde yazabilirsiniz*
+
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.string.StringUtil;  
+  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       ChangeCaseTest.run();;  
+    }  
+}  
+  
+class ChangeCaseTest {  
+    public static void run()  
+    {  
+       Scanner kb = new Scanner(System.in);  
+  
+       while (true) {  
+          System.out.print("Input string:");  
+          String s = kb.nextLine();  
+  
+          System.out.printf("%s%n", StringUtil.changeCase(s));  
+  
+          if ("exit".equals(s))  
+             break;  
+       }  
+    }  
+}  
+  
+class Util {  
+    public static String changeCase(String s)  
+    {  
+       char [] c = s.toCharArray();  
+  
+       for (int i = 0; i < c.length; ++i)  
+          c[i] = Character.isUpperCase(c[i]) ? Character.toLowerCase(c[i]) : Character.toUpperCase(c[i]);  
+  
+       return String.valueOf(c);  
+    }  
+}
+```
+
+
+
+>***Referans Dizileri:*** Her bir elemanı bir referans olan dizilere denir. Bu durumda dizinin her bir elemanı ilgili türden bir adres tutar. Bu durumda bir referans dizisinin yaratılması, elemanı olan her bir referansın gösterdiği nesnelerin de yaratılması anlamı gelmez. Yani bir referans dizisi yaratıldıktan sonra diziye ilişkin referanslara da uygun adreslerin verilmesi gerekir. Bir referans dizisi ilk değer vermeden yaratıldığında her bir referansa null değeri atanır.
+>***Anahtar Notlar:*** Programlamada kullanılmayan adrese `null adres (null address)` denilmektedir. Java'da null adres null isimli bir sabit ile temsil edilir. null bir referansın default değeri olarak atanır. nulll adres detayları ileride ele alınacaktır.
+
+>Aşağıdaki örnekte referans dizisi yaratılmış ancak, dizinin elemanı olan referanslar herhangi bir nesneyi göstermediğinden exception oluşur
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.string.StringUtil;  
+  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       Sample [] samples;  
+  
+       samples = new Sample[10];  
+  
+       for (int i = 0; i < 10; ++i)  
+          samples[i].x = i;  
+  
+       System.out.println("Dizi elemanları yazdırılıyor:");  
+       for (int i = 0; i < 10; ++i)  
+          System.out.printf("%d ", samples[i].x);  
+  
+       System.out.println();  
+    }  
+}  
+  
+class Sample {  
+    public int x;  
+  
+    public Sample(int a)  
+    {  
+       x = a;  
+    }  
+  
+    //...  
+}
+```
+
+
+
+>*Yukarıdaki örnek aşağıdaki gibi her bir referansa yeni yaratılmış bir nesnenin adresi verilerek yapılabilir. Şüphesiz duruma göre (yani domain'e) göre referanslara verilecek adresler daha önceden yaratılmış nesnelerin adresleri de olabilir. Çözüm durumu anlatmak için yapılmıştır*
+
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       Sample [] samples;  
+  
+       samples = new Sample[10];  
+  
+       for (int i = 0; i < 10; ++i)  
+          samples[i] = new Sample(i);
+  
+       System.out.println("Dizi elemanları yazdırılıyor:");  
+       for (int i = 0; i < 10; ++i)  
+          System.out.printf("%d ", samples[i].x);  
+  
+       System.out.println();  
+    }  
+}  
+  
+class Sample {  
+    public int x;  
+  
+    public Sample(int a)  
+    {  
+       x = a;  
+    }  
+  
+    //...  
+}
+```
+
+
+
+>**
 
 
 ```java
@@ -17989,7 +18200,6 @@ public class NumberUtilGetDigitsTest {
 ```java
 
 ```
-
 
 
 
