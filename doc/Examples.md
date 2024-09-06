@@ -2114,17 +2114,17 @@ yuvarlanır (rounding error).
 >- `boolean` türden iki tane sabit vardır: `true`, `false`.	
 >- Tek tırnak içerisinde yazılan karaterlere ilişkin sembollere tırnaklarıyla beraber karakter sabitleri `character literals` denir. Karakter sabitleri `char` türdendir. Tek tırnak içerisinde özel bazı durumlar dışında tek bir karakter yazılır. Aksi durumda error oluşur. Bir karakter sabiti ilgili karakterin karakter tablosundaki sıra numarasına karşılık gelir. Aslında biz char türden sabit yazarak o sabite ilişkin karakterin sıra numarasını elde etmiş oluruz. Bu sıra numarasını `char` türden bir değişken içerisinde saklayarak mantıksal olarak o karakteri tutmuş oluruz. Bazı karakterler klavyedeki tuş kombinasyonları ile doğrudan yazılamazlar. Bazı karakterler ise doğrudan ekrana basılamazlar `non-printable`. Bu tarz karakterler doğrudan tek tırnak içerisinde karakter sabiti olarak yazılamazlar. Bu karakterler ters bölü `\` karateri ile birlikte özel bir karakter kullanılarak tek tırnak içerisinde yani karakter sabiti olarak yazılırlar. Ters bölü ile yazılan karakterlere `escape sequence` karakterler denir. Java'da desteklenen escape sequence karakterler şunlardır:
 
-|     |                          |
-| --- | ------------------------ |
-| \n  | Line Feed (LF)           |
-| \r  | Carriage Return (CR)     |
-| \t  | Tabular (horizontal tab) |
-| \f  | Form feed                |
-| \b  | backspace                |
-| '   | single quote             |
-| "   | double quote (optional)  |
-| \   | back slash               |
-| \0  | null karakter            |
+|       |                          |
+| ----- | ------------------------ |
+| '\n'  | Line Feed (LF)           |
+| '\r'  | Carriage Return (CR)     |
+| '\t'  | Tabular (horizontal tab) |
+| '\f'  | Form feed                |
+| '\b'  | backspace                |
+| '\\'' | single quote             |
+| '\\"' | double quote (optional)  |
+| '\\'  | back slash               |
+| '\0'  | null karakter            |
 
 >Escape sequence karakterler string literal içerisinde kendi anlamlarındadır.
 
