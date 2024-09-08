@@ -611,7 +611,7 @@ class Mample {
 | float    | 4              | [±3.6 * 10-38, ±3.6 * 10+38]                 |
 | double   | 8              | [±1.6 * 10-308, ±1.6 * 10+308]               |
 | char     | 2              | [0, 65535]                                   |
-| boolean  | 1              | true, false                                  |
+| boolean  | -              | true, false                                  |
 
 >**_Açıklamalar:_**
 >- Java'da temel tür isimlerinin her biri birer anahtar sözcüktür.
