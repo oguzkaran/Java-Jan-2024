@@ -2,22 +2,42 @@ package org.csystem.app.datetime;
 
 public class DateUtil {
 	public static int [] daysOfMoths = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	public static String [] daysOfWeekTR = {"Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"};
+	public static String [] daysOfWeekEN = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+	public static String [] monthsTR = {"", "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran",
+			"Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"};
+	public static String [] monthsEN = {"", "January", "February", "March", "April", "May", "June",
+			"July", "August", "September", "October", "November", "December"};
+
 	public static void printDateTR(int day, int month, int year)
 	{
 		if (!isValidDate(day, month, year)) {
 			System.out.println("Geçersiz tarih!...");
 			return;
 		}
-		
-		switch (getDayOfWeek(day, month, year)) {
-			case 0 -> System.out.printf("%02d/%02d/%04d Pazar%n", day, month, year);			
-			case 1 -> System.out.printf("%02d/%02d/%04d Pazartesi%n", day, month, year);		
-			case 2 -> System.out.printf("%02d/%02d/%04d Salı%n", day, month, year);			
-			case 3 -> System.out.printf("%02d/%02d/%04d Çarşamba%n", day, month, year);		
-			case 4 -> System.out.printf("%02d/%02d/%04d Perşembe%n", day, month, year);		
-			case 5 -> System.out.printf("%02d/%02d/%04d Cuma%n", day, month, year);		
-			case 6 -> System.out.printf("%02d/%02d/%04d Cumartesi%n", day, month, year);		
-		}			
+
+		System.out.printf("%d %s %d %s%n", day, monthsTR[month], year, daysOfWeekTR[getDayOfWeek(day, month, year)]);
+	}
+
+	public static void printDateEN(int day, int month, int year)
+	{
+		if (!isValidDate(day, month, year)) {
+			System.out.println("Invalid date!...");
+			return;
+		}
+
+		System.out.printf("%d%s %s %d %s%n", day, getDaySuffix(day), monthsEN[month], year,
+				daysOfWeekEN[getDayOfWeek(day, month, year)]);
+	}
+
+	public static String getDaySuffix(int day)
+	{
+		return switch (day) {
+			case 1, 21, 31 -> "st";
+			case 2, 22 -> "nd";
+			case 3, 23 -> "rd";
+			default -> "th";
+		};
 	}
 	
 	public static int getDayOfWeek(int day, int month, int year)

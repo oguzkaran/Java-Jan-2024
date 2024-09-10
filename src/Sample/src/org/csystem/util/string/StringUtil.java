@@ -1,9 +1,11 @@
 /**
  * Utility class for string operations
- * Last Update: 8th August 2024
+ * Last Update: 10th September 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.string;
+
+import java.util.Random;
 
 public class StringUtil {
 	public static String capitalize(String s)
@@ -35,6 +37,45 @@ public class StringUtil {
 		return count;
 	}
 
+	public static String generateRandomText(Random random, int count, String sourceText)
+	{
+		char [] c = new char[count];
+
+		for (int i = 0; i < count; ++i)
+			c[i] = sourceText.charAt(random.nextInt(sourceText.length()));
+
+		return String.valueOf(c);
+	}
+
+	public static String generateRandomTextEN(Random random, int count)
+	{
+		return generateRandomText(random, count, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+	}
+
+	public static String generateRandomTextTR(Random random, int count)
+	{
+		return generateRandomText(random, count, "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZabcçdefgğhıijklmnoöprsştuüvyz");
+	}
+
+	public static String [] generateRandomTexts(Random random, int count, int origin, int bound, String sourceText)
+	{
+		String [] str = new String[count];
+
+		for (int i = 0; i < count; ++i)
+			str[i] = generateRandomText(random, random.nextInt(origin, bound), sourceText);
+
+		return str;
+	}
+
+	public static String [] generateRandomTextsEN(Random random, int count, int origin, int bound)
+	{
+		return generateRandomTexts(random, count, origin, bound, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+	}
+
+	public static String [] generateRandomTextsTR(Random random, int count, int origin, int bound)
+	{
+		return generateRandomTexts(random, count, origin, bound, "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZabcçdefgğhıijklmnoöprsştuüvyz");
+	}
 
 	public static boolean isPalindrome(String s)
 	{
@@ -79,13 +120,7 @@ public class StringUtil {
 
 	public static boolean isPangramEN(String s)
 	{
-		s = s.toLowerCase();
-
-		for (char c = 'a'; c <= 'z'; ++c)
-			if (s.indexOf(c) == -1)
-				return false;
-
-		return true;
+		return isPangram(s.toLowerCase(), "abcdefghijklmnopqrstuvwxyz");
 	}
 
 	public static boolean isPangramTR(String s)
@@ -93,6 +128,20 @@ public class StringUtil {
 		return isPangram(s.toLowerCase(), "abcçdefgğhıijklmnoöprsştuüvyz");
 	}
 
+	public static String join(String [] s, String delimiter)
+	{
+		StringBuilder sb = new StringBuilder();
+
+		for (int i = 0; i < s.length; ++i)
+			sb.append(s[i]).append(delimiter);
+
+		return sb.substring(0, sb.length() - delimiter.length());
+	}
+
+	public static String join(String [] s, char delimiter)
+	{
+		return join(s, String.valueOf(delimiter));
+	}
 
 	public static String padLeading(String s, int n, char ch)
 	{

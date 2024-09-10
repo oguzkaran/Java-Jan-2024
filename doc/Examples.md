@@ -16619,7 +16619,7 @@ class Sample {
 }
 ```
 
->*Aşağıdaki demo örnekte* `Sample` *sınıfı UDT içerisinde bildirildiğinden yıldızsız import bildirimi error oluşturur*
+>*Aşağıdaki demo örnekte `Sample` sınıfı aynı derleme biriminde de bildirildiğinden içerisinde bildirildiğinden error oluşur*
 
 ```java
 package org.csystem.app;
@@ -18056,7 +18056,7 @@ class App {
 
 
 
->***_Sınıf Çalışması:_** StringUtil sınıfı içerisinde daha önceden yazılmış olaran changeCase metodunu char türden dizi kullanarak Util isimli bir sınıf içerisinde yazınız. Util sınıfını, test kodlarını ve entry point'i içeren sınıfı tek bir derleme biriminde yazabilirsiniz*
+>***Sınıf Çalışması:** StringUtil sınıfı içerisinde daha önceden yazılmış olaran changeCase metodunu char türden dizi kullanarak Util isimli bir sınıf içerisinde yazınız. Util sınıfını, test kodlarını ve entry point'i içeren sınıfı tek bir derleme biriminde yazabilirsiniz*
 
 
 ```java
@@ -18105,10 +18105,10 @@ class Util {
 
 
 
->***Referans Dizileri:*** Her bir elemanı bir referans olan dizilere denir. Bu durumda dizinin her bir elemanı ilgili türden bir adres tutar. Bu durumda bir referans dizisinin yaratılması, elemanı olan her bir referansın gösterdiği nesnelerin de yaratılması anlamı gelmez. Yani bir referans dizisi yaratıldıktan sonra diziye ilişkin referanslara da uygun adreslerin verilmesi gerekir. Bir referans dizisi ilk değer vermeden yaratıldığında her bir referansa null değeri atanır.
->***Anahtar Notlar:*** Programlamada kullanılmayan adrese `null adres (null address)` denilmektedir. Java'da null adres null isimli bir sabit ile temsil edilir. null bir referansın default değeri olarak atanır. nulll adres detayları ileride ele alınacaktır.
+>***Referans Dizileri:*** Her bir elemanı bir referans olan dizilere denir. Bu durumda dizinin her bir elemanı ilgili türden bir adres tutar. Bu durumda bir referans dizisinin yaratılması, elemanı olan her bir referansın gösterdiği nesnelerin de yaratılması anlamına gelmez. Yani bir referans dizisi yaratıldıktan sonra diziye ilişkin referanslara da uygun adreslerin verilmesi gerekir. Bir referans dizisi ilk değer vermeden yaratıldığında her bir referansa null değeri atanır.
+>***Anahtar Notlar:*** Programlamada kullanılmayan adrese `null adres (null address)` denilmektedir. Java'da null adres null isimli bir sabit ile temsil edilir. null, bir referansın default değeri olarak atanır. null adrese ilişkin diğer detaylar ileride ele alınacaktır.
 
->Aşağıdaki örnekte referans dizisi yaratılmış ancak, dizinin elemanı olan referanslar herhangi bir nesneyi göstermediğinden exception oluşur
+>Aşağıdaki demo örnekte referans dizisi yaratılmış ancak, dizinin elemanı olan referanslar herhangi bir nesneyi göstermediğinden exception oluşur
 
 ```java
 package org.csystem.app;  
@@ -18148,8 +18148,7 @@ class Sample {
 ```
 
 
-
->*Yukarıdaki örnek aşağıdaki gibi her bir referansa yeni yaratılmış bir nesnenin adresi verilerek yapılabilir. Şüphesiz duruma göre (yani domain'e) göre referanslara verilecek adresler daha önceden yaratılmış nesnelerin adresleri de olabilir. Çözüm durumu anlatmak için yapılmıştır*
+>*Yukarıdaki örnek aşağıdaki gibi, her bir referansa yeni yaratılmış bir nesnenin adresi verilerek yapılabilir. Şüphesiz duruma göre (yani domain'e göre) referanslara verilecek adresler daha önceden yaratılmış nesnelerin adresleri de olabilir. Çözüm durumu anlatmak için yapılmıştır*
 
 
 ```java
@@ -18185,6 +18184,253 @@ class Sample {
 }
 ```
 
+#### 10 Eylül 2024
+
+>*Referans dizilerine ilk değer verilmesi aslında referans dizisinin elemanları olan referanslara adreslerin verilmesi demektir. Aşağıdaki demo örneiği inceleyiniz*
+
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       Sample s1 = new Sample(67);  
+       Sample s2 = new Sample(35);  
+       Sample [] samples = {s1, new Sample(23), s1, s2, new Sample(10), s2};  
+  
+       System.out.println("Dizi elemanları yazdırılıyor:");  
+       for (int i = 0; i < samples.length; ++i)  
+          System.out.printf("%d ", samples[i].x);  
+  
+       System.out.println();  
+    }  
+}  
+  
+class Sample {  
+    public int x;  
+  
+    public Sample(int a)  
+    {  
+       x = a;  
+    }  
+  
+    //...  
+}
+```
+
+
+
+>*Pratikte String türden referans dizileri çok sık kullanılmaktadır. String türden bir diziye ilk değer olarak String sabitleri de (string literals) verilebilir*
+
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       String [] cities = {"ankara", "istanbul", "izmir", "zonguldak", "muğla"};  
+  
+       for (int i = 0; i < cities.length; ++i)  
+          System.out.println(cities[i].toUpperCase());  
+    }  
+}
+```
+
+
+
+>**_Sınıf Çalışması:_** Parametresi ile aldığı `int` türden gün, ay ve yıl bilgilerine ilişkin tarihin haftanın hangi günü olduğu bilgisine geri dönen `getDayOfWeek` isimli metodu ve uygulamayı aşağıdaki açıklamalara göre yazınız
+>	
+>**_Açıklamalar:_**
+>- JavaSE'de bulunan veya başka bir kütüphanedeki tarih zaman işlemlerine ilişkin sınıflar ve metotlar kullanılmayacaktır.
+>- getDayOfWeek metodu tarih geçerlilik kontrolü yapmayacaktır.
+>- getDayOfWeek metodu haftanın hangi günü olduğuna ilişkin bilgiyi şu algoritmaya göre bulacaktır: `01.01.1900` tarihi ile ilgili tarih (dahil) arasındaki gün sayısı hesaplanıp 7 ile bölümünden elde edilen kalan alındığında 0 Pazar, 1 Pazartesi, ..., 6 Cumartesi anlamına gelir.
+>- Program klavyeden gün ay ve yıl bilgisini isteyecek ve eğer tarih geçerli ise aşağıdaki formatta tarihi yazdırıcaktır:
+>
+>		25/04/2024 Perşembe
+>- Tarih geçersiz ise Geçersiz tarih yazdıracaktır. Klavyeden gün ay ve yıl bilgilerinin 3'ü birden sıfır girildiğinde program sonlandırılacaktır. 
+>
+>*Not: İleride daha iyisi yazılacaktır*
+
+```java
+package org.csystem.app.datetime;  
+  
+import java.util.Scanner;  
+  
+class DemoDateApp {  
+    public static void run()  
+    {  
+       Scanner kb = new Scanner(System.in);  
+         
+       while (true) {  
+          System.out.print("Gün, ay ve yıl bilgilerini giriniz:");  
+          int day = kb.nextInt();  
+          int month = kb.nextInt();  
+          int year = kb.nextInt();  
+            
+          DateUtil.printDateTR(day, month, year);  
+          DateUtil.printDateEN(day, month, year);  
+            
+          if (day == 0 && month == 0 && year == 0)  
+             break;  
+       }  
+         
+       System.out.println("Tekrar yapıyor musunuz?");  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+       run();  
+    }  
+}
+```
+
+```java
+package org.csystem.app.datetime;  
+  
+public class DateUtil {  
+    public static int [] daysOfMoths = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};  
+    public static String [] daysOfWeekTR = {"Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"};  
+    public static String [] daysOfWeekEN = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};  
+    public static String [] monthsTR = {"", "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran",  
+          "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"};  
+    public static String [] monthsEN = {"", "January", "February", "March", "April", "May", "June",  
+          "July", "August", "September", "October", "November", "December"};  
+  
+    public static void printDateTR(int day, int month, int year)  
+    {  
+       if (!isValidDate(day, month, year)) {  
+          System.out.println("Geçersiz tarih!...");  
+          return;  
+       }  
+  
+       System.out.printf("%d %s %d %s%n", day, monthsTR[month], year, daysOfWeekTR[getDayOfWeek(day, month, year)]);  
+    }  
+  
+    public static void printDateEN(int day, int month, int year)  
+    {  
+       if (!isValidDate(day, month, year)) {  
+          System.out.println("Invalid date!...");  
+          return;  
+       }  
+  
+       System.out.printf("%d%s %s %d %s%n", day, getDaySuffix(day), monthsEN[month], year,  
+             daysOfWeekEN[getDayOfWeek(day, month, year)]);  
+    }  
+  
+    public static String getDaySuffix(int day)  
+    {  
+       return switch (day) {  
+          case 1, 21, 31 -> "st";  
+          case 2, 22 -> "nd";  
+          case 3, 23 -> "rd";  
+          default -> "th";  
+       };  
+    }  
+      
+    public static int getDayOfWeek(int day, int month, int year)  
+    {  
+       int totalDays = getDayOfYear(day, month, year);  
+         
+       for (int y = 1900; y < year; ++y) {  
+          totalDays += 365;  
+          if (isLeapYear(y))  
+             ++totalDays;  
+       }  
+         
+       return totalDays % 7;  
+    }  
+      
+      
+    public static int getDayOfYear(int day, int month, int year)  
+    {  
+       int dayOfYear = day;  
+  
+       for (int m = month - 1; m >= 1; --m)  
+          dayOfYear += daysOfMoths[m];  
+  
+       if (month > 2 && isLeapYear(year))  
+          ++dayOfYear;  
+         
+       return dayOfYear;  
+    }  
+      
+    public static boolean isValidDate(int day, int month, int year)  
+    {  
+       return 1 <= day && day <= 31 &&  1 <= month && month <= 12 && day <= getDays(month, year);  
+    }  
+      
+    public static int getDays(int month, int year)  
+    {  
+       return month == 2 && isLeapYear(year) ? 29 : daysOfMoths[month];  
+    }  
+      
+    public static boolean isLeapYear(int year)  
+    {  
+       return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;  
+    }  
+}
+```
+
+>***Sınıf Çalışması:*** Aşağıda prototipi verilen metodu StringUtil sınıfı içerisinde açıklamalara göre yazınız ve aşağıdaki kod ile test ediniz:
+>`public static String join(String [] s, String delimiter)` 
+>***Açıklamalar:*** 
+>- Metot birinci parametresi ile aldığı String dizisi ile tutulan yazıları ikinci parametresi ile aldığı separator ile birleştirilmiş bir yazıya geri dönecektir.
+>- Metot parametre geçerlilik kontrolü yapmayacaktır
+
+```java
+package org.csystem.util.string.test;  
+  
+import org.csystem.util.string.StringUtil;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+public class StringUtilJoinTest {  
+    public static void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+        Random random = new Random();  
+  
+        System.out.print("Bir sayı giriniz:");  
+        String [] s = StringUtil.generateRandomTextsTR(random, kb.nextInt(), 5, 16);  
+          
+        System.out.printf("(%s)", StringUtil.join(s, "--"));  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+>***Anahtar Notlar:*** Aslında yukarıdaki metot doğrudan String sınıfının static join metodu çağrılarak da yapılabilir. Bu metodun parametrelerinin türleri daha sonra ele alınacaktır
+
+
+>**
+
+```java
+
+```
+
+
+
+>**
+
+
+```java
+
+```
+
+
+>**
+
+
+```java
+
+```
 
 
 >**
@@ -18196,7 +18442,6 @@ class Sample {
 
 
 
-
 >**
 
 
@@ -18213,11 +18458,3 @@ class Sample {
 
 ```
 
-
-
->**
-
-
-```java
-
-```
