@@ -18406,49 +18406,390 @@ public class StringUtilJoinTest {
 }
 ```
 
->***Anahtar Notlar:*** Aslında yukarıdaki metot doğrudan String sınıfının static join metodu çağrılarak da yapılabilir. Bu metodun parametrelerinin türleri daha sonra ele alınacaktır
+>***Anahtar Notlar:*** Aslında yukarıdaki metot doğrudan String sınıfının static join metodu çağrılarak da yapılabilir. Bu metodun parametrelerine ilişkin detaylar daha sonra ele alınacaktır.
 
+#### 12 Eylül 2024
+
+>*String sınıfının `split` isimli metodu ile bir yazı ayraç (delimiter/separator) ya da ayraçlara göre parçalanabilir. Bu metot parametresi ile ayraç veya ayraçlara ilişkin bir yazı alır. Bu metot ayraç veya ayraçlara ilişkin yazıyı bir düzenli ifade (regular expression) pattern'i olarak alır.*
+>
+>***Anahtar Notlar:*** Bir yazı içerisinde belirli kalıplara uygun yazıları aramak için düzenli ifade motorları (regular expression engines/regex engines) kullanılır. Örneğin bir yazı içerisinde sayıların bulunması isteniyorsa ya da örneğin bir yazı içerisinde gg/aa/yyyy formatındaki tarih bilgileri bulunması isteniyorsa ya da örneğin bir yazı içerisinde a ile başlayan ve z biten ve içerisinde rakamların olmadığı yazılar bulunmak isteniyorsa düzenli ifadeler kullanılır. Düzenli ifadeler `Java ile Uygulama Geliştirme` kurslarında detaylı olarak ele alınacaktır.
+>
+> ***Burada split metodunun kullanımında en çok karşılaşılan regex patternleri ele alınacaktır. Pattern'lere ilişkin detayların bilinmesine şu an gerek yoktur. Birer kalıp olarak hatırlanması önerilir.*** 
+> *split metodunda ayraçların [ ile ] arasında yazılması önerilir. Bazı karakterlerin regex olarak özel anlamları vardır ve tek başına split metoduna verildiklerinde doğrudan ayraç olarak ele alınmaz. Bu sebeple [ ile ] arasında yazılması uygundur. Eğer [ veya ] ayraç olarak kullanılacaksa ters bölü ile yazılmalıdır. **Yine belirtmekte fayda var ki bu kalıbın da istisna durumları yani detayları söz konusudur.** Ancak pratikte çoğu zaman işimizi görmektedir. [ ile ] arasındaki karakterlerin en az bir tanesinin bulunması durumunda ayraç olarak ele alınır. Örneğin `split("[, .]")` çağrısı virgül, space ve nokta karakterlerini ayraç kabul et anlamındadır.  Ancak burada iki ayraç yanyana geldiğinde aralarındaki boş string de diziye eklenir. Boş string eklenmesi istenmiyorsa yani ayraçların istenildiği kadar yanyana olması durumunda da ayraç olması isteniyorsa ]'den sonra + konmalıdır: `split("[, .]+")*
+
+>Aşağıdaki demo örnekte boş string'lerin de diziye eklendiğini gözlemleyiniz
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       String s = "Bugün hava çok güzel, çok çok güzel. Yarın nasıl olacak acaba?";  
+       String [] str = s.split("[, .]");  
+  
+       for (int i = 0; i < str.length; ++i)  
+          System.out.printf("(%s)%n", str[i]);
+    }  
+} 
+```
+
+
+>*Aşağıdaki demo örnekte boş string'lerin diziye eklenmediğini gözlemleyiniz*
+
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       String s = "Bugün hava çok güzel, çok çok güzel. Yarın nasıl olacak acaba?";  
+       String [] str = s.split("[, .]+");  
+         
+       for (int i = 0; i < str.length; ++i)  
+          System.out.printf("(%s)%n", str[i]);
+    }  
+}
+```
+
+
+>*Aşağıdaki örnekte [ ve ] de ayraç olarak verilmiştir*
+
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       String s = "Bugün hava [çok] güzel, [çok] çok güzel. Yarın nasıl olacak acaba?";  
+       String [] str = s.split("[, .\\]\\[]+");  
+  
+       for (int i = 0; i < str.length; ++i)  
+          System.out.printf("(%s)%n", str[i]);  
+    }  
+}
+```
+
+
+>*Aşağıdaki demo örneği inceleyiniz*
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.string.StringUtil;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       String s = "Bugün hava [çok] güzel, [çok] çok güzel. Yarın nasıl olacak acaba?";  
+       String [] str = StringUtil.split(s, ", . ] [");  
+  
+       for (int i = 0; i < str.length; ++i)  
+          System.out.printf("(%s)%n", str[i]);  
+    }  
+}
+```
+
+
+>***Sınıf Çalışması:*** Klavyeden aşağıdaki formatta girilen yazıyı açıklamalara göre ayrıştırınız.
+>öğrenci no:ad soyad:doğum tarihi:ders adı:arasınav notu:final notu
+>***Açıklamalar:*** 
+>- Yazının format geçerlilik kontrolü yapılmayacaktır.
+>- Formata ilişkin bir örnek aşağıdaki gibidir:
+>1234:Oğuz Karan:10/09/1976:Matematik:67:100
+>- Öğrenci numarasının sayıya çevrilmesine gerek yoktur
+>- Doğum tarihi gg/aa/yyyy formatında olacaktır.
+>- Arasınav ve final notları int türden ele alınacaktır.
+>- Yazının parse edilmesinden sonra %40 * arasınav notu +%60 * final notu formülüne göre en az 50 alanın geçebildiği bir sistemde aşağıdaki gibi bir çıktı üretilecektir:
+>
+> Öğrenci Numarası: 1234
+> Ad Soyad: Oğuz Karan
+> Doğum Tarihi: 10 Eylül 1976
+> Ders Adı: Matematik
+> Arasınav Notu: 67
+> Final Notu: 100
+> Geçme Notu: 86.8
+> Durum: Geçti
+>
+> - Geçme Notu noktadan sonra tek basamak olarak bilimsel yuvarlanacaktır.
+> - Doğum tarihi için JavaSE'de veya başka bir kütüphanede bulunan sınıflar ya da metotlar kullanılmayacaktır. Bunun için DateUtil sınıfınının ilgili metotlarını kullanabilirsiniz.
+> ***Not:*** İleride daha iyisi yazılacaktır.
+
+```java
+package org.csystem.app.school;  
+  
+import java.util.Scanner;  
+  
+public class GradeInfoApp {  
+    public static void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+  
+        while (true) {  
+            System.out.print("Input text:");  
+            String s = kb.nextLine();  
+  
+            if ("quit".equals(s))  
+                break;  
+  
+            GradeInfo gradeInfo = GradeInfoHelper.parse(s);  
+  
+            GradeInfoHelper.printReport(gradeInfo);  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+```java
+package org.csystem.app.school;  
+  
+import static java.lang.Integer.parseInt;  
+import static org.csystem.app.datetime.DateUtil.getDateStrTR;  
+  
+public class GradeInfoHelper {  
+    public static GradeInfo parse(String s)  
+    {  
+        String [] info = s.split("[:]+");  
+  
+        //...  
+  
+        String [] birthDateInfo = info[2].split("[/]+");  
+        GradeInfo gradeInfo = new GradeInfo();  
+  
+        gradeInfo.number = info[0];  
+        gradeInfo.name = info[1];  
+        gradeInfo.birthDate = getDateStrTR(parseInt(birthDateInfo[0]), parseInt(birthDateInfo[1]), parseInt(birthDateInfo[2]));  
+        gradeInfo.lectureName = info[3];  
+        gradeInfo.midtermGrade = parseInt(info[4]);  
+        gradeInfo.finalGrade = parseInt(info[5]);  
+  
+        return gradeInfo;  
+    }  
+  
+    public static void printReport(GradeInfo gradeInfo)  
+    {  
+        double grade = gradeInfo.getGrade();  
+  
+        System.out.printf("Öğrenci Numarası:%s%n", gradeInfo.number);  
+        System.out.printf("Ad Soyad:%s%n", gradeInfo.name);  
+        System.out.printf("Doğum Tarihi:%s%n", gradeInfo.birthDate);  
+        System.out.printf("Ders Adı:%s%n", gradeInfo.lectureName);  
+        System.out.printf("Arasınav Notu:%d%n", gradeInfo.midtermGrade);  
+        System.out.printf("Final Notu:%d%n", gradeInfo.finalGrade);  
+        System.out.printf("Geçme Notu:%.1f%n", grade);  
+        System.out.printf("Durum:%s%n", grade > 50 ? "Geçti" : "Kaldı");  
+    }  
+}
+```
+
+```java
+package org.csystem.app.school;  
+  
+public class GradeInfo {  
+    public String number;  
+    public String name;  
+    public String birthDate;  
+    public String lectureName;  
+    public int midtermGrade;  
+    public int finalGrade;  
+  
+    //...  
+    public double getGrade()  
+    {  
+        return 0.4 * midtermGrade + 0.6 * finalGrade;  
+    }  
+  
+    //...  
+}
+```
+
+```java
+package org.csystem.app.datetime;  
+  
+public class DateUtil {  
+    public static int [] daysOfMoths = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};  
+    public static String [] daysOfWeekTR = {"Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"};  
+    public static String [] daysOfWeekEN = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};  
+    public static String [] monthsTR = {"", "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran",  
+          "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"};  
+    public static String [] monthsEN = {"", "January", "February", "March", "April", "May", "June",  
+          "July", "August", "September", "October", "November", "December"};  
+  
+    public static void printDateTR(int day, int month, int year)  
+    {  
+       if (!isValidDate(day, month, year)) {  
+          System.out.println("Geçersiz tarih!...");  
+          return;  
+       }  
+  
+       System.out.println(getDateStrEN(day, month, year));  
+    }  
+  
+    public static void printDateEN(int day, int month, int year)  
+    {  
+       if (!isValidDate(day, month, year)) {  
+          System.out.println("Invalid date!...");  
+          return;  
+       }  
+  
+       System.out.println(getDateStrTR(day, month, year));  
+    }  
+  
+    public static String getDateStrTR(int day, int month, int year)  
+    {  
+       return "%d %s %d %s".formatted(day, monthsTR[month], year, daysOfWeekTR[getDayOfWeek(day, month, year)]);  
+    }  
+  
+    public static String getDateStrEN(int day, int month, int year)  
+    {  
+       return "%d%s %s %d %s".formatted(day, getDaySuffix(day), monthsEN[month], year,  
+             daysOfWeekEN[getDayOfWeek(day, month, year)]);  
+    }  
+  
+    public static String getDaySuffix(int day)  
+    {  
+       return switch (day) {  
+          case 1, 21, 31 -> "st";  
+          case 2, 22 -> "nd";  
+          case 3, 23 -> "rd";  
+          default -> "th";  
+       };  
+    }  
+      
+    public static int getDayOfWeek(int day, int month, int year)  
+    {  
+       int totalDays = getDayOfYear(day, month, year);  
+         
+       for (int y = 1900; y < year; ++y) {  
+          totalDays += 365;  
+          if (isLeapYear(y))  
+             ++totalDays;  
+       }  
+         
+       return totalDays % 7;  
+    }  
+      
+      
+    public static int getDayOfYear(int day, int month, int year)  
+    {  
+       int dayOfYear = day;  
+  
+       for (int m = month - 1; m >= 1; --m)  
+          dayOfYear += daysOfMoths[m];  
+  
+       if (month > 2 && isLeapYear(year))  
+          ++dayOfYear;  
+         
+       return dayOfYear;  
+    }  
+      
+    public static boolean isValidDate(int day, int month, int year)  
+    {  
+       return 1 <= day && day <= 31 &&  1 <= month && month <= 12 && day <= getDays(month, year);  
+    }  
+      
+    public static int getDays(int month, int year)  
+    {  
+       return month == 2 && isLeapYear(year) ? 29 : daysOfMoths[month];  
+    }  
+      
+    public static boolean isLeapYear(int year)  
+    {  
+       return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;  
+    }  
+}
+```
+
+##### Programın Komut Satırı Argümanları
+
+>*Program çalıştırılırken programa verilen yazılara komut satırı argümanları (command line arguments) denir. Komut satırı argümanları terminal/console/shell/comment prompt üzerinden whitespace karakterlerle ayrılacak şekilde verilebilir. Bir java programı çalıştırıldığında komut satırı argümanlarından oluşan bir String dizisi yaratılır ve dizinin referansı ile main çağrılır. Program çalıştırılırken hiç komut satırı argümanı geçilmemişse sıfır elemanlı bir String dizisi ile main çağrılır. Bu durumda programcı, komut satırı argümanlarını alarak ilgili işlemleri yapar. *
+>***Anahtar Notlar:*** Komut satırı argümanları aslında işletim sistemi tarafında ilgili programa aktarılır. Modern pek çok işletim sisteminde programın ismi de ilk komut satırı argümanı olarak geçilir. Java'da main metoduna geçilen dizide yalnızca komut satırı argümanları bulunur program ismi bulunmaz.
+> Bir uygulamada komut satırı argümanları sayısı önemli olabilir. Bu durumda programcı komut satırı argümanına ilişkin dizinin uzunluğuna bakabilir. Tipik olarak komut satırı argümanları sayısının geçerli olmaması durumunda pek çok program ilgili mesajları vererek sonlanabilmektedir.
+
+>*Aşağıdaki örnekte programın komut satırı argümanları yazdırılmıştır*
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       for (int i = 0; i < args.length; ++i)  
+          System.out.println(args[i]);  
+    }  
+}
+```
+
+
+>*Aşağıdaki demo örneği inceleyiniz*
+>
+>***Anahtar Notlar:*** Genellikle hata mesajları `stderr` denilen bir dosyaya yazılır. Java'da `stderr` dosyasına yazma yapmak için System sınıfının err referansı kullanılşabilir. `stdin, stdout ve stderr` dosyaları ileride ele alınacaktır
+
+```java
+package org.csystem.app;  
+  
+import java.util.Random;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       if (args.length != 3) {  
+          System.err.println("usage: java org.csystem.app.App <count> <origin> <bound>");  
+          System.exit(1);  
+       }  
+  
+       Random random = new Random();  
+       int count = Integer.parseInt(args[0]);  
+       int origin = Integer.parseInt(args[1]);  
+       int bound = Integer.parseInt(args[2]);  
+  
+       for (int i = 0; i < count; ++i)  
+          System.out.printf("%d ", random.nextInt(origin, bound));  
+    }  
+}
+```
+
+
+>*Aşağıdaki demo örneği inceleyiniz*
+
+```java
+package org.csystem.app;  
+  
+import java.util.Random;  
+  
+import static org.csystem.util.console.CommandLineArgsUtil.checkLengthEquals;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       checkLengthEquals(3, args.length, "usage: java org.csystem.app.App <count> <origin> <bound>");  
+  
+       Random random = new Random();  
+       int count = Integer.parseInt(args[0]);  
+       int origin = Integer.parseInt(args[1]);  
+       int bound = Integer.parseInt(args[2]);  
+  
+       for (int i = 0; i < count; ++i)  
+          System.out.printf("%d ", random.nextInt(origin, bound));  
+    }  
+}
+```
+
+#### 17 Eylül 2024
+##### for-each Döngü Deyimi
 
 >**
+
 
 ```java
 
 ```
-
-
-
->**
-
-
-```java
-
-```
-
-
->**
-
-
-```java
-
-```
-
-
->**
-
-
-```java
-
-```
-
-
-
->**
-
-
-```java
-
-```
-
 
 
 >**

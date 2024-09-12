@@ -31,13 +31,13 @@ public class DateUtil {
 
 	public static String getDateStrTR(int day, int month, int year)
 	{
-		return "%d%s %s %d %s".formatted(day, getDaySuffix(day), monthsEN[month], year,
-				daysOfWeekEN[getDayOfWeek(day, month, year)]);
+		return "%d %s %d %s".formatted(day, monthsTR[month], year, daysOfWeekTR[getDayOfWeek(day, month, year)]);
 	}
 
 	public static String getDateStrEN(int day, int month, int year)
 	{
-		return "%d %s %d %s".formatted(day, monthsTR[month], year, daysOfWeekTR[getDayOfWeek(day, month, year)]);
+		return "%d%s %s %d %s".formatted(day, getDaySuffix(day), monthsEN[month], year,
+				daysOfWeekEN[getDayOfWeek(day, month, year)]);
 	}
 
 	public static String getDaySuffix(int day)
