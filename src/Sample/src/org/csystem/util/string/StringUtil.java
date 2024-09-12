@@ -1,6 +1,6 @@
 /**
  * Utility class for string operations
- * Last Update: 10th September 2024
+ * Last Update: 12th September 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.string;
@@ -170,5 +170,31 @@ public class StringUtil {
 	public static String reverse(String s)
 	{
 		return new StringBuilder(s).reverse().toString();
+	}
+
+	public static String [] split(String s, String delimiters)
+	{
+		return split(s, delimiters, true);
+	}
+
+	public static String [] split(String s, String delimiters, boolean removeEmptyEntries)
+	{
+		StringBuilder pattern = new StringBuilder("[");
+
+		for (int i = 0; i < delimiters.length(); ++i) {
+			char c = delimiters.charAt(i);
+
+			if (c == '[' || c == ']')
+				pattern.append('\\');
+
+			pattern.append(c);
+		}
+
+		pattern.append(']');
+
+		if (removeEmptyEntries)
+			pattern.append("+");
+
+		return s.split(pattern.toString());
 	}
 }

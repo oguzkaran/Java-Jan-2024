@@ -16,7 +16,7 @@ public class DateUtil {
 			return;
 		}
 
-		System.out.printf("%d %s %d %s%n", day, monthsTR[month], year, daysOfWeekTR[getDayOfWeek(day, month, year)]);
+		System.out.println(getDateStrEN(day, month, year));
 	}
 
 	public static void printDateEN(int day, int month, int year)
@@ -26,8 +26,18 @@ public class DateUtil {
 			return;
 		}
 
-		System.out.printf("%d%s %s %d %s%n", day, getDaySuffix(day), monthsEN[month], year,
+		System.out.println(getDateStrTR(day, month, year));
+	}
+
+	public static String getDateStrTR(int day, int month, int year)
+	{
+		return "%d%s %s %d %s".formatted(day, getDaySuffix(day), monthsEN[month], year,
 				daysOfWeekEN[getDayOfWeek(day, month, year)]);
+	}
+
+	public static String getDateStrEN(int day, int month, int year)
+	{
+		return "%d %s %d %s".formatted(day, monthsTR[month], year, daysOfWeekTR[getDayOfWeek(day, month, year)]);
 	}
 
 	public static String getDaySuffix(int day)
