@@ -1,6 +1,6 @@
 /**
  * Utility class for string operations
- * Last Update: 12th September 2024
+ * Last Update: 17th September 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.string;
@@ -132,8 +132,8 @@ public class StringUtil {
 	{
 		StringBuilder sb = new StringBuilder();
 
-		for (int i = 0; i < s.length; ++i)
-			sb.append(s[i]).append(delimiter);
+		for (String str : s)
+			sb.append(str).append(delimiter);
 
 		return sb.substring(0, sb.length() - delimiter.length());
 	}

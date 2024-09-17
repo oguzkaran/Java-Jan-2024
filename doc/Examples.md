@@ -18629,7 +18629,7 @@ public class DateUtil {
           return;  
        }  
   
-       System.out.println(getDateStrEN(day, month, year));  
+       System.out.println(getDateStrTR(day, month, year));  
     }  
   
     public static void printDateEN(int day, int month, int year)  
@@ -18639,7 +18639,7 @@ public class DateUtil {
           return;  
        }  
   
-       System.out.println(getDateStrTR(day, month, year));  
+       System.out.println(getDateStrEN(day, month, year));  
     }  
   
     public static String getDateStrTR(int day, int month, int year)  
@@ -18755,7 +18755,6 @@ class App {
 }
 ```
 
-
 >*Aşağıdaki demo örneği inceleyiniz*
 
 ```java
@@ -18782,10 +18781,992 @@ class App {
 ```
 
 #### 17 Eylül 2024
-##### for-each Döngü Deyimi
+
+```java
+/**  
+ * Utility class for array operations * Last Update: 10th September 2024 * @author Java-Jan-2024 Group */package org.csystem.util.array;  
+  
+import java.util.Random;  
+  
+public class ArrayUtil {  
+    public static void bubbleSortAscending(int [] a)  
+    {  
+        for (int i = 0; i < a.length - 1; ++i)  
+            for (int k = 0; k < a.length -1 - i; ++k)  
+                if (a[k + 1] < a[k])  
+                    swap(a, k, k + 1);  
+    }  
+  
+    public static void bubbleSortDescending(int [] a)  
+    {  
+        for (int i = 0; i < a.length - 1; ++i)  
+            for (int k = 0; k < a.length -1 - i; ++k)  
+                if (a[k] < a[k + 1])  
+                    swap(a, k, k + 1);  
+    }  
+  
+    public static void selectionSortAscending(int [] a)  
+    {  
+        int min, minIndex;  
+  
+        for (int i = 0; i < a.length - 1; ++i) {  
+            min = a[i];  
+            minIndex = i;  
+  
+            for (int k = i + 1; k < a.length; ++k)  
+                if (a[k] < min) {  
+                    min = a[k];  
+                    minIndex = k;  
+                }  
+            a[minIndex] = a[i];  
+            a[i] = min;  
+        }  
+    }  
+  
+    public static void selectionSortDescending(int [] a)  
+    {  
+        int max, maxIndex;  
+  
+        for (int i = 0; i < a.length - 1; ++i) {  
+            max = a[i];  
+            maxIndex = i;  
+  
+            for (int k = i + 1; k < a.length; ++k)  
+                if (max < a[k]) {  
+                    max = a[k];  
+                    maxIndex = k;  
+                }  
+            a[maxIndex] = a[i];  
+            a[i] = max;  
+        }  
+    }  
+  
+    public static void bubbleSort(int [] a)  
+    {  
+        bubbleSort(a, false);  
+    }  
+  
+    public static void bubbleSort(int [] a, boolean descending)  
+    {  
+        if (descending)  
+            bubbleSortDescending(a);  
+        else  
+            bubbleSortAscending(a);  
+    }  
+  
+    public static int [] generateRandomArray(Random random, int count, int origin, int bound)  
+    {  
+        int [] a = new int[count];  
+  
+        for (int i = 0; i < count; ++i)  
+            a[i] = random.nextInt(origin, bound);  
+  
+        return a;  
+    }  
+  
+    public static double [] generateRandomArray(Random random, int count, double origin, double bound)  
+    {  
+        double [] a = new double[count];  
+  
+        for (int i = 0; i < count; ++i)  
+            a[i] = random.nextDouble(origin, bound);  
+  
+        return a;  
+    }  
+  
+    public static boolean [] generateRandomArray(Random random, int count)  
+    {  
+        boolean [] a = new boolean[count];  
+  
+        for (int i = 0; i < count; ++i)  
+            a[i] = random.nextBoolean();  
+  
+        return a;  
+    }  
+  
+    public static int [] histogramData(int [] a, int n)  
+    {  
+        int [] data = new int[n + 1];  
+  
+        for (int i = 0; i < a.length; ++i)  
+            ++data[a[i]];  
+  
+        return data;  
+    }  
+  
+    public static int max(int [] a)  
+    {  
+        int result = a[0];  
+  
+        for (int i = 1; i < a.length; ++i)  
+            result = Math.max(result, a[i]);  
+  
+        return result;  
+    }  
+  
+    public static int max(int [] a, int startIndex)  
+    {  
+        int result = a[startIndex];  
+  
+        for (int i = startIndex + 1; i < a.length; ++i)  
+            result = Math.max(result, a[i]);  
+  
+        return result;  
+    }  
+  
+    public static int min(int [] a)  
+    {  
+        int result = a[0];  
+  
+        for (int i = 1; i < a.length; ++i)  
+            result = Math.min(result, a[i]);  
+  
+        return result;  
+    }  
+  
+    public static int min(int [] a, int startIndex)  
+    {  
+        int result = a[startIndex];  
+  
+        for (int i = startIndex + 1; i < a.length; ++i)  
+            result = Math.min(result, a[i]);  
+  
+        return result;  
+    }  
+  
+    public static int partition(int [] a, int threshold)  
+    {  
+        int partitionPoint = 0;  
+  
+        while (partitionPoint != a.length && a[partitionPoint] < threshold)  
+            ++partitionPoint;  
+  
+        if (partitionPoint == a.length)  
+            return partitionPoint;  
+  
+        for (int i = partitionPoint + 1; i < a.length; ++i)  
+            if (a[i] < threshold)  
+                swap(a, i, partitionPoint++);  
+  
+        return partitionPoint;  
+    }  
+  
+    public static int partitionByEven(int [] a)  
+    {  
+        int partitionPoint = 0;  
+  
+        while (partitionPoint != a.length && a[partitionPoint] % 2 == 0)  
+            ++partitionPoint;  
+  
+        if (partitionPoint == a.length)  
+            return partitionPoint;  
+  
+        for (int i = partitionPoint + 1; i < a.length; ++i)  
+            if (a[i] % 2 == 0)  
+                swap(a, i, partitionPoint++);  
+  
+        return partitionPoint;  
+    }  
+  
+    public static void print(int [] a)  
+    {  
+        print(a, ' ', '\n');  
+    }  
+  
+    public static void print(int [] a, char sep, char end)  
+    {  
+        print(a, 1, sep, end);  
+    }  
+  
+    public static void print(int [] a, int n)  
+    {  
+        print(a, n, ' ', '\n');  
+    }  
+  
+    public static void print(int [] a, int n, char sep, char end)  
+    {  
+        String fmt = String.format("%%0%dd%c", n, sep);  
+  
+        for (int i = 0; i < a.length; ++i)  
+            System.out.printf(fmt, a[i], sep);  
+  
+        System.out.print(end);  
+    }  
+  
+    public static void print(double [] a)  
+    {  
+        print(a, '\n', '\n');  
+    }  
+  
+    public static void print(double [] a, char sep, char end)  
+    {  
+        for (int i = 0; i < a.length; ++i)  
+            System.out.printf("%f%c", a[i], sep);  
+  
+        System.out.print(end);  
+    }  
+  
+    public static void selectionSort(int [] a)  
+    {  
+        selectionSort(a, false);  
+    }  
+  
+    public static void selectionSort(int [] a, boolean descending)  
+    {  
+        if (descending)  
+            selectionSortDescending(a);  
+        else  
+            selectionSortAscending(a);  
+    }  
+    public static long sum(int [] a)  
+    {  
+        long total = 0;  
+  
+        for (int i = 0; i < a.length; ++i)  
+            total += a[i];  
+  
+        return total;  
+    }  
+  
+    public static void swap(int [] a, int i, int k)  
+    {  
+        int temp = a[i];  
+  
+        a[i] = a[k];  
+        a[k] = temp;  
+    }  
+  
+    //...  
+}
+```
+
+```java
+/**  
+ * Utility class for command line operations * Last Update: 12th September 2024 * @author Java-Jan-2024 Group */package org.csystem.util.console;  
+  
+public class CommandLineArgsUtil {  
+    public static void checkLengthEquals(int len, int argsLen, String message)  
+    {  
+        checkLengthEquals(len, argsLen, message, 1);  
+    }  
+  
+    public static void checkLengthEquals(int len, int argsLen, String message, int exitCode)  
+    {  
+        if (len != argsLen) {  
+            System.err.println(message);  
+            System.exit(exitCode);  
+        }  
+    }  
+  
+    public static void checkLengthGreater(int len, int argsLen, String message)  
+    {  
+        checkLengthGreater(len, argsLen, message, 1);  
+    }  
+  
+    public static void checkLengthGreater(int len, int argsLen, String message, int exitCode)  
+    {  
+        if (len <= argsLen) {  
+            System.err.println(message);  
+            System.exit(exitCode);  
+        }  
+    }  
+  
+    //...  
+}
+```
+
+```java
+/**  
+ * Utility class for numeric operations * Last Update: 3rd September 2024 * @author Java-Jan-2024 Group */package org.csystem.util.numeric;  
+  
+public class NumberUtil {  
+    public static int countDigits(long a)  
+    {  
+       return a != 0 ? (int) Math.log10(Math.abs(a)) + 1 : 1;  
+    }  
+  
+    public static long factorial(int n)  
+    {  
+       long result = 1;  
+  
+       for (long i = 2; i <= n; ++i)  
+          result *= i;  
+  
+       return result;  
+    }  
+  
+    public static int fibonacciNumber(int n)  
+    {  
+       if (n <= 2)  
+          return n - 1;  
+  
+       int prev1 = 1, prev2 = 0, result = prev1 + prev2;  
+  
+       for (int i = 3; i < n; ++i) {  
+          prev2 = prev1;  
+          prev1 = result;  
+          result = prev1 + prev2;  
+       }  
+  
+       return result;  
+    }  
+  
+    public static int [] getDigits(long a)  
+    {  
+       int [] digits = new int[countDigits(a)];  
+  
+       a = Math.abs(a);  
+  
+       for (int i = digits.length - 1; i >= 0; digits[i--] = (int)(a % 10), a /= 10)  
+          ;  
+  
+       return digits;  
+    }  
+  
+    public static int getDigitsPowSum(int a)  
+    {  
+       int result = 0;  
+       int n = countDigits(a);  
+  
+       while (a != 0) {  
+          result += (int)Math.pow(a % 10, n);  
+          a /= 10;  
+       }  
+  
+       return result;  
+    }  
+  
+    public static boolean isArmstrong(int a)  
+    {  
+       return a >= 0 && getDigitsPowSum(a) == a;  
+    }  
+  
+    public static boolean isEven(int a)  
+    {  
+       return a % 2 == 0;  
+    }  
+  
+    public static boolean isOdd(int a)  
+    {  
+       return !isEven(a);  
+    }  
+  
+    public static boolean isPrime(long a)  
+    {  
+       if (a <= 1)  
+          return false;  
+  
+       if (a % 2 == 0)  
+          return a == 2;  
+  
+       if (a % 3 == 0)  
+          return a == 3;  
+  
+       if (a % 5 == 0)  
+          return a == 5;  
+  
+       if (a % 7 == 0)  
+          return a == 7;  
+  
+       for (long i = 11; i * i <= a; i += 2)  
+          if (a % i == 0)  
+             return false;  
+  
+       return true;  
+    }  
+  
+    public static long nextClosestPrime(long a)  
+    {  
+       if (a < 2)  
+          return 2;  
+  
+       while (!isPrime(++a))  
+          ;  
+  
+       return a;  
+    }  
+  
+    public static int nextFibonacciNumber(int val)  
+    {  
+       if (val < 0)  
+          return 0;  
+  
+       int prev1 = 1, prev2 = 0, next = prev1 + prev2;  
+  
+       while (next <= val) {  
+          prev2 = prev1;  
+          prev1 = next;  
+          next = prev1 + prev2;  
+       }  
+  
+       return next;  
+    }  
+  
+    public static long nthPrime(int n)  
+    {  
+       long result = 2;  
+       int count = 0;  
+  
+       for (long i = 2; count < n; ++i)  
+          if (isPrime(i)) {  
+             ++count;  
+             result = i;  
+          }  
+       return result;  
+    }  
+  
+    public static int reverse(int val)  
+    {  
+       int result = 0;  
+  
+       while (val != 0) {  
+          result = result * 10 + val % 10;  
+          val /= 10;  
+       }  
+  
+       return result;  
+    }  
+  
+    public static int sumDigits(int val)  
+    {  
+       int total = 0;  
+  
+       while (val != 0) {  
+          total += val % 10;  
+          val /= 10;  
+       }  
+  
+       return Math.abs(total);  
+    }  
+}
+```
+
+```java
+/**  
+ * Utility class for string operations * Last Update: 12th September 2024 * @author Java-Jan-2024 Group */package org.csystem.util.string;  
+  
+import java.util.Random;  
+  
+public class StringUtil {  
+    public static String capitalize(String s)  
+    {  
+       return s.isEmpty() ? s : Character.toUpperCase(s.charAt(0)) + s.substring(1).toLowerCase();  
+    }  
+  
+    public static String changeCase(String s)  
+    {  
+       StringBuilder sb = new StringBuilder(s);  
+  
+       for (int i = 0; i < s.length(); ++i) {  
+          char c = s.charAt(i);  
+  
+          sb.setCharAt(i, Character.isLowerCase(c) ? Character.toUpperCase(c) : Character.toLowerCase(c));  
+       }  
+  
+       return sb.toString();  
+    }  
+  
+  
+    public static int countString(String s1, String s2)  
+    {  
+       int count = 0;  
+  
+       for (int i = 0; (i = s1.indexOf(s2, i)) != -1; ++i, ++count)  
+          ;  
+  
+       return count;  
+    }  
+  
+    public static String generateRandomText(Random random, int count, String sourceText)  
+    {  
+       char [] c = new char[count];  
+  
+       for (int i = 0; i < count; ++i)  
+          c[i] = sourceText.charAt(random.nextInt(sourceText.length()));  
+  
+       return String.valueOf(c);  
+    }  
+  
+    public static String generateRandomTextEN(Random random, int count)  
+    {  
+       return generateRandomText(random, count, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");  
+    }  
+  
+    public static String generateRandomTextTR(Random random, int count)  
+    {  
+       return generateRandomText(random, count, "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZabcçdefgğhıijklmnoöprsştuüvyz");  
+    }  
+  
+    public static String [] generateRandomTexts(Random random, int count, int origin, int bound, String sourceText)  
+    {  
+       String [] str = new String[count];  
+  
+       for (int i = 0; i < count; ++i)  
+          str[i] = generateRandomText(random, random.nextInt(origin, bound), sourceText);  
+  
+       return str;  
+    }  
+  
+    public static String [] generateRandomTextsEN(Random random, int count, int origin, int bound)  
+    {  
+       return generateRandomTexts(random, count, origin, bound, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");  
+    }  
+  
+    public static String [] generateRandomTextsTR(Random random, int count, int origin, int bound)  
+    {  
+       return generateRandomTexts(random, count, origin, bound, "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZabcçdefgğhıijklmnoöprsştuüvyz");  
+    }  
+  
+    public static boolean isPalindrome(String s)  
+    {  
+       int left = 0;  
+       int right = s.length() - 1;  
+  
+       while (left < right) {  
+          char cLeft = s.charAt(left);  
+  
+          if (!Character.isLetter(cLeft)) {  
+             ++left;  
+             continue;  
+          }  
+  
+          char cRight = s.charAt(right);  
+  
+          if (!Character.isLetter(cRight)) {  
+             --right;  
+             continue;  
+          }  
+  
+          if (Character.toLowerCase(cLeft) != Character.toLowerCase(cRight))  
+             return false;  
+  
+          ++left;  
+          --right;  
+       }  
+  
+       return true;  
+    }  
+  
+  
+    public static boolean isPangram(String s, String alphabet)  
+    {  
+       for (int i = 0; i < alphabet.length(); ++i)  
+          if (s.indexOf(alphabet.charAt(i)) == -1)  
+             return false;  
+  
+       return true;  
+    }  
+  
+  
+    public static boolean isPangramEN(String s)  
+    {  
+       return isPangram(s.toLowerCase(), "abcdefghijklmnopqrstuvwxyz");  
+    }  
+  
+    public static boolean isPangramTR(String s)  
+    {  
+       return isPangram(s.toLowerCase(), "abcçdefgğhıijklmnoöprsştuüvyz");  
+    }  
+  
+    public static String join(String [] s, String delimiter)  
+    {  
+       StringBuilder sb = new StringBuilder();  
+  
+       for (int i = 0; i < s.length; ++i)  
+          sb.append(s[i]).append(delimiter);  
+  
+       return sb.substring(0, sb.length() - delimiter.length());  
+    }  
+  
+    public static String join(String [] s, char delimiter)  
+    {  
+       return join(s, String.valueOf(delimiter));  
+    }  
+  
+    public static String padLeading(String s, int n, char ch)  
+    {  
+       int len = s.length();  
+  
+       return len < n ? String.valueOf(ch).repeat(n - len) + s : s;  
+    }  
+  
+    public static String padLeading(String s, int n)  
+    {  
+       return padLeading(s, n, ' ');  
+    }  
+  
+    public static String padTrailing(String s, int n, char ch)  
+    {  
+       int len = s.length();  
+  
+       return len < n ? s + String.valueOf(ch).repeat(n - len) : s;  
+    }  
+  
+    public static String padTrailing(String s, int n)  
+    {  
+       return padTrailing(s, n, ' ');  
+    }  
+  
+    public static String reverse(String s)  
+    {  
+       return new StringBuilder(s).reverse().toString();  
+    }  
+  
+    public static String [] split(String s, String delimiters)  
+    {  
+       return split(s, delimiters, true);  
+    }  
+  
+    public static String [] split(String s, String delimiters, boolean removeEmptyEntries)  
+    {  
+       StringBuilder pattern = new StringBuilder("[");  
+  
+       for (int i = 0; i < delimiters.length(); ++i) {  
+          char c = delimiters.charAt(i);  
+  
+          if (c == '[' || c == ']')  
+             pattern.append('\\');  
+  
+          pattern.append(c);  
+       }  
+  
+       pattern.append(']');  
+  
+       if (removeEmptyEntries)  
+          pattern.append("+");  
+  
+       return s.split(pattern.toString());  
+    }  
+}
+```
+
+
+##### for-each Döngü 
+
+>*for-each döngü deyimi Java'ya 1.5 ile eklenmiştir. Bu döngü deyimi "dolaşılabilir (iterable)" türler ile kullanılabilmektedir. Diziler bu anlamda dolaşılabilir türlerdir. İleride başka dolaşılabilir sınıflar da ele alınacaktır. for-each döngü deyimine "enhanced for loop" ya da "range based loop"gibi isimler de verilmektedir. Java programcısı for-each döngü deyiminin kullanıldığı VE okunabilirliği/algılanabilirliği olumsuz etkilemediği durumda kesinlikle for-each döngü deyimini kullanmalıdır. for-each döngü deyiminin genel biçimi şu şekildededir:
+> `for (<tür> <değişken> : <dolaşılabilir türden referans>)
+> 	deyim
+> `
+> Burada döngü değişkeni dolaşılabilir türün her bir elemanının doğrudan atanabildiği (implicit conversion) türden olmalıdır. Aksi durumda error oluşur. Bu döngüda sırasıyla dolaşılabilir türün her elemanı baştan sona olmak üzere döngü değişkenine atanır. Yani, örneğin dolaşılabilir tür bir dizi ise her adımda dizinin ilgili elemanı döngü değişkenine atanmış olur. Bu döngü ile dizi baştan sona dolaşılmış olur. Dikkat edilirse bu döngüde dizinin elemanına erişmek için indeks kullanılması gerekmez.*
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       int [] a = {1, 2, 3, 4, 5, 6};  
+  
+       for (int val : a)  
+          System.out.printf("%d ", val);  
+  
+       System.out.println();  
+    }  
+}
+```
+
+
+>*for-each döngü deyiminde döngü değişkenine atama implicit olarak yapıldığından aşağıdaki örnekte error oluşur*
+
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       int [] a = {1, 2, 3, 4, 5, 6};  
+  
+       for (short val : a) //error  
+          System.out.printf("%d ", val);  
+  
+       System.out.println();  
+    }  
+}
+```
+
+>*for-each döngü deyiminde döngü değişkenine atama implicit olarak yapıldığından aşağıdaki örnek geçerlidir*
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       int [] a = {1, 2, 3, 4, 5, 6};  
+  
+       for (long val : a)  
+          System.out.printf("%d ", val);  
+  
+       System.out.println();  
+    }  
+}
+```
+
+>*Aslnda for-each döngü deyimi for döngü gibi de kullanılabilir. Örneğin bir dizinin elemanlarına atama yapmak için indeks numarası gerekir. Programcı bu durumda for-each döngü deyiminde indeks için değişkeni kendisi belirleyerek yine kullanabilir. Ancak bu durum okunabilirlik/algılanabilirlik açısından olumsuz bir durum oluşturur. Bu durumda programcı klasik for döngü deyimini kullanmalıdır. Aşağıdaki örneği inceleyiniz ve durumu gözlemleyiniz. Örnekte ilk döngü klasik for döngüsü olarak yazılsaydı daha okunabilir/algılanabilir olurdu*
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       int [] a = new int[10];  
+  
+       int i = 0;  
+  
+       for (int val : a)  
+          a[i++] = i * 10;  
+  
+       for (int val : a)  
+          System.out.printf("%d ", val);  
+  
+       System.out.println();  
+    }  
+}
+```
+
+>***Anahtar Notlar:*** Bu durumda for-each döngü deyimi bir dizi için ne zaman tercih edilmemelidir? Aslında bu sorunun cevabı oldukça basittir. Ne zaman dizi için indeks gerekirse o zaman for-each kullanılmamalıdır. Bu durumda tersten söylersek, indeks gerekmediği her durumda for-each kullanılmalıdır*
+
+>*for-each döngü deyiminde : den sonraki ifade döngünün başında bir kez hesaplanır*
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       for (int val : Sample.getArray())  
+          System.out.printf("%d ", val);  
+  
+       System.out.println();  
+    }  
+}  
+  
+class Sample {  
+    public static int [] getArray()  
+    {  
+       System.out.println("getArray");  
+  
+       return new int[] {1, 2, 3, 4, 5, 6};  
+    }  
+}
+```
+
+
+>*Aşağıdaki örneği inceleyiniz*
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       String [] cities = {"ankara", "istnbul", "İznir"};  
+
+  
+       for (String s : cities)  
+          System.out.println(s);  
+    }  
+}
+```
+
+>*String sınıfı "iterable" bir sınıf olmadığından for-each ile aşağıdaki gibi kullanılamaz*
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       String s = "ankara";  
+  
+       for (char c : s) //error  
+          System.out.printf("%c ", c);  
+  
+       System.out.println();  
+    }  
+}
+```
+
+
+>*Aşağıdaki örnekte String sınıfının toCharArray metodu çağrılarak char türden dizi dolaşılmıştır*
+
+```java
+package org.csystem.app;  
+  
+class App {
+    public static void main(String [] args)  
+    {  
+       String s = "ankara";  
+  
+       for (char c : s.toCharArray())  
+          System.out.printf("%c ", c);  
+  
+       System.out.println();  
+    }  
+}
+```
 
 >**
 
+```java
+
+```
+
+#### Dizi Dizileri ve Matrisler
+
+> Dizinin her bir elemanı yine bir dizi referansı ise bu durumda bu diziye artık bir dizi dizisi (array of array) denebilir. Programlamada dizi dizisi "jagged array" olarak da adlandırılmaktadır. Örneğin
+> `int [][] a` bildiriminde a referansı her bir elamanı int [ ] türünden bir dizi türündendir. Yani aslında bu bir referans dizisidir. Bu durumda dizi yaratılırken new operatörü ile birlikte yine iki tane [ ] kullanılır. Aslında diziler için karmaşık bildirimler de söz konusu olabilir. Örneğin 
+> `int [][][] a` bildiriminde a referansı, her bir elemanı bir dizi dizisi olan bir dizi türündendir. Pratikte diziler ve dizi dizileri daha çok kullanılmaktadır. 
+> Bir dizi dizisinin her bir elemanı olan dizi referanslarına ilişkin dizilerin uzunları aynı ise bu dizi dizisi artık bir matrisi temsil eder. Yani örneğin ana dizinin uzunluğu m, elemanı olan her dizininin uzunluğu n ise bu dizi artık m x n'lık bir matris olarak kullanılabilir. 
+> new operatörü ile bir dizi dizisi yaratılmasında ilk [ ]'in içeris boş olamaz. Çünkü ilk [ ] ana dizinin uzunluğunu belirtir. Diğer [ ]'ler boş olabilir. 
+
+***Anahtar Notlar:*** Java'da çok boyutlu dizi (multi dimensional array) yoktur. Yani, Java'da bir matris için iki boyutlu dizi demek teknik olarak doğru değildir. Teknik olarak bir matris de bir dizi dizisidir. 
+
+>*Aşağıdaki örneği inceleyiniz *
+
+```java
+package org.csystem.app;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       Random r = new Random();  
+       Scanner kb = new Scanner(System.in);  
+       System.out.print("Matrisin satır ve sütun sayılarını giriniz:");  
+       int m = kb.nextInt();  
+       int n = kb.nextInt();  
+  
+       int[][] a = new int[m][];  
+  
+       for (int i = 0; i < m; ++i) {  
+          a[i] = new int[n];  
+          for (int j = 0; j < n; ++j)  
+             a[i][j] = r.nextInt(10);  
+       }  
+  
+       for (int i = 0; i < m; ++i) {  
+          for (int j = 0; j < n; ++j)  
+             System.out.printf("%02d ", a[i][j]);  
+  
+          System.out.println();  
+       }  
+  
+    }  
+}
+```
+
+>*Bir dizi dizisinin ana dizisi dışında kalan [ ]'ler içeirisinde uzunluk yazıldığında ilgili dizilee otomatik olarak o uzunlukta yaratılır. Bu özellike Java 5 ile dile eklenmiştir. Yukarıdaki örnek aşağıdaki gibi yapılabilir*
+
+```java
+package org.csystem.app;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       Random r = new Random();  
+       Scanner kb = new Scanner(System.in);  
+       System.out.print("Matrisin satır ve sütun sayılarını giriniz:");  
+       int m = kb.nextInt();  
+       int n = kb.nextInt();  
+  
+       int[][] a = new int[m][n];  
+  
+       for (int i = 0; i < m; ++i)  
+          for (int j = 0; j < n; ++j)  
+             a[i][j] = r.nextInt(10);  
+  
+       for (int i = 0; i < m; ++i) {  
+          for (int j = 0; j < n; ++j)  
+             System.out.printf("%02d ", a[i][j]);  
+  
+          System.out.println();  
+       }  
+  
+    }  
+}
+```
+
+>*Aşağıdaki örnekte ikinci [ ]'in içerisinde n yazılması gereksizdir değil mi?*
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.array.ArrayUtil;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       Random r = new Random();  
+       Scanner kb = new Scanner(System.in);  
+       System.out.print("Matrisin satır ve sütun sayılarını giriniz:");  
+       int m = kb.nextInt();  
+       int n = kb.nextInt();  
+  
+       int[][] a = new int[m][];  
+  
+       for (int i = 0; i < m; ++i)  
+          for (int j = 0; j < n; ++j)  
+             a[i] = ArrayUtil.generateRandomArray(r, n, 0, 100);  
+  
+       for (int i = 0; i < a.length; ++i) {  
+          for (int j = 0; j < a[i].length; ++j)  
+             System.out.printf("%02d ", a[i][j]);  
+  
+          System.out.println();  
+       }  
+  
+    }  
+}
+```
+
+>*Dizi dizilerinin for-each döngü deyimi ile dolaşılması*
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.array.ArrayUtil;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       Random r = new Random();  
+       Scanner kb = new Scanner(System.in);  
+       System.out.print("Matrisin satır ve sütun sayılarını giriniz:");  
+       int m = kb.nextInt();  
+       int n = kb.nextInt();  
+  
+       int[][] a = new int[m][];  
+  
+       for (int i = 0; i < m; ++i)  
+          for (int j = 0; j < n; ++j)  
+             a[i] = ArrayUtil.generateRandomArray(r, n, 0, 100);  
+  
+       for (int [] array : a) {  
+          for (int val : array)  
+             System.out.printf("%02d ", val);  
+  
+          System.out.println();  
+       }  
+    }  
+}
+```
+
+
+>**
 
 ```java
 
@@ -18794,8 +19775,39 @@ class App {
 
 >**
 
+```java
+
+```
+
+
+
+>**
 
 ```java
 
 ```
 
+
+
+
+>**
+
+```java
+
+```
+
+
+
+>**
+
+```java
+
+```
+
+
+
+>**
+
+```java
+
+```

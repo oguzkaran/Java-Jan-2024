@@ -1,21 +1,32 @@
 package org.csystem.app;
 
-import java.util.Random;
+import org.csystem.util.array.ArrayUtil;
 
-import static org.csystem.util.console.CommandLineArgsUtil.checkLengthEquals;
+import java.util.Random;
+import java.util.Scanner;
 
 class App {
 	public static void main(String [] args)
 	{
-		checkLengthEquals(3, args.length, "usage: java org.csystem.app.App <count> <origin> <bound>");
+		Random r = new Random();
+		Scanner kb = new Scanner(System.in);
+		System.out.print("Matrisin satır ve sütun sayılarını giriniz:");
+		int m = kb.nextInt();
+		int n = kb.nextInt();
 
-		Random random = new Random();
-		int count = Integer.parseInt(args[0]);
-		int origin = Integer.parseInt(args[1]);
-		int bound = Integer.parseInt(args[2]);
+		int[][] a = new int[m][];
 
-		for (int i = 0; i < count; ++i)
-			System.out.printf("%d ", random.nextInt(origin, bound));
+		for (int i = 0; i < m; ++i)
+			for (int j = 0; j < n; ++j)
+				a[i] = ArrayUtil.generateRandomArray(r, n, 0, 100);
+
+		for (int [] array : a) {
+			for (int val : array)
+				System.out.printf("%02d ", val);
+
+			System.out.println();
+		}
 	}
 }
+
 

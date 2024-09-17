@@ -16,7 +16,7 @@ public class DateUtil {
 			return;
 		}
 
-		System.out.println(getDateStrEN(day, month, year));
+		System.out.println(getDateStrTR(day, month, year));
 	}
 
 	public static void printDateEN(int day, int month, int year)
@@ -26,7 +26,7 @@ public class DateUtil {
 			return;
 		}
 
-		System.out.println(getDateStrTR(day, month, year));
+		System.out.println(getDateStrEN(day, month, year));
 	}
 
 	public static String getDateStrTR(int day, int month, int year)

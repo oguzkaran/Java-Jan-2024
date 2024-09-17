@@ -1,6 +1,6 @@
 /**
  * Utility class for array operations
- * Last Update: 10th September 2024
+ * Last Update: 17th September 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.array;
@@ -107,8 +107,8 @@ public class ArrayUtil {
     {
         int [] data = new int[n + 1];
 
-        for (int i = 0; i < a.length; ++i)
-            ++data[a[i]];
+        for (int val : a)
+            ++data[val];
 
         return data;
     }
@@ -206,10 +206,16 @@ public class ArrayUtil {
     {
         String fmt = String.format("%%0%dd%c", n, sep);
 
-        for (int i = 0; i < a.length; ++i)
-            System.out.printf(fmt, a[i], sep);
+        for (int val : a)
+            System.out.printf(fmt, val, sep);
 
         System.out.print(end);
+    }
+
+    public static void print(int [][] a, int n)
+    {
+        for (int [] array : a)
+            print(array, n, ' ', '\n');
     }
 
     public static void print(double [] a)
@@ -219,8 +225,8 @@ public class ArrayUtil {
 
     public static void print(double [] a, char sep, char end)
     {
-        for (int i = 0; i < a.length; ++i)
-            System.out.printf("%f%c", a[i], sep);
+        for (double val : a)
+            System.out.printf("%f%c", val, sep);
 
         System.out.print(end);
     }
@@ -241,8 +247,8 @@ public class ArrayUtil {
     {
         long total = 0;
 
-        for (int i = 0; i < a.length; ++i)
-            total += a[i];
+        for (int val : a)
+            total += val;
 
         return total;
     }
