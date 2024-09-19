@@ -18784,7 +18784,8 @@ class App {
 
 ```java
 /**  
- * Utility class for array operations * Last Update: 10th September 2024 * @author Java-Jan-2024 Group */package org.csystem.util.array;  
+ * Utility class for array operations * Last Update: 10th September 2024 * @author Java-Jan-2024 Group */
+package org.csystem.util.array;  
   
 import java.util.Random;  
   
@@ -19441,7 +19442,7 @@ public class StringUtil {
 ```
 
 
-##### for-each Döngü 
+##### for-each Döngü Deyimi
 
 >*for-each döngü deyimi Java'ya 1.5 ile eklenmiştir. Bu döngü deyimi "dolaşılabilir (iterable)" türler ile kullanılabilmektedir. Diziler bu anlamda dolaşılabilir türlerdir. İleride başka dolaşılabilir sınıflar da ele alınacaktır. for-each döngü deyimine "enhanced for loop" ya da "range based loop"gibi isimler de verilmektedir. Java programcısı for-each döngü deyiminin kullanıldığı VE okunabilirliği/algılanabilirliği olumsuz etkilemediği durumda kesinlikle for-each döngü deyimini kullanmalıdır. for-each döngü deyiminin genel biçimi şu şekildededir:
 > `for (<tür> <değişken> : <dolaşılabilir türden referans>)
@@ -19660,7 +19661,7 @@ class App {
 }
 ```
 
->*Bir dizi dizisinin ana dizisi dışında kalan [ ]'ler içeirisinde uzunluk yazıldığında ilgili dizilee otomatik olarak o uzunlukta yaratılır. Bu özellike Java 5 ile dile eklenmiştir. Yukarıdaki örnek aşağıdaki gibi yapılabilir*
+>*Bir dizi dizisinin ana dizisi dışında kalan [ ]'ler içeirisinde uzunluk yazıldığında ilgili diziler otomatik olarak o uzunlukta yaratılır. Bu özellike Java 5 ile dile eklenmiştir. Yukarıdaki örnek aşağıdaki gibi yapılabilir*
 
 ```java
 package org.csystem.app;  
@@ -19716,8 +19717,7 @@ class App {
        int[][] a = new int[m][];  
   
        for (int i = 0; i < m; ++i)  
-          for (int j = 0; j < n; ++j)  
-             a[i] = ArrayUtil.generateRandomArray(r, n, 0, 100);  
+          a[i] = ArrayUtil.generateRandomArray(r, n, 0, 100);  
   
        for (int i = 0; i < a.length; ++i) {  
           for (int j = 0; j < a[i].length; ++j)  
@@ -19751,9 +19751,8 @@ class App {
   
        int[][] a = new int[m][];  
   
-       for (int i = 0; i < m; ++i)  
-          for (int j = 0; j < n; ++j)  
-             a[i] = ArrayUtil.generateRandomArray(r, n, 0, 100);  
+       for (int i = 0; i < m; ++i)            
+			a[i] = ArrayUtil.generateRandomArray(r, n, 0, 100);  
   
        for (int [] array : a) {  
           for (int val : array)  
@@ -19765,18 +19764,129 @@ class App {
 }
 ```
 
+#### 19 Eylül 2024
 
->**
+> *Dizi dizilerine ilk değer içiçe küme parantezleri ile verilebilir*
 
 ```java
-
+package org.csystem.app;  
+  
+import org.csystem.util.array.ArrayUtil;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       int [][] a = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};  
+       int [][] b = {{1, 2, 3}, {4, 5, 6, 3}, {7, 8, 9}};  
+  
+       ArrayUtil.print(a);  
+       System.out.println("--------------------------------");  
+       ArrayUtil.print(b);  
+    }  
+}
 ```
 
-
->**
+>***Sınıf Çalışması:*** Parametresi ile aldığı bir dizi dizisinin matris olup olmadığını test eden `isMatrix` isimli metodu ve parametresi ile aldığı bir dizi dizisinin bir kare matris olup olmadığını test eden `isSquareMatrix` metodunu `MatrixUtil` isimli sınıfın içerisinde yazınız ve test ediniz
 
 ```java
+package org.csystem.util.matrix.test;  
+  
+import org.csystem.util.array.ArrayUtil;  
+import org.csystem.util.matrix.MatrixUtil;  
+  
+public class MatrixUtilIsMatrixTest {  
+    public static void run()  
+    {  
+        int [][] a = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};  
+        int [][] b = {{1, 2, 3}, {4, 5, 6, 3}, {7, 8, 9}};  
+  
+        ArrayUtil.print(a);  
+        System.out.println("--------------------------------");  
+        ArrayUtil.print(b);  
+  
+        System.out.println(MatrixUtil.isMatrix(a) ? "Matris" : "Matris değil");  
+        System.out.println(MatrixUtil.isMatrix(b) ? "Matris" : "Matris değil");  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
 
+```java
+package org.csystem.util.matrix.test;  
+  
+import org.csystem.util.array.ArrayUtil;  
+import org.csystem.util.matrix.MatrixUtil;  
+  
+public class MatrixUtilIsSquareMatrixTest {  
+    public static void run()  
+    {  
+        int [][] a = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};  
+        int [][] b = {{1, 2, 3}, {4, 5, 6, 3}, {7, 8, 9}};  
+        int [][] c = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}, {1, 2, 3}};  
+  
+        ArrayUtil.print(a);  
+        System.out.println("--------------------------------");  
+        ArrayUtil.print(b);  
+        System.out.println("--------------------------------");  
+        ArrayUtil.print(c);  
+  
+        System.out.println(MatrixUtil.isSquareMatrix(a) ? "Kare matris" : "Kare matris değil");  
+        System.out.println(MatrixUtil.isSquareMatrix(b) ? "Kare matris" : "Kare matris değil");  
+        System.out.println(MatrixUtil.isSquareMatrix(c) ? "Kare matris" : "Kare matris değil");  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+>**Sınıf Çalışması:*** Parametresi ile aldığı bir kare matrisin esas köşegeni (diagonal) üzerindeki elemanların toplamına geri dönen `sumDiagonal` isimli metodu MatrixUtil içerisinde yazınız ve test ediniz.
+>***Açıklamalar:*** 
+>- Metot parametresi ile aldığı referansa ilişkin dizi dizisinin kare matris olup olmadığını kontrol etmeyecektir.
+>- Bir kare matrisin esas köşegeni üzerindeki elemanlar, matrisin n x n lik ise sırasıyla `a[0][0], a[1][1], ..., a[n - 1][n - 1]` elemanlarıdır.
+>- Metot taşmaları düşünmeden long türüne geri dönecektir.
+
+```java
+package org.csystem.util.matrix.test;  
+  
+import org.csystem.util.matrix.MatrixUtil;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+public class MatrixUtilSumDiagonalTest {  
+    public static void run()  
+    {  
+        Random random = new Random();  
+        Scanner kb = new Scanner(System.in);  
+  
+  
+        while (true) {  
+            System.out.print("Bir sayı giriniz:");  
+            int n = Integer.parseInt(kb.nextLine());  
+  
+            if (n <= 0)  
+                break;  
+  
+            int [][] a = MatrixUtil.generateRandomSquareMatrix(random, n, 0, 100);  
+  
+            MatrixUtil.print(a, 2);  
+  
+            System.out.printf("Esas köşegen toplamı:%d%n", MatrixUtil.sumDiagonal(a));  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
 ```
 
 
