@@ -1,30 +1,46 @@
 /**
  * Utility class for array operations
- * Last Update: 17th September 2024
+ * Last Update: 19th September 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.matrix;
+
+import org.csystem.util.array.ArrayUtil;
 
 import java.util.Random;
 
 public class MatrixUtil {
     public static int [][] generateRandomMatrix(Random random, int m, int n, int origin, int bound)
     {
-        //TODO:
+        int [][] result = new int[m][];
+
+        for (int i = 0; i < m; ++i)
+            result[i] = ArrayUtil.generateRandomArray(random, n, origin, bound);
+
+        return result;
     }
 
     public static int [][] generateRandomSquareMatrix(Random random, int n, int origin, int bound)
     {
-        //TODO:
+        return generateRandomMatrix(random, n, n, origin, bound);
     }
 
     public static boolean isMatrix(int [][] a)
     {
-        //TODO:
+        for (int i = 1; i < a.length; ++i)
+            if (a[i].length != a[0].length)
+                return false;
+
+        return true;
     }
 
     public static boolean isSquareMatrix(int [][] a)
     {
-        //TODO:
+        return isMatrix(a) && a.length == a[0].length;
+    }
+
+    public static void print(int [] a, int n)
+    {
+        ArrayUtil.print(a, n);
     }
 }

@@ -1,6 +1,6 @@
 /**
  * Utility class for array operations
- * Last Update: 17th September 2024
+ * Last Update: 19th September 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.array;
@@ -210,6 +210,11 @@ public class ArrayUtil {
             System.out.printf(fmt, val, sep);
 
         System.out.print(end);
+    }
+
+    public static void print(int [][] a)
+    {
+        print(a, 1);
     }
 
     public static void print(int [][] a, int n)
