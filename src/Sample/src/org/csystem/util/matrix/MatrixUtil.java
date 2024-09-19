@@ -58,7 +58,7 @@ public class MatrixUtil {
     {
         throw new UnsupportedOperationException("Not yet implemented!...");
     }
-    
+
     public static void print(int [][] a, int n)
     {
         ArrayUtil.print(a, n);
