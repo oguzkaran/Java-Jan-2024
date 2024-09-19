@@ -19890,8 +19890,81 @@ public class MatrixUtilSumDiagonalTest {
 ```
 
 
+>*Bir dizi dizisinin en büyük elemanı bulunurken, dizinin ilk elemanını almak yerine ilgili türün en küçük değeri alınır. İşlem klasik olarak devam eder. Benzer dırım en küçük eleman bulunurken de ilgili türün en büyük değerini alarak yapılabilir. Bu bir yaklaşımdır. Pek çok başka yaklaşım söz konusu olabilir. Aşağıdaki max ve min metotlarını inceleyiniz. Metotlar durumu anlatmak için en ilkel biçimde yazılmıştır*
 
->**
+```java
+public static int max(int [][] a)  
+{  
+    int result = Integer.MIN_VALUE;  
+  
+    for (int i = 0; i < a.length; ++i)  
+        for (int j = 0; j < a[i].length; ++j)  
+            if (result < a[i][j])  
+                result = a[i][j];  
+  
+    return result;  
+}
+
+public static int min(int [] a, int startIndex)  
+{  
+    int result = a[startIndex];  
+  
+    for (int i = startIndex + 1; i < a.length; ++i)  
+        result = Math.min(result, a[i]);  
+  
+    return result;  
+}
+```
+
+
+
+>*MatrixUtil sınıfının min ve max metotları*
+
+```java
+package org.csystem.util.matrix.test;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+import static org.csystem.util.matrix.MatrixUtil.*;  
+  
+public class MatrixUtilMinMaxTest {  
+    public static void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+        Random r = new Random();  
+  
+        while (true) {  
+            System.out.print("Satır sayısını giriniz:");  
+            int m = Integer.parseInt(kb.nextLine());  
+  
+            System.out.print("Sütun sayısını giriniz:");  
+            int n = Integer.parseInt(kb.nextLine());  
+  
+            if (m <= 0 || n <= 0)  
+                break;  
+  
+            int [][] a = generateRandomMatrix(r, m, n, 0, 100);  
+  
+            print(a, 2);  
+            System.out.printf("En büyük eleman:%d%nEn küçük eleman:%d%n", max(a), min(a));  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+
+
+>***Sınıf Çalışması:*** Parametresi ile aldığı int türden iki matrisinin toplamından oluşan matrise geri dönen add isimli metodu MatrixUtil sınıfı içerisinde yazınız ve test ediniz.
+>***Açıklamalar:*** 
+>- Metot matrislerin toplanıp toplanmayacağını kontrol etmeyecektir
+>- İki matrisin toplamı karşılıklı elemanların toplamından elde edilen yeni bir matristir.
+
 
 ```java
 
@@ -19899,24 +19972,18 @@ public class MatrixUtilSumDiagonalTest {
 
 
 
-
->**
-
-```java
-
-```
-
-
-
->**
+>***Sınıf Çalışması:*** Parametresi ile aldığı int türden iki matrisinin farkında oluşan matrise geri dönen subtract isimli metodu MatrixUtil sınıfı içerisinde yazınız ve test ediniz.
+>***Açıklamalar:*** 
+>- Metot matrislerin çıkartılıp çıkartılamayacağını kontrol etmeyecektir
+>- İki matrisin farkı karşılıklı elemanların farkından elde edilen yeni bir matristir.
 
 ```java
 
 ```
 
 
-
->**
+>***Sınıf Çalışması:*** Parametresi ile aldığı int türden bir matris ile, ikinci parametresi ile aldığı int türden bir sayıyı çarpan multiplyBy metodunu yazınız ve test ediniz.
+>***Açıklamalar:*** Bir matrisin bir sayı (scalar) ile çarpımı matrisin tüm elemanlarını o sayı ile çarpmaktır.
 
 ```java
 

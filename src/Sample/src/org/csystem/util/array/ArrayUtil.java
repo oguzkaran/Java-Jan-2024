@@ -115,12 +115,7 @@ public class ArrayUtil {
 
     public static int max(int [] a)
     {
-        int result = a[0];
-
-        for (int i = 1; i < a.length; ++i)
-            result = Math.max(result, a[i]);
-
-        return result;
+        return max(a, 0);
     }
 
     public static int max(int [] a, int startIndex)
@@ -133,14 +128,19 @@ public class ArrayUtil {
         return result;
     }
 
-    public static int min(int [] a)
+    public static int max(int [][] a)
     {
-        int result = a[0];
+        int result = Integer.MIN_VALUE;
 
-        for (int i = 1; i < a.length; ++i)
-            result = Math.min(result, a[i]);
+        for (int [] array : a)
+            result = Math.max(result, max(array));
 
         return result;
+    }
+
+    public static int min(int [] a)
+    {
+        return min(a, 0);
     }
 
     public static int min(int [] a, int startIndex)
@@ -149,6 +149,16 @@ public class ArrayUtil {
 
         for (int i = startIndex + 1; i < a.length; ++i)
             result = Math.min(result, a[i]);
+
+        return result;
+    }
+
+    public static int min(int [][] a)
+    {
+        int result = Integer.MAX_VALUE;
+
+        for (int [] array : a)
+            result = Math.min(result, min(array));
 
         return result;
     }
