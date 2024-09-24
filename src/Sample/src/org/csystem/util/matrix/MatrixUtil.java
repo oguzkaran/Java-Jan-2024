@@ -75,6 +75,11 @@ public class MatrixUtil {
         return ArrayUtil.min(a);
     }
 
+    public static int [][] multiply(int [][] a, int [][] b)
+    {
+        throw new UnsupportedOperationException("TODO");
+    }
+
     public static void multiplyBy(int [][] a, int value)
     {
         ArrayUtil.multiplyBy(a, value);
@@ -125,6 +130,14 @@ public class MatrixUtil {
 
     public static int [][] transpose(int [][] a)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        int m = a.length;
+        int n = a[0].length;
+        int [][] r = new int[n][m];
+
+        for (int i = 0; i < n; ++i)
+            for (int j = 0; j < m; ++j)
+                r[i][j] = a[j][i];
+
+        return r;
     }
 }

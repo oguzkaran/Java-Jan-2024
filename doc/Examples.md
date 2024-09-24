@@ -19961,33 +19961,248 @@ public class MatrixUtilMinMaxTest {
 }
 ```
 
+#### 24 Eylül 2024
 
-
->***Sınıf Çalışması:*** Parametresi ile aldığı int türden iki matrisinin toplamından oluşan matrise geri dönen add isimli metodu MatrixUtil sınıfı içerisinde yazınız ve test ediniz.
+>***Sınıf Çalışması:*** Parametresi ile aldığı int türden iki matrisin toplamından oluşan matrise geri dönen add isimli metodu MatrixUtil sınıfı içerisinde yazınız ve test ediniz.
 >***Açıklamalar:*** 
->- Metot matrislerin toplanıp toplanmayacağını kontrol etmeyecektir
+>- Metot matris olup olmama kontrolü yapmayacaktır.
+>- Metot matrislerin toplanıp toplanmayacağını kontrol etmeyecektir.
 >- İki matrisin toplamı karşılıklı elemanların toplamından elde edilen yeni bir matristir.
 
 
 ```java
-
+package org.csystem.util.matrix.test;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+import static org.csystem.util.matrix.MatrixUtil.*;  
+  
+public class MatrixUtilAddTest {  
+    public static void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+        Random r = new Random();  
+  
+        while (true) {  
+            System.out.print("Satır sayısını giriniz:");  
+            int m = Integer.parseInt(kb.nextLine());  
+  
+            System.out.print("Sütun sayısını giriniz:");  
+            int n = Integer.parseInt(kb.nextLine());  
+  
+            if (m <= 0 || n <= 0)  
+                break;  
+  
+            int [][] a = generateRandomMatrix(r, m, n, 0, 100);  
+            int [][] b = generateRandomMatrix(r, m, n, 0, 100);  
+  
+            print(a, 2);  
+            System.out.println("---------------------------------------------");  
+            print(b, 2);  
+            System.out.println("---------------------------------------------");  
+  
+            int [][] c = add(a, b);  
+  
+            print(c, 3);  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
 ```
 
 
 
 >***Sınıf Çalışması:*** Parametresi ile aldığı int türden iki matrisinin farkında oluşan matrise geri dönen subtract isimli metodu MatrixUtil sınıfı içerisinde yazınız ve test ediniz.
 >***Açıklamalar:*** 
->- Metot matrislerin çıkartılıp çıkartılamayacağını kontrol etmeyecektir
+>- Metot matris olup olmama kontrolü yapmayacaktır.
+>- Metot matrislerin çıkartılıp çıkartılamayacağını kontrol etmeyecektir.
 >- İki matrisin farkı karşılıklı elemanların farkından elde edilen yeni bir matristir.
 
 ```java
-
+package org.csystem.util.matrix.test;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+import static org.csystem.util.matrix.MatrixUtil.*;  
+  
+public class MatrixUtilSubtractTest {  
+    public static void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+        Random r = new Random();  
+  
+        while (true) {  
+            System.out.print("Satır sayısını giriniz:");  
+            int m = Integer.parseInt(kb.nextLine());  
+  
+            System.out.print("Sütun sayısını giriniz:");  
+            int n = Integer.parseInt(kb.nextLine());  
+  
+            if (m <= 0 || n <= 0)  
+                break;  
+  
+            int [][] a = generateRandomMatrix(r, m, n, 0, 100);  
+            int [][] b = generateRandomMatrix(r, m, n, 0, 100);  
+  
+            print(a, 2);  
+            System.out.println("---------------------------------------------");  
+            print(b, 2);  
+            System.out.println("---------------------------------------------");  
+  
+            int [][] c = subtract(a, b);  
+  
+            print(c, 3);  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
 ```
 
 
 >***Sınıf Çalışması:*** Parametresi ile aldığı int türden bir matris ile, ikinci parametresi ile aldığı int türden bir sayıyı çarpan multiplyBy metodunu yazınız ve test ediniz.
->***Açıklamalar:*** Bir matrisin bir sayı (scalar) ile çarpımı matrisin tüm elemanlarını o sayı ile çarpmaktır.
+>***Açıklamalar:*** 
+>- Metot matris olup olmama kontrolü yapmayacaktır.
+>- Bir matrisin bir sayı (scalar) ile çarpımı matrisin tüm elemanlarını o sayı ile çarpmaktır.
 
 ```java
-
+package org.csystem.util.matrix.test;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+import static org.csystem.util.matrix.MatrixUtil.*;  
+  
+public class MatrixUtilMultiplyByTest {  
+    public static void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+        Random r = new Random();  
+  
+        while (true) {  
+            System.out.print("Satır sayısını giriniz:");  
+            int m = Integer.parseInt(kb.nextLine());  
+  
+            System.out.print("Sütun sayısını giriniz:");  
+            int n = Integer.parseInt(kb.nextLine());  
+  
+            if (m <= 0 || n <= 0)  
+                break;  
+  
+            System.out.print("Bir sayı giriniz:");  
+            int value = Integer.parseInt(kb.nextLine());  
+  
+            int [][] a = generateRandomMatrix(r, m, n, 0, 100);  
+  
+  
+            print(a, 2);  
+            System.out.println();  
+            multiplyBy(a, value);  
+            print(a, 3);  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
 ```
+
+
+>***Sınıf Çalışması:*** Parametresi ile aldığı int türden bir matrisin devriğine (transpose) geri dönen transpose isimli metodu MatrixUtil sınıfı içerisinde yazınız ve test ediniz
+>***Açıklamalar:*** 
+>- Metot matris olup olmama kontrolü yapmayacaktır.
+>- Bir matrisin devriği satırların sütun sütunların yapılmış halidir.
+
+
+```java
+package org.csystem.util.matrix.test;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+import static org.csystem.util.matrix.MatrixUtil.*;  
+  
+public class MatrixUtilTransposeTest {  
+    public static void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+        Random r = new Random();  
+  
+        while (true) {  
+            System.out.print("Satır sayısını giriniz:");  
+            int m = Integer.parseInt(kb.nextLine());  
+  
+            System.out.print("Sütun sayısını giriniz:");  
+            int n = Integer.parseInt(kb.nextLine());  
+  
+            if (m <= 0 || n <= 0)  
+                break;  
+  
+            int [][] a = generateRandomMatrix(r, m, n, 0, 100);  
+  
+            print(a, 2);  
+            System.out.println();  
+            print(transpose(a), 2);  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+>Dizi dizilerine ilişkin karmaşık bildirimler de söz konusu olabilmektedir. Örneğin: 
+>`int [][][] a` referansı her bir elemanı bir dizi dizisi olan bir dizi referansını temsil eder. Bu durumda eğer dizi dizilerinin kendi aralarında uzunlukları ve dizi dizilerine ilişkin dizilerin de kendi aralarında uzunlukları eşitse yani örneğin bu referansa `new int[3][4][5]` gibi bir dizinin referansı verilirse bu bir dikdörtgen prizmayı temsil edebilir. Şüphesiz daha karmaşık bildirimler de söz konusu olabilir ancak pratikte çok kullanılmaz.
+
+```java
+package org.csystem.app;  
+  
+import java.util.Random;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       int [][][] a = new int[3][4][5];  
+       Random r = new Random();  
+  
+       for (int i = 0; i < a.length; ++i)  
+          for (int j = 0; j < a[i].length; ++j)  
+             for (int k = 0; k < a[i][j].length; ++k)  
+                a[i][j][k] = r.nextInt(100);  
+  
+       //...  
+  
+  
+       for (int [][] arrayOfArray : a)  
+          for (int [] array : arrayOfArray)  
+             for (int val : array)  
+                System.out.println(val);  
+    }  
+}
+```
+#### 26 Eylül 2024
+
+> ***Sınıf Çalışması:*** Parametresi ile aldığı int türden iki matrisin çarpımından oluşan matrisi döndüren multiply isimli metodu MatrixUtil içerisinde yazınız ve aşağıdaki kod test ediniz
+> ***Açıklamalar:*** 
+> - Metot matris olup olmama kontrolü yapmayacaktır.
+> - Metot matrislerin çarpılıp çarpılmayacağını kontrol etmeyecektir
+> - Matris çarpımına ilişkin formülü şu link'den elde edebilirsiniz:  https://en.wikipedia.org/wiki/Matrix_multiplication
+
+> ***Sınıf Çalışması:*** Bir okulda ortak olarak Fizik sınavı yapılıyor olsun. Sınav n tane şube için yapılsın. n sayısını klavyeden isteyiniz. Her bir şubedeki öğrenci sayısını da klavyeden isteyiniz. Bu sınavdan alınan notları rassal olarak belirleyiniz. Bu işlemlerden sonra ilgili notlara göre her bir şubenin ayrı ayrı Fizik dersi ortalaması ve okulun Fizik dersi ortalamasını hesaplayan simülasyonu yazınız.
+> ***Açıklamalar:*** 
+> - Bir öğrencinin notu [0, 10] aralığında bir tamsayı olabilir.
+> - Programı mümkün olduğunca nesne yönelimli olarak ve genel olarak tasarlayınız
+> - Her bir şube nin not dağılımına ilişkin histogram'ları  ve okulun Fizik notlarına ilişkin histogramı (düşey olarak) çiziniz.
