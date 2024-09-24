@@ -1,6 +1,6 @@
 /**
  * Utility class for array operations
- * Last Update: 19th September 2024
+ * Last Update: 24th September 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.matrix;
@@ -12,7 +12,28 @@ import java.util.Random;
 public class MatrixUtil {
     public static int [][] add(int [][] a, int [][] b)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        int m = a.length;
+        int n = a[0].length;
+        int [][] r = new int[m][n];
+
+        for (int i = 0; i < m; ++i)
+            for (int j = 0; j < n; ++j)
+                r[i][j] = a[i][j] + b[i][j];
+
+        return r;
+    }
+
+    public static double [][] add(double [][] a, double [][] b)
+    {
+        int m = a.length;
+        int n = a[0].length;
+        double [][] r = new double[m][n];
+
+        for (int i = 0; i < m; ++i)
+            for (int j = 0; j < n; ++j)
+                r[i][j] = a[i][j] + b[i][j];
+
+        return r;
     }
 
     public static int [][] generateRandomMatrix(Random random, int m, int n, int origin, int bound)
@@ -56,7 +77,12 @@ public class MatrixUtil {
 
     public static void multiplyBy(int [][] a, int value)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        ArrayUtil.multiplyBy(a, value);
+    }
+
+    public static void print(int [][] a)
+    {
+        print(a, 1);
     }
 
     public static void print(int [][] a, int n)
@@ -66,7 +92,15 @@ public class MatrixUtil {
 
     public static int [][] subtract(int [][] a, int [][] b)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        int m = a.length;
+        int n = a[0].length;
+        int [][] r = new int[m][n];
+
+        for (int i = 0; i < m; ++i)
+            for (int j = 0; j < n; ++j)
+                r[i][j] = a[i][j] - b[i][j];
+
+        return r;
     }
 
     public static long sum(int [][] a)
@@ -87,5 +121,10 @@ public class MatrixUtil {
             total += a[i][i];
 
         return total;
+    }
+
+    public static int [][] transpose(int [][] a)
+    {
+        throw new UnsupportedOperationException("Not yet implemented!...");
     }
 }

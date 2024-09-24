@@ -1,6 +1,6 @@
 /**
  * Utility class for array operations
- * Last Update: 19th September 2024
+ * Last Update: 24th September 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.array;
@@ -161,6 +161,18 @@ public class ArrayUtil {
             result = Math.min(result, min(array));
 
         return result;
+    }
+
+    public static void multiplyBy(int [] a, int value)
+    {
+        for (int i = 0; i < a.length; ++i)
+            a[i] *= value;
+    }
+
+    public static void multiplyBy(int [][] a, int value)
+    {
+        for (int [] array : a)
+            multiplyBy(array, value);
     }
 
     public static int partition(int [] a, int threshold)
