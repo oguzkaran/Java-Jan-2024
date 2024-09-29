@@ -1821,9 +1821,6 @@ class App {
 >Euclid Uzaklığı fomulü:
 >
 >$$\sqrt{(x1 - x2) ^ 2 + (y1 - y2) ^ 2}$$
-><br>
-
-<br>
 
 ```java
 package csd;
@@ -1865,9 +1862,6 @@ class PointUtil {
 >Euclid Uzaklığı fomulü:
 >
 >$$\sqrt{(x1 - x2) ^ 2 + (y1 - y2) ^ 2}$$
-><br>
-
-<br>
 
 ```java
 package csd;
@@ -4288,7 +4282,7 @@ class App {
 >**_Not:_** Örnek şu ana gördüklerimiz kullanılarak, daha genel yazılmaya çalışılmıştır. İleride daha iyisi yazılacaktır
 >
 >**_Not:_** Formül için `~/doc/images/ikinci-dereceden-denklem.jpg` dosyasından yararlanabilirsiniz.
-><br></br>
+>
 >İkinci dereceden (quadratic) denklem:
 >
 >$$ax^2 + bx + c = 0$$
@@ -4312,7 +4306,6 @@ class App {
 >3.	if $\Delta < 0$
 >
 >		Gerçek kök yok!
-><br></br>
 
 ```java
 package csd;
@@ -4381,7 +4374,7 @@ class EquationSolver {
 >**_Not:_** Örnek şu ana gördüklerimiz kullanılarak, daha genel yazılmaya çalışılmıştır. İleride daha iyisi yazılacaktır
 >
 >**_Not:_** Formül için `~/doc/images/ikinci-dereceden-denklem.jpg` dosyasından yararlanabilirsiniz.
-><br></br>
+>
 >İkinci dereceden (quadratic) denklem:
 >
 >$$ax^2 + bx + c = 0$$
@@ -4405,7 +4398,6 @@ class EquationSolver {
 >3.	if $\Delta < 0$
 >
 >		Gerçek kök yok!
-><br></br>
 
 ```java
 package csd;
@@ -4476,8 +4468,6 @@ class EquationSolver {
 >		while (<boolean türden ifade>)
 >			<deyim>		
 >while döngüsü koşul ifadesi doğru sürece yinelenen döngü deyimidir. Akış while döngü deyimine geldiğinde de koşul kontrol edilir, eğer yanlış ise döngüye girilmez. Koşul ifadesinin boolean türden olmamasın durumunda error oluşur.
- 
-<br></br>
 
 >Aşağıdaki demo örneği inceleyiniz
 
