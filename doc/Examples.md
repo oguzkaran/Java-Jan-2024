@@ -37,7 +37,7 @@ dosya işlemleri gibi işlemler için hazır sınıflar bulunmaktadır.*
 program yüzünden yanlışlıkla makinede bir problem olma olasılığı oldukça düşüktür.*
  
 #### 25 Ocak 2024
- 
+
 ##### Programlama Dillerinin Sınıflandırılması
 
 >Programlama dilleri çeşitli şekillerde sınıflandırılabilse de genel olarak 3 şekilde sınıflandırma eğilimi söz konusudur:
@@ -95,8 +95,6 @@ geçişi için cd komutu kullanılır.\
 >6. Komut yorumlayıcı programda aşağıdaki biçimde byte code çalıştırılır:
 >
 >`java csd.App`
-><br>
-<br>
 
 **_Anahtar Notlar:_** Yukarıdaki maddelerdeki bazı zorunluluklar ilerideki konularda anlaşılacaktır.
 
@@ -113,7 +111,7 @@ class App {
 
 #### 1 Şubat 2024
  
->Dil Kavramı: İletişimde kullanılan sembollere dil denir. Dilin kurallarına gramer denir. Bir olgu en az şu iki özelliğe sahipse bir dildir:
+>**Dil Kavramı:** İletişimde kullanılan sembollere dil denir. Dilin kurallarına gramer denir. Bir olgu en az şu iki özelliğe sahipse bir dildir:
 >1. Sentaks (syntax): Dilin öğrelerinin doğru dizilimine denir. Örneğin "I am a student" cümlesinde dilin öğeleri doğru 
 dizilmiştir. Cümle "am a student I"  biçiminde yasılsaydı sentaks olarak hatalı olurdu.
 >2. Semantik (semantic): Doğru dizilmiş öğelerin anlamına denir. Öğeler doğru dizilse bile cümle anlamlı değilse yine
@@ -122,9 +120,9 @@ hatalıdır.
 >Doğal dillerde sentaks ve semantik dışında da kavramlar bulunur. Bilgisayar bilimlerinde kullanılan dillere  bilgisayar dilleri (computer languages) denir. Bir bilgisayar dili akış (flow) içeriyorsa programlama dili (programming language) denir. Her bilgisayar dili bir programlama dili değildir. Örneğin html, XML gibi bilgisayar dilleri akış içermediği için programlama dili değildir. Java bir programlama dilidir.
 >
 >Programlama dilleri zaman içerisinde birbirilerinden esinlenmiştir. Hatta bazı programlama kalıpları da bir takım dillerden alınarak kullanılmaktadır
->
->Derleyicinin verdiği mesajlar: Derleyiciler koda ilişkin bazı teşhiş mesajları (diagnostics) verebilirler.
 
+
+>**Derleyicinin verdiği mesajlar:** Derleyiciler koda ilişkin bazı teşhiş mesajları (diagnostics) verebilirler.
 >Derleyicilerin teşhis mesajları iki gruba ayrılır:
 >1. Gerçek hatalar (errors): Sentaks veya semantik olarak geçersiz bir durumda derleyicinin verdiği mesajlardır. Bu
 durumda BC üretilmez. Programcının hataya yol açan durumları düzeltmesi ve derleme işlemini yapması gerekir.
