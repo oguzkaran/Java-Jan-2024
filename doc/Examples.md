@@ -20115,7 +20115,6 @@ public class MatrixUtilMultiplyByTest {
 >- Metot matris olup olmama kontrolü yapmayacaktır.
 >- Bir matrisin devriği satırların sütun sütunların yapılmış halidir.
 
-
 ```java
 package org.csystem.util.matrix.test;  
   
@@ -20184,7 +20183,7 @@ class App {
     }  
 }
 ```
-#### 26 Eylül 2024
+#### 1 Ekim 2024
 
 > **Sınıf Çalışması:** Parametresi ile aldığı int türden iki matrisin çarpımından oluşan matrisi döndüren multiply isimli metodu MatrixUtil içerisinde yazınız ve aşağıdaki kod test ediniz
 > ***Açıklamalar:*** 
@@ -20192,8 +20191,381 @@ class App {
 > - Metot matrislerin çarpılıp çarpılmayacağını kontrol etmeyecektir
 > - Matris çarpımına ilişkin formülü şu link'den elde edebilirsiniz:  https://en.wikipedia.org/wiki/Matrix_multiplication
 
+```java
+package org.csystem.util.matrix.test;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+import static org.csystem.util.matrix.MatrixUtil.*;  
+  
+public class MatrixUtilMultiplyTest {  
+    public static void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+        Random r = new Random();  
+  
+        while (true) {  
+            System.out.print("Satır sayısını giriniz:");  
+            int m = Integer.parseInt(kb.nextLine());  
+  
+            System.out.print("Sütun sayısını giriniz:");  
+            int n = Integer.parseInt(kb.nextLine());  
+  
+            System.out.print("İkinci matrisin sütun sayısını giriniz:");  
+            int k = Integer.parseInt(kb.nextLine());  
+  
+            if (m <= 0 || n <= 0 || k <= 0)  
+                break;  
+  
+            int [][] a = generateRandomMatrix(r, m, n, 0, 10);  
+            int [][] b = generateRandomMatrix(r, n, k, 0, 10);  
+  
+            print(a, 2);  
+            System.out.println("---------------------------------------------");  
+            print(b, 2);  
+            System.out.println("---------------------------------------------");  
+  
+            int [][] c = multiply(a, b);  
+  
+            print(c, 3);  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+XXXXXXXXXXXXXXXXXXXXXXX
 > **Sınıf Çalışması:** Bir okulda ortak olarak Fizik sınavı yapılıyor olsun. Sınav n tane şube için yapılsın. n sayısını klavyeden isteyiniz. Her bir şubedeki öğrenci sayısını da klavyeden isteyiniz. Bu sınavdan alınan notları rassal olarak belirleyiniz. Bu işlemlerden sonra ilgili notlara göre her bir şubenin ayrı ayrı Fizik dersi ortalaması ve okulun Fizik dersi ortalamasını hesaplayan simülasyonu yazınız.
 > ***Açıklamalar:*** 
-> - Bir öğrencinin notu [0, 10] aralığında bir tamsayı olabilir.
+> - Bir öğrencinin not [0, 10] aralığında bir tamsayı olabilir.
 > - Programı mümkün olduğunca nesne yönelimli olarak ve genel olarak tasarlayınız
 > - Her bir şube nin not dağılımına ilişkin histogram'ları  ve okulun Fizik notlarına ilişkin histogramı (düşey olarak) çiziniz.
+
+##### Sınıf Elemanlarının Temel Erişim Belirleyicileri
+
+>Anımsanacağı gibi sınıf elemanları  (member) şu erişim belirleyicilerden birini alabilirler: **public, no-modifier, protected, private.**
+>
+>Burada no-modifier erişim belirleyici yazmamak anlamındadır. Java'da no-modifier'ın da diğerlerinden farklı bir anlamı vardır. 
+>
+>Burada öncelikle bu erişim belirleyicilerin syntax ve semantic olarak kuralları ele alınacak, sonrasında NYPT'de kullanımı anlatılacaktır.
+>
+>Aslında bir sınıf erişim belirleyiciler açısından 4 bölümden oluşur. Bir eleman hangi erişim belirleyici ile bildirilirse o bölüme eklenmiş olur. 
+>
+>public ve private bölümlerin anlamı aynı paketteki diğer sınıflar (friendly classes) veya farklı paketlerdeki diğer sınıflar için değişmez. Yani private bölüme erişim aynı paketteki veya farklı paketlerdeki diğer sınıflar için aynı anlamdadır. Benzer şekilde public bölümün anlamı aynı paketteki diğer sınıflar için ve farklı paketlerdeki diğer sınıflar için aynıdır. Ancak no-modifier ve protected bölümlere aynı paketteki diğer sınıfların erişimi ile farklı paketlerdeki diğer sınıflların erişimleri değişiklik göstermektedir. 
+>
+>Erişim belirleyiciler, sınıf dışından erişimlerde geçerlidir. Sınıf içerisinde her bölüme erişilebilir.
+>
+>Syntax açısından bölümlere ait elemanlar karışık olarak bildirilebilir. Şüphesiz belli bir düzende bildirimi okunabilirliği artırır. 
+
+
+>Sınıfın public bölümüne aynı paketteki tüm sınıflardan erişilebilir
+
+```java
+package x;  
+  
+public class A {  
+    public int a;  
+  
+    public A(/*...*/)  
+    {  
+        //...  
+    }  
+  
+    public void foo()  
+    {  
+        //...  
+    }  
+}
+```
+
+```java
+package x;  
+  
+public class B {  
+    public void bar()  
+    {  
+        A o = new A(/*...*/);  
+  
+        o.a = 20;  
+        o.foo();  
+    }  
+}
+```
+
+>Sınıfın public bölümüne farklı paketlerdeki tüm sınıflardan erişilebilir
+
+```java
+package x;  
+  
+public class A {  
+    public int a;  
+  
+    public A(/*...*/)  
+    {  
+        //...  
+    }  
+  
+    public void foo()  
+    {  
+        //...  
+    }  
+}
+```
+
+```java
+package y;  
+  
+import x.A;  
+  
+public class B {  
+    public void bar()  
+    {  
+        A o = new A(/*...*/);  
+  
+        o.a = 20;  
+        o.foo();  
+    }  
+}
+```
+
+>Sınıfın private bölümüne aynı paketteki diğer sınıflardan erişilemez
+
+```java
+package x;  
+  
+public class A {  
+    private int a;  
+  
+    private A(/*...*/)  
+    {  
+        //...  
+    }  
+  
+    private void foo()  
+    {  
+        //...  
+    }  
+}
+```
+
+```java
+package x;  
+  
+public class B {  
+    public void bar()  
+    {  
+        A o = new A(/*...*/); //error  
+  
+        o.a = 20; //error  
+        o.foo(); //error  
+    }  
+}
+```
+
+>Sınıfın private bölümüne farklı paketlerdeki diğer sınıflardan erişilemez
+
+```java
+package x;  
+  
+public class A {  
+    private int a;  
+  
+    private A(/*...*/)  
+    {  
+        //...  
+    }  
+  
+    private void foo()  
+    {  
+        //...  
+    }  
+}
+```
+
+```java
+package y;  
+  
+import x.A;  
+  
+public class B {  
+    public void bar()  
+    {  
+        A o = new A(/*...*/); //error  
+  
+        o.a = 20; //error  
+        o.foo(); //error  
+    }  
+}
+```
+
+>Sınıfın no-modifier bölümü aynı paketteki diğer sınıflar için public anlamındadır
+
+```java
+package x;  
+  
+public class A {  
+    int a;  
+  
+    A(/*...*/)  
+    {  
+        //...  
+    }  
+  
+    void foo()  
+    {  
+        //...  
+    }  
+}
+```
+
+```java
+package x;  
+  
+public class B {  
+    public void bar()  
+    {  
+        A o = new A(/*...*/);  
+  
+        o.a = 20;  
+        o.foo();  
+    }  
+}
+```
+
+>Sınıfın no-modifier bölümü farklı paketlerdeki diğer sınıflar için private anlamındadır
+
+```java
+package x;  
+  
+public class A {  
+    int a;  
+  
+    A(/*...*/)  
+    {  
+        //...  
+    }  
+  
+    void foo()  
+    {  
+        //...  
+    }  
+}
+```
+
+```java
+package y;  
+  
+import x.A;  
+  
+public class B {  
+    public void bar()  
+    {  
+        A o = new A(/*...*/); //error
+  
+        o.a = 20;  //error
+        o.foo();  //error
+    }  
+}
+```
+
+**Anahtar Notlar:** Sınıfın no-modifier bölümündeki elemanlar için "package-private" terimi de kullanılabilmektedir
+
+>Sınıfın protected bölümü aynı paketteki diğer sınıflar için public anlamındadır
+
+```java
+package x;  
+  
+public class A {  
+    protected int a;  
+  
+    protected A(/*...*/)  
+    {  
+        //...  
+    }  
+  
+    protected void foo()  
+    {  
+        //...  
+    }  
+}
+```
+
+```java
+package x;  
+  
+public class B {  
+    public void bar()  
+    {  
+        A o = new A(/*...*/);  
+  
+        o.a = 20;  
+        o.foo();  
+    }  
+}
+```
+
+>Sınıfın protected bölümü farklı paketlerdeki diğer sınıflar için türetme (inheritance) söz konusu değilse private anlamındadır. Türemiş sınıf (derived/sub class) kendisine ait protected bölüme erişibilir. protected bölümün anlamı ve türemiş sınıfı kavramı inheritance konusunda ayrıca ele alınacaktır
+
+```java
+package x;  
+  
+public class A {  
+    protected int a;  
+  
+    protected A(/*...*/)  
+    {  
+        //...  
+    }  
+  
+    protected void foo()  
+    {  
+        //...  
+    }  
+}
+```
+
+```java
+package y;  
+  
+import x.A;  
+  
+public class B {  
+    public void bar()  
+    {  
+        A o = new A(/*...*/); //error  
+  
+        o.a = 20; //error  
+        o.foo(); //error  
+    }  
+}
+```
+
+>Sınıf içerisinde her bölüme erişilebilir
+
+```java
+package x;  
+  
+public class A {  
+    private int a;  
+  
+    protected void foo()  
+    {  
+        a = 10;  
+    }  
+}
+```
+
+
+>Erişim belirleyicilere ilişkin özet tablo şu şekildedir:
+
+| Erişim Belirleyici | Aynı Sınıf | Friendly Sınıf | Farklı Paketteki Sınıf | Türemiş sınıf |
+| ------------------ | ---------- | -------------- | ---------------------- | ------------- |
+| public             | T          | T              | T                      | T             |
+| protected          | T          | T              | F                      | T             |
+| no-modifier        | T          | T              | F                      | F             |
+| private            | T          | F              | F                      | F             |
+

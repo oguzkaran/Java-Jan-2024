@@ -24,8 +24,8 @@ public class MatrixUtilMultiplyTest {
             if (m <= 0 || n <= 0 || k <= 0)
                 break;
 
-            int [][] a = generateRandomMatrix(r, m, n, 0, 100);
-            int [][] b = generateRandomMatrix(r, n, k, 0, 100);
+            int [][] a = generateRandomMatrix(r, m, n, 0, 10);
+            int [][] b = generateRandomMatrix(r, n, k, 0, 10);
 
             print(a, 2);
             System.out.println("---------------------------------------------");

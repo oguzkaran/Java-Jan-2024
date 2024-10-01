@@ -1,6 +1,6 @@
 /**
  * Utility class for array operations
- * Last Update: 24th September 2024
+ * Last Update: 1st October 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.matrix;
@@ -77,7 +77,17 @@ public class MatrixUtil {
 
     public static int [][] multiply(int [][] a, int [][] b)
     {
-        throw new UnsupportedOperationException("TODO");
+        int m = a.length;
+        int n = a[0].length;
+        int p = b[0].length;
+        int [][] r = new int[m][p];
+
+        for (int i = 0; i < m; ++i)
+            for (int j = 0; j < n; ++j)
+                for (int k = 0; k < p; ++k)
+                    r[i][k] += a[i][j] * b[j][k];
+
+        return r;
     }
 
     public static void multiplyBy(int [][] a, int value)

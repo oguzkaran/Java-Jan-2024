@@ -1,6 +1,6 @@
 /**
  * Utility class for array operations
- * Last Update: 24th September 2024
+ * Last Update: 1st October 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.array;
@@ -8,15 +8,15 @@ package org.csystem.util.array;
 import java.util.Random;
 
 public class ArrayUtil {
-    public static void bubbleSortAscending(int [] a)
+    private static void bubbleSortAscending(int [] a)
     {
         for (int i = 0; i < a.length - 1; ++i)
-            for (int k = 0; k < a.length -1 - i; ++k)
+            for (int k = 0; k < a.length - 1 - i; ++k)
                 if (a[k + 1] < a[k])
                     swap(a, k, k + 1);
     }
 
-    public static void bubbleSortDescending(int [] a)
+    private static void bubbleSortDescending(int [] a)
     {
         for (int i = 0; i < a.length - 1; ++i)
             for (int k = 0; k < a.length -1 - i; ++k)
@@ -24,7 +24,7 @@ public class ArrayUtil {
                     swap(a, k, k + 1);
     }
 
-    public static void selectionSortAscending(int [] a)
+    private static void selectionSortAscending(int [] a)
     {
         int min, minIndex;
 
@@ -42,7 +42,7 @@ public class ArrayUtil {
         }
     }
 
-    public static void selectionSortDescending(int [] a)
+    private static void selectionSortDescending(int [] a)
     {
         int max, maxIndex;
 
@@ -58,6 +58,11 @@ public class ArrayUtil {
             a[maxIndex] = a[i];
             a[i] = max;
         }
+    }
+
+    public static double average(int [] a)
+    {
+        return sum(a) / (double)a.length;
     }
 
     public static void bubbleSort(int [] a)
