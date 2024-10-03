@@ -837,7 +837,7 @@ class App {
 }
 ```
 
-**Anahtar Notlar:** Programlamada artık kullanılması önerilmeyen bir kavrama deprecated denir. `Deprecated` olmanın çeşitli gerekçeleri olabilir. Programcı deprecated olan bir şeyi özel bir durum yoksa kullanmamalıdır. `Deprecated` olmanın gerekçeleri ve yerine kullanılacak şeyler dokümante edilir
+**Anahtar Notlar:** Programlamada artık kullanılması önerilmeyen bir kavrama  **deprecated** denir. Deprecated olmanın çeşitli gerekçeleri olabilir. Programcı deprecated olan bir şeyi özel bir durum yoksa kullanmamalıdır. Deprecated olmanın gerekçeleri ve yerine kullanılacak şeyler dokümante edilir.
  
 >Değişken isimlendirme kuralları (Buradaki kurallar tüm değişken atomlar için geçerlidir):
 >- Değişken isimleri bir rakam karakteri ile başlatılamaz. Uygun bir karakter ile başlatılıp istenildiği kadar rakam karakteri kullanılabilir.
@@ -20243,7 +20243,7 @@ XXXXXXXXXXXXXXXXXXXXXXX
 > ***Açıklamalar:*** 
 > - Bir öğrencinin not [0, 10] aralığında bir tamsayı olabilir.
 > - Programı mümkün olduğunca nesne yönelimli olarak ve genel olarak tasarlayınız
-> - Her bir şube nin not dağılımına ilişkin histogram'ları  ve okulun Fizik notlarına ilişkin histogramı (düşey olarak) çiziniz.
+> - Her bir şubenin not dağılımına ilişkin histogram'ları  ve okulun Fizik notlarına ilişkin histogramı (düşey olarak) çiziniz.
 
 ##### Sınıf Elemanlarının Temel Erişim Belirleyicileri
 
@@ -20568,4 +20568,180 @@ public class A {
 | protected          | T          | T              | F                      | T             |
 | no-modifier        | T          | T              | F                      | F             |
 | private            | T          | F              | F                      | F             |
+##### 3 Êkim 2024
+
+#### Encapsulation, Data/Information Hiding
+
+>NYPT'de özellikle veri elemanlarının gizlenmesine **encapsulation** denilmektedir. Bu anlamda bu kavrama **veri/bilgi gizleme (data/information hiding**) de denilmektedir. Bu kavram aslında gerçek hayattan programlamaya aktarılmıştır. Örneğin, televizyon izleyen bir kişi televizyonun, kumandası ile nasıl haberleştiğini bilmek zorunda değildir. Yani  bunu bilmesi ya da bilmemesi izlemesini etkilemez. Bu durumda aslında kumanda ile haberleşme kısmı televizyonu izleyenden gizlenmiştir.  Çünkü gerek yoktur. Ancak televizyonu üreten açısından bunun bilinmesi gerekir.  
+>
+>Bir sınıf için iki bakış açısı söz konusudur: **yazan bakış açısı, kullanan bakış açısı.**  Sınıfı yazan, sınıfa ilişkin tüm detayları ve sınıfı kullanan bakış açısını da bilmelidir. Sınıfı kullanan ise içsel detayları bilmek zorunda değildir. Bu anlamda sınıfın bildirimine hizmet veren anlamında **server codes**, kullanan kodlara  ise hizmet alan anlamında **client codes** da denilmektedir. Aslında bu kavramlar geneldir. Sınıf elemanlarının  gizlenmesi ile NYPT'de kullanılmaktadır.  
+>
+  Bir sınıfın veri elemanı gizlendiğinde, dışarıdan değerinin değiştirilmesi ve/veya değerinin elde edilmesi gerekebilir.  Bunun için veri elemanına erişen public metotların yazılması gerekir. Gizlenmiş bir veri elemanının değerini değiştirmek  için yazılan public metoda **set metodu (setter/mutator)** denir ve bir convention olarak (genelde) **set** öneki ile başlatılır.  Gizlenmiş bir veri elemanının değerini elde etmek için yazılan public metoda **get metodu (getter/accessor)** denir ve  bir convention olarak (genelde) **get** öneki ile başlatılır. Veri elemanı boolean türdense tipik olarak getter, **is** ile başlatılır. Gizlenenen bir eleman için mutator ve accessor metotlarının yazılıp yazılmayacağı sınıfa yani domain'e  bağlıdır. Bazı veri elemanları için hiç biri yazılmayabilirken, bazı veri elemanları için bir tanesi, bazı veri  elemanları için ise ikisi de yazılabilir.
+>
+  Bir sınıfın public ve protected bölümleri dökumante edilir. private ve no-modifier bölümleri dökumante edilmez. Bir sınıfın bir elemanının erişim belirleyicisi (yani aslında sınıfın bölümleri) diğer sınıflar için anlamldır. Sınıf  içerisinden erişimde elemanın hangi bölümde olduğunun önemi yoktur.
+
+>**Anahtar Notlar:** Değişken atom isimlendirmede bazı teknikler kullanılmaktadır. Bu teknikler dışında da isimlendirme yapılabilir. Burada anlatılanlar çok kullanılan ve bilinen tekniklerdir:
+>1. **Unix style (snake case):** Bu isimlendirmede karakterlerin tamamı küçük harfle yazılır, kelimeler alttire karakteri ile ayrılır. Örneğin: `number_of_devices` `find_file`. Bu isimlendirme Java'da doğrudan tercih edilmez.
+>2. **Lower Camel Case:** Bu isimlendirmede kelimeler bitişik yazılır. İlk kelimenin baş harfi küçük, diğer kelimelerin baş harfi büyük olur. Diğer tüm karakterler de küçük harfle yazılır. Örneğin: `numberOfDevices`, `nextInt`, `findFile`. Bu isimlendirme genel olarak Java'da metot isimlerinde, yerel değişken isimlerinde, parametre değişkeni, sınıf elemanı isimlerinde tercih edilir.
+>3. **Upper Camel Case:** Bu isimlendirmede kelimeler bitişik yazılır. Tüm kelimelerin baş hafleri büyük, geri kalan tüm karakterler küçük harfle yazılır. Örneğin: `ArrayUtil`, `ReflectionUtils`. Bu isimlerde Java'da genel olarak UDT isimlerinde tercih edilir. 
+>
+> İsimlendirmede bunlardan biri yada birden fazlası kullanılabilir. Hatta bunlardan biri kullanılmak zorunda bile değildir. Örneğin Java'da paket isimlerinin tamamı küçük harf  ve kelimeler bitişik olacak şekilde yazılır. Örneğin: `java.util`, `org.csystem.util.array`, `org.sprinframework.boot`.
+> 
+> Burada anlatılan teknikler tamamen geneldir ve bunlara isimler verilmiştir. Hatta bazen isimlendirmede bir ya da birden fazla teknik biraz değiştirilecek kullanılabilmektedir.
+> 
+> **Anahtar Notlar:** Programcılar genel olarak programlama dilinin doğasına uygun olacak şekilde isimlendirme yaparlar. Örneğin Java'da metot isimleri lower camel olarak kullanıldığından Java programcısı da kendi yazdığı metotlar aynı teknikle isimlendirme yapar.
+> 
+> **Anahtar Notlar:** Bazı programcılar özellikle private veri elemanlarının isimlendirmesinde bazı önekler (prefix) kullanalabilmektedir. Örneğin `m_`, `d_`, `m` önekleri tercih edilebilmektedir. Bazı programcılar hiç bir önek koymamayı tercih edebilirler. Bu tür yaklaşımların iyisi kötüsü yoktur. Geliştirici ekip tarafında belirlen teknik kullanılır. Biz convention olarak, sınıfların non-static ve private veri elemanları için `m_` önekini, sınıfın static ve private veri elemanları için `ms_` önekini kullanacağız.
+
+>Aşağıdaki demo Time sınıfı ve accessor ve mutator metotlarını inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       Time t = new Time(21, 21, 39);  
+  
+       System.out.printf("%02d:%02d:%02d%n", t.getHour(), t.getMinute(), t.getSecond());  
+       t.setHour(22);  
+       t.setMinute(34);  
+       t.setSecond(0);  
+       System.out.printf("%02d:%02d:%02d%n", t.getHour(), t.getMinute(), t.getSecond());  
+    }  
+}  
+  
+class Time {  
+    private int m_hour;  
+    private int m_minute;  
+    private int m_second;  
+  
+    //...  
+  
+    public Time(int hour, int minute, int second)  
+    {  
+       //...  
+       m_hour = hour;  
+       m_minute = minute;  
+       m_second = second;  
+    }  
+  
+    public int getHour()  
+    {  
+       return m_hour;  
+    }  
+  
+    public void setHour(int value)  
+    {  
+       //...  
+       m_hour = value;  
+    }  
+  
+    public int getMinute()  
+    {  
+       return m_minute;  
+    }  
+  
+    public void setMinute(int value)  
+    {  
+       //...  
+       m_minute = value;  
+    }  
+  
+    public int getSecond()  
+    {  
+       return m_second;  
+    }  
+  
+    public void setSecond(int value)  
+    {  
+       //...  
+       m_second = value;  
+    }  
+  
+    //...  
+}
+```
+
+>Aşağıdaki durumlardan en az bir tanesi varsa ilgili veri elemanı gizlenir:
+>- Sınıfların versiyonları ilerledikçe yani sınıfın kodlarında değişiklik ya da eklentiler yapıldıkça veri elemanları isimlerinin hatta türlerinin değiştirilmesi ile çok fazla karşılaşılır. Bu durumda eski kodların yeni değişikliklerden etkilenmemesi için veri elemanları gizilenir.
+>
+>-  Bir veri elemanının sınır değerleri olabilir. Bu durumda sınırlar dışında değer verilmemesi için veri elemanı gizlenir.
+>
+>- Bir veri elemanının değeri, başka bir veri elemanın değerine bağlı olarak hesaplanıyor olabilir. Bu durumda veri elemanı gizlenir. 
+>
+>- Bir veri elemanının değişen değerine göre bir işlem yapılması gerekebilir. Örneğin, bir veritabanı bağlantısına yönelik bir bilginin değişmesi durumunda eski bağlantının kopartılıp yeni bağlantının sağlanması gerekebilir. Bu durumda ilgili veri elemanı gizlenir.
+> 
+> **Anahtar Notlar:** Bazı durumlarda yukarıki durumlarda biri olmasa bile veri elemanı gizlenebilir. Örneğin, sınıfın bir veri elemanı dışında kalan diğer veri elemanları gizlenmesi gerekebilir. Bütünlüğün bozulmaması için gizlenmesi gerekmeyen veri elemanı da gizlenebilir. Bu durumda yine ilgili accessor ve mutator metotlar yazılır. Bu da aslında sınıfa bağlıdır.
+> 
+> **Anahtar Notlar:** Yukarıdaki 4 durumdan en az bir tanesi varsa programcı hiç düşünmeden veri elemanın gizlemelidir.
+> 
+> **Anahtar Notlar:** Yukarıdaki durumlardan hiçibirisi ile karşılaşılmaması durumunda (%3 - %5 arasında karşılaşılmaz) illgili veri elemanı yapılabilir.
+
+>Aşağıdaki demo Time sınıfının kodları değişmesine rağmen, değişiklik yapılmadan yazılmış client code'ların etkilenmediğine dikkat ediniz
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String [] args)  
+    {  
+       Time t = new Time(21, 21, 39);  
+  
+       System.out.printf("%02d:%02d:%02d%n", t.getHour(), t.getMinute(), t.getSecond());  
+       t.setHour(22);  
+       t.setMinute(34);  
+       t.setSecond(0);  
+       System.out.printf("%02d:%02d:%02d%n", t.getHour(), t.getMinute(), t.getSecond());  
+    }  
+}  
+  
+class Time {  
+    private String m_timeStr;  
+    //...  
+  
+    public Time(int hour, int minute, int second)  
+    {  
+       //...  
+       m_timeStr = "%02d:%02d:%02d".formatted(hour, minute, second);  
+    }  
+  
+    public int getHour()  
+    {  
+       return Integer.parseInt(m_timeStr.substring(0, 2));  
+    }  
+  
+    public void setHour(int value)  
+    {  
+       //...  
+       m_timeStr = "%02d:%02d:%02d".formatted(value, getMinute(), getSecond());  
+    }  
+  
+    public int getMinute()  
+    {  
+       return Integer.parseInt(m_timeStr.substring(3, 5));  
+    }  
+  
+    public void setMinute(int value)  
+    {  
+       //...  
+       m_timeStr = "%02d:%02d:%02d".formatted(getHour(), value, getSecond());  
+    }  
+  
+    public int getSecond()  
+    {  
+       return Integer.parseInt(m_timeStr.substring(6));  
+    }  
+  
+    public void setSecond(int value)  
+    {  
+       //...  
+       m_timeStr = "%02d:%02d:%02d".formatted(getHour(), getMinute(), value);  
+    }  
+  
+    //...  
+}
+```
+
+>**Anahtar Notlar:** Bazı durumlarda sınıfın public bölümünde değişiklik yapılması gerekebilir. Bu durumda değişikliği doğrudan yapmak yerine, eskisi korunup deprecated yapılabilir. Şüphesiz bu durum da domain'e bağlıdır. Ayrıca bu durum sınıfın dökumantasyonunda belirtilir.
 

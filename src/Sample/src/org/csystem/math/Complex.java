@@ -1,6 +1,6 @@
 /**
  * Complex class that represents a complex number in math
- * Last Update: 15th August 2024
+ * Last Update: 3rd October 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.math;
@@ -11,12 +11,12 @@ public class Complex {
 	public double real;
 	public double imag;
 	
-	public static Complex add(double re1, double im1, double re2, double im2) //İleride sınıfı kullanan kodlardan gizleyeceğiz
+	private static Complex add(double re1, double im1, double re2, double im2)
 	{
 		return new Complex(re1 + re2, im1 + im2);
 	}
 	
-	public static Complex subtract(double re1, double im1, double re2, double im2) //İleride sınıfı kullanan kodlardan gizleyeceğiz
+	private static Complex subtract(double re1, double im1, double re2, double im2)
 	{
 		return add(re1, im1, -re2, -im2);		
 	}

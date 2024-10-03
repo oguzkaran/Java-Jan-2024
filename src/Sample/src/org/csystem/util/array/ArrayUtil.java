@@ -1,6 +1,6 @@
 /**
  * Utility class for array operations
- * Last Update: 1st October 2024
+ * Last Update: 3rd October 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.array;
