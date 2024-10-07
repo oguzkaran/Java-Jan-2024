@@ -611,7 +611,7 @@ class Mample {
 | char     | 2              | [0, 65535]                                   |
 | boolean  | -              | true, false                                  |
 
->**_Açıklamalar:_**
+>**Açıklamalar:**
 >- Java'da temel tür isimlerinin her biri birer anahtar sözcüktür.
 >- int, long, short ve byte türlerine tamsayı türleri (integer/integral types) denir.
 >- Tamsayı türleri için işaretli sistemde 2'ye tümleme formatını kullanılar. ?Java'da işaretsiz tamsayı türü yoktur.
@@ -5315,7 +5315,7 @@ class App {
 
 >**Sınıf Çalışması:** Parametresi ile aldığı `int` türden a ve b değeri için a'nın b-inci kuvvetini döndüren `pow` isimli metodu `NumberUtil` sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz.
 >
->**_Açıklamalar:_**
+>**Açıklamalar:**
 >- `Math` sınıfının `pow` metodu kullanılmayacaktır
 >- b'nin negatif değerleri için metot 1 değerine geri dönecektir
 
@@ -5362,7 +5362,7 @@ class NumberUtil {
 
 >**Sınıf Çalışması:** Parametresi ile aldığı `int` türden a ve b değeri için a'nın b-inci kuvvetini döndüren `pow` isimli metodu `NumberUtil` sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz.
 >
->**_Açıklamalar:_**
+>**Açıklamalar:**
 >- `Math` sınıfının `pow` metodu kullanılmayacaktır
 >- b'nin negatif değerleri için metot 1 değerine geri dönecektir
 
@@ -5408,7 +5408,7 @@ class NumberUtil {
 
 >**Sınıf Çalışması:** Parametresi ile aldığı `int` türden bir sayının Armstrong sayısı olup olmadığını test eden `isArmstrong` metodunu `NumberUtil` sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz.
 >
->**_Açıklamalar:_**
+>**Açıklamalar:**
 >- Metot sayı Armstrong sayısı ise `true`, değilse `false` değerine geri dönecektir
 >- Negatif olmayan bir sayının basamak sayısı n ise her bir basamağının n-inci kuvvetleri toplamı kendisine eşitse o sayı bir Armstrong sayısıdır.
 >
@@ -5484,7 +5484,7 @@ class NumberUtil {
  
 >**Sınıf Çalışması:** Parametresi ile aldığı `int` türden n değerinin faktoriyel değerine geri dönen `factorial` isimli metodu `NumberUtil` sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz.
 >
->**_Açıklamalar:_**
+>**Açıklamalar:**
 >- Faktoriyel işlemi aşağıdaki şekilde betimlenebilir:
 >
 >		0! = 1
@@ -5851,7 +5851,7 @@ class NumberUtil {
  
 >**Sınıf Çalışması:** Parametresi ile aldığı `int` türden n değeri için n-inci asal sayıyı döndüren `nthPrime` metodunu `NumberUtil` sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz.
 >
->**_Açıklamalar:_**
+>**Açıklamalar:**
 >- `isPrime` metodunun `hızlı` versiyonu kullanılacaktır.
 >- n değerinin pozitif olup olmadığı metot içerisinde kontrol edilmeyecektir.
 
@@ -5926,7 +5926,7 @@ class NumberUtil {
 
 >**Sınıf Çalışması:** Parametresi ile aldığı `long` türden bir sayıdan büyük ilk asal sayıyı döndüren `nextClosestPrime` metodunu yazınız ve aşağıdaki kod ile test ediniz.
 >
->**_Açıklamalar:_**
+>**Açıklamalar:**
 >- `isPrime` metodunun `hızlı` versiyonu kullanılacaktır.
 >- Metot taşma durumlarını kontrol etmeyecektir
 
@@ -5998,7 +5998,7 @@ class NumberUtil {
 
 >**Sınıf Çalışması:** Parametresi ile aldığı `long` türden bir sayıdan büyük ilk asal sayıyı döndüren `nextClosestPrime` metodunu yazınız ve aşağıdaki kod ile test ediniz.
 >
->Açıklamalar:
+>**Açıklamalar:**
 >- `isPrime` metodunun `hızlı` versiyonu kullanılacaktır.
 >- Metot taşma durumlarını kontrol etmeyecektir
 
@@ -6145,7 +6145,7 @@ class App {
 >**Sınıf Çalışması:** Parametresi ile aldığı `long` türden bir sayıdan büyük ilk asal sayıyı döndüren `nextClosestPrime`
 metodunu yazınız ve aşağıdaki kod ile test ediniz.
 >
->Açıklamalar:
+>**Açıklamalar:**
 >- `isPrime` metodunun `hızlı` versiyonu kullanılacaktır.
 >- Metot taşma durumlarını kontrol etmeyecektir
 
@@ -6272,7 +6272,7 @@ class App {
 
 >**Sınıf Çalışması:** Parametresi ile aldığı `int` türden pozitif bir n değeri için n-inci Fibonacci sayısını döndüren `fibonacciNumber` isimli metodu yazınız ve aşağıdaki kod ile test ediniz.
 >	
->**_Açıklamalar:_**
+>**Açıklamalar:**
 >- 0 1 1 2 3 5 8 13 21 ... serisinin sayılarına Fibonacci sayıları denir
 >- Metot pozitif olmayan n değeri için kontrol yapmayacaktır
 >- Metot recursive yazılmayacaktır
@@ -7234,7 +7234,7 @@ class DateUtil {
 
 >**Sınıf Çalışması:** Parametresi ile aldığı `int` türden gün, ay ve yıl bilgilerine ilişkin tarihin yılın kaçıncı günü olduğunu döndüren `getDayOfYear` isimli metodu yazınız ve aşağıdaki kod ile test ediniz.
 >
->**_Açıklamalar:_** Metot tarihin geçerli olup olmadığını kontrol etmeyecektir
+>**Açıklamalar:** Metot tarihin geçerli olup olmadığını kontrol etmeyecektir
 
 ```java
 package csd;
@@ -7340,7 +7340,7 @@ class DateUtil {
 
 >**Sınıf Çalışması:** Parametresi ile aldığı `int` türden gün, ay ve yıl bilgilerine ilişkin tarihin haftanın hangi günü olduğu bilgisine geri dönen `getDayOfWeek` isimli metodu ve uygulamayı aşağıdaki açıklamalara göre yazınız
 >	
->**_Açıklamalar:_**
+>**Açıklamalar:**
 >- getDayOfWeek metodu tarih geçerlilik kontrolü yapmayacaktır.
 >- getDayOfWeek metodu haftanın hangi günü olduğuna ilişkin bilgiyi şu algoritmaya göre bulacaktır: `01.01.1900` tarihi ile ilgili tarih (dahil) arasındaki gün sayısı hesaplanıp 7 ile bölümünden elde edilen kalan alındığında 0 Pazar, 1 Pazartesi, ..., 6 Cumartesi anlamına gelir.
 >- Program klavyeden gün ay ve yıl bilgisini isteyecek ve eğer tarih geçerli ise aşağıdaki formatta tarihi yazdırıcaktır:
@@ -7862,7 +7862,7 @@ class DemoMenuApp {
 
 >**Sınıf Çalışması:** Parametresi ile aldığı `int` türden gün, ay ve yıl bilgilerine ilişkin tarihin haftanın hangi günü olduğu bilgisine geri dönen `getDayOfWeek` isimli metodu ve uygulamayı aşağıdaki açıklamalara göre yazınız
 >
->**_Açıklamalar:_**
+>**Açıklamalar:**
 >- getDayOfWeek metodu tarih geçerlilik kontrolü yapmayacaktır.
 >- getDayOfWeek metodu haftanın hangi günü olduğuna ilişkin bilgiyi şu algoritmaya göre bulacaktır: 01.01.1900 tarihi ile ilgili tarih (dahil) arasındaki gün sayısı hesaplanıp 7 ile bölümünden elde edilen kalan alındığında 0 Pazar, 1 Pazartesi, ..., 6 Cumartesi anlamına gelir.
 >- Program klavyeden gün ay ve yıl bilgisini isteyecek ve eğer tarih geçerli ise aşağıdaki formatta 
@@ -9402,7 +9402,7 @@ class App {
 
 >**Sınıf Çalışması:** Parametresi ile aldığı `int` türden bir sayının Armstrong sayısı olup olmadığını test eden `isArmstrong` metodunu `NumberUtil` sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz.
 >
->**_Açıklamalar:_**
+>**Açıklamalar:**
 >- Metot sayı Armstrong sayısı ise true, değilse false değerine geri dönecektir	
 >- Negatif olmayan bir sayının basamak sayısı n ise her bir basamağının n-inci kuvvetleri toplamı kendisine 
 	eşitse o sayı bir Armstrong sayısıdır. Örneğin:
@@ -9456,7 +9456,7 @@ class NumberUtil {
 
 >**Sınıf Çalışması:** Parametresi ile aldığı `int` türden gün, ay ve yıl bilgilerine ilişkin tarihin haftanın hangi günü olduğu bilgisine geri dönen `getDayOfWeek` isimli metodu ve uygulamayı aşağıdaki açıklamalara göre yazınız
 >
->Açıklamalar:
+>**Açıklamalar:**
 >- getDayOfWeek metodu tarih geçerlilik kontrolü yapmayacaktır.
 >- getDayOfWeek metodu haftanın hangi günü olduğuna ilişkin bilgiyi şu algoritmaya göre bulacaktır:
 01.01.1900 tarihi ile ilgili tarih (dahil) arasındaki gün sayısı hesaplanıp 7 ile bölümünden elde edilen
@@ -13157,7 +13157,7 @@ class App {
 
 >**Sınıf Çalışması:** Klavyeden elma girilene kadar alınan yazıları aralarına `-` koyacak şekilde birleştirilmiş yeni bir yazı (yani String referansı) elde eden programı yazınız
 >
->**_Açıklamalar:_**
+>**Açıklamalar:**
 >- Programda dizi kullanılmayacaktır. Zaten gerek de yoktur
 >**_Not:_** İleride daha iyisi yazılacaktır
 
@@ -13196,7 +13196,7 @@ class ConcatWithHyphenApp {
 
 >**Sınıf Çalışması:** Klavyeden elma girilene kadar alınan yazıları aralarına `-` koyacak şekilde birleştirilmiş yeni bir	yazı (yani String referansı) elde eden programı yazınız.
 >
->**_Açıklamalar:_**
+>**Açıklamalar:**
 >- Programda dizi kullanılmayacaktır. Zaten gerek de yoktur
 >- Girilen boş string'ler yazıya dahil edilmeyecektir
 >
@@ -13545,7 +13545,7 @@ class App {
 
 >**Sınıf Çalışması:** Aşağıdaki açıklamalara göre parametresi ile aldığı bir yol ifadesine (path) ilişkin dosyanın yalnızca ismine geri dönen `getFileName` isimli metodu yazınız.
 >
->**_Açıklamalar:_**
+>**Açıklamalar:**
 >- Metot yol ifadesi geçerliliği yapmayacaktır.
 >- Metot yol ifadesine `/` veya `\` karakterlerini kabul edecektir.
 >- Yol ifadesi `/` ya da `\` içermiyorsa doğrudan yol ifadesini döndürecektir.
@@ -13836,7 +13836,7 @@ class App {
 
 >**_Sınıfı Çalışması:_** Aşağıda belirtilen metotları `StrigUtil` sınıfı içerisinde açıklamalara yazınız ve test ediniz.
 >
->**_Açıklamalar:_**
+>**Açıklamalar:**
 >- Metotların prototipleri şunlardır:
 >
 >		public static String trim(String s);
@@ -13907,7 +13907,7 @@ class StringUtil {
 
 >**_Sınıfı Çalışması:_** Parametresi ile aldığı yazının tersini döndüren `reverse` isimli metodu yazınız ve aşağıdaki kod ile test ediniz.
 >
->**_Açıklamalar:_** Metodun yazımında performansı (ya da daha genel bir deyişle hızı) düşünmenize gerek yoktur.
+>**Açıklamalar:** Metodun yazımında performansı (ya da daha genel bir deyişle hızı) düşünmenize gerek yoktur.
 >	
 >**Anahtar Notlar:** Aşağıdaki `reverse` metodunda String birleştirme işlemi sırasında sürekli String nesnesi yaratılıp referans da eski nesneden kopartılmaktadır. Burada bellek açısından bir sorun oluşmasa da nesne yaratılması bir maliyet oluşturur:
 >
@@ -14204,7 +14204,7 @@ class App {
 
 >**Sınıf Çalışması:** Parametresi ile aldığı bir yazının pangram olup olmadığını test eden `isPangramTR` ve `isPangramEN` isimli metotları yazınız ve aşağıdaki kod ile test ediniz.
 >
->**_Açıklamalar:_**
+>**Açıklamalar:**
 >- İlgili dilin alfabesindeki tüm karakterler kullanılarak oluşturulan ve içerisinde özel isim olmayan anlamlı 
 cümlelere "pangram" denir. 
 Örneğin tipik bir İnglizce pangram şudur:	
@@ -14427,7 +14427,7 @@ class StringUtil {
 >		public static String padTrailing(String s, int n, char ch);
 >		public static String padTrailing(String s, int n);
 >
->**_Açıklamalar:_** 
+>**Açıklamalar:** 
 >- padLeading metodunun üç parametreli overload'u parametresi ile aldığı yazıyı ikinci parametresi ile aldığı
 uzunluk kadar baştan ch karakteri ile besleyecektir. İkinci parametresi ile aldığı uzunluk bilgisi ilgili 
 yazının uzunluğundan küçük veya eşit aynı yazıya geri dönecektir. 
@@ -14525,7 +14525,7 @@ class StringUtil {
 >		public static String padTrailing(String s, int n, char ch);
 >		public static String padTrailing(String s, int n);
 >
->**_Açıklamalar:_**
+>**Açıklamalar:**
 >- padLeading metodunun üç parametreli overload'u parametresi ile aldığı yazıyı ikinci parametresi ile aldığı uzunluk kadar baştan ch karakteri ile besleyecektir. İkinci parametresi ile aldığı uzunluk bilgisi ilgili yazının uzunluğundan küçük veya eşit aynı yazıya geri dönecektir.
 >
 >Örneğin:\
@@ -14749,7 +14749,7 @@ class StringUtil {
 
 >**Sınıf Çalışması:** Parametresi ile aldığı bir yazının palindrome olup olmadığını test eden `isPalindrome` isimli metodu `StringUtil` sınıfı içerisinde yazınız ve test ediniz.
 >
->**_Açıklamalar:_**
+>**Açıklamalar:**
 >- Alfabetik olmayan karakterleri çıkartıldığında tersi kendisine eşit olan yazılara pandrom denir.
 Örneğin
 >
@@ -15485,7 +15485,7 @@ class App {
 >**Sınıf Çalışması:** Aşağıdaki metodu açıklamalara göre yazınız.
 >
 >		public static String repeat(int count, char ch);
->**_Açıklamalar:_**
+>**Açıklamalar:**
 >- Metot StringUtil sınıfı içerisinde yazılacaktır.
 >- Metot yazılırken döngü kullanılmayacaktır.
 >- String sınıfının repeat metodu kullanılmayacaktır.
@@ -15511,7 +15511,7 @@ class StringUtil {
 >**Sınıf Çalışması:** Aşağıdaki metodu açıklamalara göre yazınız.
 >
 >		public static String repeat(int count, char ch);
->**_Açıklamalar:_**
+>**Açıklamalar:**
 >- Metot StringUtil sınıfı içerisinde yazılacaktır.
 >- Metot yazılırken döngü kullanılmayacaktır.
 >- String sınıfının repeat metodu kullanılmayacaktır.
@@ -15537,7 +15537,7 @@ class StringUtil {
 >**Sınıf Çalışması:** Aşağıdaki metodu açıklamalara göre yazınız.
 >
 >		public static String repeat(int count, char ch);
->**_Açıklamalar:_**
+>**Açıklamalar:**
 >- Metot StringUtil sınıfı içerisinde yazılacaktır.
 >- Metot yazılırken döngü kullanılmayacaktır.
 >- String sınıfının repeat metodu kullanılmayacaktır.
@@ -17965,7 +17965,7 @@ public class NumberUtilGetDigitsTest {
 
 >**Sınıf Çalışması:** Aşağıda prototipi verilen metodu açıklamalara göre yazınız ve test ediniz:
 >`public static int [] histogramData(int [] a, int n);`
->***Açıklamalar:***  
+>**Açıklamalar:** 
 >- Metot ArrayUtil sınıfı içerisinde yazılacaktır.
 >- Metodun birinci parametresi, içerisinde [0, n] aralığında değerlerden oluşan bir dizi olacaktır.
 >- Parametre ile alınan dizinin değerleri için geçerlilik kontrolü yapılmayacaktır.
@@ -18235,7 +18235,7 @@ class App {
 
 >**Sınıf Çalışması:** Parametresi ile aldığı `int` türden gün, ay ve yıl bilgilerine ilişkin tarihin haftanın hangi günü olduğu bilgisine geri dönen `getDayOfWeek` isimli metodu ve uygulamayı aşağıdaki açıklamalara göre yazınız
 >	
->**_Açıklamalar:_**
+>**Açıklamalar:**
 >- JavaSE'de bulunan veya başka bir kütüphanedeki tarih zaman işlemlerine ilişkin sınıflar ve metotlar kullanılmayacaktır.
 >- getDayOfWeek metodu tarih geçerlilik kontrolü yapmayacaktır.
 >- getDayOfWeek metodu haftanın hangi günü olduğuna ilişkin bilgiyi şu algoritmaya göre bulacaktır: `01.01.1900` tarihi ile ilgili tarih (dahil) arasındaki gün sayısı hesaplanıp 7 ile bölümünden elde edilen kalan alındığında 0 Pazar, 1 Pazartesi, ..., 6 Cumartesi anlamına gelir.
@@ -18368,7 +18368,7 @@ public class DateUtil {
 
 >**Sınıf Çalışması:** Aşağıda prototipi verilen metodu StringUtil sınıfı içerisinde açıklamalara göre yazınız ve aşağıdaki kod ile test ediniz:
 >`public static String join(String [] s, String delimiter)` 
->***Açıklamalar:*** 
+>**Açıklamalar:**
 >- Metot birinci parametresi ile aldığı String dizisi ile tutulan yazıları ikinci parametresi ile aldığı separator ile birleştirilmiş bir yazıya geri dönecektir.
 >- Metot parametre geçerlilik kontrolü yapmayacaktır
 
@@ -18488,7 +18488,7 @@ class App {
 
 >**Sınıf Çalışması:** Klavyeden aşağıdaki formatta girilen yazıyı açıklamalara göre ayrıştırınız.
 >öğrenci no:ad soyad:doğum tarihi:ders adı:arasınav notu:final notu
->***Açıklamalar:*** 
+>**Açıklamalar:**
 >- Yazının format geçerlilik kontrolü yapılmayacaktır.
 >- Formata ilişkin bir örnek aşağıdaki gibidir:
 >1234:Oğuz Karan:10/09/1976:Matematik:67:100
@@ -19841,7 +19841,7 @@ public class MatrixUtilIsSquareMatrixTest {
 ```
 
 >**Sınıf Çalışması:*** Parametresi ile aldığı bir kare matrisin esas köşegeni (diagonal) üzerindeki elemanların toplamına geri dönen `sumDiagonal` isimli metodu MatrixUtil içerisinde yazınız ve test ediniz.
->***Açıklamalar:*** 
+>**Açıklamalar:**
 >- Metot parametresi ile aldığı referansa ilişkin dizi dizisinin kare matris olup olmadığını kontrol etmeyecektir.
 >- Bir kare matrisin esas köşegeni üzerindeki elemanlar, matrisin n x n lik ise sırasıyla `a[0][0], a[1][1], ..., a[n - 1][n - 1]` elemanlarıdır.
 >- Metot taşmaları düşünmeden long türüne geri dönecektir.
@@ -19955,7 +19955,7 @@ public class MatrixUtilMinMaxTest {
 #### 24 Eylül 2024
 
 >**Sınıf Çalışması:** Parametresi ile aldığı int türden iki matrisin toplamından oluşan matrise geri dönen add isimli metodu MatrixUtil sınıfı içerisinde yazınız ve test ediniz.
->***Açıklamalar:*** 
+>**Açıklamalar:**
 >- Metot matris olup olmama kontrolü yapmayacaktır.
 >- Metot matrislerin toplanıp toplanmayacağını kontrol etmeyecektir.
 >- İki matrisin toplamı karşılıklı elemanların toplamından elde edilen yeni bir matristir.
@@ -20009,7 +20009,7 @@ public class MatrixUtilAddTest {
 
 
 >**Sınıf Çalışması:** Parametresi ile aldığı int türden iki matrisinin farkında oluşan matrise geri dönen subtract isimli metodu MatrixUtil sınıfı içerisinde yazınız ve test ediniz.
->***Açıklamalar:*** 
+>**Açıklamalar:**
 >- Metot matris olup olmama kontrolü yapmayacaktır.
 >- Metot matrislerin çıkartılıp çıkartılamayacağını kontrol etmeyecektir.
 >- İki matrisin farkı karşılıklı elemanların farkından elde edilen yeni bir matristir.
@@ -20061,7 +20061,7 @@ public class MatrixUtilSubtractTest {
 
 
 >**Sınıf Çalışması:** Parametresi ile aldığı int türden bir matris ile, ikinci parametresi ile aldığı int türden bir sayıyı çarpan multiplyBy metodunu yazınız ve test ediniz.
->***Açıklamalar:*** 
+>**Açıklamalar:**
 >- Metot matris olup olmama kontrolü yapmayacaktır.
 >- Bir matrisin bir sayı (scalar) ile çarpımı matrisin tüm elemanlarını o sayı ile çarpmaktır.
 
@@ -20111,7 +20111,7 @@ public class MatrixUtilMultiplyByTest {
 
 
 >**Sınıf Çalışması:** Parametresi ile aldığı int türden bir matrisin devriğine (transpose) geri dönen transpose isimli metodu MatrixUtil sınıfı içerisinde yazınız ve test ediniz
->***Açıklamalar:*** 
+>**Açıklamalar:**
 >- Metot matris olup olmama kontrolü yapmayacaktır.
 >- Bir matrisin devriği satırların sütun sütunların yapılmış halidir.
 
@@ -20186,7 +20186,7 @@ class App {
 #### 1 Ekim 2024
 
 > **Sınıf Çalışması:** Parametresi ile aldığı int türden iki matrisin çarpımından oluşan matrisi döndüren multiply isimli metodu MatrixUtil içerisinde yazınız ve aşağıdaki kod test ediniz
-> ***Açıklamalar:*** 
+> **Açıklamalar:**
 > - Metot matris olup olmama kontrolü yapmayacaktır.
 > - Metot matrislerin çarpılıp çarpılmayacağını kontrol etmeyecektir
 > - Matris çarpımına ilişkin formülü şu link'den elde edebilirsiniz:  https://en.wikipedia.org/wiki/Matrix_multiplication
@@ -20240,7 +20240,7 @@ public class MatrixUtilMultiplyTest {
 ```
 XXXXXXXXXXXXXXXXXXXXXXX
 > **Sınıf Çalışması:** Bir okulda ortak olarak Fizik sınavı yapılıyor olsun. Sınav n tane şube için yapılsın. n sayısını klavyeden isteyiniz. Her bir şubedeki öğrenci sayısını da klavyeden isteyiniz. Bu sınavdan alınan notları rassal olarak belirleyiniz. Bu işlemlerden sonra ilgili notlara göre her bir şubenin ayrı ayrı Fizik dersi ortalaması ve okulun Fizik dersi ortalamasını hesaplayan simülasyonu yazınız.
-> ***Açıklamalar:*** 
+> **Açıklamalar:**
 > - Bir öğrencinin not [0, 10] aralığında bir tamsayı olabilir.
 > - Programı mümkün olduğunca nesne yönelimli olarak ve genel olarak tasarlayınız
 > - Her bir şubenin not dağılımına ilişkin histogram'ları  ve okulun Fizik notlarına ilişkin histogramı (düşey olarak) çiziniz.
