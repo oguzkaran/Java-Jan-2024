@@ -18776,8 +18776,6 @@ class App {
 #### 17 Eylül 2024
 
 ```java
-/**  
- * Utility class for array operations * Last Update: 10th September 2024 * @author Java-Jan-2024 Group */
 package org.csystem.util.array;  
   
 import java.util.Random;  
@@ -19035,8 +19033,7 @@ public class ArrayUtil {
 ```
 
 ```java
-/**  
- * Utility class for command line operations * Last Update: 12th September 2024 * @author Java-Jan-2024 Group */package org.csystem.util.console;  
+package org.csystem.util.console;  
   
 public class CommandLineArgsUtil {  
     public static void checkLengthEquals(int len, int argsLen, String message)  
@@ -20743,5 +20740,555 @@ class Time {
 }
 ```
 
->**Anahtar Notlar:** Bazı durumlarda sınıfın public bölümünde değişiklik yapılması gerekebilir. Bu durumda değişikliği doğrudan yapmak yerine, eskisi korunup deprecated yapılabilir. Şüphesiz bu durum da domain'e bağlıdır. Ayrıca bu durum sınıfın dökumantasyonunda belirtilir.
+>**Anahtar Notlar:** Bazı durumlarda sınıfın public bölümünde değişiklik yapılması gerekebilir. Bu durumda değişikliği doğrudan yapmak yerine, eskisi korunup **deprecated** yapılabilir. Şüphesiz bu durum da domain'e bağlıdır. Ayrıca bu durum sınıfın dökumantasyonunda belirtilir.
+
+##### 8 Ekim 2024
+
+>Bir metodun sınıf dışından çağrılması istenmiyorsa yani genel olarak dışardan çağrılması anlamsızsa bu durumda ilgili metot gizlenir. Circle sınıfının aşağıdaki implementasyonunda calculate metodunun sınıf dışından çağrılmasının bir anlamı olmayacağından private yapıldığında dikkat ediniz.
+
+> Circle sınıfının bir implementasyonu
+```java
+package org.csystem.math.geometry;  
+  
+import static java.lang.Math.PI;  
+import static java.lang.Math.abs;  
+  
+public class Circle {  
+    private double m_r;  
+    private double m_area;  
+    private double m_circumference;  
+  
+    private void calculate()  
+    {  
+        m_area = PI * m_r * m_r;  
+        m_circumference = 2 * PI * m_r;  
+    }  
+  
+    public Circle()  
+    {  
+    }  
+  
+    public Circle(double radius)  
+    {  
+        setRadius(radius);  
+    }  
+  
+    public void setRadius(double radius)  
+    {  
+        m_r = abs(radius);  
+        calculate();  
+    }  
+  
+    public double getRadius()  
+    {  
+        return m_r;  
+    }  
+  
+    public double getArea()  
+    {  
+        return m_area;  
+    }  
+  
+    public double getCircumference()  
+    {  
+        return m_circumference;  
+    }  
+  
+    public String toString()  
+    {  
+        return "Radius = %f, Area = %f, Circumference = %f".formatted(m_r, m_area, m_circumference);  
+    }  
+}
+```
+
+
+>Bazı durumlarda accessor bir metot geri planda bir veri elemanın değerini doğrudan döndürmüyor olabilir. Yine, bazı veri elemanlarını kullanarak bir işlemin sonucuna geri dönebilir. Sınıfın müşteri kodları için bu metotlar yine accessor metotlardır. Circle sınıfının aşağıdaki implementasyonunda alan ve çevre için veri elemanları tutulmadığına ve getArea ve getCircumference metotların yarıçapı kullanarak hesap yaptığına dikkar ediniz.
+
+>Circle sınıfının bir implementasyonu
+```java
+package org.csystem.math.geometry;  
+  
+import static java.lang.Math.abs;  
+import static java.lang.Math.*;  
+  
+public class Circle {  
+    private double m_r;  
+  
+    public Circle(double radius)  
+    {  
+        setRadius(radius);  
+    }  
+  
+    public void setRadius(double radius)  
+    {  
+        m_r = abs(radius);  
+    }  
+  
+    public double getRadius()  
+    {  
+        return m_r;  
+    }  
+  
+    public double getArea()  
+    {  
+        return PI * m_r * m_r;  
+    }  
+  
+    public double getCircumference()  
+    {  
+        return 2 * PI * m_r;  
+    }  
+  
+    public String toString()  
+    {  
+        return "Radius = %f, Area = %f, Circumference = %f".formatted(m_r, getArea(), getCircumference());  
+    }  
+}
+```
+
+>Circle sınıfının test kodu. Aşağıdaki kodun iki implementasyon için de kullanılabileceğine dikkat ediniz
+```java
+package org.csystem.math.geometry.test;  
+  
+import org.csystem.math.geometry.Circle;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+public class CircleTest {  
+    private static void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+        Random random = new Random();  
+  
+        System.out.print("Input count:");  
+        int count = kb.nextInt();  
+  
+        while (count-- > 0) {  
+            System.out.println("----------------------------------------");  
+            double r = random.nextDouble(-10, 11);  
+            Circle c = new Circle(r);  
+  
+            System.out.printf("Generated Value:%f%n", r);  
+            System.out.printf("Radius:%f, Area:%f, Circumference:%f%n", c.getRadius(), c.getArea(), c.getCircumference());  
+            r = random.nextDouble(-10, 11);  
+            c.setRadius(r);  
+            System.out.printf("Generated Value:%f%n", r);  
+            System.out.printf("Radius:%f, Area:%f, Circumference:%f%n", c.getRadius(), c.getArea(), c.getCircumference());  
+            System.out.println("----------------------------------------");  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+>Complex sınıfının bir implementasyonu
+
+```java
+
+package org.csystem.math;  
+  
+import static java.lang.Math.sqrt;  
+  
+public class Complex {  
+    public double real;  
+    public double imag;  
+      
+    private static Complex add(double re1, double im1, double re2, double im2)  
+    {  
+       return new Complex(re1 + re2, im1 + im2);  
+    }  
+      
+    private static Complex subtract(double re1, double im1, double re2, double im2)  
+    {  
+       return add(re1, im1, -re2, -im2);       
+    }  
+      
+    public Complex()  
+    {       
+    }  
+      
+    public Complex(double a)  
+    {  
+       real = a;       
+    }  
+      
+    public Complex(double a, double b)  
+    {  
+       real = a;  
+       imag = b;  
+    }  
+      
+    public static Complex add(double val, Complex z)  
+    {  
+       return add(val, 0, z.real, z.imag);  
+    }  
+      
+    public Complex add(Complex other)  
+    {  
+       return add(real, imag, other.real, other.imag);  
+    }  
+      
+    public Complex add(double val)  
+    {  
+       return add(real, imag, val, 0);  
+    }    
+      
+    public static Complex subtract(double val, Complex z)  
+    {  
+       return subtract(val, 0, z.real, z.imag);  
+    }  
+      
+    public Complex subtract(Complex other)  
+    {  
+       return subtract(real, imag, other.real, other.imag);  
+    }  
+      
+    public Complex subtract(double val)  
+    {  
+       return subtract(real, imag, val, 0);  
+    }  
+      
+    public void inc(double val)  
+    {  
+       real += val;  
+    }  
+      
+    public void inc()  
+    {  
+       inc(1);  
+    }  
+      
+    public void dec(double val)  
+    {  
+       inc(-val);  
+    }  
+      
+    public void dec()  
+    {  
+       dec(1);  
+    }  
+      
+    public Complex getConjugate()  
+    {             
+       return new Complex(real, -imag);  
+    }  
+      
+    public double getNorm()  
+    {  
+       return sqrt(real * real + imag * imag);  
+    }  
+      
+    public double getLength()  
+    {  
+       return getNorm();  
+    }    
+      
+    public String toString()  
+    {  
+       return "(%.2f, %.2f)".formatted(real, imag);  
+    }  
+}
+```
+
+>ArrayUtil sınıfının bir implementasyonu
+
+```java
+package org.csystem.util.array;  
+  
+import java.util.Random;  
+  
+public class ArrayUtil {  
+    private static void bubbleSortAscending(int [] a)  
+    {  
+        for (int i = 0; i < a.length - 1; ++i)  
+            for (int k = 0; k < a.length - 1 - i; ++k)  
+                if (a[k + 1] < a[k])  
+                    swap(a, k, k + 1);  
+    }  
+  
+    private static void bubbleSortDescending(int [] a)  
+    {  
+        for (int i = 0; i < a.length - 1; ++i)  
+            for (int k = 0; k < a.length -1 - i; ++k)  
+                if (a[k] < a[k + 1])  
+                    swap(a, k, k + 1);  
+    }  
+  
+    private static void selectionSortAscending(int [] a)  
+    {  
+        int min, minIndex;  
+  
+        for (int i = 0; i < a.length - 1; ++i) {  
+            min = a[i];  
+            minIndex = i;  
+  
+            for (int k = i + 1; k < a.length; ++k)  
+                if (a[k] < min) {  
+                    min = a[k];  
+                    minIndex = k;  
+                }  
+            a[minIndex] = a[i];  
+            a[i] = min;  
+        }  
+    }  
+  
+    private static void selectionSortDescending(int [] a)  
+    {  
+        int max, maxIndex;  
+  
+        for (int i = 0; i < a.length - 1; ++i) {  
+            max = a[i];  
+            maxIndex = i;  
+  
+            for (int k = i + 1; k < a.length; ++k)  
+                if (max < a[k]) {  
+                    max = a[k];  
+                    maxIndex = k;  
+                }  
+            a[maxIndex] = a[i];  
+            a[i] = max;  
+        }  
+    }  
+  
+    public static double average(int [] a)  
+    {  
+        return sum(a) / (double)a.length;  
+    }  
+  
+    public static void bubbleSort(int [] a)  
+    {  
+        bubbleSort(a, false);  
+    }  
+  
+    public static void bubbleSort(int [] a, boolean descending)  
+    {  
+        if (descending)  
+            bubbleSortDescending(a);  
+        else  
+            bubbleSortAscending(a);  
+    }  
+  
+    public static int [] generateRandomArray(Random random, int count, int origin, int bound)  
+    {  
+        int [] a = new int[count];  
+  
+        for (int i = 0; i < count; ++i)  
+            a[i] = random.nextInt(origin, bound);  
+  
+        return a;  
+    }  
+  
+    public static double [] generateRandomArray(Random random, int count, double origin, double bound)  
+    {  
+        double [] a = new double[count];  
+  
+        for (int i = 0; i < count; ++i)  
+            a[i] = random.nextDouble(origin, bound);  
+  
+        return a;  
+    }  
+  
+    public static boolean [] generateRandomArray(Random random, int count)  
+    {  
+        boolean [] a = new boolean[count];  
+  
+        for (int i = 0; i < count; ++i)  
+            a[i] = random.nextBoolean();  
+  
+        return a;  
+    }  
+  
+    public static int [] histogramData(int [] a, int n)  
+    {  
+        int [] data = new int[n + 1];  
+  
+        for (int val : a)  
+            ++data[val];  
+  
+        return data;  
+    }  
+  
+    public static int max(int [] a)  
+    {  
+        return max(a, 0);  
+    }  
+  
+    public static int max(int [] a, int startIndex)  
+    {  
+        int result = a[startIndex];  
+  
+        for (int i = startIndex + 1; i < a.length; ++i)  
+            result = Math.max(result, a[i]);  
+  
+        return result;  
+    }  
+  
+    public static int max(int [][] a)  
+    {  
+        int result = Integer.MIN_VALUE;  
+  
+        for (int [] array : a)  
+            result = Math.max(result, max(array));  
+  
+        return result;  
+    }  
+  
+    public static int min(int [] a)  
+    {  
+        return min(a, 0);  
+    }  
+  
+    public static int min(int [] a, int startIndex)  
+    {  
+        int result = a[startIndex];  
+  
+        for (int i = startIndex + 1; i < a.length; ++i)  
+            result = Math.min(result, a[i]);  
+  
+        return result;  
+    }  
+  
+    public static int min(int [][] a)  
+    {  
+        int result = Integer.MAX_VALUE;  
+  
+        for (int [] array : a)  
+            result = Math.min(result, min(array));  
+  
+        return result;  
+    }  
+  
+    public static void multiplyBy(int [] a, int value)  
+    {  
+        for (int i = 0; i < a.length; ++i)  
+            a[i] *= value;  
+    }  
+  
+    public static void multiplyBy(int [][] a, int value)  
+    {  
+        for (int [] array : a)  
+            multiplyBy(array, value);  
+    }  
+  
+    public static int partition(int [] a, int threshold)  
+    {  
+        int partitionPoint = 0;  
+  
+        while (partitionPoint != a.length && a[partitionPoint] < threshold)  
+            ++partitionPoint;  
+  
+        if (partitionPoint == a.length)  
+            return partitionPoint;  
+  
+        for (int i = partitionPoint + 1; i < a.length; ++i)  
+            if (a[i] < threshold)  
+                swap(a, i, partitionPoint++);  
+  
+        return partitionPoint;  
+    }  
+  
+    public static int partitionByEven(int [] a)  
+    {  
+        int partitionPoint = 0;  
+  
+        while (partitionPoint != a.length && a[partitionPoint] % 2 == 0)  
+            ++partitionPoint;  
+  
+        if (partitionPoint == a.length)  
+            return partitionPoint;  
+  
+        for (int i = partitionPoint + 1; i < a.length; ++i)  
+            if (a[i] % 2 == 0)  
+                swap(a, i, partitionPoint++);  
+  
+        return partitionPoint;  
+    }  
+  
+    public static void print(int [] a)  
+    {  
+        print(a, ' ', '\n');  
+    }  
+  
+    public static void print(int [] a, char sep, char end)  
+    {  
+        print(a, 1, sep, end);  
+    }  
+  
+    public static void print(int [] a, int n)  
+    {  
+        print(a, n, ' ', '\n');  
+    }  
+  
+    public static void print(int [] a, int n, char sep, char end)  
+    {  
+        String fmt = String.format("%%0%dd%c", n, sep);  
+  
+        for (int val : a)  
+            System.out.printf(fmt, val, sep);  
+  
+        System.out.print(end);  
+    }  
+  
+    public static void print(int [][] a)  
+    {  
+        print(a, 1);  
+    }  
+  
+    public static void print(int [][] a, int n)  
+    {  
+        for (int [] array : a)  
+            print(array, n, ' ', '\n');  
+    }  
+  
+    public static void print(double [] a)  
+    {  
+        print(a, '\n', '\n');  
+    }  
+  
+    public static void print(double [] a, char sep, char end)  
+    {  
+        for (double val : a)  
+            System.out.printf("%f%c", val, sep);  
+  
+        System.out.print(end);  
+    }  
+  
+    public static void selectionSort(int [] a)  
+    {  
+        selectionSort(a, false);  
+    }  
+  
+    public static void selectionSort(int [] a, boolean descending)  
+    {  
+        if (descending)  
+            selectionSortDescending(a);  
+        else  
+            selectionSortAscending(a);  
+    }  
+    public static long sum(int [] a)  
+    {  
+        long total = 0;  
+  
+        for (int val : a)  
+            total += val;  
+  
+        return total;  
+    }  
+  
+    public static void swap(int [] a, int i, int k)  
+    {  
+        int temp = a[i];  
+  
+        a[i] = a[k];  
+        a[k] = temp;  
+    }  
+  
+    //...  
+}
+```
 

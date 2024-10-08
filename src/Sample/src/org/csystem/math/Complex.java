@@ -1,6 +1,6 @@
 /**
  * Complex class that represents a complex number in math
- * Last Update: 3rd October 2024
+ * Last Update: 8th October 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.math;

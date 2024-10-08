@@ -13,6 +13,5 @@ public class GradeInfo {
     {
         return 0.4 * midtermGrade + 0.6 * finalGrade;
     }
-
     //...
 }
