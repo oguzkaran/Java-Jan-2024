@@ -1,6 +1,6 @@
 /**
  * Utility class for array operations
- * Last Update: 8th October 2024
+ * Last Update: 15th October 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.array;
@@ -76,6 +76,20 @@ public class ArrayUtil {
             bubbleSortDescending(a);
         else
             bubbleSortAscending(a);
+    }
+
+    public static void drawHistogram(int [] data, int n, char ch)
+    {
+        int maxValue = ArrayUtil.max(data);
+
+        for (int grade : data) {
+            int count = (int)Math.floor(grade * n / (double)maxValue);
+
+            while (count-- > 0)
+                System.out.print(ch);
+
+            System.out.println();
+        }
     }
 
     public static int [] generateRandomArray(Random random, int count, int origin, int bound)

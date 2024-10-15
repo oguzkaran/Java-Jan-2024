@@ -6,15 +6,13 @@
 #### 23 Ocak 2024
 
 ##### Java Platformunun Temel Özellikleri:
->Arakodlu Çalışma Sistemi: C ve C++ gibi dillerde yazılan kodlardan elde edilen (nasıl elde edildiği bu aşamada önemli değildir) "çalışabilir dosya (executable file)" sisteme (genel olarak işletim sistemi, donanım vb.) özgüdür ve koda göre her sistem için ayrıca oluşturulmalıdır. Hatta sisteme özgü kodlar yazılmışsa diğer sistemler için bu dosya oluşturulamaz. Oysa Java programlama dili ile yazılan bir program "derlendiğinde (compilation)" oluşan dosyanın içerisinde hiç bir sistemin dili olmayan yapay bir arakod bulunur. Bu arakoda "byte code (BC)" denir. BC doğrudan çalıştırılamaz. Çalıştırılması için ayrı bir uygulama (program)  gerekir. Bu program, BC'yi yorumlayarak makine koduna yani sisteme özgü koda dönüştürerek programı çalıştırır. Bu dönüştürme işlemine JIT (Just In Time) compilation denir. Geliştirme ve çalıştırma anlamında 3 tane temel kavram karşımıza çıkar:
+>**Arakodlu Çalışma Sistemi:** C ve C++ gibi dillerde yazılan kodlardan elde edilen (nasıl elde edildiği bu aşamada önemli değildir) "çalışabilir dosya (executable file)" sisteme (genel olarak işletim sistemi, donanım vb.) özgüdür ve koda göre her sistem için ayrıca oluşturulmalıdır. Hatta sisteme özgü kodlar yazılmışsa diğer sistemler için bu dosya oluşturulamaz. Oysa Java programlama dili ile yazılan bir program "derlendiğinde (compilation)" oluşan dosyanın içerisinde hiç bir sistemin dili olmayan yapay bir arakod bulunur. Bu arakoda "byte code (BC)" denir. BC doğrudan çalıştırılamaz. Çalıştırılması için ayrı bir uygulama (program)  gerekir. Bu program, BC'yi yorumlayarak makine koduna yani sisteme özgü koda dönüştürerek programı çalıştırır. Bu dönüştürme işlemine JIT (Just In Time) compilation denir. Geliştirme ve çalıştırma anlamında 3 tane temel kavram karşımıza çıkar:
 >
 >- JVM (Java Virtual Machine): BC'yi makine koduna dönüştürür. JVM aslında BC'nin nasıl makine koduna dönüştürüleceğini tanımlayan soyut bir kavramdır.
 >- JRE (Java Runtime Environment): Genel olarak Java ile yazılmış bir uygulamayı çalıştırmak (run) için gereken araçları ve uygulamaları içeren bir pakettir. Yani BC elde edildiğinde bu programın çalıştırılabilmesi için JRE'ye ihtiyaç vardır.
 >- JDK (Java Development Kit): Geliştirme (development) araçlarını ve çalıştırma araçlarının bir çoğunu içeren pakettir. Buradaki çalıştırma araçları geliştirme aşamasında kullanılabilir.
 >
->Ticari kullanımlarda özellikle Java 11 ile birlikte bazı değişiklikler yapılmıştır. Genel olarak şöyle söylenebilir:
-Java'da geliştirme ortamı ücetsiz, çalıştırma araçları kullanılan araca göre ücretlendirilebilir.  Tamamen ücretsiz
-olarak kullanılabilen "Open JRE" gibi çalıştırma araçları da mevcuttur.  Burada anlatılanlar geneldir. Ayrıca, belirli
+>Ticari kullanımlarda özellikle Java 11 ile birlikte bazı değişiklikler yapılmıştır. Genel olarak şöyle söylenebilir: Java'da geliştirme ortamı ücetsiz, çalıştırma araçları kullanılan araca göre ücretlendirilebilir.  Tamamen ücretsiz olarak kullanılabilen "Open JRE" gibi çalıştırma araçları da mevcuttur.  Burada anlatılanlar geneldir. Ayrıca, belirli
 bir noktadan sonra Java sürümleri için Long Term Support (LTS) kavramı da getirilmiştir. LTS sürümleri uzun süre 
 desteklenen yani güncellemesi (hızlandırılması, hataların düzeltilmesi (bug fix) vb.) uzun süre yapılan sürümlerdir. 
 Java'da Java 8, 11, 17 ve 21 sürümleri LTS sürümleridir. Bu kavramlar zamanla anlaşılacaktır.*
@@ -27,13 +25,13 @@ Java'da Java 8, 11, 17 ve 21 sürümleri LTS sürümleridir. Bu kavramlar zamanl
 uygulamalar düşünüldüğünde bu kaybın pek de önemi yoktur. Bu kaybın önemli olduğu uygulamalar için zaten Java ile 
 geliştirme yapılmaz.*
 >
->Hızlı Uygulama Geliştirme Ortamı: Java hızlı uygulama geliştirme (rapid application development) ortamı sunar. Bu anlamda
+>**Hızlı Uygulama Geliştirme Ortamı:** Java hızlı uygulama geliştirme (rapid application development) ortamı sunar. Bu anlamda
 hem öğrenmesi kolaydır hem de ürün daha çabuk elde edilir.*
 >
->Geniş bir sınıf kütüphanesi: Java'da oldukça geniş bir sınıf kütüphanesi bulunur. Veritabanı işlemleri, web programlama,
+>**Geniş bir sınıf kütüphanesi:** Java'da oldukça geniş bir sınıf kütüphanesi bulunur. Veritabanı işlemleri, web programlama,
 dosya işlemleri gibi işlemler için hazır sınıflar bulunmaktadır.*
 >
->Güvenli Çalışma Ortamı: Java'da yazılmış olan bir programın sisteme zarar verme olasılığı çok daha azdır. Yazılan bir 
+>**Güvenli Çalışma Ortamı:** Java'da yazılmış olan bir programın sisteme zarar verme olasılığı çok daha azdır. Yazılan bir 
 program yüzünden yanlışlıkla makinede bir problem olma olasılığı oldukça düşüktür.*
  
 #### 25 Ocak 2024
@@ -41,9 +39,9 @@ program yüzünden yanlışlıkla makinede bir problem olma olasılığı olduk�
 ##### Programlama Dillerinin Sınıflandırılması
 
 >Programlama dilleri çeşitli şekillerde sınıflandırılabilse de genel olarak 3 şekilde sınıflandırma eğilimi söz konusudur:
->1. Seviyelerine (level) göre sınıflandırma: Programlama dilinin seviyesi onun insan algısına yakınlığının ölçüsüdür. Yüksek seviyeli diller (high level languages) hem dil özellikleri, hem de uygulama geliştirme anlamında insan algısına yakınlıkları dolayısıyla daha kolay öğrenebilirler. Düşük seviyeli diller (low level languages) makineye daha yakın dillerdir. Olabilecek en düşük seviyeli dil makine dilidir.
->2. Kullanım alanlarına göre sınıflandırma: Dilin hangi alanlarda kullanılabileceğine göre sınıflandırmadır. Bazı diller birden fazla alanda kullanılabilirler. Bazı diller ise sadece bir alanda kullanılabilirler. Bu anlamda genel amaçlı diller, bilimsel ve mühendislik dilleri, veritabanı dilleri, yapay zeka dilleri, oyun ve animasyon dilleri vb. alanlar için diller söz konusu olabilmektedir.
->3. Programlama modeline göre sınıflandırma: Bir programı yazarken kullanılan genel model (paradigm) önemlidir. Bazı dillerde sınıf yoktur. Program çeşitli alt programların (function) bir araya getirilmesiyle yazılır. Bu modele "procedurel model" denir. Bazı dillerde sınıflar vardır ve programlar sınıflar kullanılarak yazılır. Başka bir çok kavramla birlikte sınıflar kullanılarak yazılan programlama modeline "nesne yönelimli model (object oriented model)" denir. Bazı dillerde programlar matematiksel formül yazıyormuş gibi yazılmaktadır. Bu tarz programlama modeline "fonksiyonel (functional)" model denir. Bazı diller birden fazla modeli desteklerler. Bu tarz dillere "multi paradigm languages" denilmektedir. Birden fazla modeli destekleyen diller, modellerin tüm özelliklerini desteklemeyebilir. 
+>1. **Seviyelerine (level) göre sınıflandırma:** Programlama dilinin seviyesi onun insan algısına yakınlığının ölçüsüdür. Yüksek seviyeli diller (high level languages) hem dil özellikleri, hem de uygulama geliştirme anlamında insan algısına yakınlıkları dolayısıyla daha kolay öğrenebilirler. Düşük seviyeli diller (low level languages) makineye daha yakın dillerdir. Olabilecek en düşük seviyeli dil makine dilidir.
+>2. **Kullanım alanlarına göre sınıflandırma:** Dilin hangi alanlarda kullanılabileceğine göre sınıflandırmadır. Bazı diller birden fazla alanda kullanılabilirler. Bazı diller ise sadece bir alanda kullanılabilirler. Bu anlamda genel amaçlı diller, bilimsel ve mühendislik dilleri, veritabanı dilleri, yapay zeka dilleri, oyun ve animasyon dilleri vb. alanlar için diller söz konusu olabilmektedir.
+>3. **Programlama modeline göre sınıflandırma:** Bir programı yazarken kullanılan genel model (paradigm) önemlidir. Bazı dillerde sınıf yoktur. Program çeşitli alt programların (function) bir araya getirilmesiyle yazılır. Bu modele "procedurel model" denir. Bazı dillerde sınıflar vardır ve programlar sınıflar kullanılarak yazılır. Başka bir çok kavramla birlikte sınıflar kullanılarak yazılan programlama modeline "nesne yönelimli model (object oriented model)" denir. Bazı dillerde programlar matematiksel formül yazıyormuş gibi yazılmaktadır. Bu tarz programlama modeline "fonksiyonel (functional)" model denir. Bazı diller birden fazla modeli desteklerler. Bu tarz dillere "multi paradigm languages" denilmektedir. Birden fazla modeli destekleyen diller, modellerin tüm özelliklerini desteklemeyebilir. 
 >
 >Bu durumda Java, bilimsel ve mühendislik uygulamalarında, web uygulamalarında, yapay zeka uygulamalarında, mobil programlamada vb. kullanılabilen genel amaçlı, yüksek seviyeli, nesne yönelimli programlama modeli ile uygulama geliştirilebilen ve özellikle Java 8 ile birlike fonksiyonel programlama modelini de belirli ölçüde destekleyen "multi paradigm" bir dildir.
 
@@ -55,20 +53,20 @@ program yüzünden yanlışlıkla makinede bir problem olma olasılığı olduk�
  
 ##### Temel Kavramlar
 
->Çevirici Programlar, Derleyiciler ve Yorumlayıcılar: Bir dilde yazılmış programı başka bir dile çeviren programlara çevirici programlar (translator) denir. Çevirici programlarda bir kaynak dil (source language) ve bir hedef dil (target/destination language) vardır. Kaynak dil yüksek seviyeli, hedef dil düşük seviyeli bir programlama diliyse bu durumda çevirici programa derleyici (compiler) denir. Örneğin Java programlama dilinden Kotlin programlama diline dönüştürme yapan program bir translator, Java programlama dilinden byte code'a dönüştürme yapan program ise bir compiler'dır. JVM'in byte code'u makine koduna çevirme faaliyeti de bir derleme işlemidir. Bu sebeple buna JIT compilation denir. Bazı dillerde yazılan programlar herhangi bir kod üretilmeden çalıştırılırlar. Bu tarz dillerde yazılmış programları herhangi bir kod üretmeden çalıştıran programlara "interpreter" denir. Bazı diller hem derleyici hem yorumlayıcı ile kullanılabilirler. Java pratikte derleyici ile kullanılan, Java 11 ile birlikte "java" programı yorumlayıcı olarak da java kodunu byte code üretilmeden çalıştırabilmektedir. Yorumlayıcı ile kullanılan diller derleyici ile kullanılan dillere göre daha yavaş olma eğilimindedir.
+>**Çevirici Programlar, Derleyiciler ve Yorumlayıcılar:** Bir dilde yazılmış programı başka bir dile çeviren programlara çevirici programlar (translator) denir. Çevirici programlarda bir kaynak dil (source language) ve bir hedef dil (target/destination language) vardır. Kaynak dil yüksek seviyeli, hedef dil düşük seviyeli bir programlama diliyse bu durumda çevirici programa derleyici (compiler) denir. Örneğin Java programlama dilinden Kotlin programlama diline dönüştürme yapan program bir translator, Java programlama dilinden byte code'a dönüştürme yapan program ise bir compiler'dır. JVM'in byte code'u makine koduna çevirme faaliyeti de bir derleme işlemidir. Bu sebeple buna JIT compilation denir. Bazı dillerde yazılan programlar herhangi bir kod üretilmeden çalıştırılırlar. Bu tarz dillerde yazılmış programları herhangi bir kod üretmeden çalıştıran programlara "interpreter" denir. Bazı diller hem derleyici hem yorumlayıcı ile kullanılabilirler. Java pratikte derleyici ile kullanılan, Java 11 ile birlikte "java" programı yorumlayıcı olarak da java kodunu byte code üretilmeden çalıştırabilmektedir. Yorumlayıcı ile kullanılan diller derleyici ile kullanılan dillere göre daha yavaş olma eğilimindedir.
 
 **Anahtar Notlar:** Bir uygulama tek bir java dosyasından oluşmak zorunda değildir. Hatta bir Java uygulaması yalnızca java kodlarından da oluşmak zorunda değildir. Bu durumda farklı java dosyaları ayrı derlenir. Hatta aynı dosyada bulunan sınıflar da ayrı derlenir. Bir ürün aslında tüm birimlerinin uygun şekilde derlenmesi ve ele alınmasıyla elde edilir. Bu işlem için genel olarak "build" terimi kullanılır. Build işlemi yalnızca derleme işlemi değildir. Yani bir uygulamanın ürün olarak elde edilmesi süreci "build" işlemidir. Burada anlatılanların da detayları zamanla ele alınacaktır.
 
->İşletim Sistemi (Operating System): Makinenin donanımını yöneten, bilgisayar ile kullanıcı arasında bir köprü oluşturan yazılımdır. Bir işletim sisteminin pek çok görevi vardır. Programları çalıştırmak, çeşitli cihazları ve aygıtları yönetmek, dosyaları ve dizinleri  (directory) organize etmek vb. görevler sayılabilir. İşletim sistemleri genel olarak iki gruba ayrılabilir: masaüstü işletim sistemleri (desktop operating systems), mobil işletim sistemleri (mobile operating systems). Şüphesiz başka çeşit işletim sistemleri de vardır. Popüler masaüstü işletim sistemleri Windows, Mac OS X, Unix ve Linux dağitımları gibi işletim sistemleridir. Popüler mobil işletim sistemleri Android ve IOS'dur.
+>**İşletim Sistemi (Operating System):** Makinenin donanımını yöneten, bilgisayar ile kullanıcı arasında bir köprü oluşturan yazılımdır. Bir işletim sisteminin pek çok görevi vardır. Programları çalıştırmak, çeşitli cihazları ve aygıtları yönetmek, dosyaları ve dizinleri  (directory) organize etmek vb. görevler sayılabilir. İşletim sistemleri genel olarak iki gruba ayrılabilir: masaüstü işletim sistemleri (desktop operating systems), mobil işletim sistemleri (mobile operating systems). Şüphesiz başka çeşit işletim sistemleri de vardır. Popüler masaüstü işletim sistemleri Windows, Mac OS X, Unix ve Linux dağitımları gibi işletim sistemleridir. Popüler mobil işletim sistemleri Android ve IOS'dur.
 >
->Açık kaynak kodlu yazılım, özgür yazılım ve mülkiyete sahip yazılım: Özgür yazılım (free software) ve açık kaynak kodlu (open source) yazılımlar arasında farklar olsa da genel olarak aşağıdaki ortak özelliklere sahiptirler:
+>**Açık kaynak kodlu yazılım, özgür yazılım ve mülkiyete sahip yazılım:** Özgür yazılım (free software) ve açık kaynak kodlu (open source) yazılımlar arasında farklar olsa da genel olarak aşağıdaki ortak özelliklere sahiptirler:
 >- Bedavadır. Kullanılabilmesi için herhangi bir lisans gerekmez.
 >- Kaynak kodlar sahiplenilemez. Kaynak koda ekleme yapıldığında ya da bir kaynak kod kullanıldığında kodlar kapatılamaz. Onların da açılması gerekir.
 >- Çoğaltılabilir, izin almadan kullanılabilir.
 >
 >Bunun tam tersi olarak mülkiyete sahip (propriatery) yazlımlardır. Bu yazılımlar para verilerek kullanılır ve izin almadan çoğaltılamaz.
 >
->IDE (Integrated Development Environment): Derleyicler ve yorumlayıcılar komut satırından çalışan ve basit arayüzlere sahip programlardır. Aslında teorik olarak bir uygulamadaki tüm Java dosyaları ve diğer dosyalar basit bir editör programla yazılıp komut satırından derlenebilir. Ancak bu, uygulama büyüdükçe zahmetli olmaya başlar. Bu da programcıya zaman kaybettirir. Bu amaçla pratikte yazılım geliştirmeyi kolaylaştırmak için IDE denilen yazılımlar kullanılır. IDE'lerde örneğin bir takım yardımlar veren editörler, tasarım araçları, test araçları, debug araçları vb. programcının geliştirme sırasında kullandığı araçlar bulunur. Java ile uygulama geliştirmede iki tane IDE yoğun olarak kullanılmaktadır: Eclipse, IntelliJIDEA. Biz kursumuzda belirli bir zaman (yaklaşık kursun yarısına kadar) Eclipse, sonrasında IntelliJIDEA kullanacağız.
+>**IDE (Integrated Development Environment):** Derleyicler ve yorumlayıcılar komut satırından çalışan ve basit arayüzlere sahip programlardır. Aslında teorik olarak bir uygulamadaki tüm Java dosyaları ve diğer dosyalar basit bir editör programla yazılıp komut satırından derlenebilir. Ancak bu, uygulama büyüdükçe zahmetli olmaya başlar. Bu da programcıya zaman kaybettirir. Bu amaçla pratikte yazılım geliştirmeyi kolaylaştırmak için IDE denilen yazılımlar kullanılır. IDE'lerde örneğin bir takım yardımlar veren editörler, tasarım araçları, test araçları, debug araçları vb. programcının geliştirme sırasında kullandığı araçlar bulunur. Java ile uygulama geliştirmede iki tane IDE yoğun olarak kullanılmaktadır: Eclipse, IntelliJIDEA. Biz kursumuzda belirli bir zaman (yaklaşık kursun yarısına kadar) Eclipse, sonrasında IntelliJIDEA kullanacağız.
 >
 >JDK'nın kurulumu için işletim sistemine göre aşağıdaki link'den ilgili "installer" indirilebilir:
 >
@@ -298,7 +296,7 @@ biçimi şu şekildedir:*
 	
 **Anahtar Notlar:** Aslında teknik olarak print ve println gibi metotlar ekrana yazma yapmazlar. Bu metotlar ismine standard output (stdout) denilen kabaca bir dosyaya yazma yaparlar. stdout dosyası ekrana yönlendirildiğinde biz çıktıları ekranda görürüz. Kursumuzda basitleştirmek için ekran terimini kullanacağız. Benzer şekilde klavyeden okuma yapan metotlar, okumayı aslında standard input (stdin) denilen bir dosyadan yaparlar. Dosya, klavyeye yönlendirildiğinde okuma klavyeden yapılmış olur. Kursumuzda basitleştirmek için klavye terimini de kullanacağız. Masaüstü işletim sistemlerinin hemen hepsinde stdout ekrana, stdin ise klavyaye yönlendirilmiştir. Ayrıca IDE'ler de stout'u genel olarak kendi console pencerelerine yönlendirirler. 
 
-**Anahtar Notlar:** Java'nın standart (yani hazır olarak) sınıflarının ve metotlarının buluduğu kütüğhaneye genele olarak JavaSE (Java Standard Edition) denilmektedir.
+**Anahtar Notlar:** Java'nın standart (yani hazır olarak) sınıflarının ve metotlarının buluduğu kütüphaneye genel olarak JavaSE (Java Standard Edition) denilmektedir.
  
 >Aşağıdaki demo örneği inceleyiniz
 
@@ -375,7 +373,7 @@ class Mample {
  
 ##### Sayı Sistemleri
 
->Biz 10'luk sistemi (decimal system) kullanmaktayız. 10'luk sistemde sayıları ifade etmek için 10 sembol vardır:
+>Biz 10'luk sistemi **(decimal system)** kullanmaktayız. 10'luk sistemde sayıları ifade etmek için 10 sembol vardır:
 >
 >		0
 >		1
@@ -390,16 +388,17 @@ class Mample {
 >10'luk sistemde sayının her bir basamağı 10'nun kuvvetleriyle çarpılıp toplanmaktadır. Örneğin:
 >
 >		123.25 = 3 * 10^0 + 2 * 10^1 + 1 * 10^2 + 2 * 10^-1 + 5 * 10^-2
->Halbuki bilgisayarlar 'lik sistemi (binary system) kullanmaktadır. 2'lik sistemde sayıları ifade etmek için 2 sembol kullanılmaktadır:
+>Halbuki bilgisayarlar 2'lik sistemi **(binary system)** kullanmaktadır. 2'lik sistemde sayıları ifade etmek için 2 sembol kullanılmaktadır:
 >
 >		0 
 >		1
->2'lik sistemde sayının her bir basamağına "bit (binary digit)" denilmektedir. 2'lik sistemde sayının her basamağı 2'nin kuvvetiyle çarpılarak sayı elde edilir. Bit en küçük bellek birimidir. 8 bite 1 byte denilmektedir. Genellikle bitler 4'erli gruplanarak yazılırlar. Örneğin:
+>2'lik sistemde sayının her bir basamağına "bit (binary digit)" denilmektedir. 2'lik sistemde sayının her basamağı 2'nin kuvvetiyle çarpılarak sayı elde edilir. **Bit (binary digit)** en küçük bellek birimidir. 8 bite 1 byte denilmektedir. Genellikle bitler 4'erli gruplanarak yazılırlar. Örneğin:
 >
 >		1010 0010
+>		
 >Burada 1 byte'lık bir bilgi vardır. Byte temel bellek birimidir.
 >
->Byte da küçük bir birimdir. Kile diğer bilimlerde "1000 katı" anlamına gelmektedir. Ancak bilgisayarlar 2'lik sistemi kullandığj için 1000 katı iyi bir kat değildir. Bu nedenle genel olarak Kilo byte için 2'nin 102uncu kuvveti olan 1024 kat kullanılır. Yani 1KB (kısaca 1K) 1024 byte'tır. Mega diğer bilimlerde kilonun 1000 katıdır. Dolayısıyla milyan kat anlamına gelmektedir. Ancak bilgisayar bilimlerinde genel olarak mega kilonun 1024 katı olarak alınır. Bu durumda 1 MB = 1020  1024 (2^20) KB'dir. Giga ise meganın 1024 katıdır. Bu durumda 1 GB = 1024  1024  1024 byte'tır ( 2^30). Giga'dan sonra tera, tera'dan sonra peta, ondan sonra da exa gelmektedir.
+>Byte da küçük bir birimdir. Kilo diğer bilimlerde "1000 katı" anlamına gelmektedir. Ancak bilgisayarlar 2'lik sistemi kullandığj için 1000 katı iyi bir kat değildir. Bu nedenle genel olarak Kilo byte için 2'nin 10'uncu kuvveti olan 1024 katı kullanılır. Yani 1KB (kısaca 1K) 1024 byte'tır. Mega diğer bilimlerde kilonun 1000 katıdır. Dolayısıyla milyon kat anlamına gelmektedir. Ancak bilgisayar bilimlerinde genel olarak mega kilonun 1024 katı olarak alınır. Bu durumda 1 MB = 1024 x 1024 (2^20) byte'dır. Giga ise meganın 1024 katıdır. Bu durumda 1 GB = 1024 x1024 x 1024 byte'tır ( 2^30). Giga'dan sonra tera, tera'dan sonra peta, ondan sonra da exa gelmektedir.
 >
 >1 byte içerisinde yazılabilecek en küçük ve en büyük sayılar şöyledir:
 >
@@ -410,86 +409,88 @@ class Mample {
 >		1111 1111 1111 1111 ---> 65535
 >Biz burada ikilik sistemde tamsayıları ifade ettik. Ama bütün sayıları pozitif kabul ettik. Pekiyi negatif tamsayılar nasıl ifade edilmektedir?
 >
->Bugün negatif sayıların ifade edilmesi için "ikiye tümleyeb (two's complement)" sistemi denilen bir sistem kullanılmaktadır. Bu sistemde pozitif ve negatif sayılar birbirlerinin ikiye tümleyenidirler. ikiye tümleyen bire tümleyene bir eklenerek bulunmaktadır. Bir sayının bire tümleyeni sayıdaki o'ların 1, 1'lerin 0 yapılmasıyla bulunur. Bu durumda ikiye tümleyen şöyle hesaplanır. örneğin aşağıdaki sayının ikiye tümleyenini bulmaya çalışalım:
+>Bugün negatif tam sayıların ifade edilmesi için **ikiye tümleyen (two's complement)** sistemi denilen bir sistem kullanılmaktadır. Bu sistemde pozitif ve negatif sayılar birbirlerinin ikiye tümleyenidirler. İkiye tümleyen **bire tümleyene (one's complement)** bir eklenerek bulunmaktadır. Bir sayının bire tümleyeni sayıdaki 0'ların 1, 1'lerin 0 yapılmasıyla bulunur. Bu durumda ikiye tümleyen şöyle hesaplanır. örneğin aşağıdaki sayının ikiye tümleyenini bulmaya çalışalım:
 >
 >		0101 0110
 >Sayının bire tümleyenine bir ekleyeceğiz:
 >
->		1010 1001
->		0000 0001
->		---------
->		1010 1010
+>		1010 1001 + 0000 0001 = 1010 1010
 >
->Aslında ikiye tümleyeni bulmanın kolay bir yolu da vardır: Sayıda sağdan sola ilk 1 görene ilk 1 dahil olmak üzere aynısı yazılarak ilerlenir. Sonra 0'lar 1, 1'ler 0 yapılarak devam edilir. Örneğin:
+>Aslında ikiye tümleyeni bulmanın kolay bir yolu da vardır: Sayıda sağdan sola ilk 1 görene kadar ilk 1 dahil olmak üzere aynısı yazılarak ilerlenir. Sonra 0'lar 1, 1'ler 0 yapılarak devam edilir. Örneğin:
 >
 >		0101 0110
+>		
 >sayının ikiye tümleyenini tek hamlede bulalım:
 >
 >		1010 1010
->Negatif sayıları ifade edebilmek için kullanılan ikiye tümleme sisteminde en soldaki bit işaret bitidir. Bu bit 0 ise sayı pozitif, 1 ise negatiftir. Negatif ve pozitif sayılar birbirlerinin ikiye tümleyenidir. Örneğin bu sistemde +10 yazmak isteyelim. Bunu işaret 0 yaparak yazabiliriz:
+>		
+>Negatif tam sayıları ifade edebilmek için kullanılan ikiye tümleme sisteminde **en soldaki bit (the most significant bit)** işaret bitidir (sign bit). Bu bit 0 ise sayı pozitif, 1 ise negatiftir. **Negatif ve pozitif tam sayılar birbirlerinin ikiye tümleyenidir.** Örneğin bu sistemde +10 yazmak isteyelim. Bunu işaret 0 yaparak yazabiliriz:
 >
->		0 000 1010	--->	+10
+>		0000 1010	--->	+10
 >
 >Şimdi -10 yazmak isteyelim. Bunun için +10'un ikiye tümleyenini alalım:
 >
->		1 111 0110	--->	-10
+>		1111 0110	--->	-10
+>		
 >Bu sistemde +n ile -n toplandığında 0 elde edilir:
 >
->		  0 000 1010	--->	+10
->		  1 111 0110	--->	-10
->		  -----------------------
->		1 0 000 0000	--->	  0
+>		  0000 1010	+ 1111 0110 = 0000 0000
+>		  
 >Bu sistemde tek bir sıfır vardır. O da tüm bitleri 0 olan sıfırdır. Bu sistemde 1 byte içerisinde yazılabilecek en büyük pozitif sayı şöyledir:
 >
->		0 111 1111	--->	+127
+>		0111 1111	--->	+127
+>		
 >Şimdi bunun ikiye tümleyenini alalım:
 >
->		1 000 0001	--->	-127
->Pekiyi en küçük negatif sayı nedir? Bu sistemde bir tane sıfır olduğuna göre 255 tane permütasyon eşit bölünemez. Demek ki ya pozitif sayılar ya negatif sayılar bir tane daha fazla olmak zorundadır. Bu sistemde ikiye tümleyeni olmayan iki sayı vardır:
+>		1000 0001	--->	-127
+>Pekiyi en küçük (negatif) sayı nedir? Bu sistemde bir tane sıfır olduğuna göre 256 tane permütasyon eşit bölünemez. Demek ki ya pozitif sayılar ya negatif sayılar bir tane daha fazla olmak zorundadır. Bu sistemde ikiye tümleyeni olmayan iki sayı vardır:
 >
 >		0000 0000 
 >		1000 0000
 >Birincisi 0'dır. İkinci sayı -127'den bir eksik olan sayıdır. O halde bu sayının -128 kabul edilmesi daha uygundur.
 >
->Demek ki bu sistemde n byte içerisinde yazılabilecek en büyük pozitif sayı ilk biti 0 olan diğer tüm birleri 1 olan sayıdır. En küçük negatif sayı ise ilk biti 1 olan diğer tüm bitleri 0 olan sayıdır. Örneğin bu sistemde iki byte ile yazabileceğimiz en büyük pozitif sayı şöyledir:
+>Demek ki bu sistemde n byte içerisinde yazılabilecek en büyük pozitif sayı ilk biti 0 olan diğer tüm birleri 1 olan sayıdır. En küçük (negatif) sayı ise ilk biti 1 olan diğer tüm bitleri 0 olan sayıdır. Örneğin bu sistemde iki byte ile yazabileceğimiz en büyük pozitif sayı şöyledir:
 >
 >		0111 1111 1111 1111	--->	+32767
+>		
 >En küçük negatif sayı ise şöyledir:
 >
 >		1000 0000 0000 000	--->	-32768
 >Bu sisteme ilişkin tipik sorular ve yanıtları şöyledir:
 >
->SORU: Bu sistemde +n sayısını nasıl yazarsınız?\
->CEVAP: En soldaki bit 0 yapılıp n sayısı 2'lik sistemde yazılır.
+>**SORU**: Bu sistemde +n sayısını nasıl yazarsınız?\
+>**CEVAP:** En soldaki bit 0 yapılıp n sayısı 2'lik sistemde yazılır.
 >
->SORU: Bu sistemde -n nasıl yazarsınız?\
->CEVAP: Yazabiliyorsanız doğrudan yazın. Ancak doğrudan yazamıyorsanız önce +n değerini yazın ve ikiye tümleyenini alın. Örneğin bu sistemde -1 yazalım. Önce +1 yazalım:
+>**SORU:** Bu sistemde -n nasıl yazarsınız?\
+>**CEVAP:** Yazabiliyorsanız doğrudan yazın. Ancak doğrudan yazamıyorsanız önce +n değerini yazın ve ikiye tümleyenini alın. Örneğin bu sistemde -1 yazalım. Önce +1 yazalım:
 >
 >		0000 0001	--->	+1
 >Şimdi bunun ikiye tümleyenini alalım:
 >
 >		1111 1111	---->	-1
->SORU: Bu sistemde bir sayının kaç olduğu bize sorulsa bunu nasıl yanıtlarız?\
->CEVAP: Eğer en soldaki bit 0 ise sayının değeri doğrudan hesplanır. Eğer en soldaki bit 1 ise bu sayının negatif olduğunu gösterir. Bu durumda sayının ikiye tümleyeni alınır. Pozitifinden hareketle negatifi bulunur.
->
+>		
+>**SORU:** Bu sistemde bir sayının kaç olduğu bize sorulsa bunu nasıl yanıtlarız?\
+>**CEVAP:** Eğer en soldaki bit 0 ise sayının değeri doğrudan hesplanır. Eğer en soldaki bit 1 ise bu sayının negatif olduğunu gösterir. Bu durumda sayının ikiye tümleyeni alınır. Pozitifinden hareketle negatifi bulunur.
 >Örneğin 1110 1110 sayısı kaçtır? Burada işaret biti 1 olduğuna göre sayı negatiftir. Negatif ve pozitif sayılar birbirlerinin ikiye tümleyenidirler. O zaman bu sayının ikiye tümleyenini alıp pozitifinden faydalanarak sayıyı bulalım:
 >
 >		0001 0010	--->	+18
+>		
 >o zaman bize sorulan sayı -18'dir.
 >
->Bu sistemde örneğin 1 byte içerisinde yazılabilecek en büyük pozitif sayıya 1 toplayalım:
+>Bu sistemde örneğin 1 byte içerisinde yazılabilecek en büyük pozitif sayıya 1 ekleyelim:
 >
 >		0111 1111	--->	+127
 >		1000 0000	--->	-128
+>		
 >Demek ki bu sistemde bir sayıyı üst limitten taşırırsak yüksek bir negatif sayıyla karşılaırız. Benzer şekilde alt limitten taşırırsak yüksek bir	pozitif sayı ile karşılaşırız
 >
->Tamsayılar ikilik sistemde "işaretsiz (unsigned)" ya da "işaretli (signed)" sistemde yorumlanabilirler. İşaretsiz sistemde sayının en soldaki biti olarak yorumlanmaz. Sayı herzaman sıfır ya da pozitiftir. İşaretli sistemde ise sayının en solundaki bit işaret bitidir. Sayı ikiye tümleyen aritmetiğine göre yorumlanır.
+>Tamsayılar ikilik sistemde **işaretsiz (unsigned)** ya da **işaretli (signed)** sistemde yorumlanabilirler. İşaretsiz sistemde sayının en soldaki biti işaret biti olarak yorumlanmaz. Sayı herzaman sıfır ya da pozitiftir. İşaretli sistemde ise sayının en solundaki biti işaret bitidir. Sayı ikiye tümleyen aritmetiğine göre yorumlanır.
 >
->İşlemciler aslında genellikle işaretli ve işaretsiz ayırımını yapmazlar. Çünkü bu tür de aslında aynı biçimde işleme sokulmaktadır. Sonucun yorumu değişmektedir.
+>İşlemciler aslında genellikle işaretli ve işaretsiz ayırımını yapmazlar. Çünkü ikisi de aslında aynı biçimde işleme sokulmaktadır. Sonucun yorumu değişmektedir.
 >
->Pekiyi noktalı sayılar ikilik sistemde nasıl ifade edilmektedir? İşte insanlar noktalı sayıları ifade etmek için iki format geliştirmişlerdir. Bunlardan birine "sabit noktalı formatlar (fixed point formats)" diğerine "kayan noktalı formatlar (floating point formats)" denilmektedir. Sabit noktalı formatlar eski devirlerde basit bir mantıkla tasarlanmıştır. Bu formatlar bugün hala kullanılıyor olsa da büyük ölçüde artık bunların çağı kapanmıştır. Bugün kayan noktali format denilen formatlar kullanılmaktadır.
+>Pekiyi noktalı sayılar ikilik sistemde nasıl ifade edilmektedir? İşte insanlar noktalı sayıları ifade etmek için iki format geliştirmişlerdir. Bunlardan birine **sabit noktalı formatlar (fixed point formats)** diğerine **kayan noktalı formatlar (floating point formats)** denilmektedir. Sabit noktalı formatlar eski devirlerde basit bir mantıkla tasarlanmıştır. Bu formatlar bugün hala kullanılıyor olsa da büyük ölçüde artık bunların çağı kapanmıştır. Bugün kayan noktalı format denilen formatlar kullanılmaktadır.
 >
->Sabit noktalı formatlarda noktalı sayı için n byte yer ayrılır. Noktanın yeri önceden bellidir. Örneğin sayı 4 byte ile ifade edilsin. Noktanın yeri de tam ortada olsun. Bu durumda syının tam kısmı 2 byte ile noktalı kısmı 2 byte ile ifade edilir. Ancak sayının noktalı kısmı 2'nin negatif kuvvetleriyle kodlanmaktadır. VBöylece iki sabit noktalı sayıyı paralel toplayıcılarla kolay bir biçimde toplayabiliriz: Örneğin bu sistemde 5.25 ile 6.25 sayılarını ifade edip toplayalım:
+>Sabit noktalı formatlarda noktalı sayı için n byte yer ayrılır. Noktanın yeri önceden bellidir. Örneğin sayı 4 byte ile ifade edilsin. Noktanın yeri de tam ortada olsun. Bu durumda sayının tam kısmı 2 byte ile noktalı kısmı 2 byte ile ifade edilir. Ancak sayının noktalı kısmı 2'nin negatif kuvvetleriyle kodlanmaktadır. Böylece iki sabit noktalı sayıyı paralel toplayıcılarla kolay bir biçimde toplayabiliriz: Örneğin bu sistemde 5.25 ile 6.25 sayılarını ifade edip toplayalım:
 >
 >		0000 0000 0000 0101 . 0100 0000 0000 0000	--->	5.25
 >		0000 0000 0000 0110 . 0100 0000 0000 0000	--->	6.25
@@ -497,24 +498,27 @@ class Mample {
 >		0000 0000 0000 1011 . 1000 0000 0000 0000	--->	11.5
 >Pekiyi bu yöntemin ne dezavantajı vardır? Yöntemin en önemli dezavantajı dinamik olmamasıdır.
 >
->Sabit noktalı formatların dinamik olmaması nedeniyle kayan noktalşı formatlar geliştirilmiştir. Bu formatlarda noktanın yeri sabit değildir. Noktanın yeri format içerisinde ayrıca tutulmaktadır. Noktalı sayının noktası yokmuş gibi ifade edilmesi durumunda sayının bu haline "mantis (mantissa)" denilmektedir. İşte kayan formatlarda sayı için ayrılan alanın bir bölümünde mantis bir bölümünde de "noktanın yeri" tutulmaktadır. Noktanın yerini belirleyen kısma "üstel kısım (exponential part)" denilmektedir. Tabii bir de sayının başında işaret biti bulunur. Bu durumda kayan noktalı bir sayının format aşağıdakine benzerdir:
+>Sabit noktalı formatların dinamik olmaması nedeniyle kayan noktalı formatlar geliştirilmiştir. Bu formatlarda noktanın yeri sabit değildir. Noktanın yeri format içerisinde ayrıca tutulmaktadır. Noktalı sayının noktası yokmuş gibi ifade edilmesi durumunda sayının bu haline **mantis (mantissa)** denilmektedir. İşte kayan formatlarda sayı için ayrılan alanın bir bölümünde mantis bir bölümünde de "noktanın yeri" tutulmaktadır. Noktanın yerini belirleyen kısma **üstel kısım (exponential part)** denilmektedir. Tabii bir de sayının başında işaret biti bulunur. Bu durumda kayan noktalı bir sayının format aşağıdakine benzerdir:
 >
->		[işaret biti] [mantis] [noktanın yeri (exponential)]
+>		`[işaret biti] [mantis] [noktanın yeri (exponential)]`
+>		
 >Bugün ağırlıklı kullanılan kayan noktalı format `IEEE 754` denilen formattır. Bu formatın üç farklı genişlikte biçimi vardır:
 >
 >		IEEE 754 - Short Real Format 	(4 byte)
 >		IEEE 754 - Long Real Format 	(8 byte)
 >		IEEE 754 - Extended Real Format (10 byte)
+>		
 >Bugün Intel, ARM, MIPS, Alpha, Power PC gibi yaygın işlemciler donanımsal olarak bu formatı desteklemektedir. Aynı zamanda bu format yaygın olarak Reel Sayı Ünitesi olmayan mikro denetleyicilerdeki derleyiciler tarafından da kullanılmaktadır.
 >
->Kayan noktalı formatların (örneğin IEEE 754 formatının) en ilginç ve problemli tarafı "yuvarlama hatası (rounding error)" denilen durumdur. Yuvarlama hatası	noktalı sayının tam olarak ifade edilemeyip onun yerine ona yakın bir sayının ifade edilmesiyle oluşan hatadır. Yuvarlama hatası sayıyı ilk kez depolarken de oluşabilir, aritmetik işlemlerin sonucunda da oluşabilir. Tabii noktalı sayıların bir bölümü bu formatta hiçbir yuvarlama hatasına maruz kalmadan ifade edilebilmektedir. Ancak bazı sayılarda bu hata oluşabilmektedir. Bu hatayı ortadan kaldırmanın yolu yoktur. Tabii sayı için daha fazla bir ayrılırsa yuvarlama hatasının etkisi de azalacaktır.
+>Kayan noktalı formatların (örneğin IEEE 754 formatının) en ilginç tarafı **yuvarlama hatası (rounding error)** denilen durumdur. Yuvarlama hatası	noktalı sayının tam olarak ifade edilemeyip onun yerine ona yakın bir sayının ifade edilmesiyle oluşan hatadır. Yuvarlama hatası sayıyı ilk kez depolarken de oluşabilir, aritmetik işlemlerin sonucunda da oluşabilir. Tabii noktalı sayıların bir bölümü bu formatta hiçbir yuvarlama hatasına maruz kalmadan ifade edilebilmektedir. Ancak bazı sayılarda bu hata oluşabilmektedir. Bu hatayı ortadan kaldırmanın yolu yoktur. Tabii sayı için daha fazla bir ayrılırsa yuvarlama hatasının etkisi de azalacaktır.
 >	
 >Yuvarlama hatalarından dolayı programlama dillerinde iki noktalı sayının tam eşitliğinin karşılaştırılması anlamlı değildir. Örneğin aşağıdaki işlemde	yuvarlama hatasından dolayı sayılar sanki eşit değişmiş gibi ele alınacaktır.
 >
 >		0.2 + 0.1 == 0.3 (false)
->Pekiyi yuvarlama hatasının önemli olduğu ve bunun istenmediği tarzda uygulamalarda (örneğin finansal uygulamalarda, bilimsel birtakım uygulamalarda) ne yapak gerekir? İşte bunun tek yolu noktalı sayıları kayan noktalı formatta tutmamak olabilir. Bazı programlama dillerinde noktalı sayıyı kayan noktalı formatta tutmayan böylece yuvarlama hatalarına maruz bırakmayan özel türler (örneğin C#'taki decimal) vardır. Ancak bu türler işlemciler tarafından desteklenmediği için yapay türlerdir. 
-
->Bilgisayar dünyasında çok kullanılan diğer bir sayı sistemi de 16'lık sistemdir. 16'lık sisteme İngilizce "hexadecimal system" denilmektedir. 16'lık sistemde sayıları ifade etmek için 16 sembol bulunmaktadır. İlk 10 sembol 10'luk sistemdeki sembollerden alınmıştır. Sonraki 6 sembol alfabetik karakterlerden alınmıştır:
+>		
+>Pekiyi yuvarlama hatasının önemli olduğu ve bunun istenmediği tarzda uygulamalarda (örneğin finansal uygulamalarda, bilimsel birtakım uygulamalarda) ne yapmak gerekir? İşte bunun tek yolu noktalı sayıları kayan noktalı formatta tutmamak olabilir. Bazı programlama dillerinde noktalı sayıyı kayan noktalı formatta tutmayan böylece yuvarlama hatalarına maruz bırakmayan özel türler (örneğin C#'taki decimal) vardır. Ancak bu türler işlemciler tarafından desteklenmediği için yapay türlerdir. 
+>
+>Bilgisayar dünyasında çok kullanılan diğer bir sayı sistemi de 16'lık sistemdir. 16'lık sisteme İngilizce **hexadecimal system** denilmektedir. 16'lık sistemde sayıları ifade etmek için 16 sembol bulunmaktadır. İlk 10 sembol 10'luk sistemdeki sembollerden alınmıştır. Sonraki 6 sembol alfabetik karakterlerden alınmıştır:
 >
 >		0
 >		1
@@ -532,9 +536,10 @@ class Mample {
 >		D
 >		E
 >		F
->16'lık sistemdeki her bir basamağa `hex digit` denilmektedir. Örneğin:
+>16'lık sistemdeki her bir basamağa **hex digit** denilmektedir. Örneğin:
 >
 >		1FC8
+>		
 >Burada 4 hex digit'lik bir sayı vardır. 16'lık sistemdeki bir sayıyı 10'luk sisteme dönüştürmek için her hex digit 16'lık kuvvetleriyle çarpılıp toplanır. Ancak 16'lık sistemdeki sayı kullanım gereği bakımından aslında 10'lu sisteme pek dönüştürülmez. 16'lık sistemdeki her bir hex digit 4 bit ile ifade edilebilmektedir:
 >
 >		0	0000
@@ -557,17 +562,19 @@ class Mample {
 >
 >		1FC9  =  0001 1111 1100 1001
 >		FA3D  =  1111 1010 0011 1101
+>		
 >2'lik sistemdeki bir sayı da 16'lık sisteme çok kolay dönüştürülür. Tek yapılacak şey sayıyı dörderli gruplayıp ona karşı gelen hex digit'i yazmaktır. Örneğin:
 >
 >		1010 0001 1110 1000 0011 0101 = A1E835
->Bilgisayar dünyasında 162lık sistem aslında 2'lik sistemin yoğun bir gösterimi olarak kullanılmaktadır. Yani 2'lik sistem çok yer kapladığı için kişiler 2'lik sistem yerine 16'lık sistemi kullanırlar. Bu nedenle belleği, dosyayı gösteren programlar bunları 2'lik sistem yerine 16'lık sistemde gösterirler.
+>Bilgisayar dünyasında 16'lık sistem aslında 2'lik sistemin yoğun bir gösterimi olarak kullanılmaktadır. Yani 2'lik sistem çok yer kapladığı için kişiler 2'lik sistem yerine 16'lık sistemi kullanırlar. Bu nedenle belleği, dosyayı gösteren programlar bunları 2'lik sistem yerine 16'lık sistemde gösterirler.
 >
 >1 byte 2 hex digit ile ifade edilmektedir. Örneğin:
 >
 >		1A 23 5C 78
+>		
 >Burada 4 byte'lık bir bilgi vardır. Örneğin 2 byte içerisinde yazılabilecek en küçük negatif işaretli sayının hex karşılığı 8000 biçimindedir. Örneğin bir byte'lık işaretli sistemde yazılabilecek en büyük pozitif sayı 7F biçimindedir. İşareti tamsayı sisteminde 4 byte içerisinde -1 sayısı FFFFFFFF biçimindedir.
 
->Eskiden daha fazla kullanılıyor olsa da toplamda oldukça seyrek kullanılan diğer bir sayı sistemi de 8'lik sayı sistemidir. Bu sisteme İngilizce "octal system" denilmektedir. 8'lik sayı sistemindeki her bir basamağa "octal digit" denir. Octal digit sembolleri olarak 10'luk sistemin ilk 8 sembolü kullanılmaktadır:
+>Eskiden daha fazla kullanılıyor olsa da toplamda oldukça seyrek kullanılan diğer bir sayı sistemi de 8'lik sayı sistemidir. Bu sisteme İngilizce **octal system** denilmektedir. 8'lik sayı sistemindeki her bir basamağa **octal digit** denir. Octal digit sembolleri olarak 10'luk sistemin ilk 8 sembolü kullanılmaktadır:
 >
 >		0
 >		1
@@ -577,7 +584,7 @@ class Mample {
 >		5
 >		6
 >		7
->Her octal digit 3 bir ile ifade edilebilir:
+>Her octal digit 3 bit ile ifade edilebilir:
 >
 >		0		000
 >		1		001
@@ -595,26 +602,30 @@ class Mample {
 >
 >		1011 1011	=  273
 >		0111 1110	=  176
+>		
 >8'lik sistem de 2'lik sistemin yoğun bir gösterimi olarak kullanılmaktadır. Ancak 8'i tam ortalayamadığı için kullanımı seyrektir.
 
->**Tür (Type):** Bir değişkenin içerisindeki değerin ne kadar uzunlukta tutulduğunu yani bellekte ne kadar ayrılacağını ve değerin hangi formatta tutulacağını belirtir. Java'da temel türler (primitive/built-in/predefined) şunlardır:
-#### Java'da Temel Türler ####
+>
+##### Tür (type) Kavramı
 
-| Tür ismi | Uzunluk (byte) | Sınır Değerler                               |
-| -------- | -------------- | -------------------------------------------- |
-| short    | 2              | [-32768, +32767]                             |
-| int      | 4              | [-2147483648, +2147483647]                   |
-| long     | 8              | [-9223372036854775808, +9223372036854775807] |
-| byte     | 1              | [-128, +127]                                 |
-| float    | 4              | [±3.6 * 10-38, ±3.6 * 10+38]                 |
-| double   | 8              | [±1.6 * 10-308, ±1.6 * 10+308]               |
-| char     | 2              | [0, 65535]                                   |
-| boolean  | -              | true, false                                  |
+>Bir değişkenin içerisindeki değerin ne kadar uzunlukta (length) tutulduğunu (yani bellekte o değişken için ne kadar yer ayrılacağını) ve değerin hangi formatta tutulduğunu  belirtir. Java'da **temel türler (primitive/built-in/predefined types)** şunlardır:
+
+| Tür ismi | Uzunluk (byte) | Sınır Değerler                                 |
+| -------- | -------------- | ---------------------------------------------- |
+| short    | 2              | `[-32768, 32767]`                              |
+| int      | 4              | `[-2147483648, +2147483647]`                   |
+| long     | 8              | `[-9223372036854775808, +9223372036854775807]` |
+| byte     | 1              | `[-128, +127]`                                 |
+| float    | 4              | `[±3.6 * 10-38, ±3.6 * 10+38]`                 |
+| double   | 8              | `[±1.6 * 10-308, ±1.6 * 10+308]`               |
+| char     | 2              | `[0, 65535]`                                   |
+| boolean  | -              | `true, false`                                  |
+
 
 >**Açıklamalar:**
 >- Java'da temel tür isimlerinin her biri birer anahtar sözcüktür.
 >- int, long, short ve byte türlerine tamsayı türleri (integer/integral types) denir.
->- Tamsayı türleri için işaretli sistemde 2'ye tümleme formatını kullanılar. ?Java'da işaretsiz tamsayı türü yoktur.
+>- Tamsayı türleri için işaretli sistemde 2'ye tümleme formatını kullanılar. Java'da işaretsiz tamsayı türü yoktur.
 >- double ve float türlerine "gerçek sayı türleri (real types)" denir. Gerçek sayı türleri için `IEEE 754` formatı kullanılır. Bu sebeple türlere "floating point types" da denilmektedir. Bu türlerle yapılan işlemlerde `IEEE 754` standardının çalışma sistemi gereği yuvarlama hataları (rounding error) oluşabilir. Bu yuvarlama hatalarının problem olabileceği uygulamalarda (örneğin  parasal ve finansal uygulamalarda) bu türler kullanılmaz. Bu tip durumlarda hangi türlerin kullanılacağı ileride ele alınacaktır.
 >- Programlamada kullanılan karakterler bir tabloda tutulurlar. Bu tabloya karakter tablosu denilmektedir. Programlamada pek çok karakter tablosu kullanılabilmektedir. Daha önceleri `ASCII` denilen ve 7 bit olarak tutulan ancak daha sonra 8 bit olarak ele alınan bir karakter tablosu vardır. Daha sonraları dünyada kullanılan pek çok karakterin de tutulabilmesi için `UNICODE` isimli bir karakter tablosu kullanılmaya başlanmıştır. `UNICODE` tablosunun ilk 128 karakteri `ASCII` ile aynıdır. `UNICODE` tablosunun da çeşitleri vardır. char türü içerisinde tutulan sayı ilgili tabloda sıra numarası olarak yorumlanır. Yani char türü içerisinde tutulan sayı aslında ilgili karakter tablosunda bir karakterin sıra numarasına karşılık gelir. Bu anlamda char türü `UNICODE` tablosunun 2 byte'ı ile uyumludur. Karakter tablolarına ilişkin detaylar ileride ele alıncaktır.
 >- boolean türü mantıksal olarak doğru ve yanlış kavramlarını temsil eden bir türdür. boolean türünden bir değişken iki tane değer alabilir: true, false. Bu tür örneğin flag değişkenlerde kullanılabilir. boolean türünün uzunluğu `Java Language Specifcation` dokümanında belirtilmemiştir. Zaten iki tane değer aldığı için de uzunluğunun kaç olduğunun programcı açısından önemi yoktur.
@@ -649,7 +660,7 @@ class App {
  
 **Anahtar Notlar:** Yazılar da aslında bilgisayar belleğinde 2'lik sistemde sayılar biçiminde tutulmaktadır. Bir yazıyı oluşturan elemanlara "karakter" denilmektedir. İşte bir yazıda her bir karakter 2'lik sistemde bir sayı ile ifade edilir. Böylece yazı  aslında ikilik sistemde bir sayı dizisi gibi tutulmaktadır. İşte bir karakter için hangi sayının karşı geldiğini belirten tablolara "karakter tabloları" denilmektedir. Karakter tablosundaki karakter şekillerine "glyph" denilmektedir. Her karaktere tabloda bir sıra numarası verilmiştir. Buna da "code point" denilmektedir. Dünyanın ilk standart karakter tablosu `ASCII` (American Standard Code Information Interchange) denilen tablodur. `ASCII` tablosu aslında 7 bit bir tablodur. Dolayısıyla tabloda 128 tane glyph için code point bulundurulmuştur. `ASCII` dışında `IBM EBCDIC` tablosunu geliştirmiştir. Wang firması `WISCII` tablosunu kullanmıştır. `ASCII` tablosu Amerikalılar tarafından yalnızca İngilizce karakterleri ifade etmek için oluşturulmuştur. Bilgisayarlar yaygınlaşmaya başladığında farklı karakterlere sahip olan Türkiye gibi, Yunanistan gibi, Almanya gibi ülkeler bu  `ASCII` tablosunu 8 bite çıkartıp elde edilen 128'lik yeni alanı kendi karakterlerini ifade etmek için kullanmışlardır. `ASCII` tablosunun ilk yarısı (yani [0, 128] numaraları karakterleri) standarttır. Ancak ikinci yarısı "code page" adı altında farklı ülkeler tarafından farklı yerleşimler yapılarak kullanılmaktadır. DOS zamanlarında Türkçe karakterler için OEM 857 denilen code page kullanılıyordu. Daha sonra Microsoft Windows sistemlerinde Türkçe karakterler için `1254 code page`'i düzenledi. ISO, bu code page'leri standart hale getirmiştir. Bugün Türkçe karakterler `ISO` tarafından `ASCII 8859-9` Code page'i ile düzenlenmiştir. `ASCII` tablosu ve onların code page'leri uzun süre kullanılmış ve hala kullanılmakta olsa da maalesef karışıklıklara yol açmaktadır. İşte son 20 yıldır artık karakterleri 2 byte içerisinde ifade ederek dünyanın bütün dillerinin ve ortak sembollerinin tek bir tabloya yerleştirilmesi ile ismine `UNICODE` denilen bir tablo oluşturulmuştur.
 
-[Unicode Homepage &#x1F517;](https://www.unicode.org)
+[Unicode Homepage &#x1F517;](https://home.unicode.org)
 
 `UNICODE` tablo ISO tarafından 10646 ismiyle de bazı farklılıklarla standardize edilmiştir. `UNICODE` tablonun ilk 128 karakteri standart ASCII karakterleri, ikinci 128 karakteri `ISO 8859-9` code page'indeki karakterlerdir. Bir karakter tablosundaki code point'lerin ikilik sistemde ifade edilme biçimine "encoding" denilmektedir. ASCII code page'lerinde encoding doğrudan code point'in 1 byte'lık sayı karşılığıdır. Ancak `UNICODE` tablonun değişik encoding'leri kullanılmaktadır. `UNICODE` tablonun klasik encoding'i `UTF-16`'dır. Burada code point doğrudan 16 bit bir sayı biçiminde ifade edilir. `UTF-32` encoding'inde ise code point 32 bitlik bir sayı biçiminde ifade edilmektedir. Ancak `UNICODE` tablonun en yaygın kullanılan encoding'i `UTF-8` encoding'idir. `UTF-8` kodlamasında standart ASCII karakterler 1 byte ile, diğer karakterler 2 byte, 3 byte, 4 byte ve 5 byte ile kodlanabilmekedir. Türkçe karakterler `UTF-8` encoding'inde 2 byte yer kaplamaktadr. `UTF-8` encoding'i `UNICODE` bir yazının adeta sıkıştırılmış bir hali gibi düşünülebilir. Bugün pek çok programlama editörleri default durumda dosyayı `UNICODE UTF-8` encoding'ine göre saklamaktadır.
  
@@ -801,7 +812,7 @@ class Sample {
 }
 ```
 
->`System.out.println`, `System.out.print` metotları aldıkları değişkenin değerini akrana basarlar
+>`System.out.println`, `System.out.print` metotları aldıkları değişkenin değerini ekrana basarlar
 
 ```java
 package csd;
@@ -845,9 +856,9 @@ class App {
 >- Değişken isimlerinde `_` (underscore) karakteri kullanılabilir. Değişken ismi alttire karakteri ile de başlatılabilir. Java 8 ile brilikte `_` karakterinin tek başına değişken ismi olması deprecated olmuştur, Java 9 ile birlikte `_` karakterinin tek başına kullanımı error olarak değerlendirilir.
 >- Anahtar sözcükler tek başına değişken ismi olamazlar.
 >
->**Anahtar Notlar:** Java'ya daha sonraya eklenen bazı sözcükler kullanım yerine anahtar sözcük ya da değişken gibi ele alınırlar. Aslında bu tip sözcükler JLS'de anahar sözcükler listesinde bulunmaz. Bu tip sözcüklere programlamada `contextual keywords` denilmektedir.
+>**Anahtar Notlar:** Java'ya daha sonraya eklenen bazı sözcükler kullanım yerine anahtar sözcük ya da değişken gibi ele alınırlar. Aslında bu tip sözcükler JLS'de anahtar sözcükler listesinde bulunmaz. Bu tip sözcüklere programlamada `contextual keywords` denilmektedir.
 >- Değişken isimleri bir boşluk (whitespace) karakteri içeremez.
->- Değişken isimleri byük-küçük harf duyarlıdır (case sensitive). Aslında Java case sensitive bir dildir. Örneğin anahtar sözcüklerin tamamı küçük harf olarak yazılmalıdır.
+>- Değişken isimleri büyük-küçük harf duyarlıdır (case sensitive). Aslında Java case sensitive bir dildir. Örneğin anahtar sözcüklerin tamamı küçük harf olarak yazılmalıdır.
 >- Değişken isimleri `UNICODE` alfabetik karakterler içerebilir. Örneğin değişken isimlerinde Türkçe karakterler kullanılabilir.
 >
 >**Anahtar Notlar:** Her ne kadar değişken isimlerinde `UNICODE` alfabetik karakterler kullanılabilse de programcı İnglizce alfabedeki karakteri tercih etmelidir. Hatta programcı bir değişken ismi herhangi bir dile özgü de yazmamalıdır. Değişken isimlerinde İnglizce kelimeler tercih edilmeldir.
@@ -20235,12 +20246,6 @@ public class MatrixUtilMultiplyTest {
     }  
 }
 ```
-XXXXXXXXXXXXXXXXXXXXXXX
-> **Sınıf Çalışması:** Bir okulda ortak olarak Fizik sınavı yapılıyor olsun. Sınav n tane şube için yapılsın. n sayısını klavyeden isteyiniz. Her bir şubedeki öğrenci sayısını da klavyeden isteyiniz. Bu sınavdan alınan notları rassal olarak belirleyiniz. Bu işlemlerden sonra ilgili notlara göre her bir şubenin ayrı ayrı Fizik dersi ortalaması ve okulun Fizik dersi ortalamasını hesaplayan simülasyonu yazınız.
-> **Açıklamalar:**
-> - Bir öğrencinin not [0, 10] aralığında bir tamsayı olabilir.
-> - Programı mümkün olduğunca nesne yönelimli olarak ve genel olarak tasarlayınız
-> - Her bir şubenin not dağılımına ilişkin histogram'ları  ve okulun Fizik notlarına ilişkin histogramı (düşey olarak) çiziniz.
 
 ##### Sınıf Elemanlarının Temel Erişim Belirleyicileri
 
@@ -20801,7 +20806,6 @@ public class Circle {
 }
 ```
 
-
 >Bazı durumlarda accessor bir metot geri planda bir veri elemanın değerini doğrudan döndürmüyor olabilir. Yine, bazı veri elemanlarını kullanarak bir işlemin sonucuna geri dönebilir. Sınıfın müşteri kodları için bu metotlar yine accessor metotlardır. Circle sınıfının aşağıdaki implementasyonunda alan ve çevre için veri elemanları tutulmadığına ve getArea ve getCircumference metotların yarıçapı kullanarak hesap yaptığına dikkar ediniz.
 
 >Circle sınıfının bir implementasyonu
@@ -20889,7 +20893,6 @@ public class CircleTest {
 >Complex sınıfının bir implementasyonu
 
 ```java
-
 package org.csystem.math;  
   
 import static java.lang.Math.sqrt;  
@@ -20995,300 +20998,339 @@ public class Complex {
 }
 ```
 
->ArrayUtil sınıfının bir implementasyonu
+##### 10 Ekim 2024 - 15 Ekim 2024
+
+> **Sınıf Çalışması:** Bir okulda ortak olarak Fizik sınavı yapılıyor olsun. Sınav n tane şube için yapılsın. n sayısını klavyeden isteyiniz. Her bir şubedeki öğrenci sayısını da klavyeden isteyiniz. Bu sınavdan alınan notları rassal olarak belirleyiniz. Bu işlemlerden sonra ilgili notlara göre her bir şubenin ayrı ayrı Fizik dersi ortalaması ve okulun Fizik dersi ortalamasını hesaplayan simülasyonu yazınız.
+> **Açıklamalar:**
+> - Bir öğrencinin not `[0, 10]` aralığında bir tamsayı olabilir.
+> - Programı mümkün olduğunca nesne yönelimli olarak ve genel olarak tasarlayınız.
+> - Her bir şubenin not dağılımına ilişkin histogram'ları  ve okulun Fizik notlarına ilişkin histogramı (düşey olarak) çiziniz.
+> **Not:** İleride daha iyisi yazılacaktır.
 
 ```java
-package org.csystem.util.array;  
+package org.csystem.app.simulation.grades;  
+  
+import org.csystem.util.array.ArrayUtil;  
+import org.csystem.util.string.StringUtil;  
   
 import java.util.Random;  
+import java.util.Scanner;  
   
-public class ArrayUtil {  
-    private static void bubbleSortAscending(int [] a)  
+public class ExamSimulationApp {  
+    private static void setGrades(Classroom classroom)  
     {  
-        for (int i = 0; i < a.length - 1; ++i)  
-            for (int k = 0; k < a.length - 1 - i; ++k)  
-                if (a[k + 1] < a[k])  
-                    swap(a, k, k + 1);  
-    }  
+        Random random = new Random();  
+        int n = classroom.getNumberOfStudents();  
   
-    private static void bubbleSortDescending(int [] a)  
-    {  
-        for (int i = 0; i < a.length - 1; ++i)  
-            for (int k = 0; k < a.length -1 - i; ++k)  
-                if (a[k] < a[k + 1])  
-                    swap(a, k, k + 1);  
-    }  
+        for (int i = 0; i < n; ++i) {  
+            String firstName = StringUtil.generateRandomTextTR(random, random.nextInt(5, 11));  
+            String lastName = StringUtil.generateRandomTextTR(random, random.nextInt(5, 11));  
   
-    private static void selectionSortAscending(int [] a)  
-    {  
-        int min, minIndex;  
-  
-        for (int i = 0; i < a.length - 1; ++i) {  
-            min = a[i];  
-            minIndex = i;  
-  
-            for (int k = i + 1; k < a.length; ++k)  
-                if (a[k] < min) {  
-                    min = a[k];  
-                    minIndex = k;  
-                }  
-            a[minIndex] = a[i];  
-            a[i] = min;  
+            classroom.setGrade(i, new GradeInfo("%s %s".formatted(firstName, lastName), random.nextInt(11)));  
         }  
     }  
   
-    private static void selectionSortDescending(int [] a)  
+    private static Exam createExam(String lectureName, int nClasses, Scanner kb)  
     {  
-        int max, maxIndex;  
+        Exam exam = new Exam(lectureName, nClasses);  
   
-        for (int i = 0; i < a.length - 1; ++i) {  
-            max = a[i];  
-            maxIndex = i;  
+        for (int i = 0; i < nClasses; ++i) {  
+            System.out.printf("%d. şube öğrenci sayısını giriniz:", i + 1);  
+            Classroom classroom = new Classroom(Integer.parseInt(kb.nextLine()));  
   
-            for (int k = i + 1; k < a.length; ++k)  
-                if (max < a[k]) {  
-                    max = a[k];  
-                    maxIndex = k;  
-                }  
-            a[maxIndex] = a[i];  
-            a[i] = max;  
+            setGrades(classroom);  
+            exam.setClassroom(i, classroom);  
         }  
+  
+        return exam;  
     }  
   
-    public static double average(int [] a)  
+    private static void printReport(Exam exam)  
     {  
-        return sum(a) / (double)a.length;  
+        int nClasses = exam.getNumberOfClassrooms();  
+        System.out.printf("%s dersi notları:%n", exam.getLectureName());  
+  
+        for (int i = 0; i < nClasses; ++i) {  
+            int nStudents = exam.getNumberOfStudents(i);  
+            System.out.printf("%d. şube -> ", i + 1);  
+            for (int k = 0; k < nStudents; ++k)  
+                System.out.printf("%s ", exam.getGradeInfo(i, k).toString());  
+  
+            System.out.printf("Ortalama:%f%n", exam.getAverage(i));  
+        }  
+  
+        System.out.printf("Okul Ortalaması:%f%n", exam.getAverage());  
     }  
   
-    public static void bubbleSort(int [] a)  
+    private static void drawHistogram(Classroom classroom, int maxGrade)  
     {  
-        bubbleSort(a, false);  
+        int [] data = classroom.getHistogramData(maxGrade);  
+        ArrayUtil.print(data);  
+        ArrayUtil.drawHistogram(data, 20, '-');  
     }  
   
-    public static void bubbleSort(int [] a, boolean descending)  
+    private static void drawHistogram(Exam exam)  
     {  
-        if (descending)  
-            bubbleSortDescending(a);  
-        else  
-            bubbleSortAscending(a);  
+        int nClasses = exam.getNumberOfClassrooms();  
+  
+        for (int i = 0; i < nClasses; ++i) {  
+            System.out.printf("%d. şube histogram verisi:%n", i + 1);  
+            drawHistogram(exam.getClassroom(i), exam.getMaxGrade());  
+        }  
+  
+        System.out.printf("%s dersi okul histogramı:%n", exam.getLectureName());  
+        int [] data = exam.getHistogramData();  
+  
+        ArrayUtil.print(data);  
+        ArrayUtil.drawHistogram(data, 20, '-');  
     }  
   
-    public static int [] generateRandomArray(Random random, int count, int origin, int bound)  
+    public static void run()  
     {  
-        int [] a = new int[count];  
+        Scanner kb = new Scanner(System.in);  
   
-        for (int i = 0; i < count; ++i)  
-            a[i] = random.nextInt(origin, bound);  
+        System.out.print("Ders adını giriniz:");  
+        String lectureName = kb.nextLine();  
   
-        return a;  
+        System.out.print("Şube sayısını giriniz:");  
+        int n = Integer.parseInt(kb.nextLine());  
+  
+        Exam exam = createExam(lectureName, n, kb);  
+  
+        exam.calculate();  
+  
+        printReport(exam);  
+        System.out.println("Histogram:");  
+        drawHistogram(exam);  
     }  
   
-    public static double [] generateRandomArray(Random random, int count, double origin, double bound)  
+    public static void main(String[] args)  
     {  
-        double [] a = new double[count];  
+        run();  
+    }  
+}
+```
+
+```java
+package org.csystem.app.simulation.grades;  
   
-        for (int i = 0; i < count; ++i)  
-            a[i] = random.nextDouble(origin, bound);  
+public class Exam {  
+    private String m_lectureName;  
+    private Classroom [] m_classrooms;  
+    private double [] m_averages;  
+    private double m_average;  
+    private int m_maxGrade;  
   
-        return a;  
+    public Exam(String lectureName, int nClasses)  
+    {  
+        m_lectureName = lectureName;  
+        m_classrooms = new Classroom[nClasses];  
+        m_averages = new double[nClasses];  
+        m_maxGrade = 10;  
     }  
   
-    public static boolean [] generateRandomArray(Random random, int count)  
+    public Exam(String lectureName, int nClasses, int maxGrade)  
     {  
-        boolean [] a = new boolean[count];  
-  
-        for (int i = 0; i < count; ++i)  
-            a[i] = random.nextBoolean();  
-  
-        return a;  
+        m_lectureName = lectureName;  
+        m_classrooms = new Classroom[nClasses];  
+        m_averages = new double[nClasses];  
+        m_maxGrade = maxGrade;  
     }  
   
-    public static int [] histogramData(int [] a, int n)  
+    public String getLectureName()  
     {  
-        int [] data = new int[n + 1];  
+        return m_lectureName;  
+    }  
   
-        for (int val : a)  
-            ++data[val];  
+    public void setLectureName(String lectureName)  
+    {  
+        m_lectureName = lectureName;  
+    }  
+  
+    public Classroom getClassroom(int i)  
+    {  
+        return m_classrooms[i];  
+    }  
+  
+    public double getGrade(int i, int k)  
+    {  
+        return getGradeInfo(i, k).getGrade();  
+    }  
+  
+    public GradeInfo getGradeInfo(int i, int k)  
+    {  
+        return m_classrooms[i].getGradeInfo(k);  
+    }  
+  
+    public int getNumberOfClassrooms()  
+    {  
+        return m_classrooms.length;  
+    }  
+  
+    public int getNumberOfStudents(int i)  
+    {  
+        return m_classrooms[i].getNumberOfStudents();  
+    }  
+  
+    public void setClassroom(int i, Classroom classroom)  
+    {  
+        m_classrooms[i] = classroom;  
+    }  
+  
+    public void setGrade(int i, int k, GradeInfo gradeInfo)  
+    {  
+        m_classrooms[i].setGrade(k, gradeInfo);  
+    }  
+  
+    public double getAverage(int i)  
+    {  
+        return m_averages[i];  
+    }  
+  
+    public double getAverage()  
+    {  
+        return m_average;  
+    }  
+  
+    public int getMaxGrade()  
+    {  
+        return m_maxGrade;  
+    }  
+  
+    public int [] getHistogramData()  
+    {  
+        int [] data = new int[m_maxGrade + 1];  
+  
+        for (Classroom classroom : m_classrooms) {  
+            int nStudents = classroom.getNumberOfStudents();  
+  
+            for (int i = 0; i < nStudents; ++i)  
+                ++data[classroom.getGradeInfo(i).getGrade()];  
+        }  
+  
+        return data;  
+    }  
+    //...  
+  
+    public void calculate()  
+    {  
+        int totalNumberOfStudents = 0;  
+        int totalGrades = 0;  
+  
+        for (int i = 0; i < m_classrooms.length; ++i) {  
+            int totalClassNumberOfStudents = m_classrooms[i].getNumberOfStudents();  
+            int totalClassroomGrades = 0;  
+  
+            for (int k = 0; k < totalClassNumberOfStudents; ++k) {  
+                GradeInfo gradeInfo = m_classrooms[i].getGradeInfo(k);  
+  
+                totalClassroomGrades += gradeInfo.getGrade();  
+            }  
+  
+            m_averages[i] = (double) totalClassroomGrades / totalClassNumberOfStudents;  
+            totalGrades += totalClassroomGrades;  
+            totalNumberOfStudents += totalClassNumberOfStudents;  
+        }  
+  
+        m_average = (double) totalGrades / totalNumberOfStudents;  
+    }  
+    //...  
+}
+```
+
+```java
+package org.csystem.app.simulation.grades;  
+  
+public class Classroom {  
+    private GradeInfo [] m_grades;  
+  
+    //...  
+  
+    public Classroom(int nStudents)  
+    {  
+        m_grades = new GradeInfo[nStudents];  
+    }  
+  
+    public void setGrade(int i, GradeInfo gradeInfo)  
+    {  
+        m_grades[i] = gradeInfo;  
+    }  
+  
+    public GradeInfo getGradeInfo(int i)  
+    {  
+        return m_grades[i];  
+    }  
+  
+    public int getNumberOfStudents()  
+    {  
+        return m_grades.length;  
+    }  
+  
+    public int [] getHistogramData(int maxGrade)  
+    {  
+        int [] data = new int[maxGrade + 1];  
+  
+        for (GradeInfo gradeInfo : m_grades)  
+            ++data[gradeInfo.getGrade()];  
   
         return data;  
     }  
   
-    public static int max(int [] a)  
+    public String toString()  
     {  
-        return max(a, 0);  
+        StringBuilder sb = new StringBuilder("[");  
+        String delimiter = ", ";  
+  
+        for (GradeInfo gi : m_grades)  
+            sb.append(gi.toString()).append(delimiter);  
+  
+        return sb.substring(0, sb.length() - delimiter.length()) + "]";  
     }  
-  
-    public static int max(int [] a, int startIndex)  
-    {  
-        int result = a[startIndex];  
-  
-        for (int i = startIndex + 1; i < a.length; ++i)  
-            result = Math.max(result, a[i]);  
-  
-        return result;  
-    }  
-  
-    public static int max(int [][] a)  
-    {  
-        int result = Integer.MIN_VALUE;  
-  
-        for (int [] array : a)  
-            result = Math.max(result, max(array));  
-  
-        return result;  
-    }  
-  
-    public static int min(int [] a)  
-    {  
-        return min(a, 0);  
-    }  
-  
-    public static int min(int [] a, int startIndex)  
-    {  
-        int result = a[startIndex];  
-  
-        for (int i = startIndex + 1; i < a.length; ++i)  
-            result = Math.min(result, a[i]);  
-  
-        return result;  
-    }  
-  
-    public static int min(int [][] a)  
-    {  
-        int result = Integer.MAX_VALUE;  
-  
-        for (int [] array : a)  
-            result = Math.min(result, min(array));  
-  
-        return result;  
-    }  
-  
-    public static void multiplyBy(int [] a, int value)  
-    {  
-        for (int i = 0; i < a.length; ++i)  
-            a[i] *= value;  
-    }  
-  
-    public static void multiplyBy(int [][] a, int value)  
-    {  
-        for (int [] array : a)  
-            multiplyBy(array, value);  
-    }  
-  
-    public static int partition(int [] a, int threshold)  
-    {  
-        int partitionPoint = 0;  
-  
-        while (partitionPoint != a.length && a[partitionPoint] < threshold)  
-            ++partitionPoint;  
-  
-        if (partitionPoint == a.length)  
-            return partitionPoint;  
-  
-        for (int i = partitionPoint + 1; i < a.length; ++i)  
-            if (a[i] < threshold)  
-                swap(a, i, partitionPoint++);  
-  
-        return partitionPoint;  
-    }  
-  
-    public static int partitionByEven(int [] a)  
-    {  
-        int partitionPoint = 0;  
-  
-        while (partitionPoint != a.length && a[partitionPoint] % 2 == 0)  
-            ++partitionPoint;  
-  
-        if (partitionPoint == a.length)  
-            return partitionPoint;  
-  
-        for (int i = partitionPoint + 1; i < a.length; ++i)  
-            if (a[i] % 2 == 0)  
-                swap(a, i, partitionPoint++);  
-  
-        return partitionPoint;  
-    }  
-  
-    public static void print(int [] a)  
-    {  
-        print(a, ' ', '\n');  
-    }  
-  
-    public static void print(int [] a, char sep, char end)  
-    {  
-        print(a, 1, sep, end);  
-    }  
-  
-    public static void print(int [] a, int n)  
-    {  
-        print(a, n, ' ', '\n');  
-    }  
-  
-    public static void print(int [] a, int n, char sep, char end)  
-    {  
-        String fmt = String.format("%%0%dd%c", n, sep);  
-  
-        for (int val : a)  
-            System.out.printf(fmt, val, sep);  
-  
-        System.out.print(end);  
-    }  
-  
-    public static void print(int [][] a)  
-    {  
-        print(a, 1);  
-    }  
-  
-    public static void print(int [][] a, int n)  
-    {  
-        for (int [] array : a)  
-            print(array, n, ' ', '\n');  
-    }  
-  
-    public static void print(double [] a)  
-    {  
-        print(a, '\n', '\n');  
-    }  
-  
-    public static void print(double [] a, char sep, char end)  
-    {  
-        for (double val : a)  
-            System.out.printf("%f%c", val, sep);  
-  
-        System.out.print(end);  
-    }  
-  
-    public static void selectionSort(int [] a)  
-    {  
-        selectionSort(a, false);  
-    }  
-  
-    public static void selectionSort(int [] a, boolean descending)  
-    {  
-        if (descending)  
-            selectionSortDescending(a);  
-        else  
-            selectionSortAscending(a);  
-    }  
-    public static long sum(int [] a)  
-    {  
-        long total = 0;  
-  
-        for (int val : a)  
-            total += val;  
-  
-        return total;  
-    }  
-  
-    public static void swap(int [] a, int i, int k)  
-    {  
-        int temp = a[i];  
-  
-        a[i] = a[k];  
-        a[k] = temp;  
-    }  
-  
-    //...  
 }
 ```
+
+```java
+package org.csystem.app.simulation.grades;  
+  
+public class GradeInfo {  
+    private String m_studentName;  
+    private int m_grade;  
+  
+    public GradeInfo(String studentName, int grade)  
+    {  
+        //...  
+        m_studentName = studentName;  
+        m_grade = grade;  
+    }  
+  
+    public String getStudentName()  
+    {  
+        return m_studentName;  
+    }  
+  
+    public void setName(String studentName)  
+    {  
+        m_studentName = studentName;  
+    }  
+  
+    public int getGrade()  
+    {  
+        return m_grade;  
+    }  
+  
+    public void setGrade(int grade)  
+    {  
+        //...  
+        m_grade = grade;  
+    }  
+  
+    public String toString()  
+    {  
+        return "%s, %d".formatted(m_studentName, m_grade);  
+    }  
+}
+```
+
+##### 17 Ekim 2024
+
 
