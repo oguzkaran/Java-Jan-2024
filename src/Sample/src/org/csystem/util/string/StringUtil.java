@@ -1,6 +1,6 @@
 /**
  * Utility class for string operations
- * Last Update: 17th September 2024
+ * Last Update: 17th October 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.string;
@@ -8,6 +8,10 @@ package org.csystem.util.string;
 import java.util.Random;
 
 public class StringUtil {
+	private StringUtil()
+	{
+	}
+
 	public static String capitalize(String s)
 	{
 		return s.isEmpty() ? s : Character.toUpperCase(s.charAt(0)) + s.substring(1).toLowerCase();

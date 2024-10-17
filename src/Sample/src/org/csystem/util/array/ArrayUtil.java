@@ -1,6 +1,6 @@
 /**
  * Utility class for array operations
- * Last Update: 15th October 2024
+ * Last Update: 17th October 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.array;
@@ -8,6 +8,10 @@ package org.csystem.util.array;
 import java.util.Random;
 
 public class ArrayUtil {
+    private ArrayUtil()
+    {
+    }
+
     private static void bubbleSortAscending(int [] a)
     {
         for (int i = 0; i < a.length - 1; ++i)

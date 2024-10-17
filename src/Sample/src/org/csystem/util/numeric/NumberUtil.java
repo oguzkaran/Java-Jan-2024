@@ -1,11 +1,15 @@
 /**
  * Utility class for numeric operations
- * Last Update: 3rd September 2024
+ * Last Update: 17th October 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.numeric;
 
 public class NumberUtil {
+	private NumberUtil()
+	{
+	}
+
 	public static int countDigits(long a)
 	{
 		return a != 0 ? (int) Math.log10(Math.abs(a)) + 1 : 1;

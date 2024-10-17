@@ -14616,7 +14616,7 @@ class StringUtil {
 
 >`String` sınıfının static `valueOf` metotları temel bir türe ilişkin değerin yazı karşılığını elde etmekte kullanılır.
 	
-**Anahtar Notlar:** Aldığı parametreleri kullanarak bir nesnenin referansına geri dönen bir metoda "factory method" denir. Factory bir metot ilgili sınıfa aitse static olarak bildirilir. Bu anlamda valueOf metodu bir factory metottur. 
+**Anahtar Notlar:** Aldığı parametreleri kullanarak bir nesnenin referansına geri dönen bir metoda **factory method** denir. Factory bir metot ilgili sınıfa aitse static olarak bildirilir. Bu anlamda valueOf metodu bir factory metottur. 
 
 **Anahtar Notlar:** JavaSE'de bazı sınıfların çeşitli `factory metotları` bulunur. Java 8'e kadar bu tarz metotların isimlendirilmesinde genel olarak "valueOf" kullanılırken, `Java 8` ve sonrasında "of" ismi kullanılmaktadır. Bu anlamda bazı sınıfların `valueOf` veya `of` gibi factory metotları bulunur. Şüphesiz farklı isimlerde factory metotları olan sınıflar da vardır. 
 	
@@ -21332,5 +21332,703 @@ public class GradeInfo {
 ```
 
 ##### 17 Ekim 2024
+
+>Tüm elemanları static olarak bildirilmiş bir sınıf türünden nesne yaratılmasının bir anlamı yoktur. Çünkü bir nesne ilgili sınıfın non-static veri elemanları ve onları kullanan metotlar anlamlıdır. Tüm elemanları static olarak bildirilmiş bir sınıfın ctor'u bir convention olarak private yapılır.  Bu convention'a JavaSE içerisindeki sınıflarda da uyulmuştur. Örneğin Math ve Arrays sınıflarının tüm elemanları static olarak bildirildiğinden ctor'ları private yapılmıştır: Tüm elemanları static olarak bildirilen bu tarz sınıflara genel olarak **utility class** da denilmektedir. Java programcısı yazdığı utility için bu convention'a uymalıdır.
+
+>Aşağıdaki örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.array.ArrayUtil;  
+import org.csystem.util.string.StringUtil;  
+  
+import java.util.Arrays;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Math m = new Math(); //error  
+        Arrays a = new Arrays(); //error  
+        ArrayUtil au = new ArrayUtil(); //error  
+        StringUtil su = new StringUtil(); //error  
+  
+        //...    }  
+}
+```
+
+>ArrayUtil sınıfı
+
+```java
+package org.csystem.util.array;  
+  
+import java.util.Random;  
+  
+public class ArrayUtil {  
+    private ArrayUtil()  
+    {  
+    }  
+  
+    private static void bubbleSortAscending(int [] a)  
+    {  
+        for (int i = 0; i < a.length - 1; ++i)  
+            for (int k = 0; k < a.length - 1 - i; ++k)  
+                if (a[k + 1] < a[k])  
+                    swap(a, k, k + 1);  
+    }  
+  
+    private static void bubbleSortDescending(int [] a)  
+    {  
+        for (int i = 0; i < a.length - 1; ++i)  
+            for (int k = 0; k < a.length -1 - i; ++k)  
+                if (a[k] < a[k + 1])  
+                    swap(a, k, k + 1);  
+    }  
+  
+    private static void selectionSortAscending(int [] a)  
+    {  
+        int min, minIndex;  
+  
+        for (int i = 0; i < a.length - 1; ++i) {  
+            min = a[i];  
+            minIndex = i;  
+  
+            for (int k = i + 1; k < a.length; ++k)  
+                if (a[k] < min) {  
+                    min = a[k];  
+                    minIndex = k;  
+                }  
+            a[minIndex] = a[i];  
+            a[i] = min;  
+        }  
+    }  
+  
+    private static void selectionSortDescending(int [] a)  
+    {  
+        int max, maxIndex;  
+  
+        for (int i = 0; i < a.length - 1; ++i) {  
+            max = a[i];  
+            maxIndex = i;  
+  
+            for (int k = i + 1; k < a.length; ++k)  
+                if (max < a[k]) {  
+                    max = a[k];  
+                    maxIndex = k;  
+                }  
+            a[maxIndex] = a[i];  
+            a[i] = max;  
+        }  
+    }  
+  
+    public static double average(int [] a)  
+    {  
+        return sum(a) / (double)a.length;  
+    }  
+  
+    public static void bubbleSort(int [] a)  
+    {  
+        bubbleSort(a, false);  
+    }  
+  
+    public static void bubbleSort(int [] a, boolean descending)  
+    {  
+        if (descending)  
+            bubbleSortDescending(a);  
+        else  
+            bubbleSortAscending(a);  
+    }  
+  
+    public static void drawHistogram(int [] data, int n, char ch)  
+    {  
+        int maxValue = ArrayUtil.max(data);  
+  
+        for (int grade : data) {  
+            int count = (int)Math.floor(grade * n / (double)maxValue);  
+  
+            while (count-- > 0)  
+                System.out.print(ch);  
+  
+            System.out.println();  
+        }  
+    }  
+  
+    public static int [] generateRandomArray(Random random, int count, int origin, int bound)  
+    {  
+        int [] a = new int[count];  
+  
+        for (int i = 0; i < count; ++i)  
+            a[i] = random.nextInt(origin, bound);  
+  
+        return a;  
+    }  
+  
+    public static double [] generateRandomArray(Random random, int count, double origin, double bound)  
+    {  
+        double [] a = new double[count];  
+  
+        for (int i = 0; i < count; ++i)  
+            a[i] = random.nextDouble(origin, bound);  
+  
+        return a;  
+    }  
+  
+    public static boolean [] generateRandomArray(Random random, int count)  
+    {  
+        boolean [] a = new boolean[count];  
+  
+        for (int i = 0; i < count; ++i)  
+            a[i] = random.nextBoolean();  
+  
+        return a;  
+    }  
+  
+    public static int [] histogramData(int [] a, int n)  
+    {  
+        int [] data = new int[n + 1];  
+  
+        for (int val : a)  
+            ++data[val];  
+  
+        return data;  
+    }  
+  
+    public static int max(int [] a)  
+    {  
+        return max(a, 0);  
+    }  
+  
+    public static int max(int [] a, int startIndex)  
+    {  
+        int result = a[startIndex];  
+  
+        for (int i = startIndex + 1; i < a.length; ++i)  
+            result = Math.max(result, a[i]);  
+  
+        return result;  
+    }  
+  
+    public static int max(int [][] a)  
+    {  
+        int result = Integer.MIN_VALUE;  
+  
+        for (int [] array : a)  
+            result = Math.max(result, max(array));  
+  
+        return result;  
+    }  
+  
+    public static int min(int [] a)  
+    {  
+        return min(a, 0);  
+    }  
+  
+    public static int min(int [] a, int startIndex)  
+    {  
+        int result = a[startIndex];  
+  
+        for (int i = startIndex + 1; i < a.length; ++i)  
+            result = Math.min(result, a[i]);  
+  
+        return result;  
+    }  
+  
+    public static int min(int [][] a)  
+    {  
+        int result = Integer.MAX_VALUE;  
+  
+        for (int [] array : a)  
+            result = Math.min(result, min(array));  
+  
+        return result;  
+    }  
+  
+    public static void multiplyBy(int [] a, int value)  
+    {  
+        for (int i = 0; i < a.length; ++i)  
+            a[i] *= value;  
+    }  
+  
+    public static void multiplyBy(int [][] a, int value)  
+    {  
+        for (int [] array : a)  
+            multiplyBy(array, value);  
+    }  
+  
+    public static int partition(int [] a, int threshold)  
+    {  
+        int partitionPoint = 0;  
+  
+        while (partitionPoint != a.length && a[partitionPoint] < threshold)  
+            ++partitionPoint;  
+  
+        if (partitionPoint == a.length)  
+            return partitionPoint;  
+  
+        for (int i = partitionPoint + 1; i < a.length; ++i)  
+            if (a[i] < threshold)  
+                swap(a, i, partitionPoint++);  
+  
+        return partitionPoint;  
+    }  
+  
+    public static int partitionByEven(int [] a)  
+    {  
+        int partitionPoint = 0;  
+  
+        while (partitionPoint != a.length && a[partitionPoint] % 2 == 0)  
+            ++partitionPoint;  
+  
+        if (partitionPoint == a.length)  
+            return partitionPoint;  
+  
+        for (int i = partitionPoint + 1; i < a.length; ++i)  
+            if (a[i] % 2 == 0)  
+                swap(a, i, partitionPoint++);  
+  
+        return partitionPoint;  
+    }  
+  
+    public static void print(int [] a)  
+    {  
+        print(a, ' ', '\n');  
+    }  
+  
+    public static void print(int [] a, char sep, char end)  
+    {  
+        print(a, 1, sep, end);  
+    }  
+  
+    public static void print(int [] a, int n)  
+    {  
+        print(a, n, ' ', '\n');  
+    }  
+  
+    public static void print(int [] a, int n, char sep, char end)  
+    {  
+        String fmt = String.format("%%0%dd%c", n, sep);  
+  
+        for (int val : a)  
+            System.out.printf(fmt, val, sep);  
+  
+        System.out.print(end);  
+    }  
+  
+    public static void print(int [][] a)  
+    {  
+        print(a, 1);  
+    }  
+  
+    public static void print(int [][] a, int n)  
+    {  
+        for (int [] array : a)  
+            print(array, n, ' ', '\n');  
+    }  
+  
+    public static void print(double [] a)  
+    {  
+        print(a, '\n', '\n');  
+    }  
+  
+    public static void print(double [] a, char sep, char end)  
+    {  
+        for (double val : a)  
+            System.out.printf("%f%c", val, sep);  
+  
+        System.out.print(end);  
+    }  
+  
+    public static void selectionSort(int [] a)  
+    {  
+        selectionSort(a, false);  
+    }  
+  
+    public static void selectionSort(int [] a, boolean descending)  
+    {  
+        if (descending)  
+            selectionSortDescending(a);  
+        else  
+            selectionSortAscending(a);  
+    }  
+    public static long sum(int [] a)  
+    {  
+        long total = 0;  
+  
+        for (int val : a)  
+            total += val;  
+  
+        return total;  
+    }  
+  
+    public static void swap(int [] a, int i, int k)  
+    {  
+        int temp = a[i];  
+  
+        a[i] = a[k];  
+        a[k] = temp;  
+    }  
+  
+    //...  
+}
+```
+
+
+##### Nesne Yönelimli Tasarım İlkeleri
+
+>NYPT için birtakım ilkeler söz konusudur. Bu ilkelere literatürde **Object Oriented Design Principles** da denilmektedir. Aslında bu ilkeler yalnızca NYPT'ye özgü değildir. NYPT iiçin de uygulanabilir. Bu ilkeler kısaca **SOLID** olarak bilinir. Bu ilkeler şunlardır:
+>- **S**ingle Responsibility Principle (SRP)
+>- **O**pen Closed Principle (OCP)
+>- **L**iskov Substitution Principle (LSP)
+>- **I**nterface Segregation Principle (ISP)
+>- **D**ependency Inversion Principle (DIP)
+>Bu ilkeler birbirilerinden ayrı olarak düşünülmemelidir. 
+>Bu ilkelere ilişkin detaylar bu kurs ve uygulama kursları ile birlikte konular içerisinde anlaşılacaktır:
+
+##### Single Responsibility Principle
+
+>Bu ilkeye göre bir sınıfın tek bir sorumluluğu olmalıdır. Bu anlamda bir sınıfı birbirinden bağımsız işler yapacak şekilde tasarlanmamalıdır. Bu ilkeye ilişkin iki temel mottosu şu şekilde söylenir:
+>
+>- [A module should be responsible to one, and only one, actor](https://en.wikipedia.org/wiki/Single-responsibility_principle)>
+>- [A class should have only one reason to change](https://en.wikipedia.org/wiki/Single-responsibility_principle)
+>
+>İkinci motto NYPT açısından daha belirgindir.
+
+##### Tasarım Kalıpları
+
+>Özellikle NYPT ilerledikçe bazı programcılar bir takım problemlere gene çözümler üretme çabasına girmişlerdir. Bu anlamda  **Gang of Four (GoF)** olarak anılan 4 bilim insanı bir grup genel problemi çözümleriyle birlikte kategorize etmişlerdir. Bu tip genel çözümlere **tasarım kalıpları (design patterns)** denilmektedir. GoF pattern'lerinden sonra da pek çok patttern tasarlanmıştır. Bu kurs ve uygulama kurslarında çeşitli pattern'ler konular içerisinde ele alınacaktır.
+
+##### Singleton Tasarım Kalıbı
+
+>Singleton GoF'un nesne yaratan (creational) kalıplarından biridir. Problemin tanımı şu şekilde verilebilir: **Öyle bir sınıf olsun ki o sınıf türünden program boyunca yalnızca bir tane nesne yaratılabilsin ve istenildiği zaman o nesne referansı elde edilebilsin.** 
+
+**Anahtar Notlar:** Singleton kalıbının bir çok implementasyonu söz konusudur. Zaman içerisinde bunlar ele alınacaktır.
+
+**Anahtar Notlar:** Burada Singleton kalıbının hangi durumlarda kullanılacağı ele alınmayacaktır. Yalnızca probleme ve çözümüne odaklanınız.
+
+>Singleton kalıbının bir implementasyonu. Dikkat edilirse bu implementasyonda ilgili nesne ilk getInstance çağrısında yaratılmaktadır. Bu durumda getInstance çağrılmadığı sürece nesne yaratılmamaktadır. Bu sebeple buna **lazy implementation** da denilmektedir
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Singleton s1 = Singleton.getInstance();  
+        Singleton s2 = Singleton.getInstance();  
+  
+        System.out.println(s1 == s2);  
+  
+        //...  
+    }  
+}  
+  
+class Singleton {  
+    private static Singleton ms_instance;  
+    private int m_x;  
+    //...  
+  
+    private Singleton()  
+    {  
+    }  
+  
+    public static Singleton getInstance()  
+    {  
+        if (ms_instance == null)  
+            ms_instance = new Singleton();  
+  
+        return ms_instance;  
+    }  
+  
+    public int getX()  
+    {  
+        return m_x;  
+    }  
+  
+    public void setX(int x)  
+    {  
+        //...  
+        m_x = x;  
+    }  
+  
+    public String toString()  
+    {  
+        return String.valueOf(m_x);  
+    }  
+}
+```
+
+
+
+> Point sınıfını **kutupsal koordinatlar (polar coordinates)** da kullanılarak nesne yaratılabilecek şekilde güncellemek isteyelim. Bu durumda Point sınıfına kutupsal koordinata ilişkin yarıçapı ve açı bilgisini alan bir ctor ile birlikte kartezyen koordinatları alan bir ctor Point sınıfı içerisinde aynı imzaya sahip olduklarından yazılamazlar. Bu durumda Point sınıfına aşağıdaki gibi 3 parametreli bir ctor eklenen bir yaklaşıma gidilebilir:
+
+```java
+package org.csystem.math.geometry;  
+  
+import static java.lang.Math.*;  
+  
+public class Point {  
+    public double x;  
+    public double y;  
+  
+    public Point()  
+    {       
+    }  
+  
+    public Point(double a)  
+    {  
+       x = a;      
+    }  
+      
+    public Point(double a, double b)  
+    {  
+       x = a;  
+       y = b;  
+    }  
+  
+    public Point(double a, double b, boolean polar)  
+    {  
+       x = polar ? a * cos(b) : a;  
+       y = polar ? a * sin(b) : b;  
+    }  
+      
+    public double distance()  
+    {  
+       return distance(0, 0);  
+    }  
+      
+    public double distance(Point other)  
+    {  
+       return distance(other.x, other.y);  
+    }  
+      
+    public double distance(double a, double b)  
+    {  
+       return sqrt(pow(x - a, 2) + pow(y - b, 2));  
+    }    
+      
+    public void offset(double dxy)  
+    {  
+       offset(dxy, dxy);  
+    }  
+      
+    public void offset(double dx, double dy)  
+    {  
+       x += dx;  
+       y += dy;  
+    }  
+      
+    public String toString()  
+    {  
+       return "(%f, %f)".formatted(x, y);  
+    }  
+}
+```
+
+>Bu sınıfın basit bir kullanımı şu şekildedir:
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.math.geometry.Point;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Point pc = new Point(100, 100);  
+        Point pp = new Point(100, 100, true);
+  
+        System.out.println(pc.toString());  
+        System.out.println(pp.toString());  
+    }  
+}
+```
+
+>**Yeni eklenen ctor ile birlikte istenen sağlanmaktadır ancak kullanım biraz karmaşıklaşmaya başlamış ve okunabilirlik/algılanabilirlik görece azalmıştır.** 
+>Karmaşıklığı azaltmek ve okunabilirliği/algılanabilirliği artırmak için şöyle bir yaklaşım uygulanabilir: **Sınıfın ctor'u private yapılır ve createCartesian ve createPolar isimli factory metotlar eklenebilir. Şüphesiz farklı yaklaşımlar da söz konusu olabilir.** Point sınıfının bu yaklaşımla olan implementasyonu ve basit kullanım kodları şu şekildedir:
+
+```java
+package org.csystem.math.geometry;  
+  
+import static java.lang.Math.*;  
+  
+public class Point {  
+    private double m_x;  
+    private double m_y;  
+  
+    private Point(double a, double b, boolean polar)  
+    {  
+       m_x = polar ? a * cos(b) : a;  
+       m_y = polar ? a * sin(b) : b;  
+    }  
+  
+    public static Point createCartesian(double x, double y)  
+    {  
+       return new Point(x, y, false);  
+    }  
+  
+    public static Point createPolar(double r, double theta)  
+    {  
+       return new Point(r, theta, true);  
+    }  
+  
+    public double getX()  
+    {  
+       return m_x;  
+    }  
+  
+    public void setX(double x)  
+    {  
+       m_x = x;  
+    }  
+  
+    public double getY()  
+    {  
+       return m_y;  
+    }  
+  
+    public void setY(double y)  
+    {  
+       m_y = y;  
+    }  
+  
+    public double distance()  
+    {  
+       return distance(0, 0);  
+    }  
+      
+    public double distance(Point other)  
+    {  
+       return distance(other.m_x, other.m_y);  
+    }  
+      
+    public double distance(double x, double y)  
+    {  
+       return sqrt(pow(m_x - x, 2) + pow(m_y - y, 2));  
+    }    
+      
+    public void offset(double dxy)  
+    {  
+       offset(dxy, dxy);  
+    }  
+      
+    public void offset(double dx, double dy)  
+    {  
+       m_x += dx;  
+       m_y += dy;  
+    }  
+      
+    public String toString()  
+    {  
+       return "(%f, %f)".formatted(m_x, m_y);  
+    }  
+}
+```
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.math.geometry.Point;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Point pc = Point.createCartesian(100, 100);  
+        Point pp = Point.createPolar(100, 100);  
+  
+        System.out.println(pc.toString());  
+        System.out.println(pp.toString());  
+    }  
+}
+```
+
+>Point sınıfı aşağıdaki gibi de yazılabilirdi değil mi?
+
+```java
+package org.csystem.math.geometry;  
+  
+import static java.lang.Math.*;  
+  
+public class Point {  
+    private double m_x;  
+    private double m_y;  
+  
+    private static Point create(double a, double b)  
+    {  
+       Point p = new Point();  
+  
+       p.m_x = a;  
+       p.m_y = b;  
+  
+       return p;  
+    }  
+  
+    private Point()  
+    {  
+    }  
+  
+    public static Point createCartesian(double x, double y)  
+    {  
+       return create(x, y);  
+    }  
+  
+    public static Point createPolar(double r, double theta)  
+    {  
+       return create(r * cos(theta), r * sin(theta));  
+    }  
+  
+    public double getX()  
+    {  
+       return m_x;  
+    }  
+  
+    public void setX(double x)  
+    {  
+       m_x = x;  
+    }  
+  
+    public double getY()  
+    {  
+       return m_y;  
+    }  
+  
+    public void setY(double y)  
+    {  
+       m_y = y;  
+    }  
+  
+    public double distance()  
+    {  
+       return distance(0, 0);  
+    }  
+      
+    public double distance(Point other)  
+    {  
+       return distance(other.m_x, other.m_y);  
+    }  
+      
+    public double distance(double x, double y)  
+    {  
+       return sqrt(pow(m_x - x, 2) + pow(m_y - y, 2));  
+    }    
+      
+    public void offset(double dxy)  
+    {  
+       offset(dxy, dxy);  
+    }  
+      
+    public void offset(double dx, double dy)  
+    {  
+       m_x += dx;  
+       m_y += dy;  
+    }  
+      
+    public String toString()  
+    {  
+       return "(%f, %f)".formatted(m_x, m_y);  
+    }  
+}
+```
+
+**Anahtar Notlar:** Kutupsal koordinatlara ilişkin detaylı bilgiye [buradan](https://en.wikipedia.org/wiki/Polar_coordinate_system) ulaşabilirsiniz.
 
 
