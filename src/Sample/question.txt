@@ -1,0 +1,20 @@
+package org.csystem.app;
+
+class App {
+    public static void main(String[] args)
+    {
+        final Sample s = new Sample(20);
+
+        s.x = 10;
+    }
+}
+
+class Sample {
+    public int x;
+
+    public Sample(int a)
+    {
+        x = a;
+    }
+}
+

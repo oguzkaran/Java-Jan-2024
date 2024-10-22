@@ -1,7 +1,7 @@
 package org.csystem.app.simulation.grades;
 
 public class Classroom {
-    private GradeInfo [] m_grades;
+    private final GradeInfo [] m_grades;
 
     //...
 

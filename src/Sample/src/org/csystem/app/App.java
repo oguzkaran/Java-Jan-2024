@@ -1,14 +1,16 @@
 package org.csystem.app;
 
-import org.csystem.math.geometry.Point;
+import org.csystem.generator.random.string.RandomStringArrayGeneratorTR;
+
+import java.util.Random;
 
 class App {
     public static void main(String[] args)
     {
-        Point pc = Point.createCartesian(100, 100);
-        Point pp = Point.createPolar(100, 100);
+        RandomStringArrayGeneratorTR generator = new RandomStringArrayGeneratorTR(new Random(), 10, 4, 11);
+        int size = generator.size();
 
-        System.out.println(pc.toString());
-        System.out.println(pp.toString());
+        for (int i = 0; i < size; ++i)
+            System.out.println(generator.get(i));
     }
 }

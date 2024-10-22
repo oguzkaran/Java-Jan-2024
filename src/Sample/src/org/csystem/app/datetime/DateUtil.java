@@ -1,12 +1,12 @@
 package org.csystem.app.datetime;
 
 public class DateUtil {
-	public static int [] daysOfMoths = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-	public static String [] daysOfWeekTR = {"Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"};
-	public static String [] daysOfWeekEN = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-	public static String [] monthsTR = {"", "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran",
+	private static final int [] DAYS_OF_MONTHS = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	private static final String [] DAYS_OF_WEEK_TR = {"Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"};
+	private static final String [] DAYS_OF_WEEK_EN = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+	private static final String [] MONTHS_TR = {"", "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran",
 			"Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"};
-	public static String [] monthsEN = {"", "January", "February", "March", "April", "May", "June",
+	private static final String [] MONTHS_EN = {"", "January", "February", "March", "April", "May", "June",
 			"July", "August", "September", "October", "November", "December"};
 
 	public static void printDateTR(int day, int month, int year)
@@ -31,13 +31,13 @@ public class DateUtil {
 
 	public static String getDateStrTR(int day, int month, int year)
 	{
-		return "%d %s %d %s".formatted(day, monthsTR[month], year, daysOfWeekTR[getDayOfWeek(day, month, year)]);
+		return "%d %s %d %s".formatted(day, MONTHS_TR[month], year, DAYS_OF_WEEK_TR[getDayOfWeek(day, month, year)]);
 	}
 
 	public static String getDateStrEN(int day, int month, int year)
 	{
-		return "%d%s %s %d %s".formatted(day, getDaySuffix(day), monthsEN[month], year,
-				daysOfWeekEN[getDayOfWeek(day, month, year)]);
+		return "%d%s %s %d %s".formatted(day, getDaySuffix(day), MONTHS_EN[month], year,
+				DAYS_OF_WEEK_EN[getDayOfWeek(day, month, year)]);
 	}
 
 	public static String getDaySuffix(int day)
@@ -69,7 +69,7 @@ public class DateUtil {
 		int dayOfYear = day;
 
 		for (int m = month - 1; m >= 1; --m)
-			dayOfYear += daysOfMoths[m];
+			dayOfYear += DAYS_OF_MONTHS[m];
 
 		if (month > 2 && isLeapYear(year))
 			++dayOfYear;
@@ -84,7 +84,7 @@ public class DateUtil {
 	
 	public static int getDays(int month, int year)
 	{
-		return month == 2 && isLeapYear(year) ? 29 : daysOfMoths[month];
+		return month == 2 && isLeapYear(year) ? 29 : DAYS_OF_MONTHS[month];
 	}
 	
 	public static boolean isLeapYear(int year)

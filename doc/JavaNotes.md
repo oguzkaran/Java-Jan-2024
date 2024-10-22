@@ -862,7 +862,7 @@ class App {
 >- Değişken isimleri `UNICODE` alfabetik karakterler içerebilir. Örneğin değişken isimlerinde Türkçe karakterler kullanılabilir.
 >
 >**Anahtar Notlar:** Her ne kadar değişken isimlerinde `UNICODE` alfabetik karakterler kullanılabilse de programcı İnglizce alfabedeki karakteri tercih etmelidir. Hatta programcı bir değişken ismi herhangi bir dile özgü de yazmamalıdır. Değişken isimlerinde İnglizce kelimeler tercih edilmeldir.
->- Değişken isimlerinde `$` karakteri kullanılabilir. Değişken ismi `$` karakteri ile başlatılabilir, `$` karakteri tek başına değişken ismi olabilir. Derleyiciler bazı durumlarda arakoda veya arakod içerisinde isimler verirler. Derleyiciler bu tip isimleri verirken `$` karakterini de kullanırlar. Java programcısı da hiç bir zaman `$` karakterini değişken isimlerinde kullanmaz. Bu durumda programcının belirlediği isimler ile derleyicinin belirlediği isimlerin çakışma olaslığı olmaz. Zaten `$` karakteribin değişken isimlendirmede kullanılabilmesinin nedeni yani varlık sebebi budur. JLS'de de `$` karakteri bu şekilde açıklanmış ve programcı tarafından kullanılması önerilmemiştir
+>- Değişken isimlerinde `$` karakteri kullanılabilir. Değişken ismi `$` karakteri ile başlatılabilir, `$` karakteri tek başına değişken ismi olabilir. Derleyiciler bazı durumlarda arakoda veya arakod içerisinde isimler verirler. Derleyiciler bu tip isimleri verirken `$` karakterini de kullanırlar. Java programcısı da hiç bir zaman `$` karakterini değişken isimlerinde kullanmaz. Bu durumda programcının belirlediği isimler ile derleyicinin belirlediği isimlerin çakışma olaslığı olmaz. Zaten `$` karakterinin değişken isimlendirmede kullanılabilmesinin nedeni yani varlık sebebi budur. JLS'de de `$` karakteri bu şekilde açıklanmış ve programcı tarafından kullanılması önerilmemiştir
 >- Değişken isimlerinin okunabilirlik/algılanabilirlik açısından "kolay telaffuz edilebilir, anlamlı ve yeterince uzunlukta" olması önerilir. Bu genel bir programlama `convention`'ı olarak düşünülmelidir. Değişken isimlendirmede bazı teknikler de kullanılabilmektedir. Genel olarak kullanılan programlama diline göre bir ya da birden fazla teknik kullanılabilmektedir.
 >- JLS'de değişken isimlerinin maksimum karakter sayısı ile ilgili herhangi bir söylenmemiştir. Şüphesiz bir sınıfı olur. Ancak bu sınır oldukça fazla olma eğiliminde olduğundan isimlendirmede bir sorun oluşturmaz.
  
@@ -1004,7 +1004,7 @@ class App {
 }
 ```
 
->İfade (expression): Sabitlerden, operatörlerden ve değişkenlerden oluşan herhangi bir kombinasyona ifade denir.Bir ifade yalnızca sabitlerden ve operatörlerden oluşuyorsa bu ifadeye "sabit ifadesi (constant expression)" denir. Bir değişken veya sabit tek başına ifadedir. Ancak bir operatör tek başına bir ifade olamaz. Her ifadenin bir türü vardır. Bunun bir tane istisnası vardır, ileride ele alınacaktır
+>**İfade (expression):** Sabitlerden, operatörlerden ve değişkenlerden oluşan herhangi bir kombinasyona ifade denir.Bir ifade yalnızca sabitlerden ve operatörlerden oluşuyorsa bu ifadeye **sabit ifadesi (constant expression)** denir. Bir değişken veya sabit tek başına ifadedir. Ancak bir operatör tek başına bir ifade olamaz. Her ifadenin bir türü vardır. Bunun bir tane istisnası vardır, ileride ele alınacaktır
  
 >Bir metodun geri dönüş değeri bilgisi yerine bir tür ismi yazılırsa, bu metodun geri dönüş değeri (return value)" vardır denir. Tersinde bir metodun geri dönüş değeri varsa geri dönüş değeri bilgisi yerine bir tür yazılır. Bir metodun geri dönüş değeri varsa, o metodun çağrısı bittiğinde çağrılan noktaya bir değer ile geri döner. Bir metodun geri dönüş değeri yoksa geri dönüş değeri bilgisi yerine void anahtar sözcüğü yazılır. Metodun geri dönüş değeri yoksa sonlandığında çağrılan noktaya yalnızca geri döner, bir değer aktarılmaz. Bir metodun geri dönüş değeri metot içerisinde `return` deyimi ile oluşturulur. `return` deyiminin genel biçimi şu şekildedir:
 
@@ -2637,7 +2637,7 @@ class App {
 
 **Anahtar Notlar:** Okunabilirlik/algılanabilirlik açısından özel bazı operatörler dışında iki operandlı (binary) operatörlerin operandları ile aralarından bir tane space karakteri bulundurulur. Örneğin `a + b` işleminde operandlar ile operatör arasında birer boşluk yazılır. Ancak nokta operatörü için özellikle bitişik yazılması önerilir. Tek operandlı operatörler için de operatörün operandına bitişik olarak yazılması tavsiye edilir.
  
->`++` ve `--` operaörü tek operandlı hem önek hem de sonek kullanılabilen bir aritmetik operatördür. Operatörün operandının bir değişken olması zorunludur. Yani sabit ifadesi olamaz. Operatörün ürettiği değer önek ve son ek kullanıma göre değişiklik gösterir. Operatörün yan etkisi vardır, operandı olan değişkenin değerini bir artırır/azaltır. Operatör önek kullanımda artırılmış/azaltılmış değeri, sonek kullanımda ise artırılmamış/azaltılmamış değeri üretir. Yani işleme giren değer önek ve sonek durumunda farklıdır.
+>`++` ve `--` operatörü tek operandlı hem önek hem de sonek kullanılabilen bir aritmetik operatördür. Operatörün operandının bir değişken olması zorunludur. Yani sabit ifadesi olamaz. Operatörün ürettiği değer önek ve son ek kullanıma göre değişiklik gösterir. Operatörün yan etkisi vardır, operandı olan değişkenin değerini bir artırır/azaltır. Operatör önek kullanımda artırılmış/azaltılmış değeri, sonek kullanımda ise artırılmamış/azaltılmamış değeri üretir. Yani işleme giren değer önek ve sonek durumunda farklıdır.
  
 >`++` operatörü
 
@@ -6989,7 +6989,7 @@ class App {
  
 >**Anahtar Notlar:** Derleyiciler, programa ilişkin algoritmayı değiştirmeden, algoritmanın en iyi biçiminde çalışmasını sağlayan kodu üretmesine `compiler optimization` denir. Bu anlamda derleyiciler programcının yazdığı algoritmayı düzeltmez. Optimizasyon genel olarak ikiye ayrılır: speed optimization, size optimization. Speed optimization, algoritmaya ilişkin üretilen kodun hızlı çalışması için, size optimization ise üretilen kodun daha az yer kaplaması için yapılır. Derleyicinin pek çok durum için optimizasyon yaklaşımı vardır. 
 >	 
->Derleyiciler sabit ifadelerinin değerlerini arakoda, hesaplayıp yazarlar. Yani sabit ifadelerinin değerleri çalışma zamanında hesaplanmaz. Buna `constant folding optimization` denir.
+>Derleyiciler sabit ifadelerinin değerlerini arakoda, hesaplayıp yazarlar. Yani sabit ifadelerinin değerleri çalışma zamanında hesaplanmaz. Buna **constant folding optimization** denir.
 
 >Aşağıdaki demo örnekte derleyici `constant folding` yaptığından aynı değere sahip birden fazla case bölümü tespit ettiğinden error oluşur
 
@@ -22031,4 +22031,368 @@ public class Point {
 
 **Anahtar Notlar:** Kutupsal koordinatlara ilişkin detaylı bilgiye [buradan](https://en.wikipedia.org/wiki/Polar_coordinate_system) ulaşabilirsiniz.
 
+##### 22 Ekim 2024
+
+##### final Anahtar Sözcüğü
+>final anahtar sözcüğü aşağıdaki bildirimlerde kullanılan önemli bir anahtar sözcüktür:
+>- Değişken bildirimleri (final variables)
+>- Sınıf bildirimlerinde (final classes)
+>- Metot bildirimlerinde (final methods)
+
+##### final Değişkenler
+
+>Anımsanacağı gibi Java'da 3 çeşit değişken vardır: **local variables**, **parameter variables**, **member variables**. Değişkenler final olarak bildirilebilir. Bir değişkenin final olması durumunda, o değişkene scope'u boyunca bir kez değer verilebilir. Yani değişkenin değeri değiştirilemez. Değerinin değiştirilmeye çalışması error oluşturur.
+>
+>Bazı değişkenler final anahtar sözcüğü kullanılmasa bile belirli koşullar altında  final etkisinde olabilmektedir. Bu kavrama **effectively final** denir. Bu kavram ileride ele alınacaktır.
+>
+>Java 8 ile birlikte yerel değişkenlerin ve parametre değişkenlerinin final olarak bildirilmesi gerekliliği ortadan kalkmıştır. Bunun nedeni `Java ile Uygulama Geliştirme I` kursunda ele alınacaktır. Ancak veri elemanlarını final olarak bildirilmesi oldukça önemlidir.
+>
+>final bir yerel değişkene scope'u içerisinde ya initialize edilerek ya da atama yapılarak **toplamda bir kez** verilebilir. Bir metodun parametre değişkeni final olabilir. Bu durumda metot içerisinde o parametre değişkeninin değeri değiştirilemez.
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        final int a = 10;  
+        final int b;  
+  
+        b = 20;  
+  
+        ++b; //error  
+  
+        a += 3; //error  
+    }  
+}  
+  
+class Sample {  
+    public static void foo(int a, final double b)  
+    {  
+        ++a;  
+        --b; //error  
+    }  
+}
+```
+
+>Bir veri elemanı final olarak bildirilebilir. final veri elemanlarına default değerler otomatik olarak verilmez. 
+
+```java
+class Sample {  
+    public final int a; //error  
+    public static final int b; //error  
+}
+```
+
+**Anahtar Notlar:** Sınıf veri elemanı için erişim belirleyici, static anahtar sözcüğü ve final anahtar sözcüğü aynı sentaks seviyesinde olduklarından istenilen sırada yazılabilirler. Ancak okunabilirlik/algılanabilirlik açısından bildirimde şu sırayla yazılması uygundur:
+	`[erişim belirleyici] [static] [final]`
+
+>Sınıfın non-static ve final olarak bildirilmiş bir veri elemanına aşağıdaki 3 yerden yalnızca birinde değer verilebilir:
+>- Bildirim noktasında (initialization)
+>- Tüm ctor'lar içerisinde
+>- non-static initializer içerisinde
+>Sınıfın static ve final olarak bildirilmiş bir veri elemanına aşağıdaki 2 yerden yalnızca birinde değer verilebilir:
+>- Bildirim noktasında (initialization)
+>- static initializer içerisinde
+>static ve non-static initializer elemanları ileride ele alıncaktır.
+
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Sample s = new Sample();  
+        Mample m1 = new Mample(45);  
+        Mample m2 = new Mample();  
+  
+        System.out.printf("s.a = %d, Sample.b = %d%n", s.a, Sample.b);  
+        System.out.printf("m1.a = %d%n", m1.a);  
+        System.out.printf("m2.a = %d%n", m2.a);  
+    }  
+}  
+  
+class Sample {  
+    public final int a = 10;  
+    public static final int b = 30;  
+}  
+  
+class Mample {  
+    public final int a;  
+  
+    public Mample()  
+    {  
+        a = 0;  
+    }  
+  
+    public Mample(int x)  
+    {  
+        a = x;  
+    }  
+}
+```
+
+>non-static ve final olarak bildirilmiş bir veri elemanına ctor dışında değer verilmemişse tüm ctor'lar içerisinde değer verilmelidir. Aksi durumda error oluşur
+
+```java
+  
+class Sample {  
+    public final int a;  //error
+  
+    public Sample()  
+    {  
+        //a = 0;  
+    }  
+  
+    public Sample(int x)  
+    {  
+        a = x;  
+    }  
+}
+```
+
+>final bir değişkene sabit ifadesi (constant expression) ile değeri verilmesi zorunlu değildir. Sınıfın static ve final olarak bildirilmiş bir veri elemanına sabit ifadesi ile değer verildiğinde o veri elemanı sabit ifadesi olarak kullanılabilir. Sınıfın public, static ve final olarak bildirilmiş bir veri elemanı için (özellikle sabit ifadesi ile de değer veriliyorsa) bir convention olarak tamamı büyük harflerden oluşacak şekilde ve birden fazla kelimeden oluşuyorsa kelimeler alttire karakteri ile ayrılacak şekilde isimlendirme yapılır. 
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Window w = new Window();  
+  
+        w.setVisibility(Visibility.GONE);  
+  
+        //...  
+    }  
+}  
+  
+class Window {  
+    //...  
+    public void setVisibility(int value)  
+    {  
+        //...  
+        switch (value) {  
+            case Visibility.VISIBLE -> System.out.println("Visible");  
+            case Visibility.INVISIBLE -> System.out.println("Invisible");  
+            case Visibility.GONE -> System.out.println("Gone");  
+        }  
+    }  
+}  
+  
+class Visibility {  
+    public static final int VISIBLE = 1;  
+    public static final int INVISIBLE = 0;  
+    public static final int GONE = 2;  
+}
+```
+
+
+>final bir referans değişkenin gösterdiği nesnenin (yani içerisinde tuttuğu adresteki nesne) içeriği değiştirilebilir. Burada referansın içerisinde tuttuğu adres değiştirilemez. Bu durumda nesne final olamaz. Bir nesnenin içeriğinin değiştirilememesi için o sınıfın immutable olarak yazılmış olması gerekir. Bu durumda da nesneyi gösteren bir referansın final olup olmamasının nesnenin içeriğinin değiştirilip değiştirilememesi anlamında bir önemi yoktur.
+
+>Aşağıdaki dmo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        final Sample s = new Sample(20);  
+  
+        s.x = 10;  
+    }  
+}  
+  
+class Sample {  
+    public int x;  
+  
+    public Sample(int a)  
+    {  
+        x = a;  
+    }  
+}
+```
+
+
+>Aşağıdaki `RandomStringArrayGenerator` sınıfında `m_texts` veri elemanı gizlenmiştir. `m_texts` referansının içerisindeki adres dışarıya verildiği için ve referans da bir dizi gösterdiği için client code içerisinde dizinin elemanları değiştirilmiştir. Dolayısıyla sınıf içerisinde tutulan dizi de bundan etkilenmiştir. Yani referans değişkeni gizlemek (hatta onu final yaparak atama yapılmasını engellemek) dizi nesnesinin değiştirilmesini engellememiştir. Çünkü diziler immutable değildir. Bu durumda sınıfı yazan programcı da getTexts metodunun dökumantasyonunda bu durumu belirtmelidir. Ya da dökümanın  yazım biçiminden bu anlaşılmalıdır,
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.generator.random.string.RandomStringArrayGeneratorTR;  
+  
+import java.util.Random;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        RandomStringArrayGeneratorTR generator = new RandomStringArrayGeneratorTR(new Random(), 10, 4, 11);  
+        String [] texts = generator.getTexts();  
+  
+  
+        System.out.println("Texts:");  
+        for (String text : texts)  
+            System.out.println(text);  
+        System.out.println("---------------------------------------------------------------");  
+  
+  
+        for (int i = 0; i < texts.length; ++i)  
+            texts[i] = texts[i].toUpperCase();  
+  
+        System.out.println("Texts:");  
+        for (String text : texts)  
+            System.out.println(text);  
+        System.out.println("---------------------------------------------------------------");  
+  
+  
+        System.out.println("Generated Texts:");  
+        for (String text : generator.getTexts())  
+            System.out.println(text);  
+        System.out.println("---------------------------------------------------------------");  
+    }  
+}
+```
+
+```java
+package org.csystem.generator.random.string;  
+  
+import org.csystem.util.string.StringUtil;  
+  
+import java.util.Random;  
+  
+public class RandomStringArrayGeneratorTR {  
+    private final String [] m_texts;  
+  
+    public RandomStringArrayGeneratorTR(Random random, int count, int origin, int bound)  
+    {  
+        m_texts = StringUtil.generateRandomTextsTR(random, count, origin, bound);  
+    }  
+  
+    public String [] getTexts()  
+    {  
+        return m_texts;  
+    }  
+}
+```
+
+>Yukarıdaki sınıf aşağıdaki gibi yazıldığında artık içsel olarak tutulan dizinin doğrudan adresi değil, kopyasının (yeni yaratılmış olan bir dizinin) adresi dışarıya verilmektedir. Bu durumda sınıfı yazan programcı da getTexts metodunun dökumantasyonunda bu durumu belirtir. 
+>
+>**Anahtar Notlar:** Arrays sınıfının copyOf metodu birinci parametresi ile aldığı dizinin, ikinci parametresi ile aldığı newLength tane elemanından oluşan yeni bir (newly allocated) dizi referansına geri döner. Bu durumda ikinci parametreye argüman olarak dizinin uzunluğu geçilirse dizinin tüm elemanlarından bir kopyası çıkartılmış olur
+
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.generator.random.string.RandomStringArrayGeneratorTR;  
+  
+import java.util.Random;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        RandomStringArrayGeneratorTR generator = new RandomStringArrayGeneratorTR(new Random(), 10, 4, 11);  
+        String [] texts = generator.getTexts();  
+  
+  
+        System.out.println("Texts:");  
+        for (String text : texts)  
+            System.out.println(text);  
+        System.out.println("---------------------------------------------------------------");  
+  
+  
+        for (int i = 0; i < texts.length; ++i)  
+            texts[i] = texts[i].toUpperCase();  
+  
+        System.out.println("Texts:");  
+        for (String text : texts)  
+            System.out.println(text);  
+        System.out.println("---------------------------------------------------------------");  
+  
+  
+        System.out.println("Generated Texts:");  
+        for (String text : generator.getTexts())  
+            System.out.println(text);  
+        System.out.println("---------------------------------------------------------------");  
+    }  
+}
+```
+
+```java
+package org.csystem.generator.random.string;  
+  
+import org.csystem.util.string.StringUtil;  
+  
+import java.util.Arrays;  
+import java.util.Random;  
+  
+public class RandomStringArrayGeneratorTR {  
+    private final String [] m_texts;  
+  
+    public RandomStringArrayGeneratorTR(Random random, int count, int origin, int bound)  
+    {  
+        m_texts = StringUtil.generateRandomTextsTR(random, count, origin, bound);  
+    }  
+  
+    public String [] getTexts()  
+    {  
+        return Arrays.copyOf(m_texts, m_texts.length);  
+    }  
+}
+```
+
+>Aşağıdaki örnekte sınıfı kullanna programcı bir dizi referansını zaten elde edememektedir
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.generator.random.string.RandomStringArrayGeneratorTR;  
+  
+import java.util.Random;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        RandomStringArrayGeneratorTR generator = new RandomStringArrayGeneratorTR(new Random(), 10, 4, 11);  
+        int size = generator.size();  
+  
+        for (int i = 0; i < size; ++i)  
+            System.out.println(generator.get(i));  
+    }  
+}
+```
+
+```java
+package org.csystem.generator.random.string;  
+  
+import org.csystem.util.string.StringUtil;  
+  
+import java.util.Random;  
+  
+public class RandomStringArrayGeneratorTR {  
+    private final String [] m_texts;  
+  
+    public RandomStringArrayGeneratorTR(Random random, int count, int origin, int bound)  
+    {  
+        m_texts = StringUtil.generateRandomTextsTR(random, count, origin, bound);  
+    }  
+  
+    public int size()  
+    {  
+        return m_texts.length;  
+    }  
+  
+    public String get(int index)  
+    {  
+        return m_texts[index];  
+    }  
+}
+```
 

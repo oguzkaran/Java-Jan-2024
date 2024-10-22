@@ -2,10 +2,10 @@ package org.csystem.app.simulation.grades;
 
 public class Exam {
     private String m_lectureName;
-    private Classroom [] m_classrooms;
-    private double [] m_averages;
+    private final Classroom [] m_classrooms;
+    private final double [] m_averages;
     private double m_average;
-    private int m_maxGrade;
+    private final int m_maxGrade;
 
     public Exam(String lectureName, int nClasses)
     {
