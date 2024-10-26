@@ -27,13 +27,13 @@ public class GradeInfoHelper {
     {
         double grade = gradeInfo.getGrade();
 
-        System.out.printf("Öğrenci Numarası:%s%n", gradeInfo.number);
-        System.out.printf("Ad Soyad:%s%n", gradeInfo.name);
-        System.out.printf("Doğum Tarihi:%s%n", gradeInfo.birthDate);
-        System.out.printf("Ders Adı:%s%n", gradeInfo.lectureName);
-        System.out.printf("Arasınav Notu:%d%n", gradeInfo.midtermGrade);
-        System.out.printf("Final Notu:%d%n", gradeInfo.finalGrade);
-        System.out.printf("Geçme Notu:%.1f%n", grade);
-        System.out.printf("Durum:%s%n", grade > 50 ? "Geçti" : "Kaldı");
+        System.out.printf("Student Number:%s%n", gradeInfo.number);
+        System.out.printf("Fullname:%s%n", gradeInfo.name);
+        System.out.printf("Birth Date:%s%n", gradeInfo.birthDate);
+        System.out.printf("Lecture Name:%s%n", gradeInfo.lectureName);
+        System.out.printf("Midterm grade:%d%n", gradeInfo.midtermGrade);
+        System.out.printf("Final grade:%d%n", gradeInfo.finalGrade);
+        System.out.printf("Grade:%.1f%n", grade);
+        System.out.printf("Status:%s%n", grade > 50 ? "Success" : "Fail");
     }
 }

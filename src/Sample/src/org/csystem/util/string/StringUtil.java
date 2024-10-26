@@ -1,6 +1,6 @@
 /**
  * Utility class for string operations
- * Last Update: 17th October 2024
+ * Last Update: 26th October 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.string;
@@ -11,6 +11,13 @@ public class StringUtil {
 	private StringUtil()
 	{
 	}
+
+	private static final String LETTERS_EN = "abcdefghijklmnopqrstuvwxyz";
+	private static final String LETTERS_TR = "abcçdefgğhıijklmnoöprsştuüvyz";
+	private static final String CAPITAL_LETTERS_EN = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	private static final String CAPITAL_LETTERS_TR = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ";
+	private static final String ALL_LETTERS_EN = LETTERS_EN + CAPITAL_LETTERS_EN;
+	private static final String ALL_LETTERS_TR = LETTERS_TR + CAPITAL_LETTERS_TR;
 
 	public static String capitalize(String s)
 	{
@@ -53,12 +60,12 @@ public class StringUtil {
 
 	public static String generateRandomTextEN(Random random, int count)
 	{
-		return generateRandomText(random, count, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+		return generateRandomText(random, count, ALL_LETTERS_EN);
 	}
 
 	public static String generateRandomTextTR(Random random, int count)
 	{
-		return generateRandomText(random, count, "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZabcçdefgğhıijklmnoöprsştuüvyz");
+		return generateRandomText(random, count, ALL_LETTERS_TR);
 	}
 
 	public static String [] generateRandomTexts(Random random, int count, int origin, int bound, String sourceText)
@@ -73,12 +80,12 @@ public class StringUtil {
 
 	public static String [] generateRandomTextsEN(Random random, int count, int origin, int bound)
 	{
-		return generateRandomTexts(random, count, origin, bound, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+		return generateRandomTexts(random, count, origin, bound, ALL_LETTERS_EN);
 	}
 
 	public static String [] generateRandomTextsTR(Random random, int count, int origin, int bound)
 	{
-		return generateRandomTexts(random, count, origin, bound, "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZabcçdefgğhıijklmnoöprsştuüvyz");
+		return generateRandomTexts(random, count, origin, bound, ALL_LETTERS_TR);
 	}
 
 	public static boolean isPalindrome(String s)
@@ -124,12 +131,12 @@ public class StringUtil {
 
 	public static boolean isPangramEN(String s)
 	{
-		return isPangram(s.toLowerCase(), "abcdefghijklmnopqrstuvwxyz");
+		return isPangram(s.toLowerCase(), LETTERS_EN);
 	}
 
 	public static boolean isPangramTR(String s)
 	{
-		return isPangram(s.toLowerCase(), "abcçdefgğhıijklmnoöprsştuüvyz");
+		return isPangram(s.toLowerCase(), LETTERS_TR);
 	}
 
 	public static String join(String [] s, String delimiter)

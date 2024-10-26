@@ -22396,3 +22396,720 @@ public class RandomStringArrayGeneratorTR {
 }
 ```
 
+##### 26 Ekim 2024
+
+>**Anahtar Notlar:** Bir veri elemanının final olması algoritmik açıdan kodu değiştirimiyorsa ve final yapılması sentaks  olarak error oluşturmuyorsa, final olarak bildirilmesi her zaman iyi bir tekniktir. Pek çok static kod analizi aracı da default olarak final yapma uyarısı verir. Ancak programcının nasılsa uyarı verir düşüncesiyle değil, iyi bir  teknik olarak bunu tasarımda düşünmesi ve ona göre kodu yazması gerekir
+
+ >**Sınıf Çalışması:** Bir okulda ortak olarak Fizik sınavı yapılıyor olsun. Sınav n tane şube için yapılsın. n sayısını klavyeden isteyiniz. Her bir şubedeki öğrenci sayısını da klavyeden isteyiniz. Bu sınavdan alınan notları rassal olarak belirleyiniz. Bu işlemlerden sonra ilgili notlara göre her bir şubenin ayrı ayrı Fizik dersi ortalaması ve okulun Fizik dersi ortalamasını hesaplayan simülasyonu yazınız.
+> **Açıklamalar:**
+> - Ders adını komut satırı argümanı olarak alınız
+> - Bir öğrencinin not `[0, 10]` aralığında bir tamsayı olabilir.
+> - Programı mümkün olduğunca nesne yönelimli olarak ve genel olarak tasarlayınız.
+> - Her bir şubenin not dağılımına ilişkin histogram'ları  ve okulun Fizik notlarına ilişkin histogramı (düşey olarak) çiziniz.
+> **Not:** İleride daha iyisi yazılacaktır.
+
+```java
+package org.csystem.app.simulation.grades;  
+  
+import org.csystem.util.console.CommandLineArgsUtil;  
+  
+public class ExamSimulationApp {  
+    public static void run(String [] args)  
+    {  
+        CommandLineArgsUtil.checkLengthEquals(1, args.length, "wrong number of arguments");  
+        ExamSimulation examSimulation = new ExamSimulation(args[0]);  
+  
+        examSimulation.run();  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run(args);  
+    }  
+}
+```
+
+```java
+package org.csystem.app.simulation.grades;  
+  
+import org.csystem.util.array.ArrayUtil;  
+import org.csystem.util.string.StringUtil;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+public class ExamSimulation {  
+    private final String m_lectureName;  
+    private Exam m_exam;  
+  
+    private static void drawHistogram(Classroom classroom, int maxGrade)  
+    {  
+        int [] data = classroom.getHistogramData(maxGrade);  
+        ArrayUtil.print(data);  
+        ArrayUtil.drawHistogram(data, 20, '-');  
+    }  
+  
+    private static void setGrades(Classroom classroom)  
+    {  
+        Random random = new Random();  
+        int n = classroom.getNumberOfStudents();  
+  
+        for (int i = 0; i < n; ++i) {  
+            String firstName = StringUtil.generateRandomTextEN(random, random.nextInt(5, 11));  
+            String lastName = StringUtil.generateRandomTextEN(random, random.nextInt(5, 11));  
+  
+            classroom.setGrade(i, new GradeInfo("%s %s".formatted(firstName, lastName), random.nextInt(11)));  
+        }  
+    }  
+  
+    private static Exam createExam(String lectureName, int nClasses, Scanner kb)  
+    {  
+        Exam exam = new Exam(lectureName, nClasses);  
+  
+        for (int i = 0; i < nClasses; ++i) {  
+            System.out.printf("Input number of students of classroom %d:", i + 1);  
+            Classroom classroom = new Classroom(Integer.parseInt(kb.nextLine()));  
+  
+            setGrades(classroom);  
+            exam.setClassroom(i, classroom);  
+        }  
+  
+        return exam;  
+    }  
+  
+    private void printReport()  
+    {  
+        int nClasses = m_exam.getNumberOfClassrooms();  
+        System.out.printf("Grades of lecture %s:%n", m_exam.getLectureName());  
+  
+        for (int i = 0; i < nClasses; ++i) {  
+            int nStudents = m_exam.getNumberOfStudents(i);  
+            System.out.printf("Classroom %d -> ", i + 1);  
+            for (int k = 0; k < nStudents; ++k)  
+                System.out.printf("%s ", m_exam.getGradeInfo(i, k).toString());  
+  
+            System.out.printf("Average:%f%n", m_exam.getAverage(i));  
+        }  
+  
+        System.out.printf("School Average:%f%n", m_exam.getAverage());  
+    }  
+  
+    private void drawHistogram()  
+    {  
+        int nClasses = m_exam.getNumberOfClassrooms();  
+  
+        for (int i = 0; i < nClasses; ++i) {  
+            System.out.printf("Data of classroom %d%n", i + 1);  
+            drawHistogram(m_exam.getClassroom(i), m_exam.getMaxGrade());  
+        }  
+  
+        System.out.printf("Histogram of %s lecture:%n", m_exam.getLectureName());  
+        int [] data = m_exam.getHistogramData();  
+  
+        ArrayUtil.print(data);  
+        ArrayUtil.drawHistogram(data, 20, '-');  
+    }  
+  
+    public ExamSimulation(String lectureName)  
+    {  
+        m_lectureName = lectureName;  
+    }  
+  
+    public void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+  
+        System.out.print("Input number of classrooms:");  
+        int n = Integer.parseInt(kb.nextLine());  
+  
+        m_exam = createExam(m_lectureName, n, kb);  
+        m_exam.calculate();
+        printReport();  
+        System.out.println("Histogram:");  
+        drawHistogram();  
+    }  
+}
+```
+
+```java
+package org.csystem.app.simulation.grades;  
+  
+public class Exam {  
+    private String m_lectureName;  
+    private final Classroom [] m_classrooms;  
+    private final double [] m_averages;  
+    private double m_average;  
+    private final int m_maxGrade;  
+  
+    public Exam(String lectureName, int nClasses)  
+    {  
+        m_lectureName = lectureName;  
+        m_classrooms = new Classroom[nClasses];  
+        m_averages = new double[nClasses];  
+        m_maxGrade = 10;  
+    }  
+  
+    public Exam(String lectureName, int nClasses, int maxGrade)  
+    {  
+        m_lectureName = lectureName;  
+        m_classrooms = new Classroom[nClasses];  
+        m_averages = new double[nClasses];  
+        m_maxGrade = maxGrade;  
+    }  
+  
+    public String getLectureName()  
+    {  
+        return m_lectureName;  
+    }  
+  
+    public void setLectureName(String lectureName)  
+    {  
+        m_lectureName = lectureName;  
+    }  
+  
+    public Classroom getClassroom(int i)  
+    {  
+        return m_classrooms[i];  
+    }  
+  
+    public double getGrade(int i, int k)  
+    {  
+        return getGradeInfo(i, k).getGrade();  
+    }  
+  
+    public GradeInfo getGradeInfo(int i, int k)  
+    {  
+        return m_classrooms[i].getGradeInfo(k);  
+    }  
+  
+    public int getNumberOfClassrooms()  
+    {  
+        return m_classrooms.length;  
+    }  
+  
+    public int getNumberOfStudents(int i)  
+    {  
+        return m_classrooms[i].getNumberOfStudents();  
+    }  
+  
+    public void setClassroom(int i, Classroom classroom)  
+    {  
+        m_classrooms[i] = classroom;  
+    }  
+  
+    public void setGrade(int i, int k, GradeInfo gradeInfo)  
+    {  
+        m_classrooms[i].setGrade(k, gradeInfo);  
+    }  
+  
+    public double getAverage(int i)  
+    {  
+        return m_averages[i];  
+    }  
+  
+    public double getAverage()  
+    {  
+        return m_average;  
+    }  
+  
+    public int getMaxGrade()  
+    {  
+        return m_maxGrade;  
+    }  
+  
+    public int [] getHistogramData()  
+    {  
+        int [] data = new int[m_maxGrade + 1];  
+  
+        for (Classroom classroom : m_classrooms) {  
+            int nStudents = classroom.getNumberOfStudents();  
+  
+            for (int i = 0; i < nStudents; ++i)  
+                ++data[classroom.getGradeInfo(i).getGrade()];  
+        }  
+  
+        return data;  
+    }  
+    //...  
+  
+    public void calculate()  
+    {  
+        int totalNumberOfStudents = 0;  
+        int totalGrades = 0;  
+  
+        for (int i = 0; i < m_classrooms.length; ++i) {  
+            int totalClassNumberOfStudents = m_classrooms[i].getNumberOfStudents();  
+            int totalClassroomGrades = 0;  
+  
+            for (int k = 0; k < totalClassNumberOfStudents; ++k) {  
+                GradeInfo gradeInfo = m_classrooms[i].getGradeInfo(k);  
+  
+                totalClassroomGrades += gradeInfo.getGrade();  
+            }  
+  
+            m_averages[i] = (double) totalClassroomGrades / totalClassNumberOfStudents;  
+            totalGrades += totalClassroomGrades;  
+            totalNumberOfStudents += totalClassNumberOfStudents;  
+        }  
+  
+        m_average = (double) totalGrades / totalNumberOfStudents;  
+    }  
+    //...  
+}
+```
+
+```java
+package org.csystem.app.simulation.grades;  
+  
+public class GradeInfo {  
+    private String m_studentName;  
+    private int m_grade;  
+  
+    public GradeInfo(String studentName, int grade)  
+    {  
+        //...  
+        m_studentName = studentName;  
+        m_grade = grade;  
+    }  
+  
+    public String getStudentName()  
+    {  
+        return m_studentName;  
+    }  
+  
+    public void setName(String studentName)  
+    {  
+        m_studentName = studentName;  
+    }  
+  
+    public int getGrade()  
+    {  
+        return m_grade;  
+    }  
+  
+    public void setGrade(int grade)  
+    {  
+        //...  
+        m_grade = grade;  
+    }  
+  
+    public String toString()  
+    {  
+        return "%s, %d".formatted(m_studentName, m_grade);  
+    }  
+}
+```
+
+```java
+package org.csystem.app.simulation.grades;  
+  
+public class Classroom {  
+    private final GradeInfo [] m_grades;  
+  
+    //...  
+  
+    public Classroom(int nStudents)  
+    {  
+        m_grades = new GradeInfo[nStudents];  
+    }  
+  
+    public void setGrade(int i, GradeInfo gradeInfo)  
+    {  
+        m_grades[i] = gradeInfo;  
+    }  
+  
+    public GradeInfo getGradeInfo(int i)  
+    {  
+        return m_grades[i];  
+    }  
+  
+    public int getNumberOfStudents()  
+    {  
+        return m_grades.length;  
+    }  
+  
+    public int [] getHistogramData(int maxGrade)  
+    {  
+        int [] data = new int[maxGrade + 1];  
+  
+        for (GradeInfo gradeInfo : m_grades)  
+            ++data[gradeInfo.getGrade()];  
+  
+        return data;  
+    }  
+  
+    public String toString()  
+    {  
+        StringBuilder sb = new StringBuilder("[");  
+        String delimiter = ", ";  
+  
+        for (GradeInfo gi : m_grades)  
+            sb.append(gi.toString()).append(delimiter);  
+  
+        return sb.substring(0, sb.length() - delimiter.length()) + "]";  
+    }  
+}
+```
+
+>Aşağıdaki NumericLottery ve final veri elemanını inceleyiniz
+
+```java
+package org.csystem.app.lottery.numeric;  
+  
+import java.util.Random;  
+  
+public class NumericLottery {  
+    private final Random m_random;  
+  
+    private boolean [] getFlags()  
+    {  
+        boolean [] flags = new boolean[50];  
+  
+        for (int i = 0; i < 6; ++i) {  
+            int val;  
+  
+            do  
+                val = m_random.nextInt(1, 50);  
+            while (flags[val]);  
+  
+            flags[val] = true;  
+        }  
+  
+        return flags;  
+    }  
+  
+    private int [] getNumbers(boolean [] flags)  
+    {  
+        int [] a = new int[6];  
+        int idx = 0;  
+  
+        for (int i = 1; i < flags.length; ++i)  
+            if (flags[i])  
+                a[idx++] = i;  
+  
+        return a;  
+    }  
+  
+    public NumericLottery(Random r)  
+    {  
+        m_random = r;  
+    }  
+  
+    public int [] getNumbers()  
+    {  
+        return getNumbers(getFlags());  
+    }  
+}
+```
+
+>StringUtil sınıfı ve ilgili elemanları inceleyiniz
+
+```java
+package org.csystem.util.string;  
+  
+import java.util.Random;  
+  
+public class StringUtil {  
+    private StringUtil()  
+    {  
+    }  
+  
+    private static final String LETTERS_EN = "abcdefghijklmnopqrstuvwxyz";  
+    private static final String LETTERS_TR = "abcçdefgğhıijklmnoöprsştuüvyz";  
+    private static final String CAPITAL_LETTERS_EN = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";  
+    private static final String CAPITAL_LETTERS_TR = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ";  
+    private static final String ALL_LETTERS_EN = LETTERS_EN + CAPITAL_LETTERS_EN;  
+    private static final String ALL_LETTERS_TR = LETTERS_TR + CAPITAL_LETTERS_TR;  
+  
+    public static String capitalize(String s)  
+    {  
+       return s.isEmpty() ? s : Character.toUpperCase(s.charAt(0)) + s.substring(1).toLowerCase();  
+    }  
+  
+    public static String changeCase(String s)  
+    {  
+       StringBuilder sb = new StringBuilder(s);  
+  
+       for (int i = 0; i < s.length(); ++i) {  
+          char c = s.charAt(i);  
+  
+          sb.setCharAt(i, Character.isLowerCase(c) ? Character.toUpperCase(c) : Character.toLowerCase(c));  
+       }  
+  
+       return sb.toString();  
+    }  
+  
+  
+    public static int countString(String s1, String s2)  
+    {  
+       int count = 0;  
+  
+       for (int i = 0; (i = s1.indexOf(s2, i)) != -1; ++i, ++count)  
+          ;  
+  
+       return count;  
+    }  
+  
+    public static String generateRandomText(Random random, int count, String sourceText)  
+    {  
+       char [] c = new char[count];  
+  
+       for (int i = 0; i < count; ++i)  
+          c[i] = sourceText.charAt(random.nextInt(sourceText.length()));  
+  
+       return String.valueOf(c);  
+    }  
+  
+    public static String generateRandomTextEN(Random random, int count)  
+    {  
+       return generateRandomText(random, count, ALL_LETTERS_EN);  
+    }  
+  
+    public static String generateRandomTextTR(Random random, int count)  
+    {  
+       return generateRandomText(random, count, ALL_LETTERS_TR);  
+    }  
+  
+    public static String [] generateRandomTexts(Random random, int count, int origin, int bound, String sourceText)  
+    {  
+       String [] str = new String[count];  
+  
+       for (int i = 0; i < count; ++i)  
+          str[i] = generateRandomText(random, random.nextInt(origin, bound), sourceText);  
+  
+       return str;  
+    }  
+  
+    public static String [] generateRandomTextsEN(Random random, int count, int origin, int bound)  
+    {  
+       return generateRandomTexts(random, count, origin, bound, ALL_LETTERS_EN);  
+    }  
+  
+    public static String [] generateRandomTextsTR(Random random, int count, int origin, int bound)  
+    {  
+       return generateRandomTexts(random, count, origin, bound, ALL_LETTERS_TR);  
+    }  
+  
+    public static boolean isPalindrome(String s)  
+    {  
+       int left = 0;  
+       int right = s.length() - 1;  
+  
+       while (left < right) {  
+          char cLeft = s.charAt(left);  
+  
+          if (!Character.isLetter(cLeft)) {  
+             ++left;  
+             continue;  
+          }  
+  
+          char cRight = s.charAt(right);  
+  
+          if (!Character.isLetter(cRight)) {  
+             --right;  
+             continue;  
+          }  
+  
+          if (Character.toLowerCase(cLeft) != Character.toLowerCase(cRight))  
+             return false;  
+  
+          ++left;  
+          --right;  
+       }  
+  
+       return true;  
+    }  
+  
+  
+    public static boolean isPangram(String s, String alphabet)  
+    {  
+       for (int i = 0; i < alphabet.length(); ++i)  
+          if (s.indexOf(alphabet.charAt(i)) == -1)  
+             return false;  
+  
+       return true;  
+    }  
+  
+  
+    public static boolean isPangramEN(String s)  
+    {  
+       return isPangram(s.toLowerCase(), LETTERS_EN);  
+    }  
+  
+    public static boolean isPangramTR(String s)  
+    {  
+       return isPangram(s.toLowerCase(), LETTERS_TR);  
+    }  
+  
+    public static String join(String [] s, String delimiter)  
+    {  
+       StringBuilder sb = new StringBuilder();  
+  
+       for (String str : s)  
+          sb.append(str).append(delimiter);  
+  
+       return sb.substring(0, sb.length() - delimiter.length());  
+    }  
+  
+    public static String join(String [] s, char delimiter)  
+    {  
+       return join(s, String.valueOf(delimiter));  
+    }  
+  
+    public static String padLeading(String s, int n, char ch)  
+    {  
+       int len = s.length();  
+  
+       return len < n ? String.valueOf(ch).repeat(n - len) + s : s;  
+    }  
+  
+    public static String padLeading(String s, int n)  
+    {  
+       return padLeading(s, n, ' ');  
+    }  
+  
+    public static String padTrailing(String s, int n, char ch)  
+    {  
+       int len = s.length();  
+  
+       return len < n ? s + String.valueOf(ch).repeat(n - len) : s;  
+    }  
+  
+    public static String padTrailing(String s, int n)  
+    {  
+       return padTrailing(s, n, ' ');  
+    }  
+  
+    public static String reverse(String s)  
+    {  
+       return new StringBuilder(s).reverse().toString();  
+    }  
+  
+    public static String [] split(String s, String delimiters)  
+    {  
+       return split(s, delimiters, true);  
+    }  
+  
+    public static String [] split(String s, String delimiters, boolean removeEmptyEntries)  
+    {  
+       StringBuilder pattern = new StringBuilder("[");  
+  
+       for (int i = 0; i < delimiters.length(); ++i) {  
+          char c = delimiters.charAt(i);  
+  
+          if (c == '[' || c == ']')  
+             pattern.append('\\');  
+  
+          pattern.append(c);  
+       }  
+  
+       pattern.append(']');  
+  
+       if (removeEmptyEntries)  
+          pattern.append("+");  
+  
+       return s.split(pattern.toString());  
+    }  
+}
+```
+
+>**Sınıf Çalışması:** Aşağıda açıklanan `IntValue` isimli sınıfı yazınız.
+>**Açıklamalar:** 
+>- Sınıf int türden bir değeri sarmalayacaktır (wrapping).
+>- Sınıf immutable olarak yazılacaktır. Yani sınıf içerisinde tutulan veri elemanı değiştirilemeyecektir.
+>- Sınıf `[-128, 127]` aralığındaki değerler için bir ön bellek (cache) kullanacaktır. Bu aralıktaki bir değer için ilk sarmalamada nesne yaratılacak ve aynı değer tekrar sarmalanmak istendiğinde daha önce yaratılmış olan nesnenin referansı verilecektir.
+>- Sınıf `[-128, 127]` aralığı dışında kalan değerleri ön bellekte tutmayacaktır.
+>- Sınıfa yararlı bazı eklentiler yapılabilir.
+>- 
+>**Anahtar Notlar:** Ön bellek (cache) genel bir kavramdır ve etkinlik açısından tercih edilir. Bu örnekte sınıf immutable olduğundan belirli aralıktaki değerler için ayrı ayrı nesnelerin yaratılması engellenmiştir. Bu durumda bellekte etkin kullanılmış olur aynı zamanda sarmalama da hızlı yapılmış olur. Daha fazla değere ilişkin nesnelerin saklanmaması yine etkinlik açısından düşünülmüştür. Eğer çok fazla değer saklanırsa belleğin etkin kullanımı azalmış olur.
+>
+>**Anahtar Notlar:** Aslında JavaSE'de örnekteki int türden bir değeri immutable olarak sarmalayan ve `[-128, 127]` aralığındaki değerler için bir ön bellek kullanan sınıf vardır. Bu sınıf ileride ele alınacaktır. Örneğin amacı programalama açısından böyle bir sınıfın nasıl yazılabileceğini göstermektedir. 
+>
+>**Anahtar Notlar:**  Bir değerin sarmalanması (wrapping) o değerin bir sınıf içerisinde yani bir nesne içerinde tutulması anlamındadır. Temel türden bir değerin sarmalanması da aslında o değerin heap'de tutulması anlamına gelir. Temel türden bir değerin sarmalanasına genel olarak **boxing** denilmektedir. Sarmalanan temel türden bir değerin elde edilmesine ise **unboxing** denilmektedir. Bu kavramlar ileride daha detaylı olarak ele alınacaktır.
+>
+>**Anahtar Notlar:** Bu örnekte yazılan sınıfta `[-128, 127]` aralında kalan bir değer için nesne ilk kez sarmalandığında yaratılıp aynı değerin tekrar sarmalanması durumunda aynı nesne kullanıldığından Gof'un **flyweight** tasarım kalıbı kullanılmıştır. Kalıbın detayları şu an için önemsizdir.
+>
+>**Anahtar Notlar:** Bazı sınıflarda Java 8 öncesinde `valueOf` biçiminde isimlendirilen factory metotlar bulundurulmuştur. Java 8 ile birlike yeni eklenen sınıflarda `valueOf` yerine `of` ismi tercih edilmektedir. Bu isimlendirme Java'da genel bir convention niteliğindedir.
+
+```java
+package org.csystem.wrapper.primitive.test;  
+  
+import org.csystem.wrapper.primitive.IntValue;  
+  
+public class IntValueInCacheTest {  
+    public static void run()  
+    {  
+        int value = -128;  
+        IntValue intValue1 = IntValue.of(value);  
+        IntValue intValue2 = IntValue.of(value);  
+  
+        System.out.println(intValue1 == intValue2 ? "Aynı nesne" : "Farklı nesneler");  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+```java
+package org.csystem.wrapper.primitive.test;  
+  
+import org.csystem.wrapper.primitive.IntValue;  
+  
+public class IntValueNotInCacheTest {  
+    public static void run()  
+    {  
+        int value = -129;  
+        IntValue intValue1 = IntValue.of(value);  
+        IntValue intValue2 = IntValue.of(value);  
+  
+        System.out.println(intValue1 == intValue2 ? "Aynı nesne" : "Farklı nesneler");  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+```java
+package org.csystem.wrapper.primitive;  
+  
+public class IntValue {  
+    private static final int CACHE_MIN = -128;  
+    private static final int CACHE_MAX = 127;  
+    private static final int INDEX_DIFFERENCE = 128;  
+  
+    private static final IntValue [] CACHE = new IntValue[CACHE_MAX - CACHE_MIN + 1];  
+    private final int m_value;  
+  
+    private IntValue(int value)  
+    {  
+        m_value = value;  
+    }  
+  
+    public static IntValue of(int value)  
+    {  
+        if (value < CACHE_MIN || value > CACHE_MAX)  
+            return new IntValue(value);  
+  
+        if (CACHE[value + INDEX_DIFFERENCE] == null)  
+            CACHE[value + INDEX_DIFFERENCE] = new IntValue(value);  
+  
+        return CACHE[value + INDEX_DIFFERENCE];  
+    }  
+  
+    public int getValue()  
+    {  
+        return m_value;  
+    }  
+  
+    public String toString()  
+    {  
+        return String.valueOf(m_value);  
+    }  
+}
+```
