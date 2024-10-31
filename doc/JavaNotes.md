@@ -1248,7 +1248,7 @@ class Util {
 
 #### 20 Şubat 2024
  
->Bir metodun geri dönüş değeri yoksa geri dönüş değeri bilgisi yerine `void` anahtar sözcüğü yazılır. Geri dönüş değeri olmayan metotlara "void method" da denilmektedir. `void` bir metot sonlandığında çağrılan noktaya bir değer ile dönmez. Bu durumda `void` metot içerisinde `return` deyimi bir ifade ile kullanılamaz. İstenirse metodu sonlandırmak için tek başına kullanılabilir.
+>Bir metodun geri dönüş değeri yoksa geri dönüş değeri bilgisi yerine `void` anahtar sözcüğü yazılır. Geri dönüş değeri olmayan metotlara **void method** da denilmektedir. `void` bir metot sonlandığında çağrılan noktaya bir değer ile dönmez. Bu durumda `void` metot içerisinde `return` deyimi bir ifade ile kullanılamaz. İstenirse metodu sonlandırmak için tek başına kullanılabilir.
 >
 >Bu anlamda `void` metotlarda `return` deyimi zorunlu değildir. `void` bir metot geri dönüş değeri varmış gibi çağrılamaz. Yani geri dönüş değeri varmış gibi işleme sokulamaz
  
@@ -1784,9 +1784,9 @@ class App {
 >- Programcının bir uygulama geliştirirken yalnıca uygulamaya ilişkin domain'e odaklanmasını sağlar. 	 
 >- Bazı metotları yazmak için başka detay konuların da bilinmesi gerekir.
 >
->Bu durumda bir Java programcısının çözmesi gereken bir problem için, JavaSE'de problemin çözümüne ilişkin metotlar varsa onları kullanması gerekir, yoksakullandığı bazı iyi kütüphanelerin içerisinde varsa onu kullanması gerekir. Burada da yoksa bu durumda programcı o metodu yazmalıdır. Ancak bu durum programcının kullandığı bir metodu standart olsun ya da olmasın nasıl yazıldığını gözardı etmesi anlamına gelmemelidir. Programcı programlama yaşamı boyunca hepsini olmasa da hazır olarak kullandığı metotların nasıl yazıldığını (implementation) öğrenmesi gerekir.
+>Bu durumda bir Java programcısının çözmesi gereken bir problem için, JavaSE'de problemin çözümüne ilişkin metotlar varsa onları kullanması gerekir, yoksa kullandığı bazı iyi kütüphanelerin içerisinde varsa onu kullanması gerekir. Burada da yoksa bu durumda programcı o metodu yazmalıdır. Ancak bu durum programcının kullandığı bir metodu standart olsun ya da olmasın nasıl yazıldığını gözardı etmesi anlamına gelmemelidir. Programcı programlama yaşamı boyunca hepsini olmasa da hazır olarak kullandığı metotların nasıl yazıldığını (implementation) öğrenmesi gerekir.
  
-**Anahtar Notlar:** Bir metodun ne iş yaptığına ilişkin detaylar nasıl öğrenilecektir? Bunun için tipik olarak metot için bir dokümantasyon oluşuturur. JavaSE içerisinde bulunan standart metotların (ait olduğu sınıfların da) dokümantasyonu [Oracle Docs &#x1F517;](https://docs.oracle.com) sitesinde çeşitli sayfalarda yayınlanmaktadır. Ancak yine de ilgili dokümantasyon tüm detayıyla öğretemeyebilir. Genel olarak Java dokümanları `javadoc` konu hakkında fikir vermek için yazılır. Duruma göre programcı başka kaynaklardan öğrenmek zorunda kalabilir.
+**Anahtar Notlar:** Bir metodun ne iş yaptığına ilişkin detaylar nasıl öğrenilecektir? Bunun için tipik olarak metot için bir dokümantasyon oluşuturur. JavaSE içerisinde bulunan standart metotların (ait olduğu sınıfların da) dokümantasyonu [https://docs.oracle.com](https://docs.oracle.com) sitesinde çeşitli sayfalarda yayınlanmaktadır. Ancak yine de ilgili dokümantasyon tüm detayıyla öğretemeyebilir. Genel olarak Java dokümanları `javadoc` konu hakkında fikir vermek için yazılır. Duruma göre programcı başka kaynaklardan öğrenmek zorunda kalabilir.
  
 >`java.lang` paketi içerisinde bulunan Math sınıfının Matematiksel işlemlere yönelik çeşitli metotları vardır. Bu metotların bazıları pek yerde kullanılır. Bazıları ise Matematiksel işlemlerde kullanılır. Burada çok kullanılan bazıları ele alınacaktır. Java programcısı Matematiksel işlemler gerektiğinde önce bu sınıfa bakmalı varsa bu sınıfın elemanlarını kullanmalıdır.
 	
@@ -23113,3 +23113,409 @@ public class IntValue {
     }  
 }
 ```
+
+##### 31 Ekim 2024
+
+>Bazı sınıfların duruma göre hem mutable hem de immutable versiyonları bulundurulabilir. Şüphesiz tüm sınıflar için bu durum söz konusu değildir. Yani domain'e bağlı olarak her iki versiyonun da yazılması gerekebilir. Böylesi durumlarda hem mutable hem de immutable olan sınıfların isimlendirilmesinde genel olarak immutable olan doğrudan isimlendirilir, mutable olan ise `Mutable` ön eki ile isimlendirilir. Örneğin iki boyutlu bir noktayı temsil eden bir tür için hem mutable hem de immutable versiyonları yazılacaksa immutable olana `Point`, mutable olana ise `MutablePoint` isimleri verilebilir. Bu bir convention olarak düşünülebilir.
+
+>Aşağıdaki Point, MutablePoint ve friendly olarak bildirilmiş PointCommon isimli sınıfları inceleyiniz
+
+```java
+package org.csystem.math.geometry;  
+  
+import static java.lang.Math.*;  
+  
+public class Point {  
+    private final double m_x;  
+    private final double m_y;  
+  
+    private static Point create(double a, double b)  
+    {  
+       return new Point(a, b);  
+    }  
+  
+    private Point(double x, double y)  
+    {  
+       m_x = x;  
+       m_y = y;  
+    }  
+  
+    public static Point createCartesian(double x, double y)  
+    {  
+       return create(x, y);  
+    }  
+  
+    public static Point createPolar(double r, double theta)  
+    {  
+       return create(r * cos(theta), r * sin(theta));  
+    }  
+  
+    public double getX()  
+    {  
+       return m_x;  
+    }  
+  
+    public double getY()  
+    {  
+       return m_y;  
+    }  
+  
+    public double euclideanDistance()  
+    {  
+       return euclideanDistance(0, 0);  
+    }  
+      
+    public double euclideanDistance(Point other)  
+    {  
+       return euclideanDistance(other.m_x, other.m_y);  
+    }  
+      
+    public double euclideanDistance(double x, double y)  
+    {  
+       return PointCommon.euclideanDistance(m_x, m_y, x, y);  
+    }    
+  
+    public String toString()  
+    {  
+       return PointCommon.toString(m_x, m_y);  
+    }  
+}
+```
+
+```java
+package org.csystem.math.geometry;  
+  
+import static java.lang.Math.*;  
+  
+public class MutablePoint {  
+    private double m_x;  
+    private double m_y;  
+  
+    private static MutablePoint create(double a, double b)  
+    {  
+       return new MutablePoint(a, b);  
+    }  
+  
+    private MutablePoint(double x, double y)  
+    {  
+       m_x = x;  
+       m_y = y;  
+    }  
+  
+    public static MutablePoint createCartesian(double x, double y)  
+    {  
+       return create(x, y);  
+    }  
+  
+    public static MutablePoint createPolar(double r, double theta)  
+    {  
+       return create(r * cos(theta), r * sin(theta));  
+    }  
+  
+    public double getX()  
+    {  
+       return m_x;  
+    }  
+  
+    public void setX(double x)  
+    {  
+       m_x = x;  
+    }  
+  
+    public double getY()  
+    {  
+       return m_y;  
+    }  
+  
+    public void setY(double y)  
+    {  
+       m_y = y;  
+    }  
+  
+    public double euclideanDistance()  
+    {  
+       return euclideanDistance(0, 0);  
+    }  
+      
+    public double euclideanDistance(MutablePoint other)  
+    {  
+       return euclideanDistance(other.m_x, other.m_y);  
+    }  
+      
+    public double euclideanDistance(double x, double y)  
+    {  
+       return PointCommon.euclideanDistance(m_x, m_y, x, y);  
+    }    
+      
+    public void offset(double dxy)  
+    {  
+       offset(dxy, dxy);  
+    }  
+      
+    public void offset(double dx, double dy)  
+    {  
+       m_x += dx;  
+       m_y += dy;  
+    }  
+      
+    public String toString()  
+    {  
+       return PointCommon.toString(m_x, m_y);  
+    }  
+}
+```
+
+```java
+package org.csystem.math.geometry;  
+  
+import static java.lang.Math.pow;  
+import static java.lang.Math.sqrt;  
+  
+class PointCommon {  
+    static String toString(double x, double y)  
+    {  
+        return "(%f, %f)".formatted(x, y);  
+    }  
+  
+    static double euclideanDistance(double x1, double y1, double x2, double y2)  
+    {  
+        return sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));  
+    }  
+}
+```
+
+>Aşağıdaki Complex ve MutableComplex sınıflarını inceleyiniz
+
+```java
+package org.csystem.math;  
+  
+import static java.lang.Math.sqrt;  
+  
+public class Complex {  
+    private final double m_real;  
+    private final double m_imag;  
+      
+    private static Complex add(double re1, double im1, double re2, double im2)  
+    {  
+       return new Complex(re1 + re2, im1 + im2);  
+    }  
+      
+    private static Complex subtract(double re1, double im1, double re2, double im2)  
+    {  
+       return add(re1, im1, -re2, -im2);       
+    }  
+      
+    public Complex()  
+    {  
+       m_real = m_imag = 0;  
+    }  
+      
+    public Complex(double real)  
+    {  
+       m_real = real;  
+       m_imag = 0;  
+    }  
+      
+    public Complex(double real, double imag)  
+    {  
+       m_real = real;  
+       m_imag = imag;  
+    }  
+      
+    public static Complex add(double val, Complex z)  
+    {  
+       return add(val, 0, z.m_real, z.m_imag);  
+    }  
+      
+    public Complex add(Complex other)  
+    {  
+       return add(m_real, m_imag, other.m_real, other.m_imag);  
+    }  
+      
+    public Complex add(double val)  
+    {  
+       return add(m_real, m_imag, val, 0);  
+    }    
+      
+    public static Complex subtract(double val, Complex z)  
+    {  
+       return subtract(val, 0, z.m_real, z.m_imag);  
+    }  
+      
+    public Complex subtract(Complex other)  
+    {  
+       return subtract(m_real, m_imag, other.m_real, other.m_imag);  
+    }  
+      
+    public Complex subtract(double val)  
+    {  
+       return subtract(m_real, m_imag, val, 0);  
+    }  
+  
+    public Complex getConjugate()  
+    {             
+       return new Complex(m_real, -m_imag);  
+    }  
+      
+    public double getNorm()  
+    {  
+       return sqrt(m_real * m_real + m_imag * m_imag);  
+    }  
+      
+    public double getLength()  
+    {  
+       return getNorm();  
+    }    
+      
+    public String toString()  
+    {  
+       return "(%.2f, %.2f)".formatted(m_real, m_imag);  
+    }  
+}
+```
+
+```java
+package org.csystem.math;  
+  
+import static java.lang.Math.sqrt;  
+  
+public class MutableComplex {  
+    private double m_real;  
+    private double m_imag;  
+  
+    private static MutableComplex add(double re1, double im1, double re2, double im2)  
+    {  
+       return new MutableComplex(re1 + re2, im1 + im2);  
+    }  
+  
+    private static MutableComplex subtract(double re1, double im1, double re2, double im2)  
+    {  
+       return add(re1, im1, -re2, -im2);  
+    }  
+  
+    public MutableComplex()  
+    {  
+    }  
+  
+    public MutableComplex(double real)  
+    {  
+       m_real = real;  
+    }  
+  
+    public MutableComplex(double real, double imag)  
+    {  
+       m_real = real;  
+       m_imag = imag;  
+    }  
+      
+    public static MutableComplex add(double val, MutableComplex z)  
+    {  
+       return add(val, 0, z.m_real, z.m_imag);  
+    }  
+      
+    public MutableComplex add(MutableComplex other)  
+    {  
+       return add(m_real, m_imag, other.m_real, other.m_imag);  
+    }  
+      
+    public MutableComplex add(double val)  
+    {  
+       return add(m_real, m_imag, val, 0);  
+    }    
+      
+    public static MutableComplex subtract(double val, MutableComplex z)  
+    {  
+       return subtract(val, 0, z.m_real, z.m_imag);  
+    }  
+      
+    public MutableComplex subtract(MutableComplex other)  
+    {  
+       return subtract(m_real, m_imag, other.m_real, other.m_imag);  
+    }  
+      
+    public MutableComplex subtract(double val)  
+    {  
+       return subtract(m_real, m_imag, val, 0);  
+    }  
+      
+    public void inc(double val)  
+    {  
+       m_real += val;  
+    }  
+      
+    public void inc()  
+    {  
+       inc(1);  
+    }  
+      
+    public void dec(double val)  
+    {  
+       inc(-val);  
+    }  
+      
+    public void dec()  
+    {  
+       dec(1);  
+    }  
+      
+    public MutableComplex getConjugate()  
+    {             
+       return new MutableComplex(m_real, -m_imag);  
+    }  
+      
+    public double getNorm()  
+    {  
+       return sqrt(m_real * m_real + m_imag * m_imag);  
+    }  
+      
+    public double getLength()  
+    {  
+       return getNorm();  
+    }    
+      
+    public String toString()  
+    {  
+       return "(%.2f, %.2f)".formatted(m_real, m_imag);  
+    }  
+}
+```
+
+>**Sınıf Çalışması:** Parametresi ile aldığı long türden bir sayının Türkçe okunuşuna geri dönen numToStrTR metodunu NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz
+>**Açıklamalar:** 
+>- Sayının okunuşuna ilişkin elde edilecek yazılar şu şekilde olacaktır: 
+>Sayı `12345608` ise okunuşu `on iki milyon üç yüz kırk beş bin altı yüz sekiz`
+>Sayı `-12345608` ise okunuşu `eksi on iki milyon üç yüz kırk beş bin altı yüz sekiz`
+>- Okunuştaki kelimeler arasında birer adet SPACE karakteri olduğuna dikkat ediniz
+
+```java
+package org.csystem.util.numeric.test;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+import static org.csystem.util.numeric.NumberUtil.numToStrTR;  
+  
+public class NumberUtilNumToStrTRTest {  
+    public static void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+        Random r = new Random();  
+  
+        System.out.print("Bir sayı giriniz:");  
+        int n = kb.nextInt();  
+  
+        for (int i = 0; i < n; ++i) {  
+            long val = r.nextLong();  
+  
+            System.out.printf("%d -> ", val);  
+            System.out.println(numToStrTR(val));  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+

@@ -1,6 +1,6 @@
 /**
  * Complex class that represents a complex number in math
- * Last Update: 8th October 2024
+ * Last Update: 31st October 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.math;
@@ -8,8 +8,8 @@ package org.csystem.math;
 import static java.lang.Math.sqrt;
 
 public class Complex {
-	public double real;
-	public double imag;
+	private final double m_real;
+	private final double m_imag;
 	
 	private static Complex add(double re1, double im1, double re2, double im2)
 	{
@@ -22,78 +22,60 @@ public class Complex {
 	}
 	
 	public Complex()
-	{		
+	{
+		m_real = m_imag = 0;
 	}
 	
-	public Complex(double a)
+	public Complex(double real)
 	{
-		real = a;		
+		m_real = real;
+		m_imag = 0;
 	}
 	
-	public Complex(double a, double b)
+	public Complex(double real, double imag)
 	{
-		real = a;
-		imag = b;
+		m_real = real;
+		m_imag = imag;
 	}
 	
 	public static Complex add(double val, Complex z)
 	{
-		return add(val, 0, z.real, z.imag);
+		return add(val, 0, z.m_real, z.m_imag);
 	}
 	
 	public Complex add(Complex other)
 	{
-		return add(real, imag, other.real, other.imag);
+		return add(m_real, m_imag, other.m_real, other.m_imag);
 	}
 	
 	public Complex add(double val)
 	{
-		return add(real, imag, val, 0);
+		return add(m_real, m_imag, val, 0);
 	}	
 	
 	public static Complex subtract(double val, Complex z)
 	{
-		return subtract(val, 0, z.real, z.imag);
+		return subtract(val, 0, z.m_real, z.m_imag);
 	}
 	
 	public Complex subtract(Complex other)
 	{
-		return subtract(real, imag, other.real, other.imag);
+		return subtract(m_real, m_imag, other.m_real, other.m_imag);
 	}
 	
 	public Complex subtract(double val)
 	{
-		return subtract(real, imag, val, 0);
+		return subtract(m_real, m_imag, val, 0);
 	}
-	
-	public void inc(double val)
-	{
-		real += val;
-	}
-	
-	public void inc()
-	{
-		inc(1);
-	}
-	
-	public void dec(double val)
-	{
-		inc(-val);
-	}
-	
-	public void dec()
-	{
-		dec(1);
-	}
-	
+
 	public Complex getConjugate()
 	{				
-		return new Complex(real, -imag);
+		return new Complex(m_real, -m_imag);
 	}
 	
 	public double getNorm()
 	{
-		return sqrt(real * real + imag * imag);
+		return sqrt(m_real * m_real + m_imag * m_imag);
 	}
 	
 	public double getLength()
@@ -103,6 +85,6 @@ public class Complex {
 	
 	public String toString()
 	{
-		return "(%.2f, %.2f)".formatted(real, imag);
+		return "(%.2f, %.2f)".formatted(m_real, m_imag);
 	}
 }

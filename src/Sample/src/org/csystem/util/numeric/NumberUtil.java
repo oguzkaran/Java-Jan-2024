@@ -1,6 +1,6 @@
 /**
  * Utility class for numeric operations
- * Last Update: 17th October 2024
+ * Last Update: 31st October 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.numeric;
@@ -8,6 +8,32 @@ package org.csystem.util.numeric;
 public class NumberUtil {
 	private NumberUtil()
 	{
+	}
+
+	private static final String [] ONES_TR = {"", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz"};
+	private static final String [] TENS_TR = {"", "on", "yirmi", "otuz", "kırk", "elli", "altmış", "yetmiş", "seksen", "doksan"};
+
+	private static String numToStr3DigitsTR(int val)
+	{
+		StringBuilder sb = new StringBuilder();
+
+		int a = val / 100;
+		int b = val / 10 % 10;
+		int c = val % 10;
+
+		if (a != 0) {
+			if (a != 1)
+				sb.append(ONES_TR[a]).append(" ");
+			sb.append("yüz ");
+		}
+
+		if (b != 0)
+			sb.append(TENS_TR[b]).append(" ");
+
+		if (c != 0)
+			sb.append(ONES_TR[c]).append(" ");
+
+		return sb.substring(0, sb.length() - 1);
 	}
 
 	public static int countDigits(long a)
@@ -51,6 +77,11 @@ public class NumberUtil {
 			;
 
 		return digits;
+	}
+
+	public static int [] getDigitsInThrees(long a)
+	{
+		throw new UnsupportedOperationException("Not yet implemented");
 	}
 
 	public static int getDigitsPowSum(int a)
@@ -143,6 +174,11 @@ public class NumberUtil {
 				result = i;
 			}
 		return result;
+	}
+
+	public static String numToStrTR(long a)
+	{
+		throw new UnsupportedOperationException("Not yet implemented");
 	}
 
 	public static int reverse(int val)
