@@ -12,27 +12,17 @@
 >- JRE (Java Runtime Environment): Genel olarak Java ile yazılmış bir uygulamayı çalıştırmak (run) için gereken araçları ve uygulamaları içeren bir pakettir. Yani BC elde edildiğinde bu programın çalıştırılabilmesi için JRE'ye ihtiyaç vardır.
 >- JDK (Java Development Kit): Geliştirme (development) araçlarını ve çalıştırma araçlarının bir çoğunu içeren pakettir. Buradaki çalıştırma araçları geliştirme aşamasında kullanılabilir.
 >
->Ticari kullanımlarda özellikle Java 11 ile birlikte bazı değişiklikler yapılmıştır. Genel olarak şöyle söylenebilir: Java'da geliştirme ortamı ücetsiz, çalıştırma araçları kullanılan araca göre ücretlendirilebilir.  Tamamen ücretsiz olarak kullanılabilen "Open JRE" gibi çalıştırma araçları da mevcuttur.  Burada anlatılanlar geneldir. Ayrıca, belirli
-bir noktadan sonra Java sürümleri için Long Term Support (LTS) kavramı da getirilmiştir. LTS sürümleri uzun süre 
-desteklenen yani güncellemesi (hızlandırılması, hataların düzeltilmesi (bug fix) vb.) uzun süre yapılan sürümlerdir. 
-Java'da Java 8, 11, 17 ve 21 sürümleri LTS sürümleridir. Bu kavramlar zamanla anlaşılacaktır.*
+>Ticari kullanımlarda özellikle Java 11 ile birlikte bazı değişiklikler yapılmıştır. Genel olarak şöyle söylenebilir: Java'da geliştirme ortamı ücetsiz, çalıştırma araçları kullanılan araca göre ücretlendirilebilir.  Tamamen ücretsiz olarak kullanılabilen "Open JRE" gibi çalıştırma araçları da mevcuttur.  Burada anlatılanlar geneldir. Ayrıca, belirlibir noktadan sonra Java sürümleri için Long Term Support (LTS) kavramı da getirilmiştir. LTS sürümleri uzun süre desteklenen yani güncellemesi (hızlandırılması, hataların düzeltilmesi (bug fix) vb.) uzun süre yapılan sürümlerdir. Java'da Java 8, 11, 17 ve 21 sürümleri LTS sürümleridir. Bu kavramlar zamanla anlaşılacaktır.
 >
->Arakodlu çalışma sisteminin en önemli avantajı, gelişirilen uygulamaların genel olarak sistemden bağımsız olarak 
-çalıştırılabilmesidir. Dolayısıyla kodun çalıştırılacağı sistemden bağımsız olarak ürün geliştirilebilir. Bu kavrama
-"Write Once Run Anywhere (WORA)" denilmektedir. Şüphesiz bu durumun da istisnaları vardır.*
+>Arakodlu çalışma sisteminin en önemli avantajı, gelişirilen uygulamaların genel olarak sistemden bağımsız olarak çalıştırılabilmesidir. Dolayısıyla kodun çalıştırılacağı sistemden bağımsız olarak ürün geliştirilebilir. Bu kavramaurumun da istisnaları vardır.
 >
->Ayrıca unutulmamalıdır ki, arakodlu çalışma sistemi ufak da olsa bir performas kaybına yol açar. Ancak Java'nın hedeflediği
-uygulamalar düşünüldüğünde bu kaybın pek de önemi yoktur. Bu kaybın önemli olduğu uygulamalar için zaten Java ile 
-geliştirme yapılmaz.*
+>Ayrıca unutulmamalıdır ki, arakodlu çalışma sistemi ufak da olsa bir performas kaybına yol açar. Ancak Java'nın hedeflediği uygulamalar düşünüldüğünde bu kaybın pek de önemi yoktur. Bu kaybın önemli olduğu uygulamalar için zaten Java ile geliştirme yapılmaz.*
 >
->**Hızlı Uygulama Geliştirme Ortamı:** Java hızlı uygulama geliştirme (rapid application development) ortamı sunar. Bu anlamda
-hem öğrenmesi kolaydır hem de ürün daha çabuk elde edilir.*
+>**Hızlı Uygulama Geliştirme Ortamı:** Java hızlı uygulama geliştirme (rapid application development) ortamı sunar. Bu anlamda hem öğrenmesi kolaydır hem de ürün daha çabuk elde edilir.
 >
->**Geniş bir sınıf kütüphanesi:** Java'da oldukça geniş bir sınıf kütüphanesi bulunur. Veritabanı işlemleri, web programlama,
-dosya işlemleri gibi işlemler için hazır sınıflar bulunmaktadır.*
+>**Geniş bir sınıf kütüphanesi:** Java'da oldukça geniş bir sınıf kütüphanesi bulunur. Veritabanı işlemleri, web programlama, dosya işlemleri gibi işlemler için hazır sınıflar bulunmaktadır.
 >
->**Güvenli Çalışma Ortamı:** Java'da yazılmış olan bir programın sisteme zarar verme olasılığı çok daha azdır. Yazılan bir 
-program yüzünden yanlışlıkla makinede bir problem olma olasılığı oldukça düşüktür.*
+>**Güvenli Çalışma Ortamı:** Java'da yazılmış olan bir programın sisteme zarar verme olasılığı çok daha azdır. Yazılan bir program yüzünden yanlışlıkla makinede bir problem olma olasılığı oldukça düşüktür.
  
 #### 25 Ocak 2024
 
@@ -75,13 +65,9 @@ program yüzünden yanlışlıkla makinede bir problem olma olasılığı olduk�
 >Burada LTS olması açısından 17 veya 21 seçilebilir. Kursumuzda Java 17 özellikleri de konular içerisinde ele alınacağından en az Java 17 kurulumu önerilir. Java 17  öncesinde en az Java 11 olmalıdır. Kurulum aşamasından sonra java ve javac programları -version seçeneği ile çalıştırılarak versiyon kontrolü yapılabilir.
 >
 >Aşağıdaki programı çalıştırmak için JDK kurulu olan bir bilgisayarda aşağıdaki işlemlerin yapılması gerekir:
->1. Herhangi bir dizinde (directory) csd isimli bir dizin açılır. Buradaki csd isminin tamamı küçük-harf olacak
-şekilde yazılacaktır.
->2. csd dizini içerisinde App.java isimli bir dosya açılır. Windows sisteminde uzantılar gizlenmişse görünür hale
-getirip uzantının .java olarak değiştirilmesi gerekir. Buradaki dosya isminin aynen yazılması gerekir.
->3. Komut yorumlayıcı program (command promt/terminal/shell) ile csd directory'sinin bulunduğu dizine geçilir. Dizin
-geçişi için cd komutu kullanılır.\
->Örneğin cd cd D:\Repositories\Java-Jan-2024\src\src-console
+>1. Herhangi bir dizinde (directory) csd isimli bir dizin açılır. Buradaki csd isminin tamamı küçük-harf olacak şekilde yazılacaktır.
+>2. csd dizini içerisinde App.java isimli bir dosya açılır. Windows sisteminde uzantılar gizlenmişse görünür hale getirip uzantının .java olarak değiştirilmesi gerekir. Buradaki dosya isminin aynen yazılması gerekir.
+>3. Komut yorumlayıcı program (command promt/terminal/shell) ile csd directory'sinin bulunduğu dizine geçilir. Dizin geçişi için cd komutu kullanılır. Örneğin cd cd D:\Repositories\Java-Jan-2024\src\src-console
 >4. Herhangi bir editör program ile App.java dosyasının içerisine aşağıdaki programı yazınız.
 >5. Komut yorumlayıcı programda, csd'nin bulunduğu dizinde aşağıdaki komutları çalıştırarak derleme işlemi yapılır:
 >
@@ -110,10 +96,8 @@ class App {
 #### 1 Şubat 2024
  
 >**Dil Kavramı:** İletişimde kullanılan sembollere dil denir. Dilin kurallarına gramer denir. Bir olgu en az şu iki özelliğe sahipse bir dildir:
->1. Sentaks (syntax): Dilin öğrelerinin doğru dizilimine denir. Örneğin "I am a student" cümlesinde dilin öğeleri doğru 
-dizilmiştir. Cümle "am a student I"  biçiminde yasılsaydı sentaks olarak hatalı olurdu.
->2. Semantik (semantic): Doğru dizilmiş öğelerin anlamına denir. Öğeler doğru dizilse bile cümle anlamlı değilse yine
-hatalıdır. 
+>1. Sentaks (syntax): Dilin öğrelerinin doğru dizilimine denir. Örneğin "I am a student" cümlesinde dilin öğeleri doğru dizilmiştir. Cümle "am a student I"  biçiminde yasılsaydı sentaks olarak hatalı olurdu.
+>2. Semantik (semantic): Doğru dizilmiş öğelerin anlamına denir. Öğeler doğru dizilse bile cümle anlamlı değilse yine hatalıdır. 
 >
 >Doğal dillerde sentaks ve semantik dışında da kavramlar bulunur. Bilgisayar bilimlerinde kullanılan dillere  bilgisayar dilleri (computer languages) denir. Bir bilgisayar dili akış (flow) içeriyorsa programlama dili (programming language) denir. Her bilgisayar dili bir programlama dili değildir. Örneğin html, XML gibi bilgisayar dilleri akış içermediği için programlama dili değildir. Java bir programlama dilidir.
 >
@@ -122,30 +106,19 @@ hatalıdır.
 
 >**Derleyicinin verdiği mesajlar:** Derleyiciler koda ilişkin bazı teşhiş mesajları (diagnostics) verebilirler.
 >Derleyicilerin teşhis mesajları iki gruba ayrılır:
->1. Gerçek hatalar (errors): Sentaks veya semantik olarak geçersiz bir durumda derleyicinin verdiği mesajlardır. Bu
-durumda BC üretilmez. Programcının hataya yol açan durumları düzeltmesi ve derleme işlemini yapması gerekir.
->2. Uyarılar (warnings): Programcının olası programlama hatalarına yönelik mesajlardır. Uyarı mesajları ara kodun
-üretimini engellemez. Ancak programcı tarafından dikkate alınmalıdır. Özel bir durum yoksa uyarı mesajlarına yol
-açan durumların ortadan kaldırılması gerekir. Bazı durumlarda programcının kullandığı bazı static kod analizi
-araçları da derleyici dışında bazı uyarılar verebilirler. Şüphesiz bunlar da dikkate alınmalıdır ancak hepsinin
-ortadan kaldırılması gerekmeyebilir. Pratikte bir ürünün nihayi (release) versiyonunda derleyicinin tüm uyarı
-mesajlarının kaldıırlmış olması gerekir.
->3. Ölümcül hatalar (fatal errors): Derleme işleminin dahi tamamlanamadığı hatalardır. Örneğin derlenecek dosyanın 
-bulunamamaı, diskte yer kalmaması, sistemsel problemler oluşması vb. Bu durumda programcının ölümcül hataya yol
-açan durumu ortadan kaldırıp derleme işlemini yapması gerekir. Yani ölümcül hata durumunda programcının kodu
-ile bir durum yoktur.
+>1. Gerçek hatalar (errors): Sentaks veya semantik olarak geçersiz bir durumda derleyicinin verdiği mesajlardır. Bu durumda BC üretilmez. Programcının hataya yol açan durumları düzeltmesi ve derleme işlemini yapması gerekir.
+>2. Uyarılar (warnings): Programcının olası programlama hatalarına yönelik mesajlardır. Uyarı mesajları ara kodun üretimini engellemez. Ancak programcı tarafından dikkate alınmalıdır. Özel bir durum yoksa uyarı mesajlarına yol açan durumların ortadan kaldırılması gerekir. Bazı durumlarda programcının kullandığı bazı static kod analizi araçları da derleyici dışında bazı uyarılar verebilirler. Şüphesiz bunlar da dikkate alınmalıdır ancak hepsinin ortadan kaldırılması gerekmeyebilir. Pratikte bir ürünün nihayi (release) versiyonunda derleyicinin tüm uyarı mesajlarının kaldıırlmış olması gerekir.
+>3. Ölümcül hatalar (fatal errors): Derleme işleminin dahi tamamlanamadığı hatalardır. Örneğin derlenecek dosyanın bulunamamaı, diskte yer kalmaması, sistemsel problemler oluşması vb. Bu durumda programcının ölümcül hataya yol açan durumu ortadan kaldırıp derleme işlemini yapması gerekir. Yani ölümcül hata durumunda programcının kodu ile bir durum yoktur.
 >
 >Derleme işleminin başarıyla yapılması durumunda derleyiciler ya hiç bir mesaj vermezler ya da derleme işleminin başarılı olduğu da anlaşılan mesajlar verirler.
 >
->Programın çalışma zamanında oluşan hatalı durumlara genel olarak "excaption" veya "run time error" denir. Exception
-handling konusuna gelene kadar bir exception oluştuğunda program abnormal bir biçimde sonlanır olarak düşüneceğiz.*
+>Programın çalışma zamanında oluşan hatalı durumlara genel olarak "excaption" veya "run time error" denir. Exception handling konusuna gelene kadar bir exception oluştuğunda program abnormal bir biçimde sonlanır olarak düşüneceğiz.*
 
 >**Anahtar Notlar:** Bir program için, programcı açısından iki durum söz konusudur: 
 >1. Derleme zamanı (compile time): Derleme işlemine ilişkin süreçtir.
 >2. Çalışma zamanı (run time): Programın çalıştırlması sürecidir. 
 >
->Şüphesiz derleme zamanı ve çalışma birbirleri ile ilişkildir. Sonuçta bir program derlenmeden zaten çalıştırılamaz.
-Her ne kadar ilişkili de olsalar birbirlerinden farklı kavramlardır.*
+>Şüphesiz derleme zamanı ve çalışma birbirleri ile ilişkildir. Sonuçta bir program derlenmeden zaten çalıştırılamaz. Her ne kadar ilişkili de olsalar birbirlerinden farklı kavramlardır.*
  
 >Atom (Token): Programlama dilinin bölünemeyen en küçük birimine denir. Java programlama dilinde atomlar şunlardır:
 >1. Anahtar Sözcükler (keywords/reserved words): Derleyicinin bildiği, tanıdığı sözcüklerdir. Anahtar sözcükler tek başına değişken ismi olamazlar. Örneğin:
@@ -172,8 +145,7 @@ birlikte string ya da string literal denir. Örneğin:
 >
 >Derleme işlemi atomlarına ayırmakla (tokenizing) başlar.
 >
->**Anahtar Notlar:** Klavyeden basıldığında boşluk hissi veren karakterlere boşluk karakterleri (whitespaces) denir. 
-Klavyden basılaon tipik boşluk karakterleri şunlardır: 
+>**Anahtar Notlar:** Klavyeden basıldığında boşluk hissi veren karakterlere boşluk karakterleri (whitespaces) denir. Klavyden basılaon tipik boşluk karakterleri şunlardır: 
 >
 >		SPACE, TAB, ENTER
 
@@ -247,19 +219,13 @@ class App {
 
 #### 6 Şubat 2024
  
->Bildirim (Declaration): Bir ismin derleyiciye tanıtılmasıdır.
-Bir dilin kurallarının genel biçimlerini açıklamaya yönelik pek çok notasyon kullanılmaktadır. Biz burada "açısal 
-parantez-köşeli parantez" tekniğini kullanacağız. Bu teknikte zorunlu olması gerekenler açıklamada açısal parantez
-içerisine alınır. Seçenekli olması gerekenler ise köşeli parantez içerisine alınır. Herhangi bir paranteze alınmayanlar
-aynı şekilde bulundurulması gerekenlerdir. Ayrıca*
->
+>Bildirim (Declaration): Bir ismin derleyiciye tanıtılmasıdır.Bir dilin kurallarının genel biçimlerini açıklamaya yönelik pek çok notasyon kullanılmaktadır. Biz burada "açısal  parantez-köşeli parantez" tekniğini kullanacağız. Bu teknikte zorunlu olması gerekenler açıklamada açısal parantez içerisine alınır. Seçenekli olması gerekenler ise köşeli parantez içerisine alınır. Herhangi bir paranteze alınmayanlar aynı şekilde bulundurulması gerekenlerdir. Ayrıca>
 >		//...
->"burada bir takım kodlar var ancak şu an bizi ilgilendirmiyor" anlamına gelecektir.
+>**burada bir takım kodlar var ancak şu an bizi ilgilendirmiyor** anlamına gelecektir.
  
 ##### "Hello World" Programının Genel Açıklaması:
 
->Bir Java programı genel olarak paketlerden (package), paketler sınıflardan (class), sınıflar da metotlardan (method)
-oluşur. Paket bildiriminin genel biçimi:
+>Bir Java programı genel olarak paketlerden (package), paketler sınıflardan (class), sınıflar da metotlardan (method) oluşur. Paket bildiriminin genel biçimi:
 >	
 >	`package <isim>;`
 >
