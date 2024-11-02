@@ -2058,8 +2058,7 @@ class App {
 >Örneğin:
 >
 >		10L, 4000000000L vb.	
->**Anahtar Notlar:** Küçük harf L soneki 1(bir) sayısına özellikle bazı yazı türlerinde benzediği okunabililik açısından
-kullanılması tavsiye edilmez.
+>**Anahtar Notlar:** Küçük harf L soneki 1(bir) sayısına özellikle bazı yazı türlerinde benzediği okunabililik açısından kullanılması tavsiye edilmez.
 >- Java'da `byte` ve `short` türden sabit yoktur
 >- Sayı nokta içeriyorsa ve sonuna herhangi bir ek almamışsa `double` türdendir.
 >
@@ -2077,23 +2076,22 @@ kullanılması tavsiye edilmez.
 >
 >		3.4F, 7f, 6.8F vb.
 >
->**Anahtar Notlar:** Nokta içeren ve noktadan sonraki kısmın tamamı sıfır olmayan bir sabitin (yani double türden sabitin) sonuna F (küçük veya büyük) eki getirildiğinde, sayının değeri float türü ile temsil edilemiyorsa en yakın değere
-yuvarlanır (rounding error). 
+>**Anahtar Notlar:** Nokta içeren ve noktadan sonraki kısmın tamamı sıfır olmayan bir sabitin (yani double türden sabitin) sonuna F (küçük veya büyük) eki getirildiğinde, sayının değeri float türü ile temsil edilemiyorsa en yakın değere yuvarlanır (rounding error). 
 >
 >- `boolean` türden iki tane sabit vardır: `true`, `false`.	
 >- Tek tırnak içerisinde yazılan karaterlere ilişkin sembollere tırnaklarıyla beraber karakter sabitleri `character literals` denir. Karakter sabitleri `char` türdendir. Tek tırnak içerisinde özel bazı durumlar dışında tek bir karakter yazılır. Aksi durumda error oluşur. Bir karakter sabiti ilgili karakterin karakter tablosundaki sıra numarasına karşılık gelir. Aslında biz char türden sabit yazarak o sabite ilişkin karakterin sıra numarasını elde etmiş oluruz. Bu sıra numarasını `char` türden bir değişken içerisinde saklayarak mantıksal olarak o karakteri tutmuş oluruz. Bazı karakterler klavyedeki tuş kombinasyonları ile doğrudan yazılamazlar. Bazı karakterler ise doğrudan ekrana basılamazlar `non-printable`. Bu tarz karakterler doğrudan tek tırnak içerisinde karakter sabiti olarak yazılamazlar. Bu karakterler ters bölü `\` karateri ile birlikte özel bir karakter kullanılarak tek tırnak içerisinde yani karakter sabiti olarak yazılırlar. Ters bölü ile yazılan karakterlere `escape sequence` karakterler denir. Java'da desteklenen escape sequence karakterler şunlardır:
 
-|       |                          |
-| ----- | ------------------------ |
-| '\n'  | Line Feed (LF)           |
-| '\r'  | Carriage Return (CR)     |
-| '\t'  | Tabular (horizontal tab) |
-| '\f'  | Form feed                |
-| '\b'  | backspace                |
-| '\\'' | single quote             |
-| '\\"' | double quote (optional)  |
-| '\\'  | back slash               |
-| '\0'  | null karakter            |
+| Karater Sabiti | Karakter Sabiti Adı      |
+| -------------- | ------------------------ |
+| '\n'           | Line Feed (LF)           |
+| '\r'           | Carriage Return (CR)     |
+| '\t'           | Tabular (horizontal tab) |
+| '\f'           | Form feed                |
+| '\b'           | backspace                |
+| '\\''          | single quote             |
+| '\\"'          | double quote (optional)  |
+| '\\'           | back slash               |
+| '\0'           | null karakter            |
 
 >Escape sequence karakterler string literal içerisinde kendi anlamlarındadır.
 
