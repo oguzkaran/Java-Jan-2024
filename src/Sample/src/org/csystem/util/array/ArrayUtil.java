@@ -1,6 +1,6 @@
 /**
  * Utility class for array operations
- * Last Update: 17th October 2024
+ * Last Update: 7th November 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.array;
@@ -281,6 +281,22 @@ public class ArrayUtil {
         System.out.print(end);
     }
 
+    public static void reverse(int [] a)
+    {
+        int left = 0, right = a.length - 1;
+
+        while (left < right)
+            swap(a, left++, right--);
+    }
+
+    public static void reverse(char [] a)
+    {
+        int left = 0, right = a.length - 1;
+
+        while (left < right)
+            swap(a, left++, right--);
+    }
+
     public static void selectionSort(int [] a)
     {
         selectionSort(a, false);
@@ -306,6 +322,14 @@ public class ArrayUtil {
     public static void swap(int [] a, int i, int k)
     {
         int temp = a[i];
+
+        a[i] = a[k];
+        a[k] = temp;
+    }
+
+    public static void swap(char [] a, int i, int k)
+    {
+        char temp = a[i];
 
         a[i] = a[k];
         a[k] = temp;

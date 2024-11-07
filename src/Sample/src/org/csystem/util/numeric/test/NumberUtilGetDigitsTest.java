@@ -1,11 +1,10 @@
 package org.csystem.util.numeric.test;
 
-import static org.csystem.util.numeric.NumberUtil.*;
-
 import java.util.Random;
 import java.util.Scanner;
 
-import static org.csystem.util.array.ArrayUtil.*;
+import static org.csystem.util.array.ArrayUtil.print;
+import static org.csystem.util.numeric.NumberUtil.*;
 
 public class NumberUtilGetDigitsTest {
     public static void run()
@@ -21,7 +20,20 @@ public class NumberUtilGetDigitsTest {
 
             System.out.printf("%d -> ", val);
             print(getDigits(val));
+            System.out.printf("%d -> ", val);
+            print(getDigitsInTwos(val));
+            System.out.printf("%d -> ", val);
+            print(getDigitsInThrees(val));
+            System.out.println("------------------------------------------------------------");
         }
+
+        System.out.print("0 -> ");
+        print(getDigits(0));
+        System.out.print("0 -> ");
+        print(getDigitsInTwos(0));
+        System.out.print("0 -> ");
+        print(getDigitsInThrees(0));
+
     }
 
     public static void main(String[] args)

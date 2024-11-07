@@ -2081,17 +2081,17 @@ class App {
 >- `boolean` türden iki tane sabit vardır: `true`, `false`.	
 >- Tek tırnak içerisinde yazılan karaterlere ilişkin sembollere tırnaklarıyla beraber karakter sabitleri `character literals` denir. Karakter sabitleri `char` türdendir. Tek tırnak içerisinde özel bazı durumlar dışında tek bir karakter yazılır. Aksi durumda error oluşur. Bir karakter sabiti ilgili karakterin karakter tablosundaki sıra numarasına karşılık gelir. Aslında biz char türden sabit yazarak o sabite ilişkin karakterin sıra numarasını elde etmiş oluruz. Bu sıra numarasını `char` türden bir değişken içerisinde saklayarak mantıksal olarak o karakteri tutmuş oluruz. Bazı karakterler klavyedeki tuş kombinasyonları ile doğrudan yazılamazlar. Bazı karakterler ise doğrudan ekrana basılamazlar `non-printable`. Bu tarz karakterler doğrudan tek tırnak içerisinde karakter sabiti olarak yazılamazlar. Bu karakterler ters bölü `\` karateri ile birlikte özel bir karakter kullanılarak tek tırnak içerisinde yani karakter sabiti olarak yazılırlar. Ters bölü ile yazılan karakterlere `escape sequence` karakterler denir. Java'da desteklenen escape sequence karakterler şunlardır:
 
-| Karater Sabiti | Karakter Sabiti Adı      |
-| -------------- | ------------------------ |
-| '\n'           | Line Feed (LF)           |
-| '\r'           | Carriage Return (CR)     |
-| '\t'           | Tabular (horizontal tab) |
-| '\f'           | Form feed                |
-| '\b'           | backspace                |
-| '\\''          | single quote             |
-| '\\"'          | double quote (optional)  |
-| '\\'           | back slash               |
-| '\0'           | null karakter            |
+| Karakter Sabiti | Karakter Sabiti Adı      |
+| --------------- | ------------------------ |
+| '\n'            | Line Feed (LF)           |
+| '\r'            | Carriage Return (CR)     |
+| '\t'            | Tabular (horizontal tab) |
+| '\f'            | Form feed                |
+| '\b'            | backspace                |
+| '\\''           | single quote             |
+| '\\"'           | double quote (optional)  |
+| '\\'            | back slash               |
+| '\0'            | null karakter            |
 
 >Escape sequence karakterler string literal içerisinde kendi anlamlarındadır.
 
@@ -17784,6 +17784,15 @@ public class ArrayUtilBubbleSortTest {
 }
 ```
 
+>Aşağıdaki reverse metodunu inceleyiniz. Metodun başka bir yazım biçimi ArrayUtil sınıfı içerisinde bulunmaktadır
+
+```java
+public static void reverse(int [] a)  
+{
+    for (int i = 0; i < a.length / 2; ++i)  
+        swap(a, i, a.length - i - 1);  
+}
+```
 #### 3 Eylül 2024
 
 >Seçerek sıralama algoritmasında en küçük eleman bulunur, ilk eleman ile değiştirilir. Dizi bir daraltılır, aynı işlem daraltılmış dizi için yapılır. Böylece ilerleriz
@@ -23444,6 +23453,56 @@ public class MutableComplex {
 }
 ```
 
+##### 7 Kasım 2024
+
+>Aşağıda test kodu bulunan `getDigits, getDigitsInTwos ve getDigitsInThrees` metotlarını inceleyiniz
+
+```java
+package org.csystem.util.numeric.test;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+import static org.csystem.util.array.ArrayUtil.print;  
+import static org.csystem.util.numeric.NumberUtil.*;  
+  
+public class NumberUtilGetDigitsTest {  
+    public static void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+        Random r = new Random();  
+  
+        System.out.print("Bir sayı giriniz:");  
+        int n = kb.nextInt();  
+  
+        for (int i = 0; i < n; ++i) {  
+            long val = r.nextLong();  
+  
+            System.out.printf("%d -> ", val);  
+            print(getDigits(val));  
+            System.out.printf("%d -> ", val);  
+            print(getDigitsInTwos(val));  
+            System.out.printf("%d -> ", val);  
+            print(getDigitsInThrees(val));  
+            System.out.println("------------------------------------------------------------");  
+        }  
+  
+        System.out.print("0 -> ");  
+        print(getDigits(0));  
+        System.out.print("0 -> ");  
+        print(getDigitsInTwos(0));  
+        System.out.print("0 -> ");  
+        print(getDigitsInThrees(0));  
+  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
 >**Sınıf Çalışması:** Parametresi ile aldığı long türden bir sayının Türkçe okunuşuna geri dönen numToStrTR metodunu NumberUtil sınıfı içerisinde yazınız ve aşağıdaki kod ile test ediniz
 >**Açıklamalar:** 
 >- Sayının okunuşuna ilişkin elde edilecek yazılar şu şekilde olacaktır: 
@@ -23472,8 +23531,38 @@ public class NumberUtilNumToStrTRTest {
             long val = r.nextLong();  
   
             System.out.printf("%d -> ", val);  
-            System.out.println(numToStrTR(val));  
+            System.out.printf("(%s)%n", numToStrTR(val));  
         }  
+        long a = 0;  
+        System.out.printf("%d -> ", 0);  
+        System.out.printf("(%s)%n", numToStrTR(0));  
+  
+        a = -109;  
+        System.out.printf("%d -> ", a);  
+        System.out.printf("(%s)%n", numToStrTR(a));  
+  
+        a = 1923;  
+        System.out.printf("%d -> ", a);  
+        System.out.printf("(%s)%n", numToStrTR(a));  
+        a = 3923;  
+        System.out.printf("%d -> ", a);  
+        System.out.printf("(%s)%n", numToStrTR(a));  
+  
+        a = -1;  
+        System.out.printf("%d -> ", a);  
+        System.out.printf("(%s)%n", numToStrTR(a));  
+  
+        a = 1_000_001;  
+        System.out.printf("%d -> ", a);  
+        System.out.printf("(%s)%n", numToStrTR(a));  
+  
+        a = 1_001;  
+        System.out.printf("%d -> ", a);  
+        System.out.printf("(%s)%n", numToStrTR(a));  
+  
+        a = 1_000_000_000_001L;  
+        System.out.printf("%d -> ", a);  
+        System.out.printf("(%s)%n", numToStrTR(a));  
     }  
   
     public static void main(String[] args)  
@@ -23482,4 +23571,6 @@ public class NumberUtilNumToStrTRTest {
     }  
 }
 ```
+
+
 
