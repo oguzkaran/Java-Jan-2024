@@ -2988,11 +2988,11 @@ class App {
 >
 >Bu operatörler yine doğru sonuca en kısa yoldan ulaşmak için klasik operatör önceliği kuralına işlemi yaparken uymazlar. Yani bu operatörlere ilişkin bir ifade, operatör önceliği ne olursa olsun en soldan başlanarak hesaplanır. Ancak elde edilen sonuç operatör önceliğine uyularak yapılan işlem sırası ile elde edilen sonuç ile aynıdır. Yani bu operatörler yine kısa devre davranışını da kullanarak doğru sonuca en kısa yoldan ulaşırlar
 
->`&&` operatörüne ilişkin demo örneği inceleyiniz:\
-Ekran Çıktısı:\
-foo\
-bar\
-false
+>`&&` operatörüne ilişkin demo örneği inceleyiniz:
+Ekran Çıktısı:
+>foo
+>bar
+>false
 
 ```java
 package csd;
@@ -3026,10 +3026,10 @@ class Sample {
 ```
 
 >`||` operatörüne ilişkin demo örneği inceleyiniz\
-Ekran Çıktısı:\
-bar\
-foo\
-true
+Ekran Çıktısı:
+>bar
+>foo
+>true
 
 ```java
 package csd;
@@ -3063,9 +3063,9 @@ class Sample {
 ```
 
 >Aşağıdaki demo örnekte `kısa devre` oluşur\
-Ekran Çıktısı:\
-foo\
-true
+Ekran Çıktısı:
+>foo
+>true
 
 ```java
 package csd;
@@ -3099,9 +3099,9 @@ class Sample {
 ```
 
 >Aşağıdaki demo örnekte `kısa devre` oluşur\
-Ekran Çıktısı:\
-bar\
-false
+>Ekran Çıktısı:
+>bar
+>false
 
 ```java
 package csd;
