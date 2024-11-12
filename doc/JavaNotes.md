@@ -57,30 +57,63 @@
 >Bunun tam tersi olarak mülkiyete sahip (propriatery) yazlımlardır. Bu yazılımlar para verilerek kullanılır ve izin almadan çoğaltılamaz.
 >
 >**IDE (Integrated Development Environment):** Derleyicler ve yorumlayıcılar komut satırından çalışan ve basit arayüzlere sahip programlardır. Aslında teorik olarak bir uygulamadaki tüm Java dosyaları ve diğer dosyalar basit bir editör programla yazılıp komut satırından derlenebilir. Ancak bu, uygulama büyüdükçe zahmetli olmaya başlar. Bu da programcıya zaman kaybettirir. Bu amaçla pratikte yazılım geliştirmeyi kolaylaştırmak için IDE denilen yazılımlar kullanılır. IDE'lerde örneğin bir takım yardımlar veren editörler, tasarım araçları, test araçları, debug araçları vb. programcının geliştirme sırasında kullandığı araçlar bulunur. Java ile uygulama geliştirmede iki tane IDE yoğun olarak kullanılmaktadır: Eclipse, IntelliJIDEA. Biz kursumuzda belirli bir zaman (yaklaşık kursun yarısına kadar) Eclipse, sonrasında IntelliJIDEA kullanacağız.
->
->JDK'nın kurulumu için işletim sistemine göre aşağıdaki link'den ilgili "installer" indirilebilir:
->
->[Java Downloads &#x2615;](https://www.oracle.com/tr/java/technologies/downloads/)
->
->Burada LTS olması açısından 17 veya 21 seçilebilir. Kursumuzda Java 17 özellikleri de konular içerisinde ele alınacağından en az Java 17 kurulumu önerilir. Java 17  öncesinde en az Java 11 olmalıdır. Kurulum aşamasından sonra java ve javac programları -version seçeneği ile çalıştırılarak versiyon kontrolü yapılabilir.
->
->Aşağıdaki programı çalıştırmak için JDK kurulu olan bir bilgisayarda aşağıdaki işlemlerin yapılması gerekir:
->1. Herhangi bir dizinde (directory) csd isimli bir dizin açılır. Buradaki csd isminin tamamı küçük-harf olacak şekilde yazılacaktır.
->2. csd dizini içerisinde App.java isimli bir dosya açılır. Windows sisteminde uzantılar gizlenmişse görünür hale getirip uzantının .java olarak değiştirilmesi gerekir. Buradaki dosya isminin aynen yazılması gerekir.
->3. Komut yorumlayıcı program (command promt/terminal/shell) ile csd directory'sinin bulunduğu dizine geçilir. Dizin geçişi için cd komutu kullanılır. Örneğin cd cd D:\Repositories\Java-Jan-2024\src\src-console
->4. Herhangi bir editör program ile App.java dosyasının içerisine aşağıdaki programı yazınız.
->5. Komut yorumlayıcı programda, csd'nin bulunduğu dizinde aşağıdaki komutları çalıştırarak derleme işlemi yapılır:
->
->`javac csd/App.java` -> Windows dışı sistemler için\
->`javac csd\App.java` -> Windows sistemi için
->
->Derleme işleminde herhangi bir hata (error) mesajı alınmazsa derleme işlemi başarılıdır ve App.class isminde byte code üretilir.
->
->6. Komut yorumlayıcı programda aşağıdaki biçimde byte code çalıştırılır:
->
->`java csd.App`
 
-**Anahtar Notlar:** Yukarıdaki maddelerdeki bazı zorunluluklar ilerideki konularda anlaşılacaktır.
+>**Sembollerin ingilizce karşılıkları**
+
+| Sembol | İngilizce Karşılığı                                |
+| ------ | -------------------------------------------------- |
+| +      | plus                                               |
+| -      | minus, hyphen, dash                                |
+| *      | asterisk                                           |
+| /      | slash                                              |
+| \      | backslash                                          |
+| .      | period, dot                                        |
+| ,      | comma                                              |
+| :      | colon                                              |
+| ;      | semicolon                                          |
+| “      | double quote                                       |
+| '      | single quote                                       |
+| (...)  | parenthesis left, right, opening, closing          |
+| [...]  | (square) parenthesis left, right, opening, closing |
+| {...}  | brace left, right, opening, closing                |
+| =      | equal sign                                         |
+| &      | ampersand                                          |
+| ~      | tilda                                              |
+| @      | at                                                 |
+| <...>  | less than, greater than, angular bracket           |
+| ^      | caret                                              |
+| \|     | pipe                                               |
+| _      | underscore                                         |
+| ?      | question mark                                      |
+| #      | sharp, number sign                                 |
+| %      | percent sign                                       |
+| !      | exclamation mark                                   |
+| $      | dollar sign                                        |
+| ...    | ellipsis                                           |
+
+>**JDK'nın kurulumu için işletim sistemine göre aşağıdaki link'den ilgili "installer" indirilebilir:**
+>
+>**[Java Downloads](https://www.oracle.com/tr/java/technologies/downloads/)**
+>
+>**Burada LTS olması açısından 17 veya 21 seçilebilir. Kursumuzda Java 17 özellikleri de konular içerisinde ele alınacağından en az Java 17 kurulumu önerilir. Java 17  öncesinde en az Java 11 olmalıdır. Kurulum aşamasından sonra java ve javac programları -version seçeneği ile çalıştırılarak versiyon kontrolü yapılabilir.**
+>
+>**Aşağıdaki programı çalıştırmak için JDK kurulu olan bir bilgisayarda aşağıdaki işlemlerin yapılması gerekir:**
+>**1. Herhangi bir dizinde (directory) csd isimli bir dizin açılır. Buradaki csd isminin tamamı küçük-harf olacak şekilde yazılacaktır.**
+>**2. csd dizini içerisinde App.java isimli bir dosya açılır. Windows sisteminde uzantılar gizlenmişse görünür hale getirip uzantının .java olarak değiştirilmesi gerekir. Buradaki dosya isminin aynen yazılması gerekir.**
+>**3. Komut yorumlayıcı program (command promt/terminal/shell) ile csd directory'sinin bulunduğu dizine geçilir. Dizin geçişi için cd komutu kullanılır. Örneğin cd cd D:\Repositories\Java-Jan-2024\src\src-console**
+>**4. Herhangi bir editör program ile App.java dosyasının içerisine aşağıdaki programı yazınız.**
+>**5. Komut yorumlayıcı programda, csd'nin bulunduğu dizinde aşağıdaki komutları çalıştırarak derleme işlemi yapılır:**
+>
+>**`javac csd/App.java` -> Windows dışı sistemler için\**
+>**`javac csd\App.java` -> Windows sistemi için**
+>
+>**Derleme işleminde herhangi bir hata (error) mesajı alınmazsa derleme işlemi başarılıdır ve App.class isminde byte code üretilir.**
+>
+>**6. Komut yorumlayıcı programda aşağıdaki biçimde byte code çalıştırılır:**
+>
+>**`java csd.App`**
+
+**Anahtar Notlar: Yukarıdaki maddelerdeki bazı zorunluluklar ilerideki konularda anlaşılacaktır.**
 
 ```java
 package csd;
@@ -2459,7 +2492,7 @@ class App {
 }
 ```
 
->Mod operatörü `%` aslında bir çeşit bölme işlemi yapar. Bu sebeple öellikler ürettiği değer dışında bölme operatörü ile aynıduır. Bu operatör birinci operandının ikinci operandına bölümünden elde edilen kalan değerini verir. Bu operatörün ikinci operandının işaretinin önemi yoktur. Yani ikinci operandı negatif bile olsa pozitif değeri ile işlem yapılır. Bu operatörün birinci operandı negatif ise işlem şu şekilde yapılır:
+>Mod operatörü `%` aslında bir çeşit bölme işlemi yapar. Bu sebeple önceliği ürettiği değer dışında bölme operatörü ile aynıduır. Bu operatör birinci operandının ikinci operandına bölümünden elde edilen kalan değerini verir. Bu operatörün ikinci operandının işaretinin önemi yoktur. Yani ikinci operandı negatif bile olsa pozitif değeri ile işlem yapılır. Bu operatörün birinci operandı negatif ise işlem şu şekilde yapılır:
 >
 >Birinci operandın pozitif olduğu değere göre kalan değerinin ters işaretlisi alınır. Yani bu operaörün ürettiği değerin işareti birinci operandının işareti ile aynıdır. Yani sonuç olarak bu operatör negatif operandlar için Matematik'teki mod alma işlemi ile aynı değildir. Bazı programlama dillerinde gerçek sayılar için mod operatörü kullanılamaz. Ancak Java'da böyle bir kısıt yoktur. Pratikte bu operatörler daha daha çok tamsayılarla kullanılır.
 >
@@ -3550,8 +3583,7 @@ class App {
 >		x += 2;
 >yazmalıdır. Operatörlerin ürettiği değer yine atanan değerdir. Aslında bu operatörler hem okunabililiği/algılanabilirliği artırır hem de ifadelerin daha basit (yalın) olarak yazılabilmesi sağlar.
 >
->**Anahtar Notlar:** Aslında işlemli atama operatörlerinin genel biçimi tam olarak yukarıda anlatıldığı gibi değildir.
-İleride tam karşılığı ele alınacaktır.
+>**Anahtar Notlar:** Aslında işlemli atama operatörlerinin genel biçimi tam olarak yukarıda anlatıldığı gibi değildir. İleride tam karşılığı ele alınacaktır.
 
 >Aşağıdaki demo örneği inceleyiniz
 
@@ -3664,12 +3696,31 @@ class App {
 }
 ```
 
+#### Operatör öncelik tablosu
+
+| Operatör                                | İlişkisi    |
+| --------------------------------------- | ----------- |
+| () . [] new                             | Soldan sağa |
+| + - ++ -- ! ~ ()                        | Sağdan sola |
+| * / %                                   | Soldan sağa |
+| + -                                     | Soldan sağa |
+| << >> >>>                               | Soldan sağa |
+| > < >= <= instanceof                    | Soldan sağa |
+| == !=                                   | Soldan sağa |
+| &                                       | Soldan sağa |
+| ^                                       | Soldan sağa |
+| \|                                      | Soldan sağa |
+| &&                                      | Soldan sağa |
+| \|\|                                    | Soldan sağa |
+| ?:                                      | Sağdan sola |
+| = *= /= %= += -= <<= >>= &= ^= \|= >>>= | Sağdan sola |
+
 #### 19 Mart 2024
  
->**_Deyimler (Statements):_** Programın çalıştırılan parçalarına denir. Bir program deyimlerin çalıştırılmasıyla çalışır.
+>**Deyimler (Statements):** Programın çalıştırılan parçalarına denir. Bir program deyimlerin çalıştırılmasıyla çalışır.
 >
->**Java'da deyimler şunlardır:**
->- Basit deyimler (simple statements): Bir ifadenin sonuna noktalı virgül konmasıyla oluşan deyimdir.
+>Java'da deyimler şunlardır:
+>- **Basit deyimler (simple statements):** Bir ifadenin sonuna noktalı virgül konmasıyla oluşan deyimdir.
 >
 >Örneğin:
 >
@@ -3678,8 +3729,8 @@ class App {
 >
 >		x = y + z;
 >Basit bir deyim çalıştırıldığında deyime ilişkin ifade hesaplanır.
->- Bileşik deyimler (compound statements): { ve } arasında kalan yani bir blok içerisinde yazılan deyimlerdir. Bileşik deyim çalıştırıldığında blok içerisindeki deyimler yukarıdan aşağıya çalıştırılır.  Bu anlamda metodun gövdesi de aslında bileşik olarak düşünülebilir.
->- Bildirim deyimleri (declaration statements): Bir değişkenin bildirildiği deyimdir. Bildirim deyimi çalıştırıldığında bellekte yer ayrılır.
+>- **Bileşik deyimler (compound statements):** { ve } arasında kalan yani bir blok içerisinde yazılan deyimlerdir. Bileşik deyim çalıştırıldığında blok içerisindeki deyimler yukarıdan aşağıya çalıştırılır.  Bu anlamda metodun gövdesi de aslında bileşik olarak düşünülebilir.
+>- **Bildirim deyimleri (declaration statements):** Bir değişkenin bildirildiği deyimdir. Bildirim deyimi çalıştırıldığında bellekte yer ayrılır.
 >
 >Örneğin:
 >
@@ -3687,16 +3738,20 @@ class App {
 >ya da 
 >
 >		int x = 20;
->- Kontrol deyimleri (control statements): Akışa yön veren deyimlerdir. Her kontrol deyiminin kendine özgü çalıştırılma biçimi vardır. Java'da önemli bazı kontrol deyimleri şunlardır:
+>- **Kontrol deyimleri (control statements):** Akışa yön veren deyimlerdir. Her kontrol deyiminin kendine özgü çalıştırılma biçimi vardır. Java'da önemli bazı kontrol deyimleri şunlardır:
 >	- `return` deyimi
 >	- `if` deyimi
 >	- döngü deyimleri (`for`, `while`, `do-while`, `for-each`)
 >	- `break` deyimi
 >	- `continue` deyimi
 >	- `switch` deyimi/ifadesi
->- Boş deyim (null/empty statement): Noktalı virgülün tek başına kullanılması durumunda oluşan deyimdir. Boş deyim çalıştırıldığında hiç bir şey yapılmaz.
+>- **Boş deyim (null/empty statement):** Noktalı virgülün tek başına kullanılması durumunda oluşan deyimdir. Boş deyim çalıştırıldığında hiç bir şey yapılmaz.
 
->if deyimi: Neredeyse tüm programlama dillerinde bulunan ve koşula bağlı olarak akışın yönlemesini sağlayan bir kontrol deyimidir. if deyiminin genel biçimi şu şekildedir:
+##### Kontrol Deyimleri
+>Bu bölümde temel kontrol deyimleri ele alınacaktır.
+
+###### if Deyimi
+Neredeyse tüm programlama dillerinde bulunan ve koşula bağlı olarak akışın yönlemesini sağlayan bir kontrol deyimidir. if deyiminin genel biçimi şu şekildedir:
 
 		if (<koşul ifadesi>)
 			<deyim>
@@ -23561,4 +23616,666 @@ public class NumberUtilNumToStrTRTest {
 ```
 
 
+##### 12 Kasım 2024
 
+##### Enum Sınıfları
+
+>Enum sınıfları (enum/enumration classes) bir UDT'dir. Aslında genel olarak bakıldığında kendine ait özellikleri olan bir sınıftır. Bu bölümde anlatılacak özellikleri dışında kalan özellikler klasik sınıflar ile aynıdır. Enum sınıfları Java 5 ile dile eklenmiştir.
+>
+>Aşağıdaki demo örnekte GameObject sınıfının renk bilgisi ve move metodunun parametre isimleri ne olduğuna ilişkin bir fikir verse de, türleri hangi değerleri alabileceğine ilişkin bir fikir vermemektedir. Şüphesiz bunlar dökumanlardan anlaşılabilir. Ayrıca ilgili metotlar çağrılırken geçilen değerler de client code'ların okunabilirliğini/algılanabilirliğini olumsuz olarak etkileyebilmektedir. Bu anlamda setColor ve move metotları doğru çalışsalar da okunabilirlik/algılanabilirlik açısından iyi tasarlanmamış olarak düşünülebilir.
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.thread.ThreadUtil;  
+  
+import java.util.Random;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        DemoGameApp.run(args);  
+    }  
+}  
+  
+class DemoGameApp {  
+    public static void run(String [] args)  
+    {  
+        Random random = new Random();  
+        GameObject go1 = new GameObject("Player-1");  
+        GameObject go2 = new GameObject("Player-2");  
+  
+        go1.setColor(0);  
+        go2.setColor(2);  
+  
+        while (true) {  
+            int direction1 = random.nextInt(1, 5);  
+            int direction2 = random.nextInt(1, 5);  
+  
+            //...  
+  
+            go1.move(direction1);  
+            go2.move(direction2);  
+  
+            ThreadUtil.sleep(random.nextLong(300, 900));  
+        }  
+    }  
+}  
+  
+class GameObject {  
+    private final String m_name;  
+    private int m_color;  
+    //...  
+  
+    public GameObject(String name)  
+    {  
+        m_name = name;  
+    }  
+  
+    public void move(int direction)  
+    {  
+        switch (direction) {  
+            case 1 -> System.out.printf("%s moves to right%n", m_name);  
+            case 2 -> System.out.printf("%s moves to top%n", m_name);  
+            case 3 -> System.out.printf("%s moves to left%n", m_name);  
+            case 4 -> System.out.printf("%s moves to bottom%n", m_name);  
+            default -> System.out.println("Invalid direction value");  
+        }  
+    }  
+  
+    public void setColor(int color)  
+    {  
+        //...  
+        m_color = color;  
+    }  
+  
+    public int getColor()  
+    {  
+        return m_color;  
+    }  
+  
+    //...  
+}
+```
+
+>Yukarıdaki örnek aşağıdaki gibi daha okunabilir/algılanabilir hale getirilebilir ancak burada ilgili metotların parametre değişkenleri String türden yapıldığında geçilen değerler açısından okunabilir/algılanabilir olmaktadır ancak hata yapılması olasılığı da görece artmaktadır. Ayrıca unutulmamalıdır ki yazı karşılaştırması karakter karakter yapıldığınde tamsayı karşılaştırmasına göre yavaştır. Ayrıca yine ilgili metotların parametre değişkenleri geçilebilecek değerler açısından çok da fikir vermemektedir
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.thread.ThreadUtil;  
+  
+import java.util.Random;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        DemoGameApp.run(args);  
+    }  
+}  
+  
+class DemoGameApp {  
+    public static void run(String [] args)  
+    {  
+        String [] directions = {"", "right", "top", "left", "bottom"};  
+        Random random = new Random();  
+        GameObject go1 = new GameObject("Player-1");  
+        GameObject go2 = new GameObject("Player-2");  
+  
+        go1.setColor("red");  
+        go2.setColor("blue");  
+  
+        while (true) {  
+  
+            int direction1 = random.nextInt(1, 5);  
+            int direction2 = random.nextInt(1, 5);  
+  
+            //...  
+  
+            go1.move(directions[direction1]);  
+            go2.move(directions[direction2]);  
+  
+            ThreadUtil.sleep(random.nextLong(300, 900));  
+        }  
+    }  
+}  
+  
+class GameObject {  
+    private final String m_name;  
+    private String m_color;  
+    //...  
+  
+    public GameObject(String name)  
+    {  
+        m_name = name;  
+    }  
+  
+    public void move(String direction)  
+    {  
+        switch (direction) {  
+            case "right" -> System.out.printf("%s moves to right%n", m_name);  
+            case "top" -> System.out.printf("%s moves to top%n", m_name);  
+            case "left" -> System.out.printf("%s moves to left%n", m_name);  
+            case "bottom" -> System.out.printf("%s moves to bottom%n", m_name);  
+            default -> System.out.println("Invalid direction value");  
+        }  
+    }  
+  
+    public void setColor(String color)  
+    {  
+        //...  
+        m_color = color;  
+    }  
+  
+    public String getColor()  
+    {  
+        return m_color;  
+    }  
+  
+    //...  
+}
+```
+
+>Yukarıdaki demo örnek aşağıdaki gibi geçilecek değer final veri elemanları ile görece okunabilir/algılanabilir hale getirilebilir. Ancak hala ilgili metotların parametre değişkenleri geçilecek değerlere ilişkin bir fikir vermemektedir.
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.thread.ThreadUtil;  
+  
+import java.util.Random;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        DemoGameApp.run(args);  
+    }  
+}  
+  
+class DemoGameApp {  
+    public static void run(String [] args)  
+    {  
+        Random random = new Random();  
+        GameObject go1 = new GameObject("Player-1");  
+        GameObject go2 = new GameObject("Player-2");  
+  
+        go1.setColor(Color.RED);  
+        go2.setColor(Color.BLUE);  
+  
+        while (true) {  
+            int direction1 = random.nextInt(1, 5);  
+            int direction2 = random.nextInt(1, 5);  
+  
+            //...  
+  
+            go1.move(direction1);  
+            go2.move(direction2);  
+  
+            ThreadUtil.sleep(random.nextLong(300, 900));  
+        }  
+    }  
+}  
+  
+class Direction {  
+    private Direction()  
+    {  
+    }  
+  
+    public static final int RIGHT = 1;  
+    public static final int TOP = 2;  
+    public static final int LEFT = 3;  
+    public static final int BOTTOM = 4;  
+}  
+  
+class Color {  
+    private Color()  
+    {  
+    }  
+  
+    public static final int RED = 0;  
+    public static final int GREEN = 1;  
+    public static final int BLUE = 2;  
+    public static final int WHITE = 3;  
+    public static final int BLACK = 4;  
+}  
+  
+class GameObject {  
+    private final String m_name;  
+    private int m_color;  
+    //...  
+  
+    public GameObject(String name)  
+    {  
+        m_name = name;  
+    }  
+  
+    public void move(int direction)  
+    {  
+        switch (direction) {  
+            case 1 -> System.out.printf("%s moves to right%n", m_name);  
+            case 2 -> System.out.printf("%s moves to top%n", m_name);  
+            case 3 -> System.out.printf("%s moves to left%n", m_name);  
+            case 4 -> System.out.printf("%s moves to bottom%n", m_name);  
+            default -> System.out.println("Invalid direction value");  
+        }  
+    }  
+  
+    public void setColor(int color)  
+    {  
+        //...  
+        m_color = color;  
+    }  
+  
+    public int getColor()  
+    {  
+        return m_color;  
+    }  
+  
+    //...  
+}
+```
+
+>Direction ve Color sınıfları yukarıdaki yazıldığında ve ilgili metotların parametre değişkenleri de bu türlerden olduğunda yukarıda anlatılan okunabilirlik/algılanabilirlik artırılmıştır
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.thread.ThreadUtil;  
+  
+import java.util.Arrays;  
+import java.util.Random;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        DemoGameApp.run(args);  
+    }  
+}  
+  
+class DemoGameApp {  
+    public static void run(String [] args)  
+    {  
+        Direction [] directions = Direction.values();  
+        Random random = new Random();  
+        GameObject go1 = new GameObject("Player-1");  
+        GameObject go2 = new GameObject("Player-2");  
+  
+        go1.setColor(Color.RED);  
+        go2.setColor(Color.BLUE);  
+  
+        while (true) {  
+            int index1 = random.nextInt(0, 4);  
+            int index2 = random.nextInt(0, 4);  
+  
+            //...  
+  
+            go1.move(directions[index1]);  
+            go2.move(directions[index2]);  
+  
+            ThreadUtil.sleep(random.nextLong(300, 900));  
+        }  
+    }  
+  
+}  
+  
+class Direction {  
+    private final int m_ordinal;  
+  
+    private Direction(int ordinal)  
+    {  
+        m_ordinal = ordinal;  
+    }  
+  
+    private static final Direction [] m_values = {new Direction(0), new Direction(1), new Direction(2), new Direction(3),};  
+  
+    public static final Direction RIGHT = m_values[0];  
+    public static final Direction TOP = m_values[1];  
+    public static final Direction LEFT = m_values[2];  
+    public static final Direction BOTTOM = m_values[3];  
+  
+    public static Direction [] values()  
+    {  
+        return Arrays.copyOf(m_values, m_values.length);  
+    }  
+  
+    public int ordinal()  
+    {  
+        return m_ordinal;  
+    }  
+}  
+  
+class Color {  
+    private final int m_ordinal;  
+  
+    private Color(int ordinal)  
+    {  
+        m_ordinal = ordinal;  
+    }  
+  
+    //...  
+  
+    public static final Color RED = new Color(0);  
+    public static final Color GREEN = new Color(1);  
+    public static final Color BLUE = new Color(2);  
+    public static final Color WHITE = new Color(3);  
+    public static final Color BLACK = new Color(4);  
+  
+    public int ordinal()  
+    {  
+        return m_ordinal;  
+    }  
+  
+    //...  
+}  
+  
+class GameObject {  
+    private final String m_name;  
+    private Color m_color;  
+    //...  
+  
+    public GameObject(String name)  
+    {  
+        m_name = name;  
+    }  
+  
+    public void move(Direction direction)  
+    {  
+        if (direction == Direction.RIGHT)  
+            System.out.printf("%s moves to right%n", m_name);  
+        else if (direction == Direction.TOP)  
+            System.out.printf("%s moves to top%n", m_name);  
+        else if (direction == Direction.LEFT)  
+            System.out.printf("%s moves to left%n", m_name);  
+        else if (direction == Direction.BOTTOM)  
+            System.out.printf("%s moves to bottom%n", m_name);  
+        else  
+            System.out.println("Invalid direction value");  
+    }  
+  
+    public void setColor(Color color)  
+    {  
+        //...  
+        m_color = color;  
+    }  
+  
+    public Color getColor()  
+    {  
+        return m_color;  
+    }  
+  
+    //...  
+}
+```
+
+>Yukarıdaki örnekte Color ve Direction sınıfları enum sınıfları olarak bildirildiklerinde, hem daha kolay hem de yetenekli sınıflar olarak bildirilmiş olur. Yani bu iki sınıfın enum class olması yukarıdaki özellikle (hatta daha da fazlasına) otomatik olarak sahip olması anlamına gelir. Detaylar bölüm içerisinde ele alınacaktır
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.thread.ThreadUtil;  
+  
+import java.util.Random;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        DemoGameApp.run(args);  
+    }  
+}  
+  
+class DemoGameApp {  
+    public static void run(String [] args)  
+    {  
+        Direction [] directions = Direction.values();  
+        Random random = new Random();  
+        GameObject go1 = new GameObject("Player-1");  
+        GameObject go2 = new GameObject("Player-2");  
+  
+        go1.setColor(Color.RED);  
+        go2.setColor(Color.BLUE);  
+  
+        while (true) {  
+            int index1 = random.nextInt(0, 4);  
+            int index2 = random.nextInt(0, 4);  
+  
+            //...  
+  
+            go1.move(directions[index1]);  
+            go2.move(directions[index2]);  
+  
+            ThreadUtil.sleep(random.nextLong(300, 900));  
+        }  
+    }  
+}  
+  
+enum Direction {  
+    RIGHT, TOP, LEFT, BOTTOM  
+}  
+  
+enum Color {  
+    RED, GREEN, BLUE, WHITE, BLACK  
+}  
+  
+class GameObject {  
+    private final String m_name;  
+    private Color m_color;  
+    //...  
+  
+    public GameObject(String name)  
+    {  
+        m_name = name;  
+    }  
+  
+    public void move(Direction direction)  
+    {  
+        if (direction == Direction.RIGHT)  
+            System.out.printf("%s moves to right%n", m_name);  
+        else if (direction == Direction.TOP)  
+            System.out.printf("%s moves to top%n", m_name);  
+        else if (direction == Direction.LEFT)  
+            System.out.printf("%s moves to left%n", m_name);  
+        else if (direction == Direction.BOTTOM)  
+            System.out.printf("%s moves to bottom%n", m_name);  
+        else  
+            System.out.println("Invalid direction value");  
+    }  
+  
+    public void setColor(Color color)  
+    {  
+        //...  
+        m_color = color;  
+    }  
+  
+    public Color getColor()  
+    {  
+        return m_color;  
+    }  
+  
+    //...  
+}
+```
+
+>enum sınıfları **enum** anahtar sözcüğü ile bildirilirler. Bir enum class içerisinde aralarına virgül konularak bildirilen isimlere enum sabitleri (enum constants) denilmektedir. enum sabitlerinin her bir public, static ve final olarak bildirilmiş ait olduğu enum class türünden referans değişkenlerdir ve bu değişkenler yaratıldıklarında her bir ait oldukları enum class türünden bir nesneyi gösterir duruma gelirler. enum sabitleri için public, static, final ve tür ismi yaratılması geçersizdir. Son enum sabitinden sonra noktalı virgül konabilir. Eğer enum class içerisinde yalnızca enum sabitleri olacaksa bu durumda noktalı virgül konmasına gerek yoktur. Enum sınıfına sabit dışında elemanlar eklenecekse noktalı virgül gereklidir. Enum sınıfına sabit dışında eleman eklenmesi bölüm içerisinde ele alınacaktır. 
+
+>Aşağıdaki enum sınıflarını inceleyiniz
+
+```java
+enum DayOfWeek {  
+    SUN, MON, TUE, WED, THU, FRI, SAT  
+}
+  
+enum Month {  
+    JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC  
+}
+
+enum DeviceStatus {  
+    OPEN, CLOSED, INDETERMINATE  
+}  
+  
+enum MaritalStatus {  
+    SINGLE, MARRIED, DIVORCED  
+}  
+  
+enum CardType {  
+    SPADE, CLUB, HEART, DIAMOND  
+}  
+  
+enum CardValue {  
+    TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, KNAVE, QUEEN, KING, ACE  
+}
+
+enum Visibility {
+	VISIBLE, INVISIBLE, GONE
+}
+```
+
+>Bir enum sabitinin, enum içerisindeki birdirim sırasına ilişkin int türden değere **ordinal** değeri denir. ordinal değerin enum sınıfının ordinal isimli metodu ile elde edilebilir. ordinal değeri sıfırdan başlar.  Bir enum sınıfının static olarak bildirilmiş values isimli metodu vardır. Bu metot sabitlere ilişkin referansların ordinal numarasına sırasıyla tutulduğu ilgli enum türünde dizi referansına geri döner. values her çağrıldığında yeni bir dizi referansı elde edilir. enum sınıfının toString metodu ilgili referansın karşılık geldiği sabit ismine geri döner
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.game.card.Card;  
+import org.csystem.game.card.CardType;  
+import org.csystem.game.card.CardValue;  
+import org.csystem.game.card.RandomCardGenerator;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Scanner kb = new Scanner(System.in);  
+        RandomCardGenerator randomCardGenerator = new RandomCardGenerator(new Random());  
+  
+        System.out.print("Kaç tane kart istersiniz?");  
+        int count = kb.nextInt();  
+  
+        for (int i = 0; i < count; ++i) {  
+            System.out.println("-----------------------------------------------");  
+            Card card = randomCardGenerator.create();  
+            CardType cardType = card.getCardType();  
+            CardValue cardValue = card.getCardValue();  
+  
+            System.out.println(card.toString());  
+            System.out.printf("Ordinal %s is %d%nOrdinal of %s is %d%n", cardType, cardType.ordinal(), cardValue, cardValue.ordinal());  
+  
+            System.out.println("-----------------------------------------------");  
+        }  
+  
+    }  
+}
+```
+
+
+```java
+package org.csystem.game.card;  
+  
+import java.util.Random;  
+  
+public class RandomCardGenerator {  
+    private static final CardType [] CARD_TYPES = CardType.values();  
+    private static final CardValue [] CARD_VALUES = CardValue.values();  
+    private final Random m_random;  
+  
+    public RandomCardGenerator(Random random)  
+    {  
+        m_random = random;  
+    }  
+  
+    public Card create()  
+    {  
+        return new Card(CARD_TYPES[m_random.nextInt(CARD_TYPES.length)], CARD_VALUES[m_random.nextInt(CARD_VALUES.length)]);  
+    }  
+}
+```
+
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.game.card.Card;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        for (Card card : Card.getDeck())  
+            System.out.println(card.toString());  
+    }  
+}
+```
+
+
+>Yukarıdaki iki demo örnekte kullanılan Card sınıfı, CardType ve CardValue enum sınıflarını inceleyiniz
+
+```java
+package org.csystem.game.card;  
+  
+public class Card {  
+    private CardType m_cardType;  
+    private CardValue m_cardValue;  
+  
+    public static Card [] getDeck()  
+    {  
+        Card [] deck = new Card[52];  
+        int idx = 0;  
+  
+        for (CardType cardType : CardType.values())  
+            for (CardValue cardValue : CardValue.values())  
+                deck[idx++] = new Card(cardType, cardValue);  
+  
+        return deck;  
+    }  
+  
+    public Card(CardType cardType, CardValue cardValue)  
+    {  
+        m_cardType = cardType;  
+        m_cardValue = cardValue;  
+    }  
+  
+    public CardType getCardType()  
+    {  
+        return m_cardType;  
+    }  
+  
+    public void setCardType(CardType cardType)  
+    {  
+        m_cardType = cardType;  
+    }  
+  
+    public CardValue getCardValue()  
+    {  
+        return m_cardValue;  
+    }  
+  
+    public void setCardValue(CardValue cardValue)  
+    {  
+        m_cardValue = cardValue;  
+    }  
+  
+    public String toString()  
+    {  
+        return "%s-%s".formatted(m_cardType.toString(), m_cardValue.toString());  
+    }  
+}
+```
+
+```java
+package org.csystem.game.card;  
+  
+public enum CardType {  
+    SPADE, CLUB, HEART, DIAMOND  
+}
+```
+
+```java
+package org.csystem.game.card;  
+  
+public enum CardValue {  
+    TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, KNAVE, QUEEN, KING, ACE  
+}
+```
