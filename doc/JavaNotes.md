@@ -24131,6 +24131,9 @@ enum Visibility {
 
 >Bir enum sabitinin, enum içerisindeki birdirim sırasına ilişkin int türden değere **ordinal** değeri denir. ordinal değerin enum sınıfının ordinal isimli metodu ile elde edilebilir. ordinal değeri sıfırdan başlar.  Bir enum sınıfının static olarak bildirilmiş values isimli metodu vardır. Bu metot sabitlere ilişkin referansların ordinal numarasına sırasıyla tutulduğu ilgli enum türünde dizi referansına geri döner. values her çağrıldığında yeni bir dizi referansı elde edilir. enum sınıfının toString metodu ilgili referansın karşılık geldiği sabit ismine geri döner
 
+
+##### 14 Kasım 2024
+
 >Aşağıdaki demo örneği inceleyiniz
 
 ```java
@@ -24203,30 +24206,75 @@ import org.csystem.game.card.Card;
 class App {  
     public static void main(String[] args)  
     {  
-        for (Card card : Card.getDeck())  
+        for (Card card : Card.newDeck())  
             System.out.println(card.toString());  
     }  
 }
 ```
 
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.game.card.Card;  
+  
+import java.util.Random;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        for (Card card : Card.newShuffledDeck(new Random()))  
+            System.out.println(card.toString());  
+    }  
+}
+```
 
 >Yukarıdaki iki demo örnekte kullanılan Card sınıfı, CardType ve CardValue enum sınıflarını inceleyiniz
 
 ```java
 package org.csystem.game.card;  
   
+import java.util.Random;  
+  
 public class Card {  
+    private static final int DEFAULT_SHUFFLE_COUNT = 100;  
+    private static final int CARD_COUNT_OF_DECK = 52;  
     private CardType m_cardType;  
     private CardValue m_cardValue;  
   
-    public static Card [] getDeck()  
+    private static void swap(Card [] cards, int i, int k)  
     {  
-        Card [] deck = new Card[52];  
+        Card temp;  
+  
+        temp = cards[i];  
+        cards[i] = cards[k];  
+        cards[k] = temp;  
+    }  
+  
+    public static Card [] newDeck()  
+    {  
+        Card [] deck = new Card[CARD_COUNT_OF_DECK];  
         int idx = 0;  
   
         for (CardType cardType : CardType.values())  
             for (CardValue cardValue : CardValue.values())  
                 deck[idx++] = new Card(cardType, cardValue);  
+  
+        return deck;  
+    }  
+  
+    public static Card [] newShuffledDeck(Random random)  
+    {  
+        return newShuffledDeck(random, DEFAULT_SHUFFLE_COUNT);  
+    }  
+      
+    public static Card [] newShuffledDeck(Random random, int count)  
+    {  
+        Card [] deck = newDeck();  
+  
+        for (int i = 0; i < count; ++i)  
+            swap(deck, random.nextInt(deck.length), random.nextInt(deck.length));  
   
         return deck;  
     }  
@@ -24279,3 +24327,42 @@ public enum CardValue {
     TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, KNAVE, QUEEN, KING, ACE  
 }
 ```
+
+>Bir enum sınıfına sabitler dışında da eleman eklenebilmektedir. Bir enum sınıfına eleman eklemek için son sabitten sonra noktalı virgül konmalıdır. Bir enum sınıfına, klasik sınıflarda olduğu gibi veri elemanı, ctor ve metot eklenebilir. Bir enum sınıfına programcı tarafından hiç ctor eklenmemişse, default ctor derleyici tarafından otomatik olarak içi boş olarak yazılır. Ancak burada klasik sınıflarda olduğu public olarak yazılmaz. Zaten bir enum sınıfına programcı tarafından public ya da protected bir ctor yazılması geçersizdir. Bir enum sınıfına programcı ya private olarak ya da no-modifier olarak istediği kadar ctor ekleyebilir. Bir enum sınıfından ctor'un no-modifier olması private olarak bildirilmesiyle aynı anlamdadır. Genel olarak programcılar bir enum sınıfına yazdıkları ctor'u no-modifier olarak bildirirler. Bu durum yalnızca ctor için geçerlidir. Bir enum sınıfına eklenen diğer elemanlar için erişim belileyiciler klasik sınıflar ile aynıdır. Aslında bir enum sınıfı için ctor erişim anlamında private'ın da ötesindedir. Bir enum türünden nesne hiç bir yerde programcı tarafından yaratılamaz. Yani bir enum türünden nesne sayısı o enum türüne ait enum sabiti sayısı kadardır. 
+>
+>Bir enum sınıfında sabiti doğrudan bildirmek veya sabit isminden sonra içi boş parantez `()` koymak aynı anlamdadır ve bu sabite ilişkin referansın gösterdiği nesnenin default ctor çağrılarak yaratılacağı anlamına gelir.
+
+>Aşağıdaki demo örneği inceleyiniz. Örnekte static elemanların yaratıldığını da gözlemleyiniz
+
+```java
+package org.csystem.app;  
+  
+import java.util.Random;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Color color1 = Color.randomColor(new Random());  
+        System.out.println("-----------------------");  
+        Color color2 = Color.randomColor(new Random());  
+  
+        System.out.println(color1.toString());  
+        System.out.println(color2.toString());  
+    }  
+}  
+  
+enum Color {  
+    RED(), GREEN(), BLUE(), WHITE, BLACK;  
+    private static final Color [] VALUES = values();  
+    Color()  
+    {  
+        System.out.println("I am a default ctor");  
+    }  
+  
+    public static Color randomColor(Random random)  
+    {  
+        return VALUES[random.nextInt(VALUES.length)];  
+    }  
+}
+```
+
