@@ -95,16 +95,16 @@
 >
 >**[Java Downloads](https://www.oracle.com/tr/java/technologies/downloads/)**
 >
->**Burada LTS olması açısından 17 veya 21 seçilebilir. Kursumuzda Java 17 özellikleri de konular içerisinde ele alınacağından en az Java 17 kurulumu önerilir. Java 17  öncesinde en az Java 11 olmalıdır. Kurulum aşamasından sonra java ve javac programları -version seçeneği ile çalıştırılarak versiyon kontrolü yapılabilir.**
+>Burada LTS olması açısından 17 veya 21 seçilebilir. Kursumuzda Java 17 özellikleri de konular içerisinde ele alınacağından en az Java 17 kurulumu önerilir. Java 17  öncesinde en az Java 11 olmalıdır. Kurulum aşamasından sonra java ve javac programları -version seçeneği ile çalıştırılarak versiyon kontrolü yapılabilir.
 >
->**Aşağıdaki programı çalıştırmak için JDK kurulu olan bir bilgisayarda aşağıdaki işlemlerin yapılması gerekir:**
->**1. Herhangi bir dizinde (directory) csd isimli bir dizin açılır. Buradaki csd isminin tamamı küçük-harf olacak şekilde yazılacaktır.**
->**2. csd dizini içerisinde App.java isimli bir dosya açılır. Windows sisteminde uzantılar gizlenmişse görünür hale getirip uzantının .java olarak değiştirilmesi gerekir. Buradaki dosya isminin aynen yazılması gerekir.**
->**3. Komut yorumlayıcı program (command promt/terminal/shell) ile csd directory'sinin bulunduğu dizine geçilir. Dizin geçişi için cd komutu kullanılır. Örneğin cd cd D:\Repositories\Java-Jan-2024\src\src-console**
->**4. Herhangi bir editör program ile App.java dosyasının içerisine aşağıdaki programı yazınız.**
->**5. Komut yorumlayıcı programda, csd'nin bulunduğu dizinde aşağıdaki komutları çalıştırarak derleme işlemi yapılır:**
+>Aşağıdaki programı çalıştırmak için JDK kurulu olan bir bilgisayarda aşağıdaki işlemlerin yapılması gerekir:
+>1. Herhangi bir dizinde (directory) csd isimli bir dizin açılır. Buradaki csd isminin tamamı küçük-harf olacak şekilde yazılacaktır.
+>2. csd dizini içerisinde App.java isimli bir dosya açılır. Windows sisteminde uzantılar gizlenmişse görünür hale getirip uzantının .java olarak değiştirilmesi gerekir. Buradaki dosya isminin aynen yazılması gerekir.
+>3. Komut yorumlayıcı program (command promt/terminal/shell) ile csd directory'sinin bulunduğu dizine geçilir. Dizin geçişi için cd komutu kullanılır. Örneğin cd cd D:\Repositories\Java-Jan-2024\src\src-console
+>4. Herhangi bir editör program ile App.java dosyasının içerisine aşağıdaki programı yazınız.
+>5. Komut yorumlayıcı programda, csd'nin bulunduğu dizinde aşağıdaki komutları çalıştırarak derleme işlemi yapılır:
 >
->**`javac csd/App.java` -> Windows dışı sistemler için\**
+>`javac csd/App.java` -> Windows dışı sistemler için\**
 >**`javac csd\App.java` -> Windows sistemi için**
 >
 >**Derleme işleminde herhangi bir hata (error) mesajı alınmazsa derleme işlemi başarılıdır ve App.class isminde byte code üretilir.**
@@ -1857,7 +1857,7 @@ class PointUtil {
 >	
 >Euclid Uzaklığı fomulü:
 >
->$$\sqrt{(x1 - x2) ^ 2 + (y1 - y2) ^ 2}$$
+>$$distance = \sqrt{(x1 - x2) ^ 2 + (y1 - y2) ^ 2}$$
 
 ```java
 package csd;
@@ -3716,8 +3716,9 @@ class App {
 | = *= /= %= += -= <<= >>= &= ^= \|= >>>= | Sağdan sola |
 
 #### 19 Mart 2024
- 
->**Deyimler (Statements):** Programın çalıştırılan parçalarına denir. Bir program deyimlerin çalıştırılmasıyla çalışır.
+##### Deyimler (Statements):
+
+>Programın çalıştırılan parçalarına denir. Bir program deyimlerin çalıştırılmasıyla çalışır.
 >
 >Java'da deyimler şunlardır:
 >- **Basit deyimler (simple statements):** Bir ifadenin sonuna noktalı virgül konmasıyla oluşan deyimdir.
@@ -3751,7 +3752,8 @@ class App {
 >Bu bölümde temel kontrol deyimleri ele alınacaktır.
 
 ###### if Deyimi
-Neredeyse tüm programlama dillerinde bulunan ve koşula bağlı olarak akışın yönlemesini sağlayan bir kontrol deyimidir. if deyiminin genel biçimi şu şekildedir:
+
+>Neredeyse tüm programlama dillerinde bulunan ve koşula bağlı olarak akışın yönlemesini sağlayan bir kontrol deyimidir. if deyiminin genel biçimi şu şekildedir:
 
 		if (<koşul ifadesi>)
 			<deyim>
@@ -4298,8 +4300,6 @@ class App {
 >**Sınıf Çalışması:** Katsayıları klavyeden girilen ikinci dereceden denklemin köklerini bulan ve ekrana basan programı yazınız.
 >
 >**_Not:_** Örnek şu ana gördüklerimiz kullanılarak, daha genel yazılmaya çalışılmıştır. İleride daha iyisi yazılacaktır
->
->**_Not:_** Formül için `~/doc/images/ikinci-dereceden-denklem.jpg` dosyasından yararlanabilirsiniz.
 >
 >İkinci dereceden (quadratic) denklem:
 >
@@ -23924,7 +23924,7 @@ class Direction {
     private Direction(int ordinal)  
     {  
         m_ordinal = ordinal;  
-    }  
+    }
   
     private static final Direction [] m_values = {new Direction(0), new Direction(1), new Direction(2), new Direction(3),};  
   
@@ -24328,7 +24328,7 @@ public enum CardValue {
 }
 ```
 
->Bir enum sınıfına sabitler dışında da eleman eklenebilmektedir. Bir enum sınıfına eleman eklemek için son sabitten sonra noktalı virgül konmalıdır. Bir enum sınıfına, klasik sınıflarda olduğu gibi veri elemanı, ctor ve metot eklenebilir. Bir enum sınıfına programcı tarafından hiç ctor eklenmemişse, default ctor derleyici tarafından otomatik olarak içi boş olarak yazılır. Ancak burada klasik sınıflarda olduğu public olarak yazılmaz. Zaten bir enum sınıfına programcı tarafından public ya da protected bir ctor yazılması geçersizdir. Bir enum sınıfına programcı ya private olarak ya da no-modifier olarak istediği kadar ctor ekleyebilir. Bir enum sınıfından ctor'un no-modifier olması private olarak bildirilmesiyle aynı anlamdadır. Genel olarak programcılar bir enum sınıfına yazdıkları ctor'u no-modifier olarak bildirirler. Bu durum yalnızca ctor için geçerlidir. Bir enum sınıfına eklenen diğer elemanlar için erişim belileyiciler klasik sınıflar ile aynıdır. Aslında bir enum sınıfı için ctor erişim anlamında private'ın da ötesindedir. Bir enum türünden nesne hiç bir yerde programcı tarafından yaratılamaz. Yani bir enum türünden nesne sayısı o enum türüne ait enum sabiti sayısı kadardır. 
+>Bir enum sınıfına sabitler dışında da eleman eklenebilmektedir. Bir enum sınıfına eleman eklemek için son sabitten sonra noktalı virgül konmalıdır. Bir enum sınıfına, klasik sınıflarda olduğu gibi veri elemanı, ctor ve metot eklenebilir. Bir enum sınıfına programcı tarafından hiç ctor eklenmemişse, default ctor derleyici tarafından otomatik olarak içi boş olarak yazılır. Ancak burada klasik sınıflarda olduğu public olarak yazılmaz. Zaten bir enum sınıfına programcı tarafından public ya da protected bir ctor yazılması geçersizdir. Bir enum sınıfına programcı ya private olarak ya da no-modifier olarak istediği kadar ctor ekleyebilir. **Bir enum sınıfında ctor'un no-modifier olması private olarak bildirilmesiyle aynı anlamdadır.** Genel olarak programcılar bir enum sınıfına yazdıkları ctor'u no-modifier olarak bildirirler. Bu durum yalnızca ctor için geçerlidir. Bir enum sınıfına eklenen diğer elemanlar için erişim belileyiciler klasik sınıflar ile aynıdır. Aslında bir enum sınıfı için ctor erişim anlamında private'ın da ötesindedir. Bir enum türünden nesne hiç bir yerde programcı tarafından yaratılamaz. Yani bir enum türünden nesne sayısı o enum türüne ait enum sabiti sayısı kadardır. 
 >
 >Bir enum sınıfında sabiti doğrudan bildirmek veya sabit isminden sonra içi boş parantez `()` koymak aynı anlamdadır ve bu sabite ilişkin referansın gösterdiği nesnenin default ctor çağrılarak yaratılacağı anlamına gelir.
 
@@ -24365,4 +24365,723 @@ enum Color {
     }  
 }
 ```
+
+##### 19 Kasım 2024
+
+>Bir enum sınıfına ctor eklenmesi mantıksal olarak nesneye bir ya da birden fazla değerin iliştirilmesi (attachment) için kullanılır. 
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Random random = new Random();  
+        Scanner kb = new Scanner(System.in);  
+  
+        System.out.print("Bir sayı giriniz:");  
+        int count = kb.nextInt();  
+  
+        for (int i = 0; i < count; ++i) {  
+            Color color = Color.randomColor(random);  
+  
+            System.out.printf("%s[r = %d, g = %d, b = %d]%n", color.toString(), color.r, color.g, color.b);  
+        }  
+    }  
+}  
+  
+enum Color {  
+    RED(255, 0, 0), GREEN(0, 255, 0), BLUE(0, 0, 255), WHITE(255, 255, 255), BLACK;  
+    private static final Color [] VALUES = values();  
+    public final int r, g, b;  
+    Color()  
+    {  
+        r = g = b = 0;  
+    }  
+  
+    Color(int x, int y, int z)  
+    {  
+        r = x;  
+        g = y;  
+        b = z;  
+    }  
+  
+    public static Color randomColor(Random random)  
+    {  
+        return VALUES[random.nextInt(VALUES.length)];  
+    }  
+}
+```
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.datetime.Month;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Random random = new Random();  
+        Scanner kb = new Scanner(System.in);  
+        Month [] months = Month.values();  
+  
+        System.out.print("Bir sayı giriniz:");  
+        int count = kb.nextInt();  
+  
+        for (int i = 0; i < count; ++i) {  
+            Month month = months[random.nextInt(months.length)];  
+            int year = random.nextInt(1900, 2101);  
+  
+            System.out.printf("%d -> %s(%d)%n", year, month.toString(), month.getDays(year));  
+        }  
+    }  
+}
+ 
+```
+
+
+>Bir enum sınıfının `valueOf` static metodu parametresi ile aldığı yazıyla aynı isimde enum sabiti varsa o sabite ilişkin referansa geri döner. Yoksa exception oluşur,
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.datetime.Month;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Random random = new Random();  
+        Scanner kb = new Scanner(System.in);  
+        System.out.print("Input month as JAN, FEB, ..., DEC:");  
+        Month month = Month.valueOf(kb.nextLine());  
+        int year = random.nextInt(1900, 2100);  
+  
+        System.out.printf("%d -> %s(%d)%n", year, month.toString(), month.getDays(year));  
+    }  
+}
+```
+
+
+>enum referansları == veya != operatörü ile karşılaştırıldığında aslında mantıksal olarak eşitlik karşılaştırması da yapılmış olur. Yani referans karşılaştırma çoğu zaman mantıksal eşitlik karşılaştırması olarak da kullanılabilir. Eşitlik karşılaştırması ayrıca `equals` metodu ile de yapılabillir.
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.datetime.Month;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Random random = new Random();  
+        Scanner kb = new Scanner(System.in);  
+        Month [] months = Month.values();  
+  
+        System.out.print("Bir sayı giriniz:");  
+        int count = kb.nextInt();  
+  
+        for (int i = 0; i < count; ++i) {  
+            Month month1 = months[random.nextInt(months.length)];  
+            Month month2 = months[random.nextInt(months.length)];  
+            int year = random.nextInt(1900, 2101);  
+  
+            System.out.printf("%d -> %s(%d)%n", year, month1.toString(), month1.getDays(year));  
+            System.out.printf("%d -> %s(%d)%n", year, month2.toString(), month2.getDays(year));  
+            System.out.println(month1 == month2 ? "Aynı ay": "Farklı Aylar");  
+            System.out.println(month1 != month2 ? "Farklı aylar": "Aynı ay");  
+            System.out.println("--------------------------------------------------------");  
+        }  
+    }  
+}
+```
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.datetime.Month;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Random random = new Random();  
+        Scanner kb = new Scanner(System.in);  
+        Month [] months = Month.values();  
+  
+        System.out.print("Bir sayı giriniz:");  
+        int count = kb.nextInt();  
+  
+        for (int i = 0; i < count; ++i) {  
+            Month month1 = months[random.nextInt(months.length)];  
+            Month month2 = months[random.nextInt(months.length)];  
+            int year = random.nextInt(1900, 2101);  
+  
+            System.out.printf("%d -> %s(%d)%n", year, month1.toString(), month1.getDays(year));  
+            System.out.printf("%d -> %s(%d)%n", year, month2.toString(), month2.getDays(year));  
+            System.out.println(month1.equals(month2) ? "Aynı ay": "Farklı Aylar");  
+            System.out.println("--------------------------------------------------------");  
+        }  
+    }  
+}
+```
+
+>Bir enum sınıfının `compareTo` metodu 
+
+>`a. compareTo(b)
+>çağrısı için 
+>
+>`a.ordinal() - b.ordinal()`
+>
+> değerine geri döner. Bu durumda bu değer negatifse a referansının gösterdiği nesneyi gösteren enum sabiti, b referansının gösterdiği nesneyi gösteren enum sabitinden önce gelir, sıfırsa aynı sabitlerdir, pozitifse sonra gelir. 
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.datetime.Month;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Random random = new Random();  
+        Scanner kb = new Scanner(System.in);  
+        Month [] months = Month.values();  
+  
+        System.out.print("Bir sayı giriniz:");  
+        int count = kb.nextInt();  
+  
+        for (int i = 0; i < count; ++i) {  
+            Month month1 = months[random.nextInt(months.length)];  
+            Month month2 = months[random.nextInt(months.length)];  
+            int diff = month1.compareTo(month2);  
+  
+            if (diff > 0)  
+                System.out.printf("%s ve %s arasında %d ay vardır%n", month2.toString(), month1.toString(), diff);  
+            else if (diff == 0)  
+                System.out.printf("%s ve %s aynı aylardır", month1.toString(), month2.toString());  
+            else  
+                System.out.printf("%s ve %s arasında %d ay vardır%n", month1.toString(), month2.toString(), -diff);  
+  
+            System.out.println("--------------------------------------------------------");  
+        }  
+    }  
+}
+```
+
+>Örneklerde kullanılan Month enum sınıfı
+
+```java
+package org.csystem.datetime;  
+  
+public enum Month {  
+    JAN(31), FEB(28), MAR(31), APR(30), MAY(31), JUN(30), JUL(31), AUG(31), SEP(30), OCT(31), NOV(30), DEC(31);  
+  
+    private final int m_days;  
+  
+    Month(int days)  
+    {  
+        m_days = days;  
+    }  
+  
+    private static boolean isLeapYear(int year)  
+    {  
+        return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;  
+    }  
+  
+    public int getDays(int year)  
+    {  
+        return ordinal() == 1 && isLeapYear(year) ? 29 : m_days;  
+    }  
+}
+```
+
+>enum sabitleri sabit ifadesi (constant expression) olarak ele alınır. Dolayısıyla enum sınıfları ve sabitleri switch statement ve switch expression ile de kullanılabilir. 
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.thread.ThreadUtil;  
+  
+import java.util.Random;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        DemoGameApp.run(args);  
+    }  
+}  
+  
+class DemoGameApp {  
+    public static void run(String [] args)  
+    {  
+        Direction [] directions = Direction.values();  
+        Random random = new Random();  
+        GameObject go1 = new GameObject("Player-1");  
+        GameObject go2 = new GameObject("Player-2");  
+  
+        go1.setColor(Color.RED);  
+        go2.setColor(Color.BLUE);  
+  
+        while (true) {  
+            int index1 = random.nextInt(0, 4);  
+            int index2 = random.nextInt(0, 4);  
+  
+            //...  
+  
+            go1.move(directions[index1]);  
+            go2.move(directions[index2]);  
+  
+            ThreadUtil.sleep(random.nextLong(300, 900));  
+        }  
+    }  
+}  
+  
+enum Direction {  
+    RIGHT, TOP, LEFT, BOTTOM  
+}  
+  
+enum Color {  
+    RED, GREEN, BLUE, WHITE, BLACK  
+}  
+  
+class GameObject {  
+    private final String m_name;  
+    private Color m_color;  
+    //...  
+  
+    public GameObject(String name)  
+    {  
+        m_name = name;  
+    }  
+  
+    public void move(Direction direction)  
+    {  
+        switch (direction) {  
+            case RIGHT -> System.out.printf("%s moves to right%n", m_name);  
+            case TOP -> System.out.printf("%s moves to top%n", m_name);  
+            case LEFT -> System.out.printf("%s moves to left%n", m_name);  
+            case BOTTOM -> System.out.printf("%s moves to bottom%n", m_name);  
+            default -> System.out.println("Invalid direction value");  
+        }  
+    }  
+  
+    public void setColor(Color color)  
+    {  
+        //...  
+        m_color = color;  
+    }  
+  
+    public Color getColor()  
+    {  
+        return m_color;  
+    }  
+  
+    //...  
+}
+```
+
+>Aşağıdaki demo örnekte singleton bir sınıf **eager implementation** olarak yazılmıştır
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Singleton s1 = Singleton.INSTANCE;  
+        Singleton s2 = Singleton.INSTANCE;  
+  
+        System.out.println(s1 == s2);  
+  
+        //...  
+    }  
+}  
+  
+class Singleton {  
+    public static final Singleton INSTANCE = new Singleton();  
+    private int m_x;  
+    //...  
+  
+    private Singleton()  
+    {  
+    }  
+  
+    public int getX()  
+    {  
+        return m_x;  
+    }  
+  
+    public void setX(int x)  
+    {  
+        //...  
+        m_x = x;  
+    }  
+  
+    public String toString()  
+    {  
+        return String.valueOf(m_x);  
+    }  
+}
+```
+
+
+>Singleton bir sınıfın eager implemantasyonu enum sınıf ile daha basit ve etkin olarak yazılabilir. Lazy implementation gerekmedikçe Java'da en iyi singleton implementasyonu enum ile yapılandır
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Singleton s1 = Singleton.INSTANCE;  
+        Singleton s2 = Singleton.INSTANCE;  
+  
+        System.out.println(s1 == s2);  
+  
+        //...  
+    }  
+}  
+  
+enum Singleton {  
+    INSTANCE;  
+    private int m_x;  
+    //...  
+    public int getX()  
+    {  
+        return m_x;  
+    }  
+  
+    public void setX(int x)  
+    {  
+        //...  
+        m_x = x;  
+    }  
+  
+    public String toString()  
+    {  
+        return String.valueOf(m_x);  
+    }  
+}
+```
+
+**Anahtar Notlar:** Dikkat edilirse enum sabitleri ve gösterdikleri nesneler yaratıldıktan sonra program sonlanana kadar yaşarlar. Bu durum nadir de olsa önemli bazı uygulamalarda bellek açısından dezavantajlı olabilmektedir. Örneğin çok güçlü olmayan (limited) bir Android cihazın bellek kapasite de kullanımına göre sınırlı olabilir ve yaratılan nesnelerin sürekli yaşamaması gerekebilir. Böylesi nadir ama önemli durumlarda enum sınıf kullanmak yerine int türden değerler kullanmak uygun olabilmektedir. Bu durumda performans açısından okunabililrlikten/algılanabilirlikten vazgeçilmiş olur.
+
+
+>**Soru:** Aşağıda implementasyonu verilen sınıfı açıklamalara güncelleyiniz
+
+```java
+class Fighter {  
+    private String m_name;  
+    private int m_health;  
+    private int m_strength;  
+    private int m_agility;  
+  
+    //...  
+  
+    public String getName()  
+    {  
+        return m_name;  
+    }  
+  
+    public void setName(String name)  
+    {  
+        m_name = name;  
+    }  
+  
+    public int getHealth()  
+    {  
+        return m_health;  
+    }  
+  
+    public void setHealth(int health)  
+    {  
+        m_health = health;  
+    }  
+  
+    public int getStrength()  
+    {  
+        return m_strength;  
+    }  
+  
+    public void setStrength(int strength)  
+    {  
+        m_strength = strength;  
+    }  
+  
+    public int getAgility()  
+    {  
+        return m_agility;  
+    }  
+  
+    public void setAgility(int agility)  
+    {  
+        m_agility = agility;  
+    }  
+  
+    public int totalOfAbilities()  
+    {  
+        return m_health + m_strength + m_agility;  
+    }  
+  
+    public double averageOfAbilities()  
+    {  
+        return totalOfAbilities() / 3.;  
+    }  
+}
+```
+
+>**Açıklamalar:** 
+>
+>- Sınıfa int türden yeni yetenekler eklenecektir.
+>- Bir yetenek eklendiğinde averageOfAbilities ve totalOfAbilities metotlarının değiştirilmemesi gerekmektedir.
+
+>Bir implementasyon şu şekilde olabilir. Sabitlerin `hard coded` olarak verilmesi dolayısıyla iyi bir yaklaşım değildir
+
+```java
+class Fighter {  
+    private String m_name;  
+    private final int [] m_abilities = new int[4];  
+  
+    //...  
+  
+    public String getName()  
+    {  
+        return m_name;  
+    }  
+  
+    public void setName(String name)  
+    {  
+        m_name = name;  
+    }  
+  
+    public int getHealth()  
+    {  
+        return m_abilities[0];  
+    }  
+  
+    public void setHealth(int health)  
+    {  
+        m_abilities[0] = health;  
+    }  
+  
+    public int getStrength()  
+    {  
+        return m_abilities[1];  
+    }  
+  
+    public void setStrength(int strength)  
+    {  
+        m_abilities[1] = strength;  
+    }  
+  
+    public int getAgility()  
+    {  
+        return m_abilities[2];  
+    }  
+  
+    public void setAgility(int agility)  
+    {  
+        m_abilities[2] = agility;  
+    }  
+  
+    public int getRange()  
+    {  
+        return m_abilities[3];  
+    }  
+  
+    public void setRange(int agility)  
+    {  
+        m_abilities[3] = agility;  
+    }  
+  
+    public int totalOfAbilities()  
+    {  
+        return (int)ArrayUtil.sum(m_abilities);  
+    }  
+  
+    public double averageOfAbilities()  
+    {  
+        return totalOfAbilities() / (double)m_abilities.length;  
+    }
+}
+```
+
+>Daha okunabilir bir implementasyon şu şekilde olabilir
+
+```java
+class Fighter {  
+    private static final int HEALTH = 0;  
+    private static final int STRENGTH = 1;  
+    private static final int AGILITY = 2;  
+    private static final int RANGE = 3;  
+    private static final int COUNT = 4;  
+    private String m_name;  
+    private final int [] m_abilities = new int[COUNT];  
+  
+    //...  
+  
+    public String getName()  
+    {  
+        return m_name;  
+    }  
+  
+    public void setName(String name)  
+    {  
+        m_name = name;  
+    }  
+  
+    public int getHealth()  
+    {  
+        return m_abilities[HEALTH];  
+    }  
+  
+    public void setHealth(int health)  
+    {  
+        m_abilities[HEALTH] = health;  
+    }  
+  
+    public int getStrength()  
+    {  
+        return m_abilities[STRENGTH];  
+    }  
+  
+    public void setStrength(int strength)  
+    {  
+        m_abilities[STRENGTH] = strength;  
+    }  
+  
+    public int getAgility()  
+    {  
+        return m_abilities[AGILITY];  
+    }  
+  
+    public void setAgility(int agility)  
+    {  
+        m_abilities[AGILITY] = agility;  
+    }  
+  
+    public int getRange()  
+    {  
+        return m_abilities[RANGE];  
+    }  
+  
+    public void setRange(int range)  
+    {  
+        m_abilities[RANGE] = range;  
+    }  
+  
+    public int totalOfAbilities()  
+    {  
+        return (int)ArrayUtil.sum(m_abilities);  
+    }  
+  
+    public double averageOfAbilities()  
+    {  
+        return totalOfAbilities() / (double)m_abilities.length;  
+    }  
+}
+```
+
+>enum kullanılan bir implementasyon şu şekilde olabilir
+
+```java
+class Fighter {  
+    private enum Ability {HEALTH, STRENGTH, AGILITY, RANGE, COUNT}  
+    private String m_name;  
+    private final int [] m_abilities = new int[Ability.COUNT.ordinal()];  
+  
+    //...  
+  
+    public String getName()  
+    {  
+        return m_name;  
+    }  
+  
+    public void setName(String name)  
+    {  
+        m_name = name;  
+    }  
+  
+    public int getHealth()  
+    {  
+        return m_abilities[Ability.HEALTH.ordinal()];  
+    }  
+  
+    public void setHealth(int health)  
+    {  
+        m_abilities[Ability.HEALTH.ordinal()] = health;  
+    }  
+  
+    public int getStrength()  
+    {  
+        return m_abilities[Ability.STRENGTH.ordinal()];  
+    }  
+  
+    public void setStrength(int strength)  
+    {  
+        m_abilities[Ability.STRENGTH.ordinal()] = strength;  
+    }  
+  
+    public int getAgility()  
+    {  
+        return m_abilities[Ability.AGILITY.ordinal()];  
+    }  
+  
+    public void setAgility(int agility)  
+    {  
+        m_abilities[Ability.AGILITY.ordinal()] = agility;  
+    }  
+  
+    public int getRange()  
+    {  
+        return m_abilities[Ability.RANGE.ordinal()];  
+    }  
+  
+    public void setRange(int range)  
+    {  
+        m_abilities[Ability.RANGE.ordinal()] = range;  
+    }  
+  
+    public int totalOfAbilities()  
+    {  
+        return (int)ArrayUtil.sum(m_abilities);  
+    }  
+  
+    public double averageOfAbilities()  
+    {  
+        return totalOfAbilities() / (double)m_abilities.length;  
+    }  
+}
+```
+
+#### Sınıflararası İlişkiler
 
