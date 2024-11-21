@@ -10331,7 +10331,9 @@ class Sample {
 
 #### 30 Mayıs 2024
 
->Nesne Yönelimli Programlama (Object Oriented Programming): Nesne yönelimli programlama tekniğini (NYPT) tek bir cümle ile açıklamak pek mümkün değildir. Ancak, bu tekniği bilen veya belirli ölçüde fikri olan birisine "sınıflar kullanarak	program yazma tekniğidir" denebilir. NYPT aslında pek çok anahtar kavramın birleşimidir. Bu anahtar kavramlar içiçe geçmiş dairler biçiminde düşünülebilir. Tüm bu anahtar kavramların temelinde kodun okunabilir/algılanabilir olması ve daha iyi yönetilmesi vardır. Örneğin, benzer işi yapan metotlara aynı ismin verilmesi (method overloading) programcıyı "çok şey var" algısından uzaklaştırıp, "az şey var" gibi bir algı oluşmasını sağlar. Bu da hatırlamayı kolaylaştırır ve kodun okunabilirliğini/algılanabilirliğini artırır.
+##### Nesne Yönelimli Programlama (Object Oriented Programming)
+
+>Nesne yönelimli programlama tekniğini (NYPT) tek bir cümle ile açıklamak pek mümkün değildir. Ancak, bu tekniği bilen veya belirli ölçüde fikri olan birisine "sınıflar kullanarak	program yazma tekniğidir" denebilir. NYPT aslında pek çok anahtar kavramın birleşimidir. Bu anahtar kavramlar içiçe geçmiş dairler biçiminde düşünülebilir. Tüm bu anahtar kavramların temelinde kodun okunabilir/algılanabilir olması ve daha iyi yönetilmesi vardır. Örneğin, benzer işi yapan metotlara aynı ismin verilmesi (method overloading) programcıyı "çok şey var" algısından uzaklaştırıp, "az şey var" gibi bir algı oluşmasını sağlar. Bu da hatırlamayı kolaylaştırır ve kodun okunabilirliğini/algılanabilirliğini artırır.
 >
 >NYPT insanın doğayı algılama biçimini model alır. İnsanlar her şeyi nesne biçiminde alıp kullanırlar. Örneğin herkesin cep telefonu olabilse de konuşurken bunu cep telefonu olarak konuşuruz. Yani aslında cep telefonu soyut (abstract) bir kavramdır. Örneğin, bize ait olan bir cep telefonu artık somutlaşmıştır (concrete). Bu anlamda, herkesin sahip olduğu cep telefonu artık bir nesne biçimindedir.
 >
@@ -25083,5 +25085,80 @@ class Fighter {
 }
 ```
 
+
+##### 21 Kasım 2024
 #### Sınıflararası İlişkiler
 
+>Bir projenin kodlama aşamasında, NYPT kullanılacaksa ilk olarak o domain'e ilişkin varlıklara karşılık gelen sınıflar belirlenir. Sonra ilişkiler belirlenir. Buna **transformation** da denir. Sonrasında kodlama aşamasına geçilir. Örneğin bir alışveriş sistemine ilişkin bir uygulamada müşteri, ürün, sipariş gibi kavramlar sınıflar olarak belirlenir. Aslında ilişkiler nesneler arasında düşünülür ve sınıflar olarak implemente edilir.
+>
+>Bir uygulamanın ihtiyaçlarının belirlenmesinden (requirement analysis) teslimine (deployment) kadar geçen süreci şemalarla ifade etmeye yarayan **UML (Unified Modeling Language)** denilen bir araç proje geliştirmede kullanılabilir. UML'in genel olarak programcıyı ilgilendiren önemli şemalarında biri **class diagram** olarak adlandırılan şemadır. Bu şema ile sınıflar (aslında UDT'ler) ve aralarındaki ilişkiler bir standart olarak çizilebilmektedir/gösterilebilmektedir. 
+
+**Anahtar Notlar:** UML oldukça geniştir. Teorik olarak bakıldığında UML ile bir projenin tüm aşamaları belirlenebilir. Ancak pratikte her projede tüm detayıyla kullanılmaz. Hatta bazne kodlama aşamasından sonra da şemalarda değişiklikler yapılabilir. Bu, UML'in hedefine aykırı değildir. UML projenin süreçlerini anlatır. Değişiklik yapıldığında şemaların değişmesi de gayet normal bir durumdur. 
+
+>Bir kodun yazılabilmesi için (derlenebilmesi de denebilir) gereken kodların olması durumuna **bağımlılık (dependency)** denir. Örneğin bir metodu yazabilmek için başka bir metodun olması gerektiği durumdur. NYPT açısından dependency, sınıflar için de söz konusudur. Örneğin bir sınıfın, başka bir sınıf türünden veri elamanı olması durumu aslında bir dependency'dir. 
+>
+>**Anahtar Notlar:** Modelleme yapılırken kavramın ya da kavramların özel durumları değil genel durumları düşünülür. Özel durumlar da düşünülürse hiç bir şey modellenemez. Örneğin araba nesnesi ona ait olan motor nesnesi arasındaki ilişki (adının şu an için önemi yok) genel olarak aşağıdaki iki koşulu birden sağlar:
+>- Bir araba nesnesine ait motor nesnesi başka bir nesne tarafından kullanılamaz.
+>- Bir araba nesnesine ait motor nesnesi ömrüne hemen hemen araba ile başlar ve ömrü hemen hemen araba ile son bulur.
+>Buradaki örnekte özel bir durum olan, arabanın motorunun değişmesi bu modeli etkilemez. Çünkü genel olarak karşılaşılan bir durum değildir. 
+>
+>İki sınıf arasında aşağıdaki ilişkilerden ya birisi vardır ya da hiç birisi yoktur:
+>- **Composition(has a):** `A has B` ilişkisinde aşağıdaki iki koşulun gerçeklenmesi gerek ve yeterdir: 
+>	- A nesnesine ait B nesnesi başka bir nesne tarafından kullanılamayacak. 
+>	- A nesnesine ait B nesnesi ömrüne hemen hemen A nesnesi başlayacak ve ömrü hemen hemen A nesnesi ile son bulacak. 
+> Burada, B nesnesi ait olduğu A nesnesi tarafından gerektiğinde kullanılabilecektir. Bu tarz kullanıma `bütünsel kullanım (whole usage)` denir. `A has B` ilişkisinin sınıf diagramı şu şekildedir:
+>
+>![Composition](./media/Composition.PNG)
+>
+>A ile B arasında composition ilişkinin bir implementasyonu
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        A x = new A(/*...*/);  
+  
+        x.doWork1();  
+        x.doWork2();  
+    }  
+}  
+  
+class A {  
+    private B m_b;  
+  
+    public A(/*...*/)  
+    {  
+        m_b = new B(/*...*/);  
+    }  
+  
+    public void doWork1()  
+    {  
+        //...  
+        m_b.doSomething();  
+    }  
+  
+    public void doWork2()  
+    {  
+        //...  
+        m_b.doSomething();  
+    }  
+}  
+  
+class B {  
+    //...  
+    public void doSomething()  
+    {  
+        //...  
+    }  
+}
+```
+
+>- **Aggregation:**
+>- **Association:**
+>- **Inheritance:**
+
+**Anahtar Notlar:** Yukarıdaki 4 ilişkiden inheritance dışında kalanlar için Java'da ayrı bir kural seti yoktur. İlgili ilişkinin tanımına ve kuralları doğrultusunda Java kuralları ile implemente edilebilir. Ancak inheritance ilişkisi için Java'da ayrı bir kural seti vardır. 
+
+**Anahtar Notlar:** İki sınıf arasında, sınıfların tasarımları ve implementasyonları gereği yukarıdaki 4 ilişkiden hiç birisi olmamasına karşın bir dependency sö konusu olabilir. Bu da özel durumlardandır, genel durumu etkilemez. Bu durumlara ilişkin örnekler ileride verilecektir.
