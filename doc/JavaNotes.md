@@ -25085,32 +25085,31 @@ class Fighter {
 }
 ```
 
-
-##### 21 Kasım 2024
+##### 21 Kasım 2024 - 28 Kasım 2024
 #### Sınıflararası İlişkiler
 
 >Bir projenin kodlama aşamasında, NYPT kullanılacaksa ilk olarak o domain'e ilişkin varlıklara karşılık gelen sınıflar belirlenir. Sonra ilişkiler belirlenir. Buna **transformation** da denir. Sonrasında kodlama aşamasına geçilir. Örneğin bir alışveriş sistemine ilişkin bir uygulamada müşteri, ürün, sipariş gibi kavramlar sınıflar olarak belirlenir. Aslında ilişkiler nesneler arasında düşünülür ve sınıflar olarak implemente edilir.
 >
->Bir uygulamanın ihtiyaçlarının belirlenmesinden (requirement analysis) teslimine (deployment) kadar geçen süreci şemalarla ifade etmeye yarayan **UML (Unified Modeling Language)** denilen bir araç proje geliştirmede kullanılabilir. UML'in genel olarak programcıyı ilgilendiren önemli şemalarında biri **class diagram** olarak adlandırılan şemadır. Bu şema ile sınıflar (aslında UDT'ler) ve aralarındaki ilişkiler bir standart olarak çizilebilmektedir/gösterilebilmektedir. 
+>Bir uygulamanın isterlerinin belirlenmesinden (requirement analysis) teslimine (deployment) kadar geçen süreci şemalarla ifade etmeye yarayan **UML (Unified Modeling Language)** denilen bir dil proje geliştirmede kullanılabilmektedir. UML'in, genel olarak programcıyı ilgilendiren önemli şemalarında biri **class diagram** olarak adlandırılan şemadır. Bu şema ile sınıflar (aslında UDT'ler) ve aralarındaki ilişkiler bir standart olarak çizilebilmektedir/gösterilebilmektedir. 
 
-**Anahtar Notlar:** UML oldukça geniştir. Teorik olarak bakıldığında UML ile bir projenin tüm aşamaları belirlenebilir. Ancak pratikte her projede tüm detayıyla kullanılmaz. Hatta bazne kodlama aşamasından sonra da şemalarda değişiklikler yapılabilir. Bu, UML'in hedefine aykırı değildir. UML projenin süreçlerini anlatır. Değişiklik yapıldığında şemaların değişmesi de gayet normal bir durumdur. 
+**Anahtar Notlar:** UML oldukça geniştir. Teorik olarak bakıldığında UML ile bir projenin tüm aşamaları belirlenebilir. Ancak pratikte her projede tüm detayıyla kullanılmaz. Hatta bazen kodlama aşamasından sonra da şemalarda değişiklikler yapılabilir. Bu, UML'in hedefine aykırı değildir. UML projenin süreçlerini anlatır. Değişiklik yapıldığında şemaların değişmesi de gayet normal bir durumdur. 
 
->Bir kodun yazılabilmesi için (derlenebilmesi de denebilir) gereken kodların olması durumuna **bağımlılık (dependency)** denir. Örneğin bir metodu yazabilmek için başka bir metodun olması gerektiği durumdur. NYPT açısından dependency, sınıflar için de söz konusudur. Örneğin bir sınıfın, başka bir sınıf türünden veri elamanı olması durumu aslında bir dependency'dir. 
+>Bir kodun yazılabilmesi için (derlenebilmesi de denebilir) gereken kodların olması durumuna **bağımlılık (dependency)** denir. Örneğin bir metodu yazabilmek için başka bir metodun olması gerektiği durumdur. NYPT açısından dependency, sınıflar (aslında tüm UDT'ler) için de söz konusudur. Örneğin bir sınıfın, başka bir sınıf türünden veri elamanı olması durumu aslında bir dependency'dir. 
 >
->**Anahtar Notlar:** Modelleme yapılırken kavramın ya da kavramların özel durumları değil genel durumları düşünülür. Özel durumlar da düşünülürse hiç bir şey modellenemez. Örneğin araba nesnesi ona ait olan motor nesnesi arasındaki ilişki (adının şu an için önemi yok) genel olarak aşağıdaki iki koşulu birden sağlar:
+>**Anahtar Notlar:** Modelleme yapılırken kavramın ya da kavramların özel durumları değil genel durumları düşünülür. Özel durumlar da düşünülürse hiç bir şey modellenemez. Örneğin araba nesnesi ile ona ait olan motor nesnesi arasındaki ilişki (adının şu an için önemi yok) genel olarak aşağıdaki iki koşulu birden sağlar:
 >- Bir araba nesnesine ait motor nesnesi başka bir nesne tarafından kullanılamaz.
 >- Bir araba nesnesine ait motor nesnesi ömrüne hemen hemen araba ile başlar ve ömrü hemen hemen araba ile son bulur.
->Buradaki örnekte özel bir durum olan, arabanın motorunun değişmesi bu modeli etkilemez. Çünkü genel olarak karşılaşılan bir durum değildir. 
+>Buradaki örnekte özel bir durum olan arabanın motorunun değişmesi bu modeli etkilemez. Çünkü genel olarak karşılaşılan bir durum değildir. 
 >
 >İki sınıf arasında aşağıdaki ilişkilerden ya birisi vardır ya da hiç birisi yoktur:
->- **Composition(has a):** `A has B` ilişkisinde aşağıdaki iki koşulun gerçeklenmesi gerek ve yeterdir: 
+>- **Composition (has a):** `A has a B` ilişkisinde aşağıdaki iki koşulun gerçeklenmesi gerek ve yeterdir: 
 >	- A nesnesine ait B nesnesi başka bir nesne tarafından kullanılamayacak. 
 >	- A nesnesine ait B nesnesi ömrüne hemen hemen A nesnesi başlayacak ve ömrü hemen hemen A nesnesi ile son bulacak. 
-> Burada, B nesnesi ait olduğu A nesnesi tarafından gerektiğinde kullanılabilecektir. Bu tarz kullanıma `bütünsel kullanım (whole usage)` denir. `A has B` ilişkisinin sınıf diagramı şu şekildedir:
+> Burada, B nesnesi ait olduğu A nesnesi tarafından gerektiğinde(yani istenildiği zaman) kullanılabilecektir. Bu tarz kullanıma `bütünsel kullanım (whole usage)` denir. `A has a B` ilişkisinin sınıf diagramı şu şekildedir:
 >
 >![Composition](./media/Composition.PNG)
 >
->A ile B arasında composition ilişkinin bir implementasyonu
+>A ile B arasındaki composition ilişkinin genel bir implementasyonu
 
 ```java
 package org.csystem.app;  
@@ -25118,7 +25117,7 @@ package org.csystem.app;
 class App {  
     public static void main(String[] args)  
     {  
-        A x = new A(/*...*/);  
+        A x = new A(/*...*/);
   
         x.doWork1();  
         x.doWork2();  
@@ -25130,7 +25129,7 @@ class A {
   
     public A(/*...*/)  
     {  
-        m_b = new B(/*...*/);  
+        m_b = new B(/*...*/);
     }  
   
     public void doWork1()  
@@ -25155,10 +25154,492 @@ class B {
 }
 ```
 
->- **Aggregation:**
->- **Association:**
->- **Inheritance:**
+>- **Aggregation (holds a):** `A holds B` ilişkisi composition ilişkisinin kurallarından en az bir tanesinin genel olarak gerçeklenmediği bütünsel kullanım ilişkisidir. `A holds a B` ilişkisinin sınıf diagramı şu şekildedir:
+>![Aggregation](./media/Aggregation.PNG)
+>A ile B arasındaki aggregation ilişkinin genel bir implementasyonu
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        B b1 = new B(/*...*/);  
+        A x = new A(b1/*...*/);  
+  
+        x.doWork1();  
+        x.doWork2();  
+  
+        B b2 = new B(/*...*/);  
+  
+        x.setB(b2);
+        x.doWork1();  
+        x.doWork2();  
+    }  
+}  
+  
+class A {  
+    private B m_b;  
+  
+    public A(B b/*...*/)  
+    {  
+        m_b = b;  
+    }  
+  
+    public B getB()  
+    {  
+        return m_b;  
+    }  
+  
+    public void setB(B b)  
+    {  
+        //...  
+        m_b = b;  
+    }  
+  
+    public void doWork1()  
+    {  
+        //...  
+        m_b.doSomething();  
+    }  
+  
+    public void doWork2()  
+    {  
+        //...  
+        m_b.doSomething();  
+    }  
+}  
+  
+class B {  
+    //...  
+    public void doSomething()  
+    {  
+        //...  
+    }  
+}
+```
+>- **Association:** A nesnesinin B nesnesini ihtiyacı olduğunda kullanması yani bütünsel kullanmaması ilişkisidir. Buradaki kullanım **parçalı kullanım (partial usage)** biçimindedir. `A holds a B` ilişkisinin sınıf diagramı şu şekildedir:
+>![Association](./media/Association.PNG)
+>A ile B arasındaki association ilişkinin genel bir implementasyonu
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        B b1 = new B(/*...*/);  
+        B b2 = new B(/*...*/);  
+        A x = new A(/*...*/);  
+  
+  
+        x.doWork(b1);  
+        x.doWork(b2);  
+    }  
+}  
+  
+class A {  
+    //...  
+    public void doWork(B b)  
+    {  
+        //...  
+        b.doSomething();  
+    }  
+}  
+  
+class B {  
+    //...  
+    public void doSomething()  
+    {  
+        //...  
+    }  
+}
+```
 
-**Anahtar Notlar:** Yukarıdaki 4 ilişkiden inheritance dışında kalanlar için Java'da ayrı bir kural seti yoktur. İlgili ilişkinin tanımına ve kuralları doğrultusunda Java kuralları ile implemente edilebilir. Ancak inheritance ilişkisi için Java'da ayrı bir kural seti vardır. 
+>Aşağıdaki demo örneği aşağıdaki sınıf şeması doğrulltusunda inceleyiniz:
 
-**Anahtar Notlar:** İki sınıf arasında, sınıfların tasarımları ve implementasyonları gereği yukarıdaki 4 ilişkiden hiç birisi olmamasına karşın bir dependency sö konusu olabilir. Bu da özel durumlardandır, genel durumu etkilemez. Bu durumlara ilişkin örnekler ileride verilecektir.
+![DemoRaceAppClasses](./media/DemoRaceAppClasses.PNG)
+>Demo örnekte bazı detaylar gözardı edilmiştir
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        DemoRaceApp.run();  
+    }  
+}  
+  
+class DemoRaceApp {  
+    public static void run()  
+    {  
+        Driver driver = new Driver(/*...*/);  
+  
+        driver.setName("Arman Koca");  
+        driver.setRating(100);  
+  
+        Car car = new Car(driver/*...*/);  
+  
+        car.run();  
+  
+        Pilot [] pilots = {new Pilot(1, 10000, "Elif Kılıç"), new Pilot(2, 50000, "Günay Akıncı"), new Pilot(3, 2500, "İsmail Enes Doğru")};  
+        Plane plane = new Plane(4, pilots/*...*/);  
+  
+        plane.fly();  
+    }  
+}  
+  
+class Plane {  
+    private final Engine [] m_engines;  
+    private Pilot [] m_pilots;  
+  
+    //...  
+  
+    public Plane(int n, Pilot [] pilots/*...*/)  
+    {  
+        m_engines = new Engine[n];  
+        m_pilots = pilots;  
+  
+        for (int i = 0; i < n; ++i)  
+            m_engines[i] = new Engine(/*...*/);  
+    }  
+  
+    private void startEngines()  
+    {  
+        for (Engine e : m_engines)  
+            e.startEngine();  
+    }  
+  
+    private void accelerateEngines()  
+    {  
+        for (Engine e : m_engines)  
+            e.accelerateEngine();  
+    }  
+  
+    private void slowEngines()  
+    {  
+        for (Engine e : m_engines)  
+            e.slowEngine();  
+    }  
+  
+    private void stopEngines()  
+    {  
+        for (Engine e : m_engines)  
+            e.stopEngine();  
+    }  
+  
+  
+    public void fly()  
+    {  
+        for (Pilot pilot : m_pilots)  
+            System.out.printf("%d, %s, %d%n", pilot.getTitle(), pilot.getName(), pilot.getFlightDuration());  
+  
+        startEngines();  
+        accelerateEngines();  
+  
+        //...  
+        System.out.println("flying");  
+  
+        slowEngines();  
+        stopEngines();  
+    }  
+}  
+  
+class Car {  
+    private final Engine m_engine;  
+    private Driver m_driver;  
+  
+    //...  
+  
+    public Car(Driver driver/*...*/)  
+    {  
+        m_engine = new Engine(/*...*/);  
+        m_driver = driver;  
+    }  
+  
+    public Driver getDriver()  
+    {  
+        return m_driver;  
+    }  
+  
+    public void setDriver(Driver driver)  
+    {  
+        m_driver = driver;  
+    }  
+  
+    public void brake()  
+    {  
+        m_engine.slowEngine();  
+    }  
+  
+    public void run()  
+    {  
+        System.out.printf("Driver:%s, %d%n", m_driver.getName(), m_driver.getRating());  
+        m_engine.startEngine();  
+        m_engine.accelerateEngine();  
+  
+        //...  
+        System.out.println("running");  
+  
+        brake();  
+        m_engine.stopEngine();  
+    }  
+}  
+  
+class Pilot {  
+    private int m_title;  
+    private int m_flightDuration;  
+    private String m_name;  
+  
+    //...  
+  
+  
+    public Pilot(int title, int flightDuration, String name)  
+    {  
+        m_title = title;  
+        m_flightDuration = flightDuration;  
+        m_name = name;  
+    }  
+  
+    public int getTitle()  
+    {  
+        return m_title;  
+    }  
+  
+    public void setTitle(int title)  
+    {  
+        m_title = title;  
+    }  
+  
+    public int getFlightDuration()  
+    {  
+        return m_flightDuration;  
+    }  
+  
+    public void setFlightDuration(int flightDuration)  
+    {  
+        m_flightDuration = flightDuration;  
+    }  
+  
+    public String getName()  
+    {  
+        return m_name;  
+    }  
+  
+    public void setName(String name)  
+    {  
+        m_name = name;  
+    }  
+}  
+  
+class Driver {  
+    private String m_name;  
+    private int m_rating;  
+  
+    //...  
+  
+    public String getName()  
+    {  
+        return m_name;  
+    }  
+  
+    public void setName(String name)  
+    {  
+        m_name = name;  
+    }  
+  
+    public int getRating()  
+    {  
+        return m_rating;  
+    }  
+  
+    public void setRating(int rating)  
+    {  
+        m_rating = rating;  
+    }  
+}  
+  
+class Engine {  
+    //...  
+  
+    public void startEngine()  
+    {  
+        System.out.println("Start Engine");  
+    }  
+  
+    public void accelerateEngine()  
+    {  
+        System.out.println("Accelerate Engine");  
+    }  
+  
+    public void slowEngine()  
+    {  
+        System.out.println("Slow Engine");  
+    }  
+  
+    public void stopEngine()  
+    {  
+        System.out.println("Stop Engine");  
+    }  
+}
+```
+
+>Aşağıdaki demo örneği aşağıdaki sınıf şeması doğrulltusunda inceleyiniz:
+![DemoTaxiAutomationApp](./media/DemoTaxiAutomationApp.PNG)
+
+
+
+>Demo örnekte bazı detaylar gözardı edilmiştir,
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        DemoRaceApp.run();  
+    }  
+}  
+  
+class DemoRaceApp {  
+    public static void run()  
+    {  
+        Driver driver = new Driver();  
+  
+        driver.setName("Oğuz Karan");  
+        driver.setRating(100);  
+        Taxi taxi = new Taxi(driver/*...*/);  
+        Client client1 = new Client("kaanaslan", "Kaan Aslan");  
+        Client client2 = new Client("aliserce", "Ali Vefa Serçe");  
+  
+        taxi.take(client1);  
+  
+        //...  
+  
+        taxi.take(client2);  
+    }  
+}  
+  
+  
+class Taxi {  
+    private Driver m_driver;  
+  
+    //...  
+  
+    public Taxi(Driver driver/*...*/)  
+    {  
+        m_driver = driver;  
+    }  
+  
+    public Driver getDriver()  
+    {  
+        return m_driver;  
+    }  
+  
+    public void setDriver(Driver driver)  
+    {  
+        m_driver = driver;  
+    }  
+  
+    public void take(Client client)  
+    {  
+        System.out.printf("Driver:%s, %d%n", m_driver.getName(), m_driver.getRating());  
+        System.out.printf("Client:%s%n", client.getUsername());  
+  
+        //...  
+    }  
+}  
+  
+class Client {  
+    private String m_username;  
+    private String m_name;  
+    //...  
+  
+  
+    public Client(String name, String username)  
+    {  
+        m_name = name;  
+        m_username = username;  
+    }  
+  
+    public String getUsername()  
+    {  
+        return m_username;  
+    }  
+  
+    public void setUsername(String username)  
+    {  
+        m_username = username;  
+    }  
+  
+    public String getName()  
+    {  
+        return m_name;  
+    }  
+  
+    public void setName(String name)  
+    {  
+        m_name = name;  
+    }  
+}  
+  
+class Driver {  
+    private String m_name;  
+    private int m_rating;  
+  
+    //...  
+  
+    public String getName()  
+    {  
+        return m_name;  
+    }  
+  
+    public void setName(String name)  
+    {  
+        m_name = name;  
+    }  
+  
+    public int getRating()  
+    {  
+        return m_rating;  
+    }  
+  
+    public void setRating(int rating)  
+    {  
+        m_rating = rating;  
+    }  
+}  
+  
+class Engine {  
+    //...  
+  
+    public void startEngine()  
+    {  
+        System.out.println("Start Engine");  
+    }  
+  
+    public void accelerateEngine()  
+    {  
+        System.out.println("Accelerate Engine");  
+    }  
+  
+    public void slowEngine()  
+    {  
+        System.out.println("Slow Engine");  
+    }  
+  
+    public void stopEngine()  
+    {  
+        System.out.println("Stop Engine");  
+    }  
+}
+```
+
+>- **Inheritance (is a):** Biyoloji'den proglamlaya aktarılmıştır. Biyoloji'de inheritance `ebeveynin (parent) özelliklerinin çocuğuna (child) aktarımı` olarak tanımlanabilir.
+
+**Anahtar Notlar:** Yukarıdaki 4 ilişkiden inheritance dışında kalanlar için Java'da ayrı bir kural seti yoktur. İlgili ilişkinin tanımı ve kuralları doğrultusunda, Java kuralları ile implemente edilebilir. Ancak inheritance ilişkisi için Java'da ayrı bir kural seti vardır. 
+
+**Anahtar Notlar:** İki sınıf arasında, sınıfların tasarımları ve implementasyonları gereği yukarıdaki 4 ilişkiden hiç birisi olmamasına karşın bir dependency söz konusu olabilir. Bu da özel durumlardandır, genel durumu etkilemez. Bu durumlara ilişkin örnekler ileride verilecektir.
+
+##### Inheritance İlişkisi
+
+>
