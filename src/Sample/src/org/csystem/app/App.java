@@ -3,139 +3,55 @@ package org.csystem.app;
 class App {
     public static void main(String[] args)
     {
-        DemoRaceApp.run();
+        A x = new A();
+        System.out.println("--------------------------------");
+        B y = new B();
+        System.out.println("--------------------------------");
+        C z = new C();
+        System.out.println("--------------------------------");
+
+
     }
 }
 
-class DemoRaceApp {
-    public static void run()
+class C extends B {
+    public int c;
+
+    public C()
     {
-        Driver driver = new Driver();
+        System.out.println("I am a default ctor of C");
+    }
 
-        driver.setName("Oğuz Karan");
-        driver.setRating(100);
-        Taxi taxi = new Taxi(driver/*...*/);
-        Client client1 = new Client("kaanaslan", "Kaan Aslan");
-        Client client2 = new Client("aliserce", "Ali Vefa Serçe");
-
-        taxi.take(client1);
-
-        //...
-
-        taxi.take(client2);
+    public void tar()
+    {
+        System.out.println("C.tar");
     }
 }
 
+class B extends A {
+    public int b;
 
-class Taxi {
-    private Driver m_driver;
-
-    //...
-
-    public Taxi(Driver driver/*...*/)
+    public B()
     {
-        m_driver = driver;
+        System.out.println("I am a default ctor of B");
     }
 
-    public Driver getDriver()
+    public void bar()
     {
-        return m_driver;
-    }
-
-    public void setDriver(Driver driver)
-    {
-        m_driver = driver;
-    }
-
-    public void take(Client client)
-    {
-        System.out.printf("Driver:%s, %d%n", m_driver.getName(), m_driver.getRating());
-        System.out.printf("Client:%s%n", client.getUsername());
-
-        //...
+        System.out.println("B.bar");
     }
 }
 
-class Client {
-    private String m_username;
-    private String m_name;
-    //...
+class A {
+    public int a;
 
-
-    public Client(String name, String username)
+    public A()
     {
-        m_name = name;
-        m_username = username;
+        System.out.println("I am a default ctor of A");
     }
 
-    public String getUsername()
+    public void foo()
     {
-        return m_username;
-    }
-
-    public void setUsername(String username)
-    {
-        m_username = username;
-    }
-
-    public String getName()
-    {
-        return m_name;
-    }
-
-    public void setName(String name)
-    {
-        m_name = name;
-    }
-}
-
-class Driver {
-    private String m_name;
-    private int m_rating;
-
-    //...
-
-    public String getName()
-    {
-        return m_name;
-    }
-
-    public void setName(String name)
-    {
-        m_name = name;
-    }
-
-    public int getRating()
-    {
-        return m_rating;
-    }
-
-    public void setRating(int rating)
-    {
-        m_rating = rating;
-    }
-}
-
-class Engine {
-    //...
-
-    public void startEngine()
-    {
-        System.out.println("Start Engine");
-    }
-
-    public void accelerateEngine()
-    {
-        System.out.println("Accelerate Engine");
-    }
-
-    public void slowEngine()
-    {
-        System.out.println("Slow Engine");
-    }
-
-    public void stopEngine()
-    {
-        System.out.println("Stop Engine");
+        System.out.println("A.foo");
     }
 }

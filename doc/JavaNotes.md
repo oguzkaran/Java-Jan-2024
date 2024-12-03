@@ -11806,7 +11806,7 @@ class Complex {
 >2. `Non-static` olan (ancak `final olmayan`) veri elemanlarına `default` değerler verilir. 
 >3. Constructor (`ctor`) çağrılır.
 >
->Bu `üç` adım tamamlandığında nesne yaratılmış olur. Herhangi bir adımda bir problem oluştuğunda nesnenin yaratılması **tamamlanmamış** olur.
+>**Bu üç adım tamamlandığında nesne yaratılmış olur. Herhangi bir adımda bir problem oluştuğunda nesnenin yaratılması tamamlanmamış olur.**
 	
 **Anahtar Notlar:** final veri elemanları ileride ele alınacaktır.
 
@@ -25634,12 +25634,90 @@ class Engine {
 }
 ```
 
->- **Inheritance (is a):** Biyoloji'den proglamlaya aktarılmıştır. Biyoloji'de inheritance `ebeveynin (parent) özelliklerinin çocuğuna (child) aktarımı` olarak tanımlanabilir.
+>- **Inheritance (is a):** Biyoloji'den programlamlaya aktarılmıştır. Biyoloji'de inheritance `ebeveynin (parent) özelliklerinin çocuğuna (child) aktarımı` olarak tanımlanabilir.
 
 **Anahtar Notlar:** Yukarıdaki 4 ilişkiden inheritance dışında kalanlar için Java'da ayrı bir kural seti yoktur. İlgili ilişkinin tanımı ve kuralları doğrultusunda, Java kuralları ile implemente edilebilir. Ancak inheritance ilişkisi için Java'da ayrı bir kural seti vardır. 
 
 **Anahtar Notlar:** İki sınıf arasında, sınıfların tasarımları ve implementasyonları gereği yukarıdaki 4 ilişkiden hiç birisi olmamasına karşın bir dependency söz konusu olabilir. Bu da özel durumlardandır, genel durumu etkilemez. Bu durumlara ilişkin örnekler ileride verilecektir.
 
+##### 3 Aralık 2024
 ##### Inheritance İlişkisi
 
+>Bu ilişkiye NYPT'de `is a` ilişkisi de denilmektedir. Bu ilişki ile varolan bir sınıfın kodlarına dokunmadan (kodları elimizde olabilir ya da olmayabilir) **genişletme (extension)** yapılabilir. Bu ilişkiye aynı zamanda **generalization** da denilmektedir. Bu ilişkiye Türkçe olarak **türetme/kalıtım** ilişkisi diyeceğiz. Örneğin `analitik düzlemde` bir çemberi temsil eden (yarıçap, alan, çevre, merkez koordinatları vb bilgilerle) bir sınıf yazacak olalım. Anımsanacağı gibi daha önce yazdığımız Circle sınıfı `sentetik geometride` bir çemberi (dolayısıyla daireyi) temsil etmektedir. Yani, elimizde daha önceden yazılmış ve test edilmiş bir sınıf bulunmaktadır. Analitik düzlemde bir çemberde analitik özellikleri dışından bir çember olduğundan `(Analytical circle is a circle)`, `AnalyticalCircle` isimli bir sınıf `Circle` sınıfından türetilebilir. Bu anlamda bu ilişki `SOLID` ilkelerinden `Open Closed Principle`'ın mottosu olan **open for extension closed for modification** cümlesi de karşılamaktadır.
 >
+>A sınıfından B sınıfı türetilmiş olsun (A is a B). Bu durumda A sınıfına B sınıfının **taban sınıfı (bas class)**, B'ye ise A nın bir **türemiş sınıfı (derived class)** denir. Java'da `base class` yerine daha çok **super class**, `derived class` yerine ise daha çok **sub class** terimleri kullanılır. Bu terimlerle birlikte NYPT'de `base class` yerine **parent class**, `derived class` yerine **child class** terİmleri de kullanılabilmektedir. `A is a B` ilişkisinin sınıf şeması şu şekildedir:
+>![Inheritance](./media/Inheritance.PNG)
+> Bir dizi türeme de söz konusu olabilir:
+>![Inheritance](./media/Inheritance2.PNG)
+>Burada C'nin taban sınıfı (super class) dendiğinde **doğrudan taban sınıfı (direct super class)** anlaşılır. Yani C'nin taban sınıfı B'dir. Burada A C'nin **dolaylı taban sınıflarından (indirect super class)** biridir. Burada `C'nin taban sınıflarından bir A'dır (One of the super class of C is A` veya `A, C'nin taban sınıfır (A is super class of A` cümleleri YANLIŞTIR. Bu cümlelerin doğrusu `C'nin dolaylı taban sınıflarından bir A'dır (One of the indirect super class of C is A`. Çünkü, `C'nin taban sınıfı B'dir.` 
+>
+> Örneğin, `Vehicle` kavramı taşıma özelliğine sahip olsun. Bu domain'de bir deniz aracı, deniz'e ilişkin özelliklerin yanında taşıma özelliğine'de sahip olduğundan `Marine Vehicle is a vehicle` denebilir. Benzer şekilde `kara aracı ve hava aracı` için de aynı durum söz konusudur. Bu hiyerarşide bir `gemi`, bir `deniz aracı` olarak nitelendirilebilir. Bu hiyerarjiye ilişkin örnek bazı sınıflara ilişkin şema aşağıdaki gibi olabilir:
+>
+>
+>![Vehicles](./media/Vehicles.PNG)
+>Burada dikkat edilirse `Vehicle`'dan aşağıya doğru inildikçe bir **özelleşme (specialization)**, `Vehicle`'a doğru çıkıldıkça bir **genelleşme (generalization)** söz konusu olmaktadır. Bir sınıfın birden fazla (doğrudan) taban sınıfı olması durumuna `çoklu türetme (multiple inheritance)` denir. Java'da bir sınıfın yalnızca bir tane taban sınıfı vardır. Bu anlamda Java'da çoklu türetme yoktur. Aslında çoklu türetmenin programlamada bir kaşılığı da doğrudan yoktur. Bu anlamda Java'da ileride göreceğimiz `arayüzler (interfaces)` ile çoklu türetme belirli ölçüde (prtatikteki isterleri karşılayacak kadar) desteklenmektedir. Yani, Java'da çoklu türetmenin olmaması bir eksiklik oluşturmaz. Örneğin `Vehicle` hiyerarşisinde `deniz uçağı (float plane)` hem `deniz aracı` hem de `hava aracı` değildir. Deniz uçağı, hava aracıdır. Bu anlamda deniz uçağı için çoklu türetme söz konusu olmaz. 
+>Bir sınıf kendisinden doğrudan ya da dolaylı olarak türetilemez. Yani türetme ilişkisinde döngüsellik söz konusu değildir. 
+>
+>Java'da türetme **extends** anahtar sözcüğü ile yapıılır. Türetme işleminde taban sınıfın elemanları türemiş sınıfa aktarılmış olur. Örneğin taban sınıfta olan bir metot türemiş sınıfa da aktarılır. Benzer şekilde ver elemanları da türemiş sınıfa aktarılır. Yani bu elemanlara türemiş sınıf türünden referans ile de erişilebilir.
+>
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        A x = new A();  
+        B y = new B();  
+        C z = new C();  
+  
+        x.foo();  
+        x.a = 10;  
+        y.foo();  
+        y.bar();  
+        ++y.a;  
+        y.b = 30;  
+        z.a = 10;  
+        z.b = 20;  
+        z.c = 45;  
+        z.foo();  
+        z.bar();  
+        z.tar();  
+    }  
+}  
+  
+class C extends B {  
+    public int c;  
+  
+    public void tar()  
+    {  
+        System.out.println("C.tar");  
+    }  
+}  
+  
+class B extends A {  
+    public int b;  
+  
+    public void bar()  
+    {  
+        System.out.println("B.bar");  
+    }  
+}  
+  
+class A {  
+    public int a;  
+    public void foo()  
+    {  
+        System.out.println("A.foo");  
+    }  
+}
+```
+
+>Türetme ilişkisinde nesnesel bir kapsama söz konusudur. Bu ilişkide türemiş sınıf nesnesi içerisinde taban sınıf kadarlık bir bölüm de bulunur. Yani türemiş sınıf nesnesi yaratıldığında nesnesel olarak kapsadığı taban sınıf nesnesi de yaratılmış olur. Bu anlamda bakıldığında türemiş sınıfa eklenmiş veri elemanları ile aslında taban sınıf nesnesi genişletilmiş (extension) olur. Bu durumda türemiş sınıf nesnesinin uzunluğu **en az taban sınıf nesnesinin uzunluğu + türemiş sınıfa eklenen non-static veri elemanlarının uzunluğu kadardır.** Aslında türemiş sınıfa eklenen non-static veri elemanları ile bir nesne genişletilmiş (extend) olur:
+>![Inheritance](./media/Inheritance3.PNG)
+>Burada B sınıfı türünden bir nesnenin içeriisnde a veri elemanı da vardır. Aynı şekilde C sınıfı türünden bir nesnenin içerisinde a ve b veri elemanları da bulunur. Bu hiyerarşiye ilişkin nesnelerin birer örneklerinin bellekteki karşılıkları şekilsel olarak şu şekilde ifade edilebilir:
+>
+>![Inheritance](./media/InheritanceMemory.PNG)
+
+>Burada türemiş sınıfa eklenen veri elemanlarının düşük numaralı adreste veya yüksek numaralı adreste olmasının Java programcısı açısından önemi yoktur. 
