@@ -25651,6 +25651,7 @@ class Engine {
 >![Inheritance](./media/Inheritance.PNG)
 
 > Bir dizi türeme de söz konusu olabilir:
+
 >![Inheritance](./media/Inheritance2.PNG)
 
 >Burada C'nin taban sınıfı (super class) dendiğinde **doğrudan taban sınıfı (direct super class)** anlaşılır. Yani C'nin taban sınıfı B'dir. Burada A C'nin **dolaylı taban sınıflarından (indirect super class)** biridir. Burada `C'nin taban sınıflarından bir A'dır (One of the super class of C is A` veya `A, C'nin taban sınıfır (A is super class of A` cümleleri YANLIŞTIR. Bu cümlelerin doğrusu `C'nin dolaylı taban sınıflarından bir A'dır (One of the indirect super class of C is A`. Çünkü, `C'nin taban sınıfı B'dir.` 
