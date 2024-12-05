@@ -9684,7 +9684,7 @@ class Sample {
  
 >Method Overloading: Bir sınıf içerisinde aynı isimde birden fazla metot bildirilmesi durumuna denir. Farklı sınıflar içerisinde aynı isimde metot olması durumu method overloading değildir. Çünkü zaten bu metotlar farklı sınıflarda olduğundan farklı metotlardır. Method overloading konusu sentaks ve semantik olarak iki biçimde ele alınacaktır:
 >- Method overloading yapılabilmesi için kurallar nelerdir?
->- Bir metot çağrıldığında derleyici hangi metodun çağrılacağına nasıl karar verecektir? Bu kavrama İngilizce "method overload resolution" denilmektedir. 
+>- Bir metot çağrıldığında derleyici hangi metodun çağrılacağına nasıl karar verecektir? Bu kavrama İngilizce **method overload resolution** denilmektedir. 
 >
 >Method overloading konusunun gerekliliği yani kabaca "ne işe yaradığı" ileride ele alınacaktır
  
@@ -16134,9 +16134,7 @@ class Sample {
 
 >Niteliksiz isim arama genel kuralları (else if biçiminde değerlendiriniz):
 >
->2. Kullanılan isim sınıf içerisinde, tüm metotların dışında kalan her yerde aranır. Bulunamazsa taban sınıflara da
-bulununcaya veya bulunamayıncaya kadar bakılır. Taban sınıf (super class) kavramı türetme (inheritance) konusunda
-ele alınacaktır
+>2. Kullanılan isim sınıf içerisinde, tüm metotların dışında kalan her yerde aranır. Bulunamazsa taban sınıflara da bulununcaya veya bulunamayıncaya kadar bakılır. Taban sınıf (super class) kavramı türetme (inheritance) konusunda ele alınacaktır
 
 ```java
 package org.csystem.app;
@@ -16295,7 +16293,7 @@ class Sample {
 
 >Nitelikli isim arama genel kuralları (else if biçiminde değerlendiriniz):
 >
->2. Aranan ismin solunda bir referans (değişken) ismi varsa, isim referans değişkenin türüne ilişkin UDT içerisinde	aranır. Burada bulunamazsa taban sınıflara bulununcaya veya bulunamayıncaya kadar bakılır
+>2. Aranan ismin solunda bir referans (değişken) ismi varsa, isim referans değişkenin türüne ilişkin UDT içerisinde	aranır. Burada bulunamazsa taban sınıflara da bulununcaya veya bulunamayıncaya kadar bakılır
 
 ```java
 package org.csystem.app;
@@ -20528,7 +20526,7 @@ public class B {
 }
 ```
 
->Sınıfın protected bölümü farklı paketlerdeki diğer sınıflar için türetme (inheritance) söz konusu değilse private anlamındadır. Türemiş sınıf (derived/sub class) kendisine ait protected bölüme erişibilir. protected bölümün anlamı ve türemiş sınıfı kavramı inheritance konusunda ayrıca ele alınacaktır
+>Sınıfın protected bölümü farklı paketlerdeki diğer sınıflar için türetme (inheritance) söz konusu değilse private anlamındadır. Türemiş sınıf (derived/sub class) kendisine ait protected bölüme erişibilir. protected bölümün anlamı ve türemiş sınıf kavramı inheritance konusunda ayrıca ele alınacaktır
 
 ```java
 package x;  
@@ -25729,3 +25727,652 @@ class A {
 >![Inheritance](./media/InheritanceMemory.PNG)
 
 >Burada türemiş sınıfa eklenen veri elemanlarının düşük numaralı adreste veya yüksek numaralı adreste olmasının Java programcısı açısından önemi yoktur. 
+
+##### 5 Aralık 2024
+
+>Anımsanacağı gibi bir nesnenin yaratılmasının tamamlanması için en son aşamada ilgili ctor'unda çağrılmış olması gerekir. Bu durumda türemiş sınıf nesnesi yaratıldığında içerisinde taban sınıf nesnesi için de ctor'un çağrılması gerekir. **Türemiş sınıf ctor'undan önce, türemiş sınıf ctor'unda her hangi bir belirtme yapılmamışsa, taban sınıfının default ctor'u çağrılır.**  Yani aslında derleyici türemiş sınıf ctor'unun başında taban sınıf ctor çağrısı kodunu gizlice yerleştirir. Türemiş sınıf ctor'unda taban sınıf ctor'unun çağrısına ilişkin belirtme `super ctor sentaksı (**super ctor syntax)` kullanılarak yapılır. İleride ele alınacaktır.
+
+>Aşağıdaki demo örneği çalıştırıp çağrıları gözlemleyiniz
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        A x = new A();  
+        System.out.println("--------------------------------");  
+        B y = new B();  
+        System.out.println("--------------------------------");  
+        B z = new B(10);  
+        System.out.println("--------------------------------");  
+        C t = new C();  
+        System.out.println("--------------------------------");  
+        C u = new C(10, 20);  
+        System.out.println("--------------------------------");  
+    }  
+}  
+  
+class C extends B {  
+    public C()  
+    {  
+        System.out.println("I am a default ctor of C");  
+    }  
+  
+    public C(int b, int c)  
+    {  
+        System.out.println("I am a ctor of C with parameter types int, int");  
+    }  
+    //...  
+}  
+  
+class B extends A {  
+    public B()  
+    {  
+        System.out.println("I am a default ctor of B");  
+    }  
+  
+    public B(int b)  
+    {  
+        System.out.println("I am a ctor of B with a parameter type int");  
+    }  
+  
+    //...  
+}  
+  
+class A {  
+    public A()  
+    {  
+        System.out.println("I am a default ctor of A");  
+    }  
+  
+    //...  
+}
+```
+
+###### super Constructor Syntax
+
+>Taban sınıfın default ctor'u yoksa ya da var ama erişilemiyorsa ya da türemiş sınıfı yazan programcı türemiş sınıfın ctor'undan önce taban sınıfın default ctor'u yerine başka bir ctor'un çağrılmasını isterse (şüphesiz bu durum sınıfın tasarımı, dolayısıyla dmain'i ile alakalıdır) na yapması gerekir? Bu durumda **super ctor sentaksı (super ctor syntax)** kullanılır. super ctor sentaksı **super** anahtar sözcüğü ile yapılır. super ctor sentaksının genel biçimi şu şekildedir:,
+
+
+```java
+super([argumanlar]);
+```
+
+super ctor sentaksı türemiş sınıf ctor'nun başına programcı tarafından yerleştirilir. super ctor sentaksında hangi ctor'un çağrılacağı `method overload resolution` kurallarına göre belirlenir. Buna göre türemiş sınıfı içerisinde super ctor sentaksının `super()` biçiminde yazılması veya yazılmaması aynı anlama gelmektedir. super ctor sentaksından önce başka bir deyim yazılması error oluşuturur. Ayrıca adından da anlaşıldığı gibi super ctor sentaksı yalnızca ctor içerisinde yazılabilir. Bir metot içerisinde yazılması error oluşturur. 
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        A x = new A();  
+        System.out.println("--------------------------------");  
+        B y = new B();  
+        System.out.println("--------------------------------");  
+        B z = new B(10);  
+        System.out.println("--------------------------------");  
+        C t = new C();  
+        System.out.println("--------------------------------");  
+        C u = new C(10, 20);  
+        System.out.println("--------------------------------");  
+    }  
+}  
+  
+class C extends B {  
+    public C()  
+    {  
+        System.out.println("I am a default ctor of C");  
+    }  
+  
+    public C(int b, int c)  
+    {  
+        super(b);  
+        System.out.println("I am a ctor of C with parameter types int, int");  
+    }  
+    //...  
+}  
+  
+class B extends A {  
+    public B()  
+    {  
+        System.out.println("I am a default ctor of B");  
+    }  
+  
+    public B(int b)  
+    {  
+        super(b);  
+        System.out.println("I am a ctor of B with a parameter type int");  
+    }  
+  
+    //...  
+}  
+  
+class A {  
+    public A()  
+    {  
+        System.out.println("I am a default ctor of A");  
+    }  
+  
+    public A(int a)  
+    {  
+        System.out.println("I am a ctor of A with a parameter type int");  
+    }  
+  
+    //...  
+}
+```
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        A x = new A();  
+        System.out.println("--------------------------------");  
+        B y = new B();  
+        System.out.println("--------------------------------");  
+        B z = new B(10);  
+        System.out.println("--------------------------------");  
+        C t = new C();  
+        System.out.println("--------------------------------");  
+        C u = new C(10, 20);  
+        System.out.println("--------------------------------");  
+    }  
+}  
+  
+class C extends B {  
+    public C()  
+    {  
+        super(); //yazılsa da yazılmasa da aynı anlamdadır  
+        System.out.println("I am a default ctor of C");  
+    }  
+  
+    public C(int b, int c)  
+    {  
+        super(b);  
+        System.out.println("I am a ctor of C with parameter types int, int");  
+    }  
+    //...  
+}  
+  
+class B extends A {  
+    public B()  
+    {  
+        super(); //yazılsa da yazılmasa da aynı anlamdadır  
+        System.out.println("I am a default ctor of B");  
+    }  
+  
+    public B(int b)  
+    {  
+        super(b);  
+        System.out.println("I am a ctor of B with a parameter type int");  
+    }  
+  
+    //...  
+}  
+  
+class A {  
+    public A()  
+    {  
+        System.out.println("I am a default ctor of A");  
+    }  
+  
+    public A(int a)  
+    {  
+        System.out.println("I am a ctor of A with a parameter type int");  
+    }  
+  
+    //...  
+}
+```
+
+>Aşağıdaki demo örnekte super ctor sentaksından önce bir deyim yazıldığından yani super ctor sentaksı ctor'un ilk deyimi olmadığından error oluşur
+
+```java
+class B extends A {  
+    public B(int b)  
+    {  
+        System.out.println("I am a ctor of B with a parameter type int");  
+        super(b); //error  
+    }  
+  
+    //...  
+}  
+  
+class A {  
+    public A()  
+    {  
+        System.out.println("I am a default ctor of A");  
+    }  
+  
+    public A(int a)  
+    {  
+        System.out.println("I am a ctor of A with a parameter type int");  
+    }  
+  
+    //...  
+}
+```
+
+**Anahtar Notlar:** super ctor sentaksının ctor'un deyimi olması konusunda Java 21 ile birlikte bazı değişiklikler yapılmıştır. Bu durum `Java ile Uygulama Geliştirme` kurslarında ele alınacaktır. 
+
+>Aşağıdaki örnekte super ctor sentaksı bir metot içerisinde kullanıldığı için error oluşur
+
+```java
+class B extends A {  
+    public void foo(int a)  
+    {  
+        super(a); //error  
+    }  
+  
+    //...  
+}  
+  
+class A {  
+    public A()  
+    {  
+        System.out.println("I am a default ctor of A");  
+    }  
+  
+    public A(int a)  
+    {  
+        System.out.println("I am a ctor of A with a parameter type int");  
+    }  
+  
+    //...  
+}
+```
+
+###### this Constructor Syntax
+
+>Bir sınıfın bir ctor'undan önce, aynı sınıfın başka bir ctor'un çağrılabilmesi mümkündür ve bu **this ctor sentaksı (this ctor syntax)** kullanılarak yapılabilir. this ctor sentaksı **this** anahtar sözcüğü ile yapılır. thşs ctor sentaksının genel biçimi şu şekildedir:,
+
+
+```java
+this([argumanlar]);
+```
+
+this ctor sentaksı türemiş sınıf ctor'nun başına programcı tarafından yerleştirilir. this ctor sentaksında hangi ctor'un çağrılacağı `method overload resolution` kurallarına göre belirlenir. Bir ctor'un başında `this()` sentaksının yazılması ile yazılmaması aynı anlamda değildir. Yazılırsa, yazılan ctor'dan önce default ctor çağrılsın anlamında, yazılmasa, yazılmayan ctor'dan önce herhangi bir ctor çağrılmasın anlamındadır. this ctor sentaksından önce başka bir deyim yazılması error oluşuturur. Ayrıca adından da anlaşıldığı gibi this ctor sentaksı yalnızca ctor içerisinde yazılabilir. Bir metot içerisinde yazılması error oluşturur. this ctor sentaksında döngüsel durum error oluşturur
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+import java.util.Stack;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        A x = new A();  
+        System.out.println("--------------------------------");  
+  
+        A y = new A(10);  
+        System.out.println("--------------------------------");  
+  
+        A z = new A("ankara");  
+        System.out.println("--------------------------------");  
+    }  
+}  
+  
+class A {  
+    public A()  
+    {  
+        this("");  
+        System.out.println("I am a default ctor of A");  
+    }  
+  
+    public A(int a)  
+    {  
+        this();  
+        System.out.println("I am a ctor of A with a parameter type int");  
+    }  
+  
+    public A(String str)  
+    {  
+        System.out.println("I am a ctor of A with a parameter type String");  
+    }  
+  
+    //...  
+}
+```
+
+>Aşağıdaki demo örnekte this ctor sentaksından önce bir deyim kullanıldığından error oluşur. 
+
+```java
+class A {  
+    public A()  
+    {  
+        System.out.println("I am a default ctor of A");  
+        this("");  //error  
+    }  
+  
+    public A(int a)  
+    {  
+        this();  
+        System.out.println("I am a ctor of A with a parameter type int");  
+    }  
+  
+    public A(String str)  
+    {  
+  
+        System.out.println("I am a ctor of A with a parameter type String");  
+    }  
+  
+    //...  
+}
+```
+
+
+>Aşağıdaki demo örnekte this ctor sentaksı bir metot içerisinde kullanıldığı için error oluşur
+
+```java
+class A {  
+    public A()  
+    {  
+        this("");  
+        System.out.println("I am a default ctor of A");  
+    }  
+  
+    public A(int a)  
+    {  
+        this();  
+        System.out.println("I am a ctor of A with a parameter type int");  
+    }  
+  
+    public A(String str)  
+    {  
+  
+        System.out.println("I am a ctor of A with a parameter type String");  
+    }  
+  
+    public void foo()  
+    {  
+        this(); //error  
+    }  
+  
+    //...  
+}
+```
+
+>Aşağıdaki demo örnek this ctor sentaksı ile döngüsel bir durum oluşturuğundan geçersizdir
+
+```java
+class A {  
+    public A()  
+    {  
+        this(""); //error  
+        System.out.println("I am a default ctor of A");  
+    }  
+  
+    public A(int a)  
+    {  
+        this();  
+        System.out.println("I am a ctor of A with a parameter type int");  
+    }  
+  
+    public A(String str)  
+    {  
+        this(); //error  
+        System.out.println("I am a ctor of A with a parameter type String");  
+    }  
+  
+    //...  
+}
+```
+
+>Aşağıdaki demo örnek this ctor sentaksı ile döngüsel bir durum oluşturuğundan geçersizdir
+
+```java
+class A {  
+    public A()  
+    {  
+        this(""); //error  
+        System.out.println("I am a default ctor of A");  
+    }  
+  
+    public A(int a)  
+    {  
+        this(); //error  
+        System.out.println("I am a ctor of A with a parameter type int");  
+    }  
+  
+    public A(String str)  
+    {  
+        this(10); //error  
+        System.out.println("I am a ctor of A with a parameter type String");  
+    }  
+  
+    //...  
+}
+```
+
+>super ctor sentaksı ve this ctor sentaksı aynı ctor'da kullanılamaz. Çünkü her ikisinin de ctor'un ilk deyimi olması zorunludur. Aslında programcının böylesi bir durumla hiç karşılaşmaması gerekir. İyi bir tasarım ve dolayısıyla implementasyon programcı hiç bir zaman bunu kullanmak zorunda bırakmaz. Bir programcı böylesi bir durumla karşılaşırsa tasarımına bakmaıdır. 
+
+>Aşağıdaki demo örnekte this ctor ve super sentaksları aynı ctor'da bir arada kullanıldıklarından error oluşur
+
+```java
+class B extends A {  
+    public B()  
+    {  
+        System.out.println("I am a default ctor of B");  
+    }  
+  
+    public B(int b)  
+    {  
+        this();  
+        super(0); //error  
+        System.out.println("I am a ctor of B with a parameter type int");  
+    }  
+  
+    //...  
+}  
+  
+class A {  
+    public A()  
+    {  
+        System.out.println("I am a default ctor of A");  
+    }  
+  
+    public A(int a)  
+    {  
+        System.out.println("I am a ctor of A with a parameter type int");  
+    }  
+  
+    //...  
+}
+```
+
+>Aşağıdaki demo örneğin inceleyiniz
+
+```java
+class B extends A {  
+    public B()  
+    {  
+        super(0);  
+        System.out.println("I am a default ctor of B");  
+    }  
+  
+    public B(int b)  
+    {  
+        this();  
+        System.out.println("I am a ctor of B with a parameter type int");  
+    }  
+  
+    //...  
+}  
+  
+class A {  
+    public A()  
+    {  
+        System.out.println("I am a default ctor of A");  
+    }  
+  
+    public A(int a)  
+    {  
+        System.out.println("I am a ctor of A with a parameter type int");  
+    }  
+  
+    //...  
+}
+```
+
+###### Object Sınıfı
+
+>Bir sınıf extends anahtar sözcüğü ile hiç bir sınıftab türetilmese de **java.lang.Object** isimli bir sınıftan türetilmiş olur. Bu durumda Object sınıfı her sınıfın doğrudan ya da dolaylı olarak taban sınıfıdır. Böyle bir tasarımın yani Object sınıfın varlığı ve anlamı ileride ele alınacaktır. İstenirse Object sınıfı bir sınıfta extends anahtar sözcüğü ile de yazılabilir, yazılmasa da aynı anlamda olduğundan yazmamayı tercih edeceğiz. Bu durumda taban sınıf olmayan tek sınıf Object'dir. 
+
+>Aşağıdaki demo sınıf için extends anahtar sözcüğü ile Object yazılmasına gerek yoktur
+
+```java
+class A extends Object {  
+    //...
+}
+```
+
+
+###### protected Bölümün Anlamı
+
+>Anımsanacağı sınıfın protected bölümü friendly sınıf için public, farklı paketteki diğer sınıflar için türetme söz konusu değilse privat anlamındadır. Ancak türetme söz konusuysa, türemiş sınıf protected bölüme aşağıdaki gibi erişemez
+
+```java
+package test;  
+  
+public class A {  
+    protected int a;  
+    protected A()  
+    {  
+  
+    }  
+  
+    protected void foo()  
+    {  
+  
+    }  
+}
+```
+
+```java
+package mest;  
+  
+import test.A;  
+  
+public class B extends A {  
+    public void bar()  
+    {  
+        A x = new A(); //error
+  
+        x.a = 10; //error
+        x.foo(); //error
+    }  
+}
+```
+
+>Bir sınıf farklı paketteki bir sınıftan türetilmişse, taban sınıfının `mantıksal olarak kendisine türemiş sınıfa ait olan protected bölümüne` erişilebilir. Yani aslında protected elemanlara doğrudan erişilebilir. 
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package test;  
+  
+public class A {  
+    protected int a;  
+    protected A()  
+    {  
+  
+    }  
+  
+    protected A(int a)  
+    {  
+  
+    }  
+  
+    protected void foo()  
+    {  
+  
+    }  
+}
+```
+
+```java
+package mest;  
+  
+import test.A;  
+  
+public class B extends A {  
+    public B()  
+    {  
+  
+    }  
+  
+    public B(int a, int b)  
+    {  
+        super(a);  
+    }  
+  
+    public void  bar(int x)  
+    {  
+        a = x;  
+        foo();  
+    }  
+}
+```
+
+###### İsim Arama ve Türetme
+
+>Anımsanacağı gibi nitelikli ve niteliksiz isim arama genel kurallarında bir isim sınıf içerisinde aranıyorsa ve bulunamazsa taban sınıfa, yoksa onun taban sınıfına, . . . bakılır. Hiç birinde yoksa bu adımda bulunamamış olur. 
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        C x = new C();  
+  
+        x.a = 100;  
+        x.b = 34;  
+        x.c = 67;  
+        x.tar();  
+        x.bar();  
+        x.foo();  
+    }  
+}  
+  
+class C extends B {  
+    public int c;  
+  
+    public void tar()  
+    {  
+        a = 20;  
+        b = 30;  
+        c = 20;  
+    }  
+}  
+  
+class B extends A {  
+    public int b;  
+  
+    public void bar()  
+    {  
+        System.out.println("B.bar");  
+    }  
+}  
+  
+class A {  
+    public int a;  
+    public void foo()  
+    {  
+        System.out.println("A.foo");  
+    }  
+}
+```
+
