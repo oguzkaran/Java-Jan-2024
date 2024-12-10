@@ -1,6 +1,6 @@
 /**
  * Utility class for array operations
- * Last Update: 17th October 2024
+ * Last Update: 10th December 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.matrix;
@@ -9,7 +9,7 @@ import org.csystem.util.array.ArrayUtil;
 
 import java.util.Random;
 
-public class MatrixUtil {
+public final class MatrixUtil {
     private MatrixUtil()
     {
     }

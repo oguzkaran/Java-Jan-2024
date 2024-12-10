@@ -1,11 +1,11 @@
 /**
  * Utility class for command line operations
- * Last Update: 17th October 2024
+ * Last Update: 10th December 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.console;
 
-public class CommandLineArgsUtil {
+public final class CommandLineArgsUtil {
     private CommandLineArgsUtil()
     {
     }

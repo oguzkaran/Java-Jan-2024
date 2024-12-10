@@ -1,11 +1,11 @@
 /**
  * Utility class for numeric operations
- * Last Update: 7th November 2024
+ * Last Update: 10th December 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.numeric;
 
-public class NumberUtil {
+public final class NumberUtil {
 	private NumberUtil()
 	{
 	}

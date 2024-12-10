@@ -1,11 +1,11 @@
 /**
  * Utility class for math operations
- * Last Update:17th October 2024
+ * Last Update:10th December 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.math;
 
-public class MathUtil {
+public final class MathUtil {
 	private MathUtil()
 	{
 	}

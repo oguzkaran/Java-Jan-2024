@@ -6155,7 +6155,9 @@ class App {
 }
 ```
 
->**_break deyimi:_** `break` deyimi döngü deyimlerinde ve switch deyiminde kullanılabilen bir kontrol deyimidir. break deyimi döngüde kullanıldığında döngüyü sonlandırır. break deyiminin genel biçimi şu şekildedir:
+##### break deyimi
+
+>`break` deyimi döngü deyimlerinde ve switch deyiminde  kullanılabilen bir kontrol deyimidir. break deyimi döngüde kullanıldığında döngüyü sonlandırır. break deyiminin genel biçimi şu şekildedir:
 
 		break [etiket (label) ismi];
 >break deyiminin etiketsiz kullanımda akış ilgili döngüden sonrasından devam eder. Yani döngü sonlanmış olur. break deyiminin döngü deyimi ve switch deyimi dışında kullanımı error oluşturur.  break deyimi hangi döngü deyimi içerisinde kullanılmışsa o döngü deyimini sonlandırır. break deyimi algoritmaya göre her durumda kullanılabileceği gibi tipik olarak sonsuz döngü içerisinde de kullanılabilir
@@ -26228,7 +26230,7 @@ class A {
 
 >Bir sınıf extends anahtar sözcüğü ile hiç bir sınıftab türetilmese de **java.lang.Object** isimli bir sınıftan türetilmiş olur. Bu durumda Object sınıfı her sınıfın doğrudan ya da dolaylı olarak taban sınıfıdır. Böyle bir tasarımın yani Object sınıfın varlığı ve anlamı ileride ele alınacaktır. İstenirse Object sınıfı bir sınıfta extends anahtar sözcüğü ile de yazılabilir, yazılmasa da aynı anlamda olduğundan yazmamayı tercih edeceğiz. Bu durumda taban sınıf olmayan tek sınıf Object'dir. 
 
->Aşağıdaki demo sınıf için extends anahtar sözcüğü ile Object yazılmasına gerek yoktur
+>Aşağıdaki demo sınıfın taban sınıfı olarak Object yazılmasına gerek yoktur
 
 ```java
 class A extends Object {  
@@ -26236,10 +26238,9 @@ class A extends Object {
 }
 ```
 
-
 ###### protected Bölümün Anlamı
 
->Anımsanacağı sınıfın protected bölümü friendly sınıf için public, farklı paketteki diğer sınıflar için türetme söz konusu değilse privat anlamındadır. Ancak türetme söz konusuysa, türemiş sınıf protected bölüme aşağıdaki gibi erişemez
+>Anımsanacağı sınıfın protected bölümü friendly sınıf için public, farklı paketteki diğer sınıflar için türetme söz konusu değilse private anlamındadır. Ancak türetme söz konusuysa, türemiş sınıf taban sınıfının protected bölümüne aşağıdaki gibi erişemez
 
 ```java
 package test;  
@@ -26375,4 +26376,1320 @@ class A {
     }  
 }
 ```
+
+##### 10 Aralık 2024
+
+>Kartezyen düzlemde bir çemberi (analitik çember) temsil sınıfı yazacak olalım. Analitik çember aynı zamanda bir çember olduğuna göre daha önceden yazmış olduğumuz `Circle` sınıfının özelliklerini de barındırır. Bu durumda Circle sınıfından türetilebilir. Analitik çemberin ek (extension) olarak merkez koordinatı da olduğundan daha önce yazmış olduğumuz `MutablePoint` sınıfı `composition` ile kullanılabilir. Yani tipik olarak şu cümle kurulabilir: `AnalyticalCircle is a Circle, has a MutablePoint`. Buna göre detayları gözardı edilmiş UML şeması aşağıdaki gibidir:
+>
+
+![AnalyticalCircle](./media/AnalyticalCircle.PNG)
+>AnalyticalCircle sınıfı ve test kodlarını inceleyiniz
+
+```java
+package org.csystem.math.geometry.test;  
+  
+import org.csystem.math.geometry.AnalyticalCircle;  
+import org.csystem.math.geometry.Circle;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+public class AnalyticalCircleTest {  
+    private static void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+        Random random = new Random();  
+  
+        System.out.print("Input count:");  
+        int count = kb.nextInt();  
+  
+        while (count-- > 0) {  
+            System.out.println("----------------------------------------");  
+            double r = random.nextDouble(-10, 11);  
+            double y = random.nextDouble(-100, 101);  
+            double x = random.nextDouble(-100, 101);  
+            AnalyticalCircle ac = new AnalyticalCircle(r, x, y);  
+  
+            System.out.printf("Generated Values -> r = %f, x = %f, y = %f%n", r, x, y);  
+            System.out.printf("Radius:%f, Area:%f, Circumference:%f, Center:(%f, %f)%n", ac.getRadius(), ac.getArea(), ac.getCircumference(), ac.getX(), ac.getY());  
+            y = random.nextDouble(-100, 101);  
+            x = random.nextDouble(-100, 101);  
+            ac.setX(x);  
+            ac.setY(y);  
+            System.out.printf("Radius:%f, Area:%f, Circumference:%f, Center:(%f, %f)%n", ac.getRadius(), ac.getArea(), ac.getCircumference(), ac.getX(), ac.getY());  
+            System.out.printf("Radius:%f, Area:%f, Circumference:%f%n", ac.getRadius(), ac.getArea(), ac.getCircumference());  
+            System.out.println("----------------------------------------");  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+```java
+package org.csystem.math.geometry.test;  
+  
+import org.csystem.math.geometry.AnalyticalCircle;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+public class AnalyticalCircleDefaultCtorTest {  
+    private static void run()  
+    {  
+        AnalyticalCircle ac = new AnalyticalCircle();  
+  
+        System.out.printf("Radius:%f, Area:%f, Circumference:%f, Center:(%f, %f)%n", ac.getRadius(), ac.getArea(), ac.getCircumference(), ac.getX(), ac.getY());  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+```java
+package org.csystem.math.geometry.test;  
+  
+import org.csystem.math.geometry.AnalyticalCircle;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+public class AnalyticalCircleZeroRadiusCtorTest {  
+    private static void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+        Random random = new Random();  
+  
+        System.out.print("Input count:");  
+        int count = kb.nextInt();  
+  
+        while (count-- > 0) {  
+            System.out.println("----------------------------------------");  
+            double y = random.nextDouble(-100, 101);  
+            double x = random.nextDouble(-100, 101);  
+            AnalyticalCircle ac = new AnalyticalCircle(x, y);  
+  
+            System.out.printf("Generated Values -> x = %f, y = %f%n", x, y);  
+            System.out.printf("Radius:%f, Area:%f, Circumference:%f, Center:(%f, %f)%n", ac.getRadius(), ac.getArea(), ac.getCircumference(), ac.getX(), ac.getY());  
+            y = random.nextDouble(-100, 101);  
+            x = random.nextDouble(-100, 101);  
+            ac.setX(x);  
+            ac.setY(y);  
+            System.out.printf("Generated Values -> x = %f, y = %f%n", x, y);  
+            System.out.printf("Radius:%f, Area:%f, Circumference:%f, Center:(%f, %f)%n", ac.getRadius(), ac.getArea(), ac.getCircumference(), ac.getX(), ac.getY());  
+            System.out.println("----------------------------------------");  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+```java
+package org.csystem.math.geometry.test;  
+  
+import org.csystem.math.geometry.AnalyticalCircle;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+public class AnalyticalCircleZeroCenterCtorTest {  
+    private static void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+        Random random = new Random();  
+  
+        System.out.print("Input count:");  
+        int count = kb.nextInt();  
+  
+        while (count-- > 0) {  
+            System.out.println("----------------------------------------");  
+            double r = random.nextDouble(-10, 11);  
+  
+            AnalyticalCircle ac = new AnalyticalCircle(r);  
+  
+            System.out.printf("Generated Values -> r = %f%n", r);  
+            System.out.printf("Radius:%f, Area:%f, Circumference:%f, Center:(%f, %f)%n", ac.getRadius(), ac.getArea(), ac.getCircumference(), ac.getX(), ac.getY());  
+            System.out.println("----------------------------------------");  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+```java
+package org.csystem.math.geometry.test;  
+  
+import org.csystem.math.geometry.AnalyticalCircle;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+public class AnalyticalCircleOffsetTest {  
+    private static void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+        Random random = new Random();  
+  
+        System.out.print("Input count:");  
+        int count = kb.nextInt();  
+  
+        while (count-- > 0) {  
+            System.out.println("----------------------------------------");  
+            double r = random.nextDouble(-10, 11);  
+            double y = random.nextDouble(-100, 101);  
+            double x = random.nextDouble(-100, 101);  
+            AnalyticalCircle ac = new AnalyticalCircle(r, x, y);  
+  
+            System.out.printf("Generated Values -> r = %f, x = %f, y = %f%n", r, x, y);  
+            System.out.printf("Radius:%f, Area:%f, Circumference:%f, Center:(%f, %f)%n", ac.getRadius(), ac.getArea(), ac.getCircumference(), ac.getX(), ac.getY());  
+            double dx = random.nextDouble(-100, 101);  
+            double dy = random.nextDouble(-100, 101);  
+  
+            ac.offset(dx, dy);  
+            System.out.printf("Generated Values -> dx = %f, dy = %f%n", dx, dy);  
+            System.out.printf("Radius:%f, Area:%f, Circumference:%f, Center:(%f, %f)%n", ac.getRadius(), ac.getArea(), ac.getCircumference(), ac.getX(), ac.getY());  
+            System.out.println("----------------------------------------");  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+```java
+package org.csystem.math.geometry;  
+  
+public class AnalyticalCircle extends Circle {  
+    private static final double DELTA = 0.0000001;  
+    private final MutablePoint m_center;  
+  
+    public AnalyticalCircle()  
+    {  
+        this(0, 0);  
+    }  
+  
+    public AnalyticalCircle(double radius)  
+    {  
+        this(radius, 0, 0);  
+    }  
+  
+    public AnalyticalCircle(double x, double y)  
+    {  
+        this(0, x, y);  
+    }  
+  
+    public AnalyticalCircle(double radius, double x, double y)  
+    {  
+        super(radius);  
+        m_center = MutablePoint.createCartesian(x, y);  
+    }  
+  
+    public double getX()  
+    {  
+        return m_center.getX();  
+    }  
+  
+    public void setX(double x)  
+    {  
+        m_center.setX(x);  
+    }  
+  
+    public double getY()  
+    {  
+        return m_center.getY();  
+    }  
+  
+    public void setY(double y)  
+    {  
+        m_center.setY(y);  
+    }  
+  
+    public void setCenter(double x, double y)  
+    {  
+        setX(x);  
+        setY(y);  
+    }  
+  
+    public void offset(double dx, double dy)  
+    {  
+        m_center.offset(dx, dy);  
+    }  
+  
+    public void offset(double dxy)  
+    {  
+        offset(dxy, dxy);  
+    }  
+  
+    public boolean isTangent(AnalyticalCircle other)  
+    {  
+        return Math.abs(centersDistance(other) - getRadius() - other.getRadius()) < DELTA;  
+    }  
+  
+    public double centersDistance(AnalyticalCircle other)  
+    {  
+        return m_center.euclideanDistance(other.m_center);  
+    }  
+  
+    //...  
+}
+```
+
+>Dikkat edilirse `AnalyticalCircle` sınıfın 3 parametreli ctor'u tüm diğer ctor'lardan önce çağrılmaktadır. Çünkü ctor'ların hepsi aslında benzer işi aynı algoritmayı kullanarak yapmaktadır. Bir sınıf içerisinde tüm diğer ctor'lardan doğrudan ya da dolaylı çağrılan ctor'lara **primary ctor** da denilmektedir.
+>
+>Bir sınıf, gizlediği bir referansın türüne ilişkin sınıfın bir metodunu genel olarak aynı isimde ve aynı parametrik yapıda dışarıya veriyorsa (genel olarak public yapıyorsa), dışarıya verilen bu metoda **delegate method** denir. Yukarıdaki AnalyticalCircle sınıfının getX, setX, getY, setY, offset metotları aslında birer delagate metottur. 
+
+###### Bir Sınıfın Türetmeye Kapatılması
+
+>Java'da bir sınıf default olarak türetmeye açıktır. Bir sınıfı kapatmak için sınıf **final** olarak bildirilir. Türetmeye kapalı sınıflara ise **final sınıflar (final classes)** denir. 
+
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+class B extends A { //error
+    //...  
+}  
+  
+final class A {  
+    //...  
+}
+```
+>Bir sınıfın türetmeye kapatılması şüphesiz sınıfın domain'ine bağlıdır. Ancak bazı durumlarda gerekmese de sınıf final yapılır. Örneğin utility sınıflar zaten nesne özelliği göstermedikleri için bir convention olarak final yapılabilir. Ancak Jaba'da bu convention'a bazı sınıflarda uyulmamıştır. Örneğin Math sınıfı final'dır ancak Array sınıfı final olarak bildirilmemiştir. 
+
+>Aşağıda final olarak bildirilmiş utility sınıfları inceleyiniz
+
+```java
+package org.csystem.util.array;  
+  
+import java.util.Random;  
+  
+public final class ArrayUtil {  
+    private ArrayUtil()  
+    {  
+    }  
+  
+    private static void bubbleSortAscending(int [] a)  
+    {  
+        for (int i = 0; i < a.length - 1; ++i)  
+            for (int k = 0; k < a.length - 1 - i; ++k)  
+                if (a[k + 1] < a[k])  
+                    swap(a, k, k + 1);  
+    }  
+  
+    private static void bubbleSortDescending(int [] a)  
+    {  
+        for (int i = 0; i < a.length - 1; ++i)  
+            for (int k = 0; k < a.length -1 - i; ++k)  
+                if (a[k] < a[k + 1])  
+                    swap(a, k, k + 1);  
+    }  
+  
+    private static void selectionSortAscending(int [] a)  
+    {  
+        int min, minIndex;  
+  
+        for (int i = 0; i < a.length - 1; ++i) {  
+            min = a[i];  
+            minIndex = i;  
+  
+            for (int k = i + 1; k < a.length; ++k)  
+                if (a[k] < min) {  
+                    min = a[k];  
+                    minIndex = k;  
+                }  
+            a[minIndex] = a[i];  
+            a[i] = min;  
+        }  
+    }  
+  
+    private static void selectionSortDescending(int [] a)  
+    {  
+        int max, maxIndex;  
+  
+        for (int i = 0; i < a.length - 1; ++i) {  
+            max = a[i];  
+            maxIndex = i;  
+  
+            for (int k = i + 1; k < a.length; ++k)  
+                if (max < a[k]) {  
+                    max = a[k];  
+                    maxIndex = k;  
+                }  
+            a[maxIndex] = a[i];  
+            a[i] = max;  
+        }  
+    }  
+  
+    public static double average(int [] a)  
+    {  
+        return sum(a) / (double)a.length;  
+    }  
+  
+    public static void bubbleSort(int [] a)  
+    {  
+        bubbleSort(a, false);  
+    }  
+  
+    public static void bubbleSort(int [] a, boolean descending)  
+    {  
+        if (descending)  
+            bubbleSortDescending(a);  
+        else  
+            bubbleSortAscending(a);  
+    }  
+  
+    public static void drawHistogram(int [] data, int n, char ch)  
+    {  
+        int maxValue = ArrayUtil.max(data);  
+  
+        for (int grade : data) {  
+            int count = (int)Math.floor(grade * n / (double)maxValue);  
+  
+            while (count-- > 0)  
+                System.out.print(ch);  
+  
+            System.out.println();  
+        }  
+    }  
+  
+    public static int [] generateRandomArray(Random random, int count, int origin, int bound)  
+    {  
+        int [] a = new int[count];  
+  
+        for (int i = 0; i < count; ++i)  
+            a[i] = random.nextInt(origin, bound);  
+  
+        return a;  
+    }  
+  
+    public static double [] generateRandomArray(Random random, int count, double origin, double bound)  
+    {  
+        double [] a = new double[count];  
+  
+        for (int i = 0; i < count; ++i)  
+            a[i] = random.nextDouble(origin, bound);  
+  
+        return a;  
+    }  
+  
+    public static boolean [] generateRandomArray(Random random, int count)  
+    {  
+        boolean [] a = new boolean[count];  
+  
+        for (int i = 0; i < count; ++i)  
+            a[i] = random.nextBoolean();  
+  
+        return a;  
+    }  
+  
+    public static int [] histogramData(int [] a, int n)  
+    {  
+        int [] data = new int[n + 1];  
+  
+        for (int val : a)  
+            ++data[val];  
+  
+        return data;  
+    }  
+  
+    public static int max(int [] a)  
+    {  
+        return max(a, 0);  
+    }  
+  
+    public static int max(int [] a, int startIndex)  
+    {  
+        int result = a[startIndex];  
+  
+        for (int i = startIndex + 1; i < a.length; ++i)  
+            result = Math.max(result, a[i]);  
+  
+        return result;  
+    }  
+  
+    public static int max(int [][] a)  
+    {  
+        int result = Integer.MIN_VALUE;  
+  
+        for (int [] array : a)  
+            result = Math.max(result, max(array));  
+  
+        return result;  
+    }  
+  
+    public static int min(int [] a)  
+    {  
+        return min(a, 0);  
+    }  
+  
+    public static int min(int [] a, int startIndex)  
+    {  
+        int result = a[startIndex];  
+  
+        for (int i = startIndex + 1; i < a.length; ++i)  
+            result = Math.min(result, a[i]);  
+  
+        return result;  
+    }  
+  
+    public static int min(int [][] a)  
+    {  
+        int result = Integer.MAX_VALUE;  
+  
+        for (int [] array : a)  
+            result = Math.min(result, min(array));  
+  
+        return result;  
+    }  
+  
+    public static void multiplyBy(int [] a, int value)  
+    {  
+        for (int i = 0; i < a.length; ++i)  
+            a[i] *= value;  
+    }  
+  
+    public static void multiplyBy(int [][] a, int value)  
+    {  
+        for (int [] array : a)  
+            multiplyBy(array, value);  
+    }  
+  
+    public static int partition(int [] a, int threshold)  
+    {  
+        int partitionPoint = 0;  
+  
+        while (partitionPoint != a.length && a[partitionPoint] < threshold)  
+            ++partitionPoint;  
+  
+        if (partitionPoint == a.length)  
+            return partitionPoint;  
+  
+        for (int i = partitionPoint + 1; i < a.length; ++i)  
+            if (a[i] < threshold)  
+                swap(a, i, partitionPoint++);  
+  
+        return partitionPoint;  
+    }  
+  
+    public static int partitionByEven(int [] a)  
+    {  
+        int partitionPoint = 0;  
+  
+        while (partitionPoint != a.length && a[partitionPoint] % 2 == 0)  
+            ++partitionPoint;  
+  
+        if (partitionPoint == a.length)  
+            return partitionPoint;  
+  
+        for (int i = partitionPoint + 1; i < a.length; ++i)  
+            if (a[i] % 2 == 0)  
+                swap(a, i, partitionPoint++);  
+  
+        return partitionPoint;  
+    }  
+  
+    public static void print(int [] a)  
+    {  
+        print(a, ' ', '\n');  
+    }  
+  
+    public static void print(int [] a, char sep, char end)  
+    {  
+        print(a, 1, sep, end);  
+    }  
+  
+    public static void print(int [] a, int n)  
+    {  
+        print(a, n, ' ', '\n');  
+    }  
+  
+    public static void print(int [] a, int n, char sep, char end)  
+    {  
+        String fmt = String.format("%%0%dd%c", n, sep);  
+  
+        for (int val : a)  
+            System.out.printf(fmt, val, sep);  
+  
+        System.out.print(end);  
+    }  
+  
+    public static void print(int [][] a)  
+    {  
+        print(a, 1);  
+    }  
+  
+    public static void print(int [][] a, int n)  
+    {  
+        for (int [] array : a)  
+            print(array, n, ' ', '\n');  
+    }  
+  
+    public static void print(double [] a)  
+    {  
+        print(a, '\n', '\n');  
+    }  
+  
+    public static void print(double [] a, char sep, char end)  
+    {  
+        for (double val : a)  
+            System.out.printf("%f%c", val, sep);  
+  
+        System.out.print(end);  
+    }  
+  
+    public static void reverse(int [] a)  
+    {  
+        int left = 0, right = a.length - 1;  
+  
+        while (left < right)  
+            swap(a, left++, right--);  
+    }  
+  
+    public static void reverse(char [] a)  
+    {  
+        int left = 0, right = a.length - 1;  
+  
+        while (left < right)  
+            swap(a, left++, right--);  
+    }  
+  
+    public static void selectionSort(int [] a)  
+    {  
+        selectionSort(a, false);  
+    }  
+  
+    public static void selectionSort(int [] a, boolean descending)  
+    {  
+        if (descending)  
+            selectionSortDescending(a);  
+        else  
+            selectionSortAscending(a);  
+    }  
+    public static long sum(int [] a)  
+    {  
+        long total = 0;  
+  
+        for (int val : a)  
+            total += val;  
+  
+        return total;  
+    }  
+  
+    public static void swap(int [] a, int i, int k)  
+    {  
+        int temp = a[i];  
+  
+        a[i] = a[k];  
+        a[k] = temp;  
+    }  
+  
+    public static void swap(char [] a, int i, int k)  
+    {  
+        char temp = a[i];  
+  
+        a[i] = a[k];  
+        a[k] = temp;  
+    }  
+  
+    //...  
+}
+```
+
+```java
+package org.csystem.util.console;  
+  
+public final class CommandLineArgsUtil {  
+    private CommandLineArgsUtil()  
+    {  
+    }  
+  
+    public static void checkLengthEquals(int len, int argsLen, String message)  
+    {  
+        checkLengthEquals(len, argsLen, message, 1);  
+    }  
+  
+    public static void checkLengthEquals(int len, int argsLen, String message, int exitCode)  
+    {  
+        if (len != argsLen) {  
+            System.err.println(message);  
+            System.exit(exitCode);  
+        }  
+    }  
+  
+    public static void checkLengthGreater(int len, int argsLen, String message)  
+    {  
+        checkLengthGreater(len, argsLen, message, 1);  
+    }  
+  
+    public static void checkLengthGreater(int len, int argsLen, String message, int exitCode)  
+    {  
+        if (len <= argsLen) {  
+            System.err.println(message);  
+            System.exit(exitCode);  
+        }  
+    }  
+  
+    //...  
+}
+```
+
+```java
+package org.csystem.util.matrix;  
+  
+import org.csystem.util.array.ArrayUtil;  
+  
+import java.util.Random;  
+  
+public final class MatrixUtil {  
+    private MatrixUtil()  
+    {  
+    }  
+  
+    public static int [][] add(int [][] a, int [][] b)  
+    {  
+        int m = a.length;  
+        int n = a[0].length;  
+        int [][] r = new int[m][n];  
+  
+        for (int i = 0; i < m; ++i)  
+            for (int j = 0; j < n; ++j)  
+                r[i][j] = a[i][j] + b[i][j];  
+  
+        return r;  
+    }  
+  
+    public static double [][] add(double [][] a, double [][] b)  
+    {  
+        int m = a.length;  
+        int n = a[0].length;  
+        double [][] r = new double[m][n];  
+  
+        for (int i = 0; i < m; ++i)  
+            for (int j = 0; j < n; ++j)  
+                r[i][j] = a[i][j] + b[i][j];  
+  
+        return r;  
+    }  
+  
+    public static int [][] generateRandomMatrix(Random random, int m, int n, int origin, int bound)  
+    {  
+        int [][] result = new int[m][];  
+  
+        for (int i = 0; i < m; ++i)  
+            result[i] = ArrayUtil.generateRandomArray(random, n, origin, bound);  
+  
+        return result;  
+    }  
+  
+    public static int [][] generateRandomSquareMatrix(Random random, int n, int origin, int bound)  
+    {  
+        return generateRandomMatrix(random, n, n, origin, bound);  
+    }  
+  
+    public static boolean isMatrix(int [][] a)  
+    {  
+        for (int i = 1; i < a.length; ++i)  
+            if (a[i].length != a[0].length)  
+                return false;  
+  
+        return true;  
+    }  
+  
+    public static boolean isSquareMatrix(int [][] a)  
+    {  
+        return isMatrix(a) && a.length == a[0].length;  
+    }  
+  
+    public static int max(int [][] a)  
+    {  
+        return ArrayUtil.max(a);  
+    }  
+  
+    public static int min(int [][] a)  
+    {  
+        return ArrayUtil.min(a);  
+    }  
+  
+    public static int [][] multiply(int [][] a, int [][] b)  
+    {  
+        int m = a.length;  
+        int n = a[0].length;  
+        int p = b[0].length;  
+        int [][] r = new int[m][p];  
+  
+        for (int i = 0; i < m; ++i)  
+            for (int j = 0; j < n; ++j)  
+                for (int k = 0; k < p; ++k)  
+                    r[i][k] += a[i][j] * b[j][k];  
+  
+        return r;  
+    }  
+  
+    public static void multiplyBy(int [][] a, int value)  
+    {  
+        ArrayUtil.multiplyBy(a, value);  
+    }  
+  
+    public static void print(int [][] a)  
+    {  
+        print(a, 1);  
+    }  
+  
+    public static void print(int [][] a, int n)  
+    {  
+        ArrayUtil.print(a, n);  
+    }  
+  
+    public static int [][] subtract(int [][] a, int [][] b)  
+    {  
+        int m = a.length;  
+        int n = a[0].length;  
+        int [][] r = new int[m][n];  
+  
+        for (int i = 0; i < m; ++i)  
+            for (int j = 0; j < n; ++j)  
+                r[i][j] = a[i][j] - b[i][j];  
+  
+        return r;  
+    }  
+  
+    public static long sum(int [][] a)  
+    {  
+        long total = 0;  
+  
+        for (int [] array : a)  
+            total += ArrayUtil.sum(array);  
+  
+        return total;  
+    }  
+  
+    public static long sumDiagonal(int [][] a)  
+    {  
+        long total = 0;  
+  
+        for (int i = 0; i < a.length; ++i)  
+            total += a[i][i];  
+  
+        return total;  
+    }  
+  
+    public static int [][] transpose(int [][] a)  
+    {  
+        int m = a.length;  
+        int n = a[0].length;  
+        int [][] r = new int[n][m];  
+  
+        for (int i = 0; i < n; ++i)  
+            for (int j = 0; j < m; ++j)  
+                r[i][j] = a[j][i];  
+  
+        return r;  
+    }  
+}
+```
+
+```java
+package org.csystem.util.numeric;  
+  
+public final class NumberUtil {  
+    private NumberUtil()  
+    {  
+    }  
+  
+    private static final String ZERO_TR = "sıfır";  
+    private static final String MINUS_TR = "eksi";  
+    private static final String [] ONES_TR = {"", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz"};  
+    private static final String [] TENS_TR = {"", "on", "yirmi", "otuz", "kırk", "elli", "altmış", "yetmiş", "seksen", "doksan"};  
+    private static final String [] NUMBER_UNITS_TR = {"kentilyon", "katrilyon", "trilyon", "milyar", "milyon", "bin", ""};  
+  
+  
+    private static final String ZERO_EN = "zero";  
+    private static final String MINUS_EN= "minus";  
+    private static final String [] ONES_EN = {"", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};  
+    private static final String [] TENS_EN = {"", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"};  
+    private static final String [] NUMBER_UNITS_EN = {"quintillion", "quadrillion", "trillion", "billion", "million", "thousand", ""};  
+  
+    private static int [] getDigits(long a, int n)  
+    {  
+        int divider = (int)Math.pow(10, n);  
+       a = Math.abs(a);  
+        int [] digits = new int[a == 0 ? 1 : (int)(Math.log10(a) / n) + 1];  
+  
+        for (int i = digits.length - 1; i >= 0; digits[i--] = (int)(a % divider), a /= divider)  
+            ;  
+  
+        return digits;  
+    }  
+  
+    private static String numToStr3DigitsTR(int val)  
+    {  
+       StringBuilder sb = new StringBuilder();  
+  
+       int a = val / 100;  
+       int b = val / 10 % 10;  
+       int c = val % 10;  
+  
+       if (a != 0) {  
+          if (a != 1)  
+             sb.append(ONES_TR[a]).append(" ");  
+          sb.append("yüz ");  
+       }  
+  
+       if (b != 0)  
+          sb.append(TENS_TR[b]).append(" ");  
+  
+       if (c != 0)  
+          sb.append(ONES_TR[c]).append(" ");  
+  
+       return sb.isEmpty() ? "" : sb.substring(0, sb.length() - 1);  
+    }  
+  
+    private static String numToStr3DigitsEN(int val)  
+    {  
+       StringBuilder sb = new StringBuilder();  
+  
+       int a = val / 100;  
+       int b = val / 10 % 10;  
+       int c = val % 10;  
+  
+       if (a != 0)  
+          sb.append(ONES_EN[a]).append(" ").append("hundred ");  
+  
+       if (b != 0)  
+          sb.append(TENS_EN[b]).append(" ");  
+  
+       if (c != 0)  
+          sb.append(ONES_EN[c]).append(" ");  
+  
+       return sb.isEmpty() ? "" : sb.substring(0, sb.length() - 1);  
+    }  
+  
+    public static int countDigits(long a)  
+    {  
+       return a != 0 ? (int)Math.log10(Math.abs(a)) + 1 : 1;  
+    }  
+  
+    public static long factorial(int n)  
+    {  
+       long result = 1;  
+  
+       for (long i = 2; i <= n; ++i)  
+          result *= i;  
+  
+       return result;  
+    }  
+  
+    public static int fibonacciNumber(int n)  
+    {  
+       if (n <= 2)  
+          return n - 1;  
+  
+       int prev1 = 1, prev2 = 0, result = prev1 + prev2;  
+  
+       for (int i = 3; i < n; ++i) {  
+          prev2 = prev1;  
+          prev1 = result;  
+          result = prev1 + prev2;  
+       }  
+  
+       return result;  
+    }  
+  
+    public static int [] getDigits(long a)  
+    {  
+       return getDigits(a, 1);  
+    }  
+  
+    public static int [] getDigitsInThrees(long a)  
+    {  
+        return getDigits(a, 3);  
+    }  
+  
+    public static int [] getDigitsInTwos(long a)  
+    {  
+        return getDigits(a, 2);  
+    }  
+  
+    public static int getDigitsPowSum(int a)  
+    {  
+       int result = 0;  
+       int n = countDigits(a);  
+  
+       while (a != 0) {  
+          result += (int)Math.pow(a % 10, n);  
+          a /= 10;  
+       }  
+  
+       return result;  
+    }  
+  
+    public static boolean isArmstrong(int a)  
+    {  
+       return a >= 0 && getDigitsPowSum(a) == a;  
+    }  
+  
+    public static boolean isEven(int a)  
+    {  
+       return a % 2 == 0;  
+    }  
+  
+    public static boolean isOdd(int a)  
+    {  
+       return !isEven(a);  
+    }  
+  
+    public static boolean isPrime(long a)  
+    {  
+       if (a <= 1)  
+          return false;  
+  
+       if (a % 2 == 0)  
+          return a == 2;  
+  
+       if (a % 3 == 0)  
+          return a == 3;  
+  
+       if (a % 5 == 0)  
+          return a == 5;  
+  
+       if (a % 7 == 0)  
+          return a == 7;  
+  
+       for (long i = 11; i * i <= a; i += 2)  
+          if (a % i == 0)  
+             return false;  
+  
+       return true;  
+    }  
+  
+    public static long nextClosestPrime(long a)  
+    {  
+       if (a < 2)  
+          return 2;  
+  
+       while (!isPrime(++a))  
+          ;  
+  
+       return a;  
+    }  
+  
+    public static int nextFibonacciNumber(int val)  
+    {  
+       if (val < 0)  
+          return 0;  
+  
+       int prev1 = 1, prev2 = 0, next = prev1 + prev2;  
+  
+       while (next <= val) {  
+          prev2 = prev1;  
+          prev1 = next;  
+          next = prev1 + prev2;  
+       }  
+  
+       return next;  
+    }  
+  
+    public static long nthPrime(int n)  
+    {  
+       long result = 2;  
+       int count = 0;  
+  
+       for (long i = 2; count < n; ++i)  
+          if (isPrime(i)) {  
+             ++count;  
+             result = i;  
+          }  
+       return result;  
+    }  
+  
+    public static String numToStrTR(long a)  
+    {  
+       if (a == 0)  
+          return ZERO_TR;  
+  
+       int [] threes = getDigitsInThrees(a);  
+       StringBuilder sb = new StringBuilder();  
+       int idx = NUMBER_UNITS_TR.length - 1;  
+  
+       for (int i = threes.length - 1; i >= 0; --i) {  
+          if (threes[i] != 0)  
+             sb.insert(0, "%s%s ".formatted(idx == NUMBER_UNITS_TR.length - 2 && threes[i] == 1 ? "" : numToStr3DigitsTR(threes[i]) + " ", NUMBER_UNITS_TR[idx]));  
+  
+          --idx;  
+       }  
+  
+       return "%s%s".formatted(a < 0 ? MINUS_TR + " " : "", sb.substring(0, sb.length() - 2));  
+    }  
+  
+    public static String numToStrEN(long a)  
+    {  
+       if (a == 0)  
+          return ZERO_EN;  
+  
+       int [] threes = getDigitsInThrees(a);  
+       StringBuilder sb = new StringBuilder();  
+       int idx = NUMBER_UNITS_EN.length - 1;  
+  
+       for (int i = threes.length - 1; i >= 0; --i) {  
+          if (threes[i] != 0)  
+             sb.insert(0, "%s %s ".formatted(numToStr3DigitsEN(threes[i]), NUMBER_UNITS_EN[idx]));  
+  
+          --idx;  
+       }  
+  
+       return "%s%s".formatted(a < 0 ? MINUS_EN + " " : "", sb.substring(0, sb.length() - 2));  
+    }  
+  
+    public static int reverse(int val)  
+    {  
+       int result = 0;  
+  
+       while (val != 0) {  
+          result = result * 10 + val % 10;  
+          val /= 10;  
+       }  
+  
+       return result;  
+    }  
+  
+    public static int sumDigits(int val)  
+    {  
+       int total = 0;  
+  
+       while (val != 0) {  
+          total += val % 10;  
+          val /= 10;  
+       }  
+  
+       return Math.abs(total);  
+    }  
+}
+```
+
+```java
+package org.csystem.util.string;  
+  
+import java.util.Random;  
+  
+public final class StringUtil {  
+    private StringUtil()  
+    {  
+    }  
+  
+    private static final String LETTERS_EN = "abcdefghijklmnopqrstuvwxyz";  
+    private static final String LETTERS_TR = "abcçdefgğhıijklmnoöprsştuüvyz";  
+    private static final String CAPITAL_LETTERS_EN = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";  
+    private static final String CAPITAL_LETTERS_TR = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ";  
+    private static final String ALL_LETTERS_EN = LETTERS_EN + CAPITAL_LETTERS_EN;  
+    private static final String ALL_LETTERS_TR = LETTERS_TR + CAPITAL_LETTERS_TR;  
+  
+    public static String capitalize(String s)  
+    {  
+       return s.isEmpty() ? s : Character.toUpperCase(s.charAt(0)) + s.substring(1).toLowerCase();  
+    }  
+  
+    public static String changeCase(String s)  
+    {  
+       StringBuilder sb = new StringBuilder(s);  
+  
+       for (int i = 0; i < s.length(); ++i) {  
+          char c = s.charAt(i);  
+  
+          sb.setCharAt(i, Character.isLowerCase(c) ? Character.toUpperCase(c) : Character.toLowerCase(c));  
+       }  
+  
+       return sb.toString();  
+    }  
+  
+  
+    public static int countString(String s1, String s2)  
+    {  
+       int count = 0;  
+  
+       for (int i = 0; (i = s1.indexOf(s2, i)) != -1; ++i, ++count)  
+          ;  
+  
+       return count;  
+    }  
+  
+    public static String generateRandomText(Random random, int count, String sourceText)  
+    {  
+       char [] c = new char[count];  
+  
+       for (int i = 0; i < count; ++i)  
+          c[i] = sourceText.charAt(random.nextInt(sourceText.length()));  
+  
+       return String.valueOf(c);  
+    }  
+  
+    public static String generateRandomTextEN(Random random, int count)  
+    {  
+       return generateRandomText(random, count, ALL_LETTERS_EN);  
+    }  
+  
+    public static String generateRandomTextTR(Random random, int count)  
+    {  
+       return generateRandomText(random, count, ALL_LETTERS_TR);  
+    }  
+  
+    public static String [] generateRandomTexts(Random random, int count, int origin, int bound, String sourceText)  
+    {  
+       String [] str = new String[count];  
+  
+       for (int i = 0; i < count; ++i)  
+          str[i] = generateRandomText(random, random.nextInt(origin, bound), sourceText);  
+  
+       return str;  
+    }  
+  
+    public static String [] generateRandomTextsEN(Random random, int count, int origin, int bound)  
+    {  
+       return generateRandomTexts(random, count, origin, bound, ALL_LETTERS_EN);  
+    }  
+  
+    public static String [] generateRandomTextsTR(Random random, int count, int origin, int bound)  
+    {  
+       return generateRandomTexts(random, count, origin, bound, ALL_LETTERS_TR);  
+    }  
+  
+    public static boolean isPalindrome(String s)  
+    {  
+       int left = 0;  
+       int right = s.length() - 1;  
+  
+       while (left < right) {  
+          char cLeft = s.charAt(left);  
+  
+          if (!Character.isLetter(cLeft)) {  
+             ++left;  
+             continue;  
+          }  
+  
+          char cRight = s.charAt(right);  
+  
+          if (!Character.isLetter(cRight)) {  
+             --right;  
+             continue;  
+          }  
+  
+          if (Character.toLowerCase(cLeft) != Character.toLowerCase(cRight))  
+             return false;  
+  
+          ++left;  
+          --right;  
+       }  
+  
+       return true;  
+    }  
+  
+  
+    public static boolean isPangram(String s, String alphabet)  
+    {  
+       for (int i = 0; i < alphabet.length(); ++i)  
+          if (s.indexOf(alphabet.charAt(i)) == -1)  
+             return false;  
+  
+       return true;  
+    }  
+  
+  
+    public static boolean isPangramEN(String s)  
+    {  
+       return isPangram(s.toLowerCase(), LETTERS_EN);  
+    }  
+  
+    public static boolean isPangramTR(String s)  
+    {  
+       return isPangram(s.toLowerCase(), LETTERS_TR);  
+    }  
+  
+    public static String join(String [] s, String delimiter)  
+    {  
+       StringBuilder sb = new StringBuilder();  
+  
+       for (String str : s)  
+          sb.append(str).append(delimiter);  
+  
+       return sb.substring(0, sb.length() - delimiter.length());  
+    }  
+  
+    public static String join(String [] s, char delimiter)  
+    {  
+       return join(s, String.valueOf(delimiter));  
+    }  
+  
+    public static String padLeading(String s, int n, char ch)  
+    {  
+       int len = s.length();  
+  
+       return len < n ? String.valueOf(ch).repeat(n - len) + s : s;  
+    }  
+  
+    public static String padLeading(String s, int n)  
+    {  
+       return padLeading(s, n, ' ');  
+    }  
+  
+    public static String padTrailing(String s, int n, char ch)  
+    {  
+       int len = s.length();  
+  
+       return len < n ? s + String.valueOf(ch).repeat(n - len) : s;  
+    }  
+  
+    public static String padTrailing(String s, int n)  
+    {  
+       return padTrailing(s, n, ' ');  
+    }  
+  
+    public static String reverse(String s)  
+    {  
+       return new StringBuilder(s).reverse().toString();  
+    }  
+  
+    public static String [] split(String s, String delimiters)  
+    {  
+       return split(s, delimiters, true);  
+    }  
+  
+    public static String [] split(String s, String delimiters, boolean removeEmptyEntries)  
+    {  
+       StringBuilder pattern = new StringBuilder("[");  
+  
+       for (int i = 0; i < delimiters.length(); ++i) {  
+          char c = delimiters.charAt(i);  
+  
+          if (c == '[' || c == ']')  
+             pattern.append('\\');  
+  
+          pattern.append(c);  
+       }  
+  
+       pattern.append(']');  
+  
+       if (removeEmptyEntries)  
+          pattern.append("+");  
+  
+       return s.split(pattern.toString());  
+    }  
+}
+```
+
+**Soru:** final anahtar sözcüğü kullanmadan bir sınıfı türetmeye nasıl kapatırsınız?
 

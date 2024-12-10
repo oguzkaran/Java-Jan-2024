@@ -1,13 +1,13 @@
 /**
  * Utility class for string operations
- * Last Update: 26th October 2024
+ * Last Update: 10th December 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.string;
 
 import java.util.Random;
 
-public class StringUtil {
+public final class StringUtil {
 	private StringUtil()
 	{
 	}

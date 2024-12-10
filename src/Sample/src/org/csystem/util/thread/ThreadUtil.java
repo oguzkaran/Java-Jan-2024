@@ -1,13 +1,13 @@
 /**
  * Utility class for thread operations
- * Last Update:12th November 2024
+ * Last Update:10th December 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.thread;
 
 import java.util.concurrent.TimeUnit;
 
-public class ThreadUtil {
+public final class ThreadUtil {
     private ThreadUtil()
     {
     }

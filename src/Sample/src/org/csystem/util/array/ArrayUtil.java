@@ -1,13 +1,13 @@
 /**
  * Utility class for array operations
- * Last Update: 7th November 2024
+ * Last Update: 10th December 2024
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.array;
 
 import java.util.Random;
 
-public class ArrayUtil {
+public final class ArrayUtil {
     private ArrayUtil()
     {
     }
