@@ -6691,9 +6691,11 @@ class DemoMenuApp {
 }
 ```
 
->**_switch deyimi:_** `switch` deyimi sonlu ve sabit sayıda seçenek için okunabilirliği artırmak amaçlı kullanılan bir kontrol deyimidir. `switch` deyimi belirli koşullar altında if deyimi yerine kullanılabilir. Yani bu anlamda belirli koşullar altında if deyimi gibi çalışır. `switch` deyimine `Java 12` ile birlikte (ilerleyen bazı sürümlerde de) eklentiler yapılmıştır. Hatta bu anlamda `switch expression` da dile eklenmiştir. switch expression ve `switch` deyimine ilişkin eklentiler ileride ele alınacaktır.
->	
->`switch` deyiminin genel biçimi şu şekildedir:
+##### switch deyimi
+
+>`switch` deyimi sonlu ve sabit sayıda seçenek için okunabilirliği artırmak amaçlı kullanılan bir kontrol deyimidir. `switch` deyimi belirli koşullar altında if deyimi yerine kullanılabilir. Yani bu anlamda belirli koşullar altında if deyimi gibi çalışır. `switch` deyimine `Java 12` ile birlikte (ilerleyen bazı sürümlerde de) eklentiler yapılmıştır. Hatta bu anlamda `switch expression` da dile eklenmiştir. switch expression ve `switch` deyimine ilişkin eklentiler ileride ele alınacaktır.
+
+`switch` deyiminin genel biçimi şu şekildedir:
 
 		switch (<ifade>) {	
 			case <sabit ifadesi-1>:
@@ -8659,7 +8661,7 @@ class App {
 		(<tür ismi>)<ifade>
 >Operatör operandına ilişkin değeri belirtilen türe dönüştürür. Operatörün yan etkisi yoktur. Operatörün ürettiği değer operandına ilişkin değerin, belirtilen türe dönüştürüldüğündeki elde edilen değerdir. Operatör tür dönüştürme işlemini yine geçici değişken yaratarak yapar. Bu operatör ile yapılan dönüşümlere "explicit conversion" ya da "type casting" denilmektedir. Genel olarak `implicit` olarak yapılamayan dönüşümler, explicit olarak yapılabilmektedir. Dilin bütünlüğü olarak `implicit` olarak yapılabilen dönüşümler, bu operatör kullanılarak da yapılabilmektedir. Java'da `implicit` olarak yapılamayan ancak explicit olarak yapılabilen dönüşümlerde değerlerin nasıl elde edileceği yani genel olarak söylemek gerekirse bilgi kaybının nasıl olacağı da belirlidir. Burada bunlar ele alınacaktır.
 
-**Anahtar Notlar:** Bir dönüşüm `implicit` olarak yapılamıyor ancak `explicit` olarak yapılabiliyorsa "ortada bir problem oluşabilir ve derleyici bunu yanlışlıkla programcının yapmasını istemediği için `explicit` yapılması gerekir" anlamı çıkmalıdır. Yani aslında zorunlu olarak `explicit` yapılan dönüşüm için derleyiciye programcı "ben durumun farkındayım bana izin ver, sonuçlarına katlanacağım :)" mesajı vermektedir. `Explicit` olarak bile yapılamayan dönüşümler zaten anlamsız olduklarından geçersizdir.
+**Anahtar Notlar:** Bir dönüşüm `implicit` olarak yapılamıyor ancak `explicit` olarak yapılabiliyorsa **çalışma zamandında bir problem oluşabilir ve derleyici bunu yanlışlıkla programcının yapmasını istemediği için explicit yapılması gerekir** anlamı çıkmalıdır. Yani aslında zorunlu olarak `explicit` yapılan dönüşüm için derleyiciye programcı, **ben durumun farkındayım bana izin ver, sonuçlarına katlanacağım :)** mesajı vermektedir. `Explicit` olarak bile yapılamayan dönüşümler zaten anlamsız olduklarından geçersizdir.
  
 >Aşağıdaki demo örnekte bölme işlemi double türü ile yapılacağından sonuç double türden çıkar
 
@@ -8683,7 +8685,7 @@ class App {
 }
 ```
 
->Explciit conversion'a ilişkin ayrıntılar şunlardır:
+>Explicit conversion'a ilişkin ayrıntılar şunlardır:
  
 >Büyük tamsayı türünden küçük tamsayı türüne yapılan explicit dönüşümde değerin yüksek anlamlı byte'ları atılır. Bu durumda sayı hedef türün sınırları içerisinde kalıyorsa bilgi kaybı oluşmaz, kalmıyorsa oluşur. Aşağıdaki demo örneği inceleyiniz
 
@@ -27691,5 +27693,213 @@ public final class StringUtil {
 }
 ```
 
-**Soru:** final anahtar sözcüğü kullanmadan bir sınıfı türetmeye nasıl kapatırsınız?
+
+##### 17 Aralık 2024
+
+>**Soru:** `final` anahtar sözcüğü kullanmadan bir sınıfı türetmeye nasıl kapatırsınız? 
+
+>**Cevap:** Şüphesiz pratikte bir sınıfı türetmeye kapatmak için final anahtar sözcüğü kullanılır. Bu soruya ve cevabına bir bilgi ölçümü olarak bakılmalıdır. Bir sınıf final anahtar sözcüğü kullanmadan doğrudan türetmeye kapatılamaz. Bu durumda türetme yapılamaması için ctor'un private yapılması gerekir. Ancak bu durumda sınıfı kullanan kodlar da nesne yaratamaz duruma gelecektir. Bu sınıf türünden nesnenin de sınıf dışından yaratılabilmesi için programcı bir factory metot yazabilir. Bu durumda nesne yaratmak isteyen programcı sınıfın ilgili factory metodunu çağırarak nesne yaratılmasını sağlar. 
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        A x = A.create();  
+          
+        x.foo();  
+    }  
+}  
+  
+  
+class B extends A { //error  
+  
+}  
+  
+class A {  
+    //...  
+    private A()  
+    {  
+    }  
+  
+    public static A create()  
+    {  
+        return new A();  
+    }  
+  
+    public void foo()  
+    {  
+        //...  
+    }  
+    //...  
+}
+```
+
+>Dikkat edilirse sınıf türetmeye dolaylı olarak kapatılmıştır. 
+
+###### Türemiş Sınıf ve Taban Sınıf Arasındaki Dönüşümler
+
+>Anımsanacağı gibi farklı türden referanslar tür dönüştürme operatörü ile (explicit) bile birbirine dönüşemezler. İki sınıf arasında türetme ilişkisi varsa bu durumda:
+>1. Türemiş sınıf türünden bir referans, taban sınıf türünden bir referansa doğrudan (implicit) dönüşebilir (atanabilir).
+>2. Taban sınıf türünden bir referans, türemiş sınıf türünden bir referansa doğrudan (implicit) dönüşemez (atanamaz). Bu işlem tür dönüştürme operatörü ile yapılabilir.
+>Buradaki ilk dönüşüme **yukarıya doğru dönüşüm (upcasting)**, ikinci dönüşüme ise **aşağıya doğru dönüşüm (downcasting)** denilmektedir.
+> 
+
+![Inheritance](./media/InheritanceMemory.PNG)
+###### Yukarıya Doğru Dönüşüm (Upcasting)
+
+>Bu durumda **türemiş nesnesinin taban sınıf kısmının adresi taban sınıf referansına atanmış olur**. 
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        B x = new B();  
+        A y;  
+  
+        x.a = 20;  
+        x.b = 30;  
+        y = x; //upcasting  
+  
+        System.out.printf("x.a = %d, x.b = %d%n", x.a, x.b);  
+        System.out.printf("y.a = %d%n", y.a);  
+        System.out.println("---------------------------------");  
+  
+        ++y.a;  
+        System.out.printf("x.a = %d, x.b = %d%n", x.a, x.b);  
+        System.out.printf("y.a = %d%n", y.a);  
+        System.out.println("---------------------------------");  
+  
+        ++x.a;  
+        System.out.printf("x.a = %d, x.b = %d%n", x.a, x.b);  
+        System.out.printf("y.a = %d%n", y.a);  
+        System.out.println("---------------------------------");  
+    }  
+}  
+  
+class B extends A {  
+    public int b;  
+    //...  
+}  
+  
+class A {  
+    public int a;  
+    //...  
+}
+```
+
+>Upcasting argümandan parametreye aktarım ve metodun geri dönüş değerinde geçici değişkene atama durumlarında da geçerlidir. 
+
+>Upcasting ile özellikle türden bağımsız (type independent) kodlar yazılabilmektedir. Aşağıdaki demo örnekte A hiyararşisine yeni bir sınıf eklendiğinde yani A dan doğrudan ya da dolaylı olarak yeni bir sınıf türetildiğinde Sample sınıfına ve DemoApp sınıfının kodlarının değia da kodlarına eklenti yapılması gerekmez. İşte bu demo örnekte Sample sınıfı ve DemoApp sınıfı A'dan türeyenlerden bağımsız yazılmıştır. Başka bir deyişle Sampe ve DemoApp sınıfı A hiyerarşisinde yalnızca A sınıfına bağlıdır (dependency) 
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.thread.ThreadUtil;  
+  
+import java.util.Random;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        DemoApp.run();  
+    }  
+}  
+  
+class DemoApp {  
+    public static void run()  
+    {  
+        AFactory factory = new AFactory();  
+  
+        while (true) {  
+            System.out.println("-----------------------------------");  
+            A a = factory.create();  
+  
+            Sample.doWork(a);  
+            ThreadUtil.sleep(1000);  
+            System.out.println("-----------------------------------");  
+        }  
+    }  
+}  
+  
+class Sample {  
+    public static void doWork(A a)  
+    {  
+        System.out.printf("a = %d%n", a.x);  
+    }  
+}  
+  
+class AFactory {  
+    private final Random m_random = new Random();  
+  
+    public A create()  
+    {  
+        return switch (m_random.nextInt(6)) {  
+            case 0 -> new B();  
+            case 1 -> new C();  
+            case 2 -> new D();  
+            case 3 -> new E();  
+            case 4 -> new F();  
+            default -> new A();  
+        };  
+    }  
+}  
+  
+class F extends C {  
+    public int k;  
+    public F()  
+    {  
+        System.out.println("F");  
+    }  
+}  
+class E extends B {  
+    public int z;  
+    public E()  
+    {  
+        System.out.println("E");  
+    }  
+    //...  
+}  
+  
+class D extends A {  
+    public int t;  
+    public D()  
+    {  
+        System.out.println("D");  
+    }  
+    //...  
+}  
+  
+class C extends B {  
+    public int z;  
+    public C()  
+    {  
+        System.out.println("C");  
+    }  
+    //...  
+}  
+  
+class B extends A {  
+    public int y;  
+    public B()  
+    {  
+        System.out.println("B");  
+    }  
+    //...  
+}  
+  
+class A {  
+    public int x;  
+    public A()  
+    {  
+        System.out.println("A");  
+    }  
+    //...  
+}
+```
 
