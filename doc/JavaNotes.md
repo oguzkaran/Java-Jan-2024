@@ -27746,10 +27746,11 @@ class A {
 >Buradaki ilk dönüşüme **yukarıya doğru dönüşüm (upcasting)**, ikinci dönüşüme ise **aşağıya doğru dönüşüm (downcasting)** denilmektedir.
 > 
 
-![Inheritance](./media/InheritanceMemory.PNG)
 ###### Yukarıya Doğru Dönüşüm (Upcasting)
 
 >Bu durumda **türemiş nesnesinin taban sınıf kısmının adresi taban sınıf referansına atanmış olur**. 
+
+![Inheritance](./media/InheritanceMemory.PNG)
 
 >Aşağıdaki demo örneği inceleyiniz
 
