@@ -12,7 +12,7 @@
 >- JRE (Java Runtime Environment): Genel olarak Java ile yazılmış bir uygulamayı çalıştırmak (run) için gereken araçları ve uygulamaları içeren bir pakettir. Yani BC elde edildiğinde bu programın çalıştırılabilmesi için JRE'ye ihtiyaç vardır.
 >- JDK (Java Development Kit): Geliştirme (development) araçlarını ve çalıştırma araçlarının bir çoğunu içeren pakettir. Buradaki çalıştırma araçları geliştirme aşamasında kullanılabilir.
 >
->Ticari kullanımlarda özellikle Java 11 ile birlikte bazı değişiklikler yapılmıştır. Genel olarak şöyle söylenebilir: Java'da geliştirme ortamı ücetsiz, çalıştırma araçları kullanılan araca göre ücretlendirilebilir.  Tamamen ücretsiz olarak kullanılabilen "Open JRE" gibi çalıştırma araçları da mevcuttur.  Burada anlatılanlar geneldir. Ayrıca, belirlibir noktadan sonra Java sürümleri için Long Term Support (LTS) kavramı da getirilmiştir. LTS sürümleri uzun süre desteklenen yani güncellemesi (hızlandırılması, hataların düzeltilmesi (bug fix) vb.) uzun süre yapılan sürümlerdir. Java'da Java 8, 11, 17 ve 21 sürümleri LTS sürümleridir. Bu kavramlar zamanla anlaşılacaktır.
+>Ticari kullanımlarda özellikle Java 11 ile birlikte bazı değişiklikler yapılmıştır. Genel olarak şöyle söylenebilir: Java'da geliştirme ortamı ücetsiz, çalıştırma araçları kullanılan araca göre ücretlendirilebilir.  Tamamen ücretsiz olarak kullanılabilen "Open JRE" gibi çalıştırma araçları da mevcuttur.  Burada anlatılanlar geneldir. Ayrıca, belirli bir noktadan sonra Java sürümleri için **Long Term Support (LTS)** kavramı da getirilmiştir. LTS sürümleri uzun süre desteklenen yani güncellemesi (hızlandırılması, hataların düzeltilmesi (bug fix) vb.) uzun süre yapılan sürümlerdir. Java'da Java 8, 11, 17 ve 21 sürümleri LTS sürümleridir. Bu kavramlar zamanla anlaşılacaktır.
 >
 >Arakodlu çalışma sisteminin en önemli avantajı, gelişirilen uygulamaların genel olarak sistemden bağımsız olarak çalıştırılabilmesidir. Dolayısıyla kodun çalıştırılacağı sistemden bağımsız olarak ürün geliştirilebilir. Bu kavramaurumun da istisnaları vardır.
 >
@@ -7520,7 +7520,7 @@ class DateUtil {
 
 #### 30 Nisan 2024
  
->`switch expression` Java'ya 12 sürümü ile birlikte "preview" olarak eklenmiştir. Java 14 ile birlikte "release" durumuna gelmiştir. Java programcısı açısından switch expression pratikte Java 17 ile kullanılabilir durumdadır. Anımsanacağı gibi uygulama geliştirmede Java 8, 11, 17 ve 21 sürümleri LTS olduklarından kullanılmaktadır. "switch expression" adından da anlaşılacağı gibi, bir ifade olduğundan bir değer üretebilir. Yani bu anlamda switch expression hem bir deyim gibi hem de bir ifade gibi kullanılabilmektedir. Hatta switch expression eklenmesi ile birlikte klasik switch deyimi de "yield" anahtar sözcüğü ile birlikte bir ifade olarak kullanılabilir duruma gelmiştir. yield anahtar sözcüğü ileride detaylı olarak ele alınacaktır.
+>`switch expression` Java'ya 12 sürümü ile birlikte "preview" olarak eklenmiştir. Java 14 ile birlikte "release" durumuna gelmiştir. Java programcısı açısından switch expression pratikte Java 17 ile kullanılabilir durumdadır. Anımsanacağı gibi uygulama geliştirmede Java 8, 11, 17 ve 21 sürümleri LTS olduklarından kullanılmaktadır. switch expression adından da anlaşılacağı gibi, bir ifade olduğundan bir değer üretebilir. Yani bu anlamda switch expression hem bir deyim gibi hem de bir ifade gibi kullanılabilmektedir. Hatta switch expression eklenmesi ile birlikte klasik switch deyimi de "yield" anahtar sözcüğü ile birlikte bir ifade olarak kullanılabilir duruma gelmiştir. yield anahtar sözcüğü ileride detaylı olarak ele alınacaktır.
 >	
 >**Anahtar Notlar:** Programlamada hem deyim hem de ifade olarak kullanılan sentaktik elemanlara "ifadesel deyim" `expression statement` da denilmektedir.
 >	
@@ -25723,12 +25723,12 @@ class A {
 
 >Türetme ilişkisinde nesnesel bir kapsama söz konusudur. Bu ilişkide türemiş sınıf nesnesi içerisinde taban sınıf kadarlık bir bölüm de bulunur. Yani türemiş sınıf nesnesi yaratıldığında nesnesel olarak kapsadığı taban sınıf nesnesi de yaratılmış olur. Bu anlamda bakıldığında türemiş sınıfa eklenmiş veri elemanları ile aslında taban sınıf nesnesi genişletilmiş (extension) olur. Bu durumda türemiş sınıf nesnesinin uzunluğu **en az taban sınıf nesnesinin uzunluğu + türemiş sınıfa eklenen non-static veri elemanlarının uzunluğu kadardır.** Aslında türemiş sınıfa eklenen non-static veri elemanları ile bir nesne genişletilmiş (extend) olur:
 
->![Inheritance](./media/Inheritance3.PNG)
+![Inheritance](./media/Inheritance3.PNG)
 
 >Burada B sınıfı türünden bir nesnenin içeriisnde a veri elemanı da vardır. Aynı şekilde C sınıfı türünden bir nesnenin içerisinde a ve b veri elemanları da bulunur. Bu hiyerarşiye ilişkin nesnelerin birer örneklerinin bellekteki karşılıkları şekilsel olarak şu şekilde ifade edilebilir:
 
 
->![Inheritance](./media/InheritanceMemory.PNG)
+![Inheritance](./media/InheritanceMemory.PNG)
 
 >Burada türemiş sınıfa eklenen veri elemanlarının düşük numaralı adreste veya yüksek numaralı adreste olmasının Java programcısı açısından önemi yoktur. 
 
@@ -27748,10 +27748,12 @@ class A {
 
 ###### Yukarıya Doğru Dönüşüm (Upcasting)
 
->Bu durumda **türemiş nesnesinin taban sınıf kısmının adresi taban sınıf referansına atanmış olur**. 
+>Bu durumda **türemiş nesnesinin taban sınıf kısmının adresi taban sınıf referansına atanmış olur**.
+>
+![Inheritance](./media/Inheritance3.PNG)
+>sınıfları için nesnelerin bellekteki karşıklarının aşağıdaki gibi olduğunu yani türemiş sınıf türünden bir nesnenin taban sınıf kısmına ilişkin nesneyi de kapsadığını (nesnesel kapsama) anımsayınız:
 
 ![Inheritance](./media/InheritanceMemory.PNG)
-
 >Aşağıdaki demo örneği inceleyiniz
 
 ```java
@@ -27822,8 +27824,8 @@ class DemoApp {
             A a = factory.create();  
   
             Sample.doWork(a);  
-            ThreadUtil.sleep(1000);  
             System.out.println("-----------------------------------");  
+            ThreadUtil.sleep(1000);
         }  
     }  
 }  
@@ -27903,4 +27905,474 @@ class A {
     //...  
 }
 ```
+
+##### 19 Aralık 2024
+
+>Object sınıfı her sınıfın doğrudan ya da dolaylı olarak taban sınıfı olduğuna göre her türden referans Object türden referansa doğrudan dönüşebilir/atanabilir. Object sınıfına herhangi referansın atanabilmesinin anlamı ileride ele alınacaktır. 
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.wrapper.primitive.IntValue;  
+  
+import java.util.Random;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Object oSample = IntValue.of(67);  
+        Object oString = "ankara";  
+        Object oRandom = new Random();  
+  
+        //...  
+    }  
+}
+```
+
+###### Static ve Dinamik Türler
+
+>Bir referans değişkenin iki tane türü vardır: **statik tür (static type), dinamik (dynamic type)**. Referansın bildirildiği türe **statik tür (static type)** denir. Derleme zamanına ilişkindir ve faaliyet alanı boyunca bu tür değişmez. Referansın türü dendiğinde statik tür anlaşılır. Referansın gösterdiği adresteki nesnenin gerçek türüne **dinamik tür (dynamic type)** denir. Çalışma zamanına ilişkindir, değişebilir. 
+
+**Anahtar Notlar:** Bir referansın dinamik türünün nitelikli (fully qualified) ismi bir String olarak aşağıdaki kalıp ile elde edilebilir:
+```java
+<referans>.getClass().getName();
+```
+Bu kalıbı detayları şu an için önemsizdir.
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.thread.ThreadUtil;  
+  
+import java.util.Random;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        DemoApp.run();  
+    }  
+}  
+  
+class DemoApp {  
+    public static void run()  
+    {  
+        AFactory factory = new AFactory();  
+  
+        A a;  
+  
+        while (true) {  
+            System.out.println("-----------------------------------");  
+            a = factory.create();  
+            System.out.printf("Dynamic type:%s%n", a.getClass().getName());  
+            System.out.println("-----------------------------------");  
+            ThreadUtil.sleep(1000);  
+        }  
+        //...  
+    }  
+}  
+  
+class AFactory {  
+    private final Random m_random = new Random();  
+  
+    public A create()  
+    {  
+        return switch (m_random.nextInt(6)) {  
+            case 0 -> new B();  
+            case 1 -> new C();  
+            case 2 -> new D();  
+            case 3 -> new E();  
+            case 4 -> new F();  
+            default -> new A();  
+        };  
+    }  
+}  
+  
+class F extends C {  
+    //...  
+}  
+  
+class E extends B {  
+    //...  
+}  
+  
+class D extends A {  
+    //...  
+}  
+  
+class C extends B {  
+    //...  
+}  
+  
+class B extends A {  
+    //...  
+}  
+  
+class A {  
+    //...  
+}
+```
+
+###### Aşağıya Doğru Dönüşüm (Downcasting)
+
+>Bu dönüşüm doğrudan yapılamaz, tür dönüştürme operatörü ile (explicit conversion/casting) yapılabilir. Aslında tür dönüştürme operatörü derlemeden geçmek içindir. Çalışma zamanında kaynak referansın (yani türemiş sınıf türünden referansın) dinamik türüne bakılır, dinamik tür hedef referansa ilişkin türü kapsıyorsa yani aralarından doğrudan ya da dolaylı olarak bir türetme ilişkisi varsa (nesnesel kapsama) **haklı dönüşüm (valid casting)**  olarak ele alınır ve akış devam eder. Kapsamıyorsa **haksız dönüşüm (invalid casting)** olarak ele alınır ve exception oluşur. 
+
+>Aşağıdaki demo örneği inceleyiniz. Dinamil türlere göre akışı gözlemleyiniz
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.thread.ThreadUtil;  
+  
+import java.util.Random;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        DemoApp.run();  
+    }  
+}  
+  
+class DemoApp {  
+    public static void run()  
+    {  
+        AFactory factory = new AFactory();  
+  
+        A x;  
+  
+        while (true) {  
+            System.out.println("-----------------------------------");  
+            x = factory.create();  
+            System.out.printf("Dynamic type:%s%n", x.getClass().getName());  
+            B y = (B)x;  
+  
+            y.b = 20;  
+            System.out.println("-----------------------------------");  
+            ThreadUtil.sleep(1000);  
+        }  
+        //...  
+    }  
+}  
+  
+class AFactory {  
+    private final Random m_random = new Random();  
+  
+    public A create()  
+    {  
+        return switch (m_random.nextInt(6)) {  
+            case 0 -> new B();  
+            case 1 -> new C();  
+            case 2 -> new D();  
+            case 3 -> new E();  
+            case 4 -> new F();  
+            default -> new A();  
+        };  
+    }  
+}  
+  
+class F extends C {  
+    public int f;  
+    //...  
+}  
+  
+class E extends B {  
+    public int e;  
+    //...  
+}  
+  
+class D extends A {  
+    public int d;  
+    //...  
+}  
+  
+class C extends B {  
+    public int c;  
+    //...  
+}  
+  
+class B extends A {  
+    public int b;  
+    //...  
+}  
+  
+class A {  
+    public int a;  
+    //...  
+}
+```
+
+###### instanceof Operatörü
+
+>Bir referansın dinamik türünü test etmek için **instanceof** operatörü kullanılabilir. Bu operatör özel amaçlı (special purpose) iki operandlı (binary), araek (infix) durumundadır. Bu operatörün birinci operandı bir referans olmalıdır. İkinci operandı bir referans türü olmalıdır. Bu operatör birinci operandına ilişkin referansın dinamik türü ikinci operandına ilişkin türü kapsıyorsa (nesnesel kapsıyorsa) true, kapsamıyorsa false değerini üretir. Bu operatör tipik olarak downcasting işleminin güvenli olarak yapılması için kullanılır. 
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.thread.ThreadUtil;  
+  
+import java.util.Random;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        DemoApp.run();  
+    }  
+}  
+  
+class DemoApp {  
+    public static void run()  
+    {  
+        AFactory factory = new AFactory();  
+  
+        A x;  
+  
+        while (true) {  
+            System.out.println("-----------------------------------");  
+            x = factory.create();  
+            String name = x.getClass().getName();  
+            System.out.printf("Dynamic type:%s%n", name);  
+            if (x instanceof B) {  
+                System.out.println("Valid type");  
+                B y = (B) x;  
+  
+                y.b = 20;  
+            }  
+            else  
+                System.out.println("Invalid type");  
+  
+            System.out.println("-----------------------------------");  
+            ThreadUtil.sleep(1000);  
+        }  
+        //...  
+    }  
+}  
+  
+class AFactory {  
+    private final Random m_random = new Random();  
+  
+    public A create()  
+    {  
+        return switch (m_random.nextInt(6)) {  
+            case 0 -> new B();  
+            case 1 -> new C();  
+            case 2 -> new D();  
+            case 3 -> new E();  
+            case 4 -> new F();  
+            default -> new A();  
+        };  
+    }  
+}  
+  
+class F extends C {  
+    public int f;  
+    //...  
+}  
+  
+class E extends B {  
+    public int e;  
+    //...  
+}  
+  
+class D extends A {  
+    public int d;  
+    //...  
+}  
+  
+class C extends B {  
+    public int c;  
+    //...  
+}  
+  
+class B extends A {  
+    public int b;  
+    //...  
+}  
+  
+class A {  
+    public int a;  
+    //...  
+}
+```
+
+>Aşağıdaki demo örnekte heterojen türler bir Object dizisinde tutulmaktadır ve çalışma zamanında dizinin her bir elemanın dinamik türüne göre işlem yapılmaktadır.
+
+```java
+package org.csystem.app.generator;  
+  
+import org.csystem.generator.object.ObjectArrayGenerator;  
+import org.csystem.math.Complex;  
+import org.csystem.math.geometry.Circle;  
+import org.csystem.math.geometry.Point;  
+import org.csystem.wrapper.primitive.IntValue;  
+  
+import java.util.Scanner;  
+  
+public class DemoObjectArrayGeneratorApp {  
+    public static void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+        System.out.print("Input a number:");  
+        int count = kb.nextInt();  
+        ObjectArrayGenerator generator = new ObjectArrayGenerator();  
+  
+        for (Object o : generator.createObjects(count)) {  
+            System.out.println("-------------------------------------------------------------------------------------");  
+            System.out.printf("Dynamic type:%s%n", o.getClass().getName());  
+  
+            if (o instanceof String) {  
+                String s = (String)o;  
+                String upper = s.toUpperCase();  
+  
+                System.out.printf("Text:%s, Upper:%s%n", s, upper);  
+            }  
+            else if (o instanceof IntValue) {  
+                IntValue iVal = (IntValue)o;  
+                int val = iVal.getValue();  
+  
+                System.out.printf("%d * %d = %d%n", val, val, val * val);  
+            }  
+            else if (o instanceof Point) {  
+                 Point p = (Point)o;  
+  
+                System.out.printf("Distance to origin:%f%n", p.euclideanDistance());  
+            }  
+            else if (o instanceof Circle) {  
+                Circle c = (Circle)o;  
+  
+                System.out.printf("Radius:%f, Area:%f, Circumference:%f%n", c.getRadius(), c.getArea(), c.getCircumference());  
+            }  
+            else {  
+                Complex c = (Complex)o;  
+  
+                System.out.printf("||%s|| = %f%n", c.toString(), c.getLength());  
+            }  
+            System.out.println("-------------------------------------------------------------------------------------");  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+>`Java 14` ile birlikte **instance of pattern (pattern matching of instanceof)** dile eklenerek instanceof operatörü ile birlikte dowcasting otomatik olarak yapılarak basitleştirilmiştir. Derleyici downcasting işlemine ilişkin kodu üretir.
+
+>Yukarıdaki demo örnek aşağıdaki gibi yapılabilir
+
+```java
+package org.csystem.app.generator;  
+  
+import org.csystem.generator.object.ObjectArrayGenerator;  
+import org.csystem.math.Complex;  
+import org.csystem.math.geometry.Circle;  
+import org.csystem.math.geometry.Point;  
+import org.csystem.wrapper.primitive.IntValue;  
+  
+import java.util.Scanner;  
+  
+public class DemoObjectArrayGeneratorApp {  
+    public static void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+        System.out.print("Input a number:");  
+        int count = kb.nextInt();  
+        ObjectArrayGenerator generator = new ObjectArrayGenerator();  
+  
+        for (Object o : generator.createObjects(count)) {  
+            System.out.println("-------------------------------------------------------------------------------------");  
+            System.out.printf("Dynamic type:%s%n", o.getClass().getName());  
+  
+            if (o instanceof String s) {  
+                String upper = s.toUpperCase();  
+  
+                System.out.printf("Text:%s, Upper:%s%n", s, upper);  
+            }  
+            else if (o instanceof IntValue iVal) {  
+                int val = iVal.getValue();  
+  
+                System.out.printf("%d * %d = %d%n", val, val, val * val);  
+            }  
+            else if (o instanceof Point p)  
+                System.out.printf("Distance to origin:%f%n", p.euclideanDistance());  
+            else if (o instanceof Circle c)  
+                System.out.printf("Radius:%f, Area:%f, Circumference:%f%n", c.getRadius(), c.getArea(), c.getCircumference());  
+            else if (o instanceof Complex c)  
+                System.out.printf("||%s|| = %f%n", c.toString(), c.getLength());  
+  
+            System.out.println("-------------------------------------------------------------------------------------");  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+>`Java 17` ile birlikte **switch pattern (pattern matching of switch)** dile eklenmiştir. Aslında Java 17 ile birlikte `preview` olarak dile eklenmiştir. Daha sonraki sürümler için doğrudan kullanılabilir hale gelmiştir. switch pattern ile bir referansın bir türü kapsayıp kapsamadığı case bölümlerinde kontrol edilebilir. switch expression bu işlemi instanceof operatörü ile aynı işlemi yapar.
+
+>Yukarıdaki demo örnek aşağıdaki gibi yapılabilir
+
+```java
+package org.csystem.app.generator;  
+  
+import org.csystem.generator.object.ObjectArrayGenerator;  
+import org.csystem.math.Complex;  
+import org.csystem.math.geometry.Circle;  
+import org.csystem.math.geometry.Point;  
+import org.csystem.wrapper.primitive.IntValue;  
+  
+import java.util.Scanner;  
+  
+public class DemoObjectArrayGeneratorApp {  
+    public static void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+        System.out.print("Input a number:");  
+        int count = kb.nextInt();  
+        ObjectArrayGenerator generator = new ObjectArrayGenerator();  
+  
+        for (Object o : generator.createObjects(count)) {  
+            System.out.println("-------------------------------------------------------------------------------------");  
+            System.out.printf("Dynamic type:%s%n", o.getClass().getName());  
+  
+            switch (o) {  
+                case String s-> {  
+                    String upper = s.toUpperCase();  
+  
+                    System.out.printf("Text:%s, Upper:%s%n", s, upper);  
+                }  
+                case IntValue iVal -> {  
+                    int val = iVal.getValue();  
+  
+                    System.out.printf("%d * %d = %d%n", val, val, val * val);  
+                }  
+                case Point p -> System.out.printf("Distance to origin:%f%n", p.euclideanDistance());  
+                case Circle c -> System.out.printf("Radius:%f, Area:%f, Circumference:%f%n", c.getRadius(), c.getArea(), c.getCircumference());  
+                case Complex c -> System.out.printf("||%s|| = %f%n", c.toString(), c.getLength());  
+                default -> {}  
+            }  
+  
+            System.out.println("-------------------------------------------------------------------------------------");  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+**Anahtar Notlar:** Programlamada kullanılan dilin desteği de olması koşuluyla çalışma zamanında tür bilgisinin elde edilmesine genel olarak **Runtime Type Information (RTTI)** denilmektedir.
+
+##### Sarmalayan Sınıflar (Wrapper Classes)
 

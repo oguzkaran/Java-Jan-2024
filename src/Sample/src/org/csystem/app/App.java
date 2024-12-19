@@ -16,21 +16,27 @@ class DemoApp {
     {
         AFactory factory = new AFactory();
 
+        A x;
+
         while (true) {
             System.out.println("-----------------------------------");
-            A a = factory.create();
+            x = factory.create();
+            String name = x.getClass().getName();
+            System.out.printf("Dynamic type:%s%n", name);
 
-            Sample.doWork(a);
-            ThreadUtil.sleep(1000);
+            if (x instanceof B) {
+                System.out.println("Valid type");
+                B y = (B) x;
+
+                y.b = 20;
+            }
+            else
+                System.out.println("Invalid type");
+
             System.out.println("-----------------------------------");
+            ThreadUtil.sleep(1000);
         }
-    }
-}
-
-class Sample {
-    public static void doWork(A a)
-    {
-        System.out.printf("a = %d%n", a.x);
+        //...
     }
 }
 
@@ -51,54 +57,31 @@ class AFactory {
 }
 
 class F extends C {
-    public int k;
-    public F()
-    {
-        System.out.println("F");
-    }
+    public int f;
+    //...
 }
+
 class E extends B {
-    public int z;
-    public E()
-    {
-        System.out.println("E");
-    }
+    public int e;
     //...
 }
 
 class D extends A {
-    public int t;
-    public D()
-    {
-        System.out.println("D");
-    }
+    public int d;
     //...
 }
 
 class C extends B {
-    public int z;
-    public C()
-    {
-        System.out.println("C");
-    }
+    public int c;
     //...
 }
 
 class B extends A {
-    public int y;
-    public B()
-    {
-        System.out.println("B");
-    }
+    public int b;
     //...
 }
 
 class A {
-    public int x;
-    public A()
-    {
-        System.out.println("A");
-    }
+    public int a;
     //...
 }
-
