@@ -12672,9 +12672,7 @@ class App {
 
 **Anahtar Notlar:** Bir nesnenin içeriği (yani kabaca `non-static` veri elemanları) nesne yaratıldıktan sonra sınıfı kullanan programcı tarafından değiştirilemiyorsa bu tarz nesnelerin yaratılabildiği sınıflara **"immutable class"** denir. Pek çok immutable sınıfın `non-static` veri elemanları içsel olarak da değiştirilemez. `Immutable` bir sınıfın nasıl yazılacağı ileride ele alınacaktır.
 
->Derleyici bir string literal gördüğünde ve bu string literal'ı ilk kez görüyorsa kabaca şu şekilde bir kod üretir:
->
->"String türden bir nesne yarat ve string literal içerisindeki karakterleri bu string nesnesi ile tutulabilecek şekle getir ve ilgili string nesnesinin referansını (adresini) ver". Bu durumda bir string literal ile bir string nesnesinin referansı elde edilebilir. print ve println metotlarının String parametreli overload'ları vardır. Bu metotlar aldıkları String referansına ilişkin nesne ile tutulan yazıyı yazdırır. printf metodu ile bir yazı s format karakteri ile yazdırılabilir. Klavyeden bir yazı elde etmek için Scanner sınıfının String geri dönüş değerine sahip metotları kullanılabilir. Örneğin nextLine metodu klavyeden enter girilene alınan yazılara ilişkin bir String nesnesi yaratır ve onun referansına geri döner. Bu yazı içerisinde enter karakteri yoktur
+>Derleyici bir string literal gördüğünde ve bu string literal'ı ilk kez görüyorsa kabaca şu şekilde bir kod üretir: **String türden bir nesne yarat ve string literal içerisindeki karakterleri bu string nesnesi ile tutulabilecek şekle getir ve ilgili string nesnesinin referansını (adresini) ver**. Bu durumda bir string literal ile bir string nesnesinin referansı elde edilebilir. print ve println metotlarının String parametreli overload'ları vardır. Bu metotlar aldıkları String referansına ilişkin nesne ile tutulan yazıyı yazdırır. printf metodu ile bir yazı s format karakteri ile yazdırılabilir. Klavyeden bir yazı elde etmek için Scanner sınıfının String geri dönüş değerine sahip metotları kullanılabilir. Örneğin nextLine metodu klavyeden enter girilene alınan yazılara ilişkin bir String nesnesi yaratır ve onun referansına geri döner. Bu yazı içerisinde enter karakteri yoktur
 
 >Aşağıdaki demo örneği inceleyiniz
 
@@ -14969,7 +14967,7 @@ class App {
 
 #### 30 Temmuz 2024
 
->Anahtar Notlar: JavaSE'de her temel türe ilişkin sınıflar bulunur. Bu sınıflara "sarmalayan sınıflar (wrapper classes)" denir. Sarmalayan sınıfların ilişkin oldukları temel türe yönelik pek çok yardımcı metotları vardır. Temel tür ve ilgili sarmalayan sınıflar şunlardır:
+**Anahtar Notlar:** JavaSE'de her temel türe karşılık gelen bir sınıf bulunur. Bu sınıflara "sarmalayan sınıflar (wrapper classes)" denir. Sarmalayan sınıfların ilişkin oldukları temel türe yönelik pek çok yardımcı metotları vardır. Temel tür ve ilgili sarmalayan sınıflar şunlardır:
 		
 |Temel Tür	|	Sarmalayan sınıf|
 |-----------|-------------------|
@@ -21698,7 +21696,7 @@ public class ArrayUtil {
         String fmt = String.format("%%0%dd%c", n, sep);  
   
         for (int val : a)  
-            System.out.printf(fmt, val, sep);  
+            System.out.printf(fmt, val);  
   
         System.out.print(end);  
     }  
@@ -23114,7 +23112,7 @@ public class StringUtil {
 >
 >**Anahtar Notlar:** Aslında JavaSE'de örnekteki int türden bir değeri immutable olarak sarmalayan ve `[-128, 127]` aralığındaki değerler için bir ön bellek kullanan sınıf vardır. Bu sınıf ileride ele alınacaktır. Örneğin amacı programalama açısından böyle bir sınıfın nasıl yazılabileceğini göstermektedir. 
 >
->**Anahtar Notlar:**  Bir değerin sarmalanması (wrapping) o değerin bir sınıf içerisinde yani bir nesne içerinde tutulması anlamındadır. Temel türden bir değerin sarmalanması da aslında o değerin heap'de tutulması anlamına gelir. Temel türden bir değerin sarmalanasına genel olarak **boxing** denilmektedir. Sarmalanan temel türden bir değerin elde edilmesine ise **unboxing** denilmektedir. Bu kavramlar ileride daha detaylı olarak ele alınacaktır.
+>**Anahtar Notlar:**  Bir değerin sarmalanması (wrapping) o değerin bir sınıf içerisinde yani bir nesne içerinde tutulması anlamındadır. Temel türden bir değerin sarmalanması da aslında o değerin heap'de tutulması anlamına gelir. Temel türden bir değerin sarmalanmasına genel olarak **boxing** denilmektedir. Sarmalanan temel türden bir değerin elde edilmesine ise **unboxing** denilmektedir. Bu kavramlar ileride daha detaylı olarak ele alınacaktır.
 >
 >**Anahtar Notlar:** Bu örnekte yazılan sınıfta `[-128, 127]` aralında kalan bir değer için nesne ilk kez sarmalandığında yaratılıp aynı değerin tekrar sarmalanması durumunda aynı nesne kullanıldığından Gof'un **flyweight** tasarım kalıbı kullanılmıştır. Kalıbın detayları şu an için önemsizdir.
 >
@@ -25716,7 +25714,7 @@ class Engine {
 
 >Bu ilişkiye NYPT'de `is a` ilişkisi de denilmektedir. Bu ilişki ile varolan bir sınıfın kodlarına dokunmadan (kodları elimizde olabilir ya da olmayabilir) **genişletme (extension)** yapılabilir. Bu ilişkiye aynı zamanda **generalization** da denilmektedir. Bu ilişkiye Türkçe olarak **türetme/kalıtım** ilişkisi diyeceğiz. Örneğin `analitik düzlemde` bir çemberi temsil eden (yarıçap, alan, çevre, merkez koordinatları vb bilgilerle) bir sınıf yazacak olalım. Anımsanacağı gibi daha önce yazdığımız Circle sınıfı `sentetik geometride` bir çemberi (dolayısıyla daireyi) temsil etmektedir. Yani, elimizde daha önceden yazılmış ve test edilmiş bir sınıf bulunmaktadır. Analitik düzlemde bir çemberde analitik özellikleri dışından bir çember olduğundan `(Analytical circle is a circle)`, `AnalyticalCircle` isimli bir sınıf `Circle` sınıfından türetilebilir. Bu anlamda bu ilişki `SOLID` ilkelerinden `Open Closed Principle`'ın mottosu olan **open for extension closed for modification** cümlesi de karşılamaktadır.
 >
->A sınıfından B sınıfı türetilmiş olsun (A is a B). Bu durumda A sınıfına B sınıfının **taban sınıfı (bas class)**, B'ye ise A nın bir **türemiş sınıfı (derived class)** denir. Java'da `base class` yerine daha çok **super class**, `derived class` yerine ise daha çok **sub class** terimleri kullanılır. Bu terimlerle birlikte NYPT'de `base class` yerine **parent class**, `derived class` yerine **child class** terİmleri de kullanılabilmektedir. `A is a B` ilişkisinin sınıf şeması şu şekildedir:
+>A sınıfından B sınıfı türetilmiş olsun (B is a A). Bu durumda A sınıfına B sınıfının **taban sınıfı (bas class)**, B'ye ise A nın bir **türemiş sınıfı (derived class)** denir. Java'da `base class` yerine daha çok **super class**, `derived class` yerine ise daha çok **sub class** terimleri kullanılır. Bu terimlerle birlikte NYPT'de `base class` yerine **parent class**, `derived class` yerine **child class** terİmleri de kullanılabilmektedir. `B is a A` ilişkisinin sınıf şeması şu şekildedir:
 
 
 >![Inheritance](./media/Inheritance.PNG)
@@ -26995,7 +26993,7 @@ public final class ArrayUtil {
         String fmt = String.format("%%0%dd%c", n, sep);  
   
         for (int val : a)  
-            System.out.printf(fmt, val, sep);  
+            System.out.printf(fmt, val);  
   
         System.out.print(end);  
     }  
@@ -28443,5 +28441,470 @@ public class DemoObjectArrayGeneratorApp {
 
 **Anahtar Notlar:** Programlamada kullanılan dilin desteği de olması koşuluyla çalışma zamanında tür bilgisinin elde edilmesine genel olarak **Runtime Type Information (RTTI)** denilmektedir.
 
+##### 26 Aralık 2024
 ##### Sarmalayan Sınıflar (Wrapper Classes)
+
+>JavaSE'de her temel türe karşılık gelen bir sınıf bulundurulmuştur. Bu sınıflara **sarmalayan sınıflar (wrapper classes)** denir. Bu sınıfların sarmalama dışında ilgili temel türe ilişkin pek çok yararlı elemanı bulunur. Anımsanacağı gibi Character dışında kalan sınıfların parseXXX metotları aldıkları yazıyı ilgili temel türe çevirmek için kullanılırlar. Sarmalayan sınıflar ve ilişkin oldukları temel türle şu şekildedir:
+
+
+| Temel Tür | Sarmalayan Sınıf |
+| --------- | ---------------- |
+| short     | Short            |
+| int       | Integer          |
+| long      | Long             |
+| byte      | Byte             |
+| float     | Float            |
+| double    | Double           |
+| char      | Character        |
+| boolean   | Boolean          |
+
+>Sarmalayan sınıfların tipik özellikleri şunlardır:
+>- Bu sınıflar `java.lang` paketi içerisindedir
+>- Tamsayı ve gerçek sayı türlerine ilişkin sınıflar (Short, Integer, Long, Byte, Float, Double) `java.lang` paketi içerisindeki `Number` isimli sınıftan türetilmişlerdir. Bu sınıflara **numeric classes** da denilmektedir
+>- `Character` ve `Boolean` sınıfları Object sınıfından türetilmişlerdir. 
+>- Sarmalayan sınıfların ctor'ları `Java 9` ile birlikte `deprecated` olmuştur ve aynı zamanda ileleyen sürümlerde silineceği belirtilmiştir. Zaten ileride göreceğimiz nedenlerden dolayı `Java 5`'den itibaren bu sınıfların ctor'ları ile nesne yaratılması önerilmemektedir. Dolayısıyla `Java 5`'den itibaren programcılar tarafında da kullanılmamaktadır.
+>- Sarmalayan sınıflar temel türden bir değerin heap'de tutulması için kullanılırlar. Anımsanacağı gibi temel türden bir değerin heap'de tutulmasına **kutulama (boxing)**, heap'de tutulan temel türden bir değerin elde edilmesine ise **kutu açma (unboxing)** denilmektedir. 
+>- Bu sınıflar `immutable`'dır. Yani kutuladıkları değer değiştirilemez.
+>- Bu sınıflar kutuladıkları değerlere ilişkin **ön bellek (cache)** kullanarak zaman ve bellek maliyetini minimize ederler.
+>- Sarmalayan sınıflara **platform classes** da denilmektedir.
+
+###### Sarmayalan Sınıfların Bazı Yararlı Elemanları
+
+>Boolean sınıfı dışında kalan sarmalayan sınıfların **BYTES** ve **SIZE** public static ve final veri elemanları sırasıyla ilgili temel türe ilişkin `byte` ve `bit`cinsinden uzunluk bilgisidir.
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        System.out.printf("short -> %d/%d bytes/bits%n", Short.BYTES, Short.SIZE);  
+        System.out.printf("int -> %d/%d bytes/bits%n", Integer.BYTES, Integer.SIZE);  
+        System.out.printf("long -> %d/%d bytes/bits%n", Long.BYTES, Long.SIZE);  
+        System.out.printf("byte -> %d/%d bytes/bits%n", Byte.BYTES, Byte.SIZE);  
+        System.out.printf("float -> %d/%d bytes/bits%n", Float.BYTES, Float.SIZE);  
+        System.out.printf("double -> %d/%d bytes/bits%n", Double.BYTES, Double.SIZE);  
+        System.out.printf("char -> %d/%d bytes/bits%n", Character.BYTES, Character.SIZE);  
+    }  
+}
+```
+
+>Boolean sınıfı dışında kalabn sarmalayan sınıfların **MIN_VALUE** ve **MAX_VALUE** public static ve final veri elemanları sırasıyla ilgili temel türe ilişkin `en küçük` ve `en büyük` değer bilgisidir. Float ve Double sınıflarının MIN_VALUE ve MAX_VALUE değerleri pozifitir. Gerçek sayıların tutuluş formatında (IEEE 754) bu değerlerin negatif olanları da sınır değerleridir
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        System.out.printf("short -> [%d, %d]%n", Short.MIN_VALUE, Short.MAX_VALUE);  
+        System.out.printf("int -> [%d, %d]%n", Integer.MIN_VALUE, Integer.MAX_VALUE);  
+        System.out.printf("long -> [%d, %d]%n", Long.MIN_VALUE, Long.MAX_VALUE);  
+        System.out.printf("byte -> [%d, %d]%n", Byte.MIN_VALUE, Byte.MAX_VALUE);  
+        System.out.println("float -> [+-" + Float.MIN_VALUE + ", +-" + Float.MAX_VALUE + "]");  
+        System.out.println("double -> [+-" + Double.MIN_VALUE + ", +-" + Double.MAX_VALUE + "]");  
+        System.out.printf("char -> [%d, %d]%n", (int)Character.MIN_VALUE, (int)Character.MAX_VALUE);  
+    }  
+}
+```
+
+>Tamsayı türlerime ilişkin sarmalayan sınıfların (Short, Integer, Long, Byte) radix parametreleri parseXXX metotları ilgili yazıyı radix olarak aldığı sayı sistemine göre ilgili türe çevirir. Çeviremezse exception oluşur
+
+```java
+package org.csystem.app;  
+  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Scanner kb = new Scanner(System.in);  
+  
+        System.out.print("Hexadecimal bir sayı giriniz:");  
+        int a = Integer.parseInt(kb.nextLine(), 16);  
+  
+        System.out.printf("a = %d%n", a);  
+    }  
+}
+```
+
+>Sarmalayan sınıfların bunlar dışında da pek çok yararlı elemanı bulunur. Bu elemanlar ihtiyaca göre incelenebilir
+
+###### Sarmalama İşlemi
+
+>Boolean sınıfına `Java 4` ile, diğer sarmalayan sınıflara `Java 5` ile birlikte ilgili temel türden parametreli **valueOf** factory metotları eklenmiştir (boxing). **valueOf** metotları bir ön bellek kullanırlar. Tamsayı türlerine ilişkin sarmalayan sınıfların valueOf metotları `[-128, 127]` aralığındaki değerler için bir ön bellek tutar. Bu aralıktaki bir değer için ilgili nesne değer ilk kez sarmalandığında yaratılır, diğer sarmalamalarda aynı nesnenin referansına geri dönülür. Bu sınırlar dışında kalan değerler için ön bellek tutulup tutulmayacağı derleyici yazanlar bırakılmıştır (implementation defined). Character sınıfının `valueOf` metodu `['\u0000', '\u007F']` aralığındakİ değerleri için bir ön bellek tutar.  Bu sınırlar dışında kalan değerler için ön bellek tutulup tutulmayacağı derleyici yazanlar bırakılmıştır . Gerçek sayı türlerine ilişkin sarmalayan sınıfların (Float, Double) valueOf metotları tutuluş formatına uygun olarak bir ön bellek tutarlar. Bu sınıfların ön bellek kullanmasındaki temel amaç **to yield significantly better space and time performance** içindir.
+
+**Anahtar Notlar:** Daha önce yazmış olduğumuz `IntValue` sınıfını inceleyiniz
+
+>Aşağıdaki demo örneği inceleyiniz. 
+>**Not:** Örnekte static kod analizi araçları tarafından verilen uyarıları şimdilik dikkate almayınız
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Integer iVal1 = Integer.valueOf(127);  
+        Integer iVal2 = Integer.valueOf(127);  
+        Integer iVal3 = Integer.valueOf(128);  
+        Integer iVal4 = Integer.valueOf(128);  
+  
+        System.out.println(iVal1 == iVal2 ? "Aynı nesne" : "Farklı nesneler");  
+        System.out.println(iVal3 == iVal4 ? "Aynı nesne" : "Farklı nesneler");  
+    }  
+}
+```
+
+>Aşağıdaki demo örneği inceleyiniz
+>**Not:** Örnekte static kod analizi araçları tarafından verilen uyarıları şimdilik dikkate almayınız
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Character c1 = Character.valueOf('D');  
+        Character c2 = Character.valueOf('D');  
+        Character c3 = Character.valueOf('Ş');  
+        Character c4 = Character.valueOf('Ş');  
+  
+        System.out.println(c1 == c2 ? "Aynı nesne" : "Farklı nesneler");  
+        System.out.println(c3 == c4 ? "Aynı nesne" : "Farklı nesneler");  
+    }  
+}
+```
+
+>Sarmalanan değerleri elde etmek için (unboxing) sarmalayan sınıfların xxxValue metotları kullanılır. Nümerik sınıfların xxxValue metotları `Number` sınıfından gelir.
+
+>Aşağıdaki demo örneği inceleyiniz
+>**Not:** Örnekte static kod analizi araçları tarafından verilen uyarıları şimdilik dikkate almayınız
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Integer iVal1 = Integer.valueOf(127);  
+        int val = iVal1.intValue();  
+  
+        System.out.println(val);  
+    }  
+}
+```
+
+>Aşağıdaki demo örneği inceleyiniz
+>**Not:** Örnekte static kod analizi araçları tarafından verilen uyarıları şimdilik dikkate almayınız
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Character c = Character.valueOf('D');  
+        char ch = c.charValue();  
+  
+        System.out.println(ch);  
+    }  
+}
+```
+
+>Aşağıdaki demo örneği inceleyiniz. Örnekte temel türlere ilişkin değerler kutulanarak ilgili adresler Object referansında tutulmuştur. Zaten kutulamanın temel amacı da budur. İlgili değerler yine kutu açarak elde edilmiştir.
+
+```java
+package org.csystem.app.generator;  
+  
+import org.csystem.generator.object.ObjectArrayGenerator;  
+import org.csystem.math.Complex;  
+import org.csystem.math.geometry.Circle;  
+import org.csystem.math.geometry.Point;  
+import org.csystem.wrapper.primitive.IntValue;  
+  
+import java.util.Scanner;  
+  
+public class DemoObjectArrayGeneratorApp {  
+    public static void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+        System.out.print("Input a number:");  
+        int count = kb.nextInt();  
+        ObjectArrayGenerator generator = new ObjectArrayGenerator();  
+  
+        for (Object o : generator.createObjects(count)) {  
+            System.out.println("-------------------------------------------------------------------------------------");  
+            System.out.printf("Dynamic type:%s%n", o.getClass().getName());  
+  
+            if (o instanceof String s) {  
+                String upper = s.toUpperCase();  
+  
+                System.out.printf("Text:%s, Upper:%s%n", s, upper);  
+            }  
+            else if (o instanceof Integer iVal) {  
+                int val = iVal.intValue();  
+  
+                System.out.printf("%d * %d = %d%n", val, val, val * val);  
+            }  
+            else if (o instanceof Character c) {  
+                char ch = c.charValue();  
+  
+                System.out.printf("ch = %c%n", ch);  
+            }  
+            else if (o instanceof Boolean b) {  
+                boolean flag = b.booleanValue();  
+  
+                System.out.printf("flag = %b%n", flag);  
+            }  
+            else if (o instanceof Point p)  
+                System.out.printf("Distance to origin:%f%n", p.euclideanDistance());  
+            else if (o instanceof Circle c)  
+                System.out.printf("Radius:%f, Area:%f, Circumference:%f%n", c.getRadius(), c.getArea(), c.getCircumference());  
+            else if (o instanceof Complex c)  
+                System.out.printf("||%s|| = %f%n", c.toString(), c.getLength());  
+  
+            System.out.println("-------------------------------------------------------------------------------------");  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+```java
+package org.csystem.generator.object;  
+  
+import org.csystem.math.Complex;  
+import org.csystem.math.geometry.Circle;  
+import org.csystem.math.geometry.Point;  
+import org.csystem.util.string.StringUtil;  
+  
+import java.util.Random;  
+  
+public class ObjectArrayGenerator {  
+    private final Random m_random = new Random();  
+  
+    //StringEN, Integer, Character, Boolean, Point, Circle, Complex  
+    private Object createObject()  
+    {  
+        return switch (m_random.nextInt(7)) {  
+            case 0 -> StringUtil.generateRandomTextEN(m_random, m_random.nextInt(5, 11));  
+            case 1 -> Integer.valueOf(m_random.nextInt(-128, 128));  
+            case 2 -> Character.valueOf((char)((m_random.nextBoolean() ? 'A' : 'a') + m_random.nextInt(26)));  
+            case 3 -> Boolean.valueOf(m_random.nextBoolean());  
+            case 4 -> Point.createCartesian(m_random.nextDouble(-100, 100), m_random.nextDouble(-100, 100));  
+            case 5 -> new Circle(m_random.nextDouble(-10, 10));  
+            default -> new Complex(m_random.nextDouble(-20, 20), m_random.nextDouble(-20, 20));  
+        };  
+    }  
+  
+    public Object [] createObjects(int count)  
+    {  
+        Object [] objects = new Object[count];  
+  
+        for (int i = 0; i < count; ++i)  
+            objects[i] = createObject();  
+  
+        return objects;  
+    }  
+}
+```
+
+###### Auto-boxing ve Auto-unboxing Kavramları
+
+>Java 5 ile birlikte **otomatik kutulama (auto-boxing)** ve **otomatik kutu açma (auto-aunboxing)** kavramları dile eklenmiştir. Buna göre temel türden bir ifade ilişkin olduğu sarmalayan sınıf türünden bir referansa veya Object referansına doğrudan atanabilir. Bu durumda derleyici valuOf metodunu çağıran yaklaşık kodu üretir. Buna **auto-boxing** denir. Benzer şekilde ilgili sarmalayan sınıf türünden bir referans doğrudan ilişkin olduğu temel türden bir değişkene doğrudan atanabilir. Bu durumda derleyici `xxxValue` metodunu çağıran yaklaşık kodu üretir. Buna da **auto-unboxing** denir. Auto-unboxing işlemi Object türünden referans ile yapıldığında dinamik türe ilişkin sarmayan sınıfın karşılık geldiği türe explicit olarak dönüştürülür. Bu dönüşüm ile önce downcasting, sonra da xxxValue metodu çağrılmış olur
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Integer iVal1 = 127; //auto-boxing: Integer.valueOf(127)  
+        Integer iVal2 = 127; //auto-boxing: Integer.valueOf(127)  
+        Integer iVal3 = 128; //auto-boxing: Integer.valueOf(128)  
+        Integer iVal4 = 128;//auto-boxing: Integer.valueOf(128)  
+  
+        System.out.println(iVal1 == iVal2 ? "Aynı nesne" : "Farklı nesneler");  
+        System.out.println(iVal3 == iVal4 ? "Aynı nesne" : "Farklı nesneler");  
+    }  
+}
+```
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Character c1 = 'D';  //auto-boxing: Character.valueOf('D')  
+        Character c2 = 'D';  //auto-boxing: Character.valueOf('D')  
+        Character c3 = 'Ş';  //auto-boxing: Character.valueOf('Ş')  
+        Character c4 = 'Ş';  //auto-boxing: Character.valueOf('Ş')  
+  
+        System.out.println(c1 == c2 ? "Aynı nesne" : "Farklı nesneler");  
+        System.out.println(c3 == c4 ? "Aynı nesne" : "Farklı nesneler");  
+    }  
+}
+```
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Integer iVal = 127;
+        int a = iVal; //auto-unboxing: iVal.intValue()  
+  
+        System.out.printf("a = %d%n", a);  
+    }  
+}
+```
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Character c = 'D';  
+        char ch = c; //auto-unboxing: c.charValue()  
+  
+        System.out.printf("ch = %c%n", ch);  
+    }  
+}
+```
+
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Object o = 127; //auto-boxing: Integer.valueOf(127)  
+        int a = (int)o; //auto-unboxing: (int)o ifadesinin karşılığı -> ((Integer)o).intValue()  
+  
+        System.out.printf("a = %d%n", a);  
+    }  
+}
+```
+
+>Aşağıdaki demo örneği inceleyiniz. Örnekte auto-boxing ve auto-unboxing kullanılarak kod yalınlaştırılmıştır
+
+
+```java
+package org.csystem.app.generator;  
+  
+import org.csystem.generator.object.ObjectArrayGenerator;  
+import org.csystem.math.Complex;  
+import org.csystem.math.geometry.Circle;  
+import org.csystem.math.geometry.Point;  
+import org.csystem.wrapper.primitive.IntValue;  
+  
+import java.util.Scanner;  
+  
+public class DemoObjectArrayGeneratorApp {  
+    public static void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+        System.out.print("Input a number:");  
+        int count = kb.nextInt();  
+        ObjectArrayGenerator generator = new ObjectArrayGenerator();  
+  
+        for (Object o : generator.createObjects(count)) {  
+            System.out.println("-------------------------------------------------------------------------------------");  
+            System.out.printf("Dynamic type:%s%n", o.getClass().getName());  
+  
+            if (o instanceof String s) {  
+                String upper = s.toUpperCase();  
+  
+                System.out.printf("Text:%s, Upper:%s%n", s, upper);  
+            }  
+            else if (o instanceof Integer) {  
+                int val = (int)o;  
+  
+                System.out.printf("%d * %d = %d%n", val, val, val * val);  
+            }  
+            else if (o instanceof Character) {  
+                char ch = (char)o;  
+  
+                System.out.printf("ch = %c%n", ch);  
+            }  
+            else if (o instanceof Boolean) {  
+                boolean flag = (boolean)o;  
+  
+                System.out.printf("flag = %b%n", flag);  
+            }  
+            else if (o instanceof Point p)  
+                System.out.printf("Distance to origin:%f%n", p.euclideanDistance());  
+            else if (o instanceof Circle c)  
+                System.out.printf("Radius:%f, Area:%f, Circumference:%f%n", c.getRadius(), c.getArea(), c.getCircumference());  
+            else if (o instanceof Complex c)  
+                System.out.printf("||%s|| = %f%n", c.toString(), c.getLength());  
+  
+            System.out.println("-------------------------------------------------------------------------------------");  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+```java
+package org.csystem.generator.object;  
+  
+import org.csystem.math.Complex;  
+import org.csystem.math.geometry.Circle;  
+import org.csystem.math.geometry.Point;  
+import org.csystem.util.string.StringUtil;  
+  
+import java.util.Random;  
+  
+public class ObjectArrayGenerator {  
+    private final Random m_random = new Random();  
+  
+    //StringEN, Integer, Character, Boolean, Point, Circle, Complex  
+    private Object createObject()  
+    {  
+        return switch (m_random.nextInt(7)) {  
+            case 0 -> StringUtil.generateRandomTextEN(m_random, m_random.nextInt(5, 11));  
+            case 1 -> m_random.nextInt(-128, 128);  
+            case 2 -> (char)((m_random.nextBoolean() ? 'A' : 'a') + m_random.nextInt(26));  
+            case 3 -> m_random.nextBoolean();  
+            case 4 -> Point.createCartesian(m_random.nextDouble(-100, 100), m_random.nextDouble(-100, 100));  
+            case 5 -> new Circle(m_random.nextDouble(-10, 10));  
+            default -> new Complex(m_random.nextDouble(-20, 20), m_random.nextDouble(-20, 20));  
+        };  
+    }  
+  
+    public Object [] createObjects(int count)  
+    {  
+        Object [] objects = new Object[count];  
+  
+        for (int i = 0; i < count; ++i)  
+            objects[i] = createObject();  
+  
+        return objects;  
+    }  
+}
+```
 
