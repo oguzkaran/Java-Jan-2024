@@ -8389,13 +8389,13 @@ class App {
 >		char	-> int, long, float, double
  
 #### 7 Mayıs 2024
- 
->İşlem öncesi otomatik tür dönüşümü: İki operandlı bir operatör için aşağı seviyede farklı türlerle işlem yapılamaz.
+
+
+##### İşlem öncesi otomatik tür dönüşümü:
+
+>İki operandlı bir operatör için aşağı seviyede farklı türlerle işlem yapılamaz. Örneğin, int ve long türden iki değerin toplamı aşağı seviyede yapılamaz. İşte derleyiciler iki operandlı bir operatörün farklı türler ile işlem yaptığını gördüğünde ilgili işlemi ortak bir tür üzerinden yapmak için gereken kodları üretir. Bu işlemi duruma göre birini diğerine dönüştürerek ya da her ikisini ortak bir türe dönüştürürek yapar. Dönüştürme işlemini yukarıda anlatılan implicit conversion kurallarına uygun olarak yapar. Derleyicinin dönüştürme amaçlı ürettiği kodlara işlem öncesi otomatik tür dönüşümü denir. İşlem öncesi otomatik tür dönüşümü yapılamıyorsa error oluşur. Java'da işlem öncesi otomatik tür dönüşümü kuralları bellidir ve implicit conversion kurallarına uygundur.
 >
->Örneğin, int ve long türden iki değerin toplamı aşağı seviyede yapılamaz. İşte derleyiciler iki operandlı bir operatörün farklı türler ile işlem yaptığını gördüğünde ilgili işlemi ortak bir tür üzerinden yapmak için gereken kodları üretir. Bu işlemi duruma göre birini diğerine dönüştürerek ya da her ikisini ortak bir türe dönüştürürek yapar. Dönüştürme işlemini yukarıda anlatılan implicit conversion kurallarına uygun olarak yapar. Derleyicinin dönüştürme amaçlı ürettiği kodlara işlem öncesi otomatik tür dönüşümü denir. İşlem öncesi otomatik tür dönüşümü yapılamıyorsa error oluşur. Java'da işlem öncesi otomatik tür dönüşümü kuralları bellidir ve implicit conversion kurallarına uygundur.
->
->**Anahtar Notlar:** Bir değişkenin türü yaşamı (storage duration) boyunca değişmez. Bir değişkene ilişkin ifadenin türünün
-başka bir türe dönüşümü aslında o ifadenin değerinin hedef tür ile temsil edilmesi demektir. 
+>**Anahtar Notlar:** Bir değişkenin türü yaşamı (storage duration) boyunca değişmez. Bir değişkene ilişkin ifadenin türünün başka bir türe dönüşümü aslında o ifadenin değerinin hedef tür ile temsil edilmesi demektir. 
 >	
 >İşlem öncesi otomatik tür dönüşümü kurallarına ilişkin ayrıntılar şunlardır.
 
