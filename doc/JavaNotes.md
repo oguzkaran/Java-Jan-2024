@@ -6,6 +6,7 @@
 #### 23 Ocak 2024
 
 ##### Java Platformunun Temel Özellikleri:
+
 >**Arakodlu Çalışma Sistemi:** C ve C++ gibi dillerde yazılan kodlardan elde edilen (nasıl elde edildiği bu aşamada önemli değildir) "çalışabilir dosya (executable file)" sisteme (genel olarak işletim sistemi, donanım vb.) özgüdür ve koda göre her sistem için ayrıca oluşturulmalıdır. Hatta sisteme özgü kodlar yazılmışsa diğer sistemler için bu dosya oluşturulamaz. Oysa Java programlama dili ile yazılan bir program "derlendiğinde (compilation)" oluşan dosyanın içerisinde hiç bir sistemin dili olmayan yapay bir arakod bulunur. Bu arakoda "byte code (BC)" denir. BC doğrudan çalıştırılamaz. Çalıştırılması için ayrı bir uygulama (program)  gerekir. Bu program, BC'yi yorumlayarak makine koduna yani sisteme özgü koda dönüştürerek programı çalıştırır. Bu dönüştürme işlemine JIT (Just In Time) compilation denir. Geliştirme ve çalıştırma anlamında 3 tane temel kavram karşımıza çıkar:
 >
 >- JVM (Java Virtual Machine): BC'yi makine koduna dönüştürür. JVM aslında BC'nin nasıl makine koduna dönüştürüleceğini tanımlayan soyut bir kavramdır.
@@ -42,6 +43,8 @@
 #### 30 Ocak 2024
  
 ##### Temel Kavramlar
+
+>Bu bölümde programlamada gerekli temel kavramlar üzerinde durulacaktır.
 
 >**Çevirici Programlar, Derleyiciler ve Yorumlayıcılar:** Bir dilde yazılmış programı başka bir dile çeviren programlara çevirici programlar (translator) denir. Çevirici programlarda bir kaynak dil (source language) ve bir hedef dil (target/destination language) vardır. Kaynak dil yüksek seviyeli, hedef dil düşük seviyeli bir programlama diliyse bu durumda çevirici programa derleyici (compiler) denir. Örneğin Java programlama dilinden Kotlin programlama diline dönüştürme yapan program bir translator, Java programlama dilinden byte code'a dönüştürme yapan program ise bir compiler'dır. JVM'in byte code'u makine koduna çevirme faaliyeti de bir derleme işlemidir. Bu sebeple buna JIT compilation denir. Bazı dillerde yazılan programlar herhangi bir kod üretilmeden çalıştırılırlar. Bu tarz dillerde yazılmış programları herhangi bir kod üretmeden çalıştıran programlara "interpreter" denir. Bazı diller hem derleyici hem yorumlayıcı ile kullanılabilirler. Java pratikte derleyici ile kullanılan, Java 11 ile birlikte "java" programı yorumlayıcı olarak da java kodunu byte code üretilmeden çalıştırabilmektedir. Yorumlayıcı ile kullanılan diller derleyici ile kullanılan dillere göre daha yavaş olma eğilimindedir.
 
@@ -90,12 +93,11 @@
 | !      | exclamation mark                                   |
 | $      | dollar sign                                        |
 | ...    | ellipsis                                           |
-
->**JDK'nın kurulumu için işletim sistemine göre aşağıdaki link'den ilgili "installer" indirilebilir:**
+>**Java Geliştirme Ortamının Kurulumu:** JDK'nın kurulumu için işletim sistemine göre aşağıdaki link'den ilgili `installer` indirilebilir:
 >
 >**[Java Downloads](https://www.oracle.com/tr/java/technologies/downloads/)**
 >
->Burada LTS olması açısından 17 veya 21 seçilebilir. Kursumuzda Java 17 özellikleri de konular içerisinde ele alınacağından en az Java 17 kurulumu önerilir. Java 17  öncesinde en az Java 11 olmalıdır. Kurulum aşamasından sonra java ve javac programları -version seçeneği ile çalıştırılarak versiyon kontrolü yapılabilir.
+>Burada LTS olması açısından 17 veya 21 seçilebilir. Kursumuzda Java 17 özellikleri de konular içerisinde ele alınacağından en az Java 17 kurulumu önerilir. Java 17  öncesinde en az Java 11 olmalıdır. Kurulum aşamasından sonra `java` ve `javac` programları -version seçeneği ile çalıştırılarak versiyon kontrolü yapılabilir.
 >
 >Aşağıdaki programı çalıştırmak için JDK kurulu olan bir bilgisayarda aşağıdaki işlemlerin yapılması gerekir:
 >1. Herhangi bir dizinde (directory) csd isimli bir dizin açılır. Buradaki csd isminin tamamı küçük-harf olacak şekilde yazılacaktır.
@@ -105,15 +107,17 @@
 >5. Komut yorumlayıcı programda, csd'nin bulunduğu dizinde aşağıdaki komutları çalıştırarak derleme işlemi yapılır:
 >
 >`javac csd/App.java` -> Windows dışı sistemler için\**
->**`javac csd\App.java` -> Windows sistemi için**
+>`javac csd\App.java` -> Windows sistemi için
 >
->**Derleme işleminde herhangi bir hata (error) mesajı alınmazsa derleme işlemi başarılıdır ve App.class isminde byte code üretilir.**
+>Derleme işleminde herhangi bir hata (error) mesajı alınmazsa derleme işlemi başarılıdır ve App.class isminde byte code üretilir.
 >
->**6. Komut yorumlayıcı programda aşağıdaki biçimde byte code çalıştırılır:**
+>6. Komut yorumlayıcı programda aşağıdaki biçimde byte code çalıştırılır:
 >
->**`java csd.App`**
+>`java csd.App`
 
 **Anahtar Notlar: Yukarıdaki maddelerdeki bazı zorunluluklar ilerideki konularda anlaşılacaktır.**
+
+>Java ile yazılmış `Hello World`programı aşağıdaki gibidir:
 
 ```java
 package csd;
@@ -128,7 +132,9 @@ class App {
 
 #### 1 Şubat 2024
  
->**Dil Kavramı:** İletişimde kullanılan sembollere dil denir. Dilin kurallarına gramer denir. Bir olgu en az şu iki özelliğe sahipse bir dildir:
+##### Dil Kavramı
+
+>İletişimde kullanılan sembollere dil denir. Dilin kurallarına gramer denir. Bir olgu en az şu iki özelliğe sahipse bir dildir:
 >1. Sentaks (syntax): Dilin öğrelerinin doğru dizilimine denir. Örneğin "I am a student" cümlesinde dilin öğeleri doğru dizilmiştir. Cümle "am a student I"  biçiminde yasılsaydı sentaks olarak hatalı olurdu.
 >2. Semantik (semantic): Doğru dizilmiş öğelerin anlamına denir. Öğeler doğru dizilse bile cümle anlamlı değilse yine hatalıdır. 
 >
@@ -137,7 +143,9 @@ class App {
 >Programlama dilleri zaman içerisinde birbirilerinden esinlenmiştir. Hatta bazı programlama kalıpları da bir takım dillerden alınarak kullanılmaktadır
 
 
->**Derleyicinin verdiği mesajlar:** Derleyiciler koda ilişkin bazı teşhiş mesajları (diagnostics) verebilirler.
+##### Derleyicinin verdiği mesajlar
+
+>Derleyiciler koda ilişkin bazı teşhiş mesajları (diagnostics) verebilirler.
 >Derleyicilerin teşhis mesajları iki gruba ayrılır:
 >1. Gerçek hatalar (errors): Sentaks veya semantik olarak geçersiz bir durumda derleyicinin verdiği mesajlardır. Bu durumda BC üretilmez. Programcının hataya yol açan durumları düzeltmesi ve derleme işlemini yapması gerekir.
 >2. Uyarılar (warnings): Programcının olası programlama hatalarına yönelik mesajlardır. Uyarı mesajları ara kodun üretimini engellemez. Ancak programcı tarafından dikkate alınmalıdır. Özel bir durum yoksa uyarı mesajlarına yol açan durumların ortadan kaldırılması gerekir. Bazı durumlarda programcının kullandığı bazı static kod analizi araçları da derleyici dışında bazı uyarılar verebilirler. Şüphesiz bunlar da dikkate alınmalıdır ancak hepsinin ortadan kaldırılması gerekmeyebilir. Pratikte bir ürünün nihayi (release) versiyonunda derleyicinin tüm uyarı mesajlarının kaldıırlmış olması gerekir.
@@ -147,13 +155,15 @@ class App {
 >
 >Programın çalışma zamanında oluşan hatalı durumlara genel olarak "excaption" veya "run time error" denir. Exception handling konusuna gelene kadar bir exception oluştuğunda program abnormal bir biçimde sonlanır olarak düşüneceğiz.*
 
->**Anahtar Notlar:** Bir program için, programcı açısından iki durum söz konusudur: 
+>Bir program için, programcı açısından iki durum söz konusudur: 
 >1. Derleme zamanı (compile time): Derleme işlemine ilişkin süreçtir.
->2. Çalışma zamanı (run time): Programın çalıştırlması sürecidir. 
+>2. Çalışma zamanı (run time): Programın çalıştırılması sürecidir. 
 >
 >Şüphesiz derleme zamanı ve çalışma birbirleri ile ilişkildir. Sonuçta bir program derlenmeden zaten çalıştırılamaz. Her ne kadar ilişkili de olsalar birbirlerinden farklı kavramlardır.*
  
->Atom (Token): Programlama dilinin bölünemeyen en küçük birimine denir. Java programlama dilinde atomlar şunlardır:
+##### Atom Kavramı
+
+>Programlama dilinin bölünemeyen en küçük birimine **atom (token)** denir. Java programlama dilinde atomlar şunlardır:
 >**1. Anahtar Sözcükler (keywords/reserved words):** Derleyicinin bildiği, tanıdığı sözcüklerdir. Anahtar sözcükler tek başına değişken ismi olamazlar. Örneğin:
 >
 >		package, int, class
@@ -249,12 +259,18 @@ class App {
 ```
 
 #### 6 Şubat 2024
+
+##### Bildirim (Declaration)
  
->Bildirim (Declaration): Bir ismin derleyiciye tanıtılmasıdır.Bir dilin kurallarının genel biçimlerini açıklamaya yönelik pek çok notasyon kullanılmaktadır. Biz burada "açısal  parantez-köşeli parantez" tekniğini kullanacağız. Bu teknikte zorunlu olması gerekenler açıklamada açısal parantez içerisine alınır. Seçenekli olması gerekenler ise köşeli parantez içerisine alınır. Herhangi bir paranteze alınmayanlar aynı şekilde bulundurulması gerekenlerdir. Ayrıca>
->		//...
+>Bir ismin derleyiciye tanıtılmasıdır.Bir dilin kurallarının genel biçimlerini açıklamaya yönelik pek çok notasyon kullanılmaktadır. Biz burada "açısal  parantez-köşeli parantez" tekniğini kullanacağız. Bu teknikte zorunlu olması gerekenler açıklamada açısal parantez içerisine alınır. Seçenekli olması gerekenler ise köşeli parantez içerisine alınır. Herhangi bir paranteze alınmayanlar aynı şekilde bulundurulması gerekenlerdir. Ayrıca
+
+```java
+//...
+```
+
 >**burada bir takım kodlar var ancak şu an bizi ilgilendirmiyor** anlamına gelecektir.
  
-##### "Hello World" Programının Genel Açıklaması:
+##### `Hello World` Programının Genel Açıklaması:
 
 >Bir Java programı genel olarak paketlerden (package), paketler sınıflardan (class), sınıflar da metotlardan (method) oluşur. Paket bildiriminin genel biçimi:
 >	
