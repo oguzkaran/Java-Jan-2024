@@ -260,14 +260,16 @@ class App {
 
 #### 6 Şubat 2024
 
-##### Bildirim (Declaration)
+##### Bildirim (Declaration) Kavramı
  
->Bir ismin derleyiciye tanıtılmasıdır.Bir dilin kurallarının genel biçimlerini açıklamaya yönelik pek çok notasyon kullanılmaktadır. Biz burada "açısal  parantez-köşeli parantez" tekniğini kullanacağız. Bu teknikte zorunlu olması gerekenler açıklamada açısal parantez içerisine alınır. Seçenekli olması gerekenler ise köşeli parantez içerisine alınır. Herhangi bir paranteze alınmayanlar aynı şekilde bulundurulması gerekenlerdir. Ayrıca
+>Bir ismin derleyiciye tanıtılmasına **bildirim (declaration)** denir. 
+##### Genel Biçimlerin Açıklanmasına İlişkin Notasyonlar
+
+>Bir dilin kurallarının genel biçimlerini açıklamaya yönelik pek çok notasyon kullanılmaktadır. Biz burada **açısal  parantez-köşeli parantez tekniğini** kullanacağız. Bu teknikte zorunlu olması gerekenler açıklamada açısal parantez içerisine alınır. Seçenekli olması gerekenler ise köşeli parantez içerisine alınır. Herhangi bir paranteze alınmayanlar aynı şekilde bulundurulması gerekenlerdir. Ayrıca
 
 ```java
 //...
 ```
-
 >**burada bir takım kodlar var ancak şu an bizi ilgilendirmiyor** anlamına gelecektir.
  
 ##### `Hello World` Programının Genel Açıklaması:
@@ -610,7 +612,7 @@ class Mample {
 >8'lik sistem de 2'lik sistemin yoğun bir gösterimi olarak kullanılmaktadır. Ancak 8'i tam ortalayamadığı için kullanımı seyrektir.
 
 >
-##### Tür (type) Kavramı
+##### Tür (Type) Kavramı
 
 >Bir değişkenin içerisindeki değerin ne kadar uzunlukta (length) tutulduğunu (yani bellekte o değişken için ne kadar yer ayrılacağını) ve değerin hangi formatta tutulduğunu  belirtir. Java'da **temel türler (primitive/built-in/predefined types)** şunlardır:
 
@@ -624,7 +626,6 @@ class Mample {
 | double   | 8              | `[±1.6 * 10-308, ±1.6 * 10+308]`               |
 | char     | 2              | `[0, 65535]`                                   |
 | boolean  | -              | `true, false`                                  |
-
 
 >**Açıklamalar:**
 >- Java'da temel tür isimlerinin her biri birer anahtar sözcüktür.
@@ -662,9 +663,9 @@ class App {
 
 #### 13 Şubat 2024
  
->**Anahtar Notlar:** Yazılar da aslında bilgisayar belleğinde 2'lik sistemde sayılar biçiminde tutulmaktadır. Bir yazıyı oluşturan elemanlara "karakter" denilmektedir. İşte bir yazıda her bir karakter 2'lik sistemde bir sayı ile ifade edilir. Böylece yazı  aslında ikilik sistemde bir sayı dizisi gibi tutulmaktadır. İşte bir karakter için hangi sayının karşı geldiğini belirten tablolara "karakter tabloları" denilmektedir. Karakter tablosundaki karakter şekillerine "glyph" denilmektedir. Her karaktere tabloda bir sıra numarası verilmiştir. Buna da "code point" denilmektedir. Dünyanın ilk standart karakter tablosu `ASCII` (American Standard Code Information Interchange) denilen tablodur. `ASCII` tablosu aslında 7 bit bir tablodur. Dolayısıyla tabloda 128 tane glyph için code point bulundurulmuştur. `ASCII` dışında `IBM EBCDIC` tablosunu geliştirmiştir. Wang firması `WISCII` tablosunu kullanmıştır. `ASCII` tablosu Amerikalılar tarafından yalnızca İngilizce karakterleri ifade etmek için oluşturulmuştur. Bilgisayarlar yaygınlaşmaya başladığında farklı karakterlere sahip olan Türkiye gibi, Yunanistan gibi, Almanya gibi ülkeler bu  `ASCII` tablosunu 8 bite çıkartıp elde edilen 128'lik yeni alanı kendi karakterlerini ifade etmek için kullanmışlardır. `ASCII` tablosunun ilk yarısı (yani [0, 128] numaraları karakterleri) standarttır. Ancak ikinci yarısı "code page" adı altında farklı ülkeler tarafından farklı yerleşimler yapılarak kullanılmaktadır. DOS zamanlarında Türkçe karakterler için OEM 857 denilen code page kullanılıyordu. Daha sonra Microsoft Windows sistemlerinde Türkçe karakterler için `1254 code page`'i düzenledi. ISO, bu code page'leri standart hale getirmiştir. Bugün Türkçe karakterler `ISO` tarafından `ASCII 8859-9` Code page'i ile düzenlenmiştir. `ASCII` tablosu ve onların code page'leri uzun süre kullanılmış ve hala kullanılmakta olsa da maalesef karışıklıklara yol açmaktadır. İşte son 20 yıldır artık karakterleri 2 byte içerisinde ifade ederek dünyanın bütün dillerinin ve ortak sembollerinin tek bir tabloya yerleştirilmesi ile ismine `UNICODE` denilen bir tablo oluşturulmuştur: [Unicode Homepage](https://home.unicode.org)
->`UNICODE` tablo ISO tarafından 10646 ismiyle de bazı farklılıklarla standardize edilmiştir. `UNICODE` tablonun ilk 128 karakteri standart ASCII karakterleri, ikinci 128 karakteri `ISO 8859-9` code page'indeki karakterlerdir. Bir karakter tablosundaki code point'lerin ikilik sistemde ifade edilme biçimine "encoding" denilmektedir. ASCII code page'lerinde encoding doğrudan code point'in 1 byte'lık sayı karşılığıdır. Ancak `UNICODE` tablonun değişik encoding'leri kullanılmaktadır. `UNICODE` tablonun klasik encoding'i `UTF-16`'dır. Burada code point doğrudan 16 bit bir sayı biçiminde ifade edilir. `UTF-32` encoding'inde ise code point 32 bitlik bir sayı biçiminde ifade edilmektedir. Ancak `UNICODE` tablonun en yaygın kullanılan encoding'i `UTF-8` encoding'idir. `UTF-8` kodlamasında standart ASCII karakterler 1 byte ile, diğer karakterler 2 byte, 3 byte, 4 byte ve 5 byte ile kodlanabilmekedir. Türkçe karakterler `UTF-8` encoding'inde 2 byte yer kaplamaktadr. `UTF-8` encoding'i `UNICODE` bir yazının adeta sıkıştırılmış bir hali gibi düşünülebilir. Bugün pek çok programlama editörleri default durumda dosyayı `UNICODE UTF-8` encoding'ine göre saklamaktadır.
+**Anahtar Notlar:** Yazılar da aslında bilgisayar belleğinde 2'lik sistemde sayılar biçiminde tutulmaktadır. Bir yazıyı oluşturan elemanlara "karakter" denilmektedir. İşte bir yazıda her bir karakter 2'lik sistemde bir sayı ile ifade edilir. Böylece yazı  aslında ikilik sistemde bir sayı dizisi gibi tutulmaktadır. İşte bir karakter için hangi sayının karşı geldiğini belirten tablolara "karakter tabloları" denilmektedir. Karakter tablosundaki karakter şekillerine "glyph" denilmektedir. Her karaktere tabloda bir sıra numarası verilmiştir. Buna da "code point" denilmektedir. Dünyanın ilk standart karakter tablosu `ASCII` (American Standard Code Information Interchange) denilen tablodur. `ASCII` tablosu aslında 7 bit bir tablodur. Dolayısıyla tabloda 128 tane glyph için code point bulundurulmuştur. `ASCII` dışında `IBM EBCDIC` tablosunu geliştirmiştir. Wang firması `WISCII` tablosunu kullanmıştır. `ASCII` tablosu Amerikalılar tarafından yalnızca İngilizce karakterleri ifade etmek için oluşturulmuştur. Bilgisayarlar yaygınlaşmaya başladığında farklı karakterlere sahip olan Türkiye gibi, Yunanistan gibi, Almanya gibi ülkeler bu  `ASCII` tablosunu 8 bite çıkartıp elde edilen 128'lik yeni alanı kendi karakterlerini ifade etmek için kullanmışlardır. `ASCII` tablosunun ilk yarısı (yani [0, 128] numaraları karakterleri) standarttır. Ancak ikinci yarısı "code page" adı altında farklı ülkeler tarafından farklı yerleşimler yapılarak kullanılmaktadır. DOS zamanlarında Türkçe karakterler için OEM 857 denilen code page kullanılıyordu. Daha sonra Microsoft Windows sistemlerinde Türkçe karakterler için `1254 code page`'i düzenledi. ISO, bu code page'leri standart hale getirmiştir. Bugün Türkçe karakterler `ISO` tarafından `ASCII 8859-9` Code page'i ile düzenlenmiştir. `ASCII` tablosu ve onların code page'leri uzun süre kullanılmış ve hala kullanılmakta olsa da maalesef karışıklıklara yol açmaktadır. İşte son 20 yıldır artık karakterleri 2 byte içerisinde ifade ederek dünyanın bütün dillerinin ve ortak sembollerinin tek bir tabloya yerleştirilmesi ile ismine `UNICODE` denilen bir tablo oluşturulmuştur: [Unicode Homepage](https://home.unicode.org) `UNICODE` tablo ISO tarafından 10646 ismiyle de bazı farklılıklarla standardize edilmiştir. `UNICODE` tablonun ilk 128 karakteri standart ASCII karakterleri, ikinci 128 karakteri `ISO 8859-9` code page'indeki karakterlerdir. Bir karakter tablosundaki code point'lerin ikilik sistemde ifade edilme biçimine "encoding" denilmektedir. ASCII code page'lerinde encoding doğrudan code point'in 1 byte'lık sayı karşılığıdır. Ancak `UNICODE` tablonun değişik encoding'leri kullanılmaktadır. `UNICODE` tablonun klasik encoding'i `UTF-16`'dır. Burada code point doğrudan 16 bit bir sayı biçiminde ifade edilir. `UTF-32` encoding'inde ise code point 32 bitlik bir sayı biçiminde ifade edilmektedir. Ancak `UNICODE` tablonun en yaygın kullanılan encoding'i `UTF-8` encoding'idir. `UTF-8` kodlamasında standart ASCII karakterler 1 byte ile, diğer karakterler 2 byte, 3 byte, 4 byte ve 5 byte ile kodlanabilmekedir. Türkçe karakterler `UTF-8` encoding'inde 2 byte yer kaplamaktadr. `UTF-8` encoding'i `UNICODE` bir yazının adeta sıkıştırılmış bir hali gibi düşünülebilir. Bugün pek çok programlama editörleri default durumda dosyayı `UNICODE UTF-8` encoding'ine göre saklamaktadır.
 ##### Değişken Bildirimleri
+
 >Değişken, bellekte ayrılan bir bölge ile işlem yapılmasını sağlar yani o bölgeyi temsil eder. Bir değişken için bellekte yer ayrılma detayları ileride ele alınacaktır. Değişken bildiriminin genel biçimi şu şekildedir:
 
 	<tür> <isim>;
@@ -850,25 +851,31 @@ class App {
 ```
 
 **Anahtar Notlar:** Programlamada artık kullanılması önerilmeyen bir kavrama  **deprecated** denir. Deprecated olmanın çeşitli gerekçeleri olabilir. Programcı deprecated olan bir şeyi özel bir durum yoksa kullanmamalıdır. Deprecated olmanın gerekçeleri ve yerine kullanılacak şeyler dokümante edilir.
- 
->Değişken isimlendirme kuralları (Buradaki kurallar tüm değişken atomlar için geçerlidir):
+
+##### Değişken İsimlendirme Kuralları
+
+>Buradaki kurallar tüm değişken atomlar için geçerlidir:
 >- Değişken isimleri bir rakam karakteri ile başlatılamaz. Uygun bir karakter ile başlatılıp istenildiği kadar rakam karakteri kullanılabilir.
 >- Değişken isimlerinde alfabetik karakter kullanılabilir.
 >- Değişken isimlerinde `_` (underscore) karakteri kullanılabilir. Değişken ismi alttire karakteri ile de başlatılabilir. Java 8 ile brilikte `_` karakterinin tek başına değişken ismi olması deprecated olmuştur, Java 9 ile birlikte `_` karakterinin tek başına kullanımı error olarak değerlendirilir.
 >- Anahtar sözcükler tek başına değişken ismi olamazlar.
->
->**Anahtar Notlar:** Java'ya daha sonraya eklenen bazı sözcükler kullanım yerine anahtar sözcük ya da değişken gibi ele alınırlar. Aslında bu tip sözcükler JLS'de anahtar sözcükler listesinde bulunmaz. Bu tip sözcüklere programlamada `contextual keywords` denilmektedir.
+
+**Anahtar Notlar:** Java'ya daha sonraya eklenen bazı sözcükler kullanım yerine anahtar sözcük ya da değişken gibi ele alınırlar. Aslında bu tip sözcükler JLS'de anahtar sözcükler listesinde bulunmaz. Bu tip sözcüklere programlamada `contextual keywords` denilmektedir.
+
 >- Değişken isimleri bir boşluk (whitespace) karakteri içeremez.
 >- Değişken isimleri büyük-küçük harf duyarlıdır (case sensitive). Aslında Java case sensitive bir dildir. Örneğin anahtar sözcüklerin tamamı küçük harf olarak yazılmalıdır.
 >- Değişken isimleri `UNICODE` alfabetik karakterler içerebilir. Örneğin değişken isimlerinde Türkçe karakterler kullanılabilir.
->
->**Anahtar Notlar:** Her ne kadar değişken isimlerinde `UNICODE` alfabetik karakterler kullanılabilse de programcı İnglizce alfabedeki karakteri tercih etmelidir. Hatta programcı bir değişken ismi herhangi bir dile özgü de yazmamalıdır. Değişken isimlerinde İnglizce kelimeler tercih edilmeldir.
+
+**Anahtar Notlar:** Her ne kadar değişken isimlerinde `UNICODE` alfabetik karakterler kullanılabilse de programcı İnglizce alfabedeki karakteri tercih etmelidir. Hatta programcı bir değişken ismi herhangi bir dile özgü de yazmamalıdır. Değişken isimlerinde İnglizce kelimeler tercih edilmelidir.
+
 >- Değişken isimlerinde `$` karakteri kullanılabilir. Değişken ismi `$` karakteri ile başlatılabilir, `$` karakteri tek başına değişken ismi olabilir. Derleyiciler bazı durumlarda arakoda veya arakod içerisinde isimler verirler. Derleyiciler bu tip isimleri verirken `$` karakterini de kullanırlar. Java programcısı da hiç bir zaman `$` karakterini değişken isimlerinde kullanmaz. Bu durumda programcının belirlediği isimler ile derleyicinin belirlediği isimlerin çakışma olaslığı olmaz. Zaten `$` karakterinin değişken isimlendirmede kullanılabilmesinin nedeni yani varlık sebebi budur. JLS'de de `$` karakteri bu şekilde açıklanmış ve programcı tarafından kullanılması önerilmemiştir
 >- Değişken isimlerinin okunabilirlik/algılanabilirlik açısından "kolay telaffuz edilebilir, anlamlı ve yeterince uzunlukta" olması önerilir. Bu genel bir programlama `convention`'ı olarak düşünülmelidir. Değişken isimlendirmede bazı teknikler de kullanılabilmektedir. Genel olarak kullanılan programlama diline göre bir ya da birden fazla teknik kullanılabilmektedir.
 >- JLS'de değişken isimlerinin maksimum karakter sayısı ile ilgili herhangi bir söylenmemiştir. Şüphesiz bir sınıfı olur. Ancak bu sınır oldukça fazla olma eğiliminde olduğundan isimlendirmede bir sorun oluşturmaz.
  
 #### 15 Şubat 2024
- 
+
+##### Klavyeden Okuma Yapılması
+
 >Java'da klavyeden okuma yapmak (aslında stdin'den okuma yapmak) için pek çok sınıf ve metot bulunmaktadır. Biz kursumuzda ağırlıklı olarak `Scanner` isimli bir sınıfın `nextXXX` metotlarını kullanacağız. Belirli konulara gelene kadar bu kullanımlar birer kalıp biçiminde düşünülmelidir. Kullanılan kalıpların detayları ileride anlaşılacaktır. Kullanılan kalıplarda IDE'nin static kod analizi ya da derleyici bir takım uyarılar (warnings) verebilecektir. Aksi belirtilmediği sürece bu uyarılar dikkate alınmayacaktır.
 >
 >Bu kalıplarda ilgili türden giriş yapılmadığı durumlarda exception oluşur.
@@ -1005,9 +1012,13 @@ class App {
 }
 ```
 
->**İfade (expression):** Sabitlerden, operatörlerden ve değişkenlerden oluşan herhangi bir kombinasyona ifade denir.Bir ifade yalnızca sabitlerden ve operatörlerden oluşuyorsa bu ifadeye **sabit ifadesi (constant expression)** denir. Bir değişken veya sabit tek başına ifadedir. Ancak bir operatör tek başına bir ifade olamaz. Her ifadenin bir türü vardır. Bunun bir tane istisnası vardır, ileride ele alınacaktır
- 
->Bir metodun geri dönüş değeri bilgisi yerine bir tür ismi yazılırsa, bu metodun geri dönüş değeri (return value)" vardır denir. Tersinde bir metodun geri dönüş değeri varsa geri dönüş değeri bilgisi yerine bir tür yazılır. Bir metodun geri dönüş değeri varsa, o metodun çağrısı bittiğinde çağrılan noktaya bir değer ile geri döner. Bir metodun geri dönüş değeri yoksa geri dönüş değeri bilgisi yerine void anahtar sözcüğü yazılır. Metodun geri dönüş değeri yoksa sonlandığında çağrılan noktaya yalnızca geri döner, bir değer aktarılmaz. Bir metodun geri dönüş değeri metot içerisinde `return` deyimi ile oluşturulur. `return` deyiminin genel biçimi şu şekildedir:
+#### İfade (Expression) Kavramı
+
+>Sabitlerden, operatörlerden ve değişkenlerden oluşan herhangi bir kombinasyona **ifade (expression)** denir. Bir ifade yalnızca sabitlerden ve operatörlerden oluşuyorsa bu ifadeye **sabit ifadesi (constant expression)** denir. Bir değişken veya sabit tek başına ifadedir. Ancak bir operatör tek başına bir ifade olamaz. Her ifadenin bir türü vardır. Bunun bir tane istisnası vardır, ileride ele alınacaktır
+
+##### Metodun Geri Dönüş Değeri
+
+>Bir metodun geri dönüş değeri bilgisi yerine bir tür ismi yazılırsa, bu metodun **geri dönüş değeri (return value)** vardır denir. Tersinde bir metodun geri dönüş değeri varsa geri dönüş değeri bilgisi yerine bir tür yazılır. Bir metodun geri dönüş değeri varsa, o metodun çağrısı bittiğinde çağrılan noktaya bir değer ile geri döner. Bir metodun geri dönüş değeri yoksa geri dönüş değeri bilgisi yerine void anahtar sözcüğü yazılır. Metodun geri dönüş değeri yoksa sonlandığında çağrılan noktaya yalnızca geri döner, bir değer aktarılmaz. Bir metodun geri dönüş değeri metot içerisinde `return` deyimi ile oluşturulur. `return` deyiminin genel biçimi şu şekildedir:
 
 	return [ifade];
 >Görüldüğü gibi `return` deyimi tek başına veya bir ifade ile kullanılabilir. Bu kullanımların detayları bölüm içerisinde anlaşılacaktır. `return` deyimi nasıl kullanılırsa kullanılsın, akış `return` deyimine geldiğinde metot sonlanır. Yani `return` deyiminin birinci görevi metodu sonlandırmaktır. `return` deyimi ifade ile kullanılmışsa ifadenin değeri çağrılan noktaya aktarılır. Buna geri dönüş değeri denmesinin nedeni budur
@@ -1114,7 +1125,7 @@ class Util {
 }
 ```
 
->Aşağıdaki demoörnekte return deyimine ilişkin ifadenin değeri a ile b'nin değerlerinin toplamından elde edilmiştir. Bu tarz ifadelerde okunabilirliğin/algılanabilirliğin olumsuz etkilenmemesine dikkat edilmelidir
+>Aşağıdaki demo örnekte return deyimine ilişkin ifadenin değeri a ile b'nin değerlerinin toplamından elde edilmiştir. Bu tarz ifadelerde okunabilirliğin/algılanabilirliğin olumsuz etkilenmemesine dikkat edilmelidir
 
 ```java
 package csd;
@@ -1433,8 +1444,10 @@ class Util {
 **Anahtar Notlar:** Bir metodun geri dönüş değeri o metodun bir çıktısıdır (output).
  
 **Anahtar Notlar:** Java'da bir metot bir tane değere geri dönebilir
- 
->Metodun gövdesinde önce parantez içerisinde bildirilen değişkenlere metot parametre değişkenleri denir. Metot parametre değişkenleri virgül ile ayrılır. Değişkenler aynı türden olsa bile tür bilgisi her biri için yazılmalıdır. Metot parametre değişkenleri faaliyet alanı olarak metodun başında bildirilen yerel değişkenler gibidir. Yani ilgili metot boyunca görülebilirdir. Metot çağrısında metoda geçilen ifadelere argüman (argument) denir. Bu anlamda metodun parametre değişkenleri aslında metodun girdileridir (input). Bir metodun kaç tane parametresi varsa o kadar sayıda argüman ile çağrılmalıdır. Parametre değişkenleri değerlerini metot çağrısında, ilgili parametreye geçilen ifadenin değeri olarak alırlar. Yani metot çağrısında argümana ilişkin ifade önce hesaplanır ve değeri parametre değişkenine aktarılır. Bu anlamda argümanlardan parametrelere aktarım da bir atama işlemidir
+
+##### Metot Parametre Değişkenleri
+
+>Metodun gövdesinde önce parantez içerisinde bildirilen değişkenlere **metot parametre değişkenleri (method parameter variables)** denir. Metot parametre değişkenleri virgül ile ayrılır. Değişkenler aynı türden olsa bile tür bilgisi her biri için yazılmalıdır. Metot parametre değişkenleri faaliyet alanı olarak metodun başında bildirilen yerel değişkenler gibidir. Yani ilgili metot boyunca görülebilirdir. Metot çağrısında metoda geçilen ifadelere argüman (argument) denir. Bu anlamda metodun parametre değişkenleri aslında metodun girdileridir (input). Bir metodun kaç tane parametresi varsa o kadar sayıda argüman ile çağrılmalıdır. Parametre değişkenleri değerlerini metot çağrısında, ilgili parametreye geçilen ifadenin değeri olarak alırlar. Yani metot çağrısında argümana ilişkin ifade önce hesaplanır ve değeri parametre değişkenine aktarılır. Bu anlamda argümanlardan parametrelere aktarım da bir atama işlemidir
  
 >Aşağıdaki demo örneği inceleyiniz
 
@@ -1536,14 +1549,16 @@ class Util {
 }
 ```
 
->**Anahtar Notlar:** Java'da 3 yerde atama işlemi yapılır: 
+##### Java'da Atama İşlemleri
+
+>Java'da 3 yerde atama işlemi yapılır: 
 >1. Yalın atama işlemi
 >2. Metodun geri dönüş değerinin geçici değişkene atanması
 >3. Argümandan parametre değişkene aktarım
->	
 >Özel bazı durumlar dışında atama işlemine ilişkin kurallar tüm atama işlemleri için geçerlidir
  
 #### 22 Şubat 2024
+##### Metotların Avantajları
 
 >Metotlar ne işe yarar? Ya da başka bir deyişle bir problemin çözümünde neden metotlar yazalım?
 >
@@ -1555,8 +1570,8 @@ class Util {
 >- Metodu çağıran programcı metodun nasıl yazıldığına ilişkin detayları bilmek zorunda değildir. Çünkü metodun çağrıldığı noktada metodun nasıl yazıldığının önemi yoktur. Ne yaptığı önemlidir.
 >- Bir kod parçasının metot olarak yazılması onun bağımsız olarak test edilip doğrulanması veya varsa hataların
 düzeltilmesi açısından da önemlidir.
->
->**Anahtar Notlar:** Kurs içerisinde ele alacağımız Nesne Yönelimli Programlama Tekniği'ne (Object Oriented Programming Paradigm) ilişkin kavramlar ile kodun parçalara ayrılması metotlar dışında daha yüksek seviyede de yapılabilecektir.
+
+**Anahtar Notlar:** Kurs içerisinde ele alacağımız Nesne Yönelimli Programlama Tekniği'ne (Object Oriented Programming Paradigm) ilişkin kavramlar ile kodun parçalara ayrılması metotlar dışında daha yüksek seviyede de yapılabilecektir.
 
 >`System.out.printf` metodu ile formatlı yazdırma yapılabilir. printf metodunun birinci parametresine geçien argüman bir yazı (string literal vb.) olmalıdır. Bu metot birinci parametresi ile birlikte değişken sayıda argüman alabilecek şekilde tasarlanmıştır. Değişken sayıda argüman alan metotların (vararg methods) bildiriminin nasıl yapıldığı bu bölümde ele alınmayacaktır. printf metodunun birinci parametresine ilişkin yazının içerisinde `%` karakteri ile birlikte özel bazı karakterler kullanılabilmektedir. Bu özel karakterlere format karakterleri (format specifiers) denir. Bir format karakterinin yazı içerisinde `%` karakteri ile birlikte kullanılmasına ise yer tutucu (place holder) denir. Bir format karakteri özel bazıları dışında bir türe karşılık gelir ve o yer tutucu yerine printf'e geçilen argümanların değerleri yerleştirilerek yazı formatlanır. Format karakterlerinin bazıları şunlardır:
 >- d: Tamsayı türleri için kullanılır. Sayının değerinin decimal olarak formatlanmasını sağlar.
@@ -1775,7 +1790,9 @@ class App {
 ```
 
 #### 27 Şubat 2024
- 
+
+##### Standart Metotların Kullanım Avantajları
+
 >Neden standart metotları kullanmalıyız? Standart olarak var olan bir metodu programcı yazmalı mıdır?
 >
 >Java'da standart olarak (yani JavaSE'de bulunan) metotlatın kullanılmasının bazı önemli avantajları şunlardır:
@@ -1832,7 +1849,7 @@ class App {
 >	
 >Euclid Uzaklığı fomulü:
 >
->$$\sqrt{(x1 - x2) ^ 2 + (y1 - y2) ^ 2}$$
+>$$Euclidean Distance = \sqrt{(x1 - x2) ^ 2 + (y1 - y2) ^ 2}$$
 
 ```java
 package csd;
@@ -1873,7 +1890,7 @@ class PointUtil {
 >	
 >Euclid Uzaklığı fomulü:
 >
->$$distance = \sqrt{(x1 - x2) ^ 2 + (y1 - y2) ^ 2}$$
+>$$Euclidean Distance = \sqrt{(x1 - x2) ^ 2 + (y1 - y2) ^ 2}$$
 
 ```java
 package csd;
@@ -2076,13 +2093,14 @@ class App {
 ##### Sabitler
 
 >Program içerisinde doğrudan yazılan bir değere **sabit (literal/constant)** denir.
->
->**Anahtar Notlar:** Anımsanacağı gibi iki tırnak içerisindeki yazılara `string literal` denir.
->	
+
+**Anahtar Notlar:** Anımsanacağı gibi iki tırnak içerisindeki yazılara `string literal` denir.
+
 >Sabitlerin de türleri vardır. Sabitlerin türleri derleme aşamasında yani derleyici tarafından tespit edilir.
 >	
->**Anahtar Notlar:** Derleyicinin bir ifadenin türünü tespit etmesine genel `type inference/deduction` denilmektedir.
->	
+
+**Anahtar Notlar:** Derleyicinin bir ifadenin türünü tespit etmesine genel `type inference/deduction` denilmektedir.
+	
 >Sabitlerin türleri aşağıdaki kurallara göre belirlenir:
 >- Sayı nokta içermiyorsa, sonuna herhangi bir ek almamışsa ve int türü sınırları içerisinde kalıyorsa `int` türden bir sabittir. Sayı, nokta içermiyorsa fakat int türü sınırları dışındaysa error oluşur.
 >
@@ -2094,7 +2112,9 @@ class App {
 >Örneğin:
 >
 >		10L, 4000000000L vb.	
->**Anahtar Notlar:** Küçük harf L soneki 1(bir) sayısına özellikle bazı yazı türlerinde benzediği okunabililik açısından kullanılması tavsiye edilmez.
+
+**Anahtar Notlar:** Küçük harf L soneki 1(bir) sayısına özellikle bazı yazı türlerinde benzediği okunabililik açısından kullanılması tavsiye edilmez.
+
 >- Java'da `byte` ve `short` türden sabit yoktur
 >- Sayı nokta içeriyorsa ve sonuna herhangi bir ek almamışsa `double` türdendir.
 >
@@ -2112,8 +2132,9 @@ class App {
 >
 >		3.4F, 7f, 6.8F vb.
 >
->**Anahtar Notlar:** Nokta içeren ve noktadan sonraki kısmın tamamı sıfır olmayan bir sabitin (yani double türden sabitin) sonuna F (küçük veya büyük) eki getirildiğinde, sayının değeri float türü ile temsil edilemiyorsa en yakın değere yuvarlanır (rounding error). 
->
+
+**Anahtar Notlar:** Nokta içeren ve noktadan sonraki kısmın tamamı sıfır olmayan bir sabitin (yani double türden sabitin) sonuna F (küçük veya büyük) eki getirildiğinde, sayının değeri float türü ile temsil edilemiyorsa en yakın değere yuvarlanır (rounding error). 
+
 >- `boolean` türden iki tane sabit vardır: `true`, `false`.	
 >- Tek tırnak içerisinde yazılan karaterlere ilişkin sembollere tırnaklarıyla beraber karakter sabitleri `character literals` denir. Karakter sabitleri `char` türdendir. Tek tırnak içerisinde özel bazı durumlar dışında tek bir karakter yazılır. Aksi durumda error oluşur. Bir karakter sabiti ilgili karakterin karakter tablosundaki sıra numarasına karşılık gelir. Aslında biz char türden sabit yazarak o sabite ilişkin karakterin sıra numarasını elde etmiş oluruz. Bu sıra numarasını `char` türden bir değişken içerisinde saklayarak mantıksal olarak o karakteri tutmuş oluruz. Bazı karakterler klavyedeki tuş kombinasyonları ile doğrudan yazılamazlar. Bazı karakterler ise doğrudan ekrana basılamazlar `non-printable`. Bu tarz karakterler doğrudan tek tırnak içerisinde karakter sabiti olarak yazılamazlar. Bu karakterler ters bölü `\` karateri ile birlikte özel bir karakter kullanılarak tek tırnak içerisinde yani karakter sabiti olarak yazılırlar. Ters bölü ile yazılan karakterlere `escape sequence` karakterler denir. Java'da desteklenen escape sequence karakterler şunlardır:
 
