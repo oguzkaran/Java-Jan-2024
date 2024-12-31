@@ -93,7 +93,10 @@
 | !      | exclamation mark                                   |
 | $      | dollar sign                                        |
 | ...    | ellipsis                                           |
->**Java Geliştirme Ortamının Kurulumu:** JDK'nın kurulumu için işletim sistemine göre aşağıdaki link'den ilgili `installer` indirilebilir:
+
+##### Java Geliştirme Ortamının Kurulumu:
+
+>JDK'nın kurulumu için işletim sistemine göre aşağıdaki link'den ilgili `installer` indirilebilir:
 >
 >**[Java Downloads](https://www.oracle.com/tr/java/technologies/downloads/)**
 >
@@ -142,19 +145,18 @@ class App {
 >
 >Programlama dilleri zaman içerisinde birbirilerinden esinlenmiştir. Hatta bazı programlama kalıpları da bir takım dillerden alınarak kullanılmaktadır
 
-
 ##### Derleyicinin verdiği mesajlar
 
->Derleyiciler koda ilişkin bazı teşhiş mesajları (diagnostics) verebilirler.
->Derleyicilerin teşhis mesajları iki gruba ayrılır:
+>Derleyiciler koda ilişkin bazı **teşhiş mesajları (diagnostics)** verebilirler.
+>Derleyicilerin teşhis mesajları üç gruba ayrılır:
 >1. Gerçek hatalar (errors): Sentaks veya semantik olarak geçersiz bir durumda derleyicinin verdiği mesajlardır. Bu durumda BC üretilmez. Programcının hataya yol açan durumları düzeltmesi ve derleme işlemini yapması gerekir.
 >2. Uyarılar (warnings): Programcının olası programlama hatalarına yönelik mesajlardır. Uyarı mesajları ara kodun üretimini engellemez. Ancak programcı tarafından dikkate alınmalıdır. Özel bir durum yoksa uyarı mesajlarına yol açan durumların ortadan kaldırılması gerekir. Bazı durumlarda programcının kullandığı bazı static kod analizi araçları da derleyici dışında bazı uyarılar verebilirler. Şüphesiz bunlar da dikkate alınmalıdır ancak hepsinin ortadan kaldırılması gerekmeyebilir. Pratikte bir ürünün nihayi (release) versiyonunda derleyicinin tüm uyarı mesajlarının kaldıırlmış olması gerekir.
 >3. Ölümcül hatalar (fatal errors): Derleme işleminin dahi tamamlanamadığı hatalardır. Örneğin derlenecek dosyanın bulunamamaı, diskte yer kalmaması, sistemsel problemler oluşması vb. Bu durumda programcının ölümcül hataya yol açan durumu ortadan kaldırıp derleme işlemini yapması gerekir. Yani ölümcül hata durumunda programcının kodu ile bir durum yoktur.
 >
 >Derleme işleminin başarıyla yapılması durumunda derleyiciler ya hiç bir mesaj vermezler ya da derleme işleminin başarılı olduğu da anlaşılan mesajlar verirler.
 >
->Programın çalışma zamanında oluşan hatalı durumlara genel olarak "excaption" veya "run time error" denir. Exception handling konusuna gelene kadar bir exception oluştuğunda program abnormal bir biçimde sonlanır olarak düşüneceğiz.*
-
+>Programın çalışma zamanında oluşan hatalı durumlara genel olarak "excaption" veya "run time error" denir. Exception handling konusuna gelene kadar bir exception oluştuğunda program abnormal bir biçimde sonlanır olarak düşüneceğiz.
+>
 >Bir program için, programcı açısından iki durum söz konusudur: 
 >1. Derleme zamanı (compile time): Derleme işlemine ilişkin süreçtir.
 >2. Çalışma zamanı (run time): Programın çalıştırılması sürecidir. 
@@ -7034,10 +7036,11 @@ class App {
 ```
 
 #### 25 Nisan 2024
- 
->**Anahtar Notlar:** Derleyiciler, programa ilişkin algoritmayı değiştirmeden, algoritmanın en iyi biçiminde çalışmasını sağlayan kodu üretmesine `compiler optimization` denir. Bu anlamda derleyiciler programcının yazdığı algoritmayı düzeltmez. Optimizasyon genel olarak ikiye ayrılır: speed optimization, size optimization. Speed optimization, algoritmaya ilişkin üretilen kodun hızlı çalışması için, size optimization ise üretilen kodun daha az yer kaplaması için yapılır. Derleyicinin pek çok durum için optimizasyon yaklaşımı vardır. 
->	 
->Derleyiciler sabit ifadelerinin değerlerini arakoda, hesaplayıp yazarlar. Yani sabit ifadelerinin değerleri çalışma zamanında hesaplanmaz. Buna **constant folding optimization** denir.
+##### Derleyicilerin Kod Optimizasyonu
+
+  >Derleyiciler, programa ilişkin algoritmayı değiştirmeden, algoritmanın en iyi biçiminde çalışmasını sağlayan kodu üretmesine **compiler code optimization** denir. Bu anlamda derleyiciler programcının yazdığı algoritmayı düzeltmez. Optimizasyon genel olarak ikiye ayrılır: speed optimization, size optimization. Speed optimization, algoritmaya ilişkin üretilen kodun hızlı çalışması için, size optimization ise üretilen kodun daha az yer kaplaması için yapılır. Derleyicinin pek çok durum için optimizasyon yaklaşımı vardır. 
+  >
+  >Derleyiciler sabit ifadelerinin değerlerini arakoda hesaplayıp yazarlar. Yani sabit ifadelerinin değerleri çalışma zamanında hesaplanmaz. Buna **constant folding optimization** denir.
 
 >Aşağıdaki demo örnekte derleyici `constant folding` yaptığından aynı değere sahip birden fazla case bölümü tespit ettiğinden error oluşur
 
