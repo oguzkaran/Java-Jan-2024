@@ -3730,7 +3730,7 @@ class App {
 		
 		a = ++a;
 		
-		System.out.printf("a = %d%n", a); //a = 2
+		System.out.printf("a = %d%n", a); //a = 3
 	}
 }
 ```
@@ -8074,7 +8074,7 @@ class DateUtil {
 >
 >Derleyici kaynak türe ilişkin değerin `hedef` türün sınırları içerisinde olup olmadığına bakmaz, ki çoğu zamanda bakamaz. Örneğin değer klavyeden okunsa zaten derleme zamanında hiç bir şekilde bilinemez. Bu durumda derleyici kaynak türden `hedef` türe doğrudan atamanın geçerli olup olmadığına göre kodu derler. Doğrudan dönüşüme ilişkin ayrıntılar ayrıca ele alınacaktır.
 >	
->**Anahtar Notlar:** Uzunluk (size) olarak küçük türden uzunluk olarak büyük türe yapılan dönüşümlere Java Language Specification'da (JLS) `widening` conversion, uzunluk olarak büyük türden uzunluk olarak küçük türe yapılan dönüşümlere `narrowing` conversion, her ikisinin birden olduğu dönüşümlere ise `widening and narrowing` conversion denilmektedir. Buradaki terimler, dönüşümün geçerli ya da geçersiz olmasından bağımsızdır. Anlatım bu şekilde kullanılmıştır. Biz burada bu terimleri her zaman kullanmayarak konuyu daha anlaşılır hale getirmeye çalışacağız.
+>**Anahtar Notlar:** Uzunluk (size) olarak küçük türden uzunluk olarak büyük türe yapılan dönüşümlere Java Language Specification'da (JLS) **widening conversion**, uzunluk olarak büyük türden uzunluk olarak küçük türe yapılan dönüşümlere **narrowing conversion**, her ikisinin birden olduğu dönüşümlere ise **widening and narrowing conversion** denilmektedir. Buradaki terimler, dönüşümün geçerli ya da geçersiz olmasından bağımsızdır. Anlatım bu şekilde kullanılmıştır. Biz burada bu terimleri her zaman kullanmayarak konuyu daha anlaşılır hale getirmeye çalışacağız.
 >
 >**Anahtar Notlar:** Anımsanacağı gibi Java'da 3 yerde atama işlemi yapılmaktadır:
 >1. Yalın atama işlemi (Atama operatörü ile yapılan atama işlemi).
@@ -10477,8 +10477,7 @@ class App {
 			int c; //c yaratıldı (push c)
 			float d; // d yaratıldı (push d)
 			
-			//...
-		} //d yok edildi (pop d) -> c yok edildi (pop c)
+			//...		} //d yok edildi (pop d) -> c yok edildi (pop c)
 		
 		int x;
 		
@@ -10690,7 +10689,7 @@ class TCP {
 >Aşağıdaki örnekte `p`, `s`, `u` ve `t` birer nesne **DEĞİLDİR**, ilgili türden nesnelerin adreslerini tutan `referans` değişkenlerdir.
 >
 >Örnekte `*, **, *** ve ****` ile belirtilen deyimlerde ilgili türden nesneler yaratılmış ve ilgili türden referans değişkenlere adresleri atanmıştır. Bu durumda bir referans değişkene bir adres atandığında o referans o nesneyi gösteriyor (reference to) duruma gelmiş olur. 
->- Bir nesne ilgili sınıf türünden bir örnektir. Buna İngilizce olarak `instance` terimi de kullanılır. Bu anlamda nesne yaratma işlemi için de "create" fiili ile birlikte "instantiate" fiili de kullanılır.
+>- Bir nesne ilgili sınıf türünden bir örnektir. Buna İngilizce olarak **instance** terimi de kullanılır. Bu anlamda nesne yaratma işlemi için de "create" fiili ile birlikte "instantiate" fiili de kullanılır.
 >- Referans ve nesne kavramları birbirinden farklıdır. Referans bir nesneyi gösterir ya da adresi anlamında kullanılır.
 >- Her `new` işlemi yeni bir nesne yaratmak demektir.
 
@@ -10818,11 +10817,11 @@ class Sample {
 >
 >Peki bir **nesnenin** uzunluğu ne kadardır?
 >
->Bir nesnenin uzunluğu "en az, ilişkin olduğu sınıfın `non-static` veri elemanlarının toplam uzunluğu kadardır". Burada en az kavramıyla sisteme ilişkin başka bilgilerin de eklenebileceği anlatılmaktadır. Detaylar önemsizdir. Java programcısı açısından **"uzunluk non-static veri elemanları ile belirlenir"** olarak algılanmalıdır.
+>Bir nesnenin uzunluğu **en az, ilişkin olduğu sınıfın non-static veri elemanlarının toplam uzunluğu kadardır**. Burada en az kavramıyla sisteme ilişkin başka bilgilerin de eklenebileceği anlatılmaktadır. Detaylar önemsizdir. Java programcısı açısından **uzunluk non-static veri elemanları ile belirlenir** olarak algılanmalıdır.
 >
 >Peki `non-static` bir veri elemanının `ömrü` (storage duration) ne kadardır?
 > 
->`Non-static` bir veri elemanı nesne yaratıldığında yaratılır. Nesne yok edildiğinde yok edilir. Java'da nesne **"garbage collector"** tarafından yok edilir. Bir nesnenin yok edilmesine ilişkin detaylar ileride ele alınacaktır.
+>`Non-static` bir veri elemanı nesne yaratıldığında yaratılır. Nesne yok edildiğinde yok edilir. Java'da nesne **garbage collector** tarafından yok edilir. Bir nesnenin yok edilmesine ilişkin detaylar ileride ele alınacaktır.
 >
 >Peki `non-static` bir veri elemanının faaliyet alanı nedir?
 >
@@ -28530,7 +28529,7 @@ class App {
 }
 ```
 
->Boolean sınıfı dışında kalabn sarmalayan sınıfların **MIN_VALUE** ve **MAX_VALUE** public static ve final veri elemanları sırasıyla ilgili temel türe ilişkin `en küçük` ve `en büyük` değer bilgisidir. Float ve Double sınıflarının MIN_VALUE ve MAX_VALUE değerleri pozifitir. Gerçek sayıların tutuluş formatında (IEEE 754) bu değerlerin negatif olanları da sınır değerleridir
+>Boolean sınıfı dışında kalan sarmalayan sınıfların **MIN_VALUE** ve **MAX_VALUE** public static ve final veri elemanları sırasıyla ilgili temel türe ilişkin `en küçük` ve `en büyük` değer bilgisidir. Float ve Double sınıflarının MIN_VALUE ve MAX_VALUE değerleri pozifitir. Gerçek sayıların tutuluş formatında (IEEE 754) bu değerlerin negatif olanları da sınır değerleridir
 
 ```java
 package org.csystem.app;  
@@ -28757,7 +28756,7 @@ public class ObjectArrayGenerator {
 
 ###### Auto-boxing ve Auto-unboxing Kavramları
 
->Java 5 ile birlikte **otomatik kutulama (auto-boxing)** ve **otomatik kutu açma (auto-aunboxing)** kavramları dile eklenmiştir. Buna göre temel türden bir ifade ilişkin olduğu sarmalayan sınıf türünden bir referansa veya Object referansına doğrudan atanabilir. Bu durumda derleyici valuOf metodunu çağıran yaklaşık kodu üretir. Buna **auto-boxing** denir. Benzer şekilde ilgili sarmalayan sınıf türünden bir referans doğrudan ilişkin olduğu temel türden bir değişkene doğrudan atanabilir. Bu durumda derleyici `xxxValue` metodunu çağıran yaklaşık kodu üretir. Buna da **auto-unboxing** denir. Auto-unboxing işlemi Object türünden referans ile yapıldığında dinamik türe ilişkin sarmayan sınıfın karşılık geldiği türe explicit olarak dönüştürülür. Bu dönüşüm ile önce downcasting, sonra da xxxValue metodu çağrılmış olur
+>Java 5 ile birlikte **otomatik kutulama (auto-boxing)** ve **otomatik kutu açma (auto-unboxing)** kavramları dile eklenmiştir. Buna göre temel türden bir ifade ilişkin olduğu sarmalayan sınıf türünden bir referansa veya Object referansına doğrudan atanabilir. Bu durumda derleyici valueOf metodunu çağıran yaklaşık kodu üretir. Buna **auto-boxing** denir. Benzer şekilde ilgili sarmalayan sınıf türünden bir referans ilişkin olduğu temel türden bir değişkene doğrudan atanabilir. Bu durumda derleyici `xxxValue` metodunu çağıran yaklaşık kodu üretir. Buna da **auto-unboxing** denir. Auto-unboxing işlemi Object türünden referans ile yapıldığında dinamik türe ilişkin sarmayan sınıfın karşılık geldiği türe explicit olarak dönüştürülür. Bu dönüşüm ile önce downcasting, sonra da xxxValue metodu çağrılmış olur
 
 >Aşağıdaki demo örneği inceleyiniz
 
@@ -28946,6 +28945,175 @@ public class ObjectArrayGenerator {
   
         return objects;  
     }  
+}
+```
+
+##### 2 Ocak 2025
+
+>Aşağıdaki demo örnekte auto-unboxing yapılırken referansın dinamik türü `Integer` olduğunden haksız dönüşüm dolayısıyla exception oluşur 
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Object o = 12; //auto-boxing: Integer.valueOf(12);  
+        long a;  
+  
+        a = (long)o; //auto-unboxing: ((Long)o).longValue();  
+        System.out.printf("a = %d%n", a);  
+    }  
+}
+```
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Object o = 12; //auto-boxing: Integer.valueOf(12);  
+        long a;  
+  
+        a = (int)o; //auto-unboxing: ((Integer)o).intValue();  
+        System.out.printf("a = %d%n", a);  
+    }  
+}
+```
+
+>Aşağıdaki demo örnek tür dönüştürme operatörü `right associative` olduğundan geçerlidir ve dönüşüm haklı dönüşümdür
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Object o = 12; //auto-boxing: Integer.valueOf(12);  
+        short a;  
+  
+        a = (short)(int)o; //auto-unboxing: (short)((Integer)o).integerValue();  
+        System.out.printf("a = %d%n", a);  
+    }  
+}
+```
+
+
+>Number sınıfnın `xxxValue` metotları sarmalayan sınıflar için temel türler arasındaki tür dönüştürme kurallarına göre işlem yaparlar. Yani örneğin, `Long` türden bir referans ile `intValue` metodu çağrıldığında long türünden int türüne explicit dönüşüm kuralları uygulanır. Yani değerin yüksek anlamlı 4 byte'ı atılır elde edilen değere geri dönülür
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Long lVal = 5_000_000_000L;  
+        long val = 5_000_000_000L;  
+        int a, b;  
+  
+        a = lVal.intValue();  
+        b = (int)val;  
+  
+        System.out.printf("%016X%n", 5_000_000_000L);  
+        System.out.printf("a = %d, b = %d%n", a, b);  
+        System.out.printf("a = %9X, b = %08X%n", a, b);  
+    }  
+}
+```
+
+##### Çöp Toplayıcı (GarbageCollector)
+
+>Programlamada heap'de tahsis nesnelere genel olarak `dinamik ömürlü nesneler` denir. Bu anlamda heap'de yapılan tahsisatlara **dynamic memory allocation** denilmektedir. Stack'de tahsis edilen değişkenler **otomatik ömürlü** değişkenler denir tahsis edilen alanlar otomatik olarak yaratılır ve otomatik olarak yok edilir. Static veri elemaları ise yaratıldıktan sonra program yaşadıklarından **static ömürlü** değişkenlerdir.  
+>
+>Dinamik olarak yaratılan nesneler (Java'da nesneler) artık kullanılmaz duruma geldiklerinde, başka nesneler için de tahsisat yapılabilsin diye yok edilirler. Bu yok etme işlemine **free** ya da **delete** denilmektedir. Heap'de tahsis edilen alanlar heap'in algoritması gereği stack'teki gibi otomatik olarak yok edilmezler. Bazı programlama dillerinde ve ortamlarında delete işlemi programcının sorumluluğundadır. Java'da nesnelerin yok edilmesi işlemi  **çöp toplayıcı (garbage collector)(GC)** isimli ayrı bir akış tarafından yapılır. Şüphesiz Java programcısı açısında bu yok etme yine otomatik olarak yok etme işlemidir ancak stack'deki gibi doğal değildir. Öyleyse GC için şu sorular ve cevapları önemlidir:
+>
+>**Soru 1:** GC yok edilmesi gereken bir alanı nasıl anlar?
+>
+>**Soru2:** Programcı dinamik olarak tahsis edilen bir alanı kendisi yok edebilir mi?
+>
+>**Soru 3:** Bir nesne yok edilebilir duruma geldiğinde GC hemen devreye girip bu alanı yok eder mi?
+>
+>**Yanıt 1:** Bir nesneyi gösteren hiç bir referans kalmadığında nesne **eligible/garbage collected** duruma gelir. Bir nesneyi gösteren referansların takip edilmesine yönelik pek çok algoritma kullanılmaktadır. Örneğin **referans sayma (reference counting)** algoritması ile her nesne için ayrı bir referans sayıacı tutularak yapılır. Buna göre nesnenin adresi bir referansa atandığında sayaç 1(bir) artılır, nesne bir referanstan kopartıldığında sayaç 1(bir) azaltılır. Bu durumda sayaç sıfır olduğunda artık o nesneyi gösteren hiç bir referans kalmamıştır dolayısıya nesne eligible/garbage collected duruma gelmiş olur. 
+>
+>**Yanıt 2:** Programcı herhangi bir anda dinamik olarak tahsis edilmiş bir alanı yok edemez. Programcı akış içerisinde nesneyi eligible duruma getirebilir.
+>
+>**Yanıt 3:** GC'nin ne zaman devreye gireceği yazanlara bırakılmıştır (implementation defined/dependent). Bu durumda bir nesne eligible olur olmaz GC'nin devreye gireceği garanti olmadığından nesnenin eligible olur olmaz yok edileceği de garanti değildir. Bu anlamda GC'nin etkinliğine güvenilir. 
+
+>Aşağıdaki demo örnekte `reference counting` yöntemi kullanılıyor varsayımı ile referansların takibi gösterilmiştir
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Sample s = new Sample(); //rc1:1  
+  
+        Mample.foo(s); //rc1:2 -> 3  
+        //rc1:1      
+          
+        Mample.foo(s); //rc1:2 -> 3  
+        //rc1:1        
+        
+        s = new Sample();//rc1:0 (eligible), rc2:1  
+  
+        //...    
+    }  
+}  
+  
+class Mample {  
+    public static void foo(Sample s)  
+    {  
+        Sample k;  
+  
+        k = s;  
+  
+        //...  
+    }  
+}  
+  
+class Sample {  
+    //...  
+}
+```
+
+>Aşağıdaki demo örnekte nesneyi gösteren son referans null adres atanarak nesneden kopartıldığından nesne artık eligible duruma gelir
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Sample s = new Sample(); //rc1:1  
+  
+        Mample.foo(s); //rc1:2 -> 3  
+        //rc1:1  
+        
+        Mample.foo(s); //rc1:2 -> 3  
+        //rc1:1  
+        
+        s = null;//rc1:0 (eligible)  
+  
+        //...    }  
+}  
+  
+class Mample {  
+    public static void foo(Sample s)  
+    {  
+        Sample k;  
+  
+        k = s;  
+  
+        //...  
+    }  
+}  
+  
+class Sample {  
+    //...  
 }
 ```
 
