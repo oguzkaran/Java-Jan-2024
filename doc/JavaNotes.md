@@ -20800,12 +20800,13 @@ class Time {
 >- Bir veri elemanının değeri, başka bir veri elemanın değerine bağlı olarak hesaplanıyor olabilir. Bu durumda veri elemanı gizlenir. 
 >
 >- Bir veri elemanının değişen değerine göre bir işlem yapılması gerekebilir. Örneğin, bir veritabanı bağlantısına yönelik bir bilginin değişmesi durumunda eski bağlantının kopartılıp yeni bağlantının sağlanması gerekebilir. Bu durumda ilgili veri elemanı gizlenir.
-> 
-> **Anahtar Notlar:** Bazı durumlarda yukarıki durumlarda biri olmasa bile veri elemanı gizlenebilir. Örneğin, sınıfın bir veri elemanı dışında kalan diğer veri elemanları gizlenmesi gerekebilir. Bütünlüğün bozulmaması için gizlenmesi gerekmeyen veri elemanı da gizlenebilir. Bu durumda yine ilgili accessor ve mutator metotlar yazılır. Bu da aslında sınıfa bağlıdır.
-> 
-> **Anahtar Notlar:** Yukarıdaki 4 durumdan en az bir tanesi varsa programcı hiç düşünmeden veri elemanın gizlemelidir.
-> 
-> **Anahtar Notlar:** Yukarıdaki durumlardan hiçibirisi ile karşılaşılmaması durumunda (%3 - %5 arasında karşılaşılmaz) illgili veri elemanı yapılabilir.
+>
+
+**Anahtar Notlar:** Bazen yukarıdaki durumlardan biri olmasa bile veri elemanı gizlenebilir. Örneğin, sınıfın bir veri elemanı dışında kalan diğer veri elemanları gizlenmesi gerekebilir. Bütünlüğün bozulmaması için gizlenmesi gerekmeyen veri elemanı da gizlenebilir. Bu durumda yine ilgili accessor ve mutator metotlar yazılır. Bu da aslında sınıfa bağlıdır.
+ 
+**Anahtar Notlar:** Yukarıdaki 4 durumdan en az bir tanesi varsa programcı hiç düşünmeden veri elemanın gizlemelidir.
+ 
+ **Anahtar Notlar:** Yukarıdaki durumlardan hiç ibirisi ile karşılaşılmaması durumunda (%3 - %5 arasında karşılaşılmaz) illgili veri elemanı public yapılabilir.
 
 >Aşağıdaki demo Time sınıfının kodları değişmesine rağmen, değişiklik yapılmadan yazılmış client code'ların etkilenmediğine dikkat ediniz
 
