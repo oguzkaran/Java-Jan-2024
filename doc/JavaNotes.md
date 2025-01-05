@@ -8431,7 +8431,7 @@ class App {
 #### 7 Mayıs 2024
 
 
-##### İşlem öncesi otomatik tür dönüşümü:
+##### İşlem Öncesi Otomatik Tür Dönüşümleri
 
 >İki operandlı bir operatör için aşağı seviyede farklı türlerle işlem yapılamaz. Örneğin, int ve long türden iki değerin toplamı aşağı seviyede yapılamaz. İşte derleyiciler iki operandlı bir operatörün farklı türler ile işlem yaptığını gördüğünde ilgili işlemi ortak bir tür üzerinden yapmak için gereken kodları üretir. Bu işlemi duruma göre birini diğerine dönüştürerek ya da her ikisini ortak bir türe dönüştürürek yapar. Dönüştürme işlemini yukarıda anlatılan implicit conversion kurallarına uygun olarak yapar. Derleyicinin dönüştürme amaçlı ürettiği kodlara işlem öncesi otomatik tür dönüşümü denir. İşlem öncesi otomatik tür dönüşümü yapılamıyorsa error oluşur. Java'da işlem öncesi otomatik tür dönüşümü kuralları bellidir ve implicit conversion kurallarına uygundur.
 >
@@ -8694,8 +8694,9 @@ class App {
 	}
 }
 ```
+##### Tür Dönüştürme Operatörü (Type Casting Operator)
 
->**_Tür Dönüştürme Operatörü (Type Casting Operator):_** Bu operatör özel amaçlı, tek operandlı ve önek durumundadır.
+>Bu operatör özel amaçlı, tek operandlı ve önek durumundadır.
 >
 >Operatörün kullanımına ilişkin genel biçim şu şekildedir:
 
@@ -9224,7 +9225,9 @@ class App {
 }
 ```
 
->Koşul Operatörü (Conditional/Ternary operator): Koşul operatörü özel amaçlı, 3 operandlı (ternary) ve araek (infix) durumundadır. Bu operatörü Java'nın tek 3 operandlı operatörüdür. Bu sebeple bu operatöre "ternary operator" de denilmektedir. Operatörün yan etkisi yoktur. Operatörün genel biçimi şu şekildedir:
+##### Koşul Operatörü (Conditional/Ternary operator): 
+
+>Koşul operatörü özel amaçlı, 3 operandlı (ternary) ve araek (infix) durumundadır. Bu operatörü Java'nın tek 3 operandlı operatörüdür. Bu sebeple bu operatöre "ternary operator" de denilmektedir. Operatörün yan etkisi yoktur. Operatörün genel biçimi şu şekildedir:
 
 		<ifade1> ? <ifade2> : <ifade3>
 >Bu operatörde `<ifade1>` `boolean` türünden olmalıdır. Aksi durumda error oluşur. Bu operatör için `ifade1` hesaplandığında elde edilen değer `true` ise `ifade2` hesaplanır, `false` ise `ifade3` hesaplanır ve duruma göre `ifade2`'nin veya `ifade3`'ün değeri üretilir. Yani bu operatör için çalışma zamanında `ifade1` yapılır ve duruma göre `ifade2` veya `ifade3`'den yalnızca biri hesaplanır.
