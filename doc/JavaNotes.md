@@ -18239,7 +18239,9 @@ class Util {
 
 
 >***Referans Dizileri:*** Her bir elemanı bir referans olan dizilere denir. Bu durumda dizinin her bir elemanı ilgili türden bir adres tutar. Bu durumda bir referans dizisinin yaratılması, elemanı olan her bir referansın gösterdiği nesnelerin de yaratılması anlamına gelmez. Yani bir referans dizisi yaratıldıktan sonra diziye ilişkin referanslara da uygun adreslerin verilmesi gerekir. Bir referans dizisi ilk değer vermeden yaratıldığında her bir referansa null değeri atanır.
->**Anahtar Notlar:** Programlamada kullanılmayan adrese `null adres (null address)` denilmektedir. Java'da null adres null isimli bir sabit ile temsil edilir. null, bir referansın default değeri olarak atanır. null adrese ilişkin diğer detaylar ileride ele alınacaktır.
+
+
+**Anahtar Notlar:** Programlamada kullanılmayan adrese `null adres (null address)` denilmektedir. Java'da null adres `null` isimli bir sabit ile temsil edilir. null, bir referansın default değeri olarak atanır. null adrese ilişkin diğer detaylar ileride ele alınacaktır.
 
 >Aşağıdaki demo örnekte referans dizisi yaratılmış ancak, dizinin elemanı olan referanslar herhangi bir nesneyi göstermediğinden exception oluşur
 
@@ -20722,7 +20724,7 @@ public class A {
 > 
 > **Anahtar Notlar:** Programcılar genel olarak programlama dilinin doğasına uygun olacak şekilde isimlendirme yaparlar. Örneğin Java'da metot isimleri lower camel olarak kullanıldığından Java programcısı da kendi yazdığı metotlar aynı teknikle isimlendirme yapar.
 > 
-> **Anahtar Notlar:** Bazı programcılar özellikle private veri elemanlarının isimlendirmesinde bazı önekler (prefix) kullanalabilmektedir. Örneğin `m_`, `d_`, `m` önekleri tercih edilebilmektedir. Bazı programcılar hiç bir önek koymamayı tercih edebilirler. Bu tür yaklaşımların iyisi kötüsü yoktur. Geliştirici ekip tarafında belirlen teknik kullanılır. Biz convention olarak, sınıfların non-static ve private veri elemanları için `m_` önekini, sınıfın static ve private veri elemanları için `ms_` önekini kullanacağız.
+> **Anahtar Notlar:** Bazı programcılar özellikle private veri elemanların isimlendirmesinde bazı önekler (prefix) kullanabilmektedir. Örneğin `m_`, `d_`, `m` önekleri tercih edilebilmektedir. Bazı programcılar hiç bir önek koymamayı tercih edebilirler. Bu tür yaklaşımların iyisi kötüsü yoktur. Geliştirici ekip tarafından belirlenen teknik kullanılır. Biz convention olarak, sınıfların non-static ve private veri elemanları için `m_` önekini, sınıfın static ve private veri elemanları için `ms_` önekini kullanacağız.
 
 >Aşağıdaki demo Time sınıfı ve accessor ve mutator metotlarını inceleyiniz
 
@@ -29027,23 +29029,27 @@ class App {
 }
 ```
 
-##### Çöp Toplayıcı (GarbageCollector)
+##### Çöp Toplayıcı (Garbage Collector)
 
 >Programlamada heap'de tahsis nesnelere genel olarak `dinamik ömürlü nesneler` denir. Bu anlamda heap'de yapılan tahsisatlara **dynamic memory allocation** denilmektedir. Stack'de tahsis edilen değişkenler **otomatik ömürlü** değişkenler denir tahsis edilen alanlar otomatik olarak yaratılır ve otomatik olarak yok edilir. Static veri elemaları ise yaratıldıktan sonra program yaşadıklarından **static ömürlü** değişkenlerdir.  
 >
 >Dinamik olarak yaratılan nesneler (Java'da nesneler) artık kullanılmaz duruma geldiklerinde, başka nesneler için de tahsisat yapılabilsin diye yok edilirler. Bu yok etme işlemine **free** ya da **delete** denilmektedir. Heap'de tahsis edilen alanlar heap'in algoritması gereği stack'teki gibi otomatik olarak yok edilmezler. Bazı programlama dillerinde ve ortamlarında delete işlemi programcının sorumluluğundadır. Java'da nesnelerin yok edilmesi işlemi  **çöp toplayıcı (garbage collector)(GC)** isimli ayrı bir akış tarafından yapılır. Şüphesiz Java programcısı açısında bu yok etme yine otomatik olarak yok etme işlemidir ancak stack'deki gibi doğal değildir. Öyleyse GC için şu sorular ve cevapları önemlidir:
 >
->**Soru 1:** GC yok edilmesi gereken bir alanı nasıl anlar?
+>**Soru 1:** GC, yok edilmesi gereken bir alanı nasıl anlar?
 >
 >**Soru2:** Programcı dinamik olarak tahsis edilen bir alanı kendisi yok edebilir mi?
 >
 >**Soru 3:** Bir nesne yok edilebilir duruma geldiğinde GC hemen devreye girip bu alanı yok eder mi?
 >
->**Yanıt 1:** Bir nesneyi gösteren hiç bir referans kalmadığında nesne **eligible/garbage collected** duruma gelir. Bir nesneyi gösteren referansların takip edilmesine yönelik pek çok algoritma kullanılmaktadır. Örneğin **referans sayma (reference counting)** algoritması ile her nesne için ayrı bir referans sayıacı tutularak yapılır. Buna göre nesnenin adresi bir referansa atandığında sayaç 1(bir) artılır, nesne bir referanstan kopartıldığında sayaç 1(bir) azaltılır. Bu durumda sayaç sıfır olduğunda artık o nesneyi gösteren hiç bir referans kalmamıştır dolayısıya nesne eligible/garbage collected duruma gelmiş olur. 
+>**Yanıt 1:** Bir nesneyi gösteren hiç bir referans kalmadığında nesne **eligible/garbage collected** duruma gelir. Bir nesneyi gösteren referansların takip edilmesine yönelik pek çok algoritma kullanılmaktadır. Örneğin **referans sayma (reference counting)** algoritması ile her nesne için ayrı bir referans sayacı tutularak yapılır. Buna göre nesnenin adresi bir referansa atandığında sayaç 1(bir) artılır, nesne bir referanstan kopartıldığında sayaç 1(bir) azaltılır. Bu durumda sayaç sıfır olduğunda artık o nesneyi gösteren hiç bir referans kalmamıştır dolayısıya nesne eligible/garbage collected duruma gelmiş olur. 
 >
 >**Yanıt 2:** Programcı herhangi bir anda dinamik olarak tahsis edilmiş bir alanı yok edemez. Programcı akış içerisinde nesneyi eligible duruma getirebilir.
 >
 >**Yanıt 3:** GC'nin ne zaman devreye gireceği yazanlara bırakılmıştır (implementation defined/dependent). Bu durumda bir nesne eligible olur olmaz GC'nin devreye gireceği garanti olmadığından nesnenin eligible olur olmaz yok edileceği de garanti değildir. Bu anlamda GC'nin etkinliğine güvenilir. 
+
+**Anahtar Notlar:** Program terimi teknik olarak `çalıştırılabilen dosyaya (executable file)` verilen bir isimdir. Çalışan program için teknik olarak **process** terimi kullanılmaktadır.
+
+>Process sonlandığında, ayrılan bellek alanı da yok edildiğinden tüm nesneler de `delete` edilmiş olur.
 
 >Aşağıdaki demo örnekte `reference counting` yöntemi kullanılıyor varsayımı ile referansların takibi gösterilmiştir
 
@@ -29119,4 +29125,302 @@ class Sample {
     //...  
 }
 ```
+
+##### 16 Ocak 2024
+
+>Aşağıdaki demo örnekte nesney gösteren referans null yapılmasına karşın nesne eligible duruma gelmemiştir. Çünkü nesneyi gösteren bir referans daha bulunmaktadır
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Sample s = new Sample(); //rc1:1  
+  
+        Mample.foo(s); //rc1:2 -> 3  
+        //rc1:1  
+        Mample.foo(s); //rc1:2 -> 3  
+        //rc1:1  
+        Sample k;  
+  
+        k = s; //rc1:2  
+        s = null; //rc1:1  
+  
+        //...    }  
+}  
+  
+class Mample {  
+    public static void foo(Sample s)  
+    {  
+        Sample k;  
+  
+        k = s;  
+  
+        //...  
+    }  
+}  
+  
+class Sample {  
+    //...  
+}
+```
+
+>Programcı isterse GC'nin devreye girmesini sağlayabilir. Bunu yapmanın birden fazla yöntemi olsa da tipik olarak `System`sınıfının `gc` isimli static metodu çağrılabilir. Ancak burada GC'nin programcı tarafından devreye sokulması çoğu zaman (neredeyse hiç bir zaman) gerekmez. Bu anlamda GC'nin etkinliğine güvenilir. GC'nin sürekli ya da gereksiz yere devreye sokulması da performansı olumsuz etkileyebilir.
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Sample s = new Sample(); //rc1:1  
+  
+        Mample.foo(s); //rc1:2 -> 3  
+        //rc1:1  
+        Mample.foo(s); //rc1:2 -> 3  
+        //rc1:1  
+        s = null; //rc1:1  
+  
+        System.gc();  
+        //...  
+    }  
+}  
+  
+class Mample {  
+    public static void foo(Sample s)  
+    {  
+        Sample k;  
+  
+        k = s;  
+  
+        //...  
+    }  
+}  
+  
+class Sample {  
+    //...  
+}
+```
+
+##### null Adress
+
+>Anımsanacağı gibi programlamada **null address** belleğin kullanılmayan bir adresine verilen isimdir. Java'da null address **null** sabiti ile temsil edilir. null türü olmayan bir adrestir. Dolayısıyla bir referans değişkene atanabilir. Temel türden bir değişkene atanamaz. İçerisinde null adres bulunan bir referans ile nesne gösteriyormuş gibi erişim yapılması durumunda exception oluşur. null adresin kullanımına yönelik tipik durumlar şunlardır:
+>- Kontrol amaçlı kullanılır. Örneğin bir referansın null olması durumuna göre işlem yapılır.
+>- Bir metodun geri dönüş değeri bir referans ise ve metot akışı içerisinde bir nesnenin adresine dönülemiyorsa null adrese geri dönülebilir. Aşağıdaki örnek metodun parametre değişkenlerinin geçersiz olması durumunda null adrese dönülmüştür:
+
+```java
+public static Point createRandomPoint(Random random, double origin, double bound)  
+{  
+    return (random != null && origin < bound) ? (Point.createCartesian(random.nextDouble(origin, bound), random.nextDouble(origin, bound))) : (null);  
+}
+```
+
+>- Bir referansa derleyici açısından değer verilmesi gerekiyorsa ancak bir nesnenin adresi henüz verilemiyorsa, null adres verilebilir. Aşağıdaki demo örnekte `**` ile belirtilen noktada p referansına bir değer verilmese `***` ile belirtilen noktada error oluşur. Çünkü Java'da değer verilmemiş bir değişkenin kullanılması geçersizdir. Derleyici de örnekteki switch expression'da case bölümlerinden herhangi bir tanesinde değer yakalanmazsa p'nin değeri verilmemiş olacağı düşüncesiyle error oluşturur. Halbuki algoritmik olarak böyle bir durum oluşmaz ancak derleyici bunu bilemez. Bu durumda p referansına null değer verilerek derleyicinin error oluşturması engellenmiştir. Şüphesiz kod farklı yöntemlerle de yazılabilir. Burada null referansın kullanımına odaklanınız
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.math.geometry.Point;  
+  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        DemoApp.run();  
+    }  
+}  
+  
+class DemoApp {  
+    public static void run()  
+    {  
+        Scanner kb = new Scanner(System.in);  
+  
+        System.out.print("Bir sayı giriniz:");  
+        int val = Integer.parseInt(kb.nextLine());  
+  
+        if (val < 3 || val > 5) {  
+            System.out.println("Geçersiz değer girdiniz!...");  
+            System.exit(1);  
+        }  
+  
+        Point p = null; //**  
+  
+        switch (val) {  
+            case 3-> p = Point.createCartesian(100, 100);  
+            case 4 -> p = Point.createPolar(100, Math.PI / 4);  
+            case 5 -> p = Point.createCartesian(0, 0);  
+        }  
+  
+        System.out.printf("Point:%s%n", p.toString()); //***  
+    }  
+}
+```
+
+
+>Yukarıdaki durumlar dışında da kullanımlar söz konusu olabilir. Yukarıdaki kullanımlar daha geneldir.
+
+#### this Referansı
+
+>Aşağı seviyede non-static metot kavramı yoktur. Tüm metotlar adeta static metotmuş gibi (aslında global fonksiyonlar olarak) ele alınır. Bu durumda non-static bir metodun aşağı seviyede ele alınabilmesi için o metodu çağıran referansın da o metoda geçirilmesi gerekir. İşte bu işlem ilgili metoda ait olduğu UDT türünden +1 tane parametre eklenerek yapılır. Non-static bir metot çağrısı da aşağı seviyede metodun çağrılmasında kullanılan referansın, metodun aşağı seviyedeki karşılığına argüman olarak geçilmesi biçiminde ele alınır. Anımsanacağı gibi ctor da non-static metottur. Aşağı seviyede ctor'lar da global fonksiyonlar olarak ele alınır. Byte code içerisinde ctor için belirlenen metodun ismi genel olarak `init` biçimindedir. Bu metoda da aşağı seviyede +1 tane ilgili sınıf türünden parametre geçilir. 
+>
+>Aşağıdaki demo örnekte non-static metotların bildirimlerinin ve çağrılarının aşağı seviyedeki yaklaşık karşılıkları gösterilmiştir:
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Sample s = new Sample(20);  
+  
+        System.out.printf("Value: %d%n", s.getX());  
+  
+        //Yukarıdaki getX çağrısının aşağı seviyedeki yaklaşık karşılığı  
+        System.out.printf("Value: %d%n", Sample.getX(s));  
+  
+        s.setX(30);  
+  
+        //Yukarıdaki setX çağrısının aşağı seviyedeki yaklaşık karşılığı  
+        Sample.setX(s, 30);  
+          
+        System.out.printf("Value: %d%n", s.getX());  
+        //Yukarıdaki getX çağrısının aşağı seviyedeki yaklaşık karşılığı  
+        System.out.printf("Value: %d%n", Sample.getX(s));  
+  
+    }  
+}  
+  
+class Sample {  
+    private int m_x;  
+  
+    public Sample(int x)  
+    {  
+        m_x = x;  
+    }  
+  
+    public void setX(int x)  
+    {  
+        m_x = x;  
+    }  
+  
+    //setX metodunun aşağı seviyedeki yaklaşık karşılığı  
+    public static void setX(final Sample s, int x)  
+    {  
+        s.m_x = x;  
+    }  
+  
+    //getX metodunun aşağı seviyedeki yaklaşık karşılığı  
+    public static int getX(final Sample s)  
+    {  
+        return s.m_x;  
+    }  
+  
+    public int getX()  
+    {  
+        return m_x;  
+    }  
+}
+```
+
+>Non-static bir metodun çağrılmasında kullanılan referansa (yani aşağı seviyede gizlice geçirilen referansa) metot bildirimi içerisinde **this** referansı ile erişilebilir. Bu durumda non-static bir metot içerisinde kullanılan this referansı, o metodun çağrılmasında kullanılan nesnenin adresidir. Peki this referansının türü nedir? Hangi non-static metot içerisinde kullanılmışsa, o metodun ait olduğu UDT türündendir. Bu anlamda **non-static bir metoda this geçirilir** diyebilir. 
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Sample s = new Sample(20);  
+  
+        System.out.printf("Value: %d%n", s.getX());  
+  
+        s.setX(30);  
+  
+        System.out.printf("Value: %d%n", s.getX());  
+    }  
+}  
+  
+class Sample {  
+    private int m_x;  
+  
+    public Sample(int x)  
+    {  
+        this.m_x = x;  
+    }  
+  
+    public void setX(int x)  
+    {  
+        this.m_x = x;  
+    }  
+  
+    public int getX()  
+    {  
+        return this.m_x;  
+    }  
+}
+```
+
+>static metotlara this geçirilmez. Yani static bir metot içerisinde this referansı kullanılamaz
+
+```java
+class Sample {  
+    private static int m_x;  
+  
+    public static void setX(int x)  
+    {  
+        this.m_x = x; //error
+    }
+}
+```
+
+>this aslında bir sabittir. Değişken olmadığı için atama operatörünün solunda kullanılamaz
+
+```java
+class Sample {  
+    private int m_x;  
+  
+    //...
+  
+    public void setX(int x)  
+    {  
+        this = new Sample(x); //error
+        this.m_x = x;  
+    }  
+  
+    //...
+}
+```
+
+**Anahtar Notlar:** Java'ya örnek aldığı dillerden aktarılan ancak pratikte kullanılmayan bir sentaks vardır. Buna göre non-static metot istenirse birinci parametresi ilgili UDT türünden ve ismi this olan bir referans olarak da bildirilebilir. Bu referansın olması ile olmaması arasında bir fark yoktur. Pratikte kullanılmaz.
+
+>Aşağıdaki demo örnekte bulunan setX ve getX metotlarının `Sample this`parametrelerinin yazılması ile yazılmaması arasında fark yoktur. Pratikte yazmayacağız
+
+```java
+class Sample {  
+    private int m_x;  
+  
+    public Sample(int x)  
+    {  
+        this.m_x = x;  
+    }  
+  
+    public void setX(Sample this, int x)  
+    {  
+        this.m_x = x;  
+    }  
+  
+    public int getX(Sample this)  
+    {  
+        return m_x;  
+    }  
+}
+```
+
+>Peki this referansının kullanılması gerekli olan durumlar var mıdır? Ya da başka bir deyişle this referansını hangi durumlarda kullanacağız? Biz genel olarak okunabililiği/algılanabilirliği etkilemediği sürece zorunlu durumlar dışında this referansını kullanmayacağız.
 

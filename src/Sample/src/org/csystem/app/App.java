@@ -3,31 +3,49 @@ package org.csystem.app;
 class App {
     public static void main(String[] args)
     {
-        Sample s = new Sample(); //rc1:1
+        Sample s = new Sample(20);
 
-        Mample.foo(s); //rc1:2 -> 3
-        //rc1:1
+        System.out.printf("Value: %d%n", s.getX());
 
-        Mample.foo(s); //rc1:2 -> 3
-        //rc1:1
+        s.setX(30);
 
-        s = null;//rc1:0 (eligible)
-
-        //...
-    }
-}
-
-class Mample {
-    public static void foo(Sample s)
-    {
-        Sample k;
-
-        k = s;
-
-        //...
+        System.out.printf("Value: %d%n", s.getX());
     }
 }
 
 class Sample {
+    private int m_x;
+
+    public Sample(int x)
+    {
+        m_x = x;
+    }
+
+    public void setX(int x)
+    {
+        m_x = x;
+    }
+
+    public int getX()
+    {
+        return m_x;
+    }
+}
+
+class Point {
+    private int x;
+    private int y;
+
+    public Point(int x, int y)
+    {
+        this.x = x;
+        this.y = y;
+    }
+
+    public void setX(int x)
+    {
+        //...
+        this.x = x;
+    }
     //...
 }
