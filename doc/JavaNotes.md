@@ -9230,6 +9230,7 @@ class App {
 >Koşul operatörü özel amaçlı, 3 operandlı (ternary) ve araek (infix) durumundadır. Bu operatörü Java'nın tek 3 operandlı operatörüdür. Bu sebeple bu operatöre "ternary operator" de denilmektedir. Operatörün yan etkisi yoktur. Operatörün genel biçimi şu şekildedir:
 
 		<ifade1> ? <ifade2> : <ifade3>
+		
 >Bu operatörde `<ifade1>` `boolean` türünden olmalıdır. Aksi durumda error oluşur. Bu operatör için `ifade1` hesaplandığında elde edilen değer `true` ise `ifade2` hesaplanır, `false` ise `ifade3` hesaplanır ve duruma göre `ifade2`'nin veya `ifade3`'ün değeri üretilir. Yani bu operatör için çalışma zamanında `ifade1` yapılır ve duruma göre `ifade2` veya `ifade3`'den yalnızca biri hesaplanır.
 
 >Aşağıdaki demo örneği inceleyiniz
@@ -9730,7 +9731,9 @@ class Sample {
 
 #### 21 Mayıs 2024
  
->Method Overloading: Bir sınıf içerisinde aynı isimde birden fazla metot bildirilmesi durumuna denir. Farklı sınıflar içerisinde aynı isimde metot olması durumu method overloading değildir. Çünkü zaten bu metotlar farklı sınıflarda olduğundan farklı metotlardır. Method overloading konusu sentaks ve semantik olarak iki biçimde ele alınacaktır:
+##### Method Overloading
+
+>Bir sınıf içerisinde aynı isimde birden fazla metot bildirilmesi durumuna denir. Farklı sınıflar içerisinde aynı isimde metot olması durumu method overloading değildir. Çünkü zaten bu metotlar farklı sınıflarda olduğundan farklı metotlardır. Method overloading konusu sentaks ve semantik olarak iki biçimde ele alınacaktır:
 >- Method overloading yapılabilmesi için kurallar nelerdir?
 >- Bir metot çağrıldığında derleyici hangi metodun çağrılacağına nasıl karar verecektir? Bu kavrama İngilizce **method overload resolution** denilmektedir. 
 >
