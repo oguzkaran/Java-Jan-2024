@@ -19579,11 +19579,13 @@ public class StringUtil {
 
 ##### for-each Döngü Deyimi
 
->for-each döngü deyimi Java'ya 1.5 ile eklenmiştir. Bu döngü deyimi "dolaşılabilir (iterable)" türler ile kullanılabilmektedir. Diziler bu anlamda dolaşılabilir türlerdir. İleride başka dolaşılabilir sınıflar da ele alınacaktır. for-each döngü deyimine "enhanced for loop" ya da "range based loop"gibi isimler de verilmektedir. Java programcısı for-each döngü deyiminin kullanıldığı VE okunabilirliği/algılanabilirliği olumsuz etkilemediği durumda kesinlikle for-each döngü deyimini kullanmalıdır. for-each döngü deyiminin genel biçimi şu şekildedir:
->```
->for (<tür> <değişken> : <dolaşılabilir türden referans>)
->   deyim
->```
+>for-each döngü deyimi Java'ya 1.5 ile eklenmiştir. Bu döngü deyimi "dolaşılabilir (iterable)" türler ile kullanılabilmektedir. Diziler bu anlamda dolaşılabilir türlerdir. İleride başka dolaşılabilir sınıflar da ele alınacaktır. for-each döngü deyimine **enhanced for loop** ya da **range based loop** gibi isimler de verilmektedir. Java programcısı for-each döngü deyiminin kullanıldığı VE okunabilirliği/algılanabilirliği olumsuz etkilemediği durumda kesinlikle for-each döngü deyimini kullanmalıdır. for-each döngü deyiminin genel biçimi şu şekildedir:
+
+```java
+for (<tür> <değişken> : <dolaşılabilir türden referans>)
+   deyim
+```
+
 > Burada döngü değişkeni dolaşılabilir türün her bir elemanının doğrudan atanabildiği (implicit conversion) türden olmalıdır. Aksi durumda error oluşur. Bu döngüda sırasıyla dolaşılabilir türün her elemanı baştan sona olmak üzere döngü değişkenine atanır. Yani, örneğin dolaşılabilir tür bir dizi ise her adımda dizinin ilgili elemanı döngü değişkenine atanmış olur. Bu döngü ile dizi baştan sona dolaşılmış olur. Dikkat edilirse bu döngüde dizinin elemanına erişmek için indeks kullanılması gerekmez.
 
 ```java
@@ -19663,7 +19665,7 @@ class App {
 }
 ```
 
->**Anahtar Notlar:** Bu durumda for-each döngü deyimi bir dizi için ne zaman tercih edilmemelidir? Aslında bu sorunun cevabı oldukça basittir. Ne zaman dizi için indeks gerekirse o zaman for-each kullanılmamalıdır. Bu durumda tersten söylersek, indeks gerekmediği her durumda for-each kullanılmalıdır
+**Anahtar Notlar:** Bu durumda for-each döngü deyimi bir dizi için ne zaman tercih edilmemelidir? Aslında bu sorunun cevabı oldukça basittir. Ne zaman dizi için indeks gerekirse o zaman for-each kullanılmamalıdır. Bu durumda tersten söylersek, indeks gerekmediği her durumda for-each kullanılmalıdır
 
 >for-each döngü deyiminde : den sonraki ifade döngünün başında bir kez hesaplanır
 
@@ -19743,12 +19745,6 @@ class App {
        System.out.println();  
     }  
 }
-```
-
->**
-
-```java
-
 ```
 
 #### Dizi Dizileri ve Matrisler
@@ -29571,5 +29567,186 @@ for (int i = 1; i < n ++i)
   
 >Bir algoritma `çoğu zaman` herhangi bir karmaşlıktayken, bazı zamanlar (bu az olmalıdır) üst bir karmaşıklıkta çalışıyorsa, bu tarz karmaşıklıklara **amortized (time) complexity** ya da **amortized (time) cost** denir. Örneğin bir algoritma çoğu zaman O(1), bazı zamanlarda O(n) karmaşıklıkta çalışıyor ise **constant amortized (time) complexity/cost** denir.
 
-##### Dinamik Büyüyen Dizi Veri Yapısı ve ArrayList sınıfı
+##### 23 Ocak 2025
+##### Dinamik Büyüyen Dizi Veri Yapısı ve ArrayList Sınıfı
+
+>Anımsanacağı gibi bir dizinin uzunluğu değiştirilemez. Bir diziyi büyütmek için yeni eleman sayısıyla bir dizi yaratılmalı, eski dizideki elemanlar yeni diziye kopyalanmalı ve seki diziyi gösteren referans yeni diziyi gösterir duruma getirilmelidir. Burada aslında mantıksal bir büyütme söz konusudur. Dizinin, eklenmesi gereken eleman sayısı kadar mantıksal büyütülmesi işlemi `O(n)`karmaşıklıktadır. Bu durumda dizinin bir elemanına erişimin `O(1)`karmaşıklıkta olması avantajı artık ortadan kalkacaktır.  Böylesi bir durumda sabit zamanlı erişimden daha fazla yararlanmak için dizi eklenecek eleman sayısından biraz daha fazla büyütülür. Bu tarz bir büyütme işlemiyle birlikte bu diziye ekleme yapılması çoğu zaman O(1), büyütüleceği zaman O(n) karmaşıklıkta olur. Anımsanacağı gibi bu karmaşıklığa **constant amortized (time) complexity/cost** denilmektedir. Diziyi gerektiğinde mantıksal olarak büyüten böylesi veri yapılarına **dynamic array** ya da **resizable array** denilmektedir. Java dünyasında veri yapılarına **collections** denilmektedir. JavaSe'de de bir çok veri yapısını temsil eden collection sınıflar vardır. Burada dinamik büyüyen dizi veri yapısını temsil eden **ArrayList** ve belirli ölçüde **Vector** sınıfını ele alacağız. Bu sınıflar **java.util** paketi içerisindedir. Diğer** collection sınıflar `Java ile Uygulama Geliştirme I ve II` kurslarında ele alınacaktır. Dinamik büyüyen dizi veri yapıları büyütme işlemini eklenen elam sayısından genel olarak fazla yaptıklarından iki önemli değer söz konusudur: **capacity**, **size/count**. Capacity değeri dizinin gerçek uzunluğudur. Size değeri ise dizi ile tutulan eleman sayısıdır. Capacity değeri en az size kadar olur, size değerinden küçük olamaz. ArrayList sınıfında capacity değerinin büyütme politikası (growth policy)yani nasıl büyütüleceği belirtilmemiştir. Yani bu sınıfı JavaSE için yazanlara bırakılmıştır (implementation defined/dependent) .Ancak bir capacity değeri kullandığı yani etkin bir şekilde (amortized constant time cost) büyüteceği garanti edilmiştir. ArrayList sınıfından içsel olarak tutulan dizinin uzunluğu yani capacity değerini veren bir metot yoktur. Yani programcı o anki capacity değerini elde edemez. Capacity değeri gereken durumda ArrayList sınıfı gibi dinamik büyüyen dizi veri yapısını temsil eden `Vector`isimli sınıf kullanılabilir. Biz de örneklerimizde capacitt değeri gerektiğinde Vector sınıfını kullanacağız. Zaten pratikte de ArrayList'de olmayan özellikler için Vector sınıfı kullanılır. ArrayList'in özellikleri uygulamaya ilişkin senaryoyu karşılıyorsa bu durumda kesinlikle ArrayList kullanılmalıdır. Vector sınıfının o anki capacity değerinin döndüren **capacity** isimli bir metodu vardır. Bu metot veya bu metodun yaptığı işi yapan bir metot ArrayList'de yoktur.
+
+**Anahtar Notlar:** ArrayList ve Vector sınıfları aslında `generic` sınıflardır. Java'da generic sınıflar generic değilmiş gibi yani generic olmayan bir sınıf gibi de kullanılabilmektedir. Bu kullanım aslında tavsiye edilmeyen bir kullanımdır ancak biz henüz generic sınıfları ele almadığımız için bu şekilde kullanımı tercih edeceğiz. Generic sınıflar, generic değilmiş gibi kullanıldıklarından bir çok static kod analizi aracı uyarı mesajı verirler. Buradaki örneklerimizde bu uyarıları dikkate almayacağız. Generic sınıflar konusu ile birlikte, bu durumun neden tavsiye edilmediği gibi detaylar ayrıca ele alınacaktır. 
+
+>ArrayList ve Vector sınıfları içsel olarak `Object` türden dizi tutarlar. 
+
+>ArrayList/Vector sınıfının default ctor'u ile capacity değeri 10 olan bir nesne yaratılır. ArrayList/Vector sınıfının tek parametreli add metodu sona ekleme (append) yapar. Vector sınıfının capacity metodu ile o anki capacity değeri elde edilebilir. ArrayList/Vector sınıfının size metodu ile tutulan eleman sayısı elde edilebilir. ArrayList/Vector sınıfının get metodu aldığı indeks numarasındaki elemanına ilişkin Object referansına geri döner. get metoduna verilen indeks numarası `[0, size)` aralığı içerisinde olmalıdır. Aksi durumda exception olur. 
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.string.StringUtil;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+import java.util.Vector;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Vector texts = new Vector();  
+        Random random = new Random();  
+        Scanner kb = new Scanner(System.in);  
+  
+        while (true) {  
+            System.out.print("Bir sayı giriniz:");  
+            int n = Integer.parseInt(kb.nextLine());  
+  
+            if (n <= 0)  
+                break;  
+  
+            texts.add(StringUtil.generateRandomTextTR(random, n));  
+  
+            System.out.printf("Capacity:%d, Size:%d%n", texts.capacity(), texts.size());  
+        }  
+  
+        int size = texts.size();  
+  
+        for (int i = 0; i < size; ++i) {  
+            String text = (String)texts.get(i);  
+  
+            System.out.println(text);  
+        }  
+    }  
+}
+```
+
+>ArrayList/Vector sınıfının initialCapacity parametreli ctor'u ile başlangıç capacity değeri belirlenebilir. initialCapacity değeri sıfır olabilir, negatif bir değer için exception oluşur.
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.string.StringUtil;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+import java.util.Vector;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Random random = new Random();  
+        Scanner kb = new Scanner(System.in);  
+  
+        System.out.print("Başlangıç capacity değerini giriniz:");  
+        int initialCapacity = Integer.parseInt(kb.nextLine());  
+  
+        Vector texts = new Vector(initialCapacity);  
+  
+        while (true) {  
+            System.out.print("Bir sayı giriniz:");  
+            int n = Integer.parseInt(kb.nextLine());  
+  
+            if (n <= 0)  
+                break;  
+  
+            texts.add(StringUtil.generateRandomTextTR(random, n));  
+  
+            System.out.printf("Capacity:%d, Size:%d%n", texts.capacity(), texts.size());  
+        }  
+  
+        int size = texts.size();  
+  
+        for (int i = 0; i < size; ++i) {  
+            String text = (String)texts.get(i);  
+  
+            System.out.println(text);  
+        }  
+    }  
+}
+```
+
+>ArrayList/Vector sınıfı `for-each` döngü deyimi ile dolaşılabilirdir (iterable)
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.string.StringUtil;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+import java.util.ArrayList;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        ArrayList texts = new ArrayList();  
+        Random random = new Random();  
+        Scanner kb = new Scanner(System.in);  
+  
+        while (true) {  
+            System.out.print("Bir sayı giriniz:");  
+            int n = Integer.parseInt(kb.nextLine());  
+  
+            if (n <= 0)  
+                break;  
+  
+            texts.add(StringUtil.generateRandomTextTR(random, n));
+        }  
+  
+        int size = texts.size();  
+  
+        for (Object o : texts) {  
+            String text = (String)o;  
+  
+            System.out.println(text);  
+        }  
+    }  
+}
+```
+
+>ArrayList sınıfının iki parametreli add metodu aldığı indekse ekleme yapar (insert). Bu metot şüphesiz `O(n)`karmaşıklıktadır.
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.string.StringUtil;  
+  
+import java.util.ArrayList;  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        ArrayList texts = new ArrayList();  
+        Random random = new Random();  
+        Scanner kb = new Scanner(System.in);  
+  
+        while (true) {  
+            System.out.print("Bir sayı giriniz:");  
+            int n = Integer.parseInt(kb.nextLine());  
+  
+            if (n <= 0)  
+                break;  
+  
+            String text = StringUtil.generateRandomTextTR(random, n);  
+  
+            System.out.printf("Text:%s%n", text);  
+            texts.add(0, text);  
+        }  
+  
+        System.out.println();  
+        int size = texts.size();  
+  
+        for (Object o : texts) {  
+            String text = (String)o;  
+  
+            System.out.println(text);  
+        }  
+    }  
+}
+```
 
