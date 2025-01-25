@@ -9734,7 +9734,7 @@ class Sample {
 ##### Method Overloading
 
 >Bir sınıf içerisinde aynı isimde birden fazla metot bildirilmesi durumuna denir. Farklı sınıflar içerisinde aynı isimde metot olması durumu method overloading değildir. Çünkü zaten bu metotlar farklı sınıflarda olduğundan farklı metotlardır. Method overloading konusu sentaks ve semantik olarak iki biçimde ele alınacaktır:
->- Method overloading yapılabilmesi için kurallar nelerdir?
+>- Method overloBir ading yapılabilmesi için kurallar nelerdir?
 >- Bir metot çağrıldığında derleyici hangi metodun çağrılacağına nasıl karar verecektir? Bu kavrama İngilizce **method overload resolution** denilmektedir. 
 >
 >Method overloading konusunun gerekliliği yani kabaca "ne işe yaradığı" ileride ele alınacaktır
@@ -9767,9 +9767,9 @@ class Mample {
 }
 ```
 
->Anahtar Notlar: Aslında genel bir kural olarak "bir sınıf içerisinde AYNI metottan birden fazla olamaz" ya da başka bir şekilde söylersek "bir sınıf içerisindeki tüm metotların FARKLI olması gerekir". Bu durumda bir metot için AYNI olmayı (veya olmamayı), FARKLI olmayı (veya olmamayı) sağlayan kurallar bulunur.
+**Anahtar Notlar:** Aslında genel bir kural olarak "bir sınıf içerisinde AYNI metottan birden fazla olamaz" ya da başka bir şekilde söylersek "bir sınıf içerisindeki tüm metotların FARKLI olması gerekir". Bu durumda bir metot için AYNI olmayı (veya olmamayı), FARKLI olmayı (veya olmamayı) sağlayan kurallar bulunur.
  
->Bir metodun erişim belirleyicisini değiştirme o metodu FARKLI yapmaz. Yani erişim belirleyicinin overloading işlemine etkisi yoktur
+>Bir metodun erişim belirleyicisini değiştirmek o metodu FARKLI yapmaz. Yani erişim belirleyicinin overloading işlemine etkisi yoktur
 
 ```java
 package csd;
@@ -9940,11 +9940,11 @@ class Sample {
  
 >İmza kavramından da anlaşılacağı gibi, bir metodun overload edilebilmesi için farklı olması gerekir, bu da ancak parametrik yapısının aynı isimde olan diğerlerinden farklı olması ile mümkündür.
 >
->Bir metot çağrısı için derleyici hangi metodun çağrılacağını belirlemelidir. Bu belirleme sürecine "method overload resolution" ya da kısaca "overload resolution" denilmektedir. Derleyici method overload resolution işlemini aşağıdaki adımlardan geçerek yapar:
+>Bir metot çağrısı için derleyici hangi metodun çağrılacağını belirlemelidir. Bu belirleme sürecine **method overload resolution** ya da kısaca **overload resolution** denilmektedir. Derleyici method overload resolution işlemini aşağıdaki adımlardan geçerek yapar:
 >
 >1. Aday metotlar (candidate methods) belirlenir: Sınıf içerisindeki, çağrılan metot ile aynı isimdeki tüm metotlardır
 >2. Uygun metotlar (applicable methods) belirlenir: Aday metotlar içerisinde, çağrılan metodun argüman sayısı ile parametre sayısı aynı olan VE argümanların türünden, karşılık geldikleri parametrelerin türüne implicit conversion'ın geçerli olduğu metotlardır. 
->3. En uygun metot (the most applicable method) belirlenir: En uygun metot öyle bir metottur ki, uygun metotların her bir argümanı karşılık geldiği parametrelerin türleri ile yarışa sokulduğunda toplamda diğerlerine göre daha iyi olan, ya da daha kötü olmayan (diğer bir deyişle kaliteli) dönüşüm sunar. Dönüşümün kalitesi şu kurallar ile belirlenir:\
+>3. En uygun metot (the most applicable method) belirlenir: En uygun metot öyle bir metottur ki, uygun metotların her bir argümanı karşılık geldiği parametrelerin türleri ile yarışa sokulduğunda toplamda diğerlerine göre daha iyi olan, ya da daha kötü olmayan (diğer bir deyişle kaliteli) dönüşüm sunar. Dönüşümün kalitesi şu kurallar ile belirlenir:
 >T1 argümanın türü, T2 ve T3 yarışa sokulan parametrelerin türü olsun
 >- T1 -> T2 ve T1 -> T3 için, T2 veya T3'den biri T1 ile aynı ise aynı olan daha kalitelidir. Örneğin
 >
@@ -9954,7 +9954,7 @@ class Sample {
 >
 >		int -> long *
 >		int -> float  
->Herhangi bir adımda bir problem olursa error oluşur. Yani örneğin, aday metot yoksa VEYA aday metot var, uygun metot yoksa	VEYA uygun metot var, en uygun metot yoksa error oluşur.
+>Herhangi bir adımda bir problem olursa error oluşur. Yani örneğin, aday metot yoksa VEYA aday metot var, uygun metot yoksa VEYA uygun metot var, en uygun metot yoksa error oluşur.
 >	
 >Yukarıdaki kurallara göre, metot çağrısında argümanların türü ile karşılık geldikleri parametrelerin türlerinin birebir aynı olduğu bir metot varsa o en kalitelidir. Buna "best match" de denilmektedir.
  
@@ -10377,9 +10377,7 @@ class Sample {
 }
 ```
 
-**Anahtar Notlar:** `Method overload resolution` kavramının temel türler dışındaki bazı ayrıntıları konular içerisinde ele alınacaktır
-
-
+**Anahtar Notlar:** `Method overload resolution` kavramının temel türler dışındaki bazı ayrıntıları konular içerisinde ele alınacaktır.
 #### 30 Mayıs 2024
 
 ##### Nesne Yönelimli Programlama (Object Oriented Programming)
