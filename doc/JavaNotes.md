@@ -10464,7 +10464,7 @@ int a;
 	
 **Anahtar Notlar:** Veri Yapısı (Data Structure), genel olarak birbiri ile ilişkili olan verilerin bir arada ve belirli bir takım algoritmalara göre tutulmasını sağlayan ve istenildiğinde bu verilere erişilebilen yapılardır. Örneğin dizi, elemanları aynı türden olan ve bellekte peşpeşe olarak yaratılan bir veri yapısıdır. `Stack`, `LIFO` (Last In First Out) kuyruk sistemi biçiminde çalışan bir veri yapısıdır. Tipik olarak editör programlarının "undo-redo" mekanizmaları bu şekilde gerçekleştirilir (implementation). Stack veri yapısına eleman ekleme işlemine "push", eleman silme (bazı yaklaşımlara göre hem silme hem elemanı elde etme) işlemine "pop" denir. Uygulama için ayrılan stack alanında yer ayrılması işlemi stack veri yapısı biçiminde (donanımsal da destek ile) yapıldığından, bu alana "stack alanı" denilmektedir. Stack alanında, yaratma ve yok etme işlemi çok hızlı bir biçimde gerçekleşmektedir.
 
->`Yerel değişkenler` ve `parametre değişkenleri` `stack` alanında yaratılırlar. Stack alanı doldur boşalt biçiminde çalışan bellek alanıdır. Böylece program çalışma zamanında, toplamda, bu alanın uzunluğundan daha fazla değişken için yer ayrılabilir
+>`Yerel değişkenler` ve `parametre değişkenleri` `stack` alanında yaratılırlar. Stack alanı doldur boşalt biçiminde çalışan bellek alanıdır. Böylece program çalışma zamanında, toplamda, bu alanın uzunluğundan daha fazla değişken için yer ayrılabilir.
 >
 >Yerel bir değişken, akış kod bakımından bildirim noktasına geldiğinde yaratılır, bildirildiği blok sonunda yok edilir. Bu durumda bir yerel değişkenin yaratılması `push` komutu ile, yok edilmesi ise `pop` komutu ile yapılır. Peşpeşe bildirilen (yani çalışma zamanında peş peşe yaratılan) yerel değişkenlerin yok edilmesi ters sırada yapılır. Buna göre faaliyet alanı (scope) ve ömür arasında dolaylı bir ilişki söz konusudur. Ancak yine de faaliyet alanı derleme zamanına ilişkin, ömür ise çalışma zamanına ilişkindir. Yerel bir değişkenin bildirildiği blok sonlandığında yok edilmesi dolayısıyla faaliyet alanı da bildirildiği yerden bildirildiği bloğun sonuna kadardır.
 
@@ -10508,35 +10508,6 @@ class App {
 		//...
 	} 
 }
-
-class Sample {
-	public static void foo(int a, int b)
-	{
-		//...
-	}
-}
-```
-
->Bir parametre değişkeni ait olduğu metot çağrıldığında yaratılır (push), metot çağrısı bittiğinde yok edilir (pop)
-
-```java
-package csd;
-
-class App {
-	public static void main(String [] args) 
-	{	
-		Sample.foo(10, 20); //a yaratıldı (push a) -> b yaratıldı (push b)
-		//b yok edildi (pop b), a yok edildi (pop a)
-		
-		//...
-		
-		Sample.foo(10, 20); //a yaratıldı (push a) -> b yaratıldı (push b)
-		//b yok edildi (pop b), a yok edildi (pop a)
-		
-		//...
-	} 
-}
-
 
 class Sample {
 	public static void foo(int a, int b)
