@@ -10656,13 +10656,13 @@ class TCP {
 >- Java'da nesne yaratılması `new` operatörü ile yapılır. `new` operatörünün kullanımına ilişkin genel biçimi şu şekildedir:
 
 		new <sınıf ismi>([argümanlar]);
->Bu operatör özel amaçlı **tek operandlı** ve **önek** durumundadır. Operatör, yaratılmış olan nesnenin adresini üretir. Bir nesne ile referans için hangi uzunlukta yer ayrılacağı ileride ele alınacaktır. Bu operatörün yan etkisi yoktur. 
+>Bu operatör özel amaçlı tek operandlı ve önek durumundadır. Operatör, yaratılmış olan nesnenin adresini üretir. Bir nesne ile referans için hangi uzunlukta yer ayrılacağı ileride ele alınacaktır. Bu operatörün yan etkisi yoktur. 
 >
 >Aşağıdaki örnekte `p`, `s`, `u` ve `t` birer nesne **DEĞİLDİR**, ilgili türden nesnelerin adreslerini tutan `referans` değişkenlerdir.
 >
 >Örnekte `*, **, *** ve ****` ile belirtilen deyimlerde ilgili türden nesneler yaratılmış ve ilgili türden referans değişkenlere adresleri atanmıştır. Bu durumda bir referans değişkene bir adres atandığında o referans o nesneyi gösteriyor (reference to) duruma gelmiş olur. 
->- Bir nesne ilgili sınıf türünden bir örnektir. Buna İngilizce olarak **instance** terimi de kullanılır. Bu anlamda nesne yaratma işlemi için de "create" fiili ile birlikte "instantiate" fiili de kullanılır.
->- Referans ve nesne kavramları birbirinden farklıdır. Referans bir nesneyi gösterir ya da adresi anlamında kullanılır.
+>- Bir nesne ilgili sınıf türünden bir örnektir. Buna İngilizce olarak **instance** terimi de kullanılır. Bu anlamda nesne yaratma işlemi için de **create** fiili ile birlikte **instantiate** fiili de kullanılır.
+>- Referans ve nesne kavramları birbirinden farklıdır. 
 >- Her `new` işlemi yeni bir nesne yaratmak demektir.
 
 ```java
@@ -29536,7 +29536,7 @@ for (int i = 1; i < n ++i)
 ##### 23 Ocak 2025
 ##### Dinamik Büyüyen Dizi Veri Yapısı ve ArrayList Sınıfı
 
->Anımsanacağı gibi bir dizinin uzunluğu değiştirilemez. Bir diziyi büyütmek için yeni eleman sayısıyla bir dizi yaratılmalı, eski dizideki elemanlar yeni diziye kopyalanmalı ve seki diziyi gösteren referans yeni diziyi gösterir duruma getirilmelidir. Burada aslında mantıksal bir büyütme söz konusudur. Dizinin, eklenmesi gereken eleman sayısı kadar mantıksal büyütülmesi işlemi `O(n)`karmaşıklıktadır. Bu durumda dizinin bir elemanına erişimin `O(1)`karmaşıklıkta olması avantajı artık ortadan kalkacaktır.  Böylesi bir durumda sabit zamanlı erişimden daha fazla yararlanmak için dizi eklenecek eleman sayısından biraz daha fazla büyütülür. Bu tarz bir büyütme işlemiyle birlikte bu diziye ekleme yapılması çoğu zaman O(1), büyütüleceği zaman O(n) karmaşıklıkta olur. Anımsanacağı gibi bu karmaşıklığa **constant amortized (time) complexity/cost** denilmektedir. Diziyi gerektiğinde mantıksal olarak büyüten böylesi veri yapılarına **dynamic array** ya da **resizable array** denilmektedir. Java dünyasında veri yapılarına **collections** denilmektedir. JavaSe'de de bir çok veri yapısını temsil eden collection sınıflar vardır. Burada dinamik büyüyen dizi veri yapısını temsil eden **ArrayList** ve belirli ölçüde **Vector** sınıfını ele alacağız. Bu sınıflar **java.util** paketi içerisindedir. Diğer** collection sınıflar `Java ile Uygulama Geliştirme I ve II` kurslarında ele alınacaktır. Dinamik büyüyen dizi veri yapıları büyütme işlemini eklenen elam sayısından genel olarak fazla yaptıklarından iki önemli değer söz konusudur: **capacity**, **size/count**. Capacity değeri dizinin gerçek uzunluğudur. Size değeri ise dizi ile tutulan eleman sayısıdır. Capacity değeri en az size kadar olur, size değerinden küçük olamaz. ArrayList sınıfında capacity değerinin büyütme politikası (growth policy)yani nasıl büyütüleceği belirtilmemiştir. Yani bu sınıfı JavaSE için yazanlara bırakılmıştır (implementation defined/dependent) .Ancak bir capacity değeri kullandığı yani etkin bir şekilde (amortized constant time cost) büyüteceği garanti edilmiştir. ArrayList sınıfından içsel olarak tutulan dizinin uzunluğu yani capacity değerini veren bir metot yoktur. Yani programcı o anki capacity değerini elde edemez. Capacity değeri gereken durumda ArrayList sınıfı gibi dinamik büyüyen dizi veri yapısını temsil eden `Vector`isimli sınıf kullanılabilir. Biz de örneklerimizde capacitt değeri gerektiğinde Vector sınıfını kullanacağız. Zaten pratikte de ArrayList'de olmayan özellikler için Vector sınıfı kullanılır. ArrayList'in özellikleri uygulamaya ilişkin senaryoyu karşılıyorsa bu durumda kesinlikle ArrayList kullanılmalıdır. Vector sınıfının o anki capacity değerinin döndüren **capacity** isimli bir metodu vardır. Bu metot veya bu metodun yaptığı işi yapan bir metot ArrayList'de yoktur.
+>Anımsanacağı gibi bir dizinin uzunluğu değiştirilemez. Bir diziyi büyütmek için yeni eleman sayısıyla bir dizi yaratılmalı, eski dizideki elemanlar yeni diziye kopyalanmalı ve seki diziyi gösteren referans yeni diziyi gösterir duruma getirilmelidir. Burada aslında mantıksal bir büyütme söz konusudur. Dizinin, eklenmesi gereken eleman sayısı kadar mantıksal büyütülmesi işlemi `O(n)`karmaşıklıktadır. Bu durumda dizinin bir elemanına erişimin `O(1)`karmaşıklıkta olması avantajı artık ortadan kalkacaktır.  Böylesi bir durumda sabit zamanlı erişimden daha fazla yararlanmak için dizi eklenecek eleman sayısından biraz daha fazla büyütülür. Bu tarz bir büyütme işlemiyle birlikte bu diziye ekleme yapılması çoğu zaman O(1), büyütüleceği zaman O(n) karmaşıklıkta olur. Anımsanacağı gibi bu karmaşıklığa **constant amortized (time) complexity/cost** denilmektedir. Diziyi gerektiğinde mantıksal olarak büyüten böylesi veri yapılarına **dynamic array** ya da **resizable array** denilmektedir. Java dünyasında veri yapılarına **collections** denilmektedir. JavaSe'de de bir çok veri yapısını temsil eden collection sınıflar vardır. Burada dinamik büyüyen dizi veri yapısını temsil eden **ArrayList** ve belirli ölçüde **Vector** sınıfını ele alacağız. Bu sınıflar **java.util** paketi içerisindedir. Diğer collection sınıflar `Java ile Uygulama Geliştirme I ve II` kurslarında ele alınacaktır. Dinamik büyüyen dizi veri yapıları büyütme işlemini eklenen elam sayısından genel olarak fazla yaptıklarından iki önemli değer söz konusudur: **capacity**, **size/count**. Capacity değeri dizinin gerçek uzunluğudur. Size değeri ise dizi ile tutulan eleman sayısıdır. Capacity değeri en az size kadar olur, size değerinden küçük olamaz. ArrayList sınıfında capacity değerinin büyütme politikası (growth policy)yani nasıl büyütüleceği belirtilmemiştir. Yani bu sınıfı JavaSE için yazanlara bırakılmıştır (implementation defined/dependent). Ancak bir capacity değeri kullandığı yani etkin bir şekilde (amortized constant time cost) büyüteceği garanti edilmiştir. ArrayList sınıfından içsel olarak tutulan dizinin uzunluğu yani capacity değerini veren bir metot yoktur. Yani programcı o anki capacity değerini elde edemez. Capacity değeri gereken durumda ArrayList sınıfı gibi dinamik büyüyen dizi veri yapısını temsil eden `Vector`isimli sınıf kullanılabilir. Biz de örneklerimizde capacity değeri gerektiğinde Vector sınıfını kullanacağız. Zaten pratikte de ArrayList'de olmayan özellikler için Vector sınıfı kullanılır. ArrayList'in özellikleri uygulamaya ilişkin senaryoyu karşılıyorsa bu durumda kesinlikle ArrayList kullanılmalıdır. Vector sınıfının o anki capacity değerinin döndüren **capacity** isimli bir metodu vardır. Bu metot veya bu metodun yaptığı işi yapan bir metot ArrayList'de yoktur.
 
 **Anahtar Notlar:** ArrayList ve Vector sınıfları aslında `generic` sınıflardır. Java'da generic sınıflar generic değilmiş gibi yani generic olmayan bir sınıf gibi de kullanılabilmektedir. Bu kullanım aslında tavsiye edilmeyen bir kullanımdır ancak biz henüz generic sınıfları ele almadığımız için bu şekilde kullanımı tercih edeceğiz. Generic sınıflar, generic değilmiş gibi kullanıldıklarından bir çok static kod analizi aracı uyarı mesajı verirler. Buradaki örneklerimizde bu uyarıları dikkate almayacağız. Generic sınıflar konusu ile birlikte, bu durumun neden tavsiye edilmediği gibi detaylar ayrıca ele alınacaktır. 
 
@@ -29673,7 +29673,7 @@ class App {
 }
 ```
 
->ArrayList sınıfının iki parametreli add metodu aldığı indekse ekleme yapar (insert). Bu metot şüphesiz `O(n)`karmaşıklıktadır.
+>ArrayList sınıfının iki parametreli add metodu aldığı indekse ekleme yapar (insert). Bu metot elemanları kaydırma yaptığı için `O(n)`karmaşıklıktadır.
 
 ```java
 package org.csystem.app;  
@@ -29716,6 +29716,349 @@ class App {
 }
 ```
 
+##### 4 Şubat 2025
+
+>ArrayList sınıfının set metodu ilgili indeksteki elemanı değiştirmek için kullanılır. Bu metot `O(1)` karmaşıklıktadır. İndeks olarak `[0, size)` aralığı dışında değer verildiğinde exception oluşur. Metot değiştirme yapılmadan önceki elemana ilişkin adrese geri döner. 
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.string.StringUtil;  
+  
+import java.util.ArrayList;  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        ArrayList texts = new ArrayList();  
+        Random random = new Random();  
+        Scanner kb = new Scanner(System.in);  
+  
+        while (true) {  
+            System.out.print("Bir sayı giriniz:");  
+            int n = Integer.parseInt(kb.nextLine());  
+  
+            if (n <= 0)  
+                break;  
+  
+            String text = StringUtil.generateRandomTextTR(random, n);  
+  
+            System.out.printf("Text:%s%n", text);  
+            texts.add(text);  
+        }  
+  
+        System.out.println();  
+        int size = texts.size();  
+  
+        for (Object o : texts) {  
+            String text = (String)o;  
+  
+            System.out.println(text);  
+        }  
+        System.out.println("--------------------------------------");  
+  
+        String oldText = (String) texts.set(3, "Zonguldak");  
+  
+        for (Object o : texts) {  
+            String text = (String)o;  
+  
+            System.out.println(text);  
+        }  
+  
+        System.out.printf("Old Text:%s%n", oldText);  
+    }  
+}
+```
+
+>ArrayList sınıfının int parametreli remove metodu parametresi ile aldığı indeks numarasındaki elemanı siler ve silinmiş elemana ilişkin referansa geri döner. Bu metot `O(n)` karmaşıklıktadır. İndeks numarasın `[0, size)` aralığı dışında verilirse exception oluşur
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.string.StringUtil;  
+  
+import java.util.ArrayList;  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        ArrayList texts = new ArrayList();  
+        Random random = new Random();  
+        Scanner kb = new Scanner(System.in);  
+  
+        while (true) {  
+            System.out.print("Bir sayı giriniz:");  
+            int n = Integer.parseInt(kb.nextLine());  
+  
+            if (n <= 0)  
+                break;  
+  
+            String text = StringUtil.generateRandomTextTR(random, n);  
+  
+            System.out.printf("Text:%s%n", text);  
+            texts.add(text);  
+        }  
+  
+        System.out.println();  
+        int size = texts.size();  
+  
+        for (Object o : texts) {  
+            String text = (String)o;  
+  
+            System.out.println(text);  
+        }  
+        System.out.println("--------------------------------------");  
+  
+        String oldText = (String) texts.remove(3);  
+  
+        for (Object o : texts) {  
+            String text = (String)o;  
+  
+            System.out.println(text);  
+        }  
+  
+        System.out.printf("Old Text:%s%n", oldText);  
+    }  
+}
+```
+
+>ArrayList sınıfının clear metodu diziyi boşaltır. Bu metot `O(n)` karmaşıklıktadır
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.string.StringUtil;  
+  
+import java.util.ArrayList;  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        ArrayList texts = new ArrayList();  
+        Random random = new Random();  
+        Scanner kb = new Scanner(System.in);  
+  
+        while (true) {  
+            System.out.print("Bir sayı giriniz:");  
+            int n = Integer.parseInt(kb.nextLine());  
+  
+            if (n <= 0)  
+                break;  
+  
+            String text = StringUtil.generateRandomTextTR(random, n);  
+  
+            System.out.printf("Text:%s%n", text);  
+            texts.add(text);  
+        }  
+  
+        System.out.println();  
+        int size = texts.size();  
+  
+        for (Object o : texts) {  
+            String text = (String)o;  
+  
+            System.out.println(text);  
+        }  
+        System.out.println("--------------------------------------");  
+  
+        texts.clear();  
+  
+        System.out.printf("Size:%d%n", texts.size());  
+    }  
+}
+```
+
+**Anahtar Notlar:** ArrayList/Vector sınıfının silme işlemi yapan metotları (remove, clear vb.) capacity değerini değiştirmez.
+
+>ArrayList sınıfının isEmpty metodu ile dizinin boş olup olmadığı yani size değerinin sıfır olup olmadığı test edilebilir
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.string.StringUtil;  
+  
+import java.util.ArrayList;  
+import java.util.Random;  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        ArrayList texts = new ArrayList();  
+        Random random = new Random();  
+        Scanner kb = new Scanner(System.in);  
+  
+        while (true) {  
+            System.out.print("Bir sayı giriniz:");  
+            int n = Integer.parseInt(kb.nextLine());  
+  
+            if (n <= 0)  
+                break;  
+  
+            String text = StringUtil.generateRandomTextTR(random, n);  
+  
+            System.out.printf("Text:%s%n", text);  
+            texts.add(text);  
+        }  
+  
+        System.out.println();  
+        int size = texts.size();  
+  
+        for (Object o : texts) {  
+            String text = (String)o;  
+  
+            System.out.println(text);  
+        }  
+        System.out.println("--------------------------------------");  
+  
+        if (random.nextBoolean())  
+            texts.clear();  
+  
+        System.out.println(texts.isEmpty() ? "Empty" : "Not empty");  
+    }  
+}
+```
+
+>ArrayList/Vector sınıfının trimToSize metodu capacity değerini size değerine çeker. Bu metot `O(n)` karmaşıklıktadır. Bu metot çağrıldıktan sonra ekleme yapılması da `O(n)` karmaşıklıktadır. Bu durumda bu metodun performans açısından gereksiz yere çağrılmamasına dikkat edilmelidir
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.string.StringUtil;  
+  
+import java.util.Random;  
+import java.util.Scanner;  
+import java.util.Vector;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Vector texts = new Vector();  
+        Random random = new Random();  
+        Scanner kb = new Scanner(System.in);  
+  
+        while (true) {  
+            System.out.print("Bir sayı giriniz:");  
+            int n = Integer.parseInt(kb.nextLine());  
+  
+            if (n <= 0)  
+                break;  
+  
+            String text = StringUtil.generateRandomTextTR(random, n);  
+  
+            System.out.printf("Text:%s%n", text);  
+            texts.add(text);  
+        }  
+  
+        System.out.printf("Size:%d%nCapacity:%d%n", texts.size(), texts.capacity());  
+        texts.trimToSize();  
+        System.out.printf("Size:%d%nCapacity:%d%n", texts.size(), texts.capacity());  
+        texts.clear();  
+        System.out.printf("Size:%d%nCapacity:%d%n", texts.size(), texts.capacity());  
+        texts.trimToSize();  
+        System.out.printf("Size:%d%nCapacity:%d%n", texts.size(), texts.capacity());  
+    }  
+}
+```
+
+>ArrayList/Vector sınıfının ensureCapacity metodu ile capacity değeri aşağıdaki koşullara göre büyütülebilir: (else-if biçiminde değerlendiriniz)
+>1. minCapacity değeri, varolan capacity değerinden küçükse herhangi bir işlem yapılmaz
+>2. minCapacity değeri, varolan capacity değerinin artması gereken değerden küçük veya eşitse, capacity değeri artması gereken değere çekilir.
+>3. minCapacity değeri artması gereken değerden büyükse, capacity değeri minCapacity değerine çekilir.
+
+```java
+package org.csystem.app;  
+  
+import java.util.Vector;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Vector texts = new Vector(5);  
+  
+        texts.ensureCapacity(3);  
+        System.out.printf("Size:%d, Capacity:%d%n", texts.size(), texts.capacity());  
+        texts.ensureCapacity(7);  
+        System.out.printf("Size:%d, Capacity:%d%n", texts.size(), texts.capacity());  
+        texts.ensureCapacity(25);  
+        System.out.printf("Size:%d, Capacity:%d%n", texts.size(), texts.capacity());  
+    }  
+}
+```
+
+>**Sınıf Çalışması:** Klavyeden `exit`girilene kadar alınan yazıları bir ArrayLit'e ekleyiniz. Bu işlemden sonra yazıların arasında `--` olacak şekilde birleştirilmiş yeni bir yazı elde ediniz.
+
+```java
+package org.csystem.app.string.join;  
+  
+import org.csystem.util.console.Console;  
+import org.csystem.util.string.StringUtil;  
+  
+import java.util.ArrayList;  
+  
+public class JoinWithTwoHyphenApp {  
+    public static void run()  
+    {  
+        ArrayList texts = new ArrayList();  
+        String s;  
+  
+        while (!(s = Console.readString("Input a text:")).equals("exit"))  
+            texts.add(s);  
+  
+        String str = StringUtil.join(texts, "--");  
+  
+        Console.writeLine("(%s)", str);  
+    }  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+**Anahtar Notlar:** StringBuilder sınıfı da aslında dinamik büyüyen dizi veri yapıdır. Bu sınıf ekleme işleminde gerekirse içsel olarak tuttuğu diziyi büyütür. Büyütme işlemi yine **amortize edilmiş sabit zamanlı maliyette (karmaşıklıkta)** yapılır dolayısıyla bu sınıf ta `capacity` kavramını kullanır.
+
+>**Ara Soru:**  Bilindiği gibi `a % b` işleminde a'nın işareti elde edilen sonucu belirler. Yani bu operatör negatif a değerleri için Matematikteki gibi çalışmaz. Parametresi ile aldığı int türden a ve b değerleri için Matematikteki mod işlemini yapan `mod` isimli metodu yazınız.
+>
+>**Açıklamalar:** 
+>- b parametresinin negatif olması durumunu önemsemeyeniz.
+>- Aslında math sınıfında tamsayılar için `floorMod` ve gerçek sayılar için `IEEERemainder` metotları bu işi yaparlar. Bu metotlar kullanılmayacaktır.
+>**Çözüm:**
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.console.Console;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Console.writeLine(Util.mod(10, 3));  
+        Console.writeLine(Util.mod(-10, 3));  
+        Console.writeLine(Util.mod(11, 6));  
+        Console.writeLine(Util.mod(-11, 6));  
+    }  
+}  
+  
+class Util {
+    public static int mod(int a, int b)  
+    {  
+        int result = a % b;  
+  
+        return result < 0 ? result + b : result;  
+    }  
+}
+```
+
+##### 
+##### Polymorphism
+
+>
 
 
 

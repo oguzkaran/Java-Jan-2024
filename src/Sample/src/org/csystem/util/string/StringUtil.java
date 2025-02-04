@@ -1,10 +1,11 @@
 /**
  * Utility class for string operations
- * Last Update: 10th December 2024
+ * Last Update: 4th January 2025
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.string;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public final class StringUtil {
@@ -137,6 +138,25 @@ public final class StringUtil {
 	public static boolean isPangramTR(String s)
 	{
 		return isPangram(s.toLowerCase(), LETTERS_TR);
+	}
+
+
+	public static String join(ArrayList texts, String delimiter)
+	{
+		StringBuilder sb = new StringBuilder();
+
+		for (Object o : texts) {
+			String s = (String)o;
+
+			sb.append(s).append(delimiter);
+		}
+
+		return sb.substring(0, sb.length() - delimiter.length());
+	}
+
+	public static String join(ArrayList texts, char delimiter)
+	{
+		return join(texts, String.valueOf(delimiter));
 	}
 
 	public static String join(String [] s, String delimiter)
