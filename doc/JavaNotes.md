@@ -22382,7 +22382,7 @@ public class RandomStringArrayGeneratorTR {
 
 >Yukarıdaki sınıf aşağıdaki gibi yazıldığında artık içsel olarak tutulan dizinin doğrudan adresi değil, kopyasının (yeni yaratılmış olan bir dizinin) adresi dışarıya verilmektedir. Bu durumda sınıfı yazan programcı da getTexts metodunun dökumantasyonunda bu durumu belirtir. 
 >
->**Anahtar Notlar:** Arrays sınıfının copyOf metodu birinci parametresi ile aldığı dizinin, ikinci parametresi ile aldığı newLength tane elemanından oluşan yeni bir (newly allocated) dizi referansına geri döner. Bu durumda ikinci parametreye argüman olarak dizinin uzunluğu geçilirse dizinin tüm elemanlarından bir kopyası çıkartılmış olur
+>**Anahtar Notlar:** Arrays sınıfının `copyOf` metodu birinci parametresi ile aldığı dizinin, ikinci parametresi ile aldığı newLength tane elemanından oluşan yeni bir (newly allocated) dizi referansına geri döner. Bu durumda ikinci parametreye argüman olarak dizinin uzunluğu geçilirse dizinin tüm elemanlarından bir kopyası çıkartılmış olur
 
 
 ```java
@@ -30022,7 +30022,7 @@ public class JoinWithTwoHyphenApp {
 }
 ```
 
-**Anahtar Notlar:** StringBuilder sınıfı da aslında dinamik büyüyen dizi veri yapıdır. Bu sınıf ekleme işleminde gerekirse içsel olarak tuttuğu diziyi büyütür. Büyütme işlemi yine **amortize edilmiş sabit zamanlı maliyette (karmaşıklıkta)** yapılır dolayısıyla bu sınıf ta `capacity` kavramını kullanır.
+**Anahtar Notlar:** StringBuilder sınıfı da aslında dinamik büyüyen dizi veri yapısıdır. Bu sınıf ekleme işleminde gerekirse içsel olarak tuttuğu diziyi büyütür. Büyütme işlemi yine **amortize edilmiş sabit zamanlı maliyette (karmaşıklıkta)** yapılır dolayısıyla bu sınıf ta `capacity` kavramını kullanır.
 
 >**Ara Soru:**  Bilindiği gibi `a % b` işleminde a'nın işareti elde edilen sonucu belirler. Yani bu operatör negatif a değerleri için Matematikteki gibi çalışmaz. Parametresi ile aldığı int türden a ve b değerleri için Matematikteki mod işlemini yapan `mod` isimli metodu yazınız.
 >
@@ -30054,6 +30054,166 @@ class Util {
     }  
 }
 ```
+##### 11 Şubat 2025
+
+>Aşağıdaki `CSDStringBuilder` sınıfını ve test kodlarını inceleyiniz. Bu sınıf özellikle dinamik büyüyen dizi veri yapısının nasıl gerçekleştirilebileceğine (implementation) yönelik bir fikir vermesi açıından yazılmıştır. `java.lang.StringBuilder` sınıfının tüm metotları yazılmamıştır ancak gerekirse eklenebilecek durumdadır. `CSDStringBuilder` sınıfı capacity değerini `2 (iki)`kat artıracak şekilde (growth policy) tasarlanmıştır. Sınıfın yazımında bazı detaylar göz ardı edilmiştir. Özellikle bu bölümde dinamik büyüyen dizi veri yapısının gerçekleştirilmesine odaklanınız.
+
+**Anahtar Notlar:** System sınıfının arrayCopy parametresi ile aldığı Object türden src ve dest referansları, başlangıç indeks bilgisi ve length bilgisine göre src dizisinden dest dizisinde kopyalama yapar.
+
+```java
+package org.csystem.string.test;  
+  
+import org.csystem.string.CSDStringBuilder;  
+import org.csystem.util.console.Console;  
+  
+public class CSDStringBuilderCapacityIncrementTest {  
+    public static void run()  
+    {  
+        String str = "Bugün hava çok karlı değil mi?";  
+        CSDStringBuilder sb = new CSDStringBuilder(5);  
+  
+        sb.append("ali");  
+  
+        Console.writeLine("Capacity:%d, Length:%d", sb.capacity(), sb.length());  
+        sb.append(str);  
+        Console.writeLine("Capacity:%d, Length:%d", sb.capacity(), sb.length());  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+```java
+package org.csystem.string.test;  
+  
+import org.csystem.string.CSDStringBuilder;  
+import org.csystem.util.console.Console;  
+  
+public class CSDStringBuilderInitialCapacityZeroTest {  
+    public static void run()  
+    {  
+        CSDStringBuilder sb = new CSDStringBuilder(0);  
+  
+        sb.append("ali");  
+  
+        Console.writeLine("Capacity:%d, Length:%d", sb.capacity(), sb.length());  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+```java
+package org.csystem.string.test;  
+  
+import org.csystem.string.CSDStringBuilder;  
+import org.csystem.util.console.Console;  
+  
+public class CSDStringBuilderStringParameterCtorTest {  
+    public static void run()  
+    {  
+        CSDStringBuilder sb = new CSDStringBuilder("ali");  
+  
+        Console.writeLine("Capacity:%d, Length:%d", sb.capacity(), sb.length());  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+```java
+package org.csystem.string.test;  
+  
+import org.csystem.string.CSDStringBuilder;  
+import org.csystem.util.console.Console;  
+  
+public class CSDStringBuilderTrimToSizeTest {  
+    public static void run()  
+    {  
+        CSDStringBuilder sb = new CSDStringBuilder(5);  
+  
+        sb.append("ali");  
+  
+        Console.writeLine("Capacity:%d, Length:%d", sb.capacity(), sb.length());  
+        sb.trimToSize();  
+        Console.writeLine("Capacity:%d, Length:%d", sb.capacity(), sb.length());  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+```java
+package org.csystem.string.test;  
+  
+import org.csystem.string.CSDStringBuilder;  
+import org.csystem.util.console.Console;  
+  
+public class CSDStringBuilderInitialToStringTest {  
+    public static void run()  
+    {  
+        String str = "bugün hava çok karlı değil mi?";  
+        CSDStringBuilder sb = new CSDStringBuilder(5);  
+  
+        Console.writeLine("Capacity:%d, Length:%d", sb.capacity(), sb.length());  
+        Console.writeLine("(%s)", sb.toString());  
+        sb.append("ali");  
+        Console.writeLine("Capacity:%d, Length:%d", sb.capacity(), sb.length());  
+        Console.writeLine("(%s)", sb.toString());  
+        Console.writeLine("Capacity:%d, Length:%d", sb.capacity(), sb.length());  
+        sb.append(' ').append(str);  
+  
+        Console.writeLine("(%s)", sb.toString());  
+        Console.writeLine("Capacity:%d, Length:%d", sb.capacity(), sb.length());  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+
+```java
+package org.csystem.string.test;  
+  
+import org.csystem.string.CSDStringBuilder;  
+import org.csystem.util.console.Console;  
+  
+public class CSDStringBuilderInitialEnsureCapacityTest {  
+    public static void run()  
+    {  
+        CSDStringBuilder sb = new CSDStringBuilder(5);  
+  
+        sb.append("ali");  
+        sb.ensureCapacity(4);  
+        Console.writeLine("Capacity:%d, Length:%d", sb.capacity(), sb.length());  
+        sb.ensureCapacity(7);  
+        Console.writeLine("Capacity:%d, Length:%d", sb.capacity(), sb.length());  
+        sb.ensureCapacity(21);  
+        Console.writeLine("Capacity:%d, Length:%d", sb.capacity(), sb.length());  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
 
 ##### 
 ##### Polymorphism

@@ -1,6 +1,6 @@
 /**
  * Utility class for console operations
- * Last Update: 4th January 2025
+ * Last Update: 4th February 2025
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.console;
