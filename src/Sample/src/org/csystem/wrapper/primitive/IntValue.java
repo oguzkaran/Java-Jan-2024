@@ -5,7 +5,7 @@
  */
 package org.csystem.wrapper.primitive;
 
-public class IntValue {
+public final class IntValue {
     private static final int CACHE_MIN = -128;
     private static final int CACHE_MAX = 127;
     private static final int INDEX_DIFFERENCE = 128;
