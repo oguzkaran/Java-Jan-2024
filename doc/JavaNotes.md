@@ -30058,7 +30058,7 @@ class Util {
 
 >Aşağıdaki `CSDStringBuilder` sınıfını ve test kodlarını inceleyiniz. Bu sınıf özellikle dinamik büyüyen dizi veri yapısının nasıl gerçekleştirilebileceğine (implementation) yönelik bir fikir vermesi açıından yazılmıştır. `java.lang.StringBuilder` sınıfının tüm metotları yazılmamıştır ancak gerekirse eklenebilecek durumdadır. `CSDStringBuilder` sınıfı capacity değerini `2 (iki)`kat artıracak şekilde (growth policy) tasarlanmıştır. Sınıfın yazımında bazı detaylar göz ardı edilmiştir. Özellikle bu bölümde dinamik büyüyen dizi veri yapısının gerçekleştirilmesine odaklanınız.
 
-**Anahtar Notlar:** System sınıfının arrayCopy parametresi ile aldığı Object türden src ve dest referansları, başlangıç indeks bilgisi ve length bilgisine göre src dizisinden dest dizisinde kopyalama yapar.
+**Anahtar Notlar:** System sınıfının `arrayCopy` metodu parametresi ile aldığı Object türden src ve dest referansları, başlangıç indeks bilgisi ve length bilgisine göre src dizisinden dest dizisinde kopyalama yapar. Bu metot aşağı seviyeli yazıldığından kopyalama işlemini efektif bir biçimde yapar.
 
 ```java
 package org.csystem.string.test;  
@@ -30215,10 +30215,151 @@ public class CSDStringBuilderInitialEnsureCapacityTest {
 ```
 
 
-##### 
+##### 13 Şubat 2025
 ##### Polymorphism
 
+>Biyoloji'den programlamaya aktarılmış bir kavramdır. Biyoloji'de çok biçimlilik (polymorphism) şu şekilde tanımlanabilir: `Farklı doku ya da organların evrim süreci içerisinde temel işlevi (yani hedefi) aynı kalacak şekilde, o işlevi yerine getirme biçiminin değişebilmesidir.` Örneğin, bir canlının `duyma` işlevinin yapılı şekli, o canlıdan türemiş olan bir canlıda değişiklik gösterebilmektedir. Ancak temel işlev duymaktır. 
 >
+>Polymorphism özellikle NYPT'de iki biçimde düşünülür: **runtime polymorphism (RTP)**, **compile time polymorphism (CTP)**. Bu bölümde RTP ele alınacaktır. CTP, `generics`konusunda ele alınacaktır. Polymorphism dendiğinde genel olarak RTP anlaşılır. 
+>
+>RTP ile ilgili pek çok tanım ve betimleme yapılabilse de aşağıdaki 3 (üç) tanıma indirgenebilir:
+>
+>**1. Biyolojik Tanım:** Taban sınıfın (super/base/parent class) bir fonksiyonunun (Java'da metot olarak düşünebilirsiniz) türemiş sınıfta (sub/derived/child class) yeniden gerçekleştirilmesidir (implementation).
+>**2. Yazılım Mühendisliği Tanımı:** Türden bağımsız kod yazmaktır.
+>**3. Aşağı Seviyeli Tanım:** Önceden yazılmış kodların sonradan yazılmış kodları çağırabilmesidir.
 
+**Anahtar Notlar:** Özellikle RTP destekleyen bir programlama diline `object oriented programming language` denir. Nesne, türetme (inheritance) gibi kavramların desteklendiği ancak RTP'nin desteklenmediği bir programlama diline ise genel olarak `object based programming language` denilmektedir.
 
+**Anahtar Notlar:** Polymorphism, `SOLID` ilkelerinden, `L` yani `Liskov Substitution Principle`'ın bir uygulaması olarak düşünülebilir.
+
+###### Java'da RTP
+
+>Java'da RTP **sanal metotlar (virtual methods)** kullanılarak gerçekleştirilir. **Non-static bir metot, final olarak bildirilmemişse VEYA abstract olarak bildirilmişse sanaldır (virtual).** Bazı programlama dillerinde bu tanıma uyan metotlar default olarak sanal olmazlar. İlgili metodun sanal olması için ayrı bir şekilde (genel olarak bir anahtar sözcük ile) bildirilmesi gerekir. Bu kavrama **virtual dispatching** denilmektedir. Bu anlamda Java'da `virtual dispatching` yoktur.
+>
+>Sanal bir metodun imza ve geri dönüş değeri aynı olacak şekilde (erişim belirleyicisi kısmını ileride ele alacağız) türemiş sınıfta yazılmasına **override** denir. Sanal bir metodun türemiş sınıfta override edilme zorunluluğu yoktur.
+>
+>Derleyici sanal bir metot çağrısı gördüğünde şu şekilde bir kod üretir: `Çalışma zamanında metodun çağrılmasında kullanılan referansın dinamik türüne bak, dinamik türe ilişkin sınıfta ilgili sanal metot override edilmişse onu çağır, edilmemişse taban sınıfına bak orada override edilmişse onu çağır, edilmemişse taban sınıfına bak orada override edilmişse onu çağır, ..."
+
+>Aşağıdaki demo örneği inceleyiniz. Örnekte dikkat edilirse RTP'ye ilişkin 3 temel tanımda gerçeklenmiş olur:
+>1. Biyolojik Tanım: foo metodu bazı türemiş sınıflarda override edilmiştir
+>2. Yazılım Mühendisliği Tanım: Util sınıfının doSomething metodu ve DemoApp sınıfının run metodu A hiyerarşisi açısında türden bağımsızdır. Yani bu hiyerarşide sadece `A` sınıfına bağımlıdır.
+>3. Aşağı Seviyeli Tanım: A hiyerarşisine yeni bir tür eklense bile doSomething metodu ve run metodu çalışma zamanında bu türü, dolayısıyla ilgili metodu çağırabilir durumdadır
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.console.Console;  
+import org.csystem.util.thread.ThreadUtil;  
+  
+import java.util.Random;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        DemoApp.run();  
+    }  
+}  
+  
+class DemoApp {  
+    public static void run()  
+    {  
+        AFactory factory = new AFactory();  
+  
+        while (true) {  
+            A x = factory.create();  
+  
+            Util.doSomething(x);  
+            ThreadUtil.sleep(1000);  
+        }  
+    }  
+}  
+  
+class Util {  
+    public static void doSomething(A a)  
+    {  
+        Console.writeLine("---------------------------------------");  
+        Console.writeLine("Dynamic Type:%s", a.getClass().getName());  
+        a.foo(10);  
+        Console.writeLine("---------------------------------------");  
+    }  
+}  
+  
+class AFactory {  
+    private final Random m_random = new Random();  
+    //...  
+  
+    public A create()  
+    {  
+        return switch (m_random.nextInt(8)) {  
+            case 0 -> new B();  
+            case 1 -> new C();  
+            case 2 -> new D();  
+            case 3 -> new E();  
+            case 4 -> new F();  
+            case 5 -> new G();  
+            case 6 -> new H();  
+            default -> new A();  
+        };  
+    }  
+}  
+class H extends E {  
+    //...  
+    public void foo(int a) //override  
+    {  
+        Console.writeLine("H.foo");  
+    }  
+}  
+  
+class G extends B {  
+    //...  
+}  
+  
+class F extends C {  
+    //...  
+}  
+  
+class E extends C {  
+    //...  
+    public void foo(int a) //override  
+    {  
+        Console.writeLine("E.foo");  
+    }  
+}  
+  
+class D extends B {  
+    //...  
+    public void foo(int a) //override  
+    {  
+        Console.writeLine("D.foo");  
+    }  
+}  
+  
+class C extends A {  
+    //...  
+}  
+  
+class B extends A {  
+    public void foo(int a) //override  
+    {  
+        Console.writeLine("B.foo");  
+    }  
+}  
+  
+class A {  
+    public void foo(int a) //virtual method  
+    {  
+        Console.writeLine("A.foo");  
+    }  
+  
+    public final void tar() //non-virtual  
+    {  
+        Console.writeLine("A.tar");  
+    }  
+  
+    public static void bar(int a) //non-virtual  
+    {  
+        Console.writeLine("A.bar");  
+    }  
+}
+```
 
