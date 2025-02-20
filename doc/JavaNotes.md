@@ -11886,6 +11886,8 @@ class Complex {
 #### 2 Temmuz 2024
 
 ##### Nesnenin Yaratılması Aşamaları:
+>Çalışma zamanında bir nesne şu adımlardan geçilerek yaratılır:
+>
 >1. Bellekte yer ayrılır.
 >2. `Non-static` olan (ancak `final olmayan`) veri elemanlarına `default` değerler verilir. 
 >3. Constructor (`ctor`) çağrılır.
@@ -13113,7 +13115,7 @@ class App {
 }
 ```
 
->`+` operatörünün bir operandı String türündense, diğer operandın yazı karşılığı elde edilerek birleştirme işlemi yapılır. String türden olmayan bir ifadenin yazı karşılığının (yani String karşılığının) nasıl elde edildiği "Java Language Specification"'da açıklanmıştır ve detayları ileride ele alınacaktır. Aşağıdaki dönüşüm tür dönüştürme operatörü ile yapılamaz değil mi?
+>`+` operatörünün bir operandı String türündense, diğer operandın yazı karşılığı elde edilerek birleştirme işlemi yapılır. String türden olmayan bir ifadenin yazı karşılığının (yani String karşılığının) nasıl elde edildiği `Java Language Specification` dökumanında açıklanmıştır ve detayları ileride ele alınacaktır. Aşağıdaki dönüşüm tür dönüştürme operatörü ile yapılamaz değil mi?
 
 ```java
 package csd;
@@ -30241,9 +30243,9 @@ public class CSDStringBuilderInitialEnsureCapacityTest {
 >Derleyici sanal bir metot çağrısı gördüğünde şu şekilde bir kod üretir: `Çalışma zamanında metodun çağrılmasında kullanılan referansın dinamik türüne bak, dinamik türe ilişkin sınıfta ilgili sanal metot override edilmişse onu çağır, edilmemişse taban sınıfına bak orada override edilmişse onu çağır, edilmemişse taban sınıfına bak orada override edilmişse onu çağır, ..."
 
 >Aşağıdaki demo örneği inceleyiniz. Örnekte dikkat edilirse RTP'ye ilişkin 3 temel tanımda gerçeklenmiş olur:
->1. Biyolojik Tanım: foo metodu bazı türemiş sınıflarda override edilmiştir
->2. Yazılım Mühendisliği Tanım: Util sınıfının doSomething metodu ve DemoApp sınıfının run metodu A hiyerarşisi açısında türden bağımsızdır. Yani bu hiyerarşide sadece `A` sınıfına bağımlıdır.
->3. Aşağı Seviyeli Tanım: A hiyerarşisine yeni bir tür eklense bile doSomething metodu ve run metodu çalışma zamanında bu türü, dolayısıyla ilgili metodu çağırabilir durumdadır
+>**- Biyolojik Tanım**: foo metodu bazı türemiş sınıflarda override edilmiştir
+>**- Yazılım Mühendisliği Tanımı:** Util sınıfının doSomething metodu ve DemoApp sınıfının run metodu A hiyerarşisi açısında türden bağımsızdır. Yani bu hiyerarşide sadece `A` sınıfına bağımlıdır.
+>**- Aşağı Seviyeli Tanım:** A hiyerarşisine yeni bir tür eklense bile doSomething metodu ve run metodu çalışma zamanında bu türü, dolayısıyla ilgili metodu çağırabilir durumdadır
 
 ```java
 package org.csystem.app;  
@@ -30362,4 +30364,227 @@ class A {
     }  
 }
 ```
+
+
+##### 20 Şubat 2025
+
+>Bazı durumlarda türemiş sınıfta override edilen bir metot içerisinde, yapılacak işlerin yanında taban sınıfın metodunun da işi yapılabilir. Buna **augmentation** da denilmektedir. Bunun **super** referansı kullanılır. super referansı kullanıldığı metodun ait oldu sınıfın taban sınıf kısmının adresidir.  super referansı kullanıldığı sınıfın taban sınıfı türündendir. super referansı yalnızca non-static metotlar içerisinde kullanılabilir.
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.console.Console;  
+import org.csystem.util.thread.ThreadUtil;  
+  
+import java.util.Random;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        DemoApp.run();  
+    }  
+}  
+  
+class DemoApp {  
+    public static void run()  
+    {  
+        AFactory factory = new AFactory();  
+  
+        while (true) {  
+            A x = factory.create();  
+  
+            Util.doSomething(x);  
+            ThreadUtil.sleep(1000);  
+        }  
+    }  
+}  
+  
+class Util {  
+    public static void doSomething(A a)  
+    {  
+        Console.writeLine("---------------------------------------");  
+        Console.writeLine("Dynamic Type:%s", a.getClass().getName());  
+        a.foo(10);  
+        Console.writeLine("---------------------------------------");  
+    }  
+}  
+  
+class AFactory {  
+    private final Random m_random = new Random();  
+    //...  
+  
+    public A create()  
+    {  
+        return switch (m_random.nextInt(8)) {  
+            case 0 -> new B();  
+            case 1 -> new C();  
+            case 2 -> new D();  
+            case 3 -> new E();  
+            case 4 -> new F();  
+            case 5 -> new G();  
+            case 6 -> new H();  
+            default -> new A();  
+        };  
+    }  
+}  
+class H extends E {  
+    //...  
+    public void foo(int a)  
+    {  
+        super.foo(a);  
+        Console.writeLine("H.foo");  
+    }  
+}  
+  
+class G extends B {  
+    //...  
+}  
+  
+class F extends C {  
+    //...  
+}  
+  
+class E extends C {  
+    //...  
+    public void foo(int a)  
+    {  
+        super.foo(a);  
+        Console.writeLine("E.foo");  
+    }  
+}  
+  
+class D extends B {  
+    //...  
+    public void foo(int a)  
+    {  
+        super.foo(a);  
+        Console.writeLine("D.foo");  
+    }  
+}  
+  
+class C extends A {  
+    //...  
+}  
+  
+class B extends A {  
+    public void foo(int a)  
+    {  
+        super.foo(a);  
+        Console.writeLine("B.foo");  
+    }  
+}  
+  
+class A {  
+    public void foo(int a)  
+    {  
+        Console.writeLine("A.foo");  
+    }  
+  
+    public final void tar()  
+    {  
+        Console.writeLine("A.tar");  
+    }  
+  
+    public static void bar(int a)  
+    {  
+        Console.writeLine("A.bar");  
+    }  
+}
+```
+
+>Sanal bir metodu türemiş sınıfta override ederken taban sınıftaki erişim belirleyici ya aynı olabilir ya da erişim anlamında yükseltilebilir. Bu durumda örneğin sanal metot taban sınıfta protected olarak bildirilmişse ya protected ya da public olarak override edilebilir, public olarak bildirilmişse yalnızca public olarak override edilebilir, no-modifier olarak bildirilmişse yine public yapılabilir. private metotlar sanal değildir dolayısıyla override edilemezler ancak türemiş sınıfta herhangi bir erişimci ile yazılabilirler, bu override anlamına gelmez. Mantıksal olarak düşünüldüğünde türemiş sınıfı yazan programcı taban sınıfın private bölümünü zaten bilmiyor durumdadır. 
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+class H extends A {  
+    public void car() //Bu override anlamına gelmez. H sınıfını yazan açısından zaten A sınıfından bu metot bilinmiyor  
+    {  
+        //...  
+    }  
+}  
+  
+class G extends A {  
+    public void tar()  
+    {  
+        //...  
+    }  
+}  
+  
+class F extends A {  
+    protected void tar()  
+    {  
+        //...  
+    }  
+}  
+  
+class E extends A {  
+    protected void foo() //error  
+    {  
+        //...  
+    }  
+}  
+  
+  
+class D extends A {  
+    void bar() //error  
+    {  
+        //...  
+    }  
+}  
+  
+class C extends A {  
+    protected void bar()  
+    {  
+        //...  
+    }  
+}  
+  
+class B extends A {  
+    public void bar()  
+    {  
+        //...  
+    }  
+}  
+  
+class A {  
+    public void foo()  
+    {  
+        //...  
+    }  
+  
+    protected void bar()  
+    {  
+        //...  
+    }  
+  
+    void tar()  
+    {  
+        //...  
+    }  
+  
+    private void car()  
+    {  
+        //...  
+    }  
+}
+```
+
+###### Polymorphism'e İlişkin Bazı Örnekler
+
+>Bu bölümde bazı örnek uygulamalarda polymorphism kullanımı teorik olarak ele alınacaktır. 
+>- Sürekli devam eden (endless) bir oyunda bir karakter kendisine rasgele olarak gelen toplara vuruyor olsun. Bu karaktere gelen topların çeşitlerine göre vurduktan sonraki davranışları farklılık göstersin. Böyle bir uygulamada vurma esnasında gelen topa göre işlem yapmak yerine, bu davranışı topa ait kabul edip bir taban sınıf ve bir sanal metot (örneğin Ball sınıfı ve kick metodu gibi) ile gelen topa yalnızca vurma kodu yazılıp vurma işleminden sonra dinamik türe göre metodun çağrılması sağlanabilir. Bu durumda oyuna yeni bir top eklenmesi durumunda topun karaktere gelip vurması kodlarında değişiklik yapılması gerekmez (türden bağımsız kod yazma). 
+>- Popüler tuğla kırma oyununda (bricks world) top tuğlaya çarptığında tuğlanın şekline göre olay gerçekleşmektedir.  Bu durumda çeşitli tuğlalar için çeşitli davranışlar söz konusu olmaktadır. Topun tuğlaya çarptığı sırada  tuğlanın ne olduğuna göre işlem yapmak yerine bir taban sınıf ve bir sanal metot (örneğin Brick sınıf ve hit metodu gibi)  ile tüm tuğlalar bir matris olarak düşünülüp ilgili elemana top çarptığında sanal metot çağrılarak dinamik türe özgü işlem yapılması  sağlanabilir. Bu durumda yeni bir tuğla eklense de topun tuğlaya çarpması kodlarında değişiklik gerekmez  
+>- Popüler angry birds oyununda çeşitli kuşlar bir sapandan atılmaktadır. Oyunda, atıldığında değişik davranışlar  gösteren kuşlar bulunmaktadır. Bu durumda kuşun davranışının atıldıktan sonra kuşun türüne bakarak gerçekleştirilmesi  yerine kuş için bir taban sınıf ve bir sanal metot (örneğin Bird sınıfı ve throwBird metodu gibi) belirlenerek fırlatma işlemi  için taban sınıf referansı kullanılabilir. Bu durumda dinamik türe göre işlem yapılmış olur. Yeni bir kuş  türü eklendiğinde fırlatma kodlarında değişiklik gerekmez.
+>
+>Şüphesiz buradaki örnekler çoğaltılabilir. 
+>
+>Programlamada temel amaç yeni eklentilerin mümkün olduğunca eski kodlara dokunmadan yani senaryo değişmedikten sonra eski kodlarda değişiklik yapılmadan yazılabilmesidir. Bu işlem adeta bi puzzle'ın ya da bir lego'nun parçasını eklemek biçiminde düşünülebilir. Böyle bir tasarım ile ürünün yeni versiyonu daha çabuk ve daha sistematik bir biçimde elde edilebilir. RTP de bunu sağlayan araçlardan biridir. Bir ürünün kod kalitesi için şu önerme söylenebilir: **Bir ürünün yeni versiyon çıkartılırken eski kodlara ilişkin senaryolarda ve algoritmalarda değişiklik olmadıktan sonra eski kodlara ne kadar az müdahale edilirse ürünün kodları o kadar kalitelidir.** 
+
+###### Object Sınıfının Önemli Bazı Sanal Metotları
+
+>- toString metodu:
+>- equals metodu:
 
