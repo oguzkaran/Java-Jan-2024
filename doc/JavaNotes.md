@@ -11543,7 +11543,7 @@ class Date {
 
 #### 27 Haziran 2024
 
-##### Point sınıfı ve test kodları
+>Aşağıdaki, kartezyen düzlemde bir noktayı temsil eden `Point`sınıfını ve test kodlarını inceleyiniz.
 
 ```java
 package csd;
@@ -11680,7 +11680,14 @@ class Point {
 }
 ```
 
-##### Complex sınıfı ve test kodları
+>Aşağıdaki, bir karmaşık sayıyı (complex number) temsil eden `Complex` sınıfın ve test kodlarını inceleyiniz.
+>**Açıklamalar:** $z = a + ib$, $z_1 = a_1 + ib_1$, $z_2 = a_2 + ib_2$ karmaşık sayıları için
+>- $\bar{z} = a - ib$
+>- $|z| = \sqrt{a^2 + b^2}$
+>- $z_1 \pm z_2 = (a_1 \pm a_2) + i(b_1 \pm b2)$
+>- $z_1z_2 = (a_1 + a_2) + i(b_1 + b2)$
+>- $z_1 / z_2 = (a_1 + a_2) + i(b_1 + b2)$
+
 	
 ```java
 package csd;
@@ -12644,7 +12651,7 @@ class EvenDiceProbabilitySimulation {
 
 #### 9 Temmuz 2024
 
->Anımsanacağı gibi rassal sayı üretimi bir takım Matematiksel işlemlerle bilgisayar dünyasında gerçekleştirilir. Şüphesiz bu işlemler kullanılan algoritmalara göre değişiklik gösterebilir. Ancak neredeyse tüm algoritmalarda **"tohum değeri (seed value)"** denilen bir değer kullanılır. Bu değer her sayı üretiminde ilgili algoritmaya göre güncellenir. Bu durumda bir işlem aynı tohum değeriyle tekrar yapıldığında aynı sonuçlar elde edilir. Yani örneğin bir programda `10` tane `[0, 99]` aralığında sayı üretiliyorsa bu program hep **aynı** tohum değeri ile çalıştırılırsa hep aynı sayılar aynı dizilimde üretilir. Random sınıfının default ctor'u her yaratılan nesne için tohum değerini farklı verecek şekilde yazılmıştır. Bu işlem genel olarak zaman kavramı kullanılarak yapılabilir. Örneğin tohum değeri belirli bir tarihten itibaren geçen milisaniye olarak alınırsa veya donanıma ilişkin üretilen tick sayısına bağlı olarak alınırsa her değer farklı olma eğiliminde olur. Random sınıfının tohum değerini başlangıçta programcıdan alabildiği bir ctor'u ve `setSeed` isimli bir metodu da vardır. Örneğin bir resim içerisinde resimde gözle değişiklikle anlaşılamayacak şekilde bir yazı gizlemek için yazının bitleri rassal olarak belirlenen pixel'lere yazılabilir. Bu durumda resimden yazı elde edilirken aynı pixel'lerin elde edilebilmesi için aynı tohum değeriyle üretim yapılması gerekir. Şüphesiz bu işlemin nasıl yapılacağına ilişkin pek çok detay söz konusudur. Burada önemli olan yani odaklanmanız örnekte tohum değerinin aynı olacak şekilde kullanılmasıdır.
+>Anımsanacağı gibi rassal sayı üretimi bir takım Matematiksel işlemlerle bilgisayar dünyasında gerçekleştirilir. Şüphesiz bu işlemler kullanılan algoritmalara göre değişiklik gösterebilir. Ancak neredeyse tüm algoritmalarda **"tohum değeri (seed value)"** denilen bir değer kullanılır. Bu değer her sayı üretiminde ilgili algoritmaya göre güncellenir. Bu durumda bir işlem aynı tohum değeriyle tekrar yapıldığında aynı sonuçlar elde edilir. Yani örneğin bir programda `10` tane `[0, 99]` aralığında sayı üretiliyorsa bu program hep **aynı** tohum değeri ile çalıştırılırsa hep aynı sayılar aynı dizilimde üretilir. Random sınıfının default ctor'u her yaratılan nesne için tohum değerini farklı verecek şekilde yazılmıştır. Bu işlem genel olarak zaman kavramı kullanılarak yapılabilir. Örneğin tohum değeri belirli bir tarihten itibaren geçen milisaniye olarak alınırsa veya donanıma ilişkin üretilen tick sayısına bağlı olarak alınırsa her değer farklı olma eğiliminde olur. Random sınıfının tohum değerini başlangıçta programcıdan alabildiği bir ctor'u ve `setSeed` isimli bir metodu da vardır. Örneğin bir resim içerisinde resimde gözle değişiklikle anlaşılamayacak şekilde bir yazı gizlemek için yazının bitleri rassal olarak belirlenen pixel'lere yazılabilir. Bu durumda resimden yazı elde edilirken aynı pixel'lerin elde edilebilmesi için aynı tohum değeriyle üretim yapılması gerekir. Şüphesiz bu işlemin nasıl yapılacağına ilişkin pek çok detay söz konusudur. Burada önemli olan yani odaklanmanız gereken, örnekte tohum değerinin aynı olacak şekilde kullanılmasıdır.
 
 >Aşağıdaki demo örneğin her çalıştırılmasında üretilen ilk 10 sayının dizilimi diğer çalıştırmalardan farklıdır. İkinci 10 sayının dizilimi ise tohum değerine bağlı olduğundan daha önceki bir çalıştırılmada girilen tohum değeri ile aynı değer tekrar girildiğinde dizilim aynı olur
 
@@ -30583,8 +30590,847 @@ class A {
 >
 >Programlamada temel amaç yeni eklentilerin mümkün olduğunca eski kodlara dokunmadan yani senaryo değişmedikten sonra eski kodlarda değişiklik yapılmadan yazılabilmesidir. Bu işlem adeta bi puzzle'ın ya da bir lego'nun parçasını eklemek biçiminde düşünülebilir. Böyle bir tasarım ile ürünün yeni versiyonu daha çabuk ve daha sistematik bir biçimde elde edilebilir. RTP de bunu sağlayan araçlardan biridir. Bir ürünün kod kalitesi için şu önerme söylenebilir: **Bir ürünün yeni versiyon çıkartılırken eski kodlara ilişkin senaryolarda ve algoritmalarda değişiklik olmadıktan sonra eski kodlara ne kadar az müdahale edilirse ürünün kodları o kadar kalitelidir.** 
 
+##### 6 Mart 2025
 ###### Object Sınıfının Önemli Bazı Sanal Metotları
 
->- toString metodu:
->- equals metodu:
+>Bu bölümde Object sınıfının önemli bazı sanal metotları ele alınacaktır:
 
+>- **toString metodu:** Object sınıfının toString isimli sanal bir metodu vardır. Bu metot bir nesneye ilişkin yazı karşılığı olması durumunda `override edilmesi` bir convention olan metottur. Aslında biz sınıflarımız içerisinde toString metodunu hep override ettik. toString metodu JavaSE ve çeşitli üçüncü parti kütüphaneler ve ortamlar (framework) tarafından da duruma göre Object sınıfı üzerinden çağrılmaktadır. Örneğin print ve println metotlarının Object parametreli overload'ları standart output'a yani ekrana basacakları yazıyı toString metodunu çağırarak elde ederler:
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.math.geometry.Circle;  
+import org.csystem.math.geometry.Point;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Circle c = new Circle(100.5);  
+        Point p = Point.createCartesian(300, 67.8);  
+  
+        System.out.println(c);  
+        System.out.println(p);  
+    }  
+}
+```
+
+
+>printf (ve String sınıfının format metodu) metodu s format karakteri ile verilen bir argüman için yazı karşılığını toString metodunu çağırarak elde eder metodu s format karakteri ile verilen bir argüman için yazı karşılığını toString metodunu çağırarak elde eder.  
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.math.geometry.Circle;  
+import org.csystem.math.geometry.Point;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Circle c = new Circle(100.5);  
+        Point p = Point.createCartesian(300, 67.8);  
+  
+        System.out.printf("Circle -> %s%n", c);  
+        System.out.printf("Point -> %s%n", p);  
+    }  
+}
+```
+
+>Temel bir tür için de printf metodu (ve String sınıfının format metodu) s format karakteri için dolaylı olarak toString metodunu çağırarak değerin yazı karşılığını elde eder. Çünkü temel türden bir ifadenin değeri printf metoduna geçilirken parametre türü Object olduğundan otomatik kutulama yapılır, sonrasında ilgili sarmalayan sınıfın toString metodu çağrılmış olur.  
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        int a = 10;  
+        double b = 10.5;  
+        boolean c = true;  
+  
+        System.out.printf("a = %s, b = %s, c = %s%n", a, b, c);  
+    }  
+}
+```
+
+>Anımsanacağı gibi + operatörünün bir operandı String türündense diğer operandının yazı karşılığı elde edilerek yazı  birleştirmesi işlemi yapılır. Diğer türün yazı karşılığı yine toString metodu çağrılarak elde edilir. 
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.math.geometry.Circle;  
+import org.csystem.math.geometry.Point;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Circle c = new Circle(100.5);  
+        Point p = Point.createCartesian(300, 67.8);  
+  
+        System.out.println("Circle -> " + c);  
+        System.out.println("Point -> " + p);  
+    }  
+}
+```
+
+
+>Diğer tür temel  türlerden biriyse önce otomatik kutulanır sonra ilgili sarmalayan sınıfın toString metodu çağrılarak yazı karşılığı  elde edilir.
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        int a = 10;  
+        double b = 10.5;  
+        boolean c = true;  
+  
+        System.out.println("a = " + a + ", b = " + b + ", c = " + c);  
+    }  
+}
+```
+
+>Object sınıfının toString metodu nesneye özgü, genel olarak tekil (unique) bir bilgiye ilişkin yazıya karşılık gelir. Bu yazının nasıl elde edildiğine ilişkin detaylar şu aşamada önemsizdir.
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Sample s1 = new Sample();  
+        Sample s2 = new Sample();  
+  
+        System.out.println(s1);  
+        System.out.println(s2);  
+    }  
+}  
+  
+class Sample {  
+    //...  
+}
+```
+
+>ArrayList sınıfının toString metodu elemanlara ilişkin yazı karşılığını yine her bir eleman için toString metodunu çağırarak elde eder. 
+
+```java
+package org.csystem.app.generator;  
+  
+import org.csystem.generator.random.point.RandomPointGenerator;  
+import org.csystem.util.console.Console;  
+  
+import java.util.ArrayList;  
+import java.util.Random;  
+  
+public class DemoPointListGeneratorApp {  
+    public static void run()  
+    {  
+        RandomPointGenerator generator = new RandomPointGenerator(new Random(), -1000, 1000);  
+        int count = Console.readInt("Input number of points:");  
+  
+        ArrayList points = new ArrayList<>();  
+  
+        generator.addPoints(points, count);  
+  
+        for (Object o : points)  
+            Console.write("%s ", o);  
+  
+        Console.writeLine();  
+  
+        Console.writeLine(points);  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+```java
+package org.csystem.generator.random.point;  
+  
+import org.csystem.math.geometry.Point;  
+  
+import java.util.ArrayList;  
+import java.util.Random;  
+  
+public class RandomPointGenerator {  
+    private final Random m_random;  
+    private final double m_origin, m_bound;  
+  
+    private Point createRandomPoint()  
+    {  
+        return Point.createCartesian(m_random.nextDouble(m_origin, m_bound), m_random.nextDouble(m_origin, m_bound));  
+    }  
+  
+    public RandomPointGenerator(Random random, double origin, double bound)  
+    {  
+        m_random = random;  
+        m_origin = origin;  
+        m_bound = bound;  
+    }  
+  
+  
+    public void addPoints(ArrayList points, int count)  
+    {  
+        for (int i = 0; i < count; i++)  
+            points.add(createRandomPoint());  
+    }  
+  
+    public Point[] createPointArray(int count)  
+    {  
+        Point [] points = new Point[count];  
+  
+        for (int i = 0; i < count; i++)  
+            points[i] = createRandomPoint();  
+  
+        return points;  
+    }
+}
+```
+
+
+>- **equals metodu:** Object sınıfının equals isimli metodunun, Object parametreli ve geri dönüş değeri boolean'dır. Bu metot aynı türden iki nesne için mantıksal eşitlik karşılaştırması için kullanılır. Sınıfı yazan programcı, sınıf türünden iki nesne için mantıksal eşitlik kavramı söz konusuysa equals metodunu bir convention olarak override eder. Yani aslında override edilen metotta eşitliğe ilişkin kodlar yazılır. Object sınıfının equals metodu referans (adres) karşılaştırması yapar. equals metodu JavaSE ve çeşitli üçüncü parti kütüphaneler ve ortamlar (framework) tarafından da duruma göre Object sınıfı üzerinden çağrılmaktadır. Örneğin ArrayList sınıfının `indexOf`ve `lastIndexOf`metotları arama işlemini `null` araması yapılmıyorsa equals metodunu çağırarak yaparlar. Bu durumda ArrayList içerisinde tutulan referansın dinamik türü için, override edilmişse equals çağrılmış olur. Bu durumda ilgili tür için mantıksal eşitlik karşılaştırması yapılmış olur. equals metodu override edilirken, aldığı Object referansına ilişkin dinamik türün ilgili sınıf türünden olup olmadığına da genel olarak bakılır. Özel bir durum yoksa bu bir convention olarak düşünülmelidir. Pek çok static kod analizi aracı default konfigürasyonunda bu kontrolün yapılmadığı durumlarda uyarı vermektedir. Bu kontrol tipik olarak `instanceof` operatörü ile yapılabilir.
+
+>Aşağıdaki demo örneği Point sınıfının equals metodunu kaldırarak da çalıştırıp sonucu gözlemleyiniz
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.math.geometry.Point;  
+import org.csystem.util.console.Console;  
+import org.csystem.util.thread.ThreadUtil;  
+  
+import java.util.Random;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Point origin = Point.createCartesian(0, 0);  
+        Random r = new Random();  
+  
+        while (true) {  
+            Point point = Point.createCartesian(r.nextInt(-1, 1), r.nextInt(-1, 1));  
+  
+            Console.writeLine(point);  
+  
+            if (point.equals(origin))  
+                break;  
+  
+            ThreadUtil.sleep(1000);  
+        }  
+    }  
+}
+```
+
+>Aşağıdaki demo örneği Point sınıfının equals metodunu kaldırarak da çalıştırıp sonucu gözlemleyiniz
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.math.geometry.Point;  
+import org.csystem.util.console.Console;  
+  
+import java.util.ArrayList;  
+import java.util.Random;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        ArrayList  list = new ArrayList();  
+        Random r = new Random();  
+  
+        while (true) {  
+            int x = r.nextInt(-1, 1);  
+            int y = r.nextInt(-1, 1);  
+  
+            list.add(Point.createCartesian(x, y));  
+  
+            if (x == 0 && y == 0)  
+                break;  
+        }  
+  
+        Console.writeLine("Size:%d", list.size());  
+        int index = list.indexOf(Point.createCartesian(0, 0));  
+  
+        Console.writeLine("Index:%d", index);  
+    }  
+}
+```
+
+```java
+package org.csystem.math.geometry;  
+  
+import static java.lang.Math.*;  
+  
+public class Point {  
+    private final double m_x;  
+    private final double m_y;  
+  
+    private static Point create(double a, double b)  
+    {  
+       return new Point(a, b);  
+    }  
+  
+    private Point(double x, double y)  
+    {  
+       m_x = x;  
+       m_y = y;  
+    }  
+  
+    public static Point createCartesian(double x, double y)  
+    {  
+       return create(x, y);  
+    }  
+  
+    public static Point createPolar(double r, double theta)  
+    {  
+       return create(r * cos(theta), r * sin(theta));  
+    }  
+  
+    public double getX()  
+    {  
+       return m_x;  
+    }  
+  
+    public double getY()  
+    {  
+       return m_y;  
+    }  
+  
+    public double euclideanDistance()  
+    {  
+       return euclideanDistance(0, 0);  
+    }  
+      
+    public double euclideanDistance(Point other)  
+    {  
+       return euclideanDistance(other.m_x, other.m_y);  
+    }  
+      
+    public double euclideanDistance(double x, double y)  
+    {  
+       return PointCommon.euclideanDistance(m_x, m_y, x, y);  
+    }    
+  
+    public boolean equals(Object other)  
+    {  
+       return other instanceof Point p && PointCommon.equals(m_x, m_y, p.m_x, p.m_y);  
+    }  
+  
+    public String toString()  
+    {  
+       return PointCommon.toString(m_x, m_y);  
+    }  
+}
+```
+
+```java
+package org.csystem.math.geometry;  
+  
+import static java.lang.Math.*;  
+  
+public class MutablePoint {  
+    private double m_x;  
+    private double m_y;  
+  
+    private static MutablePoint create(double a, double b)  
+    {  
+       return new MutablePoint(a, b);  
+    }  
+  
+    private MutablePoint(double x, double y)  
+    {  
+       m_x = x;  
+       m_y = y;  
+    }  
+  
+    public static MutablePoint createCartesian(double x, double y)  
+    {  
+       return create(x, y);  
+    }  
+  
+    public static MutablePoint createPolar(double r, double theta)  
+    {  
+       return create(r * cos(theta), r * sin(theta));  
+    }  
+  
+    public double getX()  
+    {  
+       return m_x;  
+    }  
+  
+    public void setX(double x)  
+    {  
+       m_x = x;  
+    }  
+  
+    public double getY()  
+    {  
+       return m_y;  
+    }  
+  
+    public void setY(double y)  
+    {  
+       m_y = y;  
+    }  
+  
+    public double euclideanDistance()  
+    {  
+       return euclideanDistance(0, 0);  
+    }  
+      
+    public double euclideanDistance(MutablePoint other)  
+    {  
+       return euclideanDistance(other.m_x, other.m_y);  
+    }  
+      
+    public double euclideanDistance(double x, double y)  
+    {  
+       return PointCommon.euclideanDistance(m_x, m_y, x, y);  
+    }    
+      
+    public void offset(double dxy)  
+    {  
+       offset(dxy, dxy);  
+    }  
+      
+    public void offset(double dx, double dy)  
+    {  
+       m_x += dx;  
+       m_y += dy;  
+    }  
+  
+    public boolean equals(Object other)  
+    {  
+       return other instanceof MutablePoint p && PointCommon.equals(m_x, m_y, p.m_x, p.m_y);  
+    }  
+  
+    public String toString()  
+    {  
+       return PointCommon.toString(m_x, m_y);  
+    }  
+}
+```
+
+```java
+package org.csystem.math.geometry;  
+  
+import static java.lang.Math.pow;  
+import static java.lang.Math.sqrt;  
+  
+class PointCommon {  
+    static final double DELTA = 0.000001;  
+    static String toString(double x, double y)  
+    {  
+        return "(%f, %f)".formatted(x, y);  
+    }  
+  
+    static boolean equals(double x1, double y1, double x2, double y2)  
+    {  
+        return Math.abs(x1 - x2) < DELTA && Math.abs(y1 - y2) < DELTA;  
+    }  
+  
+    static double euclideanDistance(double x1, double y1, double x2, double y2)  
+    {  
+        return sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));  
+    }  
+}
+```
+
+>Aşağıdaki sınıfların equals metotlarını inceleyiniz
+```java
+package org.csystem.wrapper.primitive;  
+  
+public final class IntValue {  
+    private static final int CACHE_MIN = -128;  
+    private static final int CACHE_MAX = 127;  
+    private static final int INDEX_DIFFERENCE = 128;  
+  
+    private static final IntValue [] CACHE = new IntValue[CACHE_MAX - CACHE_MIN + 1];  
+    private final int m_value;  
+  
+    private IntValue(int value)  
+    {  
+        m_value = value;  
+    }  
+  
+    public static IntValue of(int value)  
+    {  
+        if (value < CACHE_MIN || value > CACHE_MAX)  
+            return new IntValue(value);  
+  
+        if (CACHE[value + INDEX_DIFFERENCE] == null)  
+            CACHE[value + INDEX_DIFFERENCE] = new IntValue(value);  
+  
+        return CACHE[value + INDEX_DIFFERENCE];  
+    }  
+  
+    public int getValue()  
+    {  
+        return m_value;  
+    }  
+  
+    public boolean equals(Object other)  
+    {  
+        return other instanceof IntValue i && i.m_value == m_value;  
+    }  
+      
+    public String toString()  
+    {  
+        return String.valueOf(m_value);  
+    }  
+}
+```
+
+
+```java
+package org.csystem.math;  
+  
+import static java.lang.Math.sqrt;  
+  
+public class Complex {  
+    private static final double DELTA = 0.00001;  
+    private final double m_real;  
+    private final double m_imag;  
+      
+    private static Complex add(double re1, double im1, double re2, double im2)  
+    {  
+       return new Complex(re1 + re2, im1 + im2);  
+    }  
+      
+    private static Complex subtract(double re1, double im1, double re2, double im2)  
+    {  
+       return add(re1, im1, -re2, -im2);       
+    }  
+      
+    public Complex()  
+    {  
+       m_real = m_imag = 0;  
+    }  
+      
+    public Complex(double real)  
+    {  
+       m_real = real;  
+       m_imag = 0;  
+    }  
+      
+    public Complex(double real, double imag)  
+    {  
+       m_real = real;  
+       m_imag = imag;  
+    }  
+      
+    public static Complex add(double val, Complex z)  
+    {  
+       return add(val, 0, z.m_real, z.m_imag);  
+    }  
+      
+    public Complex add(Complex other)  
+    {  
+       return add(m_real, m_imag, other.m_real, other.m_imag);  
+    }  
+      
+    public Complex add(double val)  
+    {  
+       return add(m_real, m_imag, val, 0);  
+    }    
+      
+    public static Complex subtract(double val, Complex z)  
+    {  
+       return subtract(val, 0, z.m_real, z.m_imag);  
+    }  
+      
+    public Complex subtract(Complex other)  
+    {  
+       return subtract(m_real, m_imag, other.m_real, other.m_imag);  
+    }  
+      
+    public Complex subtract(double val)  
+    {  
+       return subtract(m_real, m_imag, val, 0);  
+    }  
+  
+    public Complex getConjugate()  
+    {             
+       return new Complex(m_real, -m_imag);  
+    }  
+      
+    public double getNorm()  
+    {  
+       return sqrt(m_real * m_real + m_imag * m_imag);  
+    }  
+      
+    public double getLength()  
+    {  
+       return getNorm();  
+    }  
+  
+    public boolean equals(Object other)  
+    {  
+       return other instanceof Complex z && Math.abs(m_real - z.m_real) < DELTA && Math.abs(m_imag - z.m_imag) < DELTA;  
+    }  
+  
+    public String toString()  
+    {  
+       return "(%.2f, %.2f)".formatted(m_real, m_imag);  
+    }  
+}
+```
+
+```java
+package org.csystem.math;  
+  
+import static java.lang.Math.sqrt;  
+  
+public class MutableComplex {  
+    private static final double DELTA = 0.00001;  
+    private double m_real;  
+    private double m_imag;  
+  
+    private static MutableComplex add(double re1, double im1, double re2, double im2)  
+    {  
+       return new MutableComplex(re1 + re2, im1 + im2);  
+    }  
+  
+    private static MutableComplex subtract(double re1, double im1, double re2, double im2)  
+    {  
+       return add(re1, im1, -re2, -im2);  
+    }  
+  
+    public MutableComplex()  
+    {  
+    }  
+  
+    public MutableComplex(double real)  
+    {  
+       m_real = real;  
+    }  
+  
+    public MutableComplex(double real, double imag)  
+    {  
+       m_real = real;  
+       m_imag = imag;  
+    }  
+      
+    public static MutableComplex add(double val, MutableComplex z)  
+    {  
+       return add(val, 0, z.m_real, z.m_imag);  
+    }  
+      
+    public MutableComplex add(MutableComplex other)  
+    {  
+       return add(m_real, m_imag, other.m_real, other.m_imag);  
+    }  
+      
+    public MutableComplex add(double val)  
+    {  
+       return add(m_real, m_imag, val, 0);  
+    }    
+      
+    public static MutableComplex subtract(double val, MutableComplex z)  
+    {  
+       return subtract(val, 0, z.m_real, z.m_imag);  
+    }  
+      
+    public MutableComplex subtract(MutableComplex other)  
+    {  
+       return subtract(m_real, m_imag, other.m_real, other.m_imag);  
+    }  
+      
+    public MutableComplex subtract(double val)  
+    {  
+       return subtract(m_real, m_imag, val, 0);  
+    }  
+      
+    public void inc(double val)  
+    {  
+       m_real += val;  
+    }  
+      
+    public void inc()  
+    {  
+       inc(1);  
+    }  
+      
+    public void dec(double val)  
+    {  
+       inc(-val);  
+    }  
+      
+    public void dec()  
+    {  
+       dec(1);  
+    }  
+      
+    public MutableComplex getConjugate()  
+    {             
+       return new MutableComplex(m_real, -m_imag);  
+    }  
+      
+    public double getNorm()  
+    {  
+       return sqrt(m_real * m_real + m_imag * m_imag);  
+    }  
+      
+    public double getLength()  
+    {  
+       return getNorm();  
+    }    
+  
+    public boolean equals(Object other)  
+    {  
+       return other instanceof MutableComplex z && Math.abs(m_real - z.m_real) < DELTA && Math.abs(m_imag - z.m_imag) < DELTA;  
+    }  
+  
+    public String toString()  
+    {  
+       return "(%.2f, %.2f)".formatted(m_real, m_imag);  
+    }  
+}
+```
+
+
+```java
+package org.csystem.math.geometry;  
+  
+import static java.lang.Math.abs;  
+import static java.lang.Math.*;  
+  
+public class Circle {  
+    protected static final double DELTA = 0.000001;  
+    private double m_r;  
+  
+    public Circle()  
+    {  
+    }  
+  
+    public Circle(double radius)  
+    {  
+        setRadius(radius);  
+    }  
+  
+    public void setRadius(double radius)  
+    {  
+        m_r = abs(radius);  
+    }  
+  
+    public double getRadius()  
+    {  
+        return m_r;  
+    }  
+  
+    public double getArea()  
+    {  
+        return PI * m_r * m_r;  
+    }  
+  
+    public double getCircumference()  
+    {  
+        return 2 * PI * m_r;  
+    }  
+  
+    public boolean equals(Object other)  
+    {  
+        return other instanceof Circle c &&Math.abs(m_r - c.m_r) < DELTA;  
+    }  
+  
+    public String toString()  
+    {  
+        return "Radius = %f, Area = %f, Circumference = %f".formatted(m_r, getArea(), getCircumference());  
+    }  
+}
+```
+
+```java
+package org.csystem.math.geometry;  
+  
+public class AnalyticalCircle extends Circle {  
+    private static final double DELTA = 0.0000001;  
+    private final MutablePoint m_center;  
+  
+    public AnalyticalCircle()  
+    {  
+        this(0, 0);  
+    }  
+  
+    public AnalyticalCircle(double radius)  
+    {  
+        this(radius, 0, 0);  
+    }  
+  
+    public AnalyticalCircle(double x, double y)  
+    {  
+        this(0, x, y);  
+    }  
+  
+    public AnalyticalCircle(double radius, double x, double y)  
+    {  
+        super(radius);  
+        m_center = MutablePoint.createCartesian(x, y);  
+    }  
+  
+    public double getX()  
+    {  
+        return m_center.getX();  
+    }  
+  
+    public void setX(double x)  
+    {  
+        m_center.setX(x);  
+    }  
+  
+    public double getY()  
+    {  
+        return m_center.getY();  
+    }  
+  
+    public void setY(double y)  
+    {  
+        m_center.setY(y);  
+    }  
+  
+    public void setCenter(double x, double y)  
+    {  
+        setX(x);  
+        setY(y);  
+    }  
+  
+    public void offset(double dx, double dy)  
+    {  
+        m_center.offset(dx, dy);  
+    }  
+  
+    public void offset(double dxy)  
+    {  
+        offset(dxy, dxy);  
+    }  
+  
+    public boolean isTangent(AnalyticalCircle other)  
+    {  
+        return Math.abs(centersDistance(other) - getRadius() - other.getRadius()) < DELTA;  
+    }  
+  
+    public double centersDistance(AnalyticalCircle other)  
+    {  
+        return m_center.euclideanDistance(other.m_center);  
+    }  
+  
+    public boolean equals(Object other)  
+    {  
+        return other instanceof AnalyticalCircle ac && super.equals(other) && m_center.equals(ac.m_center);  
+    }  
+  
+    public String toString()  
+    {  
+        return "%s, Center:%s".formatted(super.toString(), m_center);  
+    }  
+}
+```
+**Anahtar Notlar:** Bir sınıfta equals metodu override edildiğinde, Object sınıfının hashCode metodu da override edilir. Yani, bu iki metot ya hiç override edilmez ya da ikisiz birden override edilir. hashCode metodu `Java ile Uygulama Geliştirme I` kursunda ele alınacaktır. Burada equals metodunun override edildiği sınıflarda hashCode override edilmeyecektir. 
+
+##### abstract Sınıflar ve abstract Metotlar
+
+>

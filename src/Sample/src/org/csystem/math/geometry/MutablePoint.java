@@ -1,6 +1,6 @@
 /**
  * Mutable Point class that represents a point in geometry
- * Last Update: 31st October 2024
+ * Last Update: 6th March 2025
  * @author Java-Jan-2024 Group
  */
 package org.csystem.math.geometry;
@@ -77,7 +77,12 @@ public class MutablePoint {
 		m_x += dx;
 		m_y += dy;
 	}
-	
+
+	public boolean equals(Object other)
+	{
+		return other instanceof MutablePoint p && PointCommon.equals(m_x, m_y, p.m_x, p.m_y);
+	}
+
 	public String toString()
 	{
 		return PointCommon.toString(m_x, m_y);

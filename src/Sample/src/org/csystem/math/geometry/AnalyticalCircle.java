@@ -1,6 +1,6 @@
 /**
  * AnalyticalCircle class that represents a circle in Cartesian System
- * Last Update: 10th December 2024
+ * Last Update: 6th March 2025
  * @author Java-Jan-2024 Group
  */
 package org.csystem.math.geometry;
@@ -76,5 +76,13 @@ public class AnalyticalCircle extends Circle {
         return m_center.euclideanDistance(other.m_center);
     }
 
-    //...
+    public boolean equals(Object other)
+    {
+        return other instanceof AnalyticalCircle ac && super.equals(other) && m_center.equals(ac.m_center);
+    }
+
+    public String toString()
+    {
+        return "%s, Center:%s".formatted(super.toString(), m_center);
+    }
 }

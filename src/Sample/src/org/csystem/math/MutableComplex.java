@@ -8,6 +8,7 @@ package org.csystem.math;
 import static java.lang.Math.sqrt;
 
 public class MutableComplex {
+	private static final double DELTA = 0.00001;
 	private double m_real;
 	private double m_imag;
 
@@ -100,7 +101,12 @@ public class MutableComplex {
 	{
 		return getNorm();
 	}	
-	
+
+	public boolean equals(Object other)
+	{
+		return other instanceof MutableComplex z && Math.abs(m_real - z.m_real) < DELTA && Math.abs(m_imag - z.m_imag) < DELTA;
+	}
+
 	public String toString()
 	{
 		return "(%.2f, %.2f)".formatted(m_real, m_imag);

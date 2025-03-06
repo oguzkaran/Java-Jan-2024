@@ -1,6 +1,6 @@
 /**
  * Mutable class for some string operations
- * Last Update: 11th February 2025
+ * Last Update: 6th March 2025
  * @author Java-Jan-2024 Group
  */
 package org.csystem.string;
@@ -162,6 +162,11 @@ public class CSDStringBuilder {
     public void trimToSize()
     {
         enlargeCapacity(m_index);
+    }
+
+    public boolean equals(Object other)
+    {
+        throw new UnsupportedOperationException("TODO");
     }
 
     public String toString()

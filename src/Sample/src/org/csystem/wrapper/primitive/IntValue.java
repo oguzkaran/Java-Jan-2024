@@ -1,6 +1,6 @@
 /**
  * Immutable class that wraps an int value
- * Last Update: 26th October 2024
+ * Last Update: 6th March 2025
  * @author Java-Jan-2024 Group
  */
 package org.csystem.wrapper.primitive;
@@ -32,6 +32,11 @@ public final class IntValue {
     public int getValue()
     {
         return m_value;
+    }
+
+    public boolean equals(Object other)
+    {
+        return other instanceof IntValue i && i.m_value == m_value;
     }
 
     public String toString()
