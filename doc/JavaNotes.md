@@ -11681,14 +11681,13 @@ class Point {
 ```
 
 >Aşağıdaki, bir karmaşık sayıyı (complex number) temsil eden `Complex` sınıfın ve test kodlarını inceleyiniz.
->**Açıklamalar:** $z = a + ib$, $z_1 = a_1 + ib_1$, $z_2 = a_2 + ib_2$ karmaşık sayıları için
->- $\bar{z} = a - ib$
+>**Açıklamalar:** $z = a + i * b$, $z_1 = a_1 + i * b_1$, $z_2 = a_2 + i * b_2$ karmaşık sayıları için
+>- $\bar{z} = a - i * b$
 >- $|z| = \sqrt{a^2 + b^2}$
 >- $z_1 \pm z_2 = (a_1 \pm a_2) + i(b_1 \pm b2)$
->- $z_1z_2 = (a_1 + a_2) + i(b_1 + b2)$
->- $z_1 / z_2 = (a_1 + a_2) + i(b_1 + b2)$
+>- $z_1z_2 = (a_1 * a_2 - b_1 * b_2) + i * (a_1 * b_2 + a_2 * b_1)$
+>- $z_1 / z_2 =  (1 / |\bar{z_2}|) * (z_1 * \bar{z_2})$
 
-	
 ```java
 package csd;
 
