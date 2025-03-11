@@ -11684,7 +11684,7 @@ class Point {
 >**Açıklamalar:** $z = a + i * b$, $z_1 = a_1 + i * b_1$, $z_2 = a_2 + i * b_2$ karmaşık sayıları için
 >- $\bar{z} = a - i * b$
 >- $|z| = \sqrt{a^2 + b^2}$
->- $z_1 \pm z_2 = (a_1 \pm a_2) + i(b_1 \pm b2)$
+>- $z_1 \pm z_2 = (a_1 \pm a_2) + i * (b_1 \pm b2)$
 >- $z_1z_2 = (a_1 * a_2 - b_1 * b_2) + i * (a_1 * b_2 + a_2 * b_1)$
 >- $z_1 / z_2 =  (1 / |\bar{z_2}|) * (z_1 * \bar{z_2})$
 
@@ -31430,6 +31430,104 @@ public class AnalyticalCircle extends Circle {
 ```
 **Anahtar Notlar:** Bir sınıfta equals metodu override edildiğinde, Object sınıfının hashCode metodu da override edilir. Yani, bu iki metot ya hiç override edilmez ya da ikisiz birden override edilir. hashCode metodu `Java ile Uygulama Geliştirme I` kursunda ele alınacaktır. Burada equals metodunun override edildiği sınıflarda hashCode override edilmeyecektir. 
 
+##### 11 Mart 2025
+
 ##### abstract Sınıflar ve abstract Metotlar
 
+>Bazı sınıflar türünden doğrudan nesne yaratmanın anlamı yoktur. Bu sınıflar tipik olarak bir kavramı **soyut (abstract)** olarak temsil ederler. Örneğin, bir insan kaynakları otomasyon sistemine ilişkin bir grup sınıfın detayların eklenmediği edildiği UML şeması aşağıdaki gibi olsun:
+
+![DemoCompanyApp](./media/DemoCompanyApp.PNG)
+>Burada `Employee` türünden doğrudan nesne yaratılmasının pratikte bir anlamı yoktur. Bu sınıf bu hiyerarşide çalışan kavramını (dolayısıyla ortak özelliklerini) temsil etmektedir. Bu sınıftan türetilmiş olan sınıfların doğrudan yaratılmış nesneler olarak anlamı vardır. Yani, Employee türünden nesne türemiş sınıf içerisinde (nesnesel kapsama) anlamlıdır. Ayrıca Employee sınıfının, bir çalışanın sigorta ödeme miktarını veren `calculateInsurancePayment` metodunun gövdesi yani kodları anlamsızdır ancak bu metodun sanal olarak var olması gerekir. Çünkü `HumanResource` sınıfının `payInsurance` metodu içerisinde sanal olarak çağrılaması gerekir. Türemiş sınıflarda bu metot override edilerek `payInsurance` metodu içerisinde çağrılmış olur. İşte böylesi gövdesi olması gerekmeyen (ya da gövdesi olması anlamsız) sanal metotlara **soyut metotlar (abstract methods)** denir. Doğrudan nesne özelliği göstermeyen sınıflara **soyut sınıflar (abstract sınıflar)** denir. Doğrudan nesne özelliği gösteren sınıflara ise **somut sınıflar (concrete classes)** denir. Buradaki hiyerarşiye ilişkin demo uygulamanın kodları bölüm sonunda `DemoCompanyApp` olarak incelenebilir.
 >
+>Programcı soyut bir sınıf gördüğünde şunu anlamalıdır: **Bu sınıf bir kavramı soyut olarak temsil ediyor, bu türünden bir nesne doğrudan yaratılamaz, çünkü anlamsız. Bu sınıftan türetilen sınıflar olmalı ya da yazmalıyım ve muhtemel bulunan abstract metotları (hatta belki de abstract olmayan sanal metotları) override etmeliyim ki somut bir sınıf olsun.** Benzer şekilde programcı bir sınıf hiyerarşisi için soyut bir kavramı temsil eden sınıfı `abstract` olarak düşünmelidir.
+>
+>abstract bir sınıf `abstract` anahtar sözcüğü ile bildirilir. Bir metot abstract olarak bildirildiğinde metoda gövde yazılmaz. Yazılması error oluşturur. Bir sınıfın en az bir tane abstract metodu varsa sınıfı abstract olarak bildirilmelidir. Aksi durumda error oluşur. abstract bir sınıfın abstract bir metodu olmak zorunda değildir. Bu durumda en az bir tane abstract metodu olan bir sınıf `concrete` olamaz. abstract bir sınıfın da veri elemanları olabilir. abstract bir sınıf türünden nesne new operatörü ile yaratılamaz. abstract bir sınıf türünden nesne türemiş sınıf nesnesi içerisinde yaratılır. abstract bir sınıfın ctor'u olabilir. abstract bir sınıfın ctor'unun public yapılmasının bir anlamı yoktur, protected olarak bildirilmesi daha uygundur. Çünkü zaten abstract türünden bir nesne sınıf dışından yaratılamaz. Şüphesiz duruma göre private ya da no-modifier ctor'lar da olabilir.
+
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        A a = new A(); //error  
+    }  
+}  
+  
+abstract class D {  
+    public void bar()  
+    {  
+        //...  
+    }  
+}  
+  
+abstract class C {  
+    public abstract void foo(int x) //error  
+    {  
+  
+    }  
+  
+    public void bar()  
+    {  
+        //...  
+    }  
+}  
+  
+class B { //error  
+    public abstract void foo(int x);  
+  
+    public void bar()  
+    {  
+        //...  
+    }  
+}  
+  
+class Z extends A { //error  
+	//...
+}  
+  
+  
+abstract class Y extends A {  
+	//...
+}  
+  
+class X extends A {  
+    public X()  
+    {  
+  
+    }  
+  
+    public X(int a)  
+    {  
+        super(a);  
+    }  
+  
+    public void foo(int x)  
+    {  
+        //...  
+    }  
+}  
+  
+abstract class A {  
+    private int m_x;  
+  
+    protected A()  
+    {  
+    }  
+  
+    protected A(int x)  
+    {  
+        m_x = x;  
+    }  
+  
+    public abstract void foo(int x);  
+  
+    public void bar()  
+    {  
+        //...  
+    }  
+}
+```
+
+
+
