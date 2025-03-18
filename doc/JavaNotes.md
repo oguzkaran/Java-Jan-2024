@@ -155,7 +155,7 @@ class App {
 >
 >Derleme işleminin başarıyla yapılması durumunda derleyiciler ya hiç bir mesaj vermezler ya da derleme işleminin başarılı olduğu da anlaşılan mesajlar verirler.
 >
->Programın çalışma zamanında oluşan hatalı durumlara genel olarak "excaption" veya "run time error" denir. Exception handling konusuna gelene kadar bir exception oluştuğunda program abnormal bir biçimde sonlanır olarak düşüneceğiz.
+>Programın çalışma zamanında oluşan hatalı durumlara genel olarak "exception" veya "run time error" denir. Exception işlemleri (exception handling) konusuna gelene kadar bir exception oluştuğunda program abnormal bir biçimde sonlanır olarak düşüneceğiz.
 >
 >Bir program için, programcı açısından iki durum söz konusudur: 
 >1. Derleme zamanı (compile time): Derleme işlemine ilişkin süreçtir.
@@ -14315,9 +14315,7 @@ class App {
 >**Sınıf Çalışması:** Parametresi ile aldığı bir yazının pangram olup olmadığını test eden `isPangramTR` ve `isPangramEN` isimli metotları yazınız ve aşağıdaki kod ile test ediniz.
 >
 >**Açıklamalar:**
->- İlgili dilin alfabesindeki tüm karakterler kullanılarak oluşturulan ve içerisinde özel isim olmayan anlamlı 
-cümlelere "pangram" denir. 
-Örneğin tipik bir İnglizce pangram şudur:	
+>- İlgili dilin alfabesindeki tüm karakterler kullanılarak oluşturulan ve içerisinde özel isim olmayan anlamlı cümlelere "pangram" denir. Örneğin tipik bir İnglizce pangram şudur:	
 >	
 >		The quick brown fox jumps over the lazy dog.
 >Örneğin tipik bir Türkçe pangram şudur:
@@ -15317,7 +15315,7 @@ class Point {
 
 >`String` sınıfına `Java 15` ile birlikte `formatted` isimli bir metot eklenmiştir. Bu metot format metodunun non-static versiyonu olarak düşünülebilir. Bu durumda programcının `Java 15` ve üzerinde yani pratikte `Java 17+` ile çalışıyorsa `format` metodu yerine bu metodu çağırması uygundur
 >
->Aşağısdaki demo önreği inceleyiniz
+>Aşağıdaki demo örneği inceleyiniz
 
 ```java
 package csd;
@@ -31528,5 +31526,335 @@ abstract class A {
 }
 ```
 
+
+##### 18 Mart 2025
+
+>Aşağıda sınıf şeması verilen demo örneğin kodlarını inceleyiniz
+
+![DemoCompanyApp](./media/DemoCompanyApp.PNG)
+```java
+package org.csystem.app.company;  
+  
+import org.csystem.util.thread.ThreadUtil;  
+  
+import java.util.Random;  
+  
+public class DemoCompanyApp {  
+    private static Manager getManager()  
+    {  
+        return new Manager("Kaan Aslan", "12345678945", "Mecidiyeköy", "Yazılım", 300000);  
+    }  
+  
+    private static Worker getWorker()  
+    {  
+        return new Worker("Güray Sönmez", "12345789321", "Bodrum", 400, 8);  
+    }  
+  
+    private static ProjectWorker getProjectWorker()  
+    {  
+        return new ProjectWorker("Lokman Köse", "23456789233", "Çağlayan", 200, 8, "Dernek", 2000);  
+    }  
+  
+    private static SalesManager getSalesManager()  
+    {  
+        return new SalesManager("Ali Serçe", "34567892345", "Geyikli", "Pazarlama", 400000, 30000);  
+    }  
+  
+    private static Employee getEmployee(Random random)  
+    {  
+        return switch (random.nextInt(4)) {  
+            case 0 -> getWorker();  
+            case 1 -> getProjectWorker();  
+            case 2 -> getSalesManager();  
+            default -> getManager();  
+        };  
+    }  
+  
+  
+    public static void run()  
+    {  
+        Random random = new Random();  
+        HumanResources humanResources = new HumanResources();  
+  
+        while (true) {  
+            Employee employee = getEmployee(random);  
+  
+            humanResources.payInsurance(employee);  
+            ThreadUtil.sleep(1000);  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+```java
+package org.csystem.app.company;  
+  
+public abstract class Employee {  
+    private String m_name;  
+    private String m_citizenId;  
+    private String m_address;  
+    //...  
+  
+    protected Employee(String name, String citizenId, String address)  
+    {  
+        //...  
+        m_name = name;  
+        m_citizenId = citizenId;  
+        m_address = address;  
+    }  
+  
+    public String getName()  
+    {  
+        return m_name;  
+    }  
+  
+    public void setName(String name)  
+    {  
+        //...  
+        m_name = name;  
+    }  
+  
+    public String getCitizenId()  
+    {  
+        return m_citizenId;  
+    }  
+  
+    public void setCitizenId(String citizenId)  
+    {  
+        //...  
+        m_citizenId = citizenId;  
+    }  
+  
+    public String getAddress()  
+    {  
+        return m_address;  
+    }  
+  
+    public void setAddress(String address)  
+    {  
+        //...  
+        m_address = address;  
+    }  
+  
+    public abstract double calculateInsurancePayment();  
+  
+    //...  
+}
+```
+
+
+```java
+package org.csystem.app.company;  
+  
+import org.csystem.util.console.Console;  
+  
+public class HumanResources {  
+    //...  
+  
+    public void payInsurance(Employee employee)  
+    {  
+        Console.writeLine("--------------------------------------------------------");  
+        Console.writeLine("Name:%s", employee.getName());  
+        Console.writeLine("CitizenId:%s", employee.getCitizenId());  
+        Console.writeLine("Insurance payment:%f", employee.calculateInsurancePayment());  
+        Console.writeLine("--------------------------------------------------------");  
+    }  
+}
+```
+
+
+```java
+package org.csystem.app.company;  
+  
+public class Manager extends Employee {  
+    private String m_department;  
+    private double m_salary;  
+  
+    public Manager(String name, String citizenId, String address, String department, double salary)  
+    {  
+        super(name, citizenId, address);  
+        m_department = department;  
+        m_salary = salary;  
+    }  
+  
+    public String getDepartment()  
+    {  
+        return m_department;  
+    }  
+  
+    public void setDepartment(String department)  
+    {  
+        //...  
+        m_department = department;  
+    }  
+  
+    public double getSalary()  
+    {  
+        return m_salary;  
+    }  
+  
+    public void setSalary(double salary)  
+    {  
+        //...  
+        m_salary = salary;  
+    }  
+  
+    public double calculateInsurancePayment()  
+    {  
+        return m_salary * 1.5;  
+    }  
+}
+```
+
+
+```java
+package org.csystem.app.company;  
+  
+public class Worker extends Employee{  
+    private double m_feePerHour;  
+    private int m_hourPerDay;  
+  
+    public Worker(String name, String citizenId, String address, double feePerHour, int hourPerDay)  
+    {  
+        super(name, citizenId, address);  
+        m_feePerHour = feePerHour;  
+        m_hourPerDay = hourPerDay;  
+    }  
+  
+    public double getFeePerHour()  
+    {  
+        return m_feePerHour;  
+    }  
+  
+    public void setFeePerHour(double feePerHour)  
+    {  
+        m_feePerHour = feePerHour;  
+    }  
+  
+    public int getHourPerDay()  
+    {  
+        return m_hourPerDay;  
+    }  
+  
+    public void setHourPerDay(int hourPerDay)  
+    {  
+        m_hourPerDay = hourPerDay;  
+    }  
+  
+    public double calculateInsurancePayment()  
+    {  
+        return m_feePerHour * m_hourPerDay * 30;  
+    }  
+  
+    //...  
+}
+```
+
+
+```java
+package org.csystem.app.company;  
+  
+public class ProjectWorker extends Worker {  
+    private String m_projectName;  
+    private double m_extraFee;  
+  
+    public ProjectWorker(String name, String citizenId, String address, double feePerHour, int hourPerDay, String projectName, double extraFee)  
+    {  
+        super(name, citizenId, address, feePerHour, hourPerDay);  
+        m_projectName = projectName;  
+        m_extraFee = extraFee;  
+    }  
+  
+    public String getProjectName()  
+    {  
+        return m_projectName;  
+    }  
+  
+    public void setProjectName(String projectName)  
+    {  
+        m_projectName = projectName;  
+    }  
+  
+    public double getExtraFee()  
+    {  
+        return m_extraFee;  
+    }  
+  
+    public void setExtraFee(double extraFee)  
+    {  
+        m_extraFee = extraFee;  
+    }  
+  
+    public double calculateInsurancePayment()  
+    {  
+        return super.calculateInsurancePayment() + m_extraFee * 30;  
+    }  
+}
+```
+
+
+```java
+package org.csystem.app.company;  
+  
+public class SalesManager extends Manager {  
+    private double m_saleExtra;  
+  
+    public SalesManager(String name, String citizenId, String address, String department, double salary, double saleExtra)  
+    {  
+        super(name, citizenId, address, department, salary);  
+        m_saleExtra = saleExtra;  
+    }  
+  
+    public double getSaleExtra()  
+    {  
+        return m_saleExtra;  
+    }  
+  
+    public void setSaleExtra(double saleExtra)  
+    {  
+        m_saleExtra = saleExtra;  
+    }  
+  
+    //...  
+}
+```
+
+##### final Metotlar
+
+>Non-static bir metot final olarak bildirildiğinde artık türemiş sınıfta override edilemez. Yani final bir metot override işlemine kapatılmış bir metottur. Kendisi override edilmiş olabilir. Ait olduğu sınıftan türeyen bir sınıfta artık override edilemez. Şüphesiz abstract metotlar final olarak bildirilemez. 
+
+
+```java
+class C extends B {  
+    public void foo() //error  
+    {  
+        Console.writeLine("B.foo");  
+    }  
+}  
+  
+class B extends A {  
+    public final void foo()  
+    {  
+        Console.writeLine("B.foo");  
+    }  
+}  
+  
+class A {  
+    public void foo()  
+    {  
+        Console.writeLine("A.foo");  
+    }  
+}
+```
+
+
+##### Exception İşlemleri
+
+>
 
 
