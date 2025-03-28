@@ -1,6 +1,6 @@
 /**
  * Utility class for numeric operations
- * Last Update: 10th December 2024
+ * Last Update: 28th March 2025
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.numeric;
@@ -10,18 +10,31 @@ public final class NumberUtil {
 	{
 	}
 
-	private static final String ZERO_TR = "sıfır";
-	private static final String MINUS_TR = "eksi";
-	private static final String [] ONES_TR = {"", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz"};
-	private static final String [] TENS_TR = {"", "on", "yirmi", "otuz", "kırk", "elli", "altmış", "yetmiş", "seksen", "doksan"};
-    private static final String [] NUMBER_UNITS_TR = {"kentilyon", "katrilyon", "trilyon", "milyar", "milyon", "bin", ""};
+	private static final String ZERO_TR;
+	private static final String MINUS_TR;
+	private static final String [] ONES_TR;
+	private static final String [] TENS_TR;
+    private static final String [] NUMBER_UNITS_TR;
 
+	private static final String ZERO_EN;
+	private static final String MINUS_EN;
+	private static final String [] ONES_EN;
+	private static final String [] TENS_EN;
+	private static final String [] NUMBER_UNITS_EN;
 
-	private static final String ZERO_EN = "zero";
-	private static final String MINUS_EN= "minus";
-	private static final String [] ONES_EN = {"", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
-	private static final String [] TENS_EN = {"", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"};
-	private static final String [] NUMBER_UNITS_EN = {"quintillion", "quadrillion", "trillion", "billion", "million", "thousand", ""};
+	static {
+		ZERO_TR = "sıfır";
+		MINUS_TR = "eksi";
+		ONES_TR = new String[]{"", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz"};
+		TENS_TR = new String[]{"", "on", "yirmi", "otuz", "kırk", "elli", "altmış", "yetmiş", "seksen", "doksan"};
+		NUMBER_UNITS_TR = new String[]{"kentilyon", "katrilyon", "trilyon", "milyar", "milyon", "bin", ""};
+
+		ZERO_EN = "zero";
+		MINUS_EN= "minus";
+		ONES_EN = new String[]{"", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
+		TENS_EN = new String[] {"", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"};
+		NUMBER_UNITS_EN = new String[] {"quintillion", "quadrillion", "trillion", "billion", "million", "thousand", ""};
+	}
 
 	private static int [] getDigits(long a, int n)
     {

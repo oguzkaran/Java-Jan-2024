@@ -1,6 +1,6 @@
 /**
  * Utility class for string operations
- * Last Update: 4th January 2025
+ * Last Update: 28th March 2025
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.string;
@@ -13,12 +13,21 @@ public final class StringUtil {
 	{
 	}
 
-	private static final String LETTERS_EN = "abcdefghijklmnopqrstuvwxyz";
-	private static final String LETTERS_TR = "abcçdefgğhıijklmnoöprsştuüvyz";
-	private static final String CAPITAL_LETTERS_EN = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	private static final String CAPITAL_LETTERS_TR = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ";
-	private static final String ALL_LETTERS_EN = LETTERS_EN + CAPITAL_LETTERS_EN;
-	private static final String ALL_LETTERS_TR = LETTERS_TR + CAPITAL_LETTERS_TR;
+	private static final String LETTERS_EN;
+	private static final String LETTERS_TR;
+	private static final String CAPITAL_LETTERS_EN;
+	private static final String CAPITAL_LETTERS_TR;
+	private static final String ALL_LETTERS_EN;
+	private static final String ALL_LETTERS_TR;
+
+	static {
+		LETTERS_EN = "abcdefghijklmnopqrstuvwxyz";
+		LETTERS_TR = "abcçdefgğhıijklmnoöprsştuüvyz";
+		CAPITAL_LETTERS_EN = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		CAPITAL_LETTERS_TR = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ";
+		ALL_LETTERS_EN = LETTERS_EN + CAPITAL_LETTERS_EN;
+		ALL_LETTERS_TR = LETTERS_TR + CAPITAL_LETTERS_TR;
+	}
 
 	public static String capitalize(String s)
 	{
