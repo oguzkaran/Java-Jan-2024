@@ -1,10 +1,22 @@
 package org.csystem.app;
 
-import java.util.InputMismatchException;
+import org.csystem.util.console.Console;
+
 import java.util.Scanner;
 
 class App {
     public static void main(String[] args)
+    {
+        int a = Console.readInt("Input first number:", "Invalid number!");
+        int b = Console.readInt("Input second number:", "Invalid number!");
+
+        Console.writeLine(a * b);
+
+    }
+}
+
+class Util {
+    public static void doWork()
     {
         try {
             Scanner kb = new Scanner(System.in);
@@ -16,14 +28,12 @@ class App {
 
             System.out.printf("log10(%f) = %f%n", a, result);
         }
-        catch (MathException ignore) {
-            System.out.println("Invalid input for logarithm");
-        }
-        catch (InputMismatchException ignore) {
-            System.out.println("Invalid number");
+        catch (NegativeException ex) {
+            System.out.println("Negative value not allowed");;
+            throw ex; //rethrow
         }
 
-        System.out.println("main ends!...");
+        System.out.println("doWork ends!...");
     }
 }
 
@@ -40,15 +50,12 @@ class MathUtil {
     }
 }
 
-class ZeroException extends MathException {
+class ZeroException extends RuntimeException {
     //...
 }
 
 
-class NegativeException extends MathException {
+class NegativeException extends RuntimeException {
     //...
 }
 
-class MathException extends RuntimeException {
-    //...
-}

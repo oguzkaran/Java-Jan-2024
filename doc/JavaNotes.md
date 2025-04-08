@@ -15688,8 +15688,9 @@ class StringUtil {
 >
 >		public static void main(String [] args);
 >Bu prototipte uygunluğu bozmayacak tek değişiklik parametre ismi olan args'ta yapılabilir. Java programına verilen sınıfın `main` metodunun bu prototipe sahip olması zorunludur. Aksi durumda exception oluşur. Akışın başladığı main metoduna "entry point" dendiğini anımsayınız. Entry point olarak belirlenen main metodunun ait olduğu UDT kesinlikle bir sınıf olmalıdır.
->
->**Anahtar Notlar:** `Java 21` ile birlikte entry point olarak belirlenen main metodunun yapısına ilişkin bazı esnek kullanımlar söz konusu olmaktadır. Bu durum "uygulama kurslarında" ele alınacaktır.
+
+**Anahtar Notlar:** `Java 21` ile birlikte entry point olarak belirlenen main metodunun yapısına ilişkin bazı esnek kullanımlar söz konusu olmaktadır. Bu durum "uygulama kurslarında" ele alınacaktır.
+
 >- `public` olarak bildirilen bir UDT, ismi ile aynı isimde bir `.java` dosyasında olmalıdır. Aksi durumda error oluşur. Bu durumda bir java dosyası içerisinde ancak dosya ismi ile aynı isimde bir UDT `public` olabilir
 >- Bir java dosyasında dosya ile aynı isimde olan bir UDT olmak zorunda değildir. Ancak bu durum pratikte çok kullanılmaz
 >- Paket bildirimi tüm bildirimlerden önce olmalıdır. Dolayısıyla bir java dosyasında bir tane paket bildirimi yapılabilir
@@ -32587,7 +32588,14 @@ class Sample {
 ###### 3 Nisan 2025
 ##### Exception İşlemleri
 
->Anımsanacağı gibi programın çalışma zamanında oluşan, genel olarak hatalı durumlara **exception** veya **runtime error** denir. Bir exception oluştuğunda akışın oluşan exception'a göre yönlendirilmesine **exception handling** denir. Örneğin, konum bilgisi veren bir uygulamanın, konum bilgisi elde edilemediğinde oluşan exception'a göre kullanıcıyı bilgilendirmesi exception handling yapılarak gerçekleştirilebilir. 
+>Anımsanacağı gibi programın çalışma zamanında oluşan, genel olarak hatalı durumlara **exception** veya **runtime error** denir. Bir exception oluştuğunda akışın oluşan exception'a göre yönlendirilmesine **exception handling** denir. Exception mekanizmasının sağladığı avantajlar şunlardır:
+>- Programın daha az kontrollü bir biçimde oluşturulmasını sağlamak ve okunabilirliği artırmak.
+>- Kod ile hata ele alımını biribirinden ayırmak.
+>- Tam bir hata kontrolü sağlamak.
+>- İç içe metot çağırmalarında iç metotta oluşan hataların daha kolay ele alınmasını sağlamak.
+>- Bir hata oluştuğunda hatanın nedenini de hatayı ele alacak kişiye bildirmek.
+>
+>Örneğin, konum bilgisi veren bir uygulamanın, konum bilgisi elde edilemediğinde oluşan exception'a göre kullanıcıyı bilgilendirmesi exception handling yapılarak gerçekleştirilebilir. 
 >
 >Java'da exception işlemleri 5 tane anahtar sözcük ile gerçekleştirilir: **throw, try, catch, finally, throws.**
 >
@@ -32667,6 +32675,8 @@ class NegativeException extends RuntimeException {
 }
 ```
 
+>Bir metodun hangi durumlarda hangi exception'ı fırlatacağı dokümantasyonundan anlaşılabilir. Bu ya açıkça belirtilir. Ya da akış içerisinde çağırdığı metoda ilişkin exception fırlattığına yönelik betimleme yapılır.
+>
 >Akış exception bakımından ele alınacaksa (handling) **try deyimi (try statement)** kodları içerisinde yazılmalıdır. try deyimi tek başına yazılamaz. try deyimine ilişkin bloğu bir **catch bloğu ya da blokları** VEYA **catch bloğu ya da blokları ile bir finally bloğu** VEYA **yalnızca bir final bloğu** takip etmelidir. try deyimi takip eden blokları ile birlikte tek bir deyimdir. Takip eden bloklar ile try bloğu arasında başka bir deyim yazılamaz. 
 >
 >catch bloğu parantezi içerisinde bir referans değişken bildirimi yapılır. Bu referansa **catch parametresi (catch parameter)** da denilmektedir. Bu parametrenin türü bir exception sınıfı türünden olmalıdır. Aksi durumda error oluşur. catch parametre değişkenin faaliyet alanı bildirildiği catch bloğu kadardır. catch parametre değişkeni catch bloğu içerisinde kullanılmayacaksa tipik olarak `ignore` yada `ignored` gibi isimler verilerek bildirilir. Hatta bazı static kod analizi araçları bu tip isimler verilmezse default olarak uyarı mesajı verirler. 
@@ -32787,5 +32797,330 @@ class MathException extends RuntimeException {
 }
 ```
 
+###### 8 Nisan 2025
 
+>Taban sınıf parametreli catch bloğu ile türemiş sınıf parametreli catch bloğu aynı try deyiminde bulunacaksa, catch bloklarına yukarıdan aşağıya doğru bakıldığı için türemiş sınıf parametreli catch bloğunun taban sınıf parametreli catch bloğundan sonra olmasının bir anlamı olmayacaktır. Bu durumda derleyici error verecektir. Türemiş sınıf parametreli catch bloğunun taban sınıf parametreli catch bloğundan önce yazılması gerekir. Tüm exception sınıfları doğrudan ya da dolaylı olarak `Throwable` sınıfından türetilmiş olduğuna göre Throwable parametreli catch bloğu ile tüm exception'lar yakalanabilir. Bu durumda birden fazla catch bloğu varsa, Throwable parametreli catch bloğu en son catch bloğu olarak o try deyiminde yazımalıdır. Aralarında türetme ilişkisi olmayan sınıflar türünden parametreli catch blokları bir try deyiminde istenildiği sırada yazılabilir.
+
+>Aşağıdaki demo örnekte ZeroException zaten MathException parametreli catch bloğu ile yakalanabileceğinden error oluşur
+
+```java
+package org.csystem.app;  
+  
+import java.util.InputMismatchException;  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        try {  
+            Scanner kb = new Scanner(System.in);  
+  
+            System.out.print("Input a number:");  
+            double a = kb.nextInt();  
+            double result;  
+            result = MathUtil.log10(a);  
+  
+            System.out.printf("log10(%f) = %f%n", a, result);  
+        }  
+        catch (MathException ignore) {  
+            System.out.println("Invalid input for logarithm");  
+        }  
+        catch (ZeroException ignore) { //error  
+            System.out.println("Invalid input for logarithm");;  
+        }  
+        catch (InputMismatchException ignore) {  
+            System.out.println("Invalid number");  
+        }  
+  
+        System.out.println("main ends!...");  
+    }  
+}  
+  
+class MathUtil {  
+    public static double log10(double a)  
+    {  
+        if (a < 0)  
+            throw new NegativeException();  
+  
+        if (a == 0)  
+            throw new ZeroException();  
+  
+        return Math.log10(a);  
+    }  
+}  
+  
+class ZeroException extends MathException {  
+    //...  
+}  
+  
+  
+class NegativeException extends MathException {  
+    //...  
+}  
+  
+class MathException extends RuntimeException {  
+    //...  
+}
+```
+
+
+>Yukarıdaki demo örnek aşağıdaki gibi yapılabilir
+
+```java
+package org.csystem.app;  
+  
+import java.util.InputMismatchException;  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        try {  
+            Scanner kb = new Scanner(System.in);  
+  
+            System.out.print("Input a number:");  
+            double a = kb.nextInt();  
+            double result;  
+            result = MathUtil.log10(a);  
+  
+            System.out.printf("log10(%f) = %f%n", a, result);  
+        }  
+        catch (ZeroException ignore) {  
+            System.out.println("Zero not allowed");;  
+        }  
+        catch (MathException ignore) {  
+            System.out.println("Invalid input for logarithm");  
+        }  
+        catch (InputMismatchException ignore) {  
+            System.out.println("Invalid number");  
+        }  
+  
+        System.out.println("main ends!...");  
+    }  
+}  
+  
+class MathUtil {  
+    public static double log10(double a)  
+    {  
+        if (a < 0)  
+            throw new NegativeException();  
+  
+        if (a == 0)  
+            throw new ZeroException();  
+  
+        return Math.log10(a);  
+    }  
+}  
+  
+class ZeroException extends MathException {  
+    //...  
+}  
+  
+  
+class NegativeException extends MathException {  
+    //...  
+}  
+  
+class MathException extends RuntimeException {  
+    //...  
+}
+```
+
+>Aşağıdaki demo örnekte Throwable parametreli catch bloğu ile NegativeException dışında kalan tüm exception'lar yakalanabilmektedir.
+
+```java
+package org.csystem.app;  
+  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        try {  
+            Scanner kb = new Scanner(System.in);  
+  
+            System.out.print("Input a number:");  
+            double a = kb.nextInt();  
+            double result;  
+            result = MathUtil.log10(a);  
+  
+            System.out.printf("log10(%f) = %f%n", a, result);  
+        }  
+        catch (NegativeException ignore) {  
+            System.out.println("Negative value not allowed");;  
+        }  
+        catch (Throwable ignore) {  
+            System.out.println("Exception occurred");  
+        }  
+  
+        System.out.println("main ends!...");  
+    }  
+}  
+  
+class MathUtil {  
+    public static double log10(double a)  
+    {  
+        if (a < 0)  
+            throw new NegativeException();  
+  
+        if (a == 0)  
+            throw new ZeroException();  
+  
+        return Math.log10(a);  
+    }  
+}  
+  
+class ZeroException extends MathException {  
+    //...  
+}  
+  
+  
+class NegativeException extends MathException {  
+    //...  
+}  
+  
+class MathException extends RuntimeException {  
+    //...  
+}
+```
+
+>Bazen bir kod birden fazla try deyimi içerisinde olabilir. Bu durumda bir try deyimi başka bir try deyiminin try bloğu içerisinde yazılmış olur. Şüphesiz bu durum doğrudan programcı tarafından yazılmayabilir. Ancak programcının bir try bloğu içerisinde çağırdığı metot içerisinde de bir try deyimi olur. Bu durumda içteki try bloğunda bir exception oluştuğunda o try bloğuna ilişkin catch bloklarına bakılır. Uygun catch bloğu bulunursa akış normal bir biçimde yakalayan bloğu çalıştırılarak devam eder. Dıştaki try deyiminin catch bloklarına bakılmaz. Uygun catch bloğu bulunamazsa dıştaki try deyiminin catch bloklarına bakılır. Bu işlem uygun catch bloğu bulununcaya ya da hiç bulunamayıncaya kadar devam eder. Hiç bulunamazsa akış abnormal bir biçimde sonlanır.
+
+>Aşağıdaki demo örneği çeşitli değerler ile çalıştırıp sonuçları gözlemleyiniz
+
+```java
+package org.csystem.app;  
+  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        try {  
+            Util.doWork();  
+        }  
+        catch (ZeroException ignore) {  
+            System.out.println("Zero not allowed");;  
+        }  
+  
+        System.out.println("main ends!...");  
+    }  
+}  
+  
+class Util {  
+    public static void doWork()  
+    {  
+        try {  
+            Scanner kb = new Scanner(System.in);  
+  
+            System.out.print("Input a number:");  
+            double a = kb.nextInt();  
+            double result;  
+            result = MathUtil.log10(a);  
+  
+            System.out.printf("log10(%f) = %f%n", a, result);  
+        }  
+        catch (NegativeException ignore) {  
+            System.out.println("Negative value not allowed");;  
+        }  
+  
+        System.out.println("doWork ends!...");  
+    }  
+}  
+  
+class MathUtil {  
+    public static double log10(double a)  
+    {  
+        if (a < 0)  
+            throw new NegativeException();  
+  
+        if (a == 0)  
+            throw new ZeroException();  
+  
+        return Math.log10(a);  
+    }  
+}  
+  
+class ZeroException extends RuntimeException {  
+    //...  
+}  
+  
+  
+class NegativeException extends RuntimeException {  
+    //...  
+}
+```
+
+>Yukarıdaki doWork metodu dökumante edilirken NegativeException fırlatıldığını ve yakalandığını belirtmek durumunda değildir. Ancak fırlattığı exception'ları iyi bir dökumantasyonsa belirtir. 
+>
+>Bazen bir metot, bir exception oluştuğunda onu handle eder ancak, metodun müşterisi olan (yani metod çağıran) koda aynı nesneyi fırlatmak ister. Bu durumda yakalanan catch bloğunun sonunda aynı catch parametresi ile throw deyimi yazılır. Bu işleme **yeniden fırlatma (rethrow)** denilmektedir. Bu, aslında bir araya girme işlemidir. Rethrow yapan metot dökumantasyonunda artık yakalayıp fırlattığı exception'ı da fırlattığını belirtecektir. Ancak bunu yeniden fırlatıp fırlatmadığını belirtmeyebilir. 
+
+>Aşağıdaki demo örneği çeşitli değerlerle çalıştırıp sonuçları sonuçları gözlemleyiniz
+
+```java
+package org.csystem.app;  
+  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        try {  
+            Util.doWork();  
+        }  
+        catch (ZeroException ignore) {  
+            System.out.println("Zero not allowed");;  
+        }  
+        catch (NegativeException ignore) {  
+            System.out.println("You can not enter negative value");;  
+        }  
+  
+        System.out.println("main ends!...");  
+    }  
+}  
+  
+class Util {  
+    public static void doWork()  
+    {  
+        try {  
+            Scanner kb = new Scanner(System.in);  
+  
+            System.out.print("Input a number:");  
+            double a = kb.nextInt();  
+            double result;  
+            result = MathUtil.log10(a);  
+  
+            System.out.printf("log10(%f) = %f%n", a, result);  
+        }  
+        catch (NegativeException ex) {  
+            System.out.println("Negative value not allowed");;  
+            throw ex; //rethrow  
+        }  
+  
+        System.out.println("doWork ends!...");  
+    }  
+}  
+  
+class MathUtil {  
+    public static double log10(double a)  
+    {  
+        if (a < 0)  
+            throw new NegativeException();  
+  
+        if (a == 0)  
+            throw new ZeroException();  
+  
+        return Math.log10(a);  
+    }  
+}  
+  
+class ZeroException extends RuntimeException {  
+    //...  
+}  
+  
+  
+class NegativeException extends RuntimeException {  
+    //...  
+}
+```
 

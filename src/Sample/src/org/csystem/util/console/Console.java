@@ -1,6 +1,6 @@
 /**
  * Utility class for console operations
- * Last Update: 4th February 2025
+ * Last Update: 8th April 2025
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.console;
@@ -21,9 +21,21 @@ public class Console {
 
     public static int readInt(String prompt)
     {
-        System.out.print(prompt);
+        return readInt(prompt, "");
+    }
 
-        return Integer.parseInt(KB.nextLine());
+    public static int readInt(String prompt, String errorPrompt)
+    {
+        while (true) {
+            try {
+                System.out.print(prompt);
+
+                return Integer.parseInt(KB.nextLine());
+            }
+            catch (NumberFormatException ignore) {
+                System.out.print(errorPrompt);
+            }
+        }
     }
 
     public static long readLong(String prompt)
