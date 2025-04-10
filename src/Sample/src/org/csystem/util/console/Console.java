@@ -1,6 +1,6 @@
 /**
  * Utility class for console operations
- * Last Update: 8th April 2025
+ * Last Update: 10th April 2025
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.console;
@@ -12,7 +12,11 @@ public class Console {
     {
     }
 
-    private static final Scanner KB = new Scanner(System.in);
+    private static final Scanner KB;
+
+    static {
+        KB = new Scanner(System.in);
+    }
 
     public static int readInt()
     {
@@ -38,19 +42,55 @@ public class Console {
         }
     }
 
+    public static long readLong()
+    {
+        return readLong("");
+    }
+
     public static long readLong(String prompt)
     {
-        System.out.print(prompt);
+        return readLong(prompt, "");
+    }
 
-        return Long.parseLong(KB.nextLine());
+    public static long readLong(String prompt, String errorPrompt)
+    {
+        while (true) {
+            try {
+                System.out.print(prompt);
+
+                return Long.parseLong(KB.nextLine());
+            }
+            catch (NumberFormatException ignore) {
+                System.out.print(errorPrompt);
+            }
+        }
+    }
+
+    public static double readDouble()
+    {
+        return readDouble("");
     }
 
     public static double readDouble(String prompt)
     {
-        System.out.print(prompt);
-
-        return Double.parseDouble(KB.nextLine());
+        return readDouble(prompt, "");
     }
+
+    public static double readDouble(String prompt, String errorPrompt)
+    {
+        while (true) {
+            try {
+                System.out.print(prompt);
+
+                return Double.parseDouble(KB.nextLine());
+            }
+            catch (NumberFormatException ignore) {
+                System.out.print(errorPrompt);
+            }
+        }
+    }
+
+    //...
 
     public static String readString(String prompt)
     {
