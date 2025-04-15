@@ -1,6 +1,7 @@
 package org.csystem.app;
 
-import java.util.InputMismatchException;
+import org.csystem.util.console.Console;
+
 import java.util.Scanner;
 
 class App {
@@ -9,11 +10,8 @@ class App {
         try {
             Util.doWork();
         }
-        catch (InputMismatchException ignore) {
-            System.out.println("Invalid numeric value");
-        }
-        catch (RuntimeException ex) {
-            System.out.println(ex.getMessage());
+        catch (NaNException ex) {
+            Console.writeLine("NaN Exception:%s", ex.getMessage());
         }
         finally {
             System.out.println("finally in main");
@@ -24,17 +22,19 @@ class App {
 }
 
 class Util {
-    public static void doWork()
+    public static void doWork() throws NaNException
     {
         try {
             Scanner kb = new Scanner(System.in);
 
-            System.out.print("Input a number:");
-            double a = kb.nextInt();
+            double a = Console.readDouble("Input a number:", "Invalid value!...");
             double result;
 
             result = MathUtil.log10(a);
             System.out.printf("log10(%f) = %f%n", a, result);
+        }
+        catch (NegativeInfinityException ex) {
+            Console.writeLine("Negative Exception:%s", ex.getMessage());
         }
         finally {
             System.out.println("finally in doWork");
@@ -45,7 +45,7 @@ class Util {
 }
 
 class MathUtil {
-    public static double log10(double a)
+    public static double log10(double a) throws NaNException, NegativeInfinityException
     {
         if (a < 0)
             throw new NaNException("Value %f can not be negative".formatted(a));
@@ -57,7 +57,7 @@ class MathUtil {
     }
 }
 
-class NegativeInfinityException extends MathException {
+class NegativeInfinityException extends Exception {
     public NegativeInfinityException()
     {
         this(null);
@@ -65,11 +65,11 @@ class NegativeInfinityException extends MathException {
 
     public NegativeInfinityException(String message)
     {
-        super(message, MatExceptionStatus.NEGATIVE_INFINITY);
+        super(message);
     }
 }
 
-class NaNException extends MathException {
+class NaNException extends Exception {
     public NaNException()
     {
         this(null);
@@ -77,31 +77,7 @@ class NaNException extends MathException {
 
     public NaNException(String message)
     {
-        super(message, MatExceptionStatus.NAN);
-    }
-}
-
-
-class MathException extends RuntimeException {
-    private final MatExceptionStatus m_matExceptionStatus;
-
-    public MathException(String message, MatExceptionStatus matExceptionStatus)
-    {
         super(message);
-        m_matExceptionStatus = matExceptionStatus;
-    }
-
-    public String getMessage()
-    {
-        return "Message:%s, Status:%s".formatted(super.getMessage(), m_matExceptionStatus);
-    }
-
-    public MatExceptionStatus getMatExceptionStatus()
-    {
-        return m_matExceptionStatus;
     }
 }
 
-enum MatExceptionStatus {
-    NAN, NEGATIVE, ZERO, INFINITY, POSITIVE_INFINITY, NEGATIVE_INFINITY
-}

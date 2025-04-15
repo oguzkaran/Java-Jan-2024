@@ -15704,7 +15704,7 @@ class StringUtil {
 >- Paketler içiçe bile olsa farklı paketlerdir. Yani örneğin `arman` paketi içerisinde `SerialPort` isimli bir sınıf varsa, `arman.util` paketi içerisinde de `SerialPort` isimli bir sınıf olabilir. Çünkü paketler **farklıdır** ve isim çakışması oluşmaz
 >- Paketler isim çakışmasını engellemek için düşünülmüştür. Paketler ile farklı firmalar kendi paket isimleriyle UDT yazdıklarında UDT'lerin isimleri aynı olsa bile diğerleriyle birlikte aynı projede kullanılabilirler
 >- Paket isimleri genelde bir firmaya özgü tekil (unique) bir olan domain isminden türetilir. Örneğin CSD'nin paketleri domain ismi "csystem.org" olduğundan "org.csystem" paketi altında yazılır. Bu bir **convention**'dır ve firmalar özellikle bu kurala genel UDT'ler için mutlaka uyarlar. Pratikte domain ismi altında doğrudan bir UDT bildirilmez. En az bir tane paket altında bildirilir. Yani aslında bu convention'da domain ismi taban paket (base package) olarak kullanılır. Programcının bir UDT'yi koyacağı paketi okunabilir/algılanabilir ve isim çakışma olasığını en aza olacak şekilde belirler. Bu anlamda alt paketlerin fazla olması bir sorun oluşturmaz. Paket isimlendirmede programcı anlamlı olacak şekilde cömert olmalıdır.
->- Paket isimleri bir convention olarak **tamamı küçük harf** olacak şekilde bildirilir. Birden fazla kelimeden oluşuyorsa **bitişik** olarak yazılır. Örnğin:
+>- Paket isimleri bir convention olarak **tamamı küçük harf** olacak şekilde bildirilir. Birden fazla kelimeden oluşuyorsa **bitişik** olarak yazılır. Örneğin:
 >
 >		org.csystem.util.net
 >		org.csystem.util.mapoperations
@@ -32826,7 +32826,7 @@ class App {
             System.out.println("Invalid input for logarithm");  
         }  
         catch (ZeroException ignore) { //error  
-            System.out.println("Invalid input for logarithm");;  
+            System.out.println("Invalid input for logarithm");  
         }  
         catch (InputMismatchException ignore) {  
             System.out.println("Invalid number");  
@@ -32947,7 +32947,7 @@ class App {
             System.out.printf("log10(%f) = %f%n", a, result);  
         }  
         catch (NegativeException ignore) {  
-            System.out.println("Negative value not allowed");;  
+            System.out.println("Negative value not allowed");  
         }  
         catch (Throwable ignore) {  
             System.out.println("Exception occurred");  
@@ -33021,7 +33021,7 @@ class Util {
             System.out.printf("log10(%f) = %f%n", a, result);  
         }  
         catch (NegativeException ignore) {  
-            System.out.println("Negative value not allowed");;  
+            System.out.println("Negative value not allowed");  
         }  
   
         System.out.println("doWork ends!...");  
@@ -33053,7 +33053,7 @@ class NegativeException extends RuntimeException {
 
 >Yukarıdaki doWork metodu dökumante edilirken NegativeException fırlatıldığını ve yakalandığını belirtmek durumunda değildir. Ancak fırlattığı exception'ları iyi bir dökumantasyonsa belirtir. 
 >
->Bazen bir metot, bir exception oluştuğunda onu handle eder ancak, metodun müşterisi olan (yani metod çağıran) koda aynı nesneyi fırlatmak ister. Bu durumda yakalanan catch bloğunun sonunda aynı catch parametresi ile throw deyimi yazılır. Bu işleme **yeniden fırlatma (rethrow)** denilmektedir. Bu, aslında bir araya girme işlemidir. Rethrow yapan metot dökumantasyonunda artık yakalayıp fırlattığı exception'ı da fırlattığını belirtecektir. Ancak bunu yeniden fırlatıp fırlatmadığını belirtmeyebilir. 
+>Bazen bir metot, bir exception oluştuğunda onu handle eder ancak, metodun müşterisi olan (yani metodu çağıran) koda aynı nesneyi fırlatmak ister. Bu durumda yakalanan catch bloğunun sonunda aynı catch parametresi ile throw deyimi yazılır. Bu işleme **yeniden fırlatma (rethrow)** denilmektedir. Bu, aslında bir araya girme işlemidir. Rethrow yapan metot dökumantasyonunda artık yakalayıp fırlattığı exception'ı da fırlattığını belirtecektir. Ancak bunu yeniden fırlatıp fırlatmadığını belirtmeyebilir. 
 
 >Aşağıdaki demo örneği çeşitli değerlerle çalıştırıp sonuçları sonuçları gözlemleyiniz
 
@@ -33069,10 +33069,10 @@ class App {
             Util.doWork();  
         }  
         catch (ZeroException ignore) {  
-            System.out.println("Zero not allowed");;  
+            System.out.println("Zero not allowed"); 
         }  
         catch (NegativeException ignore) {  
-            System.out.println("You can not enter negative value");;  
+            System.out.println("You can not enter negative value");
         }  
   
         System.out.println("main ends!...");  
@@ -33093,7 +33093,7 @@ class Util {
             System.out.printf("log10(%f) = %f%n", a, result);  
         }  
         catch (NegativeException ex) {  
-            System.out.println("Negative value not allowed");;  
+            System.out.println("Negative value not allowed");  
             throw ex; //rethrow  
         }  
   
@@ -33121,6 +33121,739 @@ class ZeroException extends RuntimeException {
   
 class NegativeException extends RuntimeException {  
     //...  
+}
+```
+
+###### 10 Nisan 2025
+
+>`finally` bloğu akış try deyiminden nasıl çıkarsa çıksın (exception oluşmadan veya exception oluşup yakalanarak veya exception oluşup yakalanmayarak) çalıştırılır. try deyiminde finally bloğu olmak zorunda değildir. Eğer catch blokları varsa tüm catch bloklarının sonunda yazılmalıdır. finally bloğunda tipik olarak exception oluşsa da oluşmasa da yapılacak işlemler yazılır. Örneğin, dosyanın verileri ile yapan bir akışın önce dosyayı açması gerekir. İşlemler bittikten sonra dosyanın kapatılması gerekir. Dosya açıldıktan sonra yapılacak olan işlemlerin sonunda veya işlemler sırasında oluşabilecek exception'lar durumunda da açılmış olan dosyanın kapatılması kodları tipik olarak finally bloğunda yazılır.
+
+>Aşağıdaki demo örneği çeşitli değerler ile çalıştırıp sonuçları gözlemleyiniz
+
+```java
+package org.csystem.app;  
+  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        try {  
+            Util.doWork();  
+        }  
+        catch (ZeroException ignore) {  
+            System.out.println("Zero not allowed"); 
+        }  
+        finally {  
+            System.out.println("finally in main");  
+        }  
+  
+        System.out.println("main ends!...");  
+    }  
+}  
+  
+class Util {  
+    public static void doWork()  
+    {  
+        try {  
+            Scanner kb = new Scanner(System.in);  
+  
+            System.out.print("Input a number:");  
+            double a = kb.nextInt();  
+            double result;  
+            result = MathUtil.log10(a);  
+  
+            System.out.printf("log10(%f) = %f%n", a, result);  
+        }  
+        catch (NegativeException ex) {  
+            System.out.println("Negative value not allowed");;  
+        }  
+        finally {  
+            System.out.println("finally in doWork");  
+        }  
+  
+        System.out.println("doWork ends!...");  
+    }  
+}  
+  
+class MathUtil {  
+    public static double log10(double a)  
+    {  
+        if (a < 0)  
+            throw new NegativeException();  
+  
+        if (a == 0)  
+            throw new ZeroException();  
+  
+        return Math.log10(a);  
+    }  
+}  
+  
+class ZeroException extends RuntimeException {  
+    //...  
+}  
+  
+  
+class NegativeException extends RuntimeException {  
+    //...  
+}
+```
+
+>try deyiminde, try bloğunu yalnızca finally bloğu takip edebilir. Bu yapıya `try-finally`bloğu da denilmektedir. Tipik olarak exception oluşsa da oluşmasa da yapılacak ortak işlemlerin exception yakalanmadan yapılması için kullanılır.
+
+>Aşağıdaki demo örneği çeşitli değerler ile çalıştırıp sonuçları gözlemleyiniz
+
+```java
+package org.csystem.app;  
+  
+import java.util.InputMismatchException;  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        try {  
+            Util.doWork();  
+        }  
+        catch (ZeroException ignore) {  
+            System.out.println("Zero not allowed");;  
+        }  
+        catch (NegativeException ex) {  
+            System.out.println("Negative value not allowed");;  
+        }  
+        catch (InputMismatchException ignore) {  
+            System.out.println("Invalid numeric value");  
+        }  
+        finally {  
+            System.out.println("finally in main");  
+        }  
+  
+        System.out.println("main ends!...");  
+    }  
+}  
+  
+class Util {  
+    public static void doWork()  
+    {  
+        try {  
+            Scanner kb = new Scanner(System.in);  
+  
+            System.out.print("Input a number:");  
+            double a = kb.nextInt();  
+            double result;  
+            result = MathUtil.log10(a);  
+  
+            System.out.printf("log10(%f) = %f%n", a, result);  
+        }  
+        finally {  
+            System.out.println("finally in doWork");  
+        }  
+  
+        System.out.println("doWork ends!...");  
+    }  
+}  
+  
+class MathUtil {  
+    public static double log10(double a)  
+    {  
+        if (a < 0)  
+            throw new NegativeException();  
+  
+        if (a == 0)  
+            throw new ZeroException();  
+  
+        return Math.log10(a);  
+    }  
+}  
+  
+class ZeroException extends RuntimeException {  
+    //...  
+}  
+  
+  
+class NegativeException extends RuntimeException {  
+    //...  
+}
+```
+
+>**Soru:** Aşağıdaki programın ekran çıktısını yazınız
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.console.Console;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Console.writeLine(Sample.doWork("foo"));
+    }  
+}  
+  
+class Sample {  
+    public static StringBuilder doWork(String s)  
+    {  
+        StringBuilder sb = new StringBuilder(s);  
+  
+        try {  
+            return sb.append("return");  
+        }  
+        finally {  
+            sb.append("finally");  
+        }  
+    }  
+}
+```
+
+>**Ekran Çıktısı:** fooreturnfinally
+
+>Aşağıdaki `Console` sınıfının kodlarını inceleyiniz
+
+```java
+package org.csystem.util.console;  
+  
+import java.util.Scanner;  
+  
+public class Console {  
+    private Console()  
+    {  
+    }  
+  
+    private static final Scanner KB;  
+  
+    static {  
+        KB = new Scanner(System.in);  
+    }  
+  
+    public static int readInt()  
+    {  
+        return readInt("");  
+    }  
+  
+    public static int readInt(String prompt)  
+    {  
+        return readInt(prompt, "");  
+    }  
+  
+    public static int readInt(String prompt, String errorPrompt)  
+    {  
+        while (true) {  
+            try {  
+                System.out.print(prompt);  
+  
+                return Integer.parseInt(KB.nextLine());  
+            }  
+            catch (NumberFormatException ignore) {  
+                System.out.print(errorPrompt);  
+            }  
+        }  
+    }  
+  
+    public static long readLong()  
+    {  
+        return readLong("");  
+    }  
+  
+    public static long readLong(String prompt)  
+    {  
+        return readLong(prompt, "");  
+    }  
+  
+    public static long readLong(String prompt, String errorPrompt)  
+    {  
+        while (true) {  
+            try {  
+                System.out.print(prompt);  
+  
+                return Long.parseLong(KB.nextLine());  
+            }  
+            catch (NumberFormatException ignore) {  
+                System.out.print(errorPrompt);  
+            }  
+        }  
+    }  
+  
+    public static double readDouble()  
+    {  
+        return readDouble("");  
+    }  
+  
+    public static double readDouble(String prompt)  
+    {  
+        return readDouble(prompt, "");  
+    }  
+  
+    public static double readDouble(String prompt, String errorPrompt)  
+    {  
+        while (true) {  
+            try {  
+                System.out.print(prompt);  
+  
+                return Double.parseDouble(KB.nextLine());  
+            }  
+            catch (NumberFormatException ignore) {  
+                System.out.print(errorPrompt);  
+            }  
+        }  
+    }  
+  
+    //...  
+  
+    public static String readString(String prompt)  
+    {  
+        System.out.print(prompt);  
+  
+        return KB.nextLine();  
+    }  
+  
+    public static void write(String fmt, Object...objects)  
+    {  
+        System.out.printf(fmt, objects);  
+    }  
+  
+    public static void writeLine(String fmt, Object...objects)  
+    {  
+        write(fmt + '\n', objects);  
+    }  
+  
+    public static void writeLine()  
+    {  
+        System.out.println();  
+    }  
+  
+    public static void write(Object object)  
+    {  
+        System.out.print(object);  
+    }  
+  
+    public static void writeLine(Object object)  
+    {  
+        System.out.println(object);  
+    }  
+  
+    //...  
+}
+```
+
+>Bir exception sınıfı içerisinde çeşitli veriler tutulabilir ve exception'ı yakalayan kişi bu verileri kullanabilir. Bu anlamda Throwable sınıfı içerisinde bazı veriler tutulabilmektedir. Bunlardan en tipik olanı String türünde message (detail message) elemanıdır. Bu anlamda Throwable sınıfının message parametreli ctor'ları vardır. Message değerini elde etmek için `getMessage` sanal metodu çağrılabilir. Bu sınıftan doğrudan ya da dolaylı olarak türetilen sınıfların genel olarak message parametreli ctor veya ctor'ları bulunur. Exception, Runtimeexception ve Error sınıflarının da message parametreli ctor'ları vardır. Programcı isterse kendi exception sınıfına başka elemanlar da ekleyebilir. getMessage metodu sanal bir metot olduğundan gerektiğinde override edilebilir. JavaSE içerisinde bulunan bazı exception sınıfları (burada bazı az anlamında düşünülmemelidir) bu metodu override etmişlerdir. 
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+import java.util.InputMismatchException;  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        try {  
+            Util.doWork();  
+        }  
+        catch (ZeroException ex) {  
+            System.out.printf("Zero->%s%n", ex.getMessage());  
+        }  
+        catch (NegativeException ex) {  
+            System.out.printf("Negative->%s%n", ex.getMessage());  
+        }  
+        catch (InputMismatchException ignore) {  
+            System.out.println("Invalid numeric value");  
+        }  
+        finally {  
+            System.out.println("finally in main");  
+        }  
+  
+        System.out.println("main ends!...");  
+    }  
+}  
+  
+class Util {  
+    public static void doWork()  
+    {  
+        try {  
+            Scanner kb = new Scanner(System.in);  
+  
+            System.out.print("Input a number:");  
+            double a = kb.nextInt();  
+            double result;  
+            result = MathUtil.log10(a);  
+  
+            System.out.printf("log10(%f) = %f%n", a, result);  
+        }  
+        finally {  
+            System.out.println("finally in doWork");  
+        }  
+  
+        System.out.println("doWork ends!...");  
+    }  
+}  
+  
+class MathUtil {  
+    public static double log10(double a)  
+    {  
+        if (a < 0)  
+            throw new NegativeException("Value %f can not be negative".formatted(a));  
+  
+        if (a == 0)  
+            throw new ZeroException("Value can not be zero");  
+  
+        return Math.log10(a);  
+    }  
+}  
+  
+class ZeroException extends RuntimeException {  
+    public ZeroException()  
+    {  
+  
+    }  
+  
+    public ZeroException(String message)  
+    {  
+        super(message);  
+    }  
+}  
+  
+  
+class NegativeException extends RuntimeException {  
+    public NegativeException()  
+    {  
+  
+    }  
+  
+    public NegativeException(String message)  
+    {  
+        super(message);  
+    }  
+}
+```
+
+>Aşağıdaki demo örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+import java.util.InputMismatchException;  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        try {  
+            Util.doWork();  
+        }  
+        catch (InputMismatchException ignore) {  
+            System.out.println("Invalid numeric value");  
+        }  
+        catch (RuntimeException ex) {  
+            System.out.println(ex.getMessage());  
+        }  
+        finally {  
+            System.out.println("finally in main");  
+        }  
+  
+        System.out.println("main ends!...");  
+    }  
+}  
+  
+class Util {  
+    public static void doWork()  
+    {  
+        try {  
+            Scanner kb = new Scanner(System.in);  
+  
+            System.out.print("Input a number:");  
+            double a = kb.nextInt();  
+            double result;  
+            result = MathUtil.log10(a);  
+  
+            System.out.printf("log10(%f) = %f%n", a, result);  
+        }  
+        finally {  
+            System.out.println("finally in doWork");  
+        }  
+  
+        System.out.println("doWork ends!...");  
+    }  
+}  
+  
+class MathUtil {  
+    public static double log10(double a)  
+    {  
+        if (a < 0)  
+            throw new NaNException("Value %f can not be negative".formatted(a));  
+  
+        if (a == 0)  
+            throw new NegativeInfinityException("Value can not be zero");  
+  
+        return Math.log10(a);  
+    }  
+}  
+  
+class NegativeInfinityException extends MathException {  
+    public NegativeInfinityException()  
+    {  
+        this(null);  
+    }  
+  
+    public NegativeInfinityException(String message)  
+    {  
+        super(message, MatExceptionStatus.NEGATIVE_INFINITY);  
+    }  
+}  
+  
+class NaNException extends MathException {  
+    public NaNException()  
+    {  
+        this(null);  
+    }  
+  
+    public NaNException(String message)  
+    {  
+        super(message, MatExceptionStatus.NAN);  
+    }  
+}  
+  
+  
+class MathException extends RuntimeException {  
+    private final MatExceptionStatus m_matExceptionStatus;  
+  
+    public MathException(String message, MatExceptionStatus matExceptionStatus)  
+    {  
+        super(message);  
+        m_matExceptionStatus = matExceptionStatus;  
+    }  
+  
+    public String getMessage()  
+    {  
+        return "Message:%s, Status:%s".formatted(super.getMessage(), m_matExceptionStatus);  
+    }  
+  
+    public MatExceptionStatus getMatExceptionStatus()  
+    {  
+        return m_matExceptionStatus;  
+    }  
+}  
+  
+enum MatExceptionStatus {  
+    NAN, NEGATIVE, ZERO, INFINITY, POSITIVE_INFINITY, NEGATIVE_INFINITY  
+}
+```
+
+###### 15 Nisan 2025
+
+>Throwable sınıfının `printStackTrace` metotları exception oluşma noktalarını bir stack olarak gösteren bir mesajı ilgili output'a gönderir. Parametresiz `printStackTrace` metodu ekrana (aslında `stderr`'ye) basmak için kullanılabilir. Basılan mesaj exception'ın yakalanmamasından dolayı akışın abnormal olarak sonlandığı durumda basılan mesaja çok benzerdir. Bu mesajlar tipik olarak geliştirme aşamasında debug etmek için kullanılabilmektedir.
+
+**Anahtar Notlar:** Bir takım bilgilerin daha sonra incelemek için saklanmasına yazılmış geliştirmede `logging` denilmektedir. Örneğin, uygulama test aşamasında çalıştırılırken bir takım hata mesajları saklanarak daha sonra incelenebilir. Bunun için her ne kadar `printStackTrace` metotları kullanılabilse de daha detaylı durumlar için bu mesajlar yetersiz kalabilir. Hatta, dışında da bazı mesajların `loglanması` gerekebilir. Bu durumda, `logger` denilen bazı üçüncü parti kütüphaneler kullanılır. Bu sebeple `printStackTrace` özellikle parametresiz overload'u için bazı static kod analizi araçları default konfigürasyonda uyarı mesajı verebilmektedirler. Logger'lar, `Java ile Uygulama Geliştirme` kurslarında kullanılacak ve çeşitli düzeylerde detaylandırılacaktır.
+
+>Aşağıdaki demo örneği inceleyiniz.
+
+```java
+package org.csystem.app;  
+  
+import java.util.InputMismatchException;  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        try {  
+            Util.doWork();  
+        }  
+        catch (InputMismatchException ignore) {  
+            System.out.println("Invalid numeric value");  
+        }  
+        catch (RuntimeException ex) {  
+            ex.printStackTrace();  
+        }  
+        finally {  
+            System.out.println("finally in main");  
+        }  
+  
+        System.out.println("main ends!...");  
+    }  
+}  
+  
+class Util {  
+    public static void doWork()  
+    {  
+        try {  
+            Scanner kb = new Scanner(System.in);  
+  
+            System.out.print("Input a number:");  
+            double a = kb.nextInt();  
+            double result;  
+  
+            result = MathUtil.log10(a);  
+            System.out.printf("log10(%f) = %f%n", a, result);  
+        }  
+        finally {  
+            System.out.println("finally in doWork");  
+        }  
+  
+        System.out.println("doWork ends!...");  
+    }  
+}  
+  
+class MathUtil {  
+    public static double log10(double a)  
+    {  
+        if (a < 0)  
+            throw new NaNException("Value %f can not be negative".formatted(a));  
+  
+        if (a == 0)  
+            throw new NegativeInfinityException("Value can not be zero");  
+  
+        return Math.log10(a);  
+    }  
+}  
+  
+class NegativeInfinityException extends MathException {  
+    public NegativeInfinityException()  
+    {  
+        this(null);  
+    }  
+  
+    public NegativeInfinityException(String message)  
+    {  
+        super(message, MatExceptionStatus.NEGATIVE_INFINITY);  
+    }  
+}  
+  
+class NaNException extends MathException {  
+    public NaNException()  
+    {  
+        this(null);  
+    }  
+  
+    public NaNException(String message)  
+    {  
+        super(message, MatExceptionStatus.NAN);  
+    }  
+}  
+  
+  
+class MathException extends RuntimeException {  
+    private final MatExceptionStatus m_matExceptionStatus;  
+  
+    public MathException(String message, MatExceptionStatus matExceptionStatus)  
+    {  
+        super(message);  
+        m_matExceptionStatus = matExceptionStatus;  
+    }  
+  
+    public String getMessage()  
+    {  
+        return "Message:%s, Status:%s".formatted(super.getMessage(), m_matExceptionStatus);  
+    }  
+  
+    public MatExceptionStatus getMatExceptionStatus()  
+    {  
+        return m_matExceptionStatus;  
+    }  
+}  
+  
+enum MatExceptionStatus {  
+    NAN, NEGATIVE, ZERO, INFINITY, POSITIVE_INFINITY, NEGATIVE_INFINITY  
+}
+```
+
+>Java'da exception'lar kategori olarak iki gruba ayrılır: **checked exceptions, unchecked exceptions**.
+
+![BasicExceptionClasses](./media/BasicExceptionClasses.png)
+>**checked exception:**  Bir exception sınıfının doğrudan taban sınıfı ya da dolaylı taban sınıflarından bir `RuntimeException` veya `Error` sınıflarından biri değilse sınıf checked exception sınıfıdır. 
+>**unchecked exception:** checked olmayan exception sınıflarıdır.
+>
+>Bu tanımlara göre şüphesiz, türemiş exception sınıfının kategorisi, taban sınıfının kategorisi ile aynıdır ve değiştirilemez.
+
+**Anahtar Notlar:** Bir exception sınıfının checked veya unchecked olması çalışma zamanına ilişkin bir kavram değildir. Derleme zamanında checked exception'lar için bazı sentaks ve semantik zorunluluklar söz konusudur. Kategorisi ne olursa olsun, çalışma zamanında exception işlemlerine ilişkin bir değişiklik yoktur.
+
+>Bir checked exception fırlatabilecek bir akış için, ya try deyimi ile ilgili exeption'ın yakalanabileceği bir catch bloğunun olması ya da akışa ilişkin metotta `throws bildirimi (throws declaration)` yapılması gerekir. Aksi durumda error oluşur.
+
+>Aşağıdaki demo örnekte `log10` metodundaki throws listesinde her iki checked exception da fırlatılabileceğinden yani akış içerisinde bunları fırlatan throw deyimleri bulunduğunda ve akış try deyimine alınmadığından throws listesi zorunludur. `doWork`metodunda `NegativeInfinityException` yakalanabildiğinden throws listesine konmaz. Ancak `NaNException` throws listesinde olmalıdır. `main` metodunda `NaNException` da yakalanabildiğinde main metodunda herhangi bir throws listesi olması gerekmez.
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.console.Console;  
+  
+import java.util.Scanner;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        try {  
+            Util.doWork();  
+        }  
+        catch (NaNException ex) {  
+            Console.writeLine("NaN Exception:%s", ex.getMessage());  
+        }  
+        finally {  
+            System.out.println("finally in main");  
+        }  
+  
+        System.out.println("main ends!...");  
+    }  
+}  
+  
+class Util {  
+    public static void doWork() throws NaNException  
+    {  
+        try {  
+            Scanner kb = new Scanner(System.in);  
+  
+            double a = Console.readDouble("Input a number:", "Invalid value!...");  
+            double result;  
+  
+            result = MathUtil.log10(a);  
+            System.out.printf("log10(%f) = %f%n", a, result);  
+        }  
+        catch (NegativeInfinityException ex) {  
+            Console.writeLine("Negative Exception:%s", ex.getMessage());  
+        }  
+        finally {  
+            System.out.println("finally in doWork");  
+        }  
+  
+        System.out.println("doWork ends!...");  
+    }  
+}  
+  
+class MathUtil {  
+    public static double log10(double a) throws NaNException, NegativeInfinityException  
+    {  
+        if (a < 0)  
+            throw new NaNException("Value %f can not be negative".formatted(a));  
+  
+        if (a == 0)  
+            throw new NegativeInfinityException("Value can not be zero");  
+  
+        return Math.log10(a);  
+    }  
+}  
+  
+class NegativeInfinityException extends Exception {  
+    public NegativeInfinityException()  
+    {  
+        this(null);  
+    }  
+  
+    public NegativeInfinityException(String message)  
+    {  
+        super(message);  
+    }  
+}  
+  
+class NaNException extends Exception {  
+    public NaNException()  
+    {  
+        this(null);  
+    }  
+  
+    public NaNException(String message)  
+    {  
+        super(message);  
+    }  
 }
 ```
 
