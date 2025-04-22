@@ -36,6 +36,9 @@ public class NumericLottery {
 
     public NumericLottery(Random r)
     {
+        if (r == null)
+            throw new IllegalArgumentException("Argument can not be null");
+
         m_random = r;
     }
 

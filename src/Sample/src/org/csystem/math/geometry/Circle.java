@@ -1,12 +1,11 @@
 /**
  * Circle class that represents a circle in geometry
- * Last Update: 6th March 2025
+ * Last Update: 22nd April 2025
  * @author Java-Jan-2024 Group
  */
 package org.csystem.math.geometry;
 
-import static java.lang.Math.abs;
-import static java.lang.Math.*;
+import static java.lang.Math.PI;
 
 public class Circle {
     protected static final double DELTA = 0.000001;
@@ -23,7 +22,10 @@ public class Circle {
 
     public void setRadius(double radius)
     {
-        m_r = abs(radius);
+        if (radius < 0)
+            throw new IllegalArgumentException("Radius can not be negative:%f".formatted(radius));
+
+        m_r = radius;
     }
 
     public double getRadius()
