@@ -33742,8 +33742,7 @@ enum MatExceptionStatus {
 
 ```java
 package org.csystem.app;  
-  
-import java.util.InputMismatchException;  
+   
 import java.util.Scanner;  
   
 class App {  
