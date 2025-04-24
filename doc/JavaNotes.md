@@ -34915,8 +34915,7 @@ public class Fraction {
     private void set(int a, int b)  
     {  
         if (a == 0) {  
-            m_a = 0;  
-            m_b = 1;  
+            setFields(0, 1);
             return;  
         }  
   
