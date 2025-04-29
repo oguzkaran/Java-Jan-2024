@@ -12,7 +12,7 @@ public class Fraction {
 
     private static Fraction add(int a1, int b1, int a2, int b2)
     {
-        return new Fraction(a1 * b2 + a2 * b1 * b2);
+        return new Fraction(a1 * b2 + a2 * b1, b1 * b2);
     }
 
     private static Fraction subtract(int a1, int b1, int a2, int b2)
