@@ -17147,7 +17147,7 @@ public class Complex {
 
 ##### Diziler (Arrays)
 
->Elemanları **aynı türden** olan ve elemanları bellekte **peş peşe** tutulacak şekilde yaratılan veri yapısıdır. Diziler programlamada en temel veri yapılarıdır. Hatta bazı veri yapıları dizi kullanılarak implemente edilebilir.
+>Elemanları **aynı türden** olan ve elemanları bellekte **peş peşe** tutulacak şekilde yaratılan veri yapısıdır. Diziler programlamada en temel veri yapılarıdır. Hatta önemli bazı veri yapıları dizi kullanılarak implemente edilebilir.
 >
 >Java'da diziler `heap`'de yaratılırlar. Yani sınıfsal temsil edilmişlerdir. Java'da `stack`'de dizi **yaratılamaz**. `T` bir tür ismi olmak üzere her bir elemanı `T` türünden olan (bu durumda `T` türden dizi de denebilir) bir dizi referansı bildiriminin iki biçimi vardır:
 >
@@ -17192,7 +17192,7 @@ class App {
 		new <tür>[<int türüne doğrudan dönüşebilen türden bir değer>];
 >Burada `[]` içerisinde verilen değere dizinin uzunluğu (length) denir. Uzunluk dizinin eleman sayısıdır. Java'da dizi uzunluğunun sabit ifadesi olması gerekmez. Dizi yaratıldıktan sonra uzunluğu **değiştirilemez**. Dizi uzunluğunun negatif olması durumunda **exception** oluşur. Dizi uzunluğuna `length` isimli veri elemanı ile erişilebilir. `length` veri elemanının değeri **değiştirilemez**
 >
->Dizinin elemanlarına erişmek için `[]` operatörü (subscription operator) kullanılır. Bu operatör özel amaçlı iki operandlı ve araek durumundadır. Operatörün birinci operandı bir referansı ikinci operandı ise `int` türüne **doğrudan** dönüşebilen bir değer olmalıdır. İkinci operandına indeks değeri de denilmektedir. Dizinin ilk elemanına sıfır numaralı indeks değeri kullanılarak erişilir. Yani bu anlamda dizinin elemanlarına erişmek için kullanılan indeks değerleri `[0, length)` aralığıdır. Bu operatör operatör öncelik tablosunda birinci seviyededir. Operatörün ürettiği değer indeksteki elemana ilişkin değişkendir. Indeks numarası pozitif ya da negatif bakımdan sınırlar dışında bir değer olarak verilirse exception oluşur.
+>Dizinin elemanlarına erişmek için `[]` operatörü (subscription operator) kullanılır. Bu operatör özel amaçlı iki operandlı ve ara ek durumundadır. Operatörün birinci operandı bir referansı ikinci operandı ise `int` türüne **doğrudan** dönüşebilen bir değer olmalıdır. İkinci operandına indeks değeri de denilmektedir. Dizinin ilk elemanına sıfır numaralı indeks değeri kullanılarak erişilir. Yani bu anlamda dizinin elemanlarına erişmek için kullanılan indeks değerleri `[0, length)` aralığıdır. Bu operatör operatör öncelik tablosunda birinci seviyededir. Operatörün ürettiği değer indeksteki elemana ilişkin değişkendir. Indeks numarası pozitif ya da negatif bakımdan sınırlar dışında bir değer olarak verilirse exception oluşur.
 >
 >Dizi yaratıldığında elemanlarının her birine `default` değerler atanır.
 
@@ -25725,7 +25725,7 @@ class Engine {
 >
 
 >![Vehicles](./media/Vehicles.PNG)
->Burada dikkat edilirse `Vehicle`'dan aşağıya doğru inildikçe bir **özelleşme (specialization)**, `Vehicle`'a doğru çıkıldıkça bir **genelleşme (generalization)** söz konusu olmaktadır. Bir sınıfın birden fazla (doğrudan) taban sınıfı olması durumuna `çoklu türetme (multiple inheritance)` denir. Java'da bir sınıfın yalnızca bir tane taban sınıfı vardır. Bu anlamda Java'da çoklu türetme yoktur. Aslında çoklu türetmenin programlamada bir kaşılığı da doğrudan yoktur. Bu anlamda Java'da ileride göreceğimiz `arayüzler (interfaces)` ile çoklu türetme belirli ölçüde (prtatikteki isterleri karşılayacak kadar) desteklenmektedir. Yani, Java'da çoklu türetmenin olmaması bir eksiklik oluşturmaz. Örneğin `Vehicle` hiyerarşisinde `deniz uçağı (float plane)` hem `deniz aracı` hem de `hava aracı` değildir. Deniz uçağı, hava aracıdır. Bu anlamda deniz uçağı için çoklu türetme söz konusu olmaz. 
+>Burada dikkat edilirse `Vehicle`'dan aşağıya doğru inildikçe bir **özelleşme (specialization)**, `Vehicle`'a doğru çıkıldıkça bir **genelleşme (generalization)** söz konusu olmaktadır. Bir sınıfın birden fazla (doğrudan) taban sınıfı olması durumuna `çoklu türetme (multiple inheritance)` denir. Java'da bir sınıfın yalnızca bir tane taban sınıfı vardır. Bu anlamda Java'da çoklu türetme yoktur. Aslında çoklu türetmenin programlamada bir karşılığı da doğrudan yoktur. Bu anlamda Java'da ileride göreceğimiz `arayüzler (interfaces)` ile çoklu türetme belirli ölçüde (pratikteki isterleri karşılayacak kadar) desteklenmektedir. Yani, Java'da çoklu türetmenin olmaması bir eksiklik oluşturmaz. Örneğin `Vehicle` hiyerarşisinde `deniz uçağı (float plane)` hem `deniz aracı` hem de `hava aracı` değildir. Deniz uçağı, hava aracıdır. Bu anlamda deniz uçağı için çoklu türetme söz konusu olmaz. 
 >Bir sınıf kendisinden doğrudan ya da dolaylı olarak türetilemez. Yani türetme ilişkisinde döngüsellik söz konusu değildir. 
 >
 >Java'da türetme **extends** anahtar sözcüğü ile yapıılır. Türetme işleminde taban sınıfın elemanları türemiş sınıfa aktarılmış olur. Örneğin taban sınıfta olan bir metot türemiş sınıfa da aktarılır. Benzer şekilde ver elemanları da türemiş sınıfa aktarılır. Yani bu elemanlara türemiş sınıf türünden referans ile de erişilebilir.
@@ -34848,12 +34848,102 @@ public class FractionSettersTest {
 }
 ```
 
+```java
+package org.csystem.math.geometry.test;  
+  
+import org.csystem.math.Fraction;  
+import org.csystem.util.console.Console;  
+  
+public class FractionComparisonTest {  
+    public static void run()  
+    {  
+        Fraction f1 = new Fraction(1,2);  
+        Fraction f2 = new Fraction(-10, 20);  
+        Fraction f3 = new Fraction(1, -4);  
+        Fraction f4 = new Fraction(3, 4);  
+        Fraction f5 = new Fraction();  
+        Fraction f6 = new Fraction(2, 4);  
+        Fraction f7 = new Fraction(-120, -160);  
+  
+        Console.writeLine(f1.compareTo(f3) > 0);  
+        Console.writeLine(f2.compareTo(f1) < 0);  
+        Console.writeLine(f4.compareTo(f7) == 0);  
+        Console.writeLine(f5.compareTo(f6) < 0);  
+        Console.writeLine(f6.compareTo(f3) > 0);  
+    }  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
 
+```java
+package org.csystem.math.geometry.test;  
+  
+import org.csystem.math.Fraction;  
+import org.csystem.util.console.Console;  
+  
+public class FractionEqualityTest {  
+    public static void run(){  
+  
+        Fraction f1 = new Fraction(1, 2);  
+        Fraction f2 = new Fraction(-10, 20);  
+        Fraction f3 = new Fraction(1, -4);  
+        Fraction f4 = new Fraction(3, 4);  
+        Fraction f5 = new Fraction(0, 10);  
+        Fraction f6 = new Fraction();  
+        Fraction f7 = new Fraction(2, 4);  
+        Fraction f8 = new Fraction(-120, -160);  
+  
+        Console.writeLine(f1.equals(f3));  
+        Console.writeLine(f2.equals(f1));  
+        Console.writeLine(f4.equals(f8));  
+        Console.writeLine(f6.equals(f5));  
+        Console.writeLine(f7.equals(f3));  
+  
+    }  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+```java
+package org.csystem.math.geometry.test;  
+  
+import org.csystem.math.Fraction;  
+import org.csystem.util.console.Console;  
+  
+public class FractionArithmeticOperationsTest {  
+    public static void run()  
+    {  
+        try {  
+            Fraction f1 = new Fraction(1,2);  
+            Fraction f2 = new Fraction(1, -4);  
+            
+            Console.writeLine(f1.add(f2).equals(new Fraction(1, 4)));  
+            Console.writeLine(f1.subtract(f2).equals(new Fraction(3, 4)));  
+            Console.writeLine(f1.multiply(f2).equals(new Fraction(1, -8)));  
+            Console.writeLine(f1.divide(f2).equals(new Fraction(-2)));  
+            Console.writeLine(f1.divide(new Fraction()));  
+        }  
+        catch (IllegalArgumentException ex) {  
+            Console.writeLine("Exception Message:%s", ex.getMessage());  
+        }  
+    }  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
 
 
 >Fraction sınıfı
 
-```java 
+```java  
 package org.csystem.math;  
   
 public class Fraction {  
@@ -34862,7 +34952,7 @@ public class Fraction {
   
     private static Fraction add(int a1, int b1, int a2, int b2)  
     {  
-        return new Fraction(a1 * b2 + a2 * b1 * b2);  
+        return new Fraction(a1 * b2 + a2 * b1, b1 * b2);  
     }  
   
     private static Fraction subtract(int a1, int b1, int a2, int b2)  
@@ -34915,7 +35005,7 @@ public class Fraction {
     private void set(int a, int b)  
     {  
         if (a == 0) {  
-            setFields(0, 1);
+            setFields(0, 1);  
             return;  
         }  
   
@@ -35033,4 +35123,51 @@ public class Fraction {
     }  
 }
 ```
+
+###### 29 Nisan 2025
+
+##### Arayüzler (Interfaces)
+
+>Bir arayüz (interface) bir UDT bildirimidir. Bir arayüz **interface** anahtar sözcüğü ile bildirilir. Arayüzler en çok `abstract class`'lara benzeseler de sentaks ve semantik olarak farklı kurallara sahiptirler. Arayüzler, Java'da çoklu türetmenin belirli ölçüde kullanılabilmesini de sağlar. Özellikle `Java 8` ile birlikte arayüzler, eklenen yeni özellikler ile daha yetenekli hale gelmişlerdir. 
+>
+>Arayüzler nesne özelliği göstermezler. Yani, bir arayüz türünden nesne hiç bir şekilde yaratıl(a)maz. Arayüzler aslında bir anlaşma (contract) belirtmek için kullanılır.
+
+**Anahtar Notlar:** Arayüz isimlerini diğer UDT'lerden ayırmak için bazı programcılar arayüz isimlerini `I` ile başlatmayı tercih ederler. Bu bir convention olarak düşünülebilir. Biz de arayüz isimlerimiz `I` ile başlatacağız. Ancak JavaSE'de bulunan arayüzler için bu convention kullanılmamaktadır.
+
+>Bir arayüz içerisinde veri elemanı olabilir. Arayüz içerisinde bildirilen bir veri elemanı yazılsa da yazılmasa da `public static final` olarak bildirilmiş olur. Yani bir arayüz içerisinde public olmayan veya non-static olan veya final olmayan bir veri elemanı bildirimi yapılamaz. `public static final` yazarak bildirim yapmak error oluşturmasa da hiç birisinin yazılmaması tavsiye edilir. Bir arayüz içerisinde `public abstract` metot bildirilebilir. Burada yine `public abstract` bildirimde yazılmayabilir. Yazılması error oluşturmasa da yazılmaması tavsiye edilir.  Java 8 ile birlikte non-static bir metodun gövdesi yazılabilmektedir. Yani abstract olmayan bir non-static metot bildirimi yapılabilmektedir. Bu işlem için metot bildiriminde **default** anahtar sözcüğü kullanılır. interface içerisindeki abstract olmayan (non-static) metotlara **default method** da denilmektedir. Default metotlar da public yazılsa da yazılmasa da public olarak bildirilmiş olurlar. Yani, public olmayan default metot veya abstract metot bildirimi yapılamaz. Java 8 ile birlikte bir arayüz içerisinde static metot bildirilebilir. Java 9 ile birlikte bir arayüz içerisinde `private`olarak bildirilmiş static ve non-static metotlar olabilmektedir. Şüphesiz bu metotların gövdeleri olmalıdır. Aksi durumda error oluşur. 
+>
+>Bu açıklamalara göre bir arayüz içerisinde `friendly` veya `protected` bir eleman bildirimi geçersizdir. Dikkat edilirse erişim belirleyicisinin olmaması (no-modifier) arayüzler içerisinde public anlamındadır.
+
+>Aşağıdaki örnek arayüz içerisinde olabilecek tüm elemanlar (member) gösterilmiştir. Şüphesiz bunların her birinden istenildiği kadar olabilmektedir
+
+```java
+interface IX {  
+    int A = 10;  
+    void foo();  
+  
+    default void bar(int a) //Since Java 8  
+    {  
+        //...  
+    }  
+  
+    static void tar(int a, double b) //Since Java 8  
+    {  
+        //...  
+    }  
+  
+    private void car() //Since Java 9  
+    {  
+        //...  
+    }  
+  
+    private static void zar() //Since Java 9  
+    {  
+        //...  
+    }  
+}
+```
+
+
+
+
 

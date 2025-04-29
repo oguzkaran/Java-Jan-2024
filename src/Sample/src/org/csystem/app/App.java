@@ -1,104 +1,42 @@
 package org.csystem.app;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
 class App {
     public static void main(String[] args)
     {
-        try {
-            Util.doWork();
-        }
-        catch (NumberFormatException | NaNException | NegativeInfinityException ex) {
-            System.out.printf("Message:%s%n", ex.getMessage());
-        }
-        finally {
-            System.out.println("finally in main");
-        }
 
-        System.out.println("main ends!...");
-    }
-}
-
-class Util {
-    public static void doWork()
-    {
-        try {
-            Scanner kb = new Scanner(System.in);
-
-            System.out.print("Input a number:");
-            double a = Integer.parseInt(kb.nextLine());
-            double result;
-
-            result = MathUtil.log10(a);
-            System.out.printf("log10(%f) = %f%n", a, result);
-        }
-        finally {
-            System.out.println("finally in doWork");
-        }
-
-        System.out.println("doWork ends!...");
-    }
-}
-
-class MathUtil {
-    public static double log10(double a)
-    {
-        if (a < 0)
-            throw new NaNException("Value %f can not be negative".formatted(a));
-
-        if (a == 0)
-            throw new NegativeInfinityException("Value can not be zero");
-
-        return Math.log10(a);
-    }
-}
-
-class NegativeInfinityException extends RuntimeException {
-    public NegativeInfinityException()
-    {
-        this(null);
-    }
-
-    public NegativeInfinityException(String message)
-    {
-        super(message);
-    }
-}
-
-class NaNException extends RuntimeException {
-    public NaNException()
-    {
-        this(null);
-    }
-
-    public NaNException(String message)
-    {
-        super(message);
     }
 }
 
 
-class MathException extends RuntimeException {
-    private final MatExceptionStatus m_matExceptionStatus;
+interface IX { //marker interface
+    int A = 10;
+    //void foo();
 
-    public MathException(String message, MatExceptionStatus matExceptionStatus)
+    default void bar(int a) //Since Java 8
     {
-        super(message);
-        m_matExceptionStatus = matExceptionStatus;
+        //...
     }
 
-    public String getMessage()
+    static void tar(int a, double b) //Since Java 8
     {
-        return "Message:%s, Status:%s".formatted(super.getMessage(), m_matExceptionStatus);
+        //...
     }
 
-    public MatExceptionStatus getMatExceptionStatus()
+    private void car() //Since Java 9
     {
-        return m_matExceptionStatus;
+        //...
+    }
+
+    private static void zar() //Since Java 9
+    {
+        //...
     }
 }
 
-enum MatExceptionStatus {
-    NAN, NEGATIVE, ZERO, INFINITY, POSITIVE_INFINITY, NEGATIVE_INFINITY
+interface IY { //marker interface
+
+}
+
+interface IZ { //functional interface
+    void foo();
 }
