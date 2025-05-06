@@ -17850,12 +17850,12 @@ public class NumericLottery {
 
 **Anahtar Notlar:**  Algoritmaların karşılaştırılmasına yönelik iki ölçüt kullanılır: hız (speed), kaynak kullanımı (resource usage). Burada ele alacağımız bubble sort ve selection sort algoritmaları karşılaştırılmayacaktır. Algoritma analizi isimli konuda bu iki algoritmanın karşılaştırılması da ayrıca ele alınacaktır.
 
->Kabarcık sıralama algoritmasında dizinin yanyana iki elemanı karşılaştırılır. Duruma göre yer değiştirilir. Her yinelemede en büyük eleman daraltılmış dizinin sonuna gider. Böylece her yinelemede bir geriye kadar gidilmiş olur
+>Kabarcık sıralama algoritmasında dizinin yanyana iki elemanı karşılaştırılır. Duruma göre yer değiştirilir. Her yinelemede en büyük eleman daraltılmış dizinin sonuna gider. Böylece her yinelemede bir geriye kadar gidilmiş olur:
 >
 >Örneğin :
 >22 8 66 -7 34 -6 17 21 68 45 -10 3 16
 >8 22 -7 34 -6 17 21 66 45 -10 3 16 68
->8 22 -7 -6 ..
+>8 22 -7 -6 . . .
 
 ```java
 package org.csystem.util.array.test;  
@@ -17953,7 +17953,7 @@ public class ArrayUtilSelectionSortTest {
 }
 ```
 
->***Bölümleme (Partition) Algoritması:*** Bu algoritmada amaç, bir dizinin belirli bir koşula uyan elemanlarının dizinin başında, koşula uymayanların ise dizinin sonuna getirilmesidir. Bu algoritma başka bir dizi yaratılmadan da gerçekleştirilebilir (implementation). Zaten başka bir dizi kullanımı efektif değildir. Dizi bölümlendikten sonra ilk koşula uymayan elemanın bulunduğu indeks değerine ***"bölümleme noktası (partition point)"*** denir. Bu durumda dizinin tüm elemanları ilgili koşula uyuyor ise partition point'in değeri dizinin uzunluğudur, dizinin hiç bir elemanı koşula uymuyorsa partitionpoint'in değeri sıfırdır. Bu işlem tipik olarak şu şekilde yapılabilir: Önce dizinin koşula uymayan ilk elemanı bulunur. Sonra ikinci bir indeks, koşula uymayan ilk elemandan bir sonraki elemana konumlandırılır. Eğer eleman (ikinci indeksdeki eleman) koşula uyuyorsa, koşula uymayan eleman ile (birinci indeksteki eleman ile) yer değiştirilir ve birinci indeks artırılır. İkinci indeks her duruda artırılır. Böylece ilerlenir. Bu durumda birinci indeks partition point olarak elde edilmiş olur.
+>***Bölümleme (Partition) Algoritması:*** Bu algoritmada amaç, bir dizinin belirli bir koşula uyan elemanlarının dizinin başında, koşula uymayanların ise dizinin sonuna getirilmesidir. Bu algoritma başka bir dizi yaratılmadan da gerçekleştirilebilir (implementation). Zaten başka bir dizi kullanımı efektif değildir. Dizi bölümlendikten sonra ilk koşula uymayan elemanın bulunduğu indeks değerine ***"bölümleme noktası (partition point)"*** denir. Bu durumda dizinin tüm elemanları ilgili koşula uyuyor ise partition point'in değeri dizinin uzunluğudur, dizinin hiç bir elemanı koşula uymuyorsa partitionpoint'in değeri sıfırdır. Bu işlem tipik olarak şu şekilde yapılabilir: Önce dizinin koşula uymayan ilk elemanı bulunur. Sonra ikinci bir indeks, koşula uymayan ilk elemandan bir sonraki elemana konumlandırılır. Eğer eleman (ikinci indeksdeki eleman) koşula uyuyorsa, koşula uymayan eleman ile (birinci indeksteki eleman ile) yer değiştirilir ve birinci indeks artırılır. İkinci indeks her durumda artırılır. Böylece ilerlenir. Bu durumda birinci indeks partition point olarak elde edilmiş olur.
 >
 > Örneğin:\
 > 2 8 66 7 34 6 17 21 68 45 10 3 16
@@ -18191,10 +18191,9 @@ class Util {
 }
 ```
 
+###### Referans Dizileri
 
-
->***Referans Dizileri:*** Her bir elemanı bir referans olan dizilere denir. Bu durumda dizinin her bir elemanı ilgili türden bir adres tutar. Bu durumda bir referans dizisinin yaratılması, elemanı olan her bir referansın gösterdiği nesnelerin de yaratılması anlamına gelmez. Yani bir referans dizisi yaratıldıktan sonra diziye ilişkin referanslara da uygun adreslerin verilmesi gerekir. Bir referans dizisi ilk değer vermeden yaratıldığında her bir referansa null değeri atanır.
-
+>Her bir elemanı bir referans olan dizilere denir. Bu durumda dizinin her bir elemanı ilgili türden bir adres tutar. Bu durumda bir referans dizisinin yaratılması, elemanı olan her bir referansın gösterdiği nesnelerin de yaratılması anlamına gelmez. Yani bir referans dizisi yaratıldıktan sonra diziye ilişkin referanslara da uygun adreslerin verilmesi gerekir. Bir referans dizisi ilk değer vermeden yaratıldığında her bir referansa null değeri atanır.
 
 **Anahtar Notlar:** Programlamada kullanılmayan adrese `null adres (null address)` denilmektedir. Java'da null adres `null` isimli bir sabit ile temsil edilir. null, bir referansın default değeri olarak atanır. null adrese ilişkin diğer detaylar ileride ele alınacaktır.
 
@@ -18276,7 +18275,7 @@ class Sample {
 
 #### 10 Eylül 2024
 
->Referans dizilerine ilk değer verilmesi aslında referans dizisinin elemanları olan referanslara adreslerin verilmesi demektir. Aşağıdaki demo örneiği inceleyiniz
+>Referans dizilerine ilk değer verilmesi aslında referans dizisinin elemanları olan referanslara adreslerin verilmesi demektir. Aşağıdaki demo örneği inceleyiniz
 
 
 ```java
@@ -35124,7 +35123,7 @@ public class Fraction {
 }
 ```
 
-###### 29 Nisan 2025
+###### 29 Nisan 2025  - 6 Mayıs 2025
 
 ##### Arayüzler (Interfaces)
 
@@ -35132,13 +35131,13 @@ public class Fraction {
 >
 >Arayüzler nesne özelliği göstermezler. Yani, bir arayüz türünden nesne hiç bir şekilde yaratıl(a)maz. Arayüzler aslında bir anlaşma (contract) belirtmek için kullanılır.
 
-**Anahtar Notlar:** Arayüz isimlerini diğer UDT'lerden ayırmak için bazı programcılar arayüz isimlerini `I` ile başlatmayı tercih ederler. Bu bir convention olarak düşünülebilir. Biz de arayüz isimlerimiz `I` ile başlatacağız. Ancak JavaSE'de bulunan arayüzler için bu convention kullanılmamaktadır.
+**Anahtar Notlar:** Arayüz isimlerini diğer UDT'lerden ayırmak için bazı programcılar arayüz isimlerini `I` ile başlatmayı tercih ederler. Bu bir convention olarak düşünülebilir. Biz de arayüz isimlerimizi `I` ile başlatacağız. Ancak JavaSE'de bulunan arayüzler için bu convention kullanılmamaktadır.
 
->Bir arayüz içerisinde veri elemanı olabilir. Arayüz içerisinde bildirilen bir veri elemanı yazılsa da yazılmasa da `public static final` olarak bildirilmiş olur. Yani bir arayüz içerisinde public olmayan veya non-static olan veya final olmayan bir veri elemanı bildirimi yapılamaz. `public static final` yazarak bildirim yapmak error oluşturmasa da hiç birisinin yazılmaması tavsiye edilir. Bir arayüz içerisinde `public abstract` metot bildirilebilir. Burada yine `public abstract` bildirimde yazılmayabilir. Yazılması error oluşturmasa da yazılmaması tavsiye edilir.  Java 8 ile birlikte non-static bir metodun gövdesi yazılabilmektedir. Yani abstract olmayan bir non-static metot bildirimi yapılabilmektedir. Bu işlem için metot bildiriminde **default** anahtar sözcüğü kullanılır. interface içerisindeki abstract olmayan (non-static) metotlara **default method** da denilmektedir. Default metotlar da public yazılsa da yazılmasa da public olarak bildirilmiş olurlar. Yani, public olmayan default metot veya abstract metot bildirimi yapılamaz. Java 8 ile birlikte bir arayüz içerisinde static metot bildirilebilir. Java 9 ile birlikte bir arayüz içerisinde `private`olarak bildirilmiş static ve non-static metotlar olabilmektedir. Şüphesiz bu metotların gövdeleri olmalıdır. Aksi durumda error oluşur. 
+>Bir arayüz içerisinde veri elemanı olabilir. Arayüz içerisinde bildirilen bir veri elemanı, yazılsa da yazılmasa da `public static final` olarak bildirilmiş olur. Yani bir arayüz içerisinde public olmayan veya non-static olan veya final olmayan bir veri elemanı bildirimi yapılamaz. `public static final` yazarak bildirim yapmak error oluşturmasa da hiç birisinin yazılmaması tavsiye edilir. Bir arayüz içerisinde `public abstract` metot bildirilebilir. Burada yine `public abstract` bildirimde yazılmayabilir. Yazılması error oluşturmasa da yazılmaması tavsiye edilir.  Java 8 ile birlikte arayüz içerisinde non-static bir metodun gövdesi yazılabilmektedir. Yani abstract olmayan bir non-static metot bildirimi yapılabilmektedir. Bu işlem için metot bildiriminde **default** anahtar sözcüğü kullanılır. Arayüz içerisindeki abstract olmayan (non-static) metotlara **default method** da denilmektedir. Default metotlar da public yazılsa da yazılmasa da public olarak bildirilmiş olurlar. Yani, public olmayan default metot veya abstract metot bildirimi yapılamaz. Java 8 ile birlikte bir arayüz içerisinde static metot bildirilebilir. Java 9 ile birlikte bir arayüz içerisinde `private`olarak bildirilmiş static ve non-static metotlar olabilmektedir. Şüphesiz bu metotların gövdeleri olmalıdır. Aksi durumda error oluşur. 
 >
->Bu açıklamalara göre bir arayüz içerisinde `friendly` veya `protected` bir eleman bildirimi geçersizdir. Dikkat edilirse erişim belirleyicisinin olmaması (no-modifier) arayüzler içerisinde public anlamındadır.
+>Bu açıklamalara göre bir arayüz içerisinde `friendly` veya `protected` bir eleman bildirimi geçersizdir. Dikkat edilirse erişim belirleyicisinin olmaması (yani no-modifier olması) arayüzler içerisinde public anlamındadır.
 
->Aşağıdaki örnek arayüz içerisinde olabilecek tüm elemanlar (member) gösterilmiştir. Şüphesiz bunların her birinden istenildiği kadar olabilmektedir
+>Aşağıdaki örnek arayüz içerisinde olabilecek tüm elemanlar (member) çeşitleri gösterilmiştir. Şüphesiz bunların her birinden istenildiği kadar olabilmektedir
 
 ```java
 interface IX {  
@@ -35167,7 +35166,304 @@ interface IX {
 }
 ```
 
+>Hiç abstract metodu olmayan arayüzlere "marker interfaces" denilmektedir. Genel olarak bir marker interface'in içerisinde hiç eleman bulundurulmaz.  
 
+```java
+interface IX { //marker interface  
+    int A = 10;  
+  
+    default void bar(int a) //Since Java 8  
+    {  
+       //...  
+    }  
+  
+    static void tar(int a, double b) //Since Java 8  
+    {  
+       //...  
+    }  
+  
+    private void car() //Since Java 9  
+    {  
+       //...  
+    }  
+  
+    private static void zar() //Since Java 9  
+    {  
+       //...  
+    }  
+}  
+  
+interface IY { //marker interface  
+  
+}
+```
+  
+**Anahtar Notlar:** Java 5 ile eklenen annotation'lar ile marker arayüzlere çok ihtiyaç kalmamıştır. Ancak Java 5 öncesinden gelen ve önemli bazı durumlarda kullanılan bazı marker interface'ler bulunmaktadır. Java programcısı Java 5 sonrasında kendisi bir marker interface yazma ihtiyacı genel olarak duymaz. Annotation bir UDT'dir ve Java ile Uygulama Geliştirme 1 kursunda ele alanacaktır.  
+  
+>Java 8 ile birlikte içerisinde `bir yalnız bir tane` abstract metodu olan arayüzler **functional interface** olarak kullanılabilmektedir. Functional interface'ler Java'da fonksiyonel programlama tekniği daha gelişmiş biçimde  kullanılabilir hale gelmiştir.  
+  
+**Anahtar Notlar:** Java 8 ile birlikte `Lambda expressions ve method references` dile eklenmiştir. Lambda ifadeleri ve method referansları fonksiyonel arayüzler ile kullanılabilmektedir. Bu anlamda fonksiyonel arayüzler Java'da yeni nesil programlama tekniğini de kullanılabilir hale getirmiştir. Lambda ifadeleri ve method referansları Java ile Uygulama Geliştirme 1 kursunda ele alınacaktır.
 
+>Aşağıdaki demo örnekte fonksiyonel arayüzler ile Lambda ifadesinin kullanımı örneklenmiştir. Kodun detayları şu aşamada önemsizdir
 
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.collection.CollectionUtil;  
+import org.csystem.util.console.Console;  
+  
+import java.util.ArrayList;  
+import java.util.Random;  
+import java.util.stream.Collectors;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        ArrayList list = CollectionUtil.randomStringListTR(new Random(), 10, 5, 11);  
+  
+        Console.writeLine("%s", list);  
+        Console.writeLine("----------------");  
+  
+        list.forEach(s -> Console.write("%s ", s));  
+        Console.writeLine();  
+        list.stream().map(o -> ((String)o).toUpperCase()).forEach(s -> Console.write("%s ", s));  
+        Console.writeLine();  
+        list.stream().filter(o -> ((String)o).length() > 7).forEach(s -> Console.write("%s ", s));  
+        Console.writeLine();  
+        Console.writeLine(list.stream().filter(o -> ((String)o).length() > 7).collect(Collectors.joining("-")));  
+        Console.writeLine();  
+    }  
+}
+```
+  
+>Bir arayüz abstract anahtar sözcüğü ile bildirilebilir. abstract yazmakla yazmamak arasında bir fark yoktur. Yazılmaması tavsiye edilir.
 
+```java
+abstract interface IX {  
+	 //... 
+}
+```
+
+>Bir sınıf bir arayüzü implements anahtar sözcüğü ile destekler (implementation). Bir sınıf istenildiği kadar arayüzü destekleyebilir. Bu durumda arayüzler virgül atomu ile listelenir. Bu durumda arayüzlerin listede sırasının önemi  yoktur. Anımsanacağı gibi bir sınıf yalnızca tek bir sınıftan türetilebilir ancak istediği kadar arayüzü destekleyebilir.  
+
+```java
+class A implements IX, IY, IZ {  
+    //...  
+}  
+
+class B extends C implements IX, IY{  
+    //...  
+}  
+  
+class C {  
+    //...  
+}  
+  
+interface IX {  
+    //...  
+}  
+  
+interface IY {  
+    //...  
+}
+```
+
+>Bir arayüzü destekleyen bir sınıf arayüzün en az bir tane abstract metodunu override etmezse sınıfın abstract olarak  bildirilmesi gerekir. Bu durumda bir sınıfın concrete olabilmesi için tüm abstract metotları (taban sınıftan gelen  veya arayüzlerden gelen) override etmiş olması gerekir. Aksi durumda sınıf abstract olarak bildirilmelidir.  
+
+```java
+class A implements IX { //error  
+    //...
+}  
+  
+abstract class B implements IX { //error  
+    //...
+}  
+  
+abstract class C implements IX, IY {  
+    public void foo()  
+    {  
+        //...  
+    }  
+  
+    public void bar()  
+    {  
+        //...  
+    }  
+}  
+  
+class D implements IX, IY {  
+    public void foo()  
+    {  
+        //...  
+    }  
+  
+    public void bar()  
+    {  
+        //...  
+    }  
+  
+    public void tar()  
+    {  
+        //...  
+    }  
+}  
+  
+interface IX {  
+    void foo();  
+}  
+  
+interface IY {  
+    void bar();  
+    void tar();  
+}
+```
+>
+>Bir interface referansı taban sınıf referansı gibi kullanılabilir. Bu anlamda RTP gerçekleştirilmiş olur. Aslında bir sınıfın birden fazla arayüzü desteklemesi ile tüm arayüzlere ilişkin RTP yapılabilir. Bu da belirli ölçüde de olsa multiple inheritance'a benzetilebilir.  
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.console.Console;  
+import org.csystem.util.thread.ThreadUtil;  
+  
+import java.util.Random;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        DemoApplication.run();  
+    }  
+}  
+  
+class DemoApplication {  
+    public static void run()  
+    {  
+        XFactory xFactory = new XFactory();  
+        YFactory yFactory = new YFactory();  
+  
+        while (true) {  
+            IX ix = xFactory.create();  
+            IY iy = yFactory.create();  
+  
+            Console.writeLine("---------------------------");  
+            Console.writeLine("Dynamic type of ix:%s", ix.getClass().getName());  
+            Console.writeLine("Dynamic type of iy:%s", iy.getClass().getName());  
+            Util.doWork(ix);  
+            Util.doWork(iy);  
+            Console.writeLine("---------------------------");  
+            ThreadUtil.sleep(1000);  
+        }  
+    }  
+}  
+  
+class Util {  
+    public static void doWork(IX ix)  
+    {  
+        //...  
+        ix.foo(10);  
+        //...  
+    }  
+  
+    public static void doWork(IY iy)  
+    {  
+        //...  
+        iy.bar(3.4);  
+        //...  
+    }  
+}  
+  
+class XFactory {  
+    private final Random m_random = new Random();  
+  
+    public IX create()  
+    {  
+        return switch (m_random.nextInt(5)) {  
+            case 0 -> new A();  
+            case 1 -> new B();  
+            case 2 -> new C();  
+            case 3 -> new D();  
+            case 4 -> new E();  
+            default -> new F();  
+        };  
+    }  
+}  
+  
+class YFactory {  
+    private final Random m_random = new Random();  
+  
+    public IY create()  
+    {  
+        return switch (m_random.nextInt(3)) {  
+            case 0 -> new D();  
+            case 1 -> new E();  
+            default -> new F();  
+        };  
+    }  
+}  
+  
+class A implements IX {  
+    public void foo(int a)  
+    {  
+        Console.writeLine("A.foo");  
+    }  
+}  
+  
+class B implements IX {  
+    public void foo(int a)  
+    {  
+        Console.writeLine("B.foo");  
+    }  
+}  
+  
+class C implements IX {  
+    public void foo(int a)  
+    {  
+        Console.writeLine("C.foo");  
+    }  
+}  
+  
+class D implements IX, IY {  
+    public void foo(int a)  
+    {  
+        Console.writeLine("D.foo");  
+    }  
+  
+    public void bar(double a)  
+    {  
+        Console.writeLine("D.bar");  
+    }  
+}  
+  
+  
+class E implements IX, IY {  
+    public void foo(int a)  
+    {  
+        Console.writeLine("E.foo");  
+    }  
+  
+    public void bar(double a)  
+    {  
+        Console.writeLine("E.bar");  
+    }  
+}  
+  
+class F implements IX, IY {  
+    public void foo(int a)  
+    {  
+        Console.writeLine("F.foo");  
+    }  
+  
+    public void bar(double a)  
+    {  
+        Console.writeLine("F.bar");  
+    }  
+}  
+  
+interface IX {  
+    void foo(int a);  
+}  
+  
+interface IY {  
+    void bar(double a);  
+}
+```
