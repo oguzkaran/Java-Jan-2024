@@ -22484,7 +22484,7 @@ public class RandomStringArrayGeneratorTR {
 
  >**Sınıf Çalışması:** Bir okulda ortak olarak Fizik sınavı yapılıyor olsun. Sınav n tane şube için yapılsın. n sayısını klavyeden isteyiniz. Her bir şubedeki öğrenci sayısını da klavyeden isteyiniz. Bu sınavdan alınan notları rassal olarak belirleyiniz. Bu işlemlerden sonra ilgili notlara göre her bir şubenin ayrı ayrı Fizik dersi ortalaması ve okulun Fizik dersi ortalamasını hesaplayan simülasyonu yazınız.
 > **Açıklamalar:**
-> - Ders adını komut satırı argümanı olarak alınız
+> - Ders adını komut satırı argümanı olarak alınız.
 > - Bir öğrencinin not `[0, 10]` aralığında bir tamsayı olabilir.
 > - Programı mümkün olduğunca nesne yönelimli olarak ve genel olarak tasarlayınız.
 > - Her bir şubenin not dağılımına ilişkin histogram'ları  ve okulun Fizik notlarına ilişkin histogramı (düşey olarak) çiziniz.
@@ -35467,3 +35467,147 @@ interface IY {
     void bar(double a);  
 }
 ```
+
+###### 13 Mayıs 2025
+
+>Bir sınıf bir arayüzü destekliyorsa ondan türeyen sınıflar da o arayüzü destekler. Bu durumda türemiş sınıf arayüz listesine ilgili desteklenen arayüzün yazılması gerekmez, istenirse yazılabilir.
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        B b = new B();  
+        C c = new C();  
+  
+        Sample.foo(b); //upcasting
+        Sample.foo(c); //upcasting
+    }  
+}  
+  
+class Sample {  
+    public static void foo(IX ix)  
+    {  
+        //...  
+    }  
+}  
+
+class C extends A implements IX, IY {  
+    //....  
+}  
+  
+  
+class B extends A implements IY {  
+    //...  
+}  
+  
+class A implements IX {  
+    //...  
+}  
+  
+interface IY {  
+    //...  
+}  
+  
+interface IX {  
+    //...  
+}
+```
+  
+>Bir sınıfın desteklediği arayüzlerin geri dönüş değeri ve imzası aynı olan bir sanal metodu varsa, override  edilen ilgili metot tüm arayüzler için geçerli olur
+
+```java
+class A implements IX, IY {  
+    public void foo(int a)  
+    {  
+        //...  
+    }  
+}  
+  
+interface IY {  
+    void foo(int a);  
+}  
+  
+interface IX {  
+    void foo(int a);  
+}
+```
+
+>Aşağıdaki demo örnekte A sınıfı IX ve IY arayüzlerinin her ikisini birden implemente ettiğinde her iki foo metodunu da override edemez. Çünkü her iki foo metodu da aynı imzaya sahiptir.
+
+```java
+class A implements IX, IY {  
+    public void foo(int a) //error  
+    {  
+        //...  
+    }  
+  
+    public int foo(int a) //error  
+    {  
+        //...  
+  
+        return 0;  
+    }
+}  
+  
+interface IY {  
+    int foo(int a);  
+}  
+  
+interface IX {  
+    void foo(int a);  
+}
+```
+  
+>Arayüzler birbirlerinden türetilebilirler. Bu sentaks olarak extends anahtar sözcüğü ile yapılır. Burada türetme (inheritance)  teriminin kullanıldığına, implementation teriminin kullanılmadığına dikkat ediniz. Arayüzler arasında çoklu türetme de geçerlidir. Türemiş bir arayüz içerisinde taban arayüzün tüm public elemanları da bulunur. Türemiş bir arayüzü  destekleyen bir sınıf taban arayüzlerini de desteklemiş olur. Taban arayüzlerin arayüz listesine yazılması gerekmez, istenirse yazılabilir.
+
+```java
+class A implements IZ {  
+    public void foo(int a)  
+    {  
+        //...  
+    }  
+  
+  
+    public void bar(int a)  
+    {  
+        //...  
+    }  
+  
+    public void tar(float a)  
+    {  
+        //...  
+    }  
+}  
+  
+interface IZ extends IX, IY {  
+    void tar(float a);  
+}  
+  
+interface IY {  
+    void foo(int a);  
+}  
+  
+interface IX {  
+    void bar(int a);  
+}
+```
+
+###### Arayüzler ile abstract sınıflar arasındaki farklar
+
+>- Bir arayüz interface anahtar sözcüğü ile, (abstract) bir sınıf class anahtar sözcüğü ile bildirilir. 
+>- Bir sınıf tek bir sınıftan türetilebilirken, istediği kadar arayüzü destekleyebilir.  
+>- Arayüzler arasında çoklu türetme yapılabilir, sınıflar arasında yapılamaz.
+>- Bir arayüz içerisinde yalnızca private metotlar ve/veya public elemanlar olabilir, (asbtract) sınıf içerisinde protected  veya friendly elemanlar da olabilir.  
+>- Bir arayüzün non-static veri elemanı olamaz. Bir abstract sınıfın olabilir.  
+>- Bir arayüz nesne özelliği göstermez. Bir abstract sınıf türünden nesne, türemiş sınıf nesnesi içerisinde  yaratılır. Bu durumda bir arayüzün ctor'u da olamaz.  
+>- Bir arayüzün gövdesiz metodu abstract'dır, abstract bir sınıfın gövdesiz bir metodu abstract olarak bildirilmelidir.  
+>- Bir arayüzün gövdeli metodu default anahtar sözcüğü ile bildirilmelidir, abstract bir sınıfın gövdeli metodu  doğrudan yazılır.  Bu durum Java 8+ için geçerlidir. Java 8 öncesinde bir arayüz içerisinde gövdeli bir metot bildirimi geçersizdir.
+>- Bir abstract sınıf içerisinde no-modifier bir eleman friendly anlamındadır, bir interface içerisinde public  anlamındadır.  
+>
+>Programcı soyut bir UDT için abstract sınıf mı yoksa arayüz mü yapacağına (abstraction) nasıl karar verecektir? Programcı bu durumda ilk olarak arayüz düşünmelidir. Eğer arayüze ilişkin sentaks ve semantik kurallar ilgili soyut tür için yetersiz kalıyorsa abstract sınıf olarak tasarlamalıdır. Yetersiz kalması tipik olarak nesne özelliği gösterip göstermemesi biçiminde düşünülebilir. Eğer, arayüz yapılabildiği durumda programcı ilgili UDT'yi abstract sınıf olarak soyutlarsa, hem okunabilirlik/algılanabilirlik olumsuz olarak etkilenir hem de o abstract sınıftan türeyen bir sınıf başka bir sınıftan türetilemez. Halbuki, arayüz yapılırsa, bir sınıftan türetilip, ilgili arayüzü de (hatta başka arayüzleri de) destekleyebilir (implements). Aynı zamanda bu basit yaklaşımı uygulamak abstract sınıfların okunabilirliğini/algılanabilirliğini artırır. Çünkü bu durumda abstract bir sınıf gören programcı genel olarak `"demekki bu sınıf nesne özelliği gösteriyor aksi durumda arayüz olarak bildirilirdi"` şeklinde algılar.
+
+
+
+>`CompanyApp` uygulamasında `Employee` sınıfı bir arayüz olamaz. Çünkü non-static veri elemanlarına sahip soyutlanmış bir UDT'dir.
