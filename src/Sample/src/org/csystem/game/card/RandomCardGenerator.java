@@ -1,19 +1,19 @@
 package org.csystem.game.card;
 
-import java.util.Random;
+import java.util.random.RandomGenerator;
 
 public class RandomCardGenerator {
     private static final CardType [] CARD_TYPES = CardType.values();
     private static final CardValue [] CARD_VALUES = CardValue.values();
-    private final Random m_random;
+    private final RandomGenerator m_randomGenerator;
 
-    public RandomCardGenerator(Random random)
+    public RandomCardGenerator(RandomGenerator randomGenerator)
     {
-        m_random = random;
+        m_randomGenerator = randomGenerator;
     }
 
     public Card create()
     {
-        return new Card(CARD_TYPES[m_random.nextInt(CARD_TYPES.length)], CARD_VALUES[m_random.nextInt(CARD_VALUES.length)]);
+        return new Card(CARD_TYPES[m_randomGenerator.nextInt(CARD_TYPES.length)], CARD_VALUES[m_randomGenerator.nextInt(CARD_VALUES.length)]);
     }
 }

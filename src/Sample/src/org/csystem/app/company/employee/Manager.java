@@ -1,4 +1,4 @@
-package org.csystem.app.company;
+package org.csystem.app.company.employee;
 
 public class Manager extends Employee {
     private String m_department;

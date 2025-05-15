@@ -1,4 +1,4 @@
-package org.csystem.app.company;
+package org.csystem.app.company.employee;
 
 public class ProjectWorker extends Worker {
     private String m_projectName;

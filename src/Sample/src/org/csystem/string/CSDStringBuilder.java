@@ -1,13 +1,13 @@
 /**
  * Mutable class for some string operations
- * Last Update: 6th March 2025
+ * Last Update: 15th May 2025
  * @author Java-Jan-2024 Group
  */
 package org.csystem.string;
 
 import java.util.Arrays;
 
-public class CSDStringBuilder {
+public class CSDStringBuilder implements CharSequence {
     private static final int DEFAULT_CAPACITY_IF_CURRENT_ZERO = 1;
     private static final int CAPACITY_INCREMENT_FACTOR = 2;
     private static final int DEFAULT_CAPACITY = 16;
@@ -153,6 +153,11 @@ public class CSDStringBuilder {
     }
 
     //...
+
+    public CharSequence subSequence(int start, int end)
+    {
+        return String.valueOf(m_chars, start, end - start); //ankara
+    }
 
     public int length()
     {

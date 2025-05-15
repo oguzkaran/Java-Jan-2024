@@ -1,13 +1,13 @@
 /**
  * Utility class for array operations
- * Last Update: 10th December 2024
+ * Last Update: 15th May 2025
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.matrix;
 
 import org.csystem.util.array.ArrayUtil;
 
-import java.util.Random;
+import java.util.random.RandomGenerator;
 
 public final class MatrixUtil {
     private MatrixUtil()
@@ -40,19 +40,19 @@ public final class MatrixUtil {
         return r;
     }
 
-    public static int [][] generateRandomMatrix(Random random, int m, int n, int origin, int bound)
+    public static int [][] generateRandomMatrix(RandomGenerator randomGenerator, int m, int n, int origin, int bound)
     {
         int [][] result = new int[m][];
 
         for (int i = 0; i < m; ++i)
-            result[i] = ArrayUtil.generateRandomArray(random, n, origin, bound);
+            result[i] = ArrayUtil.generateRandomArray(randomGenerator, n, origin, bound);
 
         return result;
     }
 
-    public static int [][] generateRandomSquareMatrix(Random random, int n, int origin, int bound)
+    public static int [][] generateRandomSquareMatrix(RandomGenerator randomGenerator, int n, int origin, int bound)
     {
-        return generateRandomMatrix(random, n, n, origin, bound);
+        return generateRandomMatrix(randomGenerator, n, n, origin, bound);
     }
 
     public static boolean isMatrix(int [][] a)

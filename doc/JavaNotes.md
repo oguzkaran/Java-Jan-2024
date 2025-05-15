@@ -12336,9 +12336,9 @@ class App {
 }
 ```
 
->`Random` sınıfına Java 17 ile birlikte iki parmatreli `nextInt` metodu da dolaylı olarak eklenmiştir. Bu metot aldığı parametre değerlerine göre `[origin, bound)` aralığında üretilmiş rassal bir sayıya geri döner.
+>`Random` sınıfına Java 17 ile birlikte iki paramatreli `nextInt` metodu da dolaylı olarak eklenmiştir. Bu metot aldığı parametre değerlerine göre `[origin, bound)` aralığında üretilmiş rassal bir sayıya geri döner.
 	
-**Anahtar Notlar:** Burada "dolaylı eklenmiştir" denmesinin ayrıntıları ileride ele alınacaktır
+**Anahtar Notlar:** Burada "dolaylı olarak eklenmiştir" denmesinin ayrıntıları ileride ele alınacaktır
 
 ```java
 package csd;
@@ -35608,6 +35608,1092 @@ interface IX {
 >
 >Programcı soyut bir UDT için abstract sınıf mı yoksa arayüz mü yapacağına (abstraction) nasıl karar verecektir? Programcı bu durumda ilk olarak arayüz düşünmelidir. Eğer arayüze ilişkin sentaks ve semantik kurallar ilgili soyut tür için yetersiz kalıyorsa abstract sınıf olarak tasarlamalıdır. Yetersiz kalması tipik olarak nesne özelliği gösterip göstermemesi biçiminde düşünülebilir. Eğer, arayüz yapılabildiği durumda programcı ilgili UDT'yi abstract sınıf olarak soyutlarsa, hem okunabilirlik/algılanabilirlik olumsuz olarak etkilenir hem de o abstract sınıftan türeyen bir sınıf başka bir sınıftan türetilemez. Halbuki, arayüz yapılırsa, bir sınıftan türetilip, ilgili arayüzü de (hatta başka arayüzleri de) destekleyebilir (implements). Aynı zamanda bu basit yaklaşımı uygulamak abstract sınıfların okunabilirliğini/algılanabilirliğini artırır. Çünkü bu durumda abstract bir sınıf gören programcı genel olarak `"demekki bu sınıf nesne özelliği gösteriyor aksi durumda arayüz olarak bildirilirdi"` şeklinde algılar.
 
+###### 15 Mayıs 2025
+
+>CompanyApp uygulamasında `Employee` sınıfı bir arayüz olamaz. Çünkü non-static veri elemanlarına sahip soyutlanmış bir UDT'dir. Sigortalı olabilme, yani belirli bir Id ve sigorta ücretine ilişkin soyutlama `IInsured` arayüzü ile gerçekleştirilmiştir. Employee sınıfının bu arayüzü implemente etmesi ile ondan türeyen sınıflar da `IInsured`anlaşmasına (contract) uymaktadır. Ayrıca demo uygulama içerisinde Employee sınıfı dışından `IInsured` anlaşmasına uyan sınıflar için `payInsurance`metodu çağrılabilir. 
+
+```java
+package org.csystem.app.company;  
+  
+import org.csystem.app.company.employee.Employee;  
+import org.csystem.app.company.employee.Manager;  
+import org.csystem.app.company.employee.ProjectWorker;  
+import org.csystem.app.company.employee.SalesManager;  
+import org.csystem.app.company.employee.Worker;  
+import org.csystem.app.company.hr.HumanResources;  
+import org.csystem.util.thread.ThreadUtil;  
+  
+import java.util.Random;  
+  
+public class DemoCompanyApp {  
+    private static Manager getManager()  
+    {  
+        return new Manager("Kaan Aslan", "12345678945", "Mecidiyeköy", "Yazılım", 300000);  
+    }  
+  
+    private static Worker getWorker()  
+    {  
+        return new Worker("Güray Sönmez", "12345789321", "Bodrum", 400, 8);  
+    }  
+  
+    private static ProjectWorker getProjectWorker()  
+    {  
+        return new ProjectWorker("Lokman Köse", "23456789233", "Çağlayan", 200, 8, "Dernek", 2000);  
+    }  
+  
+    private static SalesManager getSalesManager()  
+    {  
+        return new SalesManager("Ali Serçe", "34567892345", "Geyikli", "Pazarlama", 400000, 30000);  
+    }  
+  
+    private static Employee getEmployee(Random random)  
+    {  
+        return switch (random.nextInt(4)) {  
+            case 0 -> getWorker();  
+            case 1 -> getProjectWorker();  
+            case 2 -> getSalesManager();  
+            default -> getManager();  
+        };  
+    }  
+  
+  
+    public static void run()  
+    {  
+        Random random = new Random();  
+        HumanResources humanResources = new HumanResources();  
+  
+        while (true) {  
+            Employee employee = getEmployee(random);  
+  
+            humanResources.payInsurance(employee);  
+            ThreadUtil.sleep(1000);  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+```java
+package org.csystem.app.company.employee.insurance;  
+  
+public interface IInsured {  
+    String getId();  
+    double calculateInsurancePayment();  
+}
+```
+
+```java
+package org.csystem.app.company.employee;  
+  
+import org.csystem.app.company.employee.insurance.IInsured;  
+  
+public abstract class Employee implements IInsured {  
+    private String m_name;  
+    private String m_citizenId;  
+    private String m_address;  
+  
+    //...  
+  
+    protected Employee(String name, String citizenId, String address)  
+    {  
+        //...  
+        m_name = name;  
+        m_citizenId = citizenId;  
+        m_address = address;  
+    }  
+  
+    public String getName()  
+    {  
+        return m_name;  
+    }  
+  
+    public void setName(String name)  
+    {  
+        //...  
+        m_name = name;  
+    }  
+  
+    public String getId()  
+    {  
+        return m_citizenId;  
+    }  
+  
+    public void setId(String citizenId)  
+    {  
+        //...  
+        m_citizenId = citizenId;  
+    }  
+  
+    public String getAddress()  
+    {  
+        return m_address;  
+    }  
+  
+    public void setAddress(String address)  
+    {  
+        //...  
+        m_address = address;  
+    }  
+  
+  
+    //...  
+}
+```
+
+```java
+package org.csystem.app.company.hr;  
+  
+import org.csystem.app.company.employee.insurance.IInsured;  
+import org.csystem.util.console.Console;  
+  
+public class HumanResources {  
+    //...  
+  
+    public void payInsurance(IInsured insured)  
+    {  
+        Console.writeLine("--------------------------------------------------------");  
+        Console.writeLine("CitizenId:%s", insured.getId());  
+        Console.writeLine("Insurance payment:%f", insured.calculateInsurancePayment());  
+        Console.writeLine("--------------------------------------------------------");  
+    }  
+}
+```
+
+```java
+package org.csystem.app.company.employee;  
+  
+public class Manager extends Employee {  
+    private String m_department;  
+    private double m_salary;  
+  
+    public Manager(String name, String citizenId, String address, String department, double salary)  
+    {  
+        super(name, citizenId, address);  
+        m_department = department;  
+        m_salary = salary;  
+    }  
+  
+    public String getDepartment()  
+    {  
+        return m_department;  
+    }  
+  
+    public void setDepartment(String department)  
+    {  
+        //...  
+        m_department = department;  
+    }  
+  
+    public double getSalary()  
+    {  
+        return m_salary;  
+    }  
+  
+    public void setSalary(double salary)  
+    {  
+        //...  
+        m_salary = salary;  
+    }  
+  
+    public double calculateInsurancePayment()  
+    {  
+        return m_salary * 1.5;  
+    }  
+}
+```
+
+```java
+package org.csystem.app.company.employee;  
+  
+public class SalesManager extends Manager {  
+    private double m_saleExtra;  
+  
+    public SalesManager(String name, String citizenId, String address, String department, double salary, double saleExtra)  
+    {  
+        super(name, citizenId, address, department, salary);  
+        m_saleExtra = saleExtra;  
+    }  
+  
+    public double getSaleExtra()  
+    {  
+        return m_saleExtra;  
+    }  
+  
+    public void setSaleExtra(double saleExtra)  
+    {  
+        m_saleExtra = saleExtra;  
+    }  
+  
+    public double calculateInsurancePayment()  
+    {  
+        return super.calculateInsurancePayment() + m_saleExtra;  
+    }  
+}
+```
+
+```java
+package org.csystem.app.company.employee;  
+  
+public class Worker extends Employee {  
+    private double m_feePerHour;  
+    private int m_hourPerDay;  
+  
+    public Worker(String name, String citizenId, String address, double feePerHour, int hourPerDay)  
+    {  
+        super(name, citizenId, address);  
+        m_feePerHour = feePerHour;  
+        m_hourPerDay = hourPerDay;  
+    }  
+  
+    public double getFeePerHour()  
+    {  
+        return m_feePerHour;  
+    }  
+  
+    public void setFeePerHour(double feePerHour)  
+    {  
+        m_feePerHour = feePerHour;  
+    }  
+  
+    public int getHourPerDay()  
+    {  
+        return m_hourPerDay;  
+    }  
+  
+    public void setHourPerDay(int hourPerDay)  
+    {  
+        m_hourPerDay = hourPerDay;  
+    }  
+  
+    public double calculateInsurancePayment()  
+    {  
+        return m_feePerHour * m_hourPerDay * 30;  
+    }  
+  
+    //...  
+}
+```
 
 
->`CompanyApp` uygulamasında `Employee` sınıfı bir arayüz olamaz. Çünkü non-static veri elemanlarına sahip soyutlanmış bir UDT'dir.
+```java
+package org.csystem.app.company.employee;  
+  
+public class ProjectWorker extends Worker {  
+    private String m_projectName;  
+    private double m_extraFee;  
+  
+    public ProjectWorker(String name, String citizenId, String address, double feePerHour, int hourPerDay, String projectName, double extraFee)  
+    {  
+        super(name, citizenId, address, feePerHour, hourPerDay);  
+        m_projectName = projectName;  
+        m_extraFee = extraFee;  
+    }  
+  
+    public String getProjectName()  
+    {  
+        return m_projectName;  
+    }  
+  
+    public void setProjectName(String projectName)  
+    {  
+        m_projectName = projectName;  
+    }  
+  
+    public double getExtraFee()  
+    {  
+        return m_extraFee;  
+    }  
+  
+    public void setExtraFee(double extraFee)  
+    {  
+        m_extraFee = extraFee;  
+    }  
+  
+    public double calculateInsurancePayment()  
+    {  
+        return super.calculateInsurancePayment() + m_extraFee * 30;  
+    }  
+}
+```
+
+
+>JavaSE'de `CharSequence` arayüzü karakterlerin dizilimine ilişkin (sequence of characters) ilişkin bir soyutlama (anlaşma) sunar. Bu arayüz ile dizilmiş olan karakterler için okuma (readability) işlemlerine ilişkin soyut ve default metotlar gelmektedir. Karakterler ile işlemler yapan sınıflar bu arayüzü bir anlaşma olarak implemente ederler. Bu anlamda String sınıfı, StringBuilder sınıfı ve diğer karakterler ile işlem yapan sınıflar bu arayüzü implemente etmişlerdir. Pek çok geliştirme ortamına ilişkin kütüphanelerde bu arayüz referansı parametre olarak alan metotlar bulunur. Bu arayüzün `length`, `charAt` gibi abstract metodları vardır. Bu arayüze Java 8 ve sonrasında yararlı default metotlar da eklenmiştir.
+>
+>Java 17 ile birlikte rassal sayı üretimine ilişkin anlaşmayı temsil eden `RandomGenerator` isimli bir arayüz eklenmiştir. Bu arayüz ile birlikte farklı rassal sayı üretim algoritmaları kullanılabilmektedir. `java.util.Random` sınıfı gibi daha öncesinde var olan rassal sayı üretimine ilişkin sınıflar da Java 17 ile birlikte bu arayüzü implemente etmektedirler. Bu durumda Random sınıfına pek çok metot da dolaylı olarak eklenmiştir. Aslında `RandomGenerator` arayüzünün bir tane abstract metodu vardır:
+
+```java
+long nextLong();
+```
+
+>Diğer tüm metotları default olarak bildirilmiştir. Bu arayüzün `of` factory metotları ile çeşitli algoritmalar için nesnelere ilişkin referanslar elde edilebilmektedir. Bu arayüz ile birlikte Java'da rassal sayı üretimi soyutlanarak daha genel ve yetenekli hale getirilmiştir.
+
+
+>Aşağıdaki demo örnekte `Random` parametreli metotları `RandomGenerator` alacak şekilde genelleştirilmiş `StringUtil` sınıfının `generateRandomTextTR` metodu ile `Xoshiro256PlusPlus` rassal sayı üretim algoritması kullanılmıştır. Java'da kullanılan rassal sayı üretim algoritmalarının detayları şu aşamada önemsizdir. Şu aşamada, `RandomGenerator` arayüzünün rassal sayı üretimini soyutlamasına odaklanılmalıdır.
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.console.Console;  
+import org.csystem.util.string.StringUtil;  
+  
+import java.util.random.RandomGenerator;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        RandomGenerator randomGenerator = RandomGenerator.of("Xoshiro256PlusPlus");  
+  
+        Console.writeLine(StringUtil.generateRandomTextTR(randomGenerator, 10));  
+    }  
+}
+```
+
+>StringUtil sınıfı
+
+```java
+package org.csystem.util.string;  
+  
+import java.util.ArrayList;  
+import java.util.random.RandomGenerator;  
+  
+public final class StringUtil {  
+    private StringUtil()  
+    {  
+    }  
+  
+    private static final String LETTERS_EN;  
+    private static final String LETTERS_TR;  
+    private static final String CAPITAL_LETTERS_EN;  
+    private static final String CAPITAL_LETTERS_TR;  
+    private static final String ALL_LETTERS_EN;  
+    private static final String ALL_LETTERS_TR;  
+  
+    static {  
+       LETTERS_EN = "abcdefghijklmnopqrstuvwxyz";  
+       LETTERS_TR = "abcçdefgğhıijklmnoöprsştuüvyz";  
+       CAPITAL_LETTERS_EN = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";  
+       CAPITAL_LETTERS_TR = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ";  
+       ALL_LETTERS_EN = LETTERS_EN + CAPITAL_LETTERS_EN;  
+       ALL_LETTERS_TR = LETTERS_TR + CAPITAL_LETTERS_TR;  
+    }  
+  
+    public static String capitalize(String s)  
+    {  
+       return s.isEmpty() ? s : Character.toUpperCase(s.charAt(0)) + s.substring(1).toLowerCase();  
+    }  
+  
+    public static CharSequence changeCase(CharSequence charSequence)  
+    {  
+       StringBuilder sb = new StringBuilder(charSequence);  
+  
+       for (int i = 0; i < charSequence.length(); ++i) {  
+          char c = charSequence.charAt(i);  
+  
+          sb.setCharAt(i, Character.isLowerCase(c) ? Character.toUpperCase(c) : Character.toLowerCase(c));  
+       }  
+  
+       return sb.toString();  
+    }  
+  
+  
+    public static int countString(String s1, String s2)  
+    {  
+       int count = 0;  
+  
+       for (int i = 0; (i = s1.indexOf(s2, i)) != -1; ++i, ++count)  
+          ;  
+  
+       return count;  
+    }  
+  
+    public static String generateRandomText(RandomGenerator randomGenerator, int count, CharSequence charSequence)  
+    {  
+       char [] c = new char[count];  
+  
+       for (int i = 0; i < count; ++i)  
+          c[i] = charSequence.charAt(randomGenerator.nextInt(charSequence.length()));  
+  
+       return String.valueOf(c);  
+    }  
+  
+    public static String generateRandomTextEN(RandomGenerator randomGenerator, int count)  
+    {  
+       return generateRandomText(randomGenerator, count, ALL_LETTERS_EN);  
+    }  
+  
+    public static String generateRandomTextTR(RandomGenerator randomGenerator, int count)  
+    {  
+       return generateRandomText(randomGenerator, count, ALL_LETTERS_TR);  
+    }  
+  
+    public static String [] generateRandomTexts(RandomGenerator randomGenerator, int count, int origin, int bound, CharSequence charSequence)  
+    {  
+       String [] str = new String[count];  
+  
+       for (int i = 0; i < count; ++i)  
+          str[i] = generateRandomText(randomGenerator, randomGenerator.nextInt(origin, bound), charSequence);  
+  
+       return str;  
+    }  
+  
+    public static String [] generateRandomTextsEN(RandomGenerator randomGenerator, int count, int origin, int bound)  
+    {  
+       return generateRandomTexts(randomGenerator, count, origin, bound, ALL_LETTERS_EN);  
+    }  
+  
+    public static String [] generateRandomTextsTR(RandomGenerator randomGenerator, int count, int origin, int bound)  
+    {  
+       return generateRandomTexts(randomGenerator, count, origin, bound, ALL_LETTERS_TR);  
+    }  
+  
+    public static boolean isPalindrome(CharSequence charSequence)  
+    {  
+       int left = 0;  
+       int right = charSequence.length() - 1;  
+  
+       while (left < right) {  
+          char cLeft = charSequence.charAt(left);  
+  
+          if (!Character.isLetter(cLeft)) {  
+             ++left;  
+             continue;  
+          }  
+  
+          char cRight = charSequence.charAt(right);  
+  
+          if (!Character.isLetter(cRight)) {  
+             --right;  
+             continue;  
+          }  
+  
+          if (Character.toLowerCase(cLeft) != Character.toLowerCase(cRight))  
+             return false;  
+  
+          ++left;  
+          --right;  
+       }  
+  
+       return true;  
+    }  
+  
+  
+    public static boolean isPangram(String s, String alphabet)  
+    {  
+       for (int i = 0; i < alphabet.length(); ++i)  
+          if (s.indexOf(alphabet.charAt(i)) == -1)  
+             return false;  
+  
+       return true;  
+    }  
+  
+  
+    public static boolean isPangramEN(String s)  
+    {  
+       return isPangram(s.toLowerCase(), LETTERS_EN);  
+    }  
+  
+    public static boolean isPangramTR(String s)  
+    {  
+       return isPangram(s.toLowerCase(), LETTERS_TR);  
+    }  
+  
+  
+    public static String join(ArrayList texts, CharSequence delimiter)  
+    {  
+       StringBuilder sb = new StringBuilder();  
+  
+       for (Object o : texts) {  
+          String s = (String)o;  
+  
+          sb.append(s).append(delimiter);  
+       }  
+  
+       return sb.substring(0, sb.length() - delimiter.length());  
+    }  
+  
+    public static String join(ArrayList texts, char delimiter)  
+    {  
+       return join(texts, String.valueOf(delimiter));  
+    }  
+  
+    public static String join(String [] s, CharSequence delimiter)  
+    {  
+       StringBuilder sb = new StringBuilder();  
+  
+       for (String str : s)  
+          sb.append(str).append(delimiter);  
+  
+       return sb.substring(0, sb.length() - delimiter.length());  
+    }  
+  
+    public static String join(String [] s, char delimiter)  
+    {  
+       return join(s, String.valueOf(delimiter));  
+    }  
+  
+    public static String padLeading(String s, int n, char ch)  
+    {  
+       int len = s.length();  
+  
+       return len < n ? String.valueOf(ch).repeat(n - len) + s : s;  
+    }  
+  
+    public static String padLeading(String s, int n)  
+    {  
+       return padLeading(s, n, ' ');  
+    }  
+  
+    public static String padTrailing(String s, int n, char ch)  
+    {  
+       int len = s.length();  
+  
+       return len < n ? s + String.valueOf(ch).repeat(n - len) : s;  
+    }  
+  
+    public static String padTrailing(String s, int n)  
+    {  
+       return padTrailing(s, n, ' ');  
+    }  
+  
+    public static String reverse(String s)  
+    {  
+       return new StringBuilder(s).reverse().toString();  
+    }  
+  
+    public static String [] split(String s, CharSequence delimiters)  
+    {  
+       return split(s, delimiters, true);  
+    }  
+  
+    public static String [] split(String s, CharSequence delimiters, boolean removeEmptyEntries)  
+    {  
+       StringBuilder pattern = new StringBuilder("[");  
+  
+       for (int i = 0; i < delimiters.length(); ++i) {  
+          char c = delimiters.charAt(i);  
+  
+          if (c == '[' || c == ']')  
+             pattern.append('\\');  
+  
+          pattern.append(c);  
+       }  
+  
+       pattern.append(']');  
+  
+       if (removeEmptyEntries)  
+          pattern.append("+");  
+  
+       return s.split(pattern.toString());  
+    }  
+}
+```
+
+>ArrayUtil sınıfı
+
+```java
+package org.csystem.util.array;  
+  
+  
+import java.util.random.RandomGenerator;  
+  
+public final class ArrayUtil {  
+    private ArrayUtil()  
+    {  
+    }  
+  
+    private static void bubbleSortAscending(int [] a)  
+    {  
+        for (int i = 0; i < a.length - 1; ++i)  
+            for (int k = 0; k < a.length - 1 - i; ++k)  
+                if (a[k + 1] < a[k])  
+                    swap(a, k, k + 1);  
+    }  
+  
+    private static void bubbleSortDescending(int [] a)  
+    {  
+        for (int i = 0; i < a.length - 1; ++i)  
+            for (int k = 0; k < a.length -1 - i; ++k)  
+                if (a[k] < a[k + 1])  
+                    swap(a, k, k + 1);  
+    }  
+  
+    private static void selectionSortAscending(int [] a)  
+    {  
+        int min, minIndex;  
+  
+        for (int i = 0; i < a.length - 1; ++i) {  
+            min = a[i];  
+            minIndex = i;  
+  
+            for (int k = i + 1; k < a.length; ++k)  
+                if (a[k] < min) {  
+                    min = a[k];  
+                    minIndex = k;  
+                }  
+            a[minIndex] = a[i];  
+            a[i] = min;  
+        }  
+    }  
+  
+    private static void selectionSortDescending(int [] a)  
+    {  
+        int max, maxIndex;  
+  
+        for (int i = 0; i < a.length - 1; ++i) {  
+            max = a[i];  
+            maxIndex = i;  
+  
+            for (int k = i + 1; k < a.length; ++k)  
+                if (max < a[k]) {  
+                    max = a[k];  
+                    maxIndex = k;  
+                }  
+            a[maxIndex] = a[i];  
+            a[i] = max;  
+        }  
+    }  
+  
+    public static double average(int [] a)  
+    {  
+        return sum(a) / (double)a.length;  
+    }  
+  
+    public static void bubbleSort(int [] a)  
+    {  
+        bubbleSort(a, false);  
+    }  
+  
+    public static void bubbleSort(int [] a, boolean descending)  
+    {  
+        if (descending)  
+            bubbleSortDescending(a);  
+        else  
+            bubbleSortAscending(a);  
+    }  
+  
+    public static void drawHistogram(int [] data, int n, char ch)  
+    {  
+        int maxValue = ArrayUtil.max(data);  
+  
+        for (int grade : data) {  
+            int count = (int)Math.floor(grade * n / (double)maxValue);  
+  
+            while (count-- > 0)  
+                System.out.print(ch);  
+  
+            System.out.println();  
+        }  
+    }  
+  
+    public static int [] generateRandomArray(RandomGenerator randomGenerator, int count, int origin, int bound)  
+    {  
+        int [] a = new int[count];  
+  
+        for (int i = 0; i < count; ++i)  
+            a[i] = randomGenerator.nextInt(origin, bound);  
+  
+        return a;  
+    }  
+  
+    public static double [] generateRandomArray(RandomGenerator randomGenerator, int count, double origin, double bound)  
+    {  
+        double [] a = new double[count];  
+  
+        for (int i = 0; i < count; ++i)  
+            a[i] = randomGenerator.nextDouble(origin, bound);  
+  
+        return a;  
+    }  
+  
+    public static boolean [] generateRandomArray(RandomGenerator randomGenerator, int count)  
+    {  
+        boolean [] a = new boolean[count];  
+  
+        for (int i = 0; i < count; ++i)  
+            a[i] = randomGenerator.nextBoolean();  
+  
+        return a;  
+    }  
+  
+    public static int [] histogramData(int [] a, int n)  
+    {  
+        int [] data = new int[n + 1];  
+  
+        for (int val : a)  
+            ++data[val];  
+  
+        return data;  
+    }  
+  
+    public static int max(int [] a)  
+    {  
+        return max(a, 0);  
+    }  
+  
+    public static int max(int [] a, int startIndex)  
+    {  
+        int result = a[startIndex];  
+  
+        for (int i = startIndex + 1; i < a.length; ++i)  
+            result = Math.max(result, a[i]);  
+  
+        return result;  
+    }  
+  
+    public static int max(int [][] a)  
+    {  
+        int result = Integer.MIN_VALUE;  
+  
+        for (int [] array : a)  
+            result = Math.max(result, max(array));  
+  
+        return result;  
+    }  
+  
+    public static int min(int [] a)  
+    {  
+        return min(a, 0);  
+    }  
+  
+    public static int min(int [] a, int startIndex)  
+    {  
+        int result = a[startIndex];  
+  
+        for (int i = startIndex + 1; i < a.length; ++i)  
+            result = Math.min(result, a[i]);  
+  
+        return result;  
+    }  
+  
+    public static int min(int [][] a)  
+    {  
+        int result = Integer.MAX_VALUE;  
+  
+        for (int [] array : a)  
+            result = Math.min(result, min(array));  
+  
+        return result;  
+    }  
+  
+    public static void multiplyBy(int [] a, int value)  
+    {  
+        for (int i = 0; i < a.length; ++i)  
+            a[i] *= value;  
+    }  
+  
+    public static void multiplyBy(int [][] a, int value)  
+    {  
+        for (int [] array : a)  
+            multiplyBy(array, value);  
+    }  
+  
+    public static int partition(int [] a, int threshold)  
+    {  
+        int partitionPoint = 0;  
+  
+        while (partitionPoint != a.length && a[partitionPoint] < threshold)  
+            ++partitionPoint;  
+  
+        if (partitionPoint == a.length)  
+            return partitionPoint;  
+  
+        for (int i = partitionPoint + 1; i < a.length; ++i)  
+            if (a[i] < threshold)  
+                swap(a, i, partitionPoint++);  
+  
+        return partitionPoint;  
+    }  
+  
+    public static int partitionByEven(int [] a)  
+    {  
+        int partitionPoint = 0;  
+  
+        while (partitionPoint != a.length && a[partitionPoint] % 2 == 0)  
+            ++partitionPoint;  
+  
+        if (partitionPoint == a.length)  
+            return partitionPoint;  
+  
+        for (int i = partitionPoint + 1; i < a.length; ++i)  
+            if (a[i] % 2 == 0)  
+                swap(a, i, partitionPoint++);  
+  
+        return partitionPoint;  
+    }  
+  
+    public static void print(int [] a)  
+    {  
+        print(a, ' ', '\n');  
+    }  
+  
+    public static void print(int [] a, char sep, char end)  
+    {  
+        print(a, 1, sep, end);  
+    }  
+  
+    public static void print(int [] a, int n)  
+    {  
+        print(a, n, ' ', '\n');  
+    }  
+  
+    public static void print(int [] a, int n, char sep, char end)  
+    {  
+        String fmt = String.format("%%0%dd%c", n, sep);  
+  
+        for (int val : a)  
+            System.out.printf(fmt, val, sep);  
+  
+        System.out.print(end);  
+    }  
+  
+    public static void print(int [][] a)  
+    {  
+        print(a, 1);  
+    }  
+  
+    public static void print(int [][] a, int n)  
+    {  
+        for (int [] array : a)  
+            print(array, n, ' ', '\n');  
+    }  
+  
+    public static void print(double [] a)  
+    {  
+        print(a, '\n', '\n');  
+    }  
+  
+    public static void print(double [] a, char sep, char end)  
+    {  
+        for (double val : a)  
+            System.out.printf("%f%c", val, sep);  
+  
+        System.out.print(end);  
+    }  
+  
+    public static void reverse(int [] a)  
+    {  
+        int left = 0, right = a.length - 1;  
+  
+        while (left < right)  
+            swap(a, left++, right--);  
+    }  
+  
+    public static void reverse(char [] a)  
+    {  
+        int left = 0, right = a.length - 1;  
+  
+        while (left < right)  
+            swap(a, left++, right--);  
+    }  
+  
+    public static void selectionSort(int [] a)  
+    {  
+        selectionSort(a, false);  
+    }  
+  
+    public static void selectionSort(int [] a, boolean descending)  
+    {  
+        if (descending)  
+            selectionSortDescending(a);  
+        else  
+            selectionSortAscending(a);  
+    }  
+    public static long sum(int [] a)  
+    {  
+        long total = 0;  
+  
+        for (int val : a)  
+            total += val;  
+  
+        return total;  
+    }  
+  
+    public static void swap(int [] a, int i, int k)  
+    {  
+        int temp = a[i];  
+  
+        a[i] = a[k];  
+        a[k] = temp;  
+    }  
+  
+    public static void swap(char [] a, int i, int k)  
+    {  
+        char temp = a[i];  
+  
+        a[i] = a[k];  
+        a[k] = temp;  
+    }  
+  
+    //...  
+}
+```
+
+>MatrixUtil sınıfı
+
+```java
+package org.csystem.util.matrix;  
+  
+import org.csystem.util.array.ArrayUtil;  
+  
+import java.util.random.RandomGenerator;  
+  
+public final class MatrixUtil {  
+    private MatrixUtil()  
+    {  
+    }  
+  
+    public static int [][] add(int [][] a, int [][] b)  
+    {  
+        int m = a.length;  
+        int n = a[0].length;  
+        int [][] r = new int[m][n];  
+  
+        for (int i = 0; i < m; ++i)  
+            for (int j = 0; j < n; ++j)  
+                r[i][j] = a[i][j] + b[i][j];  
+  
+        return r;  
+    }  
+  
+    public static double [][] add(double [][] a, double [][] b)  
+    {  
+        int m = a.length;  
+        int n = a[0].length;  
+        double [][] r = new double[m][n];  
+  
+        for (int i = 0; i < m; ++i)  
+            for (int j = 0; j < n; ++j)  
+                r[i][j] = a[i][j] + b[i][j];  
+  
+        return r;  
+    }  
+  
+    public static int [][] generateRandomMatrix(RandomGenerator randomGenerator, int m, int n, int origin, int bound)  
+    {  
+        int [][] result = new int[m][];  
+  
+        for (int i = 0; i < m; ++i)  
+            result[i] = ArrayUtil.generateRandomArray(randomGenerator, n, origin, bound);  
+  
+        return result;  
+    }  
+  
+    public static int [][] generateRandomSquareMatrix(RandomGenerator randomGenerator, int n, int origin, int bound)  
+    {  
+        return generateRandomMatrix(randomGenerator, n, n, origin, bound);  
+    }  
+  
+    public static boolean isMatrix(int [][] a)  
+    {  
+        for (int i = 1; i < a.length; ++i)  
+            if (a[i].length != a[0].length)  
+                return false;  
+  
+        return true;  
+    }  
+  
+    public static boolean isSquareMatrix(int [][] a)  
+    {  
+        return isMatrix(a) && a.length == a[0].length;  
+    }  
+  
+    public static int max(int [][] a)  
+    {  
+        return ArrayUtil.max(a);  
+    }  
+  
+    public static int min(int [][] a)  
+    {  
+        return ArrayUtil.min(a);  
+    }  
+  
+    public static int [][] multiply(int [][] a, int [][] b)  
+    {  
+        int m = a.length;  
+        int n = a[0].length;  
+        int p = b[0].length;  
+        int [][] r = new int[m][p];  
+  
+        for (int i = 0; i < m; ++i)  
+            for (int j = 0; j < n; ++j)  
+                for (int k = 0; k < p; ++k)  
+                    r[i][k] += a[i][j] * b[j][k];  
+  
+        return r;  
+    }  
+  
+    public static void multiplyBy(int [][] a, int value)  
+    {  
+        ArrayUtil.multiplyBy(a, value);  
+    }  
+  
+    public static void print(int [][] a)  
+    {  
+        print(a, 1);  
+    }  
+  
+    public static void print(int [][] a, int n)  
+    {  
+        ArrayUtil.print(a, n);  
+    }  
+  
+    public static int [][] subtract(int [][] a, int [][] b)  
+    {  
+        int m = a.length;  
+        int n = a[0].length;  
+        int [][] r = new int[m][n];  
+  
+        for (int i = 0; i < m; ++i)  
+            for (int j = 0; j < n; ++j)  
+                r[i][j] = a[i][j] - b[i][j];  
+  
+        return r;  
+    }  
+  
+    public static long sum(int [][] a)  
+    {  
+        long total = 0;  
+  
+        for (int [] array : a)  
+            total += ArrayUtil.sum(array);  
+  
+        return total;  
+    }  
+  
+    public static long sumDiagonal(int [][] a)  
+    {  
+        long total = 0;  
+  
+        for (int i = 0; i < a.length; ++i)  
+            total += a[i][i];  
+  
+        return total;  
+    }  
+  
+    public static int [][] transpose(int [][] a)  
+    {  
+        int m = a.length;  
+        int n = a[0].length;  
+        int [][] r = new int[n][m];  
+  
+        for (int i = 0; i < n; ++i)  
+            for (int j = 0; j < m; ++j)  
+                r[i][j] = a[j][i];  
+  
+        return r;  
+    }  
+}
+```
+
+
+
+
+
+
+
+
+

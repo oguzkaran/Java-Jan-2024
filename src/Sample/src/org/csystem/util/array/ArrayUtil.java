@@ -1,11 +1,12 @@
 /**
  * Utility class for array operations
- * Last Update: 10th December 2024
+ * Last Update: 15th May 2025
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.array;
 
-import java.util.Random;
+
+import java.util.random.RandomGenerator;
 
 public final class ArrayUtil {
     private ArrayUtil()
@@ -96,32 +97,32 @@ public final class ArrayUtil {
         }
     }
 
-    public static int [] generateRandomArray(Random random, int count, int origin, int bound)
+    public static int [] generateRandomArray(RandomGenerator randomGenerator, int count, int origin, int bound)
     {
         int [] a = new int[count];
 
         for (int i = 0; i < count; ++i)
-            a[i] = random.nextInt(origin, bound);
+            a[i] = randomGenerator.nextInt(origin, bound);
 
         return a;
     }
 
-    public static double [] generateRandomArray(Random random, int count, double origin, double bound)
+    public static double [] generateRandomArray(RandomGenerator randomGenerator, int count, double origin, double bound)
     {
         double [] a = new double[count];
 
         for (int i = 0; i < count; ++i)
-            a[i] = random.nextDouble(origin, bound);
+            a[i] = randomGenerator.nextDouble(origin, bound);
 
         return a;
     }
 
-    public static boolean [] generateRandomArray(Random random, int count)
+    public static boolean [] generateRandomArray(RandomGenerator randomGenerator, int count)
     {
         boolean [] a = new boolean[count];
 
         for (int i = 0; i < count; ++i)
-            a[i] = random.nextBoolean();
+            a[i] = randomGenerator.nextBoolean();
 
         return a;
     }

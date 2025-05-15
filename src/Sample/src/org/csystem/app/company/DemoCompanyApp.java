@@ -1,5 +1,11 @@
 package org.csystem.app.company;
 
+import org.csystem.app.company.employee.Employee;
+import org.csystem.app.company.employee.Manager;
+import org.csystem.app.company.employee.ProjectWorker;
+import org.csystem.app.company.employee.SalesManager;
+import org.csystem.app.company.employee.Worker;
+import org.csystem.app.company.hr.HumanResources;
 import org.csystem.util.thread.ThreadUtil;
 
 import java.util.Random;

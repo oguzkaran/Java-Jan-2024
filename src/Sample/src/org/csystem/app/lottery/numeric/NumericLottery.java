@@ -1,9 +1,9 @@
 package org.csystem.app.lottery.numeric;
 
-import java.util.Random;
+import java.util.random.RandomGenerator;
 
 public class NumericLottery {
-    private final Random m_random;
+    private final RandomGenerator m_randomGenerator;
 
     private boolean [] getFlags()
     {
@@ -13,7 +13,7 @@ public class NumericLottery {
             int val;
 
             do
-                val = m_random.nextInt(1, 50);
+                val = m_randomGenerator.nextInt(1, 50);
             while (flags[val]);
 
             flags[val] = true;
@@ -34,12 +34,12 @@ public class NumericLottery {
         return a;
     }
 
-    public NumericLottery(Random r)
+    public NumericLottery(RandomGenerator randomGenerator)
     {
-        if (r == null)
+        if (randomGenerator == null)
             throw new IllegalArgumentException("Argument can not be null");
 
-        m_random = r;
+        m_randomGenerator = randomGenerator;
     }
 
     public int [] getNumbers()

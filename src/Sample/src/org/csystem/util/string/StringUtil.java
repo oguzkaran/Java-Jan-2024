@@ -1,12 +1,12 @@
 /**
  * Utility class for string operations
- * Last Update: 28th March 2025
+ * Last Update: 15th May 2025
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.string;
 
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.random.RandomGenerator;
 
 public final class StringUtil {
 	private StringUtil()
@@ -34,12 +34,12 @@ public final class StringUtil {
 		return s.isEmpty() ? s : Character.toUpperCase(s.charAt(0)) + s.substring(1).toLowerCase();
 	}
 
-	public static String changeCase(String s)
+	public static CharSequence changeCase(CharSequence charSequence)
 	{
-		StringBuilder sb = new StringBuilder(s);
+		StringBuilder sb = new StringBuilder(charSequence);
 
-		for (int i = 0; i < s.length(); ++i) {
-			char c = s.charAt(i);
+		for (int i = 0; i < charSequence.length(); ++i) {
+			char c = charSequence.charAt(i);
 
 			sb.setCharAt(i, Character.isLowerCase(c) ? Character.toUpperCase(c) : Character.toLowerCase(c));
 		}
@@ -58,60 +58,60 @@ public final class StringUtil {
 		return count;
 	}
 
-	public static String generateRandomText(Random random, int count, String sourceText)
+	public static String generateRandomText(RandomGenerator randomGenerator, int count, CharSequence charSequence)
 	{
 		char [] c = new char[count];
 
 		for (int i = 0; i < count; ++i)
-			c[i] = sourceText.charAt(random.nextInt(sourceText.length()));
+			c[i] = charSequence.charAt(randomGenerator.nextInt(charSequence.length()));
 
 		return String.valueOf(c);
 	}
 
-	public static String generateRandomTextEN(Random random, int count)
+	public static String generateRandomTextEN(RandomGenerator randomGenerator, int count)
 	{
-		return generateRandomText(random, count, ALL_LETTERS_EN);
+		return generateRandomText(randomGenerator, count, ALL_LETTERS_EN);
 	}
 
-	public static String generateRandomTextTR(Random random, int count)
+	public static String generateRandomTextTR(RandomGenerator randomGenerator, int count)
 	{
-		return generateRandomText(random, count, ALL_LETTERS_TR);
+		return generateRandomText(randomGenerator, count, ALL_LETTERS_TR);
 	}
 
-	public static String [] generateRandomTexts(Random random, int count, int origin, int bound, String sourceText)
+	public static String [] generateRandomTexts(RandomGenerator randomGenerator, int count, int origin, int bound, CharSequence charSequence)
 	{
 		String [] str = new String[count];
 
 		for (int i = 0; i < count; ++i)
-			str[i] = generateRandomText(random, random.nextInt(origin, bound), sourceText);
+			str[i] = generateRandomText(randomGenerator, randomGenerator.nextInt(origin, bound), charSequence);
 
 		return str;
 	}
 
-	public static String [] generateRandomTextsEN(Random random, int count, int origin, int bound)
+	public static String [] generateRandomTextsEN(RandomGenerator randomGenerator, int count, int origin, int bound)
 	{
-		return generateRandomTexts(random, count, origin, bound, ALL_LETTERS_EN);
+		return generateRandomTexts(randomGenerator, count, origin, bound, ALL_LETTERS_EN);
 	}
 
-	public static String [] generateRandomTextsTR(Random random, int count, int origin, int bound)
+	public static String [] generateRandomTextsTR(RandomGenerator randomGenerator, int count, int origin, int bound)
 	{
-		return generateRandomTexts(random, count, origin, bound, ALL_LETTERS_TR);
+		return generateRandomTexts(randomGenerator, count, origin, bound, ALL_LETTERS_TR);
 	}
 
-	public static boolean isPalindrome(String s)
+	public static boolean isPalindrome(CharSequence charSequence)
 	{
 		int left = 0;
-		int right = s.length() - 1;
+		int right = charSequence.length() - 1;
 
 		while (left < right) {
-			char cLeft = s.charAt(left);
+			char cLeft = charSequence.charAt(left);
 
 			if (!Character.isLetter(cLeft)) {
 				++left;
 				continue;
 			}
 
-			char cRight = s.charAt(right);
+			char cRight = charSequence.charAt(right);
 
 			if (!Character.isLetter(cRight)) {
 				--right;
@@ -150,7 +150,7 @@ public final class StringUtil {
 	}
 
 
-	public static String join(ArrayList texts, String delimiter)
+	public static String join(ArrayList texts, CharSequence delimiter)
 	{
 		StringBuilder sb = new StringBuilder();
 
@@ -168,7 +168,7 @@ public final class StringUtil {
 		return join(texts, String.valueOf(delimiter));
 	}
 
-	public static String join(String [] s, String delimiter)
+	public static String join(String [] s, CharSequence delimiter)
 	{
 		StringBuilder sb = new StringBuilder();
 
@@ -212,12 +212,12 @@ public final class StringUtil {
 		return new StringBuilder(s).reverse().toString();
 	}
 
-	public static String [] split(String s, String delimiters)
+	public static String [] split(String s, CharSequence delimiters)
 	{
 		return split(s, delimiters, true);
 	}
 
-	public static String [] split(String s, String delimiters, boolean removeEmptyEntries)
+	public static String [] split(String s, CharSequence delimiters, boolean removeEmptyEntries)
 	{
 		StringBuilder pattern = new StringBuilder("[");
 
