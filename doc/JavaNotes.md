@@ -35612,6 +35612,8 @@ interface IX {
 
 >CompanyApp uygulamasında `Employee` sınıfı bir arayüz olamaz. Çünkü non-static veri elemanlarına sahip soyutlanmış bir UDT'dir. Sigortalı olabilme, yani belirli bir Id ve sigorta ücretine ilişkin soyutlama `IInsured` arayüzü ile gerçekleştirilmiştir. Employee sınıfının bu arayüzü implemente etmesi ile ondan türeyen sınıflar da `IInsured`anlaşmasına (contract) uymaktadır. Ayrıca demo uygulama içerisinde Employee sınıfı dışından `IInsured` anlaşmasına uyan sınıflar için `payInsurance`metodu çağrılabilir. 
 
+![DemoCompanyApp](./media/DemoCompanyApp-last.PNG)
+
 ```java
 package org.csystem.app.company;  
   
@@ -36688,12 +36690,6 @@ public final class MatrixUtil {
     }  
 }
 ```
-
-
-
-
-
-
 
 
 
