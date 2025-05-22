@@ -37107,12 +37107,13 @@ public enum RandomGeneratorAlgorithm implements IRandomGeneratorFactory {
     L128X1024_MIX_RANDOM("L128X1024MixRandom"), L128X128_MIX_RANDOM("L128X128MixRandom"), L128X256_MIX_RANDOM("L128X256MixRandom"),  
     L32X64_MIX_RANDOM("L32X64MixRandom"), L64X1024MIX_RANDOM("L64X1024MixRandom"), L64X128_MIX_RANDOM("L64X128MixRandom"),  
     L64X128_STAR_STAR_RANDOM("L64X128StarStarRandom"), L64X256_MIX_RANDOM("L64X256MixRandom"), RANDOM("Random"),  
+    XOROSHIRO128_PLUS_PLUS("Xoroshiro128PlusPlus"), XOROSHIRO256_PLUS_PLUS("Xoshiro256PlusPlus"),  
     SPLITTABLE_RANDOM("SplittableRandom"), THREAD_LOCAL_RANDOM("ThreadLocalRandom") {  
         public RandomGenerator create()  
         {  
             return ThreadLocalRandom.current();  
         }  
-    }, XOROSHIRO128_PLUS_PLUS("Xoroshiro128PlusPlus"), XOROSHIRO256_PLUS_PLUS("Xoshiro256PlusPlus"),  
+    },  
     SECURE_RANDOM("SecureRandom") {  
         public RandomGenerator create()  
         {  
@@ -37141,10 +37142,385 @@ public enum RandomGeneratorAlgorithm implements IRandomGeneratorFactory {
 }
 ```
 
+###### 22 Mayıs 2025
+
+>Bazı sınıflar bir **kaynağı (resource)** kullanırlar. Bu kaynakların kullanılmaya başlamadan önce **mantıksal olarak açılması (open)** gerekir. Burada **açma işlemi**, o kaynağı kullanmadan önce yapılması gereken işlemleri tamamlamak anlamında kullanılır. Bu tip kaynakların işlem bittikten sonra **mantıksal olarak kapatılması (close)** yani **geri bırakılması (free/release)** ile ilgili işlemlerin tamamlanması gerekir. Örneğin bir dosyanın verileri üzerinde işlem yapmak için dosyanın açılması gerekir, işlem bittikten sonra da kapatılması gerekir. Bir dosyanın açılması işletim  sistemi düzeyinde aşağı seviyeli bir takım işlemlerin yapılması demektir, kapatılması ise yine işletim sistemi düzeyinde  bir takım işlemlerin yapılması demektir. İşte böylesi durumlar için Java dünyasında **Closeable** arayüzü kullanılır. Bu arayüzün aşağıdaki prototipe sahip close isimli abstract bir metodu vardır:  
+
+```java
+void close() throws IOException;  
+```
+
+>Bu durumda ilgili sınıf kaynağı geri bırakma (release) işlemini bu metot içerisinde yapar. Kaynağı mantıksal olarak açma işlemi sınıftan sınıfa yani senaryoya göre değişebilir. Örneğin bazı sınıflar kaynağı açma işlemini ctor içerisinde  yaparlar. `Senaryo ne olursa bir Java programcısı için Closeable arayüzünü destekleyen bir sınıfı kullanmak, onun close metodunun da genel olarak çağrılması gerektiği anlamına gelir. Benzer şekilde programcı, böylesi kaynak kullanan bir sınıf yazdığında da Closeable arayüzünü destekler.` JavaSE'de Closeable arayüzünü destekleyen çok fazla sınıf vardır. Java 7 ile birlikte tamamen aynı metoda sahip olan **AutoCloseable** isimli bir arayüz eklenmiştir ve Java 7 ile birlikte Closeable arayüzü AutoCloseable arayüzünden türetilmiştir. `AutoCloseable` arayüzü ileride ele alınacaktır.  
+  
+**Anahtar Notlar:** Closeable arayüzünü destekleyen bazı sınıfların close metotları throws IOException bildirerek override edilse de bu exception'ın handle edilmesi gerekmeyebilir ya da handle edilse de anlamlı olmayabilir. Örneğin açık olan bir dosyanın kapatılamaması durumunda oluşacak exception için programın içerisinde yapılacak çok da bir şey yoktur. Yani programcı açısından bu exception'ın handle edilmesi bir anlam ifade etmez ancak close metodu IOException'ı throws listesinde içerecek biçimde override edildiğinden programcının bu exception'ı akış içerisinde handle etmesi veya metodu çağırdığı yerde throws bildirimi yapması gerekir. Her iki durumda da gereksiz kod olması açısından clean code yazılmamış olur. Bu durumda programcının strateji değiştirerek daha clean code yazması gerekir.
+
+>Aşağıdaki demo örnekte finally bloğu içerisinde aslında ihtiyaç olmasa da (örnek özelinde ihtiyaç olmadığını varsayınız) `close` metodu çağrısı `IOException` fırlattığı için `try deyimi` ile sarmalanmıştır. Dikkat edilirse checked exception dolayısıyla programcı strateji değiştirmek ve gereksiz kodlar yazmak zorunda kalmıştır.
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.console.Console;  
+  
+import java.io.Closeable;  
+import java.io.IOException;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        DemoApp.run();  
+    }  
+}  
+  
+class DemoApp {  
+    public static void run()  
+    {  
+        String url = Console.readString("Input url:");  
+        String username = Console.readString("Input username:");  
+        String password = Console.readString("Input password:");  
+  
+        DemoDatabaseConnection connection = null;  
+  
+        try {  
+            connection = new DemoDatabaseConnection(url, username, password);  
+            String sqlStr = Console.readString("Input sql command:");  
+  
+            connection.insert(sqlStr);  
+        }  
+        catch (IOException ex) {  
+            Console.writeLine("Error occurred:%s", ex.getMessage());  
+        }  
+        finally {  
+            if (connection != null)  
+                try {  
+                    connection.close();  
+                }  
+                catch (IOException ignore) {  
+  
+                }  
+        }  
+  
+        Console.writeLine("C and System programmers association");  
+    }  
+}  
+  
+class DemoDatabaseConnection implements Closeable {  
+    private String m_url;  
+    private String m_username;  
+    private String m_password;  
+    //...  
+  
+    private void checkInformation(String url, String username, String password)  throws IOException  
+    {  
+        if (url == null || url.isBlank() || username == null || username.isBlank() && password == null)  
+            throw new IOException("Illegal connection parameters");  
+    }  
+  
+    public DemoDatabaseConnection(String url, String username, String password) throws IOException  
+    {  
+        checkInformation(url, username, password);  
+        m_url = url;  
+        m_username = username;  
+        m_password = password;  
+  
+        Console.writeLine("Connection to '%s' succeed with user:%s", url, username);  
+    }  
+  
+    public void insert(String sqlStr) throws IOException  
+    {  
+        if (sqlStr == null || sqlStr.isBlank())  
+            throw new IOException("sqlStr can not be null");  
+  
+        Console.writeLine("'%s' sent to %s", sqlStr, m_url);  
+    }  
+  
+    //...  
+  
+    public void close() throws IOException  
+    {  
+        //...  
+        Console.writeLine("Close connection");  
+    }  
+}
+```
+
+>Yukarıdaki demo örnek aşağıdaki gibi daha okunabilir hale getirilebilir ancak yine de programcı stratej değiştmek zorunda kalmıştır. Bununla birlikte programcı close metodunun çağrılmasını unutabilir yani gözünden kaçabilir
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.console.Console;  
+  
+import java.io.Closeable;  
+import java.io.IOException;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        DemoApp.run();  
+    }  
+}  
+  
+class DemoApp {  
+    public static void run()  
+    {  
+        String url = Console.readString("Input url:");  
+        String username = Console.readString("Input username:");  
+        String password = Console.readString("Input password:");  
+  
+        DemoDatabaseConnection connection = null;  
+  
+        try {  
+            DemoDatabaseConnectionUtil.insert(url, username, password);  
+        }  
+        catch (IOException ex) {  
+            Console.writeLine("Error occurred:%s", ex.getMessage());  
+        }  
+  
+        Console.writeLine("C and System programmers association");  
+    }  
+}  
+  
+class DemoDatabaseConnectionUtil {  
+    public static void insert(String url, String username, String password) throws IOException  
+    {  
+        DemoDatabaseConnection connection = null;  
+  
+        try {  
+            connection = new DemoDatabaseConnection(url, username, password);  
+            String sqlStr = Console.readString("Input sql command:");  
+  
+            connection.insert(sqlStr);  
+        }  
+        finally {  
+            if (connection != null)  
+                connection.close();  
+        }  
+    }  
+}  
+  
+class DemoDatabaseConnection implements Closeable {  
+    private String m_url;  
+    private String m_username;  
+    private String m_password;  
+    //...  
+  
+    private void checkInformation(String url, String username, String password)  throws IOException  
+    {  
+        if (url == null || url.isBlank() || username == null || username.isBlank() && password == null)  
+            throw new IOException("Illegal connection parameters");  
+    }  
+  
+    public DemoDatabaseConnection(String url, String username, String password) throws IOException  
+    {  
+        checkInformation(url, username, password);  
+        m_url = url;  
+        m_username = username;  
+        m_password = password;  
+  
+        Console.writeLine("Connection to '%s' succeed with user:%s", url, username);  
+    }  
+  
+    public void insert(String sqlStr) throws IOException  
+    {  
+        if (sqlStr == null || sqlStr.isBlank())  
+            throw new IOException("sqlStr can not be null");  
+  
+        Console.writeLine("'%s' sent to %s", sqlStr, m_url);  
+    }  
+  
+    //...  
+  
+    public void close() throws IOException  
+    {  
+        //...  
+        Console.writeLine("Close connection");  
+    }  
+}
+```
+
+>Yukarıdaki yaklaşımlarda checked exception dolayısıyla programcının strateji değiştirmesi söz konusudur ayrıca kod içerisinde close metodunun çağrılmasının gözden kaçtığı durumlar olabilir ve bu da senaryoya göre çeşitli bug'ların oluşmasına sebep olabilir.  Java 7 ile birlikte **AutoCloseable** arayüzü eklenmiş, `Closeable` arayüzü AutoCloseable arayüzünden türetilmiştir. Yani Java 7 ile birlikte Closeable arayüzünü destekleyen her sınıf aynı zamanda AutoCloseable arayüzünü de destekler duruma gelmiştir. Java 7 ile birlikte ismine **try-with-resources (TWR)** denilen bir deyim eklenmiştir. Bu deyimin genel biçimi şu şekildedir:  
+
+```java
+try (<AutoCloseable arayüzü türünden referans>[; <AutoCloseable arayüzü türünden referans>; ...]) {
+	//...  
+}  
+[  
+    catch blokları VEYA finally bloğu VEYA catch blokları ile finally bloğu  
+]  
+```
+
+>Bu deyim ile close metodu otomatik olarak çağrılır. Yani programcının bu deyim ile birlikte close metodunu çağırması gerekmez. Bu durumda programcı ne strateji değiştirmek zorunda kalır ne de close metodunun çağrılmasının gözden kaçabileceği durumlar oluşabilir. 
+>
+>Yukarıdaki demo örnek TWR kullanılarak aşağıdaki gibi daha okunabilir ve kapatma anlamında daha güvenli bir biçimde yazılabilir
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.console.Console;  
+  
+import java.io.Closeable;  
+import java.io.IOException;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        DemoApp.run();  
+    }  
+}  
+  
+class DemoApp {  
+    public static void run()  
+    {  
+        String url = Console.readString("Input url:");  
+        String username = Console.readString("Input username:");  
+        String password = Console.readString("Input password:");  
+  
+        try (DemoDatabaseConnection connection = new DemoDatabaseConnection(url, username, password)){  
+            String sqlStr = Console.readString("Input sql command:");  
+  
+            connection.insert(sqlStr);  
+        }  
+        catch (IOException ex) {  
+            Console.writeLine("Error occurred:%s", ex.getMessage());  
+        }  
+  
+        Console.writeLine("C and System programmers association");  
+    }  
+}  
+  
+class DemoDatabaseConnection implements Closeable {  
+    private String m_url;  
+    private String m_username;  
+    private String m_password;  
+    //...  
+  
+    private void checkInformation(String url, String username, String password)  throws IOException  
+    {  
+        if (url == null || url.isBlank() || username == null || username.isBlank() && password == null)  
+            throw new IOException("Illegal connection parameters");  
+    }  
+  
+    public DemoDatabaseConnection(String url, String username, String password) throws IOException  
+    {  
+        checkInformation(url, username, password);  
+        m_url = url;  
+        m_username = username;  
+        m_password = password;  
+  
+        Console.writeLine("Connection to '%s' succeed with user:%s", url, username);  
+    }  
+  
+    public void insert(String sqlStr) throws IOException  
+    {  
+        if (sqlStr == null || sqlStr.isBlank())  
+            throw new IOException("sqlStr can not be null");  
+  
+        Console.writeLine("'%s' sent to %s", sqlStr, m_url);  
+    }  
+  
+    //...  
+  
+    public void close() throws IOException  
+    {  
+        //...  
+        Console.writeLine("Close connection");  
+    }  
+}
+```
 
 
+>Java 9'dan önce bu deyimin parantezi içerisinde referansa ilk değer verilmesi zorunluydu yani referansın değerinin parantez içerisinde verilmesi gerekiyordu. Java 9 ile birlikte parantez içerisinde daha önce değer verilmiş referanslar da kullanılabilir duruma gelmiştir. TWR parantezi içerisindeki referansın AutoCloseable arayüzünü destekleyen bir sınıf türünden ya da AutoCloseable arayüzü türünden ya da AutoCloseable arayüzünden türetilmiş bir arayüz referansı türünden olması gerekir. Yani kısaca söylemek gerekirse buradaki referansın AutoCloseable olması gerekir. Closeable arayüzü de AutoCloseable'dan türetildiğinden TWR ile kullanılabilmektedir. 
 
+>Aşağıdaki demo örneği inceleyiniz
 
+```java
+	package org.csystem.app;  
+  
+import org.csystem.util.console.Console;  
+  
+import java.io.Closeable;  
+import java.io.IOException;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        DemoApp.run();  
+    }  
+}  
+  
+class DemoApp {  
+    public static void run()  
+    {  
+        String url = Console.readString("Input url:");  
+        String username = Console.readString("Input username:");  
+        String password = Console.readString("Input password:");  
+  
+        try {  
+            DemoDatabaseConnection connection = new DemoDatabaseConnection(url, username, password);  
+  
+            DemoDatabaseConnectionUtil.insert(connection);  
+        }  
+        catch (IOException ex) {  
+            Console.writeLine("Error occurred:%s", ex.getMessage());  
+        }  
+  
+        Console.writeLine("C and System programmers association");  
+    }  
+}  
+  
+class DemoDatabaseConnectionUtil {  
+    public static void insert(DemoDatabaseConnection connection)  
+    {  
+        try (connection) { //Since  
+            String sqlStr = Console.readString("Input sql command:");  
+  
+            connection.insert(sqlStr);  
+        }  
+        catch (IOException ex) {  
+            Console.writeLine("Error occurred while insert:%s", ex.getMessage());  
+        }  
+    }  
+}  
+  
+class DemoDatabaseConnection implements Closeable {  
+    private String m_url;  
+    private String m_username;  
+    private String m_password;  
+    //...  
+  
+    private void checkInformation(String url, String username, String password)  throws IOException  
+    {  
+        if (url == null || url.isBlank() || username == null || username.isBlank() && password == null)  
+            throw new IOException("Illegal connection parameters");  
+    }  
+  
+    public DemoDatabaseConnection(String url, String username, String password) throws IOException  
+    {  
+        checkInformation(url, username, password);  
+        m_url = url;  
+        m_username = username;  
+        m_password = password;  
+  
+        Console.writeLine("Connection to '%s' succeed with user:%s", url, username);  
+    }  
+  
+    public void insert(String sqlStr) throws IOException  
+    {  
+        if (sqlStr == null || sqlStr.isBlank())  
+            throw new IOException("sqlStr can not be null");  
+  
+        Console.writeLine("'%s' sent to %s", sqlStr, m_url);  
+    }  
+  
+    //...  
+  
+    public void close() throws IOException  
+    {  
+        //...  
+        Console.writeLine("Close connection");  
+    }  
+}
+```
 
-
+>Programcının özel bir durum yoksa TWR kullanması tavsiye edilir. Bu deyim ile close metodunun fırlattığı exception da handle edilebilir. 
 

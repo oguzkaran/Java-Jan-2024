@@ -13,12 +13,13 @@ public enum RandomGeneratorAlgorithm implements IRandomGeneratorFactory {
     L128X1024_MIX_RANDOM("L128X1024MixRandom"), L128X128_MIX_RANDOM("L128X128MixRandom"), L128X256_MIX_RANDOM("L128X256MixRandom"),
     L32X64_MIX_RANDOM("L32X64MixRandom"), L64X1024MIX_RANDOM("L64X1024MixRandom"), L64X128_MIX_RANDOM("L64X128MixRandom"),
     L64X128_STAR_STAR_RANDOM("L64X128StarStarRandom"), L64X256_MIX_RANDOM("L64X256MixRandom"), RANDOM("Random"),
+    XOROSHIRO128_PLUS_PLUS("Xoroshiro128PlusPlus"), XOROSHIRO256_PLUS_PLUS("Xoshiro256PlusPlus"),
     SPLITTABLE_RANDOM("SplittableRandom"), THREAD_LOCAL_RANDOM("ThreadLocalRandom") {
         public RandomGenerator create()
         {
             return ThreadLocalRandom.current();
         }
-    }, XOROSHIRO128_PLUS_PLUS("Xoroshiro128PlusPlus"), XOROSHIRO256_PLUS_PLUS("Xoshiro256PlusPlus"),
+    },
     SECURE_RANDOM("SecureRandom") {
         public RandomGenerator create()
         {
