@@ -7,7 +7,7 @@
 
 ##### Java Platformunun Temel Özellikleri:
 
->**Arakodlu Çalışma Sistemi:** C ve C++ gibi dillerde yazılan kodlardan elde edilen (nasıl elde edildiği bu aşamada önemli değildir) "çalışabilir dosya (executable file)" sisteme (genel olarak işletim sistemi, donanım vb.) özgüdür ve koda göre her sistem için ayrıca oluşturulmalıdır. Hatta sisteme özgü kodlar yazılmışsa diğer sistemler için bu dosya oluşturulamaz. Oysa Java programlama dili ile yazılan bir program "derlendiğinde (compilation)" oluşan dosyanın içerisinde hiç bir sistemin dili olmayan yapay bir arakod bulunur. Bu arakoda "byte code (BC)" denir. BC doğrudan çalıştırılamaz. Çalıştırılması için ayrı bir uygulama (program)  gerekir. Bu program, BC'yi yorumlayarak makine koduna yani sisteme özgü koda dönüştürerek programı çalıştırır. Bu dönüştürme işlemine JIT (Just In Time) compilation denir. Geliştirme ve çalıştırma anlamında 3 tane temel kavram karşımıza çıkar:
+>**Ara kodlu Çalışma Sistemi:** C ve C++ gibi dillerde yazılan kodlardan elde edilen (nasıl elde edildiği bu aşamada önemli değildir) "çalışabilir dosya (executable file)" sisteme (genel olarak işletim sistemi, donanım vb.) özgüdür ve koda göre her sistem için ayrıca oluşturulmalıdır. Hatta sisteme özgü kodlar yazılmışsa diğer sistemler için bu dosya oluşturulamaz. Oysa Java programlama dili ile yazılan bir program "derlendiğinde (compilation)" oluşan dosyanın içerisinde hiç bir sistemin dili olmayan yapay bir arakod bulunur. Bu arakoda "byte code (BC)" denir. BC doğrudan çalıştırılamaz. Çalıştırılması için ayrı bir uygulama (program)  gerekir. Bu program, BC'yi yorumlayarak makine koduna yani sisteme özgü koda dönüştürerek programı çalıştırır. Bu dönüştürme işlemine JIT (Just In Time) compilation denir. Geliştirme ve çalıştırma anlamında 3 tane temel kavram karşımıza çıkar:
 >
 >- JVM (Java Virtual Machine): BC'yi makine koduna dönüştürür. JVM aslında BC'nin nasıl makine koduna dönüştürüleceğini tanımlayan soyut bir kavramdır.
 >- JRE (Java Runtime Environment): Genel olarak Java ile yazılmış bir uygulamayı çalıştırmak (run) için gereken araçları ve uygulamaları içeren bir pakettir. Yani BC elde edildiğinde bu programın çalıştırılabilmesi için JRE'ye ihtiyaç vardır.
@@ -19527,17 +19527,16 @@ public class StringUtil {
 }
 ```
 
-
 ##### for-each Döngü Deyimi
 
 >for-each döngü deyimi Java'ya 1.5 ile eklenmiştir. Bu döngü deyimi "dolaşılabilir (iterable)" türler ile kullanılabilmektedir. Diziler bu anlamda dolaşılabilir türlerdir. İleride başka dolaşılabilir sınıflar da ele alınacaktır. for-each döngü deyimine **enhanced for loop** ya da **range based loop** gibi isimler de verilmektedir. Java programcısı for-each döngü deyiminin kullanıldığı VE okunabilirliği/algılanabilirliği olumsuz etkilemediği durumda kesinlikle for-each döngü deyimini kullanmalıdır. for-each döngü deyiminin genel biçimi şu şekildedir:
 
 ```java
 for (<tür> <değişken> : <dolaşılabilir türden referans>)
-   deyim
+   <deyim>
 ```
 
-> Burada döngü değişkeni dolaşılabilir türün her bir elemanının doğrudan atanabildiği (implicit conversion) türden olmalıdır. Aksi durumda error oluşur. Bu döngüda sırasıyla dolaşılabilir türün her elemanı baştan sona olmak üzere döngü değişkenine atanır. Yani, örneğin dolaşılabilir tür bir dizi ise her adımda dizinin ilgili elemanı döngü değişkenine atanmış olur. Bu döngü ile dizi baştan sona dolaşılmış olur. Dikkat edilirse bu döngüde dizinin elemanına erişmek için indeks kullanılması gerekmez.
+> Burada döngü değişkeni dolaşılabilir türün her bir elemanının doğrudan atanabildiği (implicit conversion) türden olmalıdır. Aksi durumda error oluşur. Bu döngüde sırasıyla dolaşılabilir türün her elemanı baştan sona olmak üzere döngü değişkenine atanır. Yani, örneğin dolaşılabilir tür bir dizi ise her adımda dizinin ilgili elemanı döngü değişkenine atanmış olur. Bu döngü ile dizi baştan sona dolaşılmış olur. Dikkat edilirse bu döngüde dizinin elemanına erişmek için indeks kullanılması gerekmez.
 
 ```java
 package org.csystem.app;  
@@ -37211,7 +37210,7 @@ class DemoDatabaseConnection implements Closeable {
   
     private void checkInformation(String url, String username, String password)  throws IOException  
     {  
-        if (url == null || url.isBlank() || username == null || username.isBlank() && password == null)  
+        if (url == null || url.isBlank() || username == null || username.isBlank() || password == null)  
             throw new IOException("Illegal connection parameters");  
     }  
   
@@ -37306,7 +37305,7 @@ class DemoDatabaseConnection implements Closeable {
   
     private void checkInformation(String url, String username, String password)  throws IOException  
     {  
-        if (url == null || url.isBlank() || username == null || username.isBlank() && password == null)  
+        if (url == null || url.isBlank() || username == null || username.isBlank() || password == null)  
             throw new IOException("Illegal connection parameters");  
     }  
   
@@ -37396,7 +37395,7 @@ class DemoDatabaseConnection implements Closeable {
   
     private void checkInformation(String url, String username, String password)  throws IOException  
     {  
-        if (url == null || url.isBlank() || username == null || username.isBlank() && password == null)  
+        if (url == null || url.isBlank() || username == null || username.isBlank() || password == null)  
             throw new IOException("Illegal connection parameters");  
     }  
   
@@ -37471,7 +37470,7 @@ class DemoApp {
 class DemoDatabaseConnectionUtil {  
     public static void insert(DemoDatabaseConnection connection)  
     {  
-        try (connection) { //Since  
+        try (connection) { //Since Java 9
             String sqlStr = Console.readString("Input sql command:");  
   
             connection.insert(sqlStr);  
@@ -37490,7 +37489,7 @@ class DemoDatabaseConnection implements Closeable {
   
     private void checkInformation(String url, String username, String password)  throws IOException  
     {  
-        if (url == null || url.isBlank() || username == null || username.isBlank() && password == null)  
+        if (url == null || url.isBlank() || username == null || username.isBlank() || password == null)  
             throw new IOException("Illegal connection parameters");  
     }  
   
@@ -37522,5 +37521,390 @@ class DemoDatabaseConnection implements Closeable {
 }
 ```
 
->Programcının özel bir durum yoksa TWR kullanması tavsiye edilir. Bu deyim ile close metodunun fırlattığı exception da handle edilebilir. 
+>Programcının özel bir durum yoksa TWR kullanması tavsiye edilir. Dikkat edilirse bu deyim ile close metodunun fırlattığı exception da handle edilebilmektedir.
+
+###### 27 Mayıs 2025
+
+>Genel biçime dikkat edilirse TWR bloğundan sonra herhangi bir catch bloğu ya da finally bloğu gelmek zorunda değildir
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.console.Console;  
+  
+import java.io.Closeable;  
+import java.io.IOException;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        DemoApp.run();  
+    }  
+}  
+  
+class DemoApp {  
+    public static void run()  
+    {  
+        String url = Console.readString("Input url:");  
+        String username = Console.readString("Input username:");  
+        String password = Console.readString("Input password:");  
+  
+        try {  
+            DemoDatabaseConnection connection = new DemoDatabaseConnection(url, username, password);  
+  
+            DemoDatabaseConnectionUtil.insert(connection);  
+        }  
+        catch (IOException ex) {  
+            Console.writeLine("Error occurred:%s", ex.getMessage());  
+        }  
+  
+        Console.writeLine("C and System programmers association");  
+    }  
+}  
+  
+class DemoDatabaseConnectionUtil {  
+    public static void insert(DemoDatabaseConnection connection) throws IOException  
+    {  
+        try (connection) {  
+            String sqlStr = Console.readString("Input sql command:");  
+  
+            connection.insert(sqlStr);  
+        }
+    }  
+}  
+  
+class DemoDatabaseConnection implements Closeable {  
+    private String m_url;  
+    private String m_username;  
+    private String m_password;  
+    //...  
+  
+    private void checkInformation(String url, String username, String password)  throws IOException  
+    {  
+        if (url == null || url.isBlank() || username == null || username.isBlank() || password == null)  
+            throw new IOException("Illegal connection parameters");  
+    }  
+  
+    public DemoDatabaseConnection(String url, String username, String password) throws IOException  
+    {  
+        checkInformation(url, username, password);  
+        m_url = url;  
+        m_username = username;  
+        m_password = password;  
+  
+        Console.writeLine("Connection to '%s' succeed with user:%s", url, username);  
+    }  
+  
+    public void insert(String sqlStr) throws IOException  
+    {  
+        if (sqlStr == null || sqlStr.isBlank())  
+            throw new IOException("sqlStr can not be null");  
+  
+        Console.writeLine("'%s' sent to %s", sqlStr, m_url);  
+    }  
+  
+    //...  
+  
+    public void close() throws IOException  
+    {  
+        //...  
+        Console.writeLine("Close connection");  
+    }  
+}
+```
+
+>TWR deyiminde parantez içerisinde kullanılan referans'ın faaliyet alanı TWR deyiminin try bloğu boyuncadır. Ayrıca bu referans final kabul edilir.
+>
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.console.Console;  
+  
+import java.io.Closeable;  
+import java.io.IOException;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        DemoApp.run();  
+    }  
+}  
+  
+class DemoApp {  
+    public static void run()  
+    {  
+        String url = Console.readString("Input url:");  
+        String username = Console.readString("Input username:");  
+        String password = Console.readString("Input password:");  
+  
+        try (DemoDatabaseConnection connection = new DemoDatabaseConnection(url, username, password)) {  
+            connection = null; //error: Variable 'connection' should be final or effectively final  
+            String sqlStr = Console.readString("Input sql command:");  
+  
+            connection.insert(sqlStr);  
+        }  
+        catch (IOException ex) {  
+            connection = null; //error: Can not find symbol 'connection'  
+            Console.writeLine("Error occurred:%s", ex.getMessage());  
+        }  
+  
+        connection = null; //error: Can not find symbol 'connection'  
+  
+        Console.writeLine("C and System programmers association");  
+    }  
+}  
+  
+class DemoDatabaseConnection implements Closeable {  
+    private String m_url;  
+    private String m_username;  
+    private String m_password;  
+    //...  
+  
+    private void checkInformation(String url, String username, String password)  throws IOException  
+    {  
+        if (url == null || url.isBlank() || username == null || username.isBlank() || password == null)  
+            throw new IOException("Illegal connection parameters");  
+    }  
+  
+    public DemoDatabaseConnection(String url, String username, String password) throws IOException  
+    {  
+        checkInformation(url, username, password);  
+        m_url = url;  
+        m_username = username;  
+        m_password = password;  
+  
+        Console.writeLine("Connection to '%s' succeed with user:%s", url, username);  
+    }  
+  
+    public void insert(String sqlStr) throws IOException  
+    {  
+        if (sqlStr == null || sqlStr.isBlank())  
+            throw new IOException("sqlStr can not be null");  
+  
+        Console.writeLine("'%s' sent to %s", sqlStr, m_url);  
+    }  
+  
+    //...  
+  
+    public void close() throws IOException  
+    {  
+        //...  
+        Console.writeLine("Close connection");  
+    }  
+}
+```
+  
+**Anahtar Notlar:** Bir değişkenin final olarak bildirilmemesine rağmen faaliyet alanı içerisinde final olarak kabul edilmesine genel olarak **effectively final** denilmektedir.  
+  
+>TWR deyiminin parantezi içerisinde birden fazla referans kullanılması durumunda close metodu kullanım ile ters sırada çağrılır
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.console.Console;  
+  
+import java.io.Closeable;  
+import java.io.IOException;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        DemoApp.run();  
+    }  
+}  
+  
+class DemoApp {  
+    public static void run()  
+    {  
+        String url = Console.readString("Input url:");  
+        String username = Console.readString("Input username:");  
+        String password = Console.readString("Input password:");  
+        String sqlStr = Console.readString("Input sql command:");  
+  
+        try (Statement statement = new Statement(sqlStr); DemoDatabaseConnection connection = new DemoDatabaseConnection(url, username, password, statement)) {  
+            connection.insert();  
+        }  
+        catch (IOException ex) {  
+            Console.writeLine("Error occurred:%s", ex.getMessage());  
+        }  
+  
+        Console.writeLine("C and System programmers association");  
+    }  
+}  
+  
+class Statement implements Closeable {  
+    private final String m_sqlCmd;  
+    //...  
+  
+    public Statement(String sqlCmd) throws IOException  
+    {  
+        Console.writeLine("Prepare statement");  
+          
+        if (sqlCmd == null || sqlCmd.isBlank())  
+            throw new IOException("sqlStr can not be null");  
+        m_sqlCmd = sqlCmd;  
+    }  
+  
+    public String getSqlCmd()  
+    {  
+        return m_sqlCmd;  
+    }  
+  
+    public void close()  
+    {  
+        //...  
+        Console.writeLine("Close statement");  
+    }  
+}  
+  
+class DemoDatabaseConnection implements Closeable {  
+    private String m_url;  
+    private String m_username;  
+    private String m_password;  
+    private Statement m_statement;  
+    //...  
+  
+    private void checkInformation(String url, String username, String password, Statement statement)  throws IOException  
+    {  
+        if (url == null || url.isBlank() || username == null || username.isBlank() || password == null || statement == null)  
+            throw new IOException("Illegal connection parameters");  
+    }  
+  
+    public DemoDatabaseConnection(String url, String username, String password, Statement statement) throws IOException  
+    {  
+        checkInformation(url, username, password, statement);  
+        m_url = url;  
+        m_username = username;  
+        m_password = password;  
+        m_statement = statement;  
+  
+        Console.writeLine("Connection to '%s' succeed with user:%s", url, username);  
+    }  
+  
+    public void insert() throws IOException  
+    {  
+  
+        Console.writeLine("'%s' sent to %s", m_statement.getSqlCmd(), m_url);  
+    }  
+  
+    //...  
+  
+    public void close() throws IOException  
+    {  
+        //...  
+        Console.writeLine("Close database connection");  
+    }  
+}
+```
+
+>Closeable (AutoCloseable) kullanan bazı sınıflara ilişkin aşağıdaki örnekleri inceleyiniz. **Örneklerde, sınıfların detaylarına değil, TWR ile kullanımına odaklanınız.** Örnekler TWR kullanımını göstermek için yazılmıştır.
+
+>Aslında `Scanner` sınıfı bir `input` alan ve örneğin `nextXXX` metotları ile ilgili inputtan okuma yapan bir `IO` sınıfıdır. Yani Scanner aslında okuma işlemini polimorfik olarak yapmaktadır. Aşağıdaki demo örnekte Scanner sınıfı komut satırından alınan bir dosyadan satır satır okuma yapmaktadır. 
+
+```java
+package org.csystem.app.io.input;  
+  
+import java.io.IOException;  
+import java.nio.file.Path;  
+import java.util.NoSuchElementException;  
+import java.util.Scanner;  
+  
+import static org.csystem.util.console.CommandLineArgsUtil.checkLengthEquals;  
+  
+public class ReadLinesViaScannerApp {  
+    private static void readLines(Scanner s)  
+    {  
+        try (s) {  
+            while (true) {  
+                String line = s.nextLine();  
+  
+                System.out.println(line);  
+            }  
+        }  
+        catch (NoSuchElementException ex) {  
+            System.out.println("All lines read successfully");  
+        }  
+    }  
+  
+    public static void run(String[] args)  
+    {  
+        checkLengthEquals(1, args.length, "wrong number of arguments");  
+  
+        try {  
+            Scanner s = new Scanner(Path.of(args[0]));  
+  
+            readLines(s);  
+        }  
+        catch (IOException ex) {  
+            System.err.printf("Exception occurred:%s%n", ex.getMessage());  
+        }  
+    }  
+    public static void main(String[] args)  
+    {  
+        run(args);  
+    }  
+}
+```
+
+
+>Aşağıdaki demo örnekte program şu şekilde komut satır argümanları almaktadır
+
+```java
+<src path1> <src path2> ... <src pathn> <dest path>
+```
+
+>Program son aldığı argümana ilişkin dosya içerisinde diğer argümanlara ilişkin dosyaların verilerini birleştirecektir. Her hangi bir dosya bulunamazsa program sonlandırılacak ve yaratılan dosya silinecektir. Program görece küçük dosyalardan okuma yapacak şekilde tasarlanmıştır.
+
+```java
+package org.csystem.app.io.concat;  
+  
+import java.io.File;  
+import java.io.FileInputStream;  
+import java.io.FileNotFoundException;  
+import java.io.FileOutputStream;  
+import java.io.IOException;  
+  
+import static org.csystem.util.console.CommandLineArgsUtil.checkLengthGreater;  
+  
+public class ConcatFilesApp {  
+    public static void appendFile(FileOutputStream fos, String srcPath) throws IOException  
+    {  
+        try (FileInputStream fis = new FileInputStream(srcPath)) {  
+            fos.write(fis.readAllBytes());  
+        }  
+    }  
+  
+    public static void concatFiles(FileOutputStream fos, String [] args) throws IOException  
+    {  
+        try (fos) {  
+            for (int i = 0; i < args.length - 1; ++i) {  
+                appendFile(fos, args[i]);  
+            }  
+        }  
+        catch (FileNotFoundException ex) {  
+            new File(args[args.length - 1]).delete();  
+        }  
+    }  
+  
+    public static void run(String[] args)  
+    {  
+        checkLengthGreater(2, args.length, "wrong number of arguments");  
+  
+        try  {  
+            FileOutputStream fos = new FileOutputStream(args[args.length - 1]);  
+  
+            concatFiles(fos, args);  
+        }  
+        catch (IOException ex) {  
+            System.err.printf("IO Exception occurred:%s%n", ex.getMessage());  
+        }  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run(args);  
+    }  
+}
+```
+
 

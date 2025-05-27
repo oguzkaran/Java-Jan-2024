@@ -30,7 +30,7 @@ public final class CommandLineArgsUtil {
 
     public static void checkLengthGreater(int len, int argsLen, String message, int exitCode)
     {
-        if (len <= argsLen) {
+        if (argsLen <= len) {
             System.err.println(message);
             System.exit(exitCode);
         }
