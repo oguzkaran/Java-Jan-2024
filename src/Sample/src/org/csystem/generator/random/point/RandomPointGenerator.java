@@ -22,7 +22,7 @@ public class RandomPointGenerator {
     }
 
 
-    public void addPoints(ArrayList points, int count)
+    public void addPoints(ArrayList<Point> points, int count)
     {
         for (int i = 0; i < count; i++)
             points.add(createRandomPoint());

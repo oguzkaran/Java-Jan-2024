@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class JoinWithTwoHyphenApp {
     public static void run()
     {
-        ArrayList texts = new ArrayList();
+        ArrayList<String> texts = new ArrayList<>();
         String s;
 
         while (!(s = Console.readString("Input a text:")).equals("exit"))

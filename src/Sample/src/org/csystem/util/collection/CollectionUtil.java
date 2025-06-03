@@ -16,9 +16,9 @@ public final class CollectionUtil {
     {
     }
 
-    public static ArrayList randomStringListTR(RandomGenerator randomGenerator, int count, int min, int bound)
+    public static ArrayList<String> randomStringListTR(RandomGenerator randomGenerator, int count, int min, int bound)
     {
-        ArrayList list = new ArrayList();
+        ArrayList<String> list = new ArrayList<>();
 
         for (int i = 0; i < count; ++i)
             list.add(StringUtil.generateRandomTextTR(randomGenerator, randomGenerator.nextInt(min, bound)));
@@ -26,7 +26,7 @@ public final class CollectionUtil {
         return list;
     }
 
-    public static ArrayList randomStringListTR(RandomGenerator randomGenerator, int min, int bound)
+    public static ArrayList<String> randomStringListTR(RandomGenerator randomGenerator, int min, int bound)
     {
         return randomStringListTR(randomGenerator, randomGenerator.nextInt(min, bound), min, bound);
     }

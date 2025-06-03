@@ -1,6 +1,6 @@
 /**
  * Utility class for string operations
- * Last Update: 15th May 2025
+ * Last Update: 3rd June 2025
  * @author Java-Jan-2024 Group
  */
 package org.csystem.util.string;
@@ -150,7 +150,7 @@ public final class StringUtil {
 	}
 
 
-	public static String join(ArrayList texts, CharSequence delimiter)
+	public static String join(ArrayList<String> texts, CharSequence delimiter)
 	{
 		StringBuilder sb = new StringBuilder();
 
@@ -163,7 +163,7 @@ public final class StringUtil {
 		return sb.substring(0, sb.length() - delimiter.length());
 	}
 
-	public static String join(ArrayList texts, char delimiter)
+	public static String join(ArrayList<String> texts, char delimiter)
 	{
 		return join(texts, String.valueOf(delimiter));
 	}
