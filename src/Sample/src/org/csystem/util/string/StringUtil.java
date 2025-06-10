@@ -154,11 +154,8 @@ public final class StringUtil {
 	{
 		StringBuilder sb = new StringBuilder();
 
-		for (Object o : texts) {
-			String s = (String)o;
-
+		for (String s : texts)
 			sb.append(s).append(delimiter);
-		}
 
 		return sb.substring(0, sb.length() - delimiter.length());
 	}

@@ -6,3 +6,18 @@ class App {
 
     }
 }
+
+class B implements IA<Boolean, String> {
+    //...
+    public String foo(Boolean a)
+    {
+        //...
+
+        return String.valueOf(a);
+    }
+}
+
+
+interface IA<T, K> {
+    K foo(T t);
+}

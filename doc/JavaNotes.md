@@ -37914,8 +37914,7 @@ public class ConcatFilesApp {
 
 >Generic'ler **derleme zamanı çok biçimliliğinin (compile time polimorphism - CTP)** gerçekleştirmek için kullanılır. Java 1.5 ile dile eklenmiştir. Generic'ler C++'ın template'larından esinlenilerek Java'ya eklenmiştir. Generic'ler genel olarak iki gruba ayrılabilir: **generic türler (generic types), generic metotlar (generic methods)**.  Şu ana kadar görmüş olduğumuz tür bildirimleri içerisinde yalnızca sınıflar ve arayüzler generic olarak bildirilebilirler. enum sınıfları generic olarak bildirilemezler. Exception sınıfları da generic olarak bildirilemezler. Generic konusuna ilişkin bazı detaylar `Java ile Uygulama Geliştirme 1` kursunda ele alınacaktır. 
 
-
->Generic bir UDt bildiriminde açısal parantezler kullanılır. Açısal parantezler sınıf isminden sonra yazılır. Açısal parantezler içerisinde değişken isimlendirme kurallarına uygun isimler virgül ile listelenebilir. Açısal parantezler içerisindeki bu isimlere **generic tür parametreleri (generic type parameters)** veya **tür parametreleri (type parameters)** veya **parametrelenmiş türler (parameterized types)** denir. Adından da anlaşılacağı gibi bu isimler aslında bir tür belirtirler. Bir convention olarak tür parametrelerinde `upper camel case` olarak yazılırlar. Bazı durumlarda bu isimler tek bir karakterden de oluşabilir. Tek karakterden oluşan isimlendirmelerde çoğunlukla `T, K, L, E` gibi karakterler kullanılır. Şüphesiz bu bir zorunluluk değildir. Generic tür parametrelerine ilişkin isimlerin faaliyet alanı (scope) ilgili UDT boyuncadır ilgili UDT içerisinde tür olarak kullanılabilir:
+>Generic bir UDT bildiriminde açısal parantezler kullanılır. Açısal parantezler sınıf isminden sonra yazılır. Açısal parantezler içerisinde değişken isimlendirme kurallarına uygun isimler virgül ile listelenebilir. Açısal parantezler içerisindeki bu isimlere **generic tür parametreleri (generic type parameters)** veya **tür parametreleri (type parameters)** veya **parametrelenmiş türler (parameterized types)** denir. Adından da anlaşılacağı gibi bu isimler aslında bir tür belirtirler. Bir convention olarak tür parametrelerinde `upper camel case` olarak yazılırlar. Bazı durumlarda bu isimler tek bir karakterden de oluşabilir. Tek karakterden oluşan isimlendirmelerde çoğunlukla `T, K, L, E` gibi karakterler kullanılır. Şüphesiz bu bir zorunluluk değildir. Generic tür parametrelerine ilişkin isimlerin faaliyet alanı (scope) ilgili UDT boyuncadır ilgili UDT içerisinde tür olarak kullanılabilir:
 
 ```java
 class A<T, K> {  
@@ -38108,7 +38107,7 @@ class B<T> {
 }
 ```
 
->Generic tür parametreleri açılım yapılsa da yapılmasa da `çalışma zamanında Object` olarak ele alınır. Bu anlamda generic'ler derleme zamanında tür kontrolü açısından önemlidir. Generic türlerin açılım yapılmadan kullanılması tavsiye edilen bir durum değildir. Bir generic tür parametresinin `Object` olması isteniyorsa, `Object` açılımı yapılarak kullanılmalıdır. Zaten bir çok static kod analizi aracı da generic sınıfların açılım yapılmadan kullanılması durumunda uyarı mesajı vermektedir. 
+>Generic tür parametreleri açılım yapılsa da yapılmasa da `çalışma zamanında Object` olarak ele alınır. Bu anlamda generic'ler derleme zamanında tür kontrolü açısından önemlidir. Generic türlerin açılım yapılmadan kullanılması tavsiye edilen bir durum değildir. Bir generic tür parametresinin `Object` olması isteniyorsa, `Object` açılımı yapılarak kullanılmalıdır. Zaten bir çok static kod analizi aracı da generic sınıfların açılım yapılmadan kullanılması (raw usage) durumunda uyarı mesajı vermektedir. 
 
 >Generic bir sınıf türünden nesne yaratılırken yine açısal parantez kullanılır. Aslında burada da açısal parantez kullanılmadan nesne yaratmak mümkündür (raw usage), yine tavsiye edilen bir durum değildir. 
 
@@ -38182,7 +38181,7 @@ class B<T> {
 }
 ```
 
->Java 7 ile birlikte nesne yaratılırken, atanacak referansa ilişkin açılım yapılmışsa, açısal parantez içerisi boş bırakılabilir. Burada yine açısal parantez olmadan kullanım tavsiye edilmez. Bu kullanıma **diamond syntax** da denilmektedir.
+>Java 7 ile birlikte nesne yaratılırken, atanacak referansa ilişkin açılım yapılmışsa, açısal parantez içerisi boş bırakılabilir. Burada yine açısal parantez olmadan kullanım tavsiye edilmez. Bu kullanıma açısal parantezlerin bitişik yazılması karo şekline benzediğinden **diamond syntax** da denilmektedir.
 
 ```java
 package org.csystem.app;  
@@ -38305,7 +38304,7 @@ class A<T, K> {
 }  
 ```
 
->Çalışma zamanında generic bir UDT'nin ayrı açılımları farklı türler değildirler.
+>Çalışma zamanında generic bir UDT'nin farklı türden açılımları farklı türler değildirler.
 
 ```java
 package org.csystem.app;  
@@ -38358,7 +38357,192 @@ class A<T, K> {
 }
 ```
 
+###### 10 Haziran 2025
+
+>ArrayList sınıfı da generic bir sınıftır
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.console.Console;  
+  
+import java.util.ArrayList;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        ArrayList<String> texts = new ArrayList<>();  
+  
+        while (true) {  
+            String s = Console.readString("Input a text:");  
+  
+            if ("quit".equals(s))  
+                break;  
+  
+            texts.add(s);  
+        }  
+  
+        for (String s : texts)  
+            Console.writeLine(s);  
+    }  
+}
+```
+
+>Aşağıdaki demo örnekte ekleme yaparken `otomatik kutulama (auto-boxing),` toplam bulunurken ise `otomatik kutu açma (auto-unboxing)` yapıldığına dikkat ediniz. 
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.console.Console;  
+  
+import java.util.ArrayList;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        ArrayList<Integer> numbers = new ArrayList<>();  
+  
+        while (true) {  
+            int val = Console.readInt("Input a number:", "Invalid value!...");  
+  
+            if (val == 0)  
+                break;  
+  
+            numbers.add(val);  
+        }  
+  
+        int sum = 0;  
+  
+        for (int val : numbers)  
+            sum += val;  
+  
+        Console.writeLine("Sum:%d", sum);  
+    }  
+}
+```
+
+>Generic sınıflarla ilgili türetme işlemi şu şekilde incelenebilir:  
+>- Generic olmayan bir sınıf generic bir sınıfın bir açılımından türetilebilir. Bu durumda taban sınıfın sanal metotları türemiş sınıfta açılıma uygun olarak override edilmelidir.
+
+```java
+class B extends A<Integer, String> {  
+    //...  
+    public String foo(Integer a)  
+    {  
+        //...  
+  
+        return String.valueOf(a);  
+    }  
+}  
+  
+class C extends A<Boolean, Integer> {  
+    //...  
+    public Integer foo(Boolean b)  
+    {  
+        return b ? 1 : 0;  
+    }  
+}  
+  
+abstract class A<T, K> {  
+    //...  
+    public abstract K foo(T t);  
+    //...  
+}
+```
+
+>- Generic bir sınıf generic olmayan bir sınıftan türetilebilir. Bu durumda `derleme zamanı açısından` türemiş sınıfın her açılımı o generic olmayan taban sınıftan türetilmiş olur.
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        A<Integer, String> ais = new A<>();  
+        A<Boolean, String> abs = new A<>();  
+  
+        Sample.doWork(ais);  
+        Sample.doWork(abs);  
+    }  
+}  
+  
+class Sample {  
+    public static void doWork(X x)  
+    {  
+        //...  
+    }  
+}  
+  
+class A<T, K> extends X {  
+    //...  
+    public K foo(T t)  
+    {  
+        //...  
+        return null;  
+    }  
+    //...  
+}  
+  
+class X {  
+    //...  
+}
+```
+
+>- Generic bir sınıf başka bir generic sınıfın bir açılımından türetilebilir. Bu durumda derleme zamanı açısından türemiş sınıfın her açılımı ilgili taban sınıftan türetilmiş olur. Yine taban sınıfın generic tür parametrelerini kullanan sanal metotları türemiş sınıfta açılıma uygun olarak override edilmelidir.
+
+```java
+class B<T> extends A<Integer, String> {  
+    //...  
+    public String foo(Integer a)  
+    {  
+        //...  
+  
+        return String.valueOf(a);  
+    }  
+}  
+  
+  
+abstract class A<T, K> {  
+    //...  
+    public abstract K foo(T t);  
+    //...  
+}
+```
 
 
+```java  
+class B<T, K> extends A<T, K> {  
+    //...  
+    {  
+        //...  
+  
+        return null;  
+    }  
+}  
+  
+  
+abstract class A<T, K> {  
+    //...  
+    public abstract K foo(T t);  
+    //...  
+}
+```
 
+>Bir arayüz generic olabilir. Bu durumda bu arayüzü implemente eden sınıfların arayüzün sanal metotlarını generic  tür parametrelerine uygun olarak override etmesi gerekir. 
 
+```java
+class B implements IA<Boolean, String> {  
+    //...  
+    public String foo(Boolean a)  
+    {  
+        //...  
+  
+        return String.valueOf(a);  
+    }  
+}  
+  
+  
+interface IA<T, K> {  
+    K foo(T t);  
+}
+```
