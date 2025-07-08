@@ -20337,7 +20337,7 @@ public class MatrixUtilMultiplyTest {
 >
 >Aslında bir sınıf erişim belirleyiciler açısından 4 bölümden oluşur. Bir eleman hangi erişim belirleyici ile bildirilirse o bölüme eklenmiş olur. 
 >
->public ve private bölümlerin anlamı aynı paketteki diğer sınıflar (friendly classes) veya farklı paketlerdeki diğer sınıflar için değişmez. Yani private bölüme erişim aynı paketteki veya farklı paketlerdeki diğer sınıflar için aynı anlamdadır. Benzer şekilde public bölümün anlamı aynı paketteki diğer sınıflar için ve farklı paketlerdeki diğer sınıflar için aynıdır. Ancak no-modifier ve protected bölümlere aynı paketteki diğer sınıfların erişimi ile farklı paketlerdeki diğer sınıflların erişimleri değişiklik göstermektedir. 
+>public ve private bölümlerin anlamı aynı paketteki diğer sınıflar (friendly classes) veya farklı paketlerdeki diğer sınıflar için değişmez. Yani private bölüme erişim aynı paketteki veya farklı paketlerdeki diğer sınıflar için aynı anlamdadır. Benzer şekilde public bölümün anlamı aynı paketteki diğer sınıflar için ve farklı paketlerdeki diğer sınıflar için aynıdır. Ancak no-modifier ve protected bölümlere aynı paketteki diğer sınıfların erişimi ile farklı paketlerdeki diğer sınıfların erişimleri değişiklik göstermektedir. 
 >
 >Erişim belirleyiciler, sınıf dışından erişimlerde geçerlidir. Sınıf içerisinde her bölüme erişilebilir.
 >
@@ -21756,7 +21756,7 @@ public class ArrayUtil {
 
 ##### Nesne Yönelimli Tasarım İlkeleri
 
->NYPT için birtakım ilkeler söz konusudur. Bu ilkelere literatürde **Object Oriented Design Principles** da denilmektedir. Aslında bu ilkeler yalnızca NYPT'ye özgü değildir. NYPT iiçin de uygulanabilir. Bu ilkeler kısaca **SOLID** olarak bilinir. Bu ilkeler şunlardır:
+>NYPT için birtakım ilkeler söz konusudur. Bu ilkelere literatürde **Object Oriented Design Principles** da denilmektedir. Aslında bu ilkeler yalnızca NYPT'ye özgü değildir. NYPT için de uygulanabilir. Bu ilkeler kısaca **SOLID** olarak bilinir. Bu ilkeler şunlardır:
 >- **S**ingle Responsibility Principle (SRP)
 >- **O**pen Closed Principle (OCP)
 >- **L**iskov Substitution Principle (LSP)
@@ -21776,7 +21776,7 @@ public class ArrayUtil {
 
 ##### Tasarım Kalıpları
 
->Özellikle NYPT ilerledikçe bazı programcılar bir takım problemlere gene çözümler üretme çabasına girmişlerdir. Bu anlamda  **Gang of Four (GoF)** olarak anılan 4 bilim insanı bir grup genel problemi çözümleriyle birlikte kategorize etmişlerdir. Bu tip genel çözümlere **tasarım kalıpları (design patterns)** denilmektedir. GoF pattern'lerinden sonra da pek çok patttern tasarlanmıştır. Bu kurs ve uygulama kurslarında çeşitli pattern'ler konular içerisinde ele alınacaktır.
+>Özellikle NYPT ilerledikçe bazı programcılar bir takım problemlere genel çözümler üretme çabasına girmişlerdir. Bu anlamda  **Gang of Four (GoF)** olarak anılan 4 bilim insanı bir grup genel problemi çözümleriyle birlikte kategorize etmişlerdir. Bu tip genel çözümlere **tasarım kalıpları (design patterns)** denilmektedir. GoF pattern'lerinden sonra da pek çok patttern tasarlanmıştır. Bu kurs ve uygulama kurslarında çeşitli pattern'ler konular içerisinde ele alınacaktır.
 
 ##### Singleton Tasarım Kalıbı
 
@@ -38107,7 +38107,7 @@ class B<T> {
 }
 ```
 
->Generic tür parametreleri açılım yapılsa da yapılmasa da `çalışma zamanında Object` olarak ele alınır. Bu anlamda generic'ler derleme zamanında tür kontrolü açısından önemlidir. Generic türlerin açılım yapılmadan kullanılması tavsiye edilen bir durum değildir. Bir generic tür parametresinin `Object` olması isteniyorsa, `Object` açılımı yapılarak kullanılmalıdır. Zaten bir çok static kod analizi aracı da generic sınıfların açılım yapılmadan kullanılması (raw usage) durumunda uyarı mesajı vermektedir. 
+>Generic tür parametreleri açılım yapılsa da yapılmasa da `çalışma zamanında Object` olarak ele alınır. Bu anlamda generic bir türün çalışma zamanında (yani aslında byte code'da) Object türü olarak ele alınmasına **erasure** terimi de kullanılmaktadır. Bu anlamda generic'ler **derleme zamanında tür kontrolü açısından önemlidir**. Generic türlerin açılım yapılmadan kullanılması tavsiye edilen bir durum değildir. Bir generic tür parametresinin `Object` olması isteniyorsa, `Object` açılımı yapılarak kullanılmalıdır. Zaten bir çok static kod analizi aracı da generic sınıfların açılım yapılmadan kullanılması (raw usage) durumunda uyarı mesajı vermektedir. 
 
 >Generic bir sınıf türünden nesne yaratılırken yine açısal parantez kullanılır. Aslında burada da açısal parantez kullanılmadan nesne yaratmak mümkündür (raw usage), yine tavsiye edilen bir durum değildir. 
 
@@ -38304,7 +38304,7 @@ class A<T, K> {
 }  
 ```
 
->Çalışma zamanında generic bir UDT'nin farklı türden açılımları farklı türler değildirler.
+>Çalışma zamanında generic bir UDT'nin farklı türden açılımları farklı türler değillerdir.
 
 ```java
 package org.csystem.app;  
@@ -38528,7 +38528,9 @@ abstract class A<T, K> {
 }
 ```
 
->Bir arayüz generic olabilir. Bu durumda bu arayüzü implemente eden sınıfların arayüzün sanal metotlarını generic  tür parametrelerine uygun olarak override etmesi gerekir. 
+###### 8 Temmuz 2025
+
+>Bir arayüz generic olabilir. Bu durumda bu arayüzü destekleyen (implementation) sınıfların arayüzün sanal metotlarını generic  tür parametrelerine uygun olarak override etmesi gerekir. 
 
 ```java
 class B implements IA<Boolean, String> {  
@@ -38539,6 +38541,41 @@ class B implements IA<Boolean, String> {
   
         return String.valueOf(a);  
     }  
+  
+    //...  
+}  
+  
+class C implements IA<String, Integer> {  
+    public Integer foo(String str)  
+    {  
+        //...  
+  
+        return str.length();  
+    }  
+  
+    //...  
+}  
+ 
+interface IA<T, K> {  
+    K foo(T t);  
+}
+```
+
+>Aşağıdaki demo örnekte A sınıfının interface listesinde iki tane aynı interface olduğu için error oluşur. Çünkü generic bir UDT'nin her açılımı ayrı bir tür belirtmez
+
+```java
+class A implements IA<Integer, Boolean>, IA<String, String> { //error
+    public Boolean foo(Integer i)  
+    {  
+        //...  
+  
+        return i != 0;  
+    }  
+  
+    public String foo(String s)  
+    {  
+        return s.toUpperCase();  
+    }  
 }  
   
   
@@ -38546,3 +38583,60 @@ interface IA<T, K> {
     K foo(T t);  
 }
 ```
+
+
+> Aşağıdaki demo örnekte farklı arayüzlerin override edilen metotların byte code'daki karşılıkları (erasure)aynı olacağından error oluşur
+
+```java
+class A implements IA<Integer, Boolean>, IB<String, String> {  
+    public Boolean foo(Integer i)  
+    {  
+        //...  
+  
+        return i != 0;  
+    }  
+  
+    public String foo(String s)  
+    {  
+        return s.toUpperCase();  
+    }  
+}  
+  
+interface IB<T, K> {  
+    K foo(T t);  
+}  
+  
+interface IA<T, K> {  
+    K foo(T t);  
+}
+```
+
+>Aşağıdaki demo örnekte error oluşmaz
+
+```java
+class A implements IA<Integer, Boolean>, IB<String, String> {  
+    public Boolean foo(Integer i)  
+    {  
+        //...  
+  
+        return i != 0;  
+    }  
+  
+    public String bar(String s)  
+    {  
+        return s.toUpperCase();  
+    }  
+}  
+  
+interface IB<T, K> {  
+    K bar(T t);  
+}  
+  
+interface IA<T, K> {  
+    K foo(T t);  
+}
+```
+
+
+
+

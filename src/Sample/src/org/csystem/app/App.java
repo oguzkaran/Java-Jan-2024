@@ -3,21 +3,21 @@ package org.csystem.app;
 class App {
     public static void main(String[] args)
     {
-
+        Integer i = 10;
+        X.foo(10);
+        X.foo(i);
     }
 }
 
-class B implements IA<Boolean, String> {
-    //...
-    public String foo(Boolean a)
+class X {
+    public static void foo(int a)
     {
-        //...
-
-        return String.valueOf(a);
+        System.out.println("foo, int");
     }
 }
 
-
-interface IA<T, K> {
-    K foo(T t);
-}
+/*
+1. Sentaks hatasıdır
+2. foo, int yazılır
+3. foo, Integer yazılır
+ */
