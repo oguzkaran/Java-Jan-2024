@@ -3,7 +3,7 @@
 ### Eğitmen: Oğuz KARAN
 #### Düzenleyenler: Bartu Çankaya, Eray Taşay
 
-#### 23 Ocak 2024
+###### 23 Ocak 2024
 
 ##### Java Platformunun Temel Özellikleri:
 
@@ -25,7 +25,7 @@
 >
 >**Güvenli Çalışma Ortamı:** Java'da yazılmış olan bir programın sisteme zarar verme olasılığı çok daha azdır. Yazılan bir program yüzünden yanlışlıkla makinede bir problem olma olasılığı oldukça düşüktür.
  
-#### 25 Ocak 2024
+###### 25 Ocak 2024
 
 ##### Programlama Dillerinin Sınıflandırılması
 
@@ -40,7 +40,7 @@
 
 **Anahtar Notlar:** Yukarıda anlatılan kavramların detayları vardır. Zaman içerisinde anlaşılacaktır.
  
-#### 30 Ocak 2024
+###### 30 Ocak 2024
  
 ##### Temel Kavramlar
 
@@ -133,7 +133,7 @@ class App {
 }
 ```
 
-#### 1 Şubat 2024
+###### 1 Şubat 2024
  
 ##### Dil Kavramı
 
@@ -260,7 +260,7 @@ class App {
 }
 ```
 
-#### 6 Şubat 2024
+###### 6 Şubat 2024
 
 ##### Bildirim (Declaration) Kavramı
  
@@ -377,7 +377,7 @@ class Mample {
 }
 ```
 
-#### 8 Şubat 2024
+###### 8 Şubat 2024
  
 ##### Sayı Sistemleri
 
@@ -663,7 +663,7 @@ class App {
 }
 ```
 
-#### 13 Şubat 2024
+###### 13 Şubat 2024
  
 **Anahtar Notlar:** Yazılar da aslında bilgisayar belleğinde 2'lik sistemde sayılar biçiminde tutulmaktadır. Bir yazıyı oluşturan elemanlara "karakter" denilmektedir. İşte bir yazıda her bir karakter 2'lik sistemde bir sayı ile ifade edilir. Böylece yazı  aslında ikilik sistemde bir sayı dizisi gibi tutulmaktadır. İşte bir karakter için hangi sayının karşı geldiğini belirten tablolara "karakter tabloları" denilmektedir. Karakter tablosundaki karakter şekillerine "glyph" denilmektedir. Her karaktere tabloda bir sıra numarası verilmiştir. Buna da "code point" denilmektedir. Dünyanın ilk standart karakter tablosu `ASCII` (American Standard Code Information Interchange) denilen tablodur. `ASCII` tablosu aslında 7 bit bir tablodur. Dolayısıyla tabloda 128 tane glyph için code point bulundurulmuştur. `ASCII` dışında `IBM EBCDIC` tablosunu geliştirmiştir. Wang firması `WISCII` tablosunu kullanmıştır. `ASCII` tablosu Amerikalılar tarafından yalnızca İngilizce karakterleri ifade etmek için oluşturulmuştur. Bilgisayarlar yaygınlaşmaya başladığında farklı karakterlere sahip olan Türkiye gibi, Yunanistan gibi, Almanya gibi ülkeler bu  `ASCII` tablosunu 8 bite çıkartıp elde edilen 128'lik yeni alanı kendi karakterlerini ifade etmek için kullanmışlardır. `ASCII` tablosunun ilk yarısı (yani [0, 128] numaraları karakterleri) standarttır. Ancak ikinci yarısı "code page" adı altında farklı ülkeler tarafından farklı yerleşimler yapılarak kullanılmaktadır. DOS zamanlarında Türkçe karakterler için OEM 857 denilen code page kullanılıyordu. Daha sonra Microsoft Windows sistemlerinde Türkçe karakterler için `1254 code page`'i düzenledi. ISO, bu code page'leri standart hale getirmiştir. Bugün Türkçe karakterler `ISO` tarafından `ASCII 8859-9` Code page'i ile düzenlenmiştir. `ASCII` tablosu ve onların code page'leri uzun süre kullanılmış ve hala kullanılmakta olsa da maalesef karışıklıklara yol açmaktadır. İşte son 20 yıldır artık karakterleri 2 byte içerisinde ifade ederek dünyanın bütün dillerinin ve ortak sembollerinin tek bir tabloya yerleştirilmesi ile ismine `UNICODE` denilen bir tablo oluşturulmuştur: [Unicode Homepage](https://home.unicode.org) `UNICODE` tablo ISO tarafından 10646 ismiyle de bazı farklılıklarla standardize edilmiştir. `UNICODE` tablonun ilk 128 karakteri standart ASCII karakterleri, ikinci 128 karakteri `ISO 8859-9` code page'indeki karakterlerdir. Bir karakter tablosundaki code point'lerin ikilik sistemde ifade edilme biçimine "encoding" denilmektedir. ASCII code page'lerinde encoding doğrudan code point'in 1 byte'lık sayı karşılığıdır. Ancak `UNICODE` tablonun değişik encoding'leri kullanılmaktadır. `UNICODE` tablonun klasik encoding'i `UTF-16`'dır. Burada code point doğrudan 16 bit bir sayı biçiminde ifade edilir. `UTF-32` encoding'inde ise code point 32 bitlik bir sayı biçiminde ifade edilmektedir. Ancak `UNICODE` tablonun en yaygın kullanılan encoding'i `UTF-8` encoding'idir. `UTF-8` kodlamasında standart ASCII karakterler 1 byte ile, diğer karakterler 2 byte, 3 byte, 4 byte ve 5 byte ile kodlanabilmekedir. Türkçe karakterler `UTF-8` encoding'inde 2 byte yer kaplamaktadr. `UTF-8` encoding'i `UNICODE` bir yazının adeta sıkıştırılmış bir hali gibi düşünülebilir. Bugün pek çok programlama editörleri default durumda dosyayı `UNICODE UTF-8` encoding'ine göre saklamaktadır.
 ##### Değişken Bildirimleri
@@ -874,7 +874,7 @@ class App {
 >- Değişken isimlerinin okunabilirlik/algılanabilirlik açısından "kolay telaffuz edilebilir, anlamlı ve yeterince uzunlukta" olması önerilir. Bu genel bir programlama `convention`'ı olarak düşünülmelidir. Değişken isimlendirmede bazı teknikler de kullanılabilmektedir. Genel olarak kullanılan programlama diline göre bir ya da birden fazla teknik kullanılabilmektedir.
 >- JLS'de değişken isimlerinin maksimum karakter sayısı ile ilgili herhangi bir söylenmemiştir. Şüphesiz bir sınıfı olur. Ancak bu sınır oldukça fazla olma eğiliminde olduğundan isimlendirmede bir sorun oluşturmaz.
  
-#### 15 Şubat 2024
+###### 15 Şubat 2024
 
 ##### Klavyeden Okuma Yapılması
 
@@ -1260,7 +1260,7 @@ class Util {
 }
 ```
 
-#### 20 Şubat 2024
+###### 20 Şubat 2024
  
 >Bir metodun geri dönüş değeri yoksa geri dönüş değeri bilgisi yerine `void` anahtar sözcüğü yazılır. Geri dönüş değeri olmayan metotlara **void method** da denilmektedir. `void` bir metot sonlandığında çağrılan noktaya bir değer ile dönmez. Bu durumda `void` metot içerisinde `return` deyimi bir ifade ile kullanılamaz. İstenirse metodu sonlandırmak için tek başına kullanılabilir.
 >
@@ -1559,7 +1559,7 @@ class Util {
 >3. Argümandan parametre değişkene aktarım
 >Özel bazı durumlar dışında atama işlemine ilişkin kurallar tüm atama işlemleri için geçerlidir
  
-#### 22 Şubat 2024
+###### 22 Şubat 2024
 ##### Metotların Avantajları
 
 >Metotlar ne işe yarar? Ya da başka bir deyişle bir problemin çözümünde neden metotlar yazalım?
@@ -1791,7 +1791,7 @@ class App {
 }
 ```
 
-#### 27 Şubat 2024
+###### 27 Şubat 2024
 
 ##### Standart Metotların Kullanım Avantajları
 
@@ -1929,7 +1929,7 @@ class PointUtil {
 }
 ```
 
-#### 29 Şubat 2024
+###### 29 Şubat 2024
  
 >`Math` sınıfının logaritma fonksiyonuna ilişkin metotları şunlardır:
 >
@@ -2091,7 +2091,7 @@ class App {
 }
 ```
 
-#### 5 Mart 2024
+###### 5 Mart 2024
 ##### Sabitler
 
 >Program içerisinde doğrudan yazılan bir değere **sabit (literal/constant)** denir.
@@ -2175,7 +2175,7 @@ class App {
 
 >`Carriage Return` karakter sabiti
 >
->**_Dikkat:_** Aşağıdaki örneği işletim sisteminizin "komut yorumlayıcı" programı ile çalıştırınız. Kullandığınız IDE'nin console penceresi farklı yorumlayabilir
+>**_Dikkat:_** Aşağıdaki örneği işletim sisteminizin "komut yorumlayıcı" programı ile çalıştırınız. Kullandığınız IDE'nin console penceresi farklı yorumlayabilir.
 
 ```java
 package csd;
@@ -2449,7 +2449,7 @@ class App {
 }
 ```
 
-#### 7 Mart 2024
+###### 7 Mart 2024
  
 ##### Operatörler
  
@@ -2905,7 +2905,7 @@ class App {
 }
 ```
 
-#### 12 Mart 2024
+###### 12 Mart 2024
  
 >Aşağıdaki örnekte maximal munch kuralı gereği error oluşur
 
@@ -22278,7 +22278,7 @@ class Visibility {
 
 >final bir referans değişkenin gösterdiği nesnenin (yani içerisinde tuttuğu adresteki nesne) içeriği değiştirilebilir. Burada referansın içerisinde tuttuğu adres değiştirilemez. Bu durumda nesne final olamaz. Bir nesnenin içeriğinin değiştirilememesi için o sınıfın immutable olarak yazılmış olması gerekir. Bu durumda da nesneyi gösteren bir referansın final olup olmamasının nesnenin içeriğinin değiştirilip değiştirilememesi anlamında bir önemi yoktur.
 
->Aşağıdaki dmo örneği inceleyiniz
+>Aşağıdaki demo örneği inceleyiniz
 
 ```java
 package org.csystem.app;  
@@ -22365,8 +22365,8 @@ public class RandomStringArrayGeneratorTR {
 ```
 
 >Yukarıdaki sınıf aşağıdaki gibi yazıldığında artık içsel olarak tutulan dizinin doğrudan adresi değil, kopyasının (yeni yaratılmış olan bir dizinin) adresi dışarıya verilmektedir. Bu durumda sınıfı yazan programcı da getTexts metodunun dökumantasyonunda bu durumu belirtir. 
->
->**Anahtar Notlar:** Arrays sınıfının `copyOf` metodu birinci parametresi ile aldığı dizinin, ikinci parametresi ile aldığı newLength tane elemanından oluşan yeni bir (newly allocated) dizi referansına geri döner. Bu durumda ikinci parametreye argüman olarak dizinin uzunluğu geçilirse dizinin tüm elemanlarından bir kopyası çıkartılmış olur
+
+**Anahtar Notlar:** Arrays sınıfının `copyOf` metodu birinci parametresi ile aldığı dizinin, ikinci parametresi ile aldığı newLength tane elemanından oluşan yeni bir (newly allocated) dizi referansına geri döner. Bu durumda ikinci parametreye argüman olarak dizinin uzunluğu geçilirse dizinin tüm elemanlarından bir kopyası çıkartılmış olur
 
 
 ```java
@@ -22429,7 +22429,7 @@ public class RandomStringArrayGeneratorTR {
 }
 ```
 
->Aşağıdaki örnekte sınıfı kullanna programcı bir dizi referansını zaten elde edememektedir
+>Aşağıdaki örnekte sınıfı kullanan programcı bir dizi referansını zaten elde edememektedir
 
 ```java
 package org.csystem.app;  
@@ -38637,6 +38637,176 @@ interface IA<T, K> {
 }
 ```
 
+###### 15 Temmuz 2025
 
+>Generic arayüzler programlamada çok kullanıldığından bazı durumlarda bu arayüzü kullanan sınıflar açısından otomatik kutulama ve otomatik kutu açma maliyeti olmaması için generic arayüzün ilgili temel türler için benzer arayüzleri de kütüphane içerisinde bulundurulur. Örneğin, Java 8'de çok kullanılan `Predicate<T>` arayüzünün kullanıldığı yerlerde kutulama bir maliyet oluşturabileceğinden JavaSE'de ayrıca IntPredicate, LongPredicate ve DoublePredicate gibi 3 tane daha benzer arayüz bulunur. Bu gruptaki arayüzlerin test isimli abstract metotları `Predicate<T>` için T türden, IntPredicate için int türden, LongPredicate için long türden ve DoublePredicate için  double türden parametreye sahiptir. Şüphesiz bu durum generic sınıflar için de duruma göre yapılabilmektedir. 
 
+>Aşağıdaki demo örnekte `Predicate<T>` ve `Consumer<T>` standart arayüzlerinin basit bir kullanımları gösterilmiştir.
+>
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.console.Console;  
+import org.csystem.util.string.StringUtil;  
+  
+import java.util.Arrays;  
+import java.util.Random;  
+import java.util.function.Consumer;  
+import java.util.function.Predicate;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        String [] str = StringUtil.generateRandomTextsTR(new Random(), 10, 5, 11);  
+  
+        for (String s : str)  
+            Console.writeLine(s);  
+  
+        Console.writeLine("///////////////////////////");  
+  
+        int length = Console.readInt("Input length:");  
+        LengthPredicate lengthPredicate = new LengthPredicate(length);  
+        StringConsumer stringConsumer = new StringConsumer();  
+  
+        Arrays.stream(str).filter(lengthPredicate).forEach(stringConsumer);  
+    }  
+}  
+  
+class StringConsumer implements Consumer<String> {  
+    public void accept(String s)  
+    {  
+        Console.writeLine(s);  
+    }  
+}  
+  
+class LengthPredicate implements Predicate<String> {  
+    private final int m_length;  
+    public LengthPredicate(int length)  
+    {  
+        m_length = length;  
+    }  
+  
+    public boolean test(String s)  
+    {  
+        return s.length() > m_length;  
+    }  
+}
+```
+
+>Aslında yukarıdaki program aşağıdaki gibi de Java'nın fonksiyonel programlama özellikleri kullanılarak da aşağıdaki gibi yapılabilir. Aşağıdaki kodlara ilişkin detaylar `Java ile Uygulama Geliştirme 1` kursunda ele alınacaktır. Örnek durumu göstermek amaçlı yazılmıştır.
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.console.Console;  
+import org.csystem.util.string.StringUtil;  
+  
+import java.util.Arrays;  
+import java.util.Random;  
+import java.util.function.Consumer;  
+import java.util.function.Predicate;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        String [] str = StringUtil.generateRandomTextsTR(new Random(), 10, 5, 11);  
+  
+        for (String s : str)  
+            Console.writeLine(s);  
+  
+        Console.writeLine("///////////////////////////");  
+  
+        int length = Console.readInt("Input length:");  
+          
+        Arrays.stream(str).filter(s -> s.length() > length).forEach(Console::writeLine);  
+    }  
+}
+```
+
+>Aşağıdaki örnekte otomatik kutulama ve otomatik kutu açma maliyeti olmadığına dikkat ediniz
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.array.ArrayUtil;  
+import org.csystem.util.console.Console;  
+  
+import java.util.Arrays;  
+import java.util.Random;  
+import java.util.function.IntConsumer;  
+import java.util.function.IntPredicate;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        int [] a = ArrayUtil.generateRandomArray(new Random(), 10, 10, 20);  
+  
+        for (int val : a)  
+            Console.write("%d ",val);  
+  
+        Console.writeLine("\n///////////////////////////");  
+  
+        int length = Console.readInt("Input length:");  
+        GreaterPredicate greaterPredicate = new GreaterPredicate(length);  
+        WriteIntConsumer writeIntConsumer = new WriteIntConsumer();  
+  
+        Arrays.stream(a).filter(greaterPredicate).forEach(writeIntConsumer);  
+  
+        Console.writeLine();  
+    }  
+}  
+  
+class WriteIntConsumer implements IntConsumer {  
+    public void accept(int a)  
+    {  
+        Console.write("%d ", a);  
+    }  
+}  
+  
+class GreaterPredicate implements IntPredicate {  
+    private final int m_length;  
+      
+    public GreaterPredicate(int length)  
+    {  
+        m_length = length;  
+    }  
+  
+    public boolean test(int a)  
+    {  
+        return a > m_length;  
+    }  
+}
+```
+
+>Aslında yukarıdaki program aşağıdaki gibi de Java'nın fonksiyonel programlama özellikleri kullanılarak da aşağıdaki gibi yapılabilir. Aşağıdaki kodlara ilişkin detaylar `Java ile Uygulama Geliştirme 1` kursunda ele alınacaktır. Örnek durumu göstermek amaçlı yazılmıştır.
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.array.ArrayUtil;  
+import org.csystem.util.console.Console;  
+  
+import java.util.Arrays;  
+import java.util.Random;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        int [] a = ArrayUtil.generateRandomArray(new Random(), 10, 10, 20);  
+  
+        for (int val : a)  
+            Console.write("%d ",val);  
+  
+        Console.writeLine("\n///////////////////////////");  
+  
+        int length = Console.readInt("Input length:");  
+  
+        Arrays.stream(a).filter(v -> v > length).forEach(v -> Console.write("%d ", v));  
+  
+        Console.writeLine();  
+    }  
+}
+```
+
+>Generic arayüzlerin de açılımsız kullanımı (raw usage) tavsiye edilmez. Generic bir arayüz taban sınıf referansı olarak kullanıldığında yine uygun açılım yapılmalıdır. 
 

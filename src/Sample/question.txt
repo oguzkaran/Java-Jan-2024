@@ -3,18 +3,24 @@ package org.csystem.app;
 class App {
     public static void main(String[] args)
     {
-        final Sample s = new Sample(20);
-
-        s.x = 10;
+        X.foo(10);
     }
 }
 
-class Sample {
-    public int x;
-
-    public Sample(int a)
+class X {
+    public static void foo(int a)
     {
-        x = a;
+        System.out.println("foo, int");
+    }
+
+    public static void foo(Integer a)
+    {
+        System.out.println("foo, Integer");
     }
 }
 
+/*
+1. Sentaks hatasıdır
+2. foo, int yazılır
+3. foo, Integer yazılır
+ */
