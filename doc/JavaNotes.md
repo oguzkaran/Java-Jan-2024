@@ -23685,7 +23685,7 @@ public class NumberUtilNumToStrTRTest {
 
 ##### Enum Sınıfları
 
->Enum sınıfları (enum/enumration classes) bir UDT'dir. Aslında genel olarak bakıldığında kendine ait özellikleri olan bir sınıftır. Bu bölümde anlatılacak özellikleri dışında kalan özellikler klasik sınıflar ile aynıdır. Enum sınıfları Java 5 ile dile eklenmiştir.
+>Enum sınıfları (enum/enumeration classes) bir UDT'dir. Aslında genel olarak bakıldığında kendine ait özellikleri olan bir sınıftır. Bu bölümde anlatılacak özellikleri dışında kalan özellikler klasik sınıflar ile aynıdır. >uka sınıfları Java 5 ile dile eklenmiştir.
 >
 >Aşağıdaki demo örnekte GameObject sınıfının renk bilgisi ve move metodunun parametre isimleri ne olduğuna ilişkin bir fikir verse de, türleri hangi değerleri alabileceğine ilişkin bir fikir vermemektedir. Şüphesiz bunlar dökumanlardan anlaşılabilir. Ayrıca ilgili metotlar çağrılırken geçilen değerler de client code'ların okunabilirliğini/algılanabilirliğini olumsuz olarak etkileyebilmektedir. Bu anlamda setColor ve move metotları doğru çalışsalar da okunabilirlik/algılanabilirlik açısından iyi tasarlanmamış olarak düşünülebilir.
 
@@ -38809,4 +38809,202 @@ class App {
 ```
 
 >Generic arayüzlerin de açılımsız kullanımı (raw usage) tavsiye edilmez. Generic bir arayüz taban sınıf referansı olarak kullanıldığında yine uygun açılım yapılmalıdır. 
+
+###### 29 Temmuz 2025
+
+>enum sınıflar ve exception sınıfları generic olamazlar
+
+```java
+enum Sample<T> { //error  
+    //...
+}  
+  
+class MyException<T> extends Exception { //error  
+    //...
+}  
+  
+  
+class YourException<T> extends RuntimeException { //error  
+    //...
+}
+```
+
+
+>Bir metot generic olarak bildirilebilir. Generic bir metodun generic tür parametreleri metodun geri dönüş değerinden  önce açısal parantez içerisinde bildirilir. Generic bir metot çağrısında generic parametrelerin türleri çağrı  sırasında **tespit edilebiliyorsa (type inference/deduction)** bu durumda açılım yapmaya gerek yoktur. Açılım metot isminden önce açısal parantez içerisinde yapılır.
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.console.Console;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Sample s = new Sample();  
+  
+        s.foo(10);  
+        s.foo("Ankara");  
+        s.<String>foo("istanbul");  
+        Sample.bar(67, "Zonguldak");  
+        Sample.bar("Ali", "Veli");  
+        Sample.<Integer, String>bar(34, "İstanbul");  
+    }  
+}  
+  
+class Sample {  
+    public <T> void foo(T t)  
+    {  
+        Console.writeLine(t);  
+    }  
+  
+    public static <T, K> void bar(T t, K k)  
+    {  
+        Console.writeLine(t);  
+        Console.writeLine(k);  
+    }  
+}
+```
+
+>Aşağıdaki demo örnekte int türden bir argüman ile açılım yapılarak generic metodun çağrılması mümkün değildir. Çünkü Java'da her durumda argümandan parametrelere olan dönüşümün kalitesi sorgulanır ve daha kaliteli olan ya da daha az kaliteli olmayan dönüşüm kazanır. Bu durumda örnek özelinde int bir argüman ile generic metodun çağrılması sağlanamayacağına göre int değer kutulanarak (yani Integer bir argüman geçilerek) generic metodun çağrılması sağlanabilir. Örnekte, String bir argüman ile generic metodun çağrılması temel türler kadar kolay yapılamaz. Bu kavrama genel olarak **generic parameter type specialization** da denilmektedir.
+
+```java
+package org.csystem.app;  
+  
+import org.csystem.util.console.Console;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Sample.foo(10);  
+        Sample.<Integer>foo(10);  
+        Sample.foo((Integer)10);  
+        Sample.foo("Ankara");  
+        Sample.<String>foo("Ankara");  
+        Sample.foo((Object)"Ankara");  
+        Sample.foo(new StringBuilder("Ankara"));  
+    }  
+}  
+  
+class Sample {  
+    public static <T> void foo(T t)  
+    {  
+        Console.writeLine("T -> %s", t);  
+    }  
+  
+    public static void foo(int a)  
+    {  
+        Console.writeLine("int -> %d", a);  
+    }  
+  
+    public static void foo(String s)  
+    {  
+        Console.writeLine("String -> %s", s);  
+    }  
+}
+```
+
+>Generic bir sınıfın generic metodu olabilir. Buna **member generic** de denilmektedir.
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Sample<Integer> s = new Sample<>();  
+  
+        s.foo(6, "ankara");  
+        s.foo(10, 20);  
+    }  
+}  
+  
+class Sample<T> {  
+    public <K> void foo(T t, K k)  
+    {  
+        //...  
+    }  
+	//...
+}
+```
+
+>Generic bir sınıfın generic tür parametresi static bir metot içerisinde kullanılamaz. Yani generic sınıfın generic tür parametre isminin faaliyet alanına (scope) static metotlar dahil değildir.
+
+```java
+class Sample<T> {  
+    public static <K> void foo(T a, K b)  //error
+    {  
+        //...  
+    }  
+	//...
+}
+```
+
+>Yukarıdaki durum için generic metoda ayrı bir tür parametresi bildirilebilir
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Sample.foo(6, "ankara");  
+        Sample.foo(10, 20);  
+    }  
+}  
+  
+class Sample<T> {  
+    public static <L, K> void foo(L a, K b)  
+    {  
+        //...  
+    }  
+  
+    //...  
+}
+```
+
+>Yukarıda bildirilen generic tür parametre ismi generic sınıfın tür parametre ismi ile aynı verilebilir
+
+```java
+package org.csystem.app;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Sample.foo(6, "ankara");  
+        Sample.foo(10, 20);  
+    }  
+}  
+  
+class Sample<T> {  
+    public static <T, K> void foo(T t, K k)  
+    {  
+        //...  
+    }  
+  
+    //...  
+}
+```
+
+>Aşağıdaki demo örnekte generic metodun `T` tür parametresi sınıfın `T` tür parametresini gölgeler (shadowing/hiding/masking). Yani foo metodu içerisinde sınıfın generic tür parametresi olan `T` kullanılamaz.
+
+```java
+class Sample<T> {  
+    public <T, K> void foo(T t, K k)  
+    {  
+        //...  
+    }  
+  
+    //...  
+}
+```
+
+
+>Aşağıdaki demo örnekte static bir veri elemanı, ait olduğu generic sınıfın generic tür parametresi türünden olamayacağından error oluşur
+
+```java
+class Sample<T> {  
+    public static T a;  
+    //...  
+}
+```
 
