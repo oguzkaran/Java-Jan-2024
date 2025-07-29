@@ -6,8 +6,3 @@ class App {
 
     }
 }
-
-class Sample<T> {
-    public static T a;
-    //...
-}
