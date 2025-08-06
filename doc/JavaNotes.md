@@ -24160,7 +24160,7 @@ class GameObject {
 }
 ```
 
->enum sınıfları **enum** anahtar sözcüğü ile bildirilirler. Bir enum class içerisinde aralarına virgül konularak bildirilen isimlere enum sabitleri (enum constants) denilmektedir. enum sabitlerinin her bir public, static ve final olarak bildirilmiş ait olduğu enum class türünden referans değişkenlerdir ve bu değişkenler yaratıldıklarında her bir ait oldukları enum class türünden bir nesneyi gösterir duruma gelirler. enum sabitleri için public, static, final ve tür ismi yaratılması geçersizdir. Son enum sabitinden sonra noktalı virgül konabilir. Eğer enum class içerisinde yalnızca enum sabitleri olacaksa bu durumda noktalı virgül konmasına gerek yoktur. Enum sınıfına sabit dışında elemanlar eklenecekse noktalı virgül gereklidir. Enum sınıfına sabit dışında eleman eklenmesi bölüm içerisinde ele alınacaktır. 
+>enum sınıfları **enum** anahtar sözcüğü ile bildirilirler. Bir enum class içerisinde aralarına virgül konularak bildirilen isimlere enum sabitleri (enum constants) denilmektedir. enum sabitlerinin her bir public, static ve final olarak bildirilmiş ait olduğu enum class türünden referans değişkenlerdir ve bu değişkenler yaratıldıklarında her bir ait oldukları enum class türünden bir nesneyi gösterir duruma gelirler. enum sabitleri için public, static, final ve tür ismi yazılması geçersizdir. Son enum sabitinden sonra noktalı virgül konabilir. Eğer enum class içerisinde yalnızca enum sabitleri olacaksa bu durumda noktalı virgül konmasına gerek yoktur. Enum sınıfına sabit dışında elemanlar eklenecekse noktalı virgül gereklidir. Enum sınıfına sabit dışında eleman eklenmesi bölüm içerisinde ele alınacaktır. 
 
 >Aşağıdaki enum sınıflarını inceleyiniz
 
@@ -39008,3 +39008,98 @@ class Sample<T> {
 }
 ```
 
+###### 6 Ağustos 2025
+
+>Programlamada bir  `n-liyi (n-ary)` temsil eden veri yapılarına genel olarak `tuple` denilmektedir. JavaSE'de `tuple` veri yapısını temsil eden sınıflar doğrudan bulunmaz. Böylesi sınıflar gerektiğinde programcı ya kendisi bir kütüphane yazar ya da yazılmış olan başka bir kütüphaneyi kullanır. Bir `tuple` veri yapısının generic olması daha uygundur. Burada bir ikiliyi temsil eden `Pair` ve bir üçlüyü temsil eden `Triple` generic sınıfları immutable olarak yazılacaktır.
+
+**Anahtar Notlar:** Generic bir sınıfın açılımında tür parametreleri için `?` karakteri kullanılabilir. Bu generic'ler için genel olarak `any type` anlamına gelmektedir.  Genel olarak tür bilgisinin kullanılmadığı ancak açılım yapılması durumunda kullanılır. Buradaki, `?` atomuna `wildcard` denilmektedir. Wildcard kullanımına ilişkin detaylar `Java ile Uygulama Geliştirme 1` kursunda ele alınacaktır. Buradaki `instanceof` operatöründe kullanımı şimdilik bir kalıp olarak düşünülebilir.
+
+>Test kodları
+
+```java
+package org.csystem.tuple.test;  
+  
+import org.csystem.tuple.Pair;  
+import org.csystem.util.console.Console;  
+  
+public class TupleEqualsTest {  
+    public static void run()  
+    {  
+        Pair<Integer, String> p1 = new Pair<>(67, "Zonguldak");  
+        Pair<Integer, String> p2 = new Pair<>(67, "Zonguldak");  
+        Pair<Integer, String> p3 = new Pair<>(34, "İstanbul");  
+  
+        Console.writeLine(p1);  
+        Console.writeLine(p2);  
+        Console.writeLine(p3);  
+  
+        Console.writeLine(p1.equals(p2));  
+        Console.writeLine(!p1.equals(p3));  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+
+```java
+package org.csystem.tuple.test;  
+  
+import org.csystem.tuple.Pair;  
+import org.csystem.util.console.Console;  
+  
+public class TupleOfTest {  
+    public static void run()  
+    {  
+        Pair<Integer, String> p1 = Pair.of(67, "Zonguldak");  
+        Pair<Integer, String> p2 = Pair.of(67, "Zonguldak");  
+        Pair<Integer, String> p3 = Pair.of(34, "İstanbul");  
+  
+        Console.writeLine(p1);  
+        Console.writeLine(p2);  
+        Console.writeLine(p3);  
+  
+        Console.writeLine(p1.equals(p2));  
+        Console.writeLine(!p1.equals(p3));  
+    }  
+  
+    public static void main(String[] args)  
+    {  
+        run();  
+    }  
+}
+```
+
+```java
+package org.csystem.tuple;  
+  
+public class Pair<F, S> {  
+    public final F first;  
+    public final S second;  
+  
+    public static <F, S> Pair<F, S> of(F first, S second)  
+    {  
+        return new Pair<>(first, second);  
+    }  
+  
+    public Pair(F first, S second)  
+    {  
+        this.first = first;  
+        this.second = second;  
+    }  
+  
+    public boolean equals(Object other)  
+    {  
+        return other instanceof Pair<?, ?> p && first.equals(p.first) && second.equals(p.second);  
+    }  
+  
+    public String toString()  
+    {  
+        return "(%s, %s)".formatted(first, second);  
+    }  
+    //...  
+}
+```
