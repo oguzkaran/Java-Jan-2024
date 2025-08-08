@@ -39014,7 +39014,7 @@ class Sample<T> {
 
 **Anahtar Notlar:** Generic bir sınıfın açılımında tür parametreleri için `?` karakteri kullanılabilir. Bu generic'ler için genel olarak `any type` anlamına gelmektedir.  Genel olarak tür bilgisinin kullanılmadığı ancak açılım yapılması durumunda kullanılır. Buradaki, `?` atomuna `wildcard` denilmektedir. Wildcard kullanımına ilişkin detaylar `Java ile Uygulama Geliştirme 1` kursunda ele alınacaktır. Buradaki `instanceof` operatöründe kullanımı şimdilik bir kalıp olarak düşünülebilir.
 
->Test kodları
+>Test Kodları
 
 ```java
 package org.csystem.tuple.test;  
@@ -39022,7 +39022,7 @@ package org.csystem.tuple.test;
 import org.csystem.tuple.Pair;  
 import org.csystem.util.console.Console;  
   
-public class TupleEqualsTest {  
+public class PairEqualsTest {  
     public static void run()  
     {  
         Pair<Integer, String> p1 = new Pair<>(67, "Zonguldak");  
@@ -39051,7 +39051,7 @@ package org.csystem.tuple.test;
 import org.csystem.tuple.Pair;  
 import org.csystem.util.console.Console;  
   
-public class TupleOfTest {  
+public class PairOfTest {  
     public static void run()  
     {  
         Pair<Integer, String> p1 = Pair.of(67, "Zonguldak");  
@@ -39072,6 +39072,8 @@ public class TupleOfTest {
     }  
 }
 ```
+
+>Pair sınıfı
 
 ```java
 package org.csystem.tuple;  
@@ -39103,3 +39105,444 @@ public class Pair<F, S> {
     //...  
 }
 ```
+###### 8 Ağustos 2025
+
+>Triple sınıfı
+
+```java
+package org.csystem.tuple;  
+  
+public class Triple<F, S, T> {  
+    public final F first;  
+    public final S second;  
+    public final T third;  
+  
+    public static <F, S, T> Triple<F, S, T> of(F first, S second, T third)  
+    {  
+        return new Triple<>(first, second, third);  
+    }  
+  
+    public Triple(F first, S second, T third)  
+    {  
+        this.first = first;  
+        this.second = second;  
+        this.third = third;  
+    }  
+  
+    public boolean equals(Object other)  
+    {  
+        return other instanceof Triple<?,?,?> t && first.equals(t.first) && second.equals(t.second) && third.equals(t.third);  
+    }  
+  
+    public String toString()  
+    {  
+        return "(%s, %s, %s)".formatted(first, second, third);  
+    }  
+  
+    //...  
+}
+```
+
+
+>Bir sınıf ya da bir metodun generic tür parametresi için bir kısıt (constraint) verilebilir. Örneğin bir sınıf generic tür parametresi için `TWR` kullanmak isteyebilir. Yani generic türün `AutoCloseable` olması tasarımdan dolayı gerekebilir. Bu durumda derleyici generic tür parametresinin `AutoCloseable` olduğunu nasıl anlayacaktır? Bu durumda generic tür parametreleri için kısıtlar verilebilir. Bunun için genel olarak `extends` anahtar sözcüğü kullanılır. Kısıt verilen generic tür parametreleri, verilen kısıtlara uygun olarak açılmalıdır. Yani, kısıtları sağlan türler ile açılım yapılmalıdır. Aksi durumda error oluşur.
+
+```java
+package org.csystem.app;  
+  
+import java.io.FileInputStream;  
+import java.io.FileOutputStream;  
+  
+class App {  
+    public static void main(String[] args)  
+    {  
+        Sample<FileOutputStream, MyRunnable> s1;  
+        Sample<AutoCloseable, Runnable> s2;  
+        Sample<String, Runnable> s3; //error  
+        Sample<FileInputStream, String> s4; // error  
+    }  
+}  
+  
+class Sample<T extends AutoCloseable, K extends Runnable> {  
+    //...  
+  
+    public void foo(T t, K k)  
+    {  
+        try (t) {  
+            k.run();  
+        }  
+        catch (Exception ex) {  
+            //...  
+        }  
+    }  
+}  
+  
+class MyRunnable implements Runnable {  
+    //...  
+    public void run()  
+    {  
+		//...
+    }  
+}
+```
+
+**Anahtar Notlar:** Generic parametrelere ilişkin kısıtların detayları `Java ile Uygulama Geliştirme` kurslarında ele alınacaktır.
+
+>Generic türden bir nesne new operatörü ile doğrudan yaratılamaz. Benzer şekilde generic türden bir dizi de new  operatörü ile doğrudan yaratılamaz. 
+
+```java
+class Sample<T, K> {  
+    private T m_t;  
+    private K [] m_ks;  
+  
+    public Sample(int size)  
+    {  
+        m_t = new T(); //error  
+        m_ks = new T[size];  //error  
+  
+    }  
+  
+    //...  
+}
+```
+
+>
+>Bunun için pek çok yöntem vardır. Burada, aşağıdaki yöntemle nesne yaratma ele alınacaktır. Aşağıdaki yöntemde nesne için önce `Object` türden nesne yaratılmış sonra tür dönüştürme operatörü ile  generic türe dönüştürülmüştür. Benzer şekilde dizi için önce `Object` türden bir dizi yaratılmış sonra generic dizi  referansına explicit olarak dönüştürülmüştür. Diğer yöntemler burada ele alınmayacaktır.  
+  
+**Anahtar Notlar:** Bu yöntemde bir çok static kod analizi aracı uyarı verebilecektir. Bu uyarı ve nedeni şu aşamda  önemsizdir.
+
+```java
+class Sample<T, K> {  
+    private T m_t;  
+    private K [] m_ks;  
+  
+    public Sample(int size)  
+    {  
+        m_t = (T)new Object();  
+        m_ks = (K[]) new Object[size];   
+    }  
+  
+    //...  
+}
+```
+
+
+>StringUtil sınıfı
+
+```java
+package org.csystem.util.string;  
+  
+import java.util.ArrayList;  
+import java.util.random.RandomGenerator;  
+  
+public final class StringUtil {  
+    private StringUtil()  
+    {  
+    }  
+  
+    private static final String LETTERS_EN;  
+    private static final String LETTERS_TR;  
+    private static final String CAPITAL_LETTERS_EN;  
+    private static final String CAPITAL_LETTERS_TR;  
+    private static final String ALL_LETTERS_EN;  
+    private static final String ALL_LETTERS_TR;  
+  
+    static {  
+       LETTERS_EN = "abcdefghijklmnopqrstuvwxyz";  
+       LETTERS_TR = "abcçdefgğhıijklmnoöprsştuüvyz";  
+       CAPITAL_LETTERS_EN = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";  
+       CAPITAL_LETTERS_TR = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ";  
+       ALL_LETTERS_EN = LETTERS_EN + CAPITAL_LETTERS_EN;  
+       ALL_LETTERS_TR = LETTERS_TR + CAPITAL_LETTERS_TR;  
+    }  
+  
+    public static String capitalize(String s)  
+    {  
+       return s.isEmpty() ? s : Character.toUpperCase(s.charAt(0)) + s.substring(1).toLowerCase();  
+    }  
+  
+    public static CharSequence changeCase(CharSequence charSequence)  
+    {  
+       StringBuilder sb = new StringBuilder(charSequence);  
+  
+       for (int i = 0; i < charSequence.length(); ++i) {  
+          char c = charSequence.charAt(i);  
+  
+          sb.setCharAt(i, Character.isLowerCase(c) ? Character.toUpperCase(c) : Character.toLowerCase(c));  
+       }  
+  
+       return sb.toString();  
+    }  
+  
+  
+    public static int countString(String s1, String s2)  
+    {  
+       int count = 0;  
+  
+       for (int i = 0; (i = s1.indexOf(s2, i)) != -1; ++i, ++count)  
+          ;  
+  
+       return count;  
+    }  
+  
+    public static String generateRandomText(RandomGenerator randomGenerator, int count, CharSequence charSequence)  
+    {  
+       char [] c = new char[count];  
+  
+       for (int i = 0; i < count; ++i)  
+          c[i] = charSequence.charAt(randomGenerator.nextInt(charSequence.length()));  
+  
+       return String.valueOf(c);  
+    }  
+  
+    public static String generateRandomTextEN(RandomGenerator randomGenerator, int count)  
+    {  
+       return generateRandomText(randomGenerator, count, ALL_LETTERS_EN);  
+    }  
+  
+    public static String generateRandomTextTR(RandomGenerator randomGenerator, int count)  
+    {  
+       return generateRandomText(randomGenerator, count, ALL_LETTERS_TR);  
+    }  
+  
+    public static String [] generateRandomTexts(RandomGenerator randomGenerator, int count, int origin, int bound, CharSequence charSequence)  
+    {  
+       String [] str = new String[count];  
+  
+       for (int i = 0; i < count; ++i)  
+          str[i] = generateRandomText(randomGenerator, randomGenerator.nextInt(origin, bound), charSequence);  
+  
+       return str;  
+    }  
+  
+    public static String [] generateRandomTextsEN(RandomGenerator randomGenerator, int count, int origin, int bound)  
+    {  
+       return generateRandomTexts(randomGenerator, count, origin, bound, ALL_LETTERS_EN);  
+    }  
+  
+    public static String [] generateRandomTextsTR(RandomGenerator randomGenerator, int count, int origin, int bound)  
+    {  
+       return generateRandomTexts(randomGenerator, count, origin, bound, ALL_LETTERS_TR);  
+    }  
+  
+    public static boolean isPalindrome(CharSequence charSequence)  
+    {  
+       int left = 0;  
+       int right = charSequence.length() - 1;  
+  
+       while (left < right) {  
+          char cLeft = charSequence.charAt(left);  
+  
+          if (!Character.isLetter(cLeft)) {  
+             ++left;  
+             continue;  
+          }  
+  
+          char cRight = charSequence.charAt(right);  
+  
+          if (!Character.isLetter(cRight)) {  
+             --right;  
+             continue;  
+          }  
+  
+          if (Character.toLowerCase(cLeft) != Character.toLowerCase(cRight))  
+             return false;  
+  
+          ++left;  
+          --right;  
+       }  
+  
+       return true;  
+    }  
+  
+  
+    public static boolean isPangram(String s, String alphabet)  
+    {  
+       for (int i = 0; i < alphabet.length(); ++i)  
+          if (s.indexOf(alphabet.charAt(i)) == -1)  
+             return false;  
+  
+       return true;  
+    }  
+  
+  
+    public static boolean isPangramEN(String s)  
+    {  
+       return isPangram(s.toLowerCase(), LETTERS_EN);  
+    }  
+  
+    public static boolean isPangramTR(String s)  
+    {  
+       return isPangram(s.toLowerCase(), LETTERS_TR);  
+    }  
+  
+  
+    public static String join(ArrayList<String> texts, CharSequence delimiter)  
+    {  
+       StringBuilder sb = new StringBuilder();  
+  
+       for (String s : texts)  
+          sb.append(s).append(delimiter);  
+  
+       return sb.substring(0, sb.length() - delimiter.length());  
+    }  
+  
+    public static String join(ArrayList<String> texts, char delimiter)  
+    {  
+       return join(texts, String.valueOf(delimiter));  
+    }  
+  
+    public static String join(String [] s, CharSequence delimiter)  
+    {  
+       StringBuilder sb = new StringBuilder();  
+  
+       for (String str : s)  
+          sb.append(str).append(delimiter);  
+  
+       return sb.substring(0, sb.length() - delimiter.length());  
+    }  
+  
+    public static String join(String [] s, char delimiter)  
+    {  
+       return join(s, String.valueOf(delimiter));  
+    }  
+  
+    public static String padLeading(String s, int n, char ch)  
+    {  
+       int len = s.length();  
+  
+       return len < n ? String.valueOf(ch).repeat(n - len) + s : s;  
+    }  
+  
+    public static String padLeading(String s, int n)  
+    {  
+       return padLeading(s, n, ' ');  
+    }  
+  
+    public static String padTrailing(String s, int n, char ch)  
+    {  
+       int len = s.length();  
+  
+       return len < n ? s + String.valueOf(ch).repeat(n - len) : s;  
+    }  
+  
+    public static String padTrailing(String s, int n)  
+    {  
+       return padTrailing(s, n, ' ');  
+    }  
+  
+    public static String reverse(String s)  
+    {  
+       return new StringBuilder(s).reverse().toString();  
+    }  
+  
+    public static String [] split(String s, CharSequence delimiters)  
+    {  
+       return split(s, delimiters, true);  
+    }  
+  
+    public static String [] split(String s, CharSequence delimiters, boolean removeEmptyEntries)  
+    {  
+       StringBuilder pattern = new StringBuilder("[");  
+  
+       for (int i = 0; i < delimiters.length(); ++i) {  
+          char c = delimiters.charAt(i);  
+  
+          if (c == '[' || c == ']')  
+             pattern.append('\\');  
+  
+          pattern.append(c);  
+       }  
+  
+       pattern.append(']');  
+  
+       if (removeEmptyEntries)  
+          pattern.append("+");  
+  
+       return s.split(pattern.toString());  
+    }  
+}
+```
+
+>**Sınıf Çalışması:** İskeleti verilen `CSDArrayList<E>` sınıfını aşağıdaki açıklamalara göre yazınız:  
+>**Açıklamalar:**  
+    - Sınıfın metotları `ArrayList<E>` sınıfındaki metotların yaptığı işleri yapacaktır.  
+    - Metotların karmaşıklıklarının `ArrayList<E>` ile aynı olması gerekir.  
+    - Metotlarda fırlatılacak exception'lar yine `ArrayList<E>` ile aynı olacaktır.  
+    - Sınıfın public bölümünü değiştirmeden istediğiniz eklemeyi yapabilirsiniz.
+>
+>`CSDArrayList<E>` sınıfının iskeleti
+
+```java
+package org.csystem.collection;  
+  
+public class CSDArrayList<E> {  
+  
+    public CSDArrayList()  
+    {  
+        throw new UnsupportedOperationException("Not yet implemented");  
+    }  
+  
+    public CSDArrayList(int initialCapacity)  
+    {  
+        throw new UnsupportedOperationException("Not yet implemented");  
+    }  
+  
+    public boolean add(E element)  
+    {  
+        throw new UnsupportedOperationException("Not yet implemented");  
+    }  
+  
+    public void add(int index, E element)  
+    {  
+        throw new UnsupportedOperationException("Not yet implemented");  
+    }  
+  
+    public int capacity()  
+    {  
+        throw new UnsupportedOperationException("Not yet implemented");  
+    }  
+  
+    public void clear()  
+    {  
+        throw new UnsupportedOperationException("Not yet implemented");  
+    }  
+  
+    public void ensureCapacity(int minCapacity)  
+    {  
+        throw new UnsupportedOperationException("Not yet implemented");  
+    }  
+  
+    public E get(int index)  
+    {  
+        throw new UnsupportedOperationException("Not yet implemented");  
+    }  
+  
+    public E remove(int index)  
+    {  
+        throw new UnsupportedOperationException("Not yet implemented");  
+    }  
+  
+    public E set(int index, E element)  
+    {  
+        throw new UnsupportedOperationException("Not yet implemented");  
+    }  
+  
+    public int size()  
+    {  
+        throw new UnsupportedOperationException("Not yet implemented");  
+    }  
+  
+    public void trimToSize()  
+    {  
+        throw new UnsupportedOperationException("Not yet implemented");  
+    }  
+  
+    public String toString()  
+    {  
+        throw new UnsupportedOperationException("Not yet implemented");  
+    }  
+}
+```
+
+
+
