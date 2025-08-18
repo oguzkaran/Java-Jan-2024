@@ -25280,7 +25280,7 @@ class B {
     }  
 }
 ```
->- **Association:** A nesnesinin B nesnesini ihtiyacı olduğunda kullanması yani bütünsel kullanmaması ilişkisidir. Buradaki kullanım **parçalı kullanım (partial usage)** biçimindedir. `A holds a B` ilişkisinin sınıf diagramı şu şekildedir:
+>- **Association:** A nesnesinin B nesnesini ihtiyacı olduğunda kullanması yani bütünsel kullanmaması ilişkisidir. Buradaki kullanım **parçalı kullanım (partial usage)** biçimindedir.
 >![Association](./media/Association.PNG)
 >A ile B arasındaki association ilişkinin genel bir implementasyonu
 ```java
