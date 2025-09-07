@@ -25706,7 +25706,7 @@ class Engine {
 ##### 3 Aralık 2024
 ##### Inheritance İlişkisi
 
->Bu ilişkiye NYPT'de `is a` ilişkisi de denilmektedir. Bu ilişki ile varolan bir sınıfın kodlarına dokunmadan (kodları elimizde olabilir ya da olmayabilir) **genişletme (extension)** yapılabilir. Bu ilişkiye aynı zamanda **generalization** da denilmektedir. Bu ilişkiye Türkçe olarak **türetme/kalıtım** ilişkisi diyeceğiz. Örneğin `analitik düzlemde` bir çemberi temsil eden (yarıçap, alan, çevre, merkez koordinatları vb bilgilerle) bir sınıf yazacak olalım. Anımsanacağı gibi daha önce yazdığımız Circle sınıfı `sentetik geometride` bir çemberi (dolayısıyla daireyi) temsil etmektedir. Yani, elimizde daha önceden yazılmış ve test edilmiş bir sınıf bulunmaktadır. Analitik düzlemde bir çemberde analitik özellikleri dışından bir çember olduğundan `(Analytical circle is a circle)`, `AnalyticalCircle` isimli bir sınıf `Circle` sınıfından türetilebilir. Bu anlamda bu ilişki `SOLID` ilkelerinden `Open Closed Principle`'ın mottosu olan **open for extension closed for modification** cümlesi de karşılamaktadır.
+>Bu ilişkiye NYPT'de `is a` ilişkisi de denilmektedir. Bu ilişki ile varolan bir sınıfın kodlarına dokunmadan (kodları elimizde olabilir ya da olmayabilir) **genişletme (extension)** yapılabilir. Bu ilişkiye aynı zamanda **generalization** da denilmektedir. Bu ilişkiye Türkçe olarak **türetme/kalıtım** ilişkisi diyeceğiz. Örneğin `analitik düzlemde` bir çemberi temsil eden (yarıçap, alan, çevre, merkez koordinatları vb bilgilerle) bir sınıf yazacak olalım. Anımsanacağı gibi daha önce yazdığımız Circle sınıfı `sentetik geometride` bir çemberi (dolayısıyla daireyi) temsil etmektedir. Yani, elimizde daha önceden yazılmış ve test edilmiş bir sınıf bulunmaktadır. Analitik düzlemde bir çember de analitik özellikleri dışında bir çember olduğundan `(Analytical circle is a circle)`, `AnalyticalCircle` isimli bir sınıf `Circle` sınıfından türetilebilir. Bu anlamda bu ilişki `SOLID` ilkelerinden `Open Closed Principle`'ın mottosu olan **open for extension closed for modification** cümlesini de karşılamaktadır.
 >
 >A sınıfından B sınıfı türetilmiş olsun (B is a A). Bu durumda A sınıfına B sınıfının **taban sınıfı (bas class)**, B'ye ise A nın bir **türemiş sınıfı (derived class)** denir. Java'da `base class` yerine daha çok **super class**, `derived class` yerine ise daha çok **sub class** terimleri kullanılır. Bu terimlerle birlikte NYPT'de `base class` yerine **parent class**, `derived class` yerine **child class** terİmleri de kullanılabilmektedir. `B is a A` ilişkisinin sınıf şeması şu şekildedir:
 
@@ -25795,7 +25795,7 @@ class A {
 
 ##### 5 Aralık 2024
 
->Anımsanacağı gibi bir nesnenin yaratılmasının tamamlanması için en son aşamada ilgili ctor'unda çağrılmış olması gerekir. Bu durumda türemiş sınıf nesnesi yaratıldığında içerisinde taban sınıf nesnesi için de ctor'un çağrılması gerekir. **Türemiş sınıf ctor'undan önce, türemiş sınıf ctor'unda her hangi bir belirtme yapılmamışsa, taban sınıfının default ctor'u çağrılır.**  Yani aslında derleyici türemiş sınıf ctor'unun başında taban sınıf ctor çağrısı kodunu gizlice yerleştirir. Türemiş sınıf ctor'unda taban sınıf ctor'unun çağrısına ilişkin belirtme `super ctor sentaksı (**super ctor syntax)` kullanılarak yapılır. İleride ele alınacaktır.
+>Anımsanacağı gibi bir nesnenin yaratılmasının tamamlanması için en son aşamada ilgili ctor'unda çağrılmış olması gerekir. Bu durumda türemiş sınıf nesnesi yaratıldığında içerisinde taban sınıf nesnesi için de ctor'un çağrılması gerekir. **Türemiş sınıf ctor'undan önce, türemiş sınıf ctor'unda her hangi bir belirtme yapılmamışsa, taban sınıfının default ctor'u çağrılır.**  Yani aslında derleyici türemiş sınıf ctor'unun başında taban sınıf ctor çağrısı kodunu gizlice yerleştirir. Türemiş sınıf ctor'unda taban sınıf ctor'unun çağrısına ilişkin belirtme `super ctor sentaksı (super ctor syntax)` kullanılarak yapılır. İleride ele alınacaktır.
 
 >Aşağıdaki demo örneği çalıştırıp çağrıları gözlemleyiniz
 
@@ -26057,14 +26057,14 @@ class A {
 
 ###### this Constructor Syntax
 
->Bir sınıfın bir ctor'undan önce, aynı sınıfın başka bir ctor'un çağrılabilmesi mümkündür ve bu **this ctor sentaksı (this ctor syntax)** kullanılarak yapılabilir. this ctor sentaksı **this** anahtar sözcüğü ile yapılır. thşs ctor sentaksının genel biçimi şu şekildedir:,
+>Bir sınıfın bir ctor'undan önce, aynı sınıfın başka bir ctor'un çağrılabilmesi mümkündür ve bu **this ctor sentaksı (this ctor syntax)** kullanılarak yapılabilir. this ctor sentaksı **this** anahtar sözcüğü ile yapılır. this ctor sentaksının genel biçimi şu şekildedir:,
 
 
 ```java
 this([argumanlar]);
 ```
 
-this ctor sentaksı türemiş sınıf ctor'nun başına programcı tarafından yerleştirilir. this ctor sentaksında hangi ctor'un çağrılacağı `method overload resolution` kurallarına göre belirlenir. Bir ctor'un başında `this()` sentaksının yazılması ile yazılmaması aynı anlamda değildir. Yazılırsa, yazılan ctor'dan önce default ctor çağrılsın anlamında, yazılmasa, yazılmayan ctor'dan önce herhangi bir ctor çağrılmasın anlamındadır. this ctor sentaksından önce başka bir deyim yazılması error oluşuturur. Ayrıca adından da anlaşıldığı gibi this ctor sentaksı yalnızca ctor içerisinde yazılabilir. Bir metot içerisinde yazılması error oluşturur. this ctor sentaksında döngüsel durum error oluşturur
+this ctor sentaksı sınıf ctor'nun başına programcı tarafından yerleştirilir. this ctor sentaksında hangi ctor'un çağrılacağı `method overload resolution` kurallarına göre belirlenir. Bir ctor'un başında `this()` sentaksının yazılması ile yazılmaması aynı anlamda değildir. Yazılırsa, yazılan ctor'dan önce default ctor çağrılsın anlamında, yazılmasa, yazılmayan ctor'dan önce herhangi bir ctor çağrılmasın anlamındadır. this ctor sentaksından önce başka bir deyim yazılması error oluşuturur. Ayrıca adından da anlaşıldığı gibi this ctor sentaksı yalnızca ctor içerisinde yazılabilir. Bir metot içerisinde yazılması error oluşturur. this ctor sentaksında döngüsel durum error oluşturur
 
 >Aşağıdaki demo örneği inceleyiniz
 
@@ -26219,7 +26219,7 @@ class A {
 }
 ```
 
->super ctor sentaksı ve this ctor sentaksı aynı ctor'da kullanılamaz. Çünkü her ikisinin de ctor'un ilk deyimi olması zorunludur. Aslında programcının böylesi bir durumla hiç karşılaşmaması gerekir. İyi bir tasarım ve dolayısıyla implementasyon programcı hiç bir zaman bunu kullanmak zorunda bırakmaz. Bir programcı böylesi bir durumla karşılaşırsa tasarımına bakmaıdır. 
+>super ctor sentaksı ve this ctor sentaksı aynı ctor'da kullanılamaz. Çünkü her ikisinin de ctor'un ilk deyimi olması zorunludur. Aslında programcının böylesi bir durumla hiç karşılaşmaması gerekir. İyi bir tasarım ve dolayısıyla implementasyon programcı hiç bir zaman bunu kullanmak zorunda bırakmaz. Bir programcı böylesi bir durumla karşılaşırsa tasarımına bakmalıdır. 
 
 >Aşağıdaki demo örnekte this ctor ve super sentaksları aynı ctor'da bir arada kullanıldıklarından error oluşur
 
@@ -26291,7 +26291,7 @@ class A {
 
 ###### Object Sınıfı
 
->Bir sınıf extends anahtar sözcüğü ile hiç bir sınıftab türetilmese de **java.lang.Object** isimli bir sınıftan türetilmiş olur. Bu durumda Object sınıfı her sınıfın doğrudan ya da dolaylı olarak taban sınıfıdır. Böyle bir tasarımın yani Object sınıfın varlığı ve anlamı ileride ele alınacaktır. İstenirse Object sınıfı bir sınıfta extends anahtar sözcüğü ile de yazılabilir, yazılmasa da aynı anlamda olduğundan yazmamayı tercih edeceğiz. Bu durumda taban sınıf olmayan tek sınıf Object'dir. 
+>Bir sınıf extends anahtar sözcüğü ile hiç bir sınıftan türetilmese de **java.lang.Object** isimli bir sınıftan türetilmiş olur. Bu durumda Object sınıfı her sınıfın doğrudan ya da dolaylı olarak taban sınıfıdır. Böyle bir tasarımın yani Object sınıfın varlığı ve anlamı ileride ele alınacaktır. İstenirse Object sınıfı bir sınıfta extends anahtar sözcüğü ile de yazılabilir, yazılmasa da aynı anlamda olduğundan yazmamayı tercih edeceğiz. Bu durumda taban sınıf olmayan tek sınıf Object'dir. 
 
 >Aşağıdaki demo sınıfın taban sınıfı olarak Object yazılmasına gerek yoktur
 
@@ -39469,9 +39469,7 @@ public final class StringUtil {
     - Metotların karmaşıklıklarının `ArrayList<E>` ile aynı olması gerekir.  
     - Metotlarda fırlatılacak exception'lar yine `ArrayList<E>` ile aynı olacaktır.  
     - Sınıfın public bölümünü değiştirmeden istediğiniz eklemeyi yapabilirsiniz.
->
->`CSDArrayList<E>` sınıfının iskeleti
-
+    - `CSDArrayList<E>` sınıfının iskeleti şu şekildedir:
 ```java
 package org.csystem.collection;  
   
@@ -39543,6 +39541,156 @@ public class CSDArrayList<E> {
     }  
 }
 ```
+
+
+**Anahtar Notlar:** Anımsanacağı gibi bir nesneyi gösteren en az bir tane referans kaldığında nesne eligible duruma geçemez. Bu durumda GC devreye girdiğinde nesneyi çöp olarak kabul etmez. Bazı durumlarda programcı nesneyi referanstan kopartmayı gözden kaçırırsa bu durumda nesne hiç bir zaman eligible duruma gelemez. ArrayList sınıfının clear metodunda  ve remove metodunda böylesi bir durum oluşmaması için referanslar null'a çekilmiştir.
+
+**Çözüm:**
+
+```java
+package org.csystem.collection;  
+  
+import java.util.Arrays;  
+  
+public class CSDArrayList<E> {  
+    private static final int DEFAULT_CAPACITY = 10;  
+    private E [] m_elements;  
+    private int m_index;  
+  
+    private void throwIllegalArgumentException(String message)  
+    {  
+        throw new IllegalArgumentException(message);  
+    }  
+  
+    private void throwIndexOutOfBoundsException(String message)  
+    {  
+        throw new IndexOutOfBoundsException(message);  
+    }  
+  
+    private void checkCapacity(int capacity)  
+    {  
+        if (capacity < 0)  
+            throwIllegalArgumentException(String.format("Capacity must be non-negative:%d", capacity));  
+    }  
+  
+    private void checkIndex(int index)  
+    {  
+        if (index < 0 || index >= m_index)  
+            throwIndexOutOfBoundsException(String.format("Index out of bounds:%d", index));  
+    }  
+  
+    private void changeCapacity(int capacity)  
+    {  
+        m_elements = Arrays.copyOf(m_elements, capacity);  
+    }  
+  
+    private void increaseCapacityIfNecessary()  
+    {  
+        if (m_elements.length == m_index)  
+            changeCapacity(m_elements.length == 0 ? 1 : m_elements.length * 2);  
+    }  
+  
+    public CSDArrayList()  
+    {  
+        m_elements = (E[])new Object[DEFAULT_CAPACITY];  
+    }  
+  
+    public CSDArrayList(int initialCapacity)  
+    {  
+        checkCapacity(initialCapacity);  
+        m_elements = (E[])new Object[initialCapacity];  
+    }  
+  
+    public boolean add(E element)  
+    {  
+        increaseCapacityIfNecessary();  
+        m_elements[m_index++] = element;  
+  
+        return true;  
+    }  
+  
+    public void add(int index, E element)  
+    {  
+        increaseCapacityIfNecessary();  
+  
+        for (int i = m_index++; i > index; --i)  
+            m_elements[i] = m_elements[i - 1];  
+  
+        m_elements[index] = element;  
+    }  
+  
+    public int capacity()  
+    {  
+        return m_elements.length;  
+    }  
+  
+    public void clear()  
+    {  
+        for (int i = 0; i < m_index; ++i)  
+            m_elements[i] = null;  
+  
+        m_index = 0;  
+    }  
+  
+    public void ensureCapacity(int minCapacity)  
+    {  
+        if (minCapacity > m_elements.length)  
+            changeCapacity(Math.max(minCapacity, m_elements.length * 2));  
+    }  
+  
+    public E get(int index)  
+    {  
+        checkIndex(index);  
+  
+        return m_elements[index];  
+    }  
+  
+    public E remove(int index)  
+    {  
+        checkIndex(index);  
+        E oldElement = m_elements[index];  
+  
+        for (int i = index; i < m_index - 1; ++i)  
+            m_elements[i] = m_elements[i + 1];  
+  
+        m_elements[--m_index] = null;  
+  
+        return oldElement;  
+    }  
+  
+    public E set(int index, E element)  
+    {  
+        checkIndex(index);  
+        E oldElement = m_elements[index];  
+  
+        m_elements[index] = element;  
+  
+        return oldElement;  
+    }  
+  
+    public int size()  
+    {  
+        return m_index;  
+    }  
+  
+    public void trimToSize()  
+    {  
+        if (m_elements.length != m_index)  
+            changeCapacity(m_index);  
+    }  
+  
+    public String toString()  
+    {  
+        StringBuilder sb = new StringBuilder("[");  
+  
+        for (int i = 0; i < m_index; ++i)  
+            sb.append(m_elements[i]).append(", ");  
+  
+        return (m_index != 0 ? sb.substring(0, sb.length() - 2) : sb.toString()) + "]";  
+    }  
+}
+```
+
 
 
 
